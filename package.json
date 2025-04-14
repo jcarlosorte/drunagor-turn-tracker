@@ -2,7 +2,7 @@
   "name": "drunagor-turn-tracker",
   "version": "1.0.0",
   "description": "Web app para el control de turnos de Chronicles of Drunagor",
-  "homepage": "https://jcarlosorte.github.io/drunagor-tracker",
+  "homepage": "https://jcarlosorte.github.io/drunagor-turn-tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
