@@ -2,20 +2,12 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/logo-drunagor.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Control de Turnos - Drunagor</title>
-    <link rel="stylesheet" href="/src/index.css" />
+    <title>Drunagor Turn Tracker</title>
   </head>
-  <body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
-    <img src="/public/logo-drunagor.png" alt="Logo Drunagor" class="w-40 h-40 mb-6" />
-    <h1 class="text-4xl font-bold mb-8 text-center">Control de Turnos - Crónicas de Drunagor</h1>
-    <div class="flex flex-col gap-4">
-      <a href="/src/Tracker.jsx" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-center">
-        Control de Turnos
-      </a>
-      <a href="/src/MenuEntorno.jsx" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded text-center">
-        Configuración
-      </a>
-    </div>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
