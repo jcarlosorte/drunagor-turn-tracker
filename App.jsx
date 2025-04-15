@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "./assets/logo-drunagor.png";
+import logo from "./src/logo-drunagor.png";
 
 export default function App() {
   return (
