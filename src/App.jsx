@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Tracker from "./pages/Tracker";
+import Tracker from "./pages/Tracker.jsx";
 import Config from "./pages/Config";
 import "./index.css";
 
