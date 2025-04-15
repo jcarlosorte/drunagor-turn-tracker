@@ -1,31 +1,28 @@
-import { Link, Routes, Route } from 'react-router-dom'
-import Tracker from './pages/Tracker'
-import MenuEntorno from './pages/MenuEntorno'
-import './index.css'
+import { Link } from "react-router-dom";
+import logo from "./assets/logo-drunagor.png";
 
-function Home() {
+export default function App() {
   return (
-    <div className="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
-      <img src="/logo-drunagor.png" alt="Logo Drunagor" className="w-40 h-40 mb-6" />
-      <h1 className="text-4xl font-bold mb-8 text-center">Control de Turnos - Chronicles of Drunagor</h1>
-      <div className="flex flex-col gap-4">
-        <Link to="/tracker" className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <img src={logo} alt="Logo" className="w-64 mb-6" />
+      <h1 className="text-4xl font-bold mb-6 text-center">
+        Seguimiento de Turnos - Crónicas de Drunagor
+      </h1>
+      <div className="flex flex-col space-y-4">
+        <Link
+          to="/tracker"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl text-lg text-center"
+        >
           Iniciar Tracker
         </Link>
-        <Link to="/entorno" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded text-center">
+        <Link
+          to="/config"
+          className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-xl text-lg text-center"
+        >
           Configurar Entorno
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/tracker" element={<Tracker />} />
-      <Route path="/entorno" element={<MenuEntorno />} />
-    </Routes>
-  )
-}
