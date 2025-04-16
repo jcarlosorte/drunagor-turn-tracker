@@ -1,19 +1,31 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { EXPANSIONS } from '../data/expansions';
 
-export const ExpansionContext = createContext();
+const ExpansionsContext = createContext();
 
-export function ExpansionProvider({ children }) {
-  const [selectedExpansions, setSelectedExpansions] = useState([]);
+export const ExpansionsProvider = ({ children }) => {
+  const stored = localStorage.getItem('expansions');
+  const [selectedExpansions, setSelectedExpansions] = useState(
+    stored ? JSON.parse(stored) : EXPANSIONS.map(e => e.id)
+  );
+
+  useEffect(() => {
+    localStorage.setItem('expansions', JSON.stringify(selectedExpansions));
+  }, [selectedExpansions]);
 
   const toggleExpansion = (id) => {
-    setSelectedExpansions(prev =>
-      prev.includes(id) ? prev.filter(exp => exp !== id) : [...prev, id]
+    setSelectedExpansions((prev) =>
+      prev.includes(id)
+        ? prev.filter((expId) => expId !== id)
+        : [...prev, id]
     );
   };
 
   return (
-    <ExpansionContext.Provider value={{ selectedExpansions, toggleExpansion }}>
+    <ExpansionsContext.Provider value={{ selectedExpansions, toggleExpansion }}>
       {children}
-    </ExpansionContext.Provider>
+    </ExpansionsContext.Provider>
   );
-}
+};
+
+export const useExpansions = () => useContext(ExpansionsContext);
