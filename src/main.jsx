@@ -1,10 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+import { LanguageProvider } from './context/LanguageContext'
+import { ExpansionsProvider } from './context/ExpansionsContext'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+    <LanguageProvider>
+      <ExpansionsProvider>
+        <App />
+      </ExpansionsProvider>
+    </LanguageProvider>
+  </React.StrictMode>,
+)
