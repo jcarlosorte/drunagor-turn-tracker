@@ -64,20 +64,26 @@ const expansions = [
   {
     id: "apocalypse",
     nombre: "Apocalypse Adventures",
-    imagen: "/assets/expansions/apocalypse.jpg",
+    imagen: "/assets/expansions/apocalypse.png",
     añade: "ambos",
   },
   {
     id: "hero-pack",
     nombre: "Hero Pack #1",
-    imagen: "/assets/expansions/hero-pack.jpg",
+    imagen: "/assets/expansions/hero-pack.png",
     añade: "héroes",
   },
   {
-    id: "backers",
-    nombre: "Apocalypse Backer's Campaign",
-    imagen: "/assets/expansions/backers.jpg",
+    id: "Awakenings",
+    nombre: "Apocalypse Awakenings",
+    imagen: "/assets/expansions/awakenings.png",
     añade: "ambos",
+  },
+{
+    id: "sisters",
+    nombre: "Apocalypse - The Fallen Sisters",
+    imagen: "/assets/expansions/sisters.png",
+    añade: "enemigos",
   }
 ];
 
