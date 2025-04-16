@@ -1,6 +1,6 @@
 // src/pages/Config.jsx
 import { useContext } from "react";
-import { LanguageContext } from "@/context/LanguageContext";
+import LanguageContext from "@/context/LanguageContext"; 
 import { ExpansionContext } from "@/context/ExpansionContext";
 import { translations } from "@/i18n/translations";
 import { EXPANSIONS } from "@/data/expansions";
