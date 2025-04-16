@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 
 import { LanguageProvider } from './context/LanguageContext'
-import { ExpansionsProvider } from './context/ExpansionsContext'
+import { ExpansionsProvider } from './context/ExpansionContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
