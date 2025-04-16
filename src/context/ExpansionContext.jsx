@@ -32,4 +32,3 @@ export const ExpansionProvider = ({ children }) => {
 };
 
 export const useExpansions = () => useContext(ExpansionContext);
-export { ExpansionContext };
