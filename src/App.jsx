@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Tracker from "./pages/Tracker.jsx";
 import Config from './pages/Config.jsx';
 
