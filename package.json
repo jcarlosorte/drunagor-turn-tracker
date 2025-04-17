@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://jcarlosorte.github.io/drunagor-turn-tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -22,6 +23,5 @@
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.5",
     "vite": "^5.0.10"
-  },
-  "homepage": "https://jcarlosorte.github.io/drunagor-turn-tracker"
+  }
 }
