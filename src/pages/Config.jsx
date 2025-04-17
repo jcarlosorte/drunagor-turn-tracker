@@ -54,7 +54,7 @@ export default function Config() {
         </div>
       </div>
        <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/", { replace: true })}
         className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2"
       >
         Volver al Menú Principal
