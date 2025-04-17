@@ -5,7 +5,6 @@ import { useExpansions } from "@/context/ExpansionContext";
 import { translations } from "@/i18n/translations";
 import { EXPANSIONS } from "@/data/expansions";
 
-const availableLanguages = ["es", "en"];
 
 export default function Config() {
   const navigate = useNavigate();
@@ -14,11 +13,11 @@ export default function Config() {
 
   return (
     <div className="p-6 text-white">
-      <h1 className="text-3xl font-bold mb-4">{texts.config_title}</h1>
+      <h1 className="text-3xl font-bold mb-4">{texts.title}</h1>
 
       {/* Selector de idioma */}
       <div className="mb-6">
-        <label className="block mb-2">{texts.select_language}</label>
+        <label className="block mb-2">{texts.language_section_title}</label>
         <select
           value={lang}
           onChange={(e) => setLang(e.target.value)}
