@@ -3,15 +3,23 @@ import { languages } from '../i18n';
 
 const LanguageContext = createContext();
 
-export const useLanguage = () => useContext(LanguageContext);
+export const LanguageProvider = ({ children }) => {
+  const storedLang = localStorage.getItem('lang') || 'es';
+  const [language, setLanguage] = useState(storedLang);
+  const [translations, setTranslations] = useState(languages[storedLang]);
 
-export default function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('es');
-  const translations = languages[language];
+  useEffect(() => {
+    localStorage.setItem('lang', language);
+    setTranslations(languages[language]);
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, translations }}>
       {children}
     </LanguageContext.Provider>
   );
-}
+};
+
+export const useLanguage = () => useContext(LanguageContext);
+
+export default LanguageContext;
