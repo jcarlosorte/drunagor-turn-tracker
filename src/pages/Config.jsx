@@ -1,33 +1,32 @@
 // src/pages/Config.jsx
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "@/context/LanguageContext"; 
-import ExpansionContext from "@/context/ExpansionContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { useExpansions } from "@/context/ExpansionContext";
 import { translations } from "@/i18n/translations";
 import { EXPANSIONS } from "@/data/expansions";
 
-const availableLanguages = ["es", "en"]; // se puede ampliar más adelante
+const availableLanguages = ["es", "en"];
 
 export default function Config() {
   const navigate = useNavigate();
-  
-  const { lang: language, setLang: setLanguage } = useLanguage();
-  const { selectedExpansions, toggleExpansion } = useContext(ExpansionContext);
+  const { lang, setLang, texts } = useLanguage();
+  const { selectedExpansions, toggleExpansion } = useExpansions();
 
   return (
     <div className="p-6 text-white">
-      <h1 className="text-3xl font-bold mb-4">{translations[language].config_title}</h1>
+      <h1 className="text-3xl font-bold mb-4">{texts.config_title}</h1>
 
       {/* Selector de idioma */}
       <div className="mb-6">
-        <label className="block mb-2">{translations[language].select_language}</label>
+        <label className="block mb-2">{texts.select_language}</label>
         <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
           className="text-black px-2 py-1 rounded"
         >
-          {availableLanguages.map((lang) => (
-            <option key={lang} value={lang}>
-              {translations[lang].language_name}
+          {availableLanguages.map((l) => (
+            <option key={l} value={l}>
+              {translations[l].language_name}
             </option>
           ))}
         </select>
@@ -35,7 +34,7 @@ export default function Config() {
 
       {/* Selección de expansiones */}
       <div>
-        <h2 className="text-xl font-semibold mb-2">{translations[language].select_expansions}</h2>
+        <h2 className="text-xl font-semibold mb-2">{texts.select_expansions}</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {EXPANSIONS.map((exp) => (
             <div key={exp.id} className="border rounded p-2 bg-zinc-800">
@@ -52,11 +51,12 @@ export default function Config() {
           ))}
         </div>
       </div>
-       <button
+
+      <button
         onClick={() => navigate("/", { replace: true })}
         className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2"
       >
-        Volver al Menú Principal
+        {texts.back_to_main_menu}
       </button>
     </div>
   );
