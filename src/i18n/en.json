@@ -1,1 +1,11 @@
-{"home": "Inicio", "tracker": "Tracker", "config": "Configuración"}
+{
+  "home": "Home",
+  "tracker": "Tracker",
+  "config": {
+    "title": "Settings",
+    "language_section_title": "App Language",
+    "select_language": "Select language",
+    "select_expansions": "Select expansions"
+  },
+  "language_name": "English"
+}
