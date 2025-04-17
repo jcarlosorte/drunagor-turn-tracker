@@ -4,7 +4,7 @@ import path from 'path'; // 👈 Importa 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/drunagor-turn-tracker/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // 👈 Alias para que "@" apunte a "src"
