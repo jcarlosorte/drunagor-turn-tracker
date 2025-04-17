@@ -12,6 +12,7 @@ export const ExpansionProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('expansions', JSON.stringify(selectedExpansions));
+    console.log('[ExpansionContext] Expansiones seleccionadas:', selectedExpansions);
   }, [selectedExpansions]);
 
   const toggleExpansion = (id) => {
