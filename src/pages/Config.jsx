@@ -14,10 +14,6 @@ export default function Config() {
   const { language, setLanguage } = useContext(LanguageContext);
   const { selectedExpansions, toggleExpansion } = useContext(ExpansionContext);
 
-  const handleBackToMenu = () => {
-    navigate("/"); // Redirige a la página principal, puedes ajustar la ruta si es necesario
-  };
-
   return (
     <div className="p-6 text-white">
       <h1 className="text-3xl font-bold mb-4">{translations[language].config_title}</h1>
@@ -57,7 +53,12 @@ export default function Config() {
           ))}
         </div>
       </div>
-       <button onClick={handleBackToMenu}>Volver al Menú Principal</button>
+       <button
+        onClick={() => navigate('/')}
+        className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2"
+      >
+        Volver al Menú Principal
+      </button>
     </div>
   );
 }
