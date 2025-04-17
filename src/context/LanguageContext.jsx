@@ -15,6 +15,7 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('lang', lang);
     setTexts(languages[lang]);
+    console.log('[LanguageContext] Idioma actual:', lang);
   }, [lang]);
 
   return (
