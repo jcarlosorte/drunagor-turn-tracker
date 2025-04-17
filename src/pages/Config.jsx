@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import { useExpansions } from "@/context/ExpansionContext";
-import { availableLanguages } from "@/i18n";
+import { availableLanguages, languageNames } from "@/i18n";
 import { EXPANSIONS } from "@/data/expansions";
 
 export default function Config() {
@@ -18,17 +18,17 @@ export default function Config() {
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-2">{translations.config.language_section_title}</h2>
         <label className="block mb-2">{translations.config.select_language}</label>
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          className="text-black px-2 py-1 rounded"
-        >
-          {availableLanguages.map((langCode) => (
-            <option key={langCode} value={langCode}>
-              {translations.language_name}
-            </option>
-          ))}
-        </select>
+          <select
+            value={lang}
+            onChange={(e) => setLang(e.target.value)}
+            className="text-black px-2 py-1 rounded"
+          >
+            {availableLanguages.map((l) => (
+              <option key={l} value={l}>
+                {languageNames[l]}
+              </option>
+            ))}
+          </select>
       </div>
 
       {/* Selección de expansiones */}
