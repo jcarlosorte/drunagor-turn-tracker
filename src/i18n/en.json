@@ -1,5 +1,9 @@
 {
-  "home": "Home",
+  "home": {
+    "title": "Drunagor Turn Tracker",
+    "start_tracker": "Start Tracker",
+    "configure_environment": "Configure"
+  }
   "language_name": "English",
   "tracker": "Tracker",
   "config": {
