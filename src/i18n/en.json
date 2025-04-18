@@ -3,7 +3,8 @@
   "home": {
     "title": "Drunagor Turn Tracker",
     "start_tracker": "Start",
-    "configure_environment": "Configure"
+    "configure_environment": "Configure",
+    "back_to_home": "Back"
   },
   "tracker": "Tracker",
   "config": {
