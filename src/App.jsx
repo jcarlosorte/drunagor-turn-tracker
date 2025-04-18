@@ -5,8 +5,6 @@ import Config from './pages/Config.jsx';
 
 function Header() {
   const { translations } = useLanguage();
-  console.log("Traducciones cargadas:", translations);
-  console.log("Traducciones home:", translations.home);
   return (
     <>
       <img
