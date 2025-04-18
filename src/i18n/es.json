@@ -1,16 +1,15 @@
 {
+  "language_name": "Español 🇪🇸",
   "home": {
     "title": "Drunagor Control de Turnos",
     "start_tracker": "Iniciar",
     "configure_environment": "Configurar"
   },
-  "language_name": "Español",
-  "tracker": "Tracker",
+  "tracker": "Control",
   "config": {
     "title": "Configuración",
     "language_section_title": "Idioma de la Aplicación",
     "select_language": "Selecciona el idioma",
     "select_expansions": "Selecciona las expansiones"
-  },
-  "language_name": "Español"
+  }
 }
