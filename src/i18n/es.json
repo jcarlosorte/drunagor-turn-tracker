@@ -1,5 +1,9 @@
 {
-  "home": "Inicio",
+  "home": {
+    "title": "Drunagor Control de Turnos",
+    "start_tracker": "Iniciar",
+    "configure_environment": "Configurar"
+  },
   "language_name": "Español",
   "tracker": "Tracker",
   "config": {
