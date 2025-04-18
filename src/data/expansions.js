@@ -12,6 +12,7 @@ import apocalypseImg from '@/assets/expansions/apocalypse.png';
 import heroPackImg from '@/assets/expansions/hero-pack.png';
 import awakeningsImg from '@/assets/expansions/awakenings.png';
 import sistersImg from '@/assets/expansions/sisters.png';
+import lorienImg from '@/assets/expansions/lorien.png';
 
 export const EXPANSIONS = [
   {
