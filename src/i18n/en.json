@@ -12,5 +12,19 @@
     "language_section_title": "App Language",
     "select_language": "Select language",
     "select_expansions": "Select expansions"
-  }
+  },
+  "expansions": {
+  "base": "Chronicles of Drunagor (Base Game)",
+  "luccanor": "The Ruin of Luccanor",
+  "dragon": "Rise of the Undead Dragon",
+  "desierto": "Infernal Desert",
+  "mundo_sombrio": "Shadow World",
+  "handuriel": "Handuriel, Lord of Wrath",
+  "monstruos1": "Monster Pack No. 1",
+  "botines": "War Spoils",
+  "apocalypse": "Apocalypse Adventures",
+  "heroes1": "Hero Pack #1",
+  "apocalypse_backers": "Apocalypse Backer's Campaign"
+}
+
 }
