@@ -11,6 +11,13 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('lang', language);
     setTranslations(languages[language]);
+
+    // Cambiar atributo lang del <html>
+    document.documentElement.lang = language;
+
+    // Cambiar el título del documento si está definido en los textos
+    const newTitle = languages[language]?.home?.title || 'Drunagor Turn Tracker';
+    document.title = newTitle;
   }, [language]);
 
   return (
