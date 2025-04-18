@@ -75,7 +75,7 @@ export const EXPANSIONS = [
     añade: "ambos",
   },
   {
-    id: "hero-pack",
+    id: "heroes1",
     nombre: "Hero Pack #1",
     imagen: heroPackImg,
     añade: "héroes",
@@ -91,5 +91,11 @@ export const EXPANSIONS = [
     nombre: "Apocalypse - The Fallen Sisters",
     imagen: sistersImg,
     añade: "enemigos",
+  },
+  {
+    id: "lorien",
+    nombre: "Apocalypse - Lorien",
+    imagen: lorienImg,
+    añade: "héroes",
   }
 ];
