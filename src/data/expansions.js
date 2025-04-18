@@ -76,7 +76,7 @@ export const EXPANSIONS = [
     pets: []
   },
   {
-    id: "monster_pack_1",
+    id: "monsters_pack_1",
     imagen: monstruos1Img,
     heroes: [],
     enemies: ["scout_of_darkness", "death_messenger", "demon_lord"],
