@@ -39,11 +39,11 @@ export default function Config() {
             <div key={exp.id} className="border rounded p-2 bg-zinc-800">
               <img
                 src={exp.imagen}
-                alt={exp.nombre}
+                alt={translations.expansions[exp.id]}
                 className="w-full h-32 object-cover rounded"
               />
               <div className="flex items-center justify-between mt-2">
-                <span>{exp.nombre}</span>
+                <span>{translations.expansions[exp.id]}</span>
                 <input
                   type="checkbox"
                   checked={selectedExpansions.includes(exp.id)}
