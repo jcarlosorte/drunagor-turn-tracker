@@ -2,57 +2,56 @@
 
 export const HEROES = [
   // Juego Base
-  { id: "lorelai", nombre: "Lorelai", vidaBase: 8, tipo: "héroe", expansionId: "base" },
-  { id: "elros", nombre: "Elros", vidaBase: 8, tipo: "héroe", expansionId: "base" },
-  { id: "jaheen", nombre: "Jaheen", vidaBase: 8, tipo: "héroe", expansionId: "base" },
-  { id: "maya", nombre: "Maya", vidaBase: 8, tipo: "héroe", expansionId: "base" },
-  { id: "vorn", nombre: "Vorn", vidaBase: 8, tipo: "héroe", expansionId: "base" },
+  { id: "lorelai", expansionId: "core", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "elros", expansionId: "core", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
+  { id: "jaheen", expansionId: "core", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
+  { id: "maya", expansionId: "core", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
+  { id: "vorn", expansionId: "core", baseLife: 10, baseMove: 2, color: "purple", type: "hero" },
 
   // El Ascenso del Dragón No Muerto
-  { id: "drasek", nombre: "Drasek", vidaBase: 8, tipo: "héroe", expansionId: "undead-dragon" },
-  { id: "jade", nombre: "Jade", vidaBase: 8, tipo: "héroe", expansionId: "undead-dragon" },
+  { id: "drasek", expansionId: "undead-dragon", baseLife: 10, baseMove: 2, color: "black", type: "hero" },
+  { id: "jade", expansionId: "undead-dragon", baseLife: 10, baseMove: 2, color: "white", type: "hero" },
 
   // Desierto Avernal
-  { id: "katarina", nombre: "Katarina", vidaBase: 8, tipo: "héroe", expansionId: "infernal-desert" },
-  { id: "tork", nombre: "Tork", vidaBase: 8, tipo: "héroe", expansionId: "infernal-desert" },
+  { id: "katarina", expansionId: "infernal-desert", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "tork", expansionId: "infernal-desert", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
 
   // Handuriel
-  { id: "handuriel", nombre: "Handuriel", vidaBase: 8, tipo: "héroe", expansionId: "handuriel" },
+  { id: "handuriel", expansionId: "handuriel", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
 
   // Señor de la Ira
-  { id: "senor-de-la-ira", nombre: "Señor de la Ira", vidaBase: 8, tipo: "héroe", expansionId: "lord-of-wrath" },
+  { id: "lord-of-wrath", expansionId: "lord-of-wrath", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
 
   // Botines de Guerra
-  { id: "arkanos", nombre: "Arkanos", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "barak", nombre: "Barak", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "devron", nombre: "Devron", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "duncan", nombre: "Duncan", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "flavian", nombre: "Flavian", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "kellam", nombre: "Kellam", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "pietro", nombre: "Pietro", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "savran", nombre: "Savran", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "shadow", nombre: "Shadow", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "sskar", nombre: "Sskar", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "sun", nombre: "Sun", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
-  { id: "willow", nombre: "Willow", vidaBase: 8, tipo: "héroe", expansionId: "war-loot" },
+  { id: "arkanos", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "barak", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
+  { id: "devron", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
+  { id: "duncan", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
+  { id: "flavian", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "purple", type: "hero" },
+  { id: "kellam", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "black", type: "hero" },
+  { id: "pietro", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "white", type: "hero" },
+  { id: "savran", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "shadow", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
+  { id: "sskar", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
+  { id: "sun", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
+  { id: "willow", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, color: "purple", type: "hero" },
 
   // Apocalypse - Hero Pack 1
-  { id: "mordred", nombre: "Mordred", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "siff", nombre: "Siff", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "sahara", nombre: "Sahara", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "garamond", nombre: "Garamond", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "diana", nombre: "Diana", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "azriel", nombre: "Azriel", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "brigitte", nombre: "Brigitte", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
-  { id: "drixx", nombre: "Drixx", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-hero-pack-1" },
+  { id: "mordred", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "black", type: "hero" },
+  { id: "siff", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "white", type: "hero" },
+  { id: "sahara", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "garamond", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
+  { id: "diana", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
+  { id: "azriel", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
+  { id: "brigitte", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "purple", type: "hero" },
+  { id: "drixx", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, color: "black", type: "hero" },
 
   // Apocalypse - Lorien
-  { id: "lorien", nombre: "Lorien", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-lorien" },
+  { id: "lorien", expansionId: "apocalypse-lorien", baseLife: 10, baseMove: 2, color: "white", type: "hero" },
 
   // Apocalypse - Awakenings
-  { id: "vacrem", nombre: "Vacrem", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-awakenings" },
-  { id: "andreas", nombre: "Andreas", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-awakenings" },
-  { id: "nyx", nombre: "Nyx", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-awakenings" },
-  { id: "catharina", nombre: "Catharina", vidaBase: 8, tipo: "héroe", expansionId: "apocalypse-awakenings" }
+  { id: "vacrem", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, color: "blue", type: "hero" },
+  { id: "andreas", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, color: "red", type: "hero" },
+  { id: "nyx", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, color: "green", type: "hero" },
+  { id: "catharina", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, color: "yellow", type: "hero" },
 ];
-
