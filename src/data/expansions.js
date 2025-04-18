@@ -17,7 +17,7 @@ import sistersImg from '@/assets/expansions/sisters.png';
 
 export const EXPANSIONS = [
   {
-    id: "base_game",
+    id: "base",
     imagen: baseImg,
     heroes: ["lorelai", "elros", "jaheen", "maya", "vorn"],
     enemies: [
@@ -28,7 +28,7 @@ export const EXPANSIONS = [
     pets: ["bliss", "gloomy"]
   },
   {
-    id: "ruin_of_luccanor",
+    id: "luccanor",
     imagen: luccanorImg,
     heroes: [],
     enemies: ["ravager", "lady_claw"],
@@ -52,7 +52,7 @@ export const EXPANSIONS = [
     pets: []
   },
   {
-    id: "shadow_world",
+    id: "dark_world",
     imagen: mundoImg,
     heroes: [],
     enemies: ["shadow_pain", "shadow_guardian"],
@@ -84,7 +84,7 @@ export const EXPANSIONS = [
     pets: []
   },
   {
-    id: "war_loots",
+    id: "war_loot",
     imagen: botinesImg,
     heroes: [
       "arkanos", "barak", "devron", "duncan", "flavian", "kellam",
@@ -107,7 +107,7 @@ export const EXPANSIONS = [
     pets: []
   },
   {
-    id: "hero_pack_1",
+    id: "apocalypse_heroes_1",
     imagen: heroPackImg,
     heroes: ["mordred", "siff", "sahara", "garamond", "diana", "azriel", "brigitte", "drixx"],
     enemies: [],
@@ -134,7 +134,7 @@ export const EXPANSIONS = [
     pets: []
   },
   {
-    id: "apocalypse_fallen_sisters",
+    id: "apocalypse_sisters",
     imagen: sistersImg,
     heroes: [],
     enemies: ["fallen_sisters"],
