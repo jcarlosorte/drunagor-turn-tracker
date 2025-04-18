@@ -12,5 +12,19 @@
     "language_section_title": "Idioma de la Aplicación",
     "select_language": "Selecciona el idioma",
     "select_expansions": "Selecciona las expansiones"
-  }
+  },
+  "expansions": {
+  "base": "Crónicas de Drunagor (Juego Base)",
+  "luccanor": "La Ruina de Luccanor",
+  "dragon": "El Ascenso del Dragón No Muerto",
+  "desierto": "Desierto Avernal",
+  "mundo_sombrio": "El Mundo Sombrío",
+  "handuriel": "Handuriel, Señor de la Ira",
+  "monstruos1": "Pack de Monstruos Nº1",
+  "botines": "Botines de Guerra",
+  "apocalypse": "Apocalypse Adventures",
+  "heroes1": "Hero Pack #1",
+  "apocalypse_backers": "Campaña Apocalypse Backer's"
+}
+
 }
