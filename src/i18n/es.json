@@ -3,7 +3,8 @@
   "home": {
     "title": "Drunagor Control de Turnos",
     "start_tracker": "Iniciar",
-    "configure_environment": "Configurar"
+    "configure_environment": "Configurar",
+    "back_to_home": "Volver"
   },
   "tracker": "Control",
   "config": {
