@@ -19,12 +19,15 @@
     "dragon": "El Ascenso del Dragón No Muerto",
     "desierto": "Desierto Avernal",
     "mundo_sombrio": "El Mundo Sombrío",
-    "handuriel": "Handuriel, Señor de la Ira",
+    "handuriel": "Handuriel",
+    "Ira":"Señor de la Ira",
     "monstruos1": "Pack de Monstruos Nº1",
     "botines": "Botines de Guerra",
     "apocalypse": "Apocalypse Adventures",
-    "heroes1": "Hero Pack #1",
-    "apocalypse_backers": "Campaña Apocalypse Backer's"
+    "heroes1": "Apocalypse - Hero Pack",
+    "lorien": "Apocalypse - Lorien",
+    "Awakenings": "Apocalypse - Awakenings",
+    "sisters":"Apocalypse - The Fallen Sisters"
 }
 
 }
