@@ -40,7 +40,7 @@ export const EXPANSIONS = [
     añade: "ambos",
   },
   {
-    id: "mundo-sombrio",
+    id: "mundo_sombrio",
     nombre: "El Mundo Sombrío",
     imagen: mundoImg,
     añade: "ambos",
