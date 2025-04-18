@@ -59,7 +59,7 @@ export default function Config() {
         onClick={() => navigate("/", { replace: true })}
         className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-6"
       >
-        ← {translations.home}
+        ← {translations.home.back_to_home}
       </button>
     </div>
   );
