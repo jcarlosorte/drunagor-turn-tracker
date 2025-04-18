@@ -10,93 +10,135 @@ import monstruos1Img from '@/assets/expansions/monstruos1.jpg';
 import botinesImg from '@/assets/expansions/botines.jpg';
 import apocalypseImg from '@/assets/expansions/apocalypse.png';
 import heroPackImg from '@/assets/expansions/hero-pack.png';
+import lorienImg from '@/assets/expansions/lorien.png';
 import awakeningsImg from '@/assets/expansions/awakenings.png';
 import sistersImg from '@/assets/expansions/sisters.png';
-import lorienImg from '@/assets/expansions/lorien.png';
+
 
 export const EXPANSIONS = [
   {
-    id: "base",
-    nombre: "Crónicas de Drunagor (Juego Base)",
+    id: "base_game",
     imagen: baseImg,
-    añade: "ambos",
+    heroes: ["lorelai", "elros", "jaheen", "maya", "vorn"],
+    enemies: [
+      "undead_king_boss", "skeleton_archer", "dark_vampire", "rotten_flesh",
+      "shadow_cultist", "executioner", "shadow_knight", "abomination"
+    ],
+    companions: ["alyra", "koragg"],
+    pets: ["bliss", "gloomy"]
   },
   {
-    id: "luccanor",
-    nombre: "La Ruina de Luccanor",
+    id: "ruin_of_luccanor",
     imagen: luccanorImg,
-    añade: "ambos",
+    heroes: [],
+    enemies: ["ravager", "lady_claw"],
+    companions: [],
+    pets: []
   },
   {
-    id: "dragon",
-    nombre: "El ascenso del Dragón no muerto",
+    id: "undead_dragon",
     imagen: dragonImg,
-    añade: "enemigos",
+    heroes: ["drasek", "jade"],
+    enemies: ["corrupted_farmer", "aralhezec"],
+    companions: [],
+    pets: []
   },
   {
-    id: "desierto",
-    nombre: "Desierto Avernal",
+    id: "infernal_desert",
     imagen: desiertoImg,
-    añade: "ambos",
+    heroes: ["katarina", "tork"],
+    enemies: ["wermunggdir", "corrupted_worm"],
+    companions: [],
+    pets: []
   },
   {
-    id: "mundo_sombrio",
-    nombre: "El Mundo Sombrío",
+    id: "shadow_world",
     imagen: mundoImg,
-    añade: "ambos",
+    heroes: [],
+    enemies: ["shadow_pain", "shadow_guardian"],
+    companions: [],
+    pets: []
   },
   {
     id: "handuriel",
-    nombre: "Handuriel",
     imagen: handurielImg,
-    añade: "héroes",
+    heroes: ["handuriel"],
+    enemies: [],
+    companions: [],
+    pets: []
   },
   {
-    id: "Ira",
-    nombre: "Señor de la Ira",
+    id: "lord_of_wrath",
     imagen: iraImg,
-    añade: "héroes",
+    heroes: ["lord_of_wrath"],
+    enemies: [],
+    companions: [],
+    pets: []
   },
   {
-    id: "monstruos1",
-    nombre: "Pack de Monstruos Nº1",
+    id: "monster_pack_1",
     imagen: monstruos1Img,
-    añade: "enemigos",
+    heroes: [],
+    enemies: ["scout_of_darkness", "death_messenger", "demon_lord"],
+    companions: [],
+    pets: []
   },
   {
-    id: "botines",
-    nombre: "Botines de Guerra",
+    id: "war_loots",
     imagen: botinesImg,
-    añade: "ambos",
+    heroes: [
+      "arkanos", "barak", "devron", "duncan", "flavian", "kellam",
+      "pietro", "savran", "shadow", "sskar", "sun", "willow"
+    ],
+    enemies: ["shadow_mistress", "walking_horror", "bone_reaper", "commander_twins", "commander_thern"],
+    companions: [],
+    pets: ["wog"]
   },
   {
-    id: "apocalypse",
-    nombre: "Apocalypse Adventures",
+    id: "apocalypse_adventures",
     imagen: apocalypseImg,
-    añade: "ambos",
+    heroes: [],
+    enemies: [
+      "dream_titan", "chain_master", "the_witch", "skeleton_knight",
+      "larua_mage", "war_horsemen", "death_horsemen",
+      "plague_horsemen", "famine_horsemen"
+    ],
+    companions: [],
+    pets: []
   },
   {
-    id: "heroes1",
-    nombre: "Hero Pack #1",
+    id: "hero_pack_1",
     imagen: heroPackImg,
-    añade: "héroes",
+    heroes: ["mordred", "siff", "sahara", "garamond", "diana", "azriel", "brigitte", "drixx"],
+    enemies: [],
+    companions: [],
+    pets: []
   },
   {
-    id: "Awakenings",
-    nombre: "Apocalypse Awakenings",
-    imagen: awakeningsImg,
-    añade: "ambos",
-  },
-  {
-    id: "sisters",
-    nombre: "Apocalypse - The Fallen Sisters",
-    imagen: sistersImg,
-    añade: "enemigos",
-  },
-  {
-    id: "lorien",
-    nombre: "Apocalypse - Lorien",
+    id: "apocalypse_lorien",
     imagen: lorienImg,
-    añade: "héroes",
+    heroes: ["lorien"],
+    enemies: [],
+    companions: [],
+    pets: []
+  },
+  {
+    id: "apocalypse_awakenings",
+    imagen: awakeningsImg,
+    heroes: ["vacrem", "andreas", "nyx", "catharina"],
+    enemies: [
+      "soul_harvester", "gorgon_hexer", "gremlin_horde", "gorgoness_witch",
+      "grim_doctor_fell_asteris", "nagian_hunter", "hellspawn_brute", "night_stalker"
+    ],
+    companions: [],
+    pets: []
+  },
+  {
+    id: "apocalypse_fallen_sisters",
+    imagen: sistersImg,
+    heroes: [],
+    enemies: ["fallen_sisters"],
+    companions: [],
+    pets: []
   }
 ];
