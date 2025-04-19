@@ -1,52 +1,58 @@
-// src/components/Tracker.jsx
-import React, { useState, useEffect } from 'react';
-import { EXPANSIONS } from '@/data/expansions';
+// src/pages/Tracker.jsx
+import React, { useState, useMemo } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTranslation } from 'react-i18next';
+
+import { EXPANSIONS } from '@/data/expansions';
+import HEROES from '@/data/heroes';
+import ENEMIES from '@/data/enemies';
+import ROLES from '@/data/roles';
 
 const TrackerSelect = () => {
+  const { activeExpansions } = useLanguage(); // Aquí asumimos que tienes las expansiones activas en contexto
+  const { t } = useTranslation();
+
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
-  const [selectedExpansion, setSelectedExpansion] = useState(EXPANSIONS[0]);
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
 
-  const { translations } = useLanguage();
+  const availableHeroes = useMemo(() =>
+    HEROES.filter(h => activeExpansions.includes(h.expansionId)), [activeExpansions]
+  );
 
-  const t = translations?.trackerSelect || {};
-
-  useEffect(() => {
-    // Esto podría venir de alguna configuración o del estado del usuario
-  }, [selectedExpansion]);
+  const availableEnemies = useMemo(() =>
+    ENEMIES.filter(e => activeExpansions.includes(e.expansionId)), [activeExpansions]
+  );
 
   const handleHeroSelect = (heroId, role) => {
-  // Asegúrate de que no se seleccionen más de 5 héroes
-  if (selectedHeroes.length < 5) {
     if (selectedHeroes.includes(heroId)) {
-      setSelectedHeroes(selectedHeroes.filter(id => id !== heroId)); // Eliminar héroe si ya está seleccionado
-      const newHeroRoles = { ...heroRoles };
-      delete newHeroRoles[heroId]; // Eliminar el rol del héroe si se deselecciona
-      setHeroRoles(newHeroRoles);
+      setSelectedHeroes(prev => prev.filter(id => id !== heroId));
+      const newRoles = { ...heroRoles };
+      delete newRoles[heroId];
+      setHeroRoles(newRoles);
+    } else if (selectedHeroes.length < 5) {
+      setSelectedHeroes(prev => [...prev, heroId]);
+      setHeroRoles(prev => ({ ...prev, [heroId]: role }));
     } else {
-      setSelectedHeroes([...selectedHeroes, heroId]); // Agregar héroe si no está seleccionado
-      setHeroRoles({ ...heroRoles, [heroId]: role }); // Asignar rol al héroe
+      alert(t('trackerSelect.maxHeroesAlert'));
     }
-  } else if (!selectedHeroes.includes(heroId)) {
-    alert('Puedes seleccionar hasta 5 héroes');
-  }
-};
+  };
 
   const handleEnemySelect = (enemyId) => {
-    setSelectedEnemies(prevSelected =>
-      prevSelected.includes(enemyId)
-        ? prevSelected.filter(id => id !== enemyId)
-        : [...prevSelected, enemyId]
+    setSelectedEnemies(prev =>
+      prev.includes(enemyId)
+        ? prev.filter(id => id !== enemyId)
+        : [...prev, enemyId]
     );
   };
 
   const handleRandomEnemySelect = (color) => {
-    const randomEnemy = selectedExpansion.enemies.filter(enemy => enemy.color === color);
-    const randomId = randomEnemy[Math.floor(Math.random() * randomEnemy.length)].id;
-    handleEnemySelect(randomId);
+    const candidates = availableEnemies.filter(e => e.color === color);
+    if (candidates.length > 0) {
+      const random = candidates[Math.floor(Math.random() * candidates.length)];
+      handleEnemySelect(random.id);
+    }
   };
 
   const handleConfirm = () => {
@@ -60,82 +66,87 @@ const TrackerSelect = () => {
 
   return (
     <div>
-      <h1>{t.title}</h1>
+      <h1>{t('trackerSelect.title')}</h1>
 
       <div>
-        <h2>{t.selectHeroes}</h2>
-        <div>
-          {selectedExpansion.heroes.map(hero => (
-            <div key={hero.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedHeroes.includes(hero.id)}
-                  onChange={() => handleHeroSelect(hero.id, 'role_example')}
-                />
-                {hero.name}
-              </label>
-            </div>
-          ))}
-        </div>
+        <h2>{t('trackerSelect.selectHeroes')}</h2>
+        {availableHeroes.map(hero => (
+          <div key={hero.id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={selectedHeroes.includes(hero.id)}
+                onChange={() => handleHeroSelect(hero.id, 'none')}
+              />
+              {t(`heroes.${hero.id}`)}
+            </label>
+          </div>
+        ))}
 
-        <h3>{t.assignRoles}</h3>
+        <h3>{t('trackerSelect.assignRoles')}</h3>
         {selectedHeroes.map(heroId => (
           <div key={heroId}>
             <select
               value={heroRoles[heroId] || 'none'}
-              onChange={(e) => setHeroRoles({ ...heroRoles, [heroId]: e.target.value })}
+              onChange={(e) =>
+                setHeroRoles({ ...heroRoles, [heroId]: e.target.value })
+              }
             >
-              <option value="none">{t.noRole}</option>
-              <option value="tank">{t.tank}</option>
-              <option value="support">{t.support}</option>
-              <option value="dps">{t.dps}</option>
-              <option value="healer">{t.healer}</option>
-              <option value="control">{t.control}</option>
+              <option value="none">{t('trackerSelect.noRole')}</option>
+              {ROLES.map(role => (
+                <option key={role.id} value={role.id}>
+                  {t(`roles.${role.id}`)}
+                </option>
+              ))}
             </select>
           </div>
         ))}
       </div>
 
       <div>
-        <h2>{t.selectEnemies}</h2>
-        <div>
-          {selectedExpansion.enemies.map(enemy => (
-            <div key={enemy.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedEnemies.includes(enemy.id)}
-                  onChange={() => handleEnemySelect(enemy.id)}
-                />
-                {enemy.name}
-              </label>
-            </div>
-          ))}
-        </div>
+        <h2>{t('trackerSelect.selectEnemies')}</h2>
+        {availableEnemies.map(enemy => (
+          <div key={enemy.id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={selectedEnemies.includes(enemy.id)}
+                onChange={() => handleEnemySelect(enemy.id)}
+              />
+              {t(`enemies.${enemy.id}`)}
+            </label>
+          </div>
+        ))}
 
-        <h3>{t.randomEnemyByColor}</h3>
-        <div>
-          {['red', 'green', 'blue', 'yellow'].map(color => (
-            <button key={color} onClick={() => handleRandomEnemySelect(color)}>
-              {t.selectRandomEnemyForColor.replace('{color}', t.colors?.[color] || color)}
-            </button>
-          ))}
-        </div>
+        <h3>{t('trackerSelect.randomEnemyByColor')}</h3>
+        {['red', 'green', 'blue', 'yellow'].map(color => (
+          <button key={color} onClick={() => handleRandomEnemySelect(color)}>
+            {t('trackerSelect.selectRandomEnemyForColor', {
+              color: t(`trackerSelect.colors.${color}`),
+            })}
+          </button>
+        ))}
       </div>
 
       <div>
-        <h2>{t.summary}</h2>
-        <p>{t.selectedHeroes}: {selectedHeroes.join(', ')}</p>
-        <p>{t.selectedEnemies}: {selectedEnemies.join(', ')}</p>
+        <h2>{t('trackerSelect.summary')}</h2>
+        <p>
+          {t('trackerSelect.selectedHeroes')}:{' '}
+          {selectedHeroes.map(id => t(`heroes.${id}`)).join(', ')}
+        </p>
+        <p>
+          {t('trackerSelect.selectedEnemies')}:{' '}
+          {selectedEnemies.map(id => t(`enemies.${id}`)).join(', ')}
+        </p>
       </div>
 
       <div>
-        <button onClick={handleBack}>{t.back}</button>
-        <button onClick={handleConfirm}>{t.confirm}</button>
+        <button onClick={handleBack}>{t('trackerSelect.back')}</button>
+        <button onClick={handleConfirm}>{t('trackerSelect.confirm')}</button>
       </div>
     </div>
   );
 };
 
 export default TrackerSelect;
+
