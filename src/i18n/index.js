@@ -1,6 +1,4 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-
+// src/i18n/index.js
 import es from './es.json';
 import en from './en.json';
 
@@ -17,6 +15,9 @@ export const languageNames = {
 };
 
 // Inicialización de i18next
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
 i18n
   .use(initReactI18next)
   .init({
@@ -24,7 +25,7 @@ i18n
       es: { translation: es },
       en: { translation: en },
     },
-    lng: 'es', // idioma por defecto
+    lng: 'es',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
