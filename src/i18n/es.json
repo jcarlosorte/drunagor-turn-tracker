@@ -118,7 +118,7 @@
     "healer": "Sanador",
     "control": "Control"
   },
-    "trackerSelect": {
+  "trackerSelect": {
     "title": "Seleccionar configuración del tracker",
     "selectHeroes": "Selecciona tus héroes",
     "assignRoles": "Asigna roles de mazmorra",
