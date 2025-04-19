@@ -1,7 +1,7 @@
 // src/components/Tracker.jsx
 import React, { useState, useEffect } from 'react';
-import { EXPANSIONS } from '@/data/expansions'; // Importar las expansiones
-import { useTranslation } from 'react-i18next'; // Para gestionar traducciones
+import { EXPANSIONS } from '@/data/expansions';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
@@ -10,7 +10,9 @@ const TrackerSelect = () => {
   const [selectedExpansion, setSelectedExpansion] = useState(EXPANSIONS[0]);
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
 
-  const { t, i18n } = useTranslation();
+  const { translations } = useLanguage();
+
+  const t = translations.trackerSelect;
 
   useEffect(() => {
     // Esto podría venir de alguna configuración o del estado del usuario
@@ -50,10 +52,10 @@ const TrackerSelect = () => {
 
   return (
     <div>
-      <h1>{t('trackerSelect.title')}</h1>
+      <h1>{t.title}</h1>
 
       <div>
-        <h2>{t('trackerSelect.selectHeroes')}</h2>
+        <h2>{t.selectHeroes}</h2>
         <div>
           {selectedExpansion.heroes.map(hero => (
             <div key={hero.id}>
@@ -69,26 +71,26 @@ const TrackerSelect = () => {
           ))}
         </div>
 
-        <h3>{t('trackerSelect.assignRoles')}</h3>
-        {selectedHeroes.map(hero => (
-          <div key={hero.id}>
+        <h3>{t.assignRoles}</h3>
+        {selectedHeroes.map(heroId => (
+          <div key={heroId}>
             <select
-              value={heroRoles[hero.id] || 'none'}
-              onChange={(e) => setHeroRoles({ ...heroRoles, [hero.id]: e.target.value })}
+              value={heroRoles[heroId] || 'none'}
+              onChange={(e) => setHeroRoles({ ...heroRoles, [heroId]: e.target.value })}
             >
-              <option value="none">{t('trackerSelect.noRole')}</option>
-              <option value="tank">{t('trackerSelect.tank')}</option>
-              <option value="support">{t('trackerSelect.support')}</option>
-              <option value="dps">{t('trackerSelect.dps')}</option>
-              <option value="healer">{t('trackerSelect.healer')}</option>
-              <option value="control">{t('trackerSelect.control')}</option>
+              <option value="none">{t.noRole}</option>
+              <option value="tank">{t.tank}</option>
+              <option value="support">{t.support}</option>
+              <option value="dps">{t.dps}</option>
+              <option value="healer">{t.healer}</option>
+              <option value="control">{t.control}</option>
             </select>
           </div>
         ))}
       </div>
 
       <div>
-        <h2>{t('trackerSelect.selectEnemies')}</h2>
+        <h2>{t.selectEnemies}</h2>
         <div>
           {selectedExpansion.enemies.map(enemy => (
             <div key={enemy.id}>
@@ -104,25 +106,25 @@ const TrackerSelect = () => {
           ))}
         </div>
 
-        <h3>{t('trackerSelect.randomEnemyByColor')}</h3>
+        <h3>{t.randomEnemyByColor}</h3>
         <div>
           {['red', 'green', 'blue', 'yellow'].map(color => (
             <button key={color} onClick={() => handleRandomEnemySelect(color)}>
-              {t('trackerSelect.selectRandomEnemyForColor', { color })}
+              {t.selectRandomEnemyForColor.replace('{color}', color)}
             </button>
           ))}
         </div>
       </div>
 
       <div>
-        <h2>{t('trackerSelect.summary')}</h2>
-        <p>{t('trackerSelect.selectedHeroes')}: {selectedHeroes.join(', ')}</p>
-        <p>{t('trackerSelect.selectedEnemies')}: {selectedEnemies.join(', ')}</p>
+        <h2>{t.summary}</h2>
+        <p>{t.selectedHeroes}: {selectedHeroes.join(', ')}</p>
+        <p>{t.selectedEnemies}: {selectedEnemies.join(', ')}</p>
       </div>
 
       <div>
-        <button onClick={handleBack}>{t('trackerSelect.back')}</button>
-        <button onClick={handleConfirm}>{t('trackerSelect.confirm')}</button>
+        <button onClick={handleBack}>{t.back}</button>
+        <button onClick={handleConfirm}>{t.confirm}</button>
       </div>
     </div>
   );
