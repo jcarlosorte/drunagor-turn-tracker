@@ -110,5 +110,12 @@
     "hellspawn_brute": "Bruto del Inframundo",
     "night_stalker": "Acechador Nocturno",
     "fallen_sisters": "Hermanas Caídas"
+  },
+  "roles": {
+  "tank": "Tanque",
+  "support": "Apoyo",
+  "dps": "Daño",
+  "healer": "Sanador",
+  "control": "Control"
   }
 }
