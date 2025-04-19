@@ -110,6 +110,13 @@
     "hellspawn_brute": "Hellspawn Brute",
     "night_stalker": "Night Stalker",
     "fallen_sisters": "Fallen Sisters"
+  },
+    "roles": {
+    "tank": "Tank",
+    "support": "Support",
+    "dps": "DPS",
+    "healer": "Healer",
+    "control": "Control"
   }
 
 }
