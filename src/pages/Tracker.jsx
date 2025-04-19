@@ -19,13 +19,21 @@ const TrackerSelect = () => {
   }, [selectedExpansion]);
 
   const handleHeroSelect = (heroId, role) => {
-    if (selectedHeroes.length < 5 && !selectedHeroes.includes(heroId)) {
-      setSelectedHeroes([...selectedHeroes, heroId]);
-      setHeroRoles({ ...heroRoles, [heroId]: role });
+  // Asegúrate de que no se seleccionen más de 5 héroes
+  if (selectedHeroes.length < 5) {
+    if (selectedHeroes.includes(heroId)) {
+      setSelectedHeroes(selectedHeroes.filter(id => id !== heroId)); // Eliminar héroe si ya está seleccionado
+      const newHeroRoles = { ...heroRoles };
+      delete newHeroRoles[heroId]; // Eliminar el rol del héroe si se deselecciona
+      setHeroRoles(newHeroRoles);
     } else {
-      alert('Puedes seleccionar hasta 5 héroes');
+      setSelectedHeroes([...selectedHeroes, heroId]); // Agregar héroe si no está seleccionado
+      setHeroRoles({ ...heroRoles, [heroId]: role }); // Asignar rol al héroe
     }
-  };
+  } else if (!selectedHeroes.includes(heroId)) {
+    alert('Puedes seleccionar hasta 5 héroes');
+  }
+};
 
   const handleEnemySelect = (enemyId) => {
     setSelectedEnemies(prevSelected =>
