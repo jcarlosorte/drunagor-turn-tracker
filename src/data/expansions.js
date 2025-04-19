@@ -14,7 +14,6 @@ import lorienImg from '@/assets/expansions/lorien.png';
 import awakeningsImg from '@/assets/expansions/awakenings.png';
 import sistersImg from '@/assets/expansions/sisters.png';
 
-
 export const EXPANSIONS = [
   {
     id: "base",
@@ -26,7 +25,10 @@ export const EXPANSIONS = [
     ],
     companions: ["alyra", "koragg"],
     pets: ["bliss", "gloomy"],
-    roles: ['tank', 'support', 'dps', 'healer', 'control']
+    roles: ['tank', 'support', 'dps', 'healer', 'control'],
+    // Campos vacíos para otras expansiones o datos adicionales
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "luccanor",
@@ -34,7 +36,10 @@ export const EXPANSIONS = [
     heroes: [],
     enemies: ["ravager", "lady_claw"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "undead_dragon",
@@ -42,7 +47,10 @@ export const EXPANSIONS = [
     heroes: ["drasek", "jade"],
     enemies: ["corrupted_farmer", "aralhezec"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "infernal_desert",
@@ -50,7 +58,10 @@ export const EXPANSIONS = [
     heroes: ["katarina", "tork"],
     enemies: ["wermunggdir", "corrupted_worm"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "dark_world",
@@ -58,7 +69,10 @@ export const EXPANSIONS = [
     heroes: [],
     enemies: ["shadow_pain", "shadow_guardian"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "handuriel",
@@ -66,7 +80,10 @@ export const EXPANSIONS = [
     heroes: ["handuriel"],
     enemies: [],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "lord_of_wrath",
@@ -74,7 +91,10 @@ export const EXPANSIONS = [
     heroes: ["lord_of_wrath"],
     enemies: [],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "monsters_pack_1",
@@ -82,7 +102,10 @@ export const EXPANSIONS = [
     heroes: [],
     enemies: ["scout_of_darkness", "death_messenger", "demon_lord"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "war_loot",
@@ -93,7 +116,10 @@ export const EXPANSIONS = [
     ],
     enemies: ["shadow_mistress", "walking_horror", "bone_reaper", "commander_twins", "commander_thern"],
     companions: [],
-    pets: ["wog"]
+    pets: ["wog"],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "apocalypse_adventures",
@@ -105,7 +131,10 @@ export const EXPANSIONS = [
       "plague_horsemen", "famine_horsemen"
     ],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "apocalypse_heroes_1",
@@ -113,7 +142,10 @@ export const EXPANSIONS = [
     heroes: ["mordred", "siff", "sahara", "garamond", "diana", "azriel", "brigitte", "drixx"],
     enemies: [],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "apocalypse_lorien",
@@ -121,7 +153,10 @@ export const EXPANSIONS = [
     heroes: ["lorien"],
     enemies: [],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "apocalypse_awakenings",
@@ -132,7 +167,10 @@ export const EXPANSIONS = [
       "grim_doctor_fell_asteris", "nagian_hunter", "hellspawn_brute", "night_stalker"
     ],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   },
   {
     id: "apocalypse_sisters",
@@ -140,6 +178,10 @@ export const EXPANSIONS = [
     heroes: [],
     enemies: ["fallen_sisters"],
     companions: [],
-    pets: []
+    pets: [],
+    roles: [],
+    dungeonRoles: [],
+    language: { en: '', es: '' }
   }
 ];
+
