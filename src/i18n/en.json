@@ -135,6 +135,12 @@
     "selectedHeroes": "Selected heroes",
     "selectedEnemies": "Selected enemies",
     "back": "Back",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "colors": {
+      "red": "red",
+      "green": "green",
+      "blue": "blue",
+      "yellow": "yellow"
+    }
   }
 }
