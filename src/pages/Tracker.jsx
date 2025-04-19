@@ -1,41 +1,39 @@
 // src/pages/Tracker.jsx
-import React, { useState, useMemo } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { useTranslation } from 'react-i18next';
-
+import React, { useState } from 'react';
 import { EXPANSIONS } from '@/data/expansions';
 import HEROES from '@/data/heroes';
 import ENEMIES from '@/data/enemies';
 import ROLES from '@/data/roles';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TrackerSelect = () => {
-  const { activeExpansions } = useLanguage(); // Aquí asumimos que tienes las expansiones activas en contexto
-  const { t } = useTranslation();
-
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
+  const [selectedExpansion, setSelectedExpansion] = useState(EXPANSIONS[0]);
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
 
-  const availableHeroes = useMemo(() =>
-    HEROES.filter(h => activeExpansions.includes(h.expansionId)), [activeExpansions]
-  );
+  const { language, translations } = useLanguage();
+  const t = translations?.trackerSelect || {};
 
-  const availableEnemies = useMemo(() =>
-    ENEMIES.filter(e => activeExpansions.includes(e.expansionId)), [activeExpansions]
-  );
+  const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
+  const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
+  const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
 
-  const handleHeroSelect = (heroId, role) => {
+  const heroesInExpansion = HEROES.filter(h => selectedExpansion.heroes.includes(h.id));
+  const enemiesInExpansion = ENEMIES.filter(e => selectedExpansion.enemies.includes(e.id));
+
+  const handleHeroSelect = (heroId) => {
     if (selectedHeroes.includes(heroId)) {
-      setSelectedHeroes(prev => prev.filter(id => id !== heroId));
-      const newRoles = { ...heroRoles };
-      delete newRoles[heroId];
-      setHeroRoles(newRoles);
+      setSelectedHeroes(selectedHeroes.filter(id => id !== heroId));
+      const updatedRoles = { ...heroRoles };
+      delete updatedRoles[heroId];
+      setHeroRoles(updatedRoles);
     } else if (selectedHeroes.length < 5) {
-      setSelectedHeroes(prev => [...prev, heroId]);
-      setHeroRoles(prev => ({ ...prev, [heroId]: role }));
+      setSelectedHeroes([...selectedHeroes, heroId]);
+      setHeroRoles({ ...heroRoles, [heroId]: 'none' });
     } else {
-      alert(t('trackerSelect.maxHeroesAlert'));
+      alert(t.maxHeroes || 'Puedes seleccionar hasta 5 héroes');
     }
   };
 
@@ -48,10 +46,10 @@ const TrackerSelect = () => {
   };
 
   const handleRandomEnemySelect = (color) => {
-    const candidates = availableEnemies.filter(e => e.color === color);
-    if (candidates.length > 0) {
-      const random = candidates[Math.floor(Math.random() * candidates.length)];
-      handleEnemySelect(random.id);
+    const matching = enemiesInExpansion.filter(e => e.color === color);
+    if (matching.length > 0) {
+      const randomEnemy = matching[Math.floor(Math.random() * matching.length)];
+      handleEnemySelect(randomEnemy.id);
     }
   };
 
@@ -66,36 +64,34 @@ const TrackerSelect = () => {
 
   return (
     <div>
-      <h1>{t('trackerSelect.title')}</h1>
+      <h1>{t.title}</h1>
 
       <div>
-        <h2>{t('trackerSelect.selectHeroes')}</h2>
-        {availableHeroes.map(hero => (
+        <h2>{t.selectHeroes}</h2>
+        {heroesInExpansion.map(hero => (
           <div key={hero.id}>
             <label>
               <input
                 type="checkbox"
                 checked={selectedHeroes.includes(hero.id)}
-                onChange={() => handleHeroSelect(hero.id, 'none')}
+                onChange={() => handleHeroSelect(hero.id)}
               />
-              {t(`heroes.${hero.id}`)}
+              {getHeroName(hero.id)}
             </label>
           </div>
         ))}
 
-        <h3>{t('trackerSelect.assignRoles')}</h3>
+        <h3>{t.assignRoles}</h3>
         {selectedHeroes.map(heroId => (
           <div key={heroId}>
+            <label>{getHeroName(heroId)}:</label>
             <select
               value={heroRoles[heroId] || 'none'}
-              onChange={(e) =>
-                setHeroRoles({ ...heroRoles, [heroId]: e.target.value })
-              }
+              onChange={(e) => setHeroRoles({ ...heroRoles, [heroId]: e.target.value })}
             >
-              <option value="none">{t('trackerSelect.noRole')}</option>
               {ROLES.map(role => (
                 <option key={role.id} value={role.id}>
-                  {t(`roles.${role.id}`)}
+                  {getRoleName(role.id)}
                 </option>
               ))}
             </select>
@@ -104,8 +100,8 @@ const TrackerSelect = () => {
       </div>
 
       <div>
-        <h2>{t('trackerSelect.selectEnemies')}</h2>
-        {availableEnemies.map(enemy => (
+        <h2>{t.selectEnemies}</h2>
+        {enemiesInExpansion.map(enemy => (
           <div key={enemy.id}>
             <label>
               <input
@@ -113,40 +109,33 @@ const TrackerSelect = () => {
                 checked={selectedEnemies.includes(enemy.id)}
                 onChange={() => handleEnemySelect(enemy.id)}
               />
-              {t(`enemies.${enemy.id}`)}
+              {getEnemyName(enemy.id)}
             </label>
           </div>
         ))}
 
-        <h3>{t('trackerSelect.randomEnemyByColor')}</h3>
-        {['red', 'green', 'blue', 'yellow'].map(color => (
-          <button key={color} onClick={() => handleRandomEnemySelect(color)}>
-            {t('trackerSelect.selectRandomEnemyForColor', {
-              color: t(`trackerSelect.colors.${color}`),
-            })}
-          </button>
-        ))}
+        <h3>{t.randomEnemyByColor}</h3>
+        <div>
+          {['red', 'green', 'blue', 'yellow'].map(color => (
+            <button key={color} onClick={() => handleRandomEnemySelect(color)}>
+              {t.selectRandomEnemyForColor?.replace('{color}', t.colors?.[color] || color)}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div>
-        <h2>{t('trackerSelect.summary')}</h2>
-        <p>
-          {t('trackerSelect.selectedHeroes')}:{' '}
-          {selectedHeroes.map(id => t(`heroes.${id}`)).join(', ')}
-        </p>
-        <p>
-          {t('trackerSelect.selectedEnemies')}:{' '}
-          {selectedEnemies.map(id => t(`enemies.${id}`)).join(', ')}
-        </p>
+        <h2>{t.summary}</h2>
+        <p>{t.selectedHeroes}: {selectedHeroes.map(getHeroName).join(', ')}</p>
+        <p>{t.selectedEnemies}: {selectedEnemies.map(getEnemyName).join(', ')}</p>
       </div>
 
       <div>
-        <button onClick={handleBack}>{t('trackerSelect.back')}</button>
-        <button onClick={handleConfirm}>{t('trackerSelect.confirm')}</button>
+        <button onClick={handleBack}>{t.back}</button>
+        <button onClick={handleConfirm}>{t.confirm}</button>
       </div>
     </div>
   );
 };
 
 export default TrackerSelect;
-
