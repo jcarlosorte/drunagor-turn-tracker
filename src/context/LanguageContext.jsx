@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { languages } from '../i18n/languageData';
+import { translationsByLang } from '../i18n/languageData';
 
 const LanguageContext = createContext();
 
@@ -10,13 +10,13 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('lang', language);
-    setTranslations(languages[language]);
+    setTranslations(translationsByLang[language]);
 
     // Cambiar atributo lang del <html>
     document.documentElement.lang = language;
 
     // Cambiar el título del documento si está definido en los textos
-    const newTitle = languages[language]?.home?.title || 'Drunagor Turn Tracker';
+    const newTitle = translationsByLang[language]?.home?.title || 'Drunagor Turn Tracker';
     document.title = newTitle;
   }, [language]);
 
