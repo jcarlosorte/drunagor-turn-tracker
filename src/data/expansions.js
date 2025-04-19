@@ -25,7 +25,8 @@ export const EXPANSIONS = [
       "shadow_cultist", "executioner", "shadow_knight", "abomination"
     ],
     companions: ["alyra", "koragg"],
-    pets: ["bliss", "gloomy"]
+    pets: ["bliss", "gloomy"],
+    roles: ['tank', 'support', 'dps', 'healer', 'control']
   },
   {
     id: "luccanor",
