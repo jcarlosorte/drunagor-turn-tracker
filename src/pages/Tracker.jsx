@@ -12,7 +12,7 @@ const TrackerSelect = () => {
 
   const { translations } = useLanguage();
 
-  const t = translations.trackerSelect;
+  const t = translations?.trackerSelect || {};
 
   useEffect(() => {
     // Esto podría venir de alguna configuración o del estado del usuario
@@ -110,7 +110,7 @@ const TrackerSelect = () => {
         <div>
           {['red', 'green', 'blue', 'yellow'].map(color => (
             <button key={color} onClick={() => handleRandomEnemySelect(color)}>
-              {t.selectRandomEnemyForColor.replace('{color}', color)}
+              {t.selectRandomEnemyForColor.replace('{color}', t.colors?.[color] || color)}
             </button>
           ))}
         </div>
