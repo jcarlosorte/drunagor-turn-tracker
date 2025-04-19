@@ -117,6 +117,24 @@
     "dps": "DPS",
     "healer": "Healer",
     "control": "Control"
+  },
+  "trackerSelect": {
+    "title": "Select tracker setup",
+    "selectHeroes": "Select your heroes",
+    "assignRoles": "Assign dungeon roles",
+    "noRole": "No role",
+    "tank": "Tank",
+    "support": "Support",
+    "dps": "DPS",
+    "healer": "Healer",
+    "control": "Control",
+    "selectEnemies": "Select enemies",
+    "randomEnemyByColor": "Select random enemy by color",
+    "selectRandomEnemyForColor": "Select random enemy of color {color}",
+    "summary": "Summary",
+    "selectedHeroes": "Selected heroes",
+    "selectedEnemies": "Selected enemies",
+    "back": "Back",
+    "confirm": "Confirm"
   }
-
 }
