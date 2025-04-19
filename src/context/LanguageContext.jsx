@@ -6,7 +6,7 @@ const LanguageContext = createContext();
 export const LanguageProvider = ({ children }) => {
   const storedLang = localStorage.getItem('lang') || 'es';
   const [language, setLanguage] = useState(storedLang);
-  const [translations, setTranslations] = useState(languages[storedLang]);
+  const [translations, setTranslations] = useState(translationsByLang[storedLang]);
 
   useEffect(() => {
     localStorage.setItem('lang', language);
