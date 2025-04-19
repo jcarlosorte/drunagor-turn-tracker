@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { languages } from '../i18n';
+import { languages } from '../i18n/languageData';
 
 const LanguageContext = createContext();
 
