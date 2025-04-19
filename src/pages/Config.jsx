@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import { useExpansions } from "@/context/ExpansionContext";
-import { availableLanguages, languageNames } from "@/i18n";
+import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { EXPANSIONS } from "@/data/expansions";
 
 export default function Config() {
