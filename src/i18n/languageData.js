@@ -7,3 +7,8 @@ export const languageNames = {
   es: es.language_name,
   en: en.language_name,
 };
+
+export const translationsByLang = {
+  es,
+  en,
+};
