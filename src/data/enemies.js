@@ -30,23 +30,24 @@ import aralhezec from "@/assets/enemies/Dragon.png";
 import wermunggdir from "@/assets/enemies/Wurm.png";
 
 // Apocalipsis
+import skeleton_knight from "@/assets/enemies/skeleton_knight.png";
+import the_witch from "@/assets/enemies/the_witch.png";
 import dream_titan from "@/assets/enemies/dream_titan.png";
 import chain_master from "@/assets/enemies/chain_master.png";
-import the_witch from "@/assets/enemies/the_witch.png";
-import skeleton_knight from "@/assets/enemies/skeleton_knight.png";
 import larua_mage from "@/assets/enemies/larua_mage.png";
 import war_horsemen from "@/assets/enemies/war_horsemen.png";
 import death_horsemen from "@/assets/enemies/death_horsemen.png";
 import plague_horsemen from "@/assets/enemies/plague_horsemen.png";
 import famine_horsemen from "@/assets/enemies/famine_horsemen.png";
-import soul_harvester from "@/assets/enemies/soul_harvester.png";
-import gorgon_hexer from "@/assets/enemies/gorgon_hexer.png";
 import gremlin_horde from "@/assets/enemies/gremlin_horde.png";
 import gorgoness_witch from "@/assets/enemies/gorgoness_witch.png";
 import grim_doctor from "@/assets/enemies/grim_doctor.png";
 import nagian_hunter from "@/assets/enemies/nagian_hunter.png";
 import hellspawn_brute from "@/assets/enemies/hellspawn_brute.png";
 import night_stalker from "@/assets/enemies/night_stalker.png";
+import gorgon_hexer from "@/assets/enemies/gorgon_hexer.png";
+import soul_harvester from "@/assets/enemies/soul_harvester.png";
+import soul_harvester from "@/assets/enemies/FellAsteris.png";
 import fallen_sisters from "@/assets/enemies/fallen_sisters.png";
 
 export const ENEMIES = [
@@ -99,6 +100,7 @@ export const ENEMIES = [
   { id: "nagian_hunter", nombre: "Nagian Hunter", vida: 0, movimiento: 0, color: "dark", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: nagian_hunter },
   { id: "hellspawn_brute", nombre: "Hellspawn Brute", vida: 0, movimiento: 0, color: "fire", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: hellspawn_brute },
   { id: "night_stalker", nombre: "Night Stalker", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: night_stalker },
+  { id: "fell_asteris", nombre: "Fell Asteris", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: FellAsteris },
 
   { id: "fallen_sisters", nombre: "Fallen Sisters", vida: 0, movimiento: 0, color: "dark", tipo: "enemigo", expansionId: "apocalypse_sisters", imagen: fallen_sisters }
 ];
