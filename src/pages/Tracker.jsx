@@ -86,8 +86,6 @@ const TrackerSelect = () => {
     setHeroRoles({ ...heroRoles, [heroId]: roleId });
   };
   
-  const availableRoles = ROLES.filter(r => r.type === "dungeon");
-  
   return (
     <div className="p-4 space-y-8 text-gray-900">
       <h1 className="text-2xl font-bold">{t.title}</h1>
@@ -124,25 +122,27 @@ const TrackerSelect = () => {
       {selectedHeroes.length > 0 && (
         <div className="border p-4 rounded-xl bg-gray-100 shadow">
           <h3 className="text-lg font-semibold mb-2">{t.assignRoles}</h3>
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               return (
-                <div key={heroId} className="flex items-center gap-2">
-                  <img src={heroData.image} alt={getHeroName(heroId)} className="w-10 h-10 object-contain" />
+                <div key={heroId} className="flex flex-col items-center gap-2">
+                  <img
+                    src={heroData.image}
+                    alt={getHeroName(heroId)}
+                    className="w-24 h-24 object-contain"
+                  />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => assignRole(heroId, e.target.value)}
-                    className="ml-2"
+                    className="mt-2 border rounded-md p-2"
                   >
                     <option value="">{t.selectRole}</option>
-                    {availableRoles
-                      .filter(role => !Object.entries(heroRoles).some(([hId, r]) => r === role.id && hId !== heroId))
-                      .map(role => (
-                        <option key={role.id} value={role.id}>
-                          {getRoleName(role.id)}
-                        </option>
+                    {ROLES.map(role => (
+                      <option key={role.id} value={role.id}>
+                        {getRoleName(role.id)} {/* Aquí obtenemos el nombre del rol con la traducción */}
+                      </option>
                       ))}
                   </select>
                 </div>
@@ -150,6 +150,7 @@ const TrackerSelect = () => {
             })}
           </div>
         </div>
+
       )}
 
       {/* Enemigos agrupados por color */}
