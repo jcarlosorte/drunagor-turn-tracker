@@ -137,10 +137,11 @@
     "back": "Volver",
     "confirm": "Confirmar",
     "colors": {
-      "red": "rojo",
-      "green": "verde",
-      "blue": "azul",
-      "yellow": "amarillo"
+      "blanco": "Blanco",
+      "gris": "Gris",
+      "negro": "Negro",
+      "comandante": "Comandante",
+      "jefe": "Jefe",
     }
   }
 }
