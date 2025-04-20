@@ -191,8 +191,20 @@ const TrackerSelect = () => {
       {/* Resumen */}
       <div className="bg-gray-100 rounded p-4 border shadow">
         <h2 className="text-lg font-semibold">{t.summary}</h2>
-        <p>{t.selectedHeroes}: {selectedHeroes.map(getHeroName).join(', ')}</p>
-        <p>{t.selectedEnemies}: {selectedEnemies.map(getEnemyName).join(', ')}</p>
+        <div className="flex flex-wrap gap-4 mt-2">
+          {selectedHeroes.map(id => (
+            <span key={id} className="bg-white px-2 py-1 rounded">
+              {getHeroName(id)}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-4 mt-2">
+          {selectedEnemies.map(id => (
+            <span key={id} className="bg-white px-2 py-1 rounded">
+              {getEnemyName(id)}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Botones finales */}
