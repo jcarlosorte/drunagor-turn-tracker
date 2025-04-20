@@ -7,12 +7,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useExpansions } from '@/context/ExpansionContext'; // Asumiendo que tienes este contexto
 
 const TrackerSelect = () => {
-  console.log(EXPANSIONS[0]
+  console.log(EXPANSIONS[0];
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
   const { selectedExpansions, toggleExpansion } = useExpansions();
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
+  const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
 
   const { language, translations } = useLanguage();
   const t = translations?.trackerSelect || {};
@@ -21,9 +22,17 @@ const TrackerSelect = () => {
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
   const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
 
-  // Filtrar héroes y enemigos según las expansiones activas
-  const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.some(exp => exp.heroes.includes(h.id)));
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.some(exp => exp.enemies.includes(e.id)));
+ // Obtener todos los IDs de héroes/enemigos que pertenecen a las expansiones seleccionadas
+  const heroIdsInSelectedExpansions = EXPANSIONS
+    .filter(exp => selectedExpansions.includes(exp.id))
+    .flatMap(exp => exp.heroes);
+  
+  const enemyIdsInSelectedExpansions = EXPANSIONS
+    .filter(exp => selectedExpansions.includes(exp.id))
+    .flatMap(exp => exp.enemies);
+  
+  const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => enemyIdsInSelectedExpansions.includes(e.id));
 
   const handleHeroSelect = (heroId) => {
     if (selectedHeroes.includes(heroId)) {
@@ -69,9 +78,9 @@ const TrackerSelect = () => {
       <h1>{t.title}</h1>
 
       {/* Héroes por expansión */}
-      {selectedExpansions.map(expansion => (
+      {fullSelectedExpansions.map(expansion => (
         <div key={expansion.id}>
-          <h2>{t.selectHeroes} ({expansion.name})</h2>
+          <h2>{t.selectHeroes} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
           {heroesInSelectedExpansions.filter(hero => expansion.heroes.includes(hero.id)).map(hero => (
             <div key={hero.id}>
               <label>
