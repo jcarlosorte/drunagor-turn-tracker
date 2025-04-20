@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
@@ -14,6 +15,7 @@ const TrackerSelect = () => {
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const t = translations?.trackerSelect || {};
+  const navigate = useNavigate();
 
   const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
   const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
@@ -66,7 +68,7 @@ const TrackerSelect = () => {
   };
 
   const handleBack = () => {
-    console.log('Volver a la configuración');
+    navigate("/", { replace: true }); // o solo navigate("/") si no quieres reemplazo en el historial
   };
 
   return (
@@ -169,7 +171,10 @@ const TrackerSelect = () => {
       </div>
 
       <div className="flex justify-between mt-6">
-        <button onClick={handleBack} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded">
+        <button
+          onClick={handleBack}
+          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded"
+        >
           {t.back}
         </button>
         <button onClick={handleConfirm} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
