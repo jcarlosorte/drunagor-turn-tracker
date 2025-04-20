@@ -76,10 +76,10 @@ const TrackerSelect = () => {
     <div>
       <h1>{t.title}</h1>
 
-      {/* Héroes por expansión */}
+     {/* Héroes por expansión */}
       {fullSelectedExpansions.map(expansion => (
-        
-          <h2>{t.selectHeroes}</h2>
+       
+          <h2>{t.selectHeroes} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
           {heroesInSelectedExpansions.filter(hero => expansion.heroes.includes(hero.id)).map(hero => (
             <div key={hero.id}>
               <label>
@@ -90,7 +90,7 @@ const TrackerSelect = () => {
                 />
                 {getHeroName(hero.id)}
               </label>
-            
+            </div>
           ))}
 
           <h3>{t.assignRoles}</h3>
@@ -109,7 +109,7 @@ const TrackerSelect = () => {
               </select>
             </div>
           ))}
-        </div>
+     
       ))}
 
       {/* Enemigos por expansión */}
