@@ -64,8 +64,12 @@ const TrackerSelect = () => {
   };
 
   const handleConfirm = () => {
-    console.log('Héroes seleccionados:', selectedHeroes, 'Roles:', heroRoles);
-    console.log('Enemigos seleccionados:', selectedEnemies);
+    console.log('Confirmado:', {
+      heroes: selectedHeroes,
+      roles: heroRoles,
+      enemies: selectedEnemies
+    });
+    // Navegar a siguiente pantalla o actualizar estado global si se desea
   };
 
   const handleBack = () => {
@@ -171,15 +175,19 @@ const TrackerSelect = () => {
         <p>{t.selectedEnemies}: {selectedEnemies.map(getEnemyName).join(', ')}</p>
       </div>
 
-      <div className="flex justify-between mt-6">
+      {/* Botones finales */}
+      <div className="flex justify-between">
         <button
           onClick={handleBack}
-          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded"
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
         >
-          {t.back}
+          {t.back || 'Volver'}
         </button>
-        <button onClick={handleConfirm} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
-          {t.confirm}
+        <button
+          onClick={handleConfirm}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          {t.confirm || 'Confirmar'}
         </button>
       </div>
     </div>
