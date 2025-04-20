@@ -132,12 +132,12 @@ const TrackerSelect = () => {
       {/* Enemigos agrupados por color */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
         <h2 className="text-xl font-semibold">{t.selectEnemies}</h2>
-        {['red', 'green', 'blue', 'yellow'].map(color => {
-          const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color);
+        {COLORS.map(color => {
+          const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
           if (enemiesOfColor.length === 0) return null;
           return (
-            <div key={color}>
-              <h3 className="text-lg font-semibold mb-2">{t.colors?.[color] || color}</h3>
+            <div key={color.id}>
+              <h3 className="text-lg font-semibold mb-2">{t.colors?.[color.id] || color.id}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {enemiesOfColor.map(enemy => (
                   <label key={enemy.id} className="flex items-center space-x-2">
@@ -154,10 +154,10 @@ const TrackerSelect = () => {
                 ))}
               </div>
               <button
-                onClick={() => handleRandomEnemySelect(color)}
-                className={`mt-2 px-3 py-1 rounded bg-${color}-600 text-white hover:bg-${color}-700`}
+                onClick={() => handleRandomEnemySelect(color.id)}
+                className={`mt-2 px-3 py-1 rounded bg-${color.id}-600 text-white hover:bg-${color.id}-700`}
               >
-                {t.selectRandomEnemyForColor?.replace('{color}', t.colors?.[color] || color)}
+                {t.selectRandomEnemyForColor?.replace('{color}', t.colors?.[color.id] || color.id)}
               </button>
             </div>
           );
