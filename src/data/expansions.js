@@ -164,7 +164,7 @@ export const EXPANSIONS = [
     heroes: ["vacrem", "andreas", "nyx", "catharina"],
     enemies: [
       "soul_harvester", "gorgon_hexer", "gremlin_horde", "gorgoness_witch",
-      "grim_doctor_fell_asteris", "nagian_hunter", "hellspawn_brute", "night_stalker"
+      "grim_doctor", "fell_asteris", "nagian_hunter", "hellspawn_brute", "night_stalker"
     ],
     companions: [],
     pets: [],
