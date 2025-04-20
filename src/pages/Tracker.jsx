@@ -10,7 +10,7 @@ const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
-  const { selectedExpansions } = useContext(useExpansions); // Usar el contexto de expansiones
+  const { selectedExpansions, toggleExpansion } = useExpansions();
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
 
   const { language, translations } = useLanguage();
