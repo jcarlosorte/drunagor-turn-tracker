@@ -47,7 +47,7 @@ import hellspawn_brute from "@/assets/enemies/hellspawn_brute.png";
 import night_stalker from "@/assets/enemies/night_stalker.png";
 import gorgon_hexer from "@/assets/enemies/gorgon_hexer.png";
 import soul_harvester from "@/assets/enemies/soul_harvester.png";
-import soul_harvester from "@/assets/enemies/FellAsteris.png";
+import fell_asteris from "@/assets/enemies/FellAsteris.png";
 import fallen_sisters from "@/assets/enemies/fallen_sisters.png";
 
 export const ENEMIES = [
