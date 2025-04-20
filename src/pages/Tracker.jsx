@@ -114,9 +114,9 @@ const TrackerSelect = () => {
       ))}
 
       {/* Enemigos por expansión */}
-      {selectedExpansions.map(expansion => (
+      {fullSelectedExpansions.map(expansion => (
         <div key={expansion.id}>
-          <h2>{t.selectEnemies} ({expansion.name})</h2>
+          <h2>{t.selectEnemies} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
           {enemiesInSelectedExpansions.filter(enemy => expansion.enemies.includes(enemy.id)).map(enemy => (
             <div key={enemy.id}>
               <label>
