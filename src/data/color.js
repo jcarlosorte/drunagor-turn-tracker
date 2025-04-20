@@ -1,4 +1,4 @@
-/ src/data/color.js
+// src/data/color.js
 export const ROLES = [
   {
     id: 'blanco'
