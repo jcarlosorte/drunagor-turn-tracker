@@ -150,9 +150,9 @@ const TrackerSelect = () => {
                   />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
                   {heroRoles[heroId] ? (
-                    <span> - {heroRoles[heroId]}</span>
+                    <span> - {getRoleName(role.id)} - </span>
                   ) : (
-                    <span> - <em>Elige rol</em></span>
+                    <span> - <em>Elige rol</em> - </span>
                   )}
                   <select
                     value={heroRoles[heroId] || ""}
@@ -161,7 +161,7 @@ const TrackerSelect = () => {
                     className="mt-2 border rounded-md p-2"
                   >
                     <option value="" disabled>Elige rol</option>
-                    <option value="">{t.selectRole}</option>
+                   // <option value="">{t.selectRole}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
                         {getRoleName(role.id)} {/* Aquí obtenemos el nombre del rol con la traducción */}
