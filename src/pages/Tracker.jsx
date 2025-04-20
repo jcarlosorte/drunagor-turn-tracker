@@ -4,13 +4,13 @@ import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { ROLES } from '@/data/roles';
 import { useLanguage } from '@/context/LanguageContext';
-import { ExpansionContext } from '@/context/ExpansionContext'; // Asumiendo que tienes este contexto
+import { useExpansions } from '@/context/ExpansionContext'; // Asumiendo que tienes este contexto
 
 const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
-  const { selectedExpansions } = useContext(ExpansionContext); // Usar el contexto de expansiones
+  const { selectedExpansions } = useContext(useExpansions); // Usar el contexto de expansiones
   const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
 
   const { language, translations } = useLanguage();
