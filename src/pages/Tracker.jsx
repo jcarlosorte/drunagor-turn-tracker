@@ -22,12 +22,18 @@ const TrackerSelect = () => {
   const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
   const enemyIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.enemies);
   const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => enemyIdsInSelectedExpansions.includes(e.id));
-
+  const enemiesInSelectedExpansions = ENEMIES.filter(
+    e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe"
+  );
+  
   // Preseleccionar todos los enemigos al cargar
   useEffect(() => {
-    setSelectedEnemies(enemyIdsInSelectedExpansions);
+    setSelectedEnemies(enemyIdsInSelectedExpansions.filter(id => {
+      const enemy = ENEMIES.find(e => e.id === id);
+      return enemy?.color !== "jefe";
+    }));
   }, [enemyIdsInSelectedExpansions.join(',')]);
+
 
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
@@ -76,6 +82,12 @@ const TrackerSelect = () => {
     navigate("/", { replace: true }); // o solo navigate("/") si no quieres reemplazo en el historial
   };
 
+  const assignRole = (heroId, roleId) => {
+    setHeroRoles({ ...heroRoles, [heroId]: roleId });
+  };
+  
+  const availableRoles = ROLES.filter(r => r.type === "dungeon");
+  
   return (
     <div className="p-4 space-y-8 text-gray-900">
       <h1 className="text-2xl font-bold">{t.title}</h1>
@@ -113,29 +125,29 @@ const TrackerSelect = () => {
         <div className="border p-4 rounded-xl bg-gray-100 shadow">
           <h3 className="text-lg font-semibold mb-2">{t.assignRoles}</h3>
           <div className="space-y-2">
-            {selectedHeroes.map((hero) => {
-            const heroData = heroes.find((h) => h.id === hero.id);
-            return (
-              <div key={hero.id} className="flex items-center gap-2">
-                <img src={heroData.image} alt={t(`heroes.${hero.id}`)} className="w-10 h-10 object-contain" />
-                <span className="font-semibold">{t(`heroes.${hero.id}`)}</span>
-                <select
-                  value={hero.role || ""}
-                  onChange={(e) => assignRole(hero.id, e.target.value)}
-                  className="ml-2"
-                >
-                  <option value="">{t("tracker.selectRole")}</option>
-                  {dungeonRoles
-                    .filter((role) => !selectedHeroes.some((h) => h.role === role && h.id !== hero.id))
-                    .map((role) => (
-                      <option key={role} value={role}>
-                        {t(`roles.${role}`)}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            );
-          })}
+            {selectedHeroes.map((heroId) => {
+              const heroData = HEROES.find((h) => h.id === heroId);
+              return (
+                <div key={heroId} className="flex items-center gap-2">
+                  <img src={heroData.image} alt={getHeroName(heroId)} className="w-10 h-10 object-contain" />
+                  <span className="font-semibold">{getHeroName(heroId)}</span>
+                  <select
+                    value={heroRoles[heroId] || ""}
+                    onChange={(e) => assignRole(heroId, e.target.value)}
+                    className="ml-2"
+                  >
+                    <option value="">{t.selectRole}</option>
+                    {availableRoles
+                      .filter(role => !Object.entries(heroRoles).some(([hId, r]) => r === role.id && hId !== heroId))
+                      .map(role => (
+                        <option key={role.id} value={role.id}>
+                          {getRoleName(role.id)}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -183,7 +195,7 @@ const TrackerSelect = () => {
       </div>
 
       {/* Botones finales */}
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-8">
         <button
           onClick={handleBack}
           className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
