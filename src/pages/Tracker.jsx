@@ -1,9 +1,9 @@
 // src/pages/Tracker.jsx
 import React, { useState } from 'react';
 import { EXPANSIONS } from '@/data/expansions';
-import HEROES from '@/data/heroes';
-import ENEMIES from '@/data/enemies';
-import ROLES from '@/data/roles';
+import { HEROES } from '@/data/heroes';
+import { ENEMIES } from '@/data/enemies';
+import { ROLES } from '@/data/roles';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TrackerSelect = () => {
