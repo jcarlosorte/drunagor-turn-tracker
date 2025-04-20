@@ -21,19 +21,19 @@ import shadow from "@/assets/heroes/Shadow.png";
 import sskar from "@/assets/heroes/Sskar.png";
 import sun from "@/assets/heroes/Sun.png";
 import willow from "@/assets/heroes/Willow.png";
-//import mordred from "@/assets/heroes/Mordred.png";
-//import siff from "@/assets/heroes/Siff.png";
-//import sahara from "@/assets/heroes/Sahara.png";
-//import garamond from "@/assets/heroes/Garamond.png";
-//import diana from "@/assets/heroes/Diana.png";
-//import azriel from "@/assets/heroes/Azriel.png";
-//import brigitte from "@/assets/heroes/Brigitte.png";
-//import drixx from "@/assets/heroes/Drixx.png";
-//import lorien from "@/assets/heroes/Lorien.png";
-//import vacrem from "@/assets/heroes/Vacrem.png";
-//import andreas from "@/assets/heroes/Andreas.png";
-//import nyx from "@/assets/heroes/Nyx.png";
-//import catharina from "@/assets/heroes/Catharina.png";
+import mordred from "@/assets/heroes/Mordred.png";
+import siff from "@/assets/heroes/Siff.png";
+import sahara from "@/assets/heroes/Sahara.png";
+import garamond from "@/assets/heroes/Garamond.png";
+import diana from "@/assets/heroes/Diana.png";
+import azriel from "@/assets/heroes/Azriel.png";
+import brigitte from "@/assets/heroes/Brigitte.png";
+import drixx from "@/assets/heroes/Drixx.png";
+import lorien from "@/assets/heroes/Lorien.png";
+import vacrem from "@/assets/heroes/Vacrem.png";
+import andreas from "@/assets/heroes/Andreas.png";
+import nyx from "@/assets/heroes/Nyx.png";
+import catharina from "@/assets/heroes/Catharina.png";
 
 export const HEROES = [
   { id: "lorelai", expansionId: "core", baseLife: 10, baseMove: 2, type: "hero", profession: "Maga", image: lorelai },
@@ -59,17 +59,17 @@ export const HEROES = [
   { id: "sskar", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Hechicero", image: sskar },
   { id: "sun", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Monje", image: sun },
   { id: "willow", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Druida", image: willow },
-  { id: "mordred", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "paladin", image: mordred },
-  { id: "siff", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "asesino", image: siff },
-  { id: "sahara", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "mago", image: sahara },
-  { id: "garamond", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "bardo", image: garamond },
-  { id: "diana", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "monje", image: diana },
-  { id: "azriel", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "clerigo", image: azriel },
-  { id: "brigitte", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "druida", image: brigitte },
-  { id: "drixx", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "asesino", image: drixx },
-  { id: "lorien", expansionId: "apocalypse-lorien", baseLife: 10, baseMove: 2, type: "hero", profession: "mago", image: lorien },
-  { id: "vacrem", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "bardo", image: vacrem },
-  { id: "andreas", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "barbaro", image: andreas },
-  { id: "nyx", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "asesino", image: nyx },
-  { id: "catharina", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "monje", image: catharina },
+  { id: "mordred", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Necromante", image: mordred },
+  { id: "siff", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Necromante", image: siff },
+  { id: "sahara", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Chamana", image: sahara },
+  { id: "garamond", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Chamán", image: garamond },
+  { id: "diana", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago Espadachín", image: diana },
+  { id: "azriel", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago Espadachín", image: azriel },
+  { id: "brigitte", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Adalid", image: brigitte },
+  { id: "drixx", expansionId: "apocalypse-hero-pack-1", baseLife: 10, baseMove: 2, type: "hero", profession: "Adalid", image: drixx },
+  { id: "lorien", expansionId: "apocalypse-lorien", baseLife: 10, baseMove: 2, type: "hero", profession: "Maga", image: lorien },
+  { id: "vacrem", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Adalid", image: vacrem },
+  { id: "andreas", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Necromante", image: andreas },
+  { id: "nyx", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago Espadachín", image: nyx },
+  { id: "catharina", expansionId: "apocalypse-awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Chamana", image: catharina },
 ];
