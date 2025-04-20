@@ -38,21 +38,7 @@ const TrackerSelect = () => {
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
   const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
 
-  const handleHeroSelect_Ori = (heroId) => {
-    if (selectedHeroes.includes(heroId)) {
-      setSelectedHeroes(selectedHeroes.filter(id => id !== heroId));
-      const updatedRoles = { ...heroRoles };
-      delete updatedRoles[heroId];
-      setHeroRoles(updatedRoles);
-    } else if (selectedHeroes.length < 5) {
-      setSelectedHeroes([...selectedHeroes, heroId]);
-      setHeroRoles({ ...heroRoles, [heroId]: 'none' });
-    } else {
-      alert(t.maxHeroes || 'Puedes seleccionar hasta 5 héroes');
-    }
-  };
-
-  const handleHeroSelect = heroId => {
+  const handleHeroSelect_ori = heroId => {
     setHeroRoles(prev => {
       const roles = { ...prev };
       if (roles[heroId]) delete roles[heroId];
@@ -69,7 +55,34 @@ const TrackerSelect = () => {
       alert(t.maxHeroes || 'Máx heroes');
     }
   };
-
+  
+  const handleRoleSelect = (heroId, roleId) => {
+    // Asignar el rol al héroe
+    setHeroRoles(prev => ({
+      ...prev,
+      [heroId]: roleId,  // Asigna el rol al héroe seleccionado
+    }));
+  };
+  
+  const handleHeroSelect = heroId => {
+  setSelectedHeroes(prev => {
+    const updatedHeroes = prev.includes(heroId)
+      ? prev.filter(id => id !== heroId)  // Deseleccionar el héroe
+      : prev.length < 5
+      ? [...prev, heroId]  // Seleccionar el héroe
+      : prev;
+    
+    // Si se deselecciona el héroe, se elimina el rol asignado (pero no lo borres del estado)
+    setHeroRoles(prev => {
+      const updatedRoles = { ...prev };
+      if (!updatedHeroes.includes(heroId)) {
+        delete updatedRoles[heroId];  // Deja de mostrar el rol pero lo mantiene en el estado
+      }
+      return updatedRoles;
+    });
+    return updatedHeroes;
+  });
+};
   
   const handleEnemySelect = (enemyId) => {
     setSelectedEnemies(prev =>
