@@ -37,8 +37,16 @@ const TrackerSelect = () => {
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
   const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
-
-  const handleHeroSelect_ori = heroId => {
+ 
+  const handleRoleSelect = (heroId, roleId) => {
+    // Asignar el rol al héroe
+    setHeroRoles(prev => ({
+      ...prev,
+      [heroId]: roleId,  // Asigna el rol al héroe seleccionado
+    }));
+  };
+  
+  const handleHeroSelect = heroId => {
     setHeroRoles(prev => {
       const roles = { ...prev };
       if (roles[heroId]) delete roles[heroId];
@@ -55,34 +63,6 @@ const TrackerSelect = () => {
       alert(t.maxHeroes || 'Máx heroes');
     }
   };
-  
-  const handleRoleSelect = (heroId, roleId) => {
-    // Asignar el rol al héroe
-    setHeroRoles(prev => ({
-      ...prev,
-      [heroId]: roleId,  // Asigna el rol al héroe seleccionado
-    }));
-  };
-  
-  const handleHeroSelect = heroId => {
-  setSelectedHeroes(prev => {
-    const updatedHeroes = prev.includes(heroId)
-      ? prev.filter(id => id !== heroId)  // Deseleccionar el héroe
-      : prev.length < 5
-      ? [...prev, heroId]  // Seleccionar el héroe
-      : prev;
-    
-    // Si se deselecciona el héroe, se elimina el rol asignado (pero no lo borres del estado)
-    setHeroRoles(prev => {
-      const updatedRoles = { ...prev };
-      if (!updatedHeroes.includes(heroId)) {
-        delete updatedRoles[heroId];  // Deja de mostrar el rol pero lo mantiene en el estado
-      }
-      return updatedRoles;
-    });
-    return updatedHeroes;
-  });
-};
   
   const handleEnemySelect = (enemyId) => {
     setSelectedEnemies(prev =>
@@ -169,11 +149,18 @@ const TrackerSelect = () => {
                     className="w-24 h-24 object-contain"
                   />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
+                  {heroRoles[heroId] ? (
+                    <span> - {heroRoles[heroId]}</span>
+                  ) : (
+                    <span> - <em>Elige rol</em></span>
+                  )}
                   <select
                     value={heroRoles[heroId] || ""}
-                    onChange={(e) => assignRole(heroId, e.target.value)}
+                    onChange={(e) => handleRoleSelect(heroId, e.target.value)}
+                    //onChange={(e) => assignRole(heroId, e.target.value)}
                     className="mt-2 border rounded-md p-2"
                   >
+                    <option value="" disabled>Elige rol</option>
                     <option value="">{t.selectRole}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
