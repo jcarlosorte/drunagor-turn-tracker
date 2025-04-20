@@ -113,22 +113,29 @@ const TrackerSelect = () => {
         <div className="border p-4 rounded-xl bg-gray-100 shadow">
           <h3 className="text-lg font-semibold mb-2">{t.assignRoles}</h3>
           <div className="space-y-2">
-            {selectedHeroes.map(heroId => (
-              <div key={heroId} className="flex items-center space-x-4">
-                <span>{getHeroName(heroId)}:</span>
+            {selectedHeroes.map((hero) => {
+            const heroData = heroes.find((h) => h.id === hero.id);
+            return (
+              <div key={hero.id} className="flex items-center gap-2">
+                <img src={heroData.image} alt={t(`heroes.${hero.id}`)} className="w-10 h-10 object-contain" />
+                <span className="font-semibold">{t(`heroes.${hero.id}`)}</span>
                 <select
-                  value={heroRoles[heroId] || 'none'}
-                  onChange={(e) => setHeroRoles({ ...heroRoles, [heroId]: e.target.value })}
-                  className="border rounded px-2 py-1 bg-white text-gray-900"
+                  value={hero.role || ""}
+                  onChange={(e) => assignRole(hero.id, e.target.value)}
+                  className="ml-2"
                 >
-                  {ROLES.map(role => (
-                    <option key={role.id} value={role.id}>
-                      {getRoleName(role.id)}
-                    </option>
-                  ))}
+                  <option value="">{t("tracker.selectRole")}</option>
+                  {dungeonRoles
+                    .filter((role) => !selectedHeroes.some((h) => h.role === role && h.id !== hero.id))
+                    .map((role) => (
+                      <option key={role} value={role}>
+                        {t(`roles.${role}`)}
+                      </option>
+                    ))}
                 </select>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       )}
