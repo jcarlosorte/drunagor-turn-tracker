@@ -34,12 +34,11 @@ const TrackerSelect = () => {
     }));
   }, [enemyIdsInSelectedExpansions.join(',')]);
 
-
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
   const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
 
-  const handleHeroSelect = (heroId) => {
+  const handleHeroSelect_Ori = (heroId) => {
     if (selectedHeroes.includes(heroId)) {
       setSelectedHeroes(selectedHeroes.filter(id => id !== heroId));
       const updatedRoles = { ...heroRoles };
@@ -53,6 +52,25 @@ const TrackerSelect = () => {
     }
   };
 
+  const handleHeroSelect = heroId => {
+    setHeroRoles(prev => {
+      const roles = { ...prev };
+      if (roles[heroId]) delete roles[heroId];
+      return roles;
+    });
+    setSelectedHeroes(prev =>
+      prev.includes(heroId)
+        ? prev.filter(id => id !== heroId)
+        : prev.length < 5
+        ? [...prev, heroId]
+        : prev
+    );
+    if (selectedHeroes.length >= 5 && !selectedHeroes.includes(heroId)) {
+      alert(t.maxHeroes || 'Máx heroes');
+    }
+  };
+
+  
   const handleEnemySelect = (enemyId) => {
     setSelectedEnemies(prev =>
       prev.includes(enemyId)
@@ -97,11 +115,10 @@ const TrackerSelect = () => {
           {heroesInSelectedExpansions.map(hero => (
             <label
               key={hero.id}
-              className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition ${
-                selectedHeroes.includes(hero.id)
-                  ? 'bg-blue-200 border border-blue-500'
-                  : 'bg-white hover:bg-gray-200'
-              }`}
+              className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition ${{
+                true: 'bg-blue-200 border border-blue-500',
+                false: 'bg-white hover:bg-gray-200'
+              }[selectedHeroes.includes(hero.id)]}`}
             >
               <input
                 type="checkbox"
@@ -125,6 +142,7 @@ const TrackerSelect = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
+              const usedRoles = Object.values(heroRoles);
               return (
                 <div key={heroId} className="flex flex-col items-center gap-2">
                   <img
