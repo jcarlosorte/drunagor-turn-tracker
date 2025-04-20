@@ -66,11 +66,17 @@ const TrackerSelect = () => {
     console.log('Volver a la configuración');
   };
 
+  const colorStyles = {
+    red: 'bg-red-600 hover:bg-red-700',
+    green: 'bg-green-600 hover:bg-green-700',
+    blue: 'bg-blue-600 hover:bg-blue-700',
+    yellow: 'bg-yellow-500 hover:bg-yellow-600 text-black'
+  };
+
   return (
     <div className="p-4 space-y-8">
       <h1 className="text-2xl font-bold">{t.title}</h1>
 
-     {/* Selección de héroes (solo un bloque con todos los disponibles) */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow">
         <h2 className="text-xl font-semibold mb-4 text-gray-800">{t.selectHeroes}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -98,8 +104,6 @@ const TrackerSelect = () => {
         </div>
       </div>
 
-
-      {/* Asignación de roles (fuera del bucle de expansiones) */}
       {selectedHeroes.length > 0 && (
         <div className="border p-4 rounded-xl bg-white shadow">
           <h3 className="text-lg font-semibold mb-2">{t.assignRoles}</h3>
@@ -124,7 +128,6 @@ const TrackerSelect = () => {
         </div>
       )}
 
-      {/* Enemigos por expansión */}
       <div className="grid gap-8">
         {fullSelectedExpansions.map(expansion => (
           <div key={expansion.id} className="border rounded-xl p-4 bg-gray-100 shadow">
@@ -133,7 +136,11 @@ const TrackerSelect = () => {
               {enemiesInSelectedExpansions
                 .filter(enemy => expansion.enemies.includes(enemy.id))
                 .map(enemy => (
-                  <label key={enemy.id} className="flex items-center space-x-2">
+                  <label key={enemy.id} className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition ${
+                    selectedEnemies.includes(enemy.id)
+                      ? 'bg-blue-200 border border-blue-500'
+                      : 'bg-white hover:bg-gray-200'
+                  }`}>
                     <input
                       type="checkbox"
                       checked={selectedEnemies.includes(enemy.id)}
@@ -147,14 +154,13 @@ const TrackerSelect = () => {
                 ))}
             </div>
 
-            {/* Random enemy by color */}
             <div className="mt-4 space-x-2">
               <h3 className="font-medium">{t.randomEnemyByColor}</h3>
               {['red', 'green', 'blue', 'yellow'].map(color => (
                 <button
                   key={color}
                   onClick={() => handleRandomEnemySelect(color)}
-                  className={`px-3 py-1 rounded bg-${color}-500 text-white`}
+                  className={`px-3 py-1 rounded text-white ${colorStyles[color]}`}
                 >
                   {t.selectRandomEnemyForColor?.replace('{color}', t.colors?.[color] || color)}
                 </button>
@@ -164,7 +170,6 @@ const TrackerSelect = () => {
         ))}
       </div>
 
-      {/* Resumen */}
       <div className="bg-white rounded p-4 border shadow">
         <h2 className="text-lg font-semibold">{t.summary}</h2>
         <p>{t.selectedHeroes}: {selectedHeroes.map(getHeroName).join(', ')}</p>
@@ -172,8 +177,12 @@ const TrackerSelect = () => {
       </div>
 
       <div className="flex justify-between mt-6">
-        <button onClick={() => navigate("/", { replace: true })} className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-6">{t.back}</button>
-        <button onClick={handleConfirm} className="px-4 py-2 bg-blue-600 text-white rounded">{t.confirm}</button>
+        <button onClick={() => handleBack()} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded">
+          {t.back}
+        </button>
+        <button onClick={() => handleConfirm()} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
+          {t.confirm}
+        </button>
       </div>
     </div>
   );
