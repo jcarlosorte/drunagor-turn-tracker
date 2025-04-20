@@ -1,5 +1,5 @@
 // src/data/color.js
-export const ROLES = [
+export const COLORS = [
   {
     id: 'blanco'
   },
