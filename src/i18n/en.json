@@ -137,10 +137,11 @@
     "back": "Back",
     "confirm": "Confirm",
     "colors": {
-      "red": "red",
-      "green": "green",
-      "blue": "blue",
-      "yellow": "yellow"
+      "blanco": "White Monsters",
+      "gris": "Gray Monsters",
+      "negro": "Black Monsters",
+      "comandante": "Commanders",
+      "jefe": "Bosses",
     }
   }
 }
