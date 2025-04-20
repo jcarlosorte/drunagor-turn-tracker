@@ -7,6 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useExpansions } from '@/context/ExpansionContext'; // Asumiendo que tienes este contexto
 
 const TrackerSelect = () => {
+  console.log(EXPANSIONS[0]
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
