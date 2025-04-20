@@ -4,6 +4,7 @@ import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { ROLES } from '@/data/roles';
+import { COLORS } from '@/data/color';
 import { useLanguage } from '@/context/LanguageContext';
 import { useExpansions } from '@/context/ExpansionContext';
 
