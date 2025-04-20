@@ -1,0 +1,180 @@
+import React, { useState } from 'react';
+import { EXPANSIONS } from '@/data/expansions';
+import { HEROES } from '@/data/heroes';
+import { ENEMIES } from '@/data/enemies';
+import { ROLES } from '@/data/roles';
+import { useLanguage } from '@/context/LanguageContext';
+import { useExpansions } from '@/context/ExpansionContext';
+
+const TrackerSelect = () => {
+  const [selectedHeroes, setSelectedHeroes] = useState([]);
+  const [heroRoles, setHeroRoles] = useState({});
+  const [selectedEnemies, setSelectedEnemies] = useState([]);
+  const { selectedExpansions } = useExpansions();
+  const [selectedEnemyColors, setSelectedEnemyColors] = useState([]);
+  const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
+
+  const { language, translations } = useLanguage();
+  const t = translations?.trackerSelect || {};
+
+  const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
+  const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
+  const getRoleName = (roleId) => translations.roles?.[roleId] || roleId;
+
+  const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
+  const enemyIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.enemies);
+
+  const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => enemyIdsInSelectedExpansions.includes(e.id));
+
+  const handleHeroSelect = (heroId) => {
+    if (selectedHeroes.includes(heroId)) {
+      setSelectedHeroes(selectedHeroes.filter(id => id !== heroId));
+      const updatedRoles = { ...heroRoles };
+      delete updatedRoles[heroId];
+      setHeroRoles(updatedRoles);
+    } else if (selectedHeroes.length < 5) {
+      setSelectedHeroes([...selectedHeroes, heroId]);
+      setHeroRoles({ ...heroRoles, [heroId]: 'none' });
+    } else {
+      alert(t.maxHeroes || 'Puedes seleccionar hasta 5 héroes');
+    }
+  };
+
+  const handleEnemySelect = (enemyId) => {
+    setSelectedEnemies(prev =>
+      prev.includes(enemyId)
+        ? prev.filter(id => id !== enemyId)
+        : [...prev, enemyId]
+    );
+  };
+
+  const handleRandomEnemySelect = (color) => {
+    const matching = enemiesInSelectedExpansions.filter(e => e.color === color);
+    if (matching.length > 0) {
+      const randomEnemy = matching[Math.floor(Math.random() * matching.length)];
+      handleEnemySelect(randomEnemy.id);
+    }
+  };
+
+  const handleConfirm = () => {
+    console.log('Héroes seleccionados:', selectedHeroes, 'Roles:', heroRoles);
+    console.log('Enemigos seleccionados:', selectedEnemies);
+  };
+
+  const handleBack = () => {
+    console.log('Volver a la configuración');
+  };
+
+  return (
+    <div className="p-4 space-y-8">
+      <h1 className="text-2xl font-bold">{t.title}</h1>
+
+      {/* Héroes por expansión */}
+      <div className="grid gap-8">
+        {fullSelectedExpansions.map(expansion => (
+          <div key={expansion.id} className="border rounded-xl p-4 bg-gray-50 shadow">
+            <h2 className="text-xl font-semibold mb-2">{t.selectHeroes} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {heroesInSelectedExpansions
+                .filter(hero => expansion.heroes.includes(hero.id))
+                .map(hero => (
+                  <label key={hero.id} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedHeroes.includes(hero.id)}
+                      onChange={() => handleHeroSelect(hero.id)}
+                      disabled={!selectedHeroes.includes(hero.id) && selectedHeroes.length >= 5}
+                    />
+                    {hero.image && (
+                      <img src={hero.image} alt={getHeroName(hero.id)} className="w-12 h-12 object-contain" />
+                    )}
+                    <span>{getHeroName(hero.id)}</span>
+                  </label>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Asignación de roles (fuera del bucle de expansiones) */}
+      {selectedHeroes.length > 0 && (
+        <div className="border p-4 rounded-xl bg-white shadow">
+          <h3 className="text-lg font-semibold mb-2">{t.assignRoles}</h3>
+          <div className="space-y-2">
+            {selectedHeroes.map(heroId => (
+              <div key={heroId} className="flex items-center space-x-4">
+                <span>{getHeroName(heroId)}:</span>
+                <select
+                  value={heroRoles[heroId] || 'none'}
+                  onChange={(e) => setHeroRoles({ ...heroRoles, [heroId]: e.target.value })}
+                  className="border rounded px-2 py-1"
+                >
+                  {ROLES.map(role => (
+                    <option key={role.id} value={role.id}>
+                      {getRoleName(role.id)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Enemigos por expansión */}
+      <div className="grid gap-8">
+        {fullSelectedExpansions.map(expansion => (
+          <div key={expansion.id} className="border rounded-xl p-4 bg-gray-100 shadow">
+            <h2 className="text-xl font-semibold mb-2">{t.selectEnemies} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {enemiesInSelectedExpansions
+                .filter(enemy => expansion.enemies.includes(enemy.id))
+                .map(enemy => (
+                  <label key={enemy.id} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedEnemies.includes(enemy.id)}
+                      onChange={() => handleEnemySelect(enemy.id)}
+                    />
+                    {enemy.image && (
+                      <img src={enemy.image} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                    )}
+                    <span>{getEnemyName(enemy.id)}</span>
+                  </label>
+                ))}
+            </div>
+
+            {/* Random enemy by color */}
+            <div className="mt-4 space-x-2">
+              <h3 className="font-medium">{t.randomEnemyByColor}</h3>
+              {['red', 'green', 'blue', 'yellow'].map(color => (
+                <button
+                  key={color}
+                  onClick={() => handleRandomEnemySelect(color)}
+                  className={`px-3 py-1 rounded bg-${color}-500 text-white`}
+                >
+                  {t.selectRandomEnemyForColor?.replace('{color}', t.colors?.[color] || color)}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Resumen */}
+      <div className="bg-white rounded p-4 border shadow">
+        <h2 className="text-lg font-semibold">{t.summary}</h2>
+        <p>{t.selectedHeroes}: {selectedHeroes.map(getHeroName).join(', ')}</p>
+        <p>{t.selectedEnemies}: {selectedEnemies.map(getEnemyName).join(', ')}</p>
+      </div>
+
+      <div className="flex justify-between mt-6">
+        <button onClick={handleBack} className="px-4 py-2 bg-gray-300 rounded">{t.back}</button>
+        <button onClick={handleConfirm} className="px-4 py-2 bg-blue-600 text-white rounded">{t.confirm}</button>
+      </div>
+    </div>
+  );
+};
+
+export default TrackerSelect;
