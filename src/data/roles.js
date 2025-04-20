@@ -1,5 +1,5 @@
 // src/data/roles.js
-const roles = [
+export const ROLES = [
   {
     id: 'tank',
     expansionId: 'base',
@@ -22,4 +22,3 @@ const roles = [
   },
 ];
 
-export default roles;
