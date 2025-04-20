@@ -100,7 +100,7 @@ export const ENEMIES = [
   { id: "nagian_hunter", nombre: "Nagian Hunter", vida: 0, movimiento: 0, color: "dark", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: nagian_hunter },
   { id: "hellspawn_brute", nombre: "Hellspawn Brute", vida: 0, movimiento: 0, color: "fire", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: hellspawn_brute },
   { id: "night_stalker", nombre: "Night Stalker", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: night_stalker },
-  { id: "fell_asteris", nombre: "Fell Asteris", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: FellAsteris },
+  { id: "fell_asteris", nombre: "Fell Asteris", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_awakenings", imagen: fell_asteris  },
 
   { id: "fallen_sisters", nombre: "Fallen Sisters", vida: 0, movimiento: 0, color: "dark", tipo: "enemigo", expansionId: "apocalypse_sisters", imagen: fallen_sisters }
 ];
