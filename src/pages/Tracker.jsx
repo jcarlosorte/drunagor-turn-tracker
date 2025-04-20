@@ -101,8 +101,13 @@ const TrackerSelect = () => {
   };
 
   const assignRole = (heroId, roleId) => {
-    setHeroRoles({ ...heroRoles, [heroId]: roleId });
-  };
+  if (!roleId) return; // Evitar asignar rol vacío
+  if (Object.values(heroRoles).includes(roleId)) {
+    alert(t.roleAlreadyAssigned || 'Este rol ya está asignado a otro héroe');
+    return;
+  }
+  setHeroRoles({ ...heroRoles, [heroId]: roleId });
+};
   
   return (
     <div className="p-4 space-y-8 text-gray-900">
@@ -157,7 +162,7 @@ const TrackerSelect = () => {
                     className="mt-2 border rounded-md p-2"
                   >
                     <option value="">{t.selectRole}</option>
-                    {ROLES.map(role => (
+                    {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
                         {getRoleName(role.id)} {/* Aquí obtenemos el nombre del rol con la traducción */}
                       </option>
