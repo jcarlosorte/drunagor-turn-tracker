@@ -70,32 +70,34 @@ const TrackerSelect = () => {
     <div className="p-4 space-y-8">
       <h1 className="text-2xl font-bold">{t.title}</h1>
 
-      {/* Héroes por expansión */}
-      <div className="grid gap-8">
-        {fullSelectedExpansions.map(expansion => (
-          <div key={expansion.id} className="border rounded-xl p-4 bg-gray-50 shadow">
-            <h2 className="text-xl font-semibold mb-2">{t.selectHeroes} ({translations.expansions?.[expansion.id] || expansion.id})</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {heroesInSelectedExpansions
-                .filter(hero => expansion.heroes.includes(hero.id))
-                .map(hero => (
-                  <label key={hero.id} className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedHeroes.includes(hero.id)}
-                      onChange={() => handleHeroSelect(hero.id)}
-                      disabled={!selectedHeroes.includes(hero.id) && selectedHeroes.length >= 5}
-                    />
-                    {hero.image && (
-                      <img src={hero.image} alt={getHeroName(hero.id)} className="w-12 h-12 object-contain" />
-                    )}
-                    <span>{getHeroName(hero.id)}</span>
-                  </label>
-                ))}
-            </div>
-          </div>
-        ))}
+     {/* Selección de héroes (solo un bloque con todos los disponibles) */}
+      <div className="border rounded-xl p-4 bg-gray-100 shadow">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">{t.selectHeroes}</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {heroesInSelectedExpansions.map(hero => (
+            <label
+              key={hero.id}
+              className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition ${
+                selectedHeroes.includes(hero.id)
+                  ? 'bg-blue-200 border border-blue-500'
+                  : 'bg-white hover:bg-gray-200'
+              }`}
+            >
+              <input
+                type="checkbox"
+                checked={selectedHeroes.includes(hero.id)}
+                onChange={() => handleHeroSelect(hero.id)}
+                disabled={!selectedHeroes.includes(hero.id) && selectedHeroes.length >= 5}
+              />
+              {hero.image && (
+                <img src={hero.image} alt={getHeroName(hero.id)} className="w-10 h-10 object-contain rounded" />
+              )}
+              <span className="text-gray-900">{getHeroName(hero.id)}</span>
+            </label>
+          ))}
+        </div>
       </div>
+
 
       {/* Asignación de roles (fuera del bucle de expansiones) */}
       {selectedHeroes.length > 0 && (
@@ -170,7 +172,7 @@ const TrackerSelect = () => {
       </div>
 
       <div className="flex justify-between mt-6">
-        <button onClick={handleBack} className="px-4 py-2 bg-gray-300 rounded">{t.back}</button>
+        <button onClick={() => navigate("/", { replace: true })} className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-6">{t.back}</button>
         <button onClick={handleConfirm} className="px-4 py-2 bg-blue-600 text-white rounded">{t.confirm}</button>
       </div>
     </div>
