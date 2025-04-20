@@ -9,7 +9,7 @@ import katarina from "@/assets/heroes/Katarina.png";
 import tork from "@/assets/heroes/Tork.png";
 import handuriel from "@/assets/heroes/Handuriel.png";
 import lord_of_wrath from "@/assets/heroes/Lordwrath.png";
-import arkanos from "@/assets/heroes/Arkanos.png";
+import arkhanos from "@/assets/heroes/Arkhanos.png";
 import barak from "@/assets/heroes/Barak.png";
 import devron from "@/assets/heroes/Devron.png";
 import duncan from "@/assets/heroes/Duncan.png";
@@ -47,7 +47,7 @@ export const HEROES = [
   { id: "tork", expansionId: "infernal-desert", baseLife: 10, baseMove: 2, type: "hero", profession: "Bárbaro", image: tork },
   { id: "handuriel", expansionId: "handuriel", baseLife: 10, baseMove: 2, type: "hero", profession: "Arquero", image: handuriel },
   { id: "lord-of-wrath", expansionId: "lord-of-wrath", baseLife: 10, baseMove: 2, type: "hero", profession: "Guerro Sombrío", image: lord_of_wrath },
-  { id: "arkanos", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago", image: arkanos },
+  { id: "arkanos", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago", image: arkhanos },
   { id: "barak", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Hechicero", image: barak },
   { id: "devron", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Guerro Sombrío", image: devron },
   { id: "duncan", expansionId: "spoils-of-war", baseLife: 10, baseMove: 2, type: "hero", profession: "Guerrero", image: duncan },
