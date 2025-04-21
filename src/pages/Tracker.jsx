@@ -103,7 +103,7 @@ const TrackerSelect = () => {
   
   return (
     <div className="p-4 space-y-8 text-gray-900">
-      <h1 className="text-2xl font-bold">{t.title}</h1>
+      <h1 className="text-2xl font-bold font-fantasy">{t.title}</h1>
 
       {/* Selección de héroes */}
       <div className="border rounded-xl p-4 bg-white/70 shadow">
