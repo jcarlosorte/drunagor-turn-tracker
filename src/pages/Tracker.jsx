@@ -150,7 +150,7 @@ const TrackerSelect = () => {
                   />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
                   {heroRoles[heroId] ? (
-                    <span> - {t(`roles.${heroRoles[heroId]}`)} - </span>
+                    <span> - {getRoleName(heroRoles[heroId])} - </span>
                   ) : (
                     <span> - <em>Elige rol</em> - </span>
                   )}
