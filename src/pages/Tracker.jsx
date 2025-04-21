@@ -213,7 +213,7 @@ const TrackerSelect = () => {
                     className={
                       ['blanco', 'gris'].includes(color.id)
                         ? 'grid gap-4 w-full'
-                        : 'flex flex-col gap-4'
+                        : 'flex flex-wrap gap-4 w-full justify-start'
                     }
                     style={
                       ['blanco', 'gris'].includes(color.id)
