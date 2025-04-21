@@ -203,9 +203,9 @@ const TrackerSelect = () => {
                 </h3>
               <div
                 key={color.id}
-                //className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-                className={`grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 p-4 rounded-lg shadow ${areaBg} ${textColor}
-                  ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
+                //className={`grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 p-4 rounded-lg shadow ${areaBg} ${textColor}
+                className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
                 `}
               >
                 <h3 className="text-xl font-bold mb-4 text-center">
