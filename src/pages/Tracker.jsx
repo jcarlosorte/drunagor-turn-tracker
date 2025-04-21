@@ -209,7 +209,7 @@ const TrackerSelect = () => {
                   </h3>
               
                   <div
-                    className={`grid gap-4 w-full
+                    className={`grid gap-1 w-full
                       ${isCompact ? 'grid-cols-1' : 'grid-cols-[repeat(auto-fit,minmax(140px,1fr))]'} `}
                     style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}
                   >
