@@ -183,7 +183,7 @@ const TrackerSelect = () => {
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
         {/* Agrupación tipo masonry con columnas */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        <div className="columns-1 sm:columns-2 lg:columns-2 gap-6 space-y-6">
           {COLORS.map(color => {
             const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
             if (enemiesOfColor.length === 0) return null;
