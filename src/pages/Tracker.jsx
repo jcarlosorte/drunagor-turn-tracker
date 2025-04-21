@@ -88,18 +88,17 @@ const TrackerSelect = () => {
   };
 
   const RuneTitle = ({ children }) => (
-    <div className="relative text-center my-4">
-      <div className="inline-block border-4 border-yellow-800 rounded-lg px-6 py-2 bg-yellow-50 shadow-lg relative">
-        <span className="text-3xl font-extrabold tracking-wider text-yellow-900">
-          {children}
-        </span>
-        <span className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-        <span className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-        <span className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-        <span className="absolute -bottom-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+      <div className="relative text-center my-6">
+        <div className="inline-block border-4 border-yellow-800 rounded-2xl px-6 py-3 bg-yellow-100 shadow-xl relative font-fantasy">
+          <span className="text-4xl tracking-wider text-yellow-900">{children}</span>
+          <span className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+          <span className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+          <span className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+          <span className="absolute -bottom-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+        </div>
       </div>
-    </div>
-  );
+    );
+
   
   return (
     <div className="p-4 space-y-8 text-gray-900">
