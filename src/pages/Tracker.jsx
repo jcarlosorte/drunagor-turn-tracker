@@ -141,9 +141,6 @@ const TrackerSelect = () => {
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
         <div className="border p-4 rounded-xl bg-blue-100/60 shadow">
-          <h3 className="text-3xl font-extrabold text-center tracking-wide mb-4">
-            - {t.assignRoles} -
-          </h3>
           <RuneTitle>{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {selectedHeroes.map((heroId) => {
