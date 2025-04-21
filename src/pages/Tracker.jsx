@@ -182,50 +182,45 @@ const TrackerSelect = () => {
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
-        {COLORS.map(color => {
-          const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
-          if (enemiesOfColor.length === 0) return null;
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4">
+          {COLORS.map(color => {
+            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+            return enemiesOfColor.map(enemy => {
+              const isSelected = selectedEnemies.includes(enemy.id);
       
-          let areaBg = "bg-white";
-          let textColor = "";
-          if (color.id === "gris") areaBg = "bg-gray-300";
-          else if (color.id === "negro") {
-            areaBg = "bg-black/60";
-            textColor = "text-white";
-          } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+              // Estilos por color
+              let bg = "bg-white";
+              let text = "";
+              if (color.id === "gris") bg = "bg-gray-300";
+              else if (color.id === "negro") {
+                bg = "bg-black/60";
+                text = "text-white";
+              } else if (color.id === "comandante") bg = "bg-yellow-200";
       
-          return (
-            <div key={color.id} className={`p-4 rounded-lg ${areaBg} ${textColor}`}>
-              <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
-      
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 justify-center">
-                {enemiesOfColor.map(enemy => {
-                  const isSelected = selectedEnemies.includes(enemy.id);
-                  return (
-                    <label
-                      key={enemy.id}
-                      className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                      w-full max-w-[160px] mx-auto 
-                      ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={() => handleEnemySelect(enemy.id)}
-                        className="hidden"
-                      />
-                      {enemy.imagen && (
-                        <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
-                      )}
-                      <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
-                    </label>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
+              return (
+                <label
+                  key={enemy.id}
+                  className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition w-full 
+                  ${bg} ${text}
+                  ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 hover:bg-gray-100'}`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleEnemySelect(enemy.id)}
+                    className="hidden"
+                  />
+                  {enemy.imagen && (
+                    <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                  )}
+                  <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                </label>
+              );
+            });
+          })}
+        </div>
       </div>
+
 
       {/* Resumen de selección */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
