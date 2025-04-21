@@ -218,8 +218,8 @@ const TrackerSelect = () => {
                         onChange={() => handleEnemySelect(enemy.id)}
                         className="hidden"
                       />
-                      {enemy.image && (
-                        <img src={enemy.image} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                      {enemy.imagen && (
+                        <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
                       )}
                       <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
                     </label>
