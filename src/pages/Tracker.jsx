@@ -161,7 +161,7 @@ const TrackerSelect = () => {
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
-                    className="mt-2 border rounded-md p-2 w-full font-sans"
+                    className="mt-1 p-1 border border-gray-400 rounded text-sm"
                   >
                     <option value="">Elige rol</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
@@ -178,11 +178,11 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-      <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
+      <div className="border rounded-xl p-4 bg-white/70 shadow">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
         {/* Flex en filas con wrap */}
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
             const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
             if (enemiesOfColor.length === 0) return null;
@@ -214,7 +214,7 @@ const TrackerSelect = () => {
                     return (
                       <label
                         key={enemy.id}
-                        className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                        className={`fantasy-frame flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
                           w-full
                           ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
                       >
@@ -225,9 +225,9 @@ const TrackerSelect = () => {
                           className="hidden"
                         />
                         {enemy.imagen && (
-                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain mb-2" />
                         )}
-                        <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                        <span className="text-sm font-fantasy">{getEnemyName(enemy.id)}</span>
                       </label>
                     );
                   })}
