@@ -182,49 +182,55 @@ const TrackerSelect = () => {
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
-        {COLORS.map(color => {
-          const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
-          if (enemiesOfColor.length === 0) return null;
+        {/* Flex en filas con wrap */}
+        <div className="flex flex-wrap gap-6">
+          {COLORS.map(color => {
+            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+            if (enemiesOfColor.length === 0) return null;
       
-          let areaBg = "bg-white";
-          let textColor = "";
-          if (color.id === "gris") areaBg = "bg-gray-300";
-          else if (color.id === "negro") {
-            areaBg = "bg-black/60";
-            textColor = "text-white";
-          } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+            let areaBg = "bg-white";
+            let textColor = "";
+            if (color.id === "gris") areaBg = "bg-gray-300";
+            else if (color.id === "negro") {
+              areaBg = "bg-black/60";
+              textColor = "text-white";
+            } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
-          return (
-            <div key={color.id} className={p-4 rounded-lg ${areaBg} ${textColor}}>
-              <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
+            return (
+              <div
+                key={color.id}
+                className={`flex flex-col p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
+              >
+                <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 justify-center">
-                {enemiesOfColor.map(enemy => {
-                  const isSelected = selectedEnemies.includes(enemy.id);
-                  return (
-                    <label
-                      key={enemy.id}
-                      className={flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                      w-full max-w-[160px] mx-auto 
-                      ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={() => handleEnemySelect(enemy.id)}
-                        className="hidden"
-                      />
-                      {enemy.imagen && (
-                        <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
-                      )}
-                      <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
-                    </label>
-                  );
-                })}
+                <div className="grid grid-cols-2 gap-4">
+                  {enemiesOfColor.map(enemy => {
+                    const isSelected = selectedEnemies.includes(enemy.id);
+                    return (
+                      <label
+                        key={enemy.id}
+                        className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                        w-full 
+                        ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => handleEnemySelect(enemy.id)}
+                          className="hidden"
+                        />
+                        {enemy.imagen && (
+                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                        )}
+                        <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
 
