@@ -198,6 +198,9 @@ const TrackerSelect = () => {
             const isCompact = enemiesOfColor.length <= 4;
       
             return (
+              <h3 className="text-xl font-bold mb-4 text-center">
+                  {t.colors?.[color.id] || color.id}
+                </h3>
               <div
                 key={color.id}
                 //className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
