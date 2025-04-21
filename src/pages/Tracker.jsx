@@ -203,7 +203,7 @@ const TrackerSelect = () => {
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
                     return (
