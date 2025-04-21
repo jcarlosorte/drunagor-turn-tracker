@@ -178,7 +178,7 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-      <div className="border rounded-xl p-4 bg-white/70 shadow">
+      <div className="border rounded-xl p-4 bg-white/70 shadow border-yellow-700">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
         {/* Flex en filas con wrap */}
@@ -200,7 +200,8 @@ const TrackerSelect = () => {
             return (
               <div
                 key={color.id}
-                className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                //className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 p-4 rounded-lg shadow ${areaBg} ${textColor}
                   ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
                 `}
               >
