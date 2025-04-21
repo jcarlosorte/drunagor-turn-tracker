@@ -63,6 +63,21 @@ const TrackerSelect = () => {
       alert(t.maxHeroes || 'Máx heroes');
     }
   };
+
+{selectedHeroes.map((heroId) => {
+  const heroData = HEROES.find((h) => h.id === heroId);
+  const usedRoles = Object.entries(heroRoles)
+    .filter(([id]) => Number(id) !== heroId) // excluir el actual
+    .map(([, roleId]) => roleId); // recoger los roles usados por los demás
+
+  const selectedRole = heroRoles[heroId];
+
+  // Obtener la lista de roles disponibles + el ya seleccionado si no está
+  const availableRoles = ROLES.filter(role => !usedRoles.includes(role.id));
+  if (selectedRole && !availableRoles.find(role => role.id === selectedRole)) {
+    const currentRole = ROLES.find(role => role.id === selectedRole);
+    if (currentRole) availableRoles.push(currentRole); // añadirlo si no está
+  }
   
   const handleEnemySelect = (enemyId) => {
     setSelectedEnemies(prev =>
@@ -140,20 +155,20 @@ const TrackerSelect = () => {
                     className="w-24 h-24 object-contain"
                   />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
-                  {heroRoles[heroId] ? (
-                    <span> - {getRoleName(heroRoles[heroId])} - </span>
+                  {selectedRole ? (
+                    <span> - {getRoleName(selectedRole)} - </span>
                   ) : (
                     <span> - <em>Elige rol</em> - </span>
                   )}
                   <select
-                    value={heroRoles[heroId] || ""}
+                    value={selectedRole || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
                     className="mt-2 border rounded-md p-2"
                   >
                     <option value="">Elige rol</option>
-                    {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
+                    {availableRoles.map(role => (
                       <option key={role.id} value={role.id}>
-                        {getRoleName(role.id)} {/* Aquí obtenemos el nombre del rol con la traducción */}
+                        {getRoleName(role.id)}
                       </option>
                       ))}
                   </select>
