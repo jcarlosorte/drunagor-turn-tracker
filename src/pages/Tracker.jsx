@@ -101,11 +101,11 @@ const TrackerSelect = () => {
 
   
   return (
-    <div className="p-4 space-y-8 text-gray-900">
-      <h1 className="text-2xl font-bold font-fantasy">{t.title}</h1>
+    <div className="p-4 space-y-8 text-gray-900 font-fantasy bg-gradient-to-br from-yellow-50 to-yellow-100 min-h-screen">
+      <h1 className="text-3xl font-bold text-center">{t.title}</h1>
 
       {/* Selección de héroes */}
-      <div className="border rounded-xl p-4 bg-white/70 shadow">
+      <div className="border-4 rounded-3xl p-6 bg-white/80 shadow-2xl border-yellow-700">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {heroesInSelectedExpansions.map((hero) => {
@@ -139,20 +139,20 @@ const TrackerSelect = () => {
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border p-4 rounded-xl bg-blue-100/60 shadow">
+        <div className="border-4 rounded-3xl p-6 bg-blue-100/60 shadow-2xl border-blue-600">
           <RuneTitle>{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
               return (
-                <div key={heroId} className="flex flex-col items-center gap-2 p-2 bg-white rounded-lg shadow">
+                <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-blue-500 shadow-md">
                   <img
                     src={heroData.image}
                     alt={getHeroName(heroId)}
                     className="w-20 h-20 object-contain"
                   />
-                  <span className="font-semibold">{getHeroName(heroId)}</span>
+                  <span className="font-bold">{getHeroName(heroId)}</span>
                   <span>
                     {heroRoles[heroId]
                       ? `- ${getRoleName(heroRoles[heroId])} -`
@@ -161,7 +161,7 @@ const TrackerSelect = () => {
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
-                    className="mt-2 border rounded-md p-2 w-full"
+                    className="mt-2 border rounded-md p-2 w-full font-sans"
                   >
                     <option value="">Elige rol</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
@@ -178,81 +178,80 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-<div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
-  <RuneTitle>{t.selectEnemies}</RuneTitle>
-
-  {/* Flex en filas con wrap */}
-  <div className="flex flex-wrap gap-6">
-    {COLORS.map(color => {
-      const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
-      if (enemiesOfColor.length === 0) return null;
-
-      let areaBg = "bg-white";
-      let textColor = "";
-      if (color.id === "gris") areaBg = "bg-gray-300";
-      else if (color.id === "negro") {
-        areaBg = "bg-black/60";
-        textColor = "text-white";
-      } else if (color.id === "comandante") areaBg = "bg-yellow-200";
-
-      const isCompact = enemiesOfColor.length <= 4;
-
-      return (
-        <div
-          key={color.id}
-          className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-            ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
-          `}
-        >
-          <h3 className="text-xl font-bold mb-4 text-center">
-            {t.colors?.[color.id] || color.id}
-          </h3>
-
-          <div className="flex flex-col gap-4">
-            {enemiesOfColor.map(enemy => {
-              const isSelected = selectedEnemies.includes(enemy.id);
-              return (
-                <label
-                  key={enemy.id}
-                  className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                    w-full
-                    ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={isSelected}
-                    onChange={() => handleEnemySelect(enemy.id)}
-                    className="hidden"
-                  />
-                  {enemy.imagen && (
-                    <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
-                  )}
-                  <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
-                </label>
-              );
-            })}
-          </div>
+      <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
+        <RuneTitle>{t.selectEnemies}</RuneTitle>
+      
+        {/* Flex en filas con wrap */}
+        <div className="flex flex-wrap gap-6">
+          {COLORS.map(color => {
+            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+            if (enemiesOfColor.length === 0) return null;
+      
+            let areaBg = "bg-white";
+            let textColor = "";
+            if (color.id === "gris") areaBg = "bg-gray-300";
+            else if (color.id === "negro") {
+              areaBg = "bg-black/60";
+              textColor = "text-white";
+            } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+      
+            const isCompact = enemiesOfColor.length <= 4;
+      
+            return (
+              <div
+                key={color.id}
+                className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                  ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
+                `}
+              >
+                <h3 className="text-xl font-bold mb-4 text-center">
+                  {t.colors?.[color.id] || color.id}
+                </h3>
+      
+                <div className="flex flex-col gap-4">
+                  {enemiesOfColor.map(enemy => {
+                    const isSelected = selectedEnemies.includes(enemy.id);
+                    return (
+                      <label
+                        key={enemy.id}
+                        className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                          w-full
+                          ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => handleEnemySelect(enemy.id)}
+                          className="hidden"
+                        />
+                        {enemy.imagen && (
+                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                        )}
+                        <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
-</div>
-
-
-      {/* Resumen de selección */}
-      <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
-        <h3 className="text-lg font-semibold">{t.currentSelection || "Selección actual"}</h3>
-        <p><strong>{t.heroes || "Héroes"}:</strong> {selectedHeroes.map(id => getHeroName(id)).join(", ") || "-"}</p>
-        <p><strong>{t.enemies || "Enemigos"}:</strong> {selectedEnemies.map(id => getEnemyName(id)).join(", ") || "-"}</p>
       </div>
 
+
       {/* Botones */}
-      <div className="flex justify-between">
-        <button onClick={handleBack} className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded">
-          {t.back || "Volver"}
+      <div className="flex justify-between gap-4 mt-6">
+        <button
+          onClick={handleBack}
+          className="px-4 py-2 rounded-lg bg-red-200 hover:bg-red-300 shadow font-bold"
+        >
+          {t.back}
         </button>
-        <button onClick={handleConfirm} className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded">
-          {t.confirm || "Confirmar"}
+        <button
+          onClick={handleConfirm}
+          className="px-4 py-2 rounded-lg bg-green-200 hover:bg-green-300 shadow font-bold"
+        >
+          {t.confirm}
         </button>
       </div>
     </div>
