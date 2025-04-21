@@ -198,7 +198,7 @@ const TrackerSelect = () => {
             <div key={color.id} className={`p-4 rounded-lg ${areaBg} ${textColor}`}>
               <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 justify-center">
                 {enemiesOfColor.map(enemy => {
                   const isSelected = selectedEnemies.includes(enemy.id);
                   return (
