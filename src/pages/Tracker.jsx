@@ -210,7 +210,8 @@ const TrackerSelect = () => {
               
                   <div
                     className={`grid gap-4 w-full
-                      ${isCompact ? 'grid-cols-1' : 'grid-cols-[repeat(auto-fill,minmax(120px,1fr))]'}`}
+                      ${isCompact ? 'grid-cols-1' : 'grid-cols-[repeat(auto-fit,minmax(140px,1fr))]'} `}
+                    style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}
                   >
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
