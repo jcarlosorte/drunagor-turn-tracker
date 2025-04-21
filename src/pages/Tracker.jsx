@@ -108,7 +108,7 @@ const TrackerSelect = () => {
       {/* Selección de héroes */}
       <div className="border rounded-xl p-4 bg-white/70 shadow">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {heroesInSelectedExpansions.map((hero) => {
             const isSelected = selectedHeroes.includes(hero.id);
             return (
