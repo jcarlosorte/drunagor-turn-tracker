@@ -196,10 +196,14 @@ const TrackerSelect = () => {
               textColor = "text-white";
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
+            const isCompact = enemiesOfColor.length <= 4; // Por ejemplo, si hay pocos enemigos
+      
             return (
               <div
                 key={color.id}
-                className={`flex flex-col p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
+                className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                  ${isCompact ? 'min-w-[180px] max-w-[220px]' : 'w-full sm:min-w-[320px] sm:max-w-full'} 
+                  flex-1`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
@@ -232,6 +236,7 @@ const TrackerSelect = () => {
           })}
         </div>
       </div>
+
 
 
       {/* Resumen de selección */}
