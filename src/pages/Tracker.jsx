@@ -121,24 +121,37 @@ const TrackerSelect = () => {
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border p-4 rounded-xl bg-gray-100 shadow">
-          <h3 className="text-lg font-semibold mb-2">- {t.assignRoles} -</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="border p-4 rounded-xl bg-blue-100/60 shadow">
+          <h3 className="text-3xl font-extrabold text-center tracking-wide mb-4">
+            - {t.assignRoles} -
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
               return (
-                <div key={heroId} className="flex flex-col items-center gap-2">
-                  <img src={heroData.image} alt={getHeroName(heroId)} className="w-24 h-24 object-contain" />
+                <div key={heroId} className="flex flex-col items-center gap-2 p-2 bg-white rounded-lg shadow">
+                  <img
+                    src={heroData.image}
+                    alt={getHeroName(heroId)}
+                    className="w-20 h-20 object-contain"
+                  />
                   <span className="font-semibold">{getHeroName(heroId)}</span>
+                  <span>
+                    {heroRoles[heroId]
+                      ? `- ${getRoleName(heroRoles[heroId])} -`
+                      : <em>- Elige rol -</em>}
+                  </span>
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
-                    className="mt-2 border rounded-md p-2"
+                    className="mt-2 border rounded-md p-2 w-full"
                   >
-                    <option value="">{t.chooseRole || "Elige rol"}</option>
-                    {ROLES.filter(role => !usedRoles.includes(role.id) || heroRoles[heroId] === role.id).map(role => (
-                      <option key={role.id} value={role.id}>{getRoleName(role.id)}</option>
+                    <option value="">Elige rol</option>
+                    {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
+                      <option key={role.id} value={role.id}>
+                        {getRoleName(role.id)}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -150,47 +163,60 @@ const TrackerSelect = () => {
 
       {/* Enemigos agrupados por color */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
-        <h2 className="text-xl font-semibold">{t.selectEnemies}</h2>
+        <h2 className="text-3xl font-extrabold text-center tracking-wide">{t.selectEnemies}</h2>
         {COLORS.map(color => {
           const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
           if (enemiesOfColor.length === 0) return null;
+      
+          // Color específico para fondo de área según el tipo
+          let areaBg = "bg-white";
+          let textColor = "";
+          if (color.id === "gris") areaBg = "bg-gray-300";
+          else if (color.id === "negro") {
+            areaBg = "bg-black/60";
+            textColor = "text-white";
+          } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+      
           return (
-            <div key={color.id}>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-semibold">{t.colors?.[color.id] || color.id}</h3>
+            <div key={color.id} className={`p-4 rounded-lg ${areaBg} ${textColor}`}>
+              <h3 className="text-xl font-bold mb-2">{t.colors?.[color.id] || color.id}</h3>
+      
+              <div className="flex justify-center mb-4">
                 <button
+                  className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition"
                   onClick={() => handleRandomEnemySelect(color.id)}
-                  className="text-sm text-blue-600 hover:underline"
                 >
-                  {t.randomEnemy || "Añadir enemigo aleatorio"}
+                  {t.addRandomEnemy || 'Añadir enemigo aleatorio'}
                 </button>
               </div>
+      
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {enemiesOfColor.map(enemy => (
-                  <label
-                    key={enemy.id}
-                    className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition ${
-                      selectedEnemies.includes(enemy.id)
-                        ? 'bg-red-200 border border-red-500'
-                        : 'bg-white hover:bg-gray-200'
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedEnemies.includes(enemy.id)}
-                      onChange={() => handleEnemySelect(enemy.id)}
-                    />
-                    {enemy.imagen && (
-                      <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-10 h-10 object-contain rounded" />
-                    )}
-                    <span>{getEnemyName(enemy.id)}</span>
-                  </label>
-                ))}
+                {enemiesOfColor.map(enemy => {
+                  const isSelected = selectedEnemies.includes(enemy.id);
+                  return (
+                    <label
+                      key={enemy.id}
+                      className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer border transition 
+                      ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleEnemySelect(enemy.id)}
+                      />
+                      {enemy.image && (
+                        <img src={enemy.image} alt={getEnemyName(enemy.id)} className="w-10 h-10 object-contain rounded" />
+                      )}
+                      <span>{getEnemyName(enemy.id)}</span>
+                    </label>
+                  );
+                })}
               </div>
             </div>
           );
         })}
       </div>
+
 
       {/* Resumen de selección */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
