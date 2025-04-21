@@ -179,68 +179,65 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-      <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
-        <RuneTitle>{t.selectEnemies}</RuneTitle>
-      
-        {/* Flex en filas con wrap */}
-        <div className="flex flex-wrap gap-6">
-          {COLORS.map(color => {
-            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
-            if (enemiesOfColor.length === 0) return null;
-      
-            let areaBg = "bg-white";
-            let textColor = "";
-            if (color.id === "gris") areaBg = "bg-gray-300";
-            else if (color.id === "negro") {
-              areaBg = "bg-black/60";
-              textColor = "text-white";
-            } else if (color.id === "comandante") areaBg = "bg-yellow-200";
-      
-            const isCompact = enemiesOfColor.length <= 4;
-      
-            return (
-              <div
-                key={color.id}
-                className={`p-4 rounded-lg shadow ${areaBg} ${textColor}
-                  ${isCompact ? 'min-w-[180px] max-w-[220px]' : 'w-full sm:min-w-[320px] sm:max-w-full'} 
-                  flex-1`}
-              >
-                <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
-      
-                <div className={isCompact 
-                  ? "flex flex-col items-center gap-4" 
-                  : "grid grid-cols-2 gap-4"}
+<div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
+  <RuneTitle>{t.selectEnemies}</RuneTitle>
+
+  {/* Flex en filas con wrap */}
+  <div className="flex flex-wrap gap-6">
+    {COLORS.map(color => {
+      const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+      if (enemiesOfColor.length === 0) return null;
+
+      let areaBg = "bg-white";
+      let textColor = "";
+      if (color.id === "gris") areaBg = "bg-gray-300";
+      else if (color.id === "negro") {
+        areaBg = "bg-black/60";
+        textColor = "text-white";
+      } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+
+      const isCompact = enemiesOfColor.length <= 4;
+
+      return (
+        <div
+          key={color.id}
+          className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+            ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
+          `}
+        >
+          <h3 className="text-xl font-bold mb-4 text-center">
+            {t.colors?.[color.id] || color.id}
+          </h3>
+
+          <div className="flex flex-col gap-4">
+            {enemiesOfColor.map(enemy => {
+              const isSelected = selectedEnemies.includes(enemy.id);
+              return (
+                <label
+                  key={enemy.id}
+                  className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                    w-full
+                    ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
                 >
-                  {enemiesOfColor.map(enemy => {
-                    const isSelected = selectedEnemies.includes(enemy.id);
-                    return (
-                      <label
-                        key={enemy.id}
-                        className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                        w-full 
-                        ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => handleEnemySelect(enemy.id)}
-                          className="hidden"
-                        />
-                        {enemy.imagen && (
-                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
-                        )}
-                        <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleEnemySelect(enemy.id)}
+                    className="hidden"
+                  />
+                  {enemy.imagen && (
+                    <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                  )}
+                  <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                </label>
+              );
+            })}
+          </div>
         </div>
-      </div>
-
-
+      );
+    })}
+  </div>
+</div>
 
 
       {/* Resumen de selección */}
