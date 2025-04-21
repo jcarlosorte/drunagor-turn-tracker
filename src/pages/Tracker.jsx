@@ -199,7 +199,7 @@ const TrackerSelect = () => {
             return (
               <div
                 key={color.id}
-                className={`flex flex-col p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
+                className={`flex flex-wrap p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
