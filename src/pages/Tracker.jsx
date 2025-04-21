@@ -106,38 +106,37 @@ const TrackerSelect = () => {
       <h1 className="text-2xl font-bold">{t.title}</h1>
 
       {/* Selección de héroes */}
-      <div className="border p-4 rounded-xl bg-white/70 shadow">
+      <div className="border rounded-xl p-4 bg-white/70 shadow">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-center">
-          {allHeroes.map((hero) => {
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {heroesInSelectedExpansions.map((hero) => {
             const isSelected = selectedHeroes.includes(hero.id);
             return (
               <label
                 key={hero.id}
-                className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center gap-2 transition 
-                  w-full max-w-[160px] mx-auto 
-                  ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-gray-400 hover:bg-gray-100'}`}
+                className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
+                  ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
               >
                 <input
                   type="checkbox"
                   checked={isSelected}
                   onChange={() => handleHeroSelect(hero.id)}
+                  disabled={!isSelected && selectedHeroes.length >= 5}
                   className="hidden"
                 />
                 {hero.image && (
                   <img
                     src={hero.image}
                     alt={getHeroName(hero.id)}
-                    className="w-16 h-16 object-contain"
+                    className="w-12 h-12 object-contain mb-2"
                   />
                 )}
-                <span className="text-sm font-semibold text-center">{getHeroName(hero.id)}</span>
+                <span className="text-sm font-semibold">{getHeroName(hero.id)}</span>
               </label>
             );
           })}
         </div>
       </div>
-
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
