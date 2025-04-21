@@ -92,15 +92,6 @@ const TrackerSelect = () => {
   const handleBack = () => {
     navigate("/", { replace: true }); // o solo navigate("/") si no quieres reemplazo en el historial
   };
-
-  const assignRole = (heroId, roleId) => {
-  if (!roleId) return; // Evitar asignar rol vacío
-  if (Object.values(heroRoles).includes(roleId)) {
-    alert(t.roleAlreadyAssigned || 'Este rol ya está asignado a otro héroe');
-    return;
-  }
-  setHeroRoles({ ...heroRoles, [heroId]: roleId });
-};
   
   return (
     <div className="p-4 space-y-8 text-gray-900">
@@ -160,7 +151,7 @@ const TrackerSelect = () => {
                     className="mt-2 border rounded-md p-2"
                   >
                     <option value="">Elige rol</option>
-                    <option value=""> - {getRoleName(role.id)} - </option>
+                    <option value="">{getRoleName(role.id)}</option>
                     <option value="">{t.selectRole}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
