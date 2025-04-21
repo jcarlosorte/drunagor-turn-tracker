@@ -142,7 +142,7 @@ const TrackerSelect = () => {
       {selectedHeroes.length > 0 && (
         <div className="border p-4 rounded-xl bg-blue-100/60 shadow">
           <RuneTitle>{t.assignRoles}</RuneTitle>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
