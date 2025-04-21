@@ -199,11 +199,16 @@ const TrackerSelect = () => {
             return (
               <div
                 key={color.id}
-                className={`flex flex-wrap p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
+                className={`p-4 rounded-lg shadow ${areaBg} ${textColor}
+                  ${isCompact ? 'min-w-[180px] max-w-[220px]' : 'w-full sm:min-w-[320px] sm:max-w-full'} 
+                  flex-1`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
-      
-                <div className="grid grid-cols-2 gap-4">
+              
+                <div className={isCompact 
+                  ? "flex flex-col items-center gap-4" 
+                  : "grid grid-cols-2 gap-4"}
+                >
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
                     return (
@@ -228,6 +233,7 @@ const TrackerSelect = () => {
                   })}
                 </div>
               </div>
+
             );
           })}
         </div>
