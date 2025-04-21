@@ -182,8 +182,8 @@ const TrackerSelect = () => {
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
-        {/* Flexbox en vez de grid para permitir agrupación horizontal fluida */}
-        <div className="flex flex-wrap gap-6 justify-start">
+        {/* Agrupación tipo masonry con columnas */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           {COLORS.map(color => {
             const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
             if (enemiesOfColor.length === 0) return null;
@@ -199,12 +199,10 @@ const TrackerSelect = () => {
             return (
               <div
                 key={color.id}
-                className={`rounded-lg p-4 shadow ${areaBg} ${textColor} 
-                  flex-grow basis-[300px] max-w-[100%]`}
+                className={`break-inside-avoid rounded-lg p-4 shadow ${areaBg} ${textColor} mb-6`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
-                {/* Grid interno solo para los enemigos de este color */}
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
@@ -234,8 +232,6 @@ const TrackerSelect = () => {
           })}
         </div>
       </div>
-
-
 
       {/* Resumen de selección */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
