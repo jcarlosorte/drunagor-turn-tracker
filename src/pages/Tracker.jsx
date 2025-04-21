@@ -21,7 +21,9 @@ const TrackerSelect = () => {
   const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
   const enemyIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.enemies);
   const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe");
+  const enemiesInSelectedExpansions = ENEMIES.filter(
+    e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe"
+  );
 
   useEffect(() => {
     setSelectedEnemies(enemyIdsInSelectedExpansions.filter(id => {
@@ -78,6 +80,7 @@ const TrackerSelect = () => {
       roles: heroRoles,
       enemies: selectedEnemies
     });
+    // Aquí puedes guardar los datos globalmente o navegar a la siguiente pantalla
   };
 
   const handleBack = () => {
@@ -85,41 +88,34 @@ const TrackerSelect = () => {
   };
 
   const RuneTitle = ({ children }) => (
-    <div className="relative text-center my-6">
-      <div className="inline-block px-8 py-3 border-4 border-yellow-700 bg-gradient-to-br from-yellow-100 to-yellow-300 rounded-xl shadow-xl font-fantasy">
-        <span className="text-4xl font-extrabold text-yellow-900 tracking-wider">
+    <div className="relative text-center my-4">
+      <div className="inline-block border-4 border-yellow-800 rounded-lg px-6 py-2 bg-yellow-50 shadow-lg relative">
+        <span className="text-3xl font-extrabold tracking-wider text-yellow-900">
           {children}
         </span>
-        <span className="absolute -top-3 -left-3 w-5 h-5 bg-yellow-800 rounded-full shadow-md" />
-        <span className="absolute -top-3 -right-3 w-5 h-5 bg-yellow-800 rounded-full shadow-md" />
-        <span className="absolute -bottom-3 -left-3 w-5 h-5 bg-yellow-800 rounded-full shadow-md" />
-        <span className="absolute -bottom-3 -right-3 w-5 h-5 bg-yellow-800 rounded-full shadow-md" />
+        <span className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+        <span className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+        <span className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
+        <span className="absolute -bottom-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
       </div>
     </div>
   );
-
+  
   return (
-    <div className="p-6 space-y-10 text-gray-900 font-fantasy">
-      <style>
-        {`@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-          .font-fantasy { font-family: 'MedievalSharp', cursive; }
-        `}
-      </style>
+    <div className="p-4 space-y-8 text-gray-900">
+      <h1 className="text-2xl font-bold font-fantasy">{t.title}</h1>
 
-      <h1 className="text-3xl font-bold text-center">{t.title}</h1>
-
-      {/* HEROES */}
-      <div className="border border-yellow-900 rounded-xl p-4 bg-yellow-50/90 shadow-lg">
+      {/* Selección de héroes */}
+      <div className="border rounded-xl p-4 bg-white/70 shadow">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {heroesInSelectedExpansions.map((hero) => {
             const isSelected = selectedHeroes.includes(hero.id);
             return (
               <label
                 key={hero.id}
-                className={`cursor-pointer border-4 rounded-lg p-3 flex flex-col items-center text-center transition
-                  ${isSelected ? 'border-green-700 bg-green-100/80 shadow-2xl' : 'border-gray-400 bg-white/70 hover:bg-gray-100'}
-                  font-fantasy`}
+                className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
+                  ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
               >
                 <input
                   type="checkbox"
@@ -132,41 +128,41 @@ const TrackerSelect = () => {
                   <img
                     src={hero.image}
                     alt={getHeroName(hero.id)}
-                    className="w-16 h-16 object-contain mb-2 border border-gray-700 rounded-lg shadow-md"
+                    className="w-12 h-12 object-contain mb-2"
                   />
                 )}
-                <span className="text-md font-bold">{getHeroName(hero.id)}</span>
+                <span className="text-sm font-semibold">{getHeroName(hero.id)}</span>
               </label>
             );
           })}
         </div>
       </div>
 
-      {/* ROLES */}
+      {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border border-blue-900 rounded-xl p-4 bg-blue-100/60 shadow-lg">
+        <div className="border p-4 rounded-xl bg-blue-100/60 shadow">
           <RuneTitle>{t.assignRoles}</RuneTitle>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
-              const heroData = HEROES.find(h => h.id === heroId);
+              const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
               return (
-                <div key={heroId} className="flex flex-col items-center p-4 bg-white rounded-xl border-4 border-blue-600 shadow-md font-fantasy">
+                <div key={heroId} className="flex flex-col items-center gap-2 p-2 bg-white rounded-lg shadow">
                   <img
                     src={heroData.image}
                     alt={getHeroName(heroId)}
-                    className="w-20 h-20 object-contain border rounded"
+                    className="w-20 h-20 object-contain"
                   />
-                  <span className="mt-2 font-bold">{getHeroName(heroId)}</span>
-                  <span className="italic text-sm">
+                  <span className="font-semibold">{getHeroName(heroId)}</span>
+                  <span>
                     {heroRoles[heroId]
                       ? `- ${getRoleName(heroRoles[heroId])} -`
-                      : '- Elige rol -'}
+                      : <em>- Elige rol -</em>}
                   </span>
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
-                    className="mt-2 border rounded-md p-2 w-full bg-blue-50 text-blue-900"
+                    className="mt-2 border rounded-md p-2 w-full"
                   >
                     <option value="">Elige rol</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
@@ -182,59 +178,82 @@ const TrackerSelect = () => {
         </div>
       )}
 
-      {/* ENEMIGOS */}
-      <div className="border border-red-800 rounded-xl p-4 bg-red-100/80 shadow-lg">
-        <RuneTitle>{t.selectEnemies}</RuneTitle>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-6">
-          {enemiesInSelectedExpansions.map((enemy) => {
-            const isSelected = selectedEnemies.includes(enemy.id);
-            return (
-              <label
-                key={enemy.id}
-                className={`cursor-pointer border-4 rounded-xl p-3 flex flex-col items-center text-center transition
-                  ${isSelected ? 'border-red-700 bg-red-200/80 shadow-xl' : 'border-gray-400 bg-white/70 hover:bg-gray-100'}
-                  font-fantasy`}
-              >
-                <input
-                  type="checkbox"
-                  checked={isSelected}
-                  onChange={() => handleEnemySelect(enemy.id)}
-                  className="hidden"
-                />
-                {enemy.image && (
-                  <img
-                    src={enemy.image}
-                    alt={getEnemyName(enemy.id)}
-                    className="w-16 h-16 object-contain mb-2 border border-gray-700 rounded-lg"
+      {/* Enemigos agrupados por color */}
+<div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
+  <RuneTitle>{t.selectEnemies}</RuneTitle>
+
+  {/* Flex en filas con wrap */}
+  <div className="flex flex-wrap gap-6">
+    {COLORS.map(color => {
+      const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+      if (enemiesOfColor.length === 0) return null;
+
+      let areaBg = "bg-white";
+      let textColor = "";
+      if (color.id === "gris") areaBg = "bg-gray-300";
+      else if (color.id === "negro") {
+        areaBg = "bg-black/60";
+        textColor = "text-white";
+      } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+
+      const isCompact = enemiesOfColor.length <= 4;
+
+      return (
+        <div
+          key={color.id}
+          className={`inline-flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+            ${isCompact ? 'max-w-[240px] flex-1' : 'w-full'}
+          `}
+        >
+          <h3 className="text-xl font-bold mb-4 text-center">
+            {t.colors?.[color.id] || color.id}
+          </h3>
+
+          <div className="flex flex-col gap-4">
+            {enemiesOfColor.map(enemy => {
+              const isSelected = selectedEnemies.includes(enemy.id);
+              return (
+                <label
+                  key={enemy.id}
+                  className={`flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                    w-full
+                    ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleEnemySelect(enemy.id)}
+                    className="hidden"
                   />
-                )}
-                <span className="text-md font-bold">{getEnemyName(enemy.id)}</span>
-              </label>
-            );
-          })}
+                  {enemy.imagen && (
+                    <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain" />
+                  )}
+                  <span className="text-sm text-center">{getEnemyName(enemy.id)}</span>
+                </label>
+              );
+            })}
+          </div>
         </div>
-        {/* Botones por color */}
-        <div className="flex flex-wrap justify-center gap-3 mt-6">
-          {COLORS.map(color => (
-            <button
-              key={color}
-              onClick={() => handleRandomEnemySelect(color)}
-              className={`px-4 py-2 rounded-md text-white font-bold shadow font-fantasy
-                ${color === 'rojo' ? 'bg-red-600' : color === 'azul' ? 'bg-blue-600' : color === 'verde' ? 'bg-green-600' : 'bg-gray-600'}
-              `}
-            >
-              {t.randomColor?.[color] || color}
-            </button>
-          ))}
-        </div>
+      );
+    })}
+  </div>
+</div>
+
+
+      {/* Resumen de selección */}
+      <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
+        <h3 className="text-lg font-semibold">{t.currentSelection || "Selección actual"}</h3>
+        <p><strong>{t.heroes || "Héroes"}:</strong> {selectedHeroes.map(id => getHeroName(id)).join(", ") || "-"}</p>
+        <p><strong>{t.enemies || "Enemigos"}:</strong> {selectedEnemies.map(id => getEnemyName(id)).join(", ") || "-"}</p>
       </div>
 
-      <div className="flex justify-between mt-10">
-        <button onClick={handleBack} className="px-6 py-3 rounded-lg bg-gray-700 text-white shadow font-fantasy">
-          {t.back}
+      {/* Botones */}
+      <div className="flex justify-between">
+        <button onClick={handleBack} className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded">
+          {t.back || "Volver"}
         </button>
-        <button onClick={handleConfirm} className="px-6 py-3 rounded-lg bg-green-700 text-white shadow font-fantasy">
-          {t.confirm}
+        <button onClick={handleConfirm} className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded">
+          {t.confirm || "Confirmar"}
         </button>
       </div>
     </div>
