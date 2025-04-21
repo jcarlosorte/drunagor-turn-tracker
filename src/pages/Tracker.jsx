@@ -196,6 +196,8 @@ const TrackerSelect = () => {
               textColor = "text-white";
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
+            const isCompact = enemiesOfColor.length <= 4;
+      
             return (
               <div
                 key={color.id}
@@ -204,7 +206,7 @@ const TrackerSelect = () => {
                   flex-1`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
-              
+      
                 <div className={isCompact 
                   ? "flex flex-col items-center gap-4" 
                   : "grid grid-cols-2 gap-4"}
@@ -233,11 +235,11 @@ const TrackerSelect = () => {
                   })}
                 </div>
               </div>
-
             );
           })}
         </div>
       </div>
+
 
 
 
