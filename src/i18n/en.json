@@ -123,6 +123,7 @@
     "title": "Select tracker setup",
     "selectHeroes": "Select your heroes",
     "assignRoles": "Assign dungeon roles",
+    "chooseRole": "Choose Role",
     "noRole": "No role",
     "tank": "Tank",
     "support": "Support",
