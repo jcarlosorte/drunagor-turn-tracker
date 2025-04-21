@@ -136,7 +136,7 @@ const TrackerSelect = () => {
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
         <div className="border p-4 rounded-xl bg-gray-100 shadow">
-          <h3 className="text-lg font-semibold mb-2"> o {t.assignRoles} - </h3>
+          <h3 className="text-lg font-semibold mb-2"> - {t.assignRoles} - </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
@@ -157,11 +157,10 @@ const TrackerSelect = () => {
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
-                    //onChange={(e) => assignRole(heroId, e.target.value)}
                     className="mt-2 border rounded-md p-2"
                   >
                     <option value="">Elige rol</option>
-                    <option value="">{getRoleName(heroRoles[heroId])}</option>
+                    <option value=""> - {getRoleName(role.id)} - </option>
                     <option value="">{t.selectRole}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
