@@ -182,8 +182,8 @@ const TrackerSelect = () => {
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-6">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
-        {/* Agrupación tipo masonry con columnas */}
-        <div className="columns-1 sm:columns-2 lg:columns-2 gap-6 space-y-6">
+        {/* Flex en filas con wrap */}
+        <div className="flex flex-wrap gap-6">
           {COLORS.map(color => {
             const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
             if (enemiesOfColor.length === 0) return null;
@@ -199,11 +199,11 @@ const TrackerSelect = () => {
             return (
               <div
                 key={color.id}
-                className={`break-inside-avoid rounded-lg p-4 shadow ${areaBg} ${textColor} mb-6`}
+                className={`flex flex-col p-4 rounded-lg shadow w-full sm:w-[320px] ${areaBg} ${textColor}`}
               >
                 <h3 className="text-xl font-bold mb-4">{t.colors?.[color.id] || color.id}</h3>
       
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
+                <div className="grid grid-cols-2 gap-4">
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
                     return (
@@ -232,6 +232,7 @@ const TrackerSelect = () => {
           })}
         </div>
       </div>
+
 
       {/* Resumen de selección */}
       <div className="border rounded-xl p-4 bg-gray-100 shadow space-y-2">
