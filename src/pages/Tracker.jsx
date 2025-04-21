@@ -180,8 +180,8 @@ const TrackerSelect = () => {
                       checked={selectedEnemies.includes(enemy.id)}
                       onChange={() => handleEnemySelect(enemy.id)}
                     />
-                    {enemy.image && (
-                      <img src={enemy.image} alt={getEnemyName(enemy.id)} className="w-10 h-10 object-contain rounded" />
+                    {enemy.imagen && (
+                      <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-10 h-10 object-contain rounded" />
                     )}
                     <span>{getEnemyName(enemy.id)}</span>
                   </label>
