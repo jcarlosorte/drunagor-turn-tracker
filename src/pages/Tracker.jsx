@@ -152,7 +152,7 @@ const TrackerSelect = () => {
                   >
                     <option value="">Elige rol</option>
                     <option value="">{getRoleName(role.id)}</option>
-                    <option value="">{t.selectRole}</option>
+                    <option value="">{heroRoles[heroId]}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
                         {getRoleName(role.id)} {/* Aquí obtenemos el nombre del rol con la traducción */}
