@@ -133,6 +133,7 @@
     "selectEnemies": "Select enemies",
     "randomEnemyByColor": "Select random enemy by color",
     "selectRandomEnemyForColor": "Select random enemy of color {color}",
+    "randomEnemy": "Select random enemy",
     "summary": "Summary",
     "selectedHeroes": "Selected heroes",
     "selectedEnemies": "Selected enemies",
