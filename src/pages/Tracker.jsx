@@ -78,6 +78,19 @@ const TrackerSelect = () => {
   };
 
   const handleConfirm = () => {
+    if (selectedHeroes.length === 0) {
+      alert(t.noHeroesSelected || "Debes seleccionar al menos un héroe.");
+      return;
+  }
+   const heroesWithoutRole = selectedHeroes.filter(h => !heroRoles[h]);
+    if (heroesWithoutRole.length > 0) {
+      const names = heroesWithoutRole.map(getHeroName).join(', ');
+      alert(
+        t.heroesWithoutRoles?.replace('{heroes}', names) ||
+        `Todos los héroes deben tener un rol asignado. Faltan: ${names}`
+      );
+      return;
+    }
     console.log('Confirmado:', {
       heroes: selectedHeroes,
       roles: heroRoles,
