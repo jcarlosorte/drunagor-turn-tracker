@@ -4,10 +4,11 @@ import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
+import TopMenu from "@/components/TopMenu";
 
 
 const InitTracker = () => {
-  const { trackerData } = useTracker();
+  const { trackerData, setTrackerData } = useTracker();
   console.log("TRACKER DATA:", trackerData);
   const { translations } = useLanguage();
   const t = translations.trackerInit || {};
@@ -16,8 +17,31 @@ const InitTracker = () => {
   const getEnemyName = (id) => translations.enemies?.[id] || id;
   const getRoleName = (id) => translations.roles?.[id] || id;
 
+  const handleAddEnemy = (color) => {
+    // Lógica para añadir enemigo del color especificado
+    console.log("Añadir enemigo:", color);
+  };
+
+  const handleSelectBoss = () => {
+    console.log("Seleccionar jefes");
+  };
+
+  const handleSelectOther = () => {
+    console.log("Seleccionar otros");
+  };
+
+  const handleAddManual = () => {
+    console.log("Añadir enemigo manualmente");
+  };
+
   return (
     <div className="p-4 text-gray-900">
+      <TopMenu
+        onAddEnemy={handleAddEnemy}
+        onSelectBoss={handleSelectBoss}
+        onSelectOther={handleSelectOther}
+        onAddManual={handleAddManual}
+      />
       <h1 className="text-3xl font-bold">{t.title || 'Inicio del Tracker'}</h1>
 
       <div className="mt-6 space-y-4">
