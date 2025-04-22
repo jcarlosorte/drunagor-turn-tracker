@@ -44,6 +44,7 @@ const InitTracker = () => {
         onSelectBoss={handleSelectBoss}
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
+        translations={translations}
       />
       <div className="no-header"></div>  {/* Esto elimina la cabecera global */}
       
