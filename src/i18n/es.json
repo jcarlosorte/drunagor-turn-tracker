@@ -130,7 +130,7 @@
     "dps": "Daño",
     "healer": "Sanador",
     "control": "Control",
-    "selectEnemies": "Selecciona enemigos",
+    "selectEnemies": "Enemigos",
     "randomEnemyByColor": "Seleccionar enemigo aleatorio por color",
     "selectRandomEnemyForColor": "Seleccionar enemigo aleatorio de color {color}",
     "randomEnemy": "Añadir Enemigo Aleatorio",
@@ -139,6 +139,12 @@
     "selectedEnemies": "Enemigos seleccionados",
     "back": "Volver",
     "confirm": "Confirmar",
+    "comportamientos": {
+      "comportamiento": "Comportamiento",
+      "estandar": "Estándar",
+      "alternativo": "Alternativo",
+      "complejo": "Complejo"
+    },
     "colors": {
       "blanco": "Monstruos Blancos",
       "gris": "Monstruos Grises",
