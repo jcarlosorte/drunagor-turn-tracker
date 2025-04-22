@@ -113,11 +113,11 @@
     "fallen_sisters": "Fallen Sisters"
   },
     "roles": {
-      "controlador": "Control",
+      "controlador": "Controller",
       "defensor": "Defender",
       "lider": "Leader",
-      "agresor": "Agressor",
-      "apoyo": "Suport"
+      "agresor": "Striker",
+      "apoyo": "Support"
   },
   "trackerSelect": {
     "title": "Select tracker setup",
