@@ -92,12 +92,6 @@ const TrackerSelect = () => {
       );
       return;
     }
-    console.log('Confirmado:', {
-      heroes: selectedHeroes,
-      roles: heroRoles,
-      enemies: selectedEnemies,
-      behaviors: selectedBehaviors
-    });
     setTrackerData({
       heroes: selectedHeroes,
       roles: heroRoles,
