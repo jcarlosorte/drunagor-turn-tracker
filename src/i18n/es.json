@@ -125,11 +125,6 @@
     "assignRoles": "Asigna roles de mazmorra",
     "chooseRole": "Elige Rol",
     "noRole": "Sin rol",
-    "tank": "Tanque",
-    "support": "Apoyo",
-    "dps": "Daño",
-    "healer": "Sanador",
-    "control": "Control",
     "selectEnemies": "Enemigos",
     "randomEnemyByColor": "Seleccionar enemigo aleatorio por color",
     "selectRandomEnemyForColor": "Seleccionar enemigo aleatorio de color {color}",
@@ -150,7 +145,8 @@
       "gris": "Monstruos Grises",
       "negro": "Monstruos Negros",
       "comandante": "Comandantes",
-      "jefe": "Jefes"
+      "jefe": "Jefes",
+      "hero": "Héroes caídos"
     }
   }
 }
