@@ -91,11 +91,18 @@ const TrackerSelect = () => {
 
   // Función para manejar la selección de comportamientos
   const handleBehaviorSelect = (behavior) => {
-    setSelectedBehaviors(prev =>
-      prev.includes(behavior)
-        ? prev.filter(b => b !== behavior)
-        : [...prev, behavior]
-    );
+    setSelectedBehaviors(prev => {
+      if (prev.includes(behavior)) {
+        return prev.filter(b => b !== behavior);
+      } else {
+        const newBehaviors = [...prev, behavior];
+        // Aseguramos que siempre haya al menos un comportamiento seleccionado
+        if (newBehaviors.length === 0) {
+          return ["Estándar"];
+        }
+        return newBehaviors;
+      }
+    });
   };
   
   const RuneTitle = ({ children }) => (
@@ -193,38 +200,38 @@ const TrackerSelect = () => {
         <RuneTitle>{t.selectEnemies}</RuneTitle>
 
         {/* Comportamientos Generales */}
-          <div className="mb-4">
-            <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
-            <div className="flex gap-4 mb-4">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedBehaviors.includes("Estándar")}
-                  onChange={() => handleBehaviorSelect("Estándar")}
-                  className="form-checkbox"
-                />
-                <span className="text-sm">{t?.comportamientos?.estandar}</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedBehaviors.includes("Alternativo")}
-                  onChange={() => handleBehaviorSelect("Alternativo")}
-                  className="form-checkbox"
-                />
-                <span className="text-sm">{t?.comportamientos?.alternativo}</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedBehaviors.includes("Complejo")}
-                  onChange={() => handleBehaviorSelect("Complejo")}
-                  className="form-checkbox"
-                />
-                <span className="text-sm">{t?.comportamientos?.complejo}</span>
-              </label>
-            </div>
+        <div className="mb-4">
+          <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={selectedBehaviors.includes("Estándar")}
+                onChange={() => handleBehaviorSelect("Estándar")}
+                className="form-checkbox"
+              />
+              <span className="text-sm">{t?.comportamientos?.estandar}</span>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={selectedBehaviors.includes("Alternativo")}
+                onChange={() => handleBehaviorSelect("Alternativo")}
+                className="form-checkbox"
+              />
+              <span className="text-sm">{t?.comportamientos?.alternativo}</span>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={selectedBehaviors.includes("Complejo")}
+                onChange={() => handleBehaviorSelect("Complejo")}
+                className="form-checkbox"
+              />
+              <span className="text-sm">{t?.comportamientos?.complejo}</span>
+            </label>
           </div>
+        </div>
 
         
         {/* Flex en filas con wrap */}
