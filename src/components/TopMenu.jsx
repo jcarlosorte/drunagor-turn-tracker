@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai'; // <-- esta línea es necesaria
 
-const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
+const TopMenu2 = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
   return (
     <div className="bg-gray-800 text-white p-4 flex flex-wrap justify-around rounded-xl mb-4 shadow">
       <button onClick={() => onAddEnemy("white")} className="btn">➕ Enemigo Blanco</button>
@@ -16,7 +16,7 @@ const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
   );
 };
 
-const TopMenu2 = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual, translations }) => {
+const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual, translations }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
