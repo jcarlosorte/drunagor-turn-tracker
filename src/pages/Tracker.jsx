@@ -181,7 +181,7 @@ const TrackerSelect = () => {
       <div className="border-4 rounded-3xl p-6 bg-white/70 shadow-2xl border-yellow-700">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
       
-        {/* Flex en filas con wrap */}
+        {/* Contenedor general: flex con wrap */}
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
             const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
@@ -195,33 +195,33 @@ const TrackerSelect = () => {
               textColor = "text-white";
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
-            const isCompact = enemiesOfColor.length <= 4;
-            const isGridLayout = !['blanco', 'gris'].includes(color.id);
-      
+            const isCompact = enemiesOfColor.length <= 4; // Lógica de compactación
+            const isGridLayout = !['blanco', 'gris'].includes(color.id); // Solo los demás colores usarán grid
+            
             return (
               <div
-                  key={color.id}
-                  className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-                    ${isGridLayout  ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
-                  `}
+                key={color.id}
+                className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                  ${isGridLayout ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
+                `}
+              >
+                <h3 className="text-xl font-bold mb-4 text-center">
+                  {t.colors?.[color.id] || color.id}
+                </h3>
+      
+                {/* Aquí estamos eligiendo cómo mostrar las cajas dependiendo del layout */}
+                <div
+                  className={
+                    isGridLayout
+                      ? 'grid gap-4 w-full'
+                      : 'flex flex-wrap gap-4 w-full justify-start'
+                  }
+                  style={
+                    isGridLayout
+                      ? { gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' } // Grid para otros colores
+                      : {} // Flex en fila para blanco y gris
+                  }
                 >
-                  <h3 className="text-xl font-bold mb-4 text-center">
-                    {t.colors?.[color.id] || color.id}
-                  </h3>
-              
-                  {/** Aquí está la magia: cambiamos el layout según el color */}
-                  <div
-                    className={
-                      isGridLayout
-                        ? 'grid gap-4 w-full'
-                        : 'flex flex-wrap gap-4 w-full justify-start'
-                    }
-                    style={
-                      isGridLayout
-                        ? { gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }
-                        : {}
-                    }
-                  >
                   {enemiesOfColor.map(enemy => {
                     const isSelected = selectedEnemies.includes(enemy.id);
                     return (
