@@ -124,10 +124,10 @@
     "selectHeroes": "Select your heroes",
     "assignRoles": "Assign dungeon roles",
     "noHeroesSelected": "You must select at least one hero.",
-    "heroesWithoutRoles": "All heroes must have an assigned role. Missing: {heroes}"
+    "heroesWithoutRoles": "All heroes must have an assigned role. Missing: {heroes}",
     "maxHeroes": "You can select up to 5 heroes",
     "confirmErrorNoHero": "Select at least one hero.",
-    "confirmErrorMissingRoles": "Each selected hero must have a role assigned."
+    "confirmErrorMissingRoles": "Each selected hero must have a role assigned.",
     "chooseRole": "Choose Role",
     "selectEnemies": "Enemies",
     "randomEnemyByColor": "Select random enemy by color",
