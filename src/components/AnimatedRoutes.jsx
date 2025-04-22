@@ -1,7 +1,7 @@
 // src/components/AnimatedRoutes.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import HomeMenu from "@/App"; // Lo importamos desde App.jsx ya que estaba ahí
+import HomeMenu from "@/pages/HomeMenu"; // Lo importamos desde App.jsx ya que estaba ahí
 import Tracker from "@/pages/Tracker";
 import Config from "@/pages/Config";
 import InitTracker from "@/pages/InitTracker";
