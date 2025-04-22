@@ -2,10 +2,7 @@
 import React from 'react';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { HEROES } from '@/data/heroes';
-import { ENEMIES } from '@/data/enemies';
 import TopMenu from "@/components/TopMenu";
-
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -18,10 +15,9 @@ const InitTracker = () => {
 
   const handleAddEnemy = (color) => {
     console.log("Añadir enemigo:", color);
-    // Lógica para añadir el enemigo correspondiente al estado
     setTrackerData(prevState => ({
       ...prevState,
-      enemies: [...prevState.enemies, color]  // Simplemente ejemplo de agregar
+      enemies: [...prevState.enemies, color]  // Solo ejemplo
     }));
   };
 
@@ -38,7 +34,7 @@ const InitTracker = () => {
   };
 
   return (
-    <div className="p-4 text-gray-900">
+    <div className="min-h-screen bg-gray-900 text-white px-6 py-4 font-sans">
       <TopMenu
         onAddEnemy={handleAddEnemy}
         onSelectBoss={handleSelectBoss}
@@ -46,35 +42,44 @@ const InitTracker = () => {
         onAddManual={handleAddManual}
         translations={translations}
       />
-      <div className="no-header"></div>  {/* Esto elimina la cabecera global */}
-      
-      <h1 className="text-3xl font-bold text-white-500 font-fantasy">{t.title || 'Inicio del Tracker'}</h1>
+      <div className="no-header" />
 
-      <div className="mt-6 space-y-4">
-        <div>
-          <h2 className="text-xl font-semibold">Héroes Seleccionados:</h2>
-          <ul>
+      <h1 className="text-4xl font-bold text-center font-fantasy text-yellow-300 mt-6 drop-shadow">
+        {t.title || 'Inicio del Tracker'}
+      </h1>
+
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Héroes */}
+        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-blue-300">{t.selectedHeroes || 'Héroes Seleccionados'}</h2>
+          <ul className="space-y-2">
             {trackerData.heroes.map(heroId => (
-              <li key={heroId}>
-                {getHeroName(heroId)} - {getRoleName(trackerData.roles[heroId])}
+              <li key={heroId} className="text-white">
+                <span className="font-semibold text-green-400">{getHeroName(heroId)}</span> – <span className="italic text-gray-300">{getRoleName(trackerData.roles[heroId])}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold">Enemigos Seleccionados:</h2>
-          <ul>
+        {/* Enemigos */}
+        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-red-300">{t.selectedEnemies || 'Enemigos Seleccionados'}</h2>
+          <ul className="space-y-2">
             {trackerData.enemies.map(enemyId => (
-              <li key={enemyId}>{getEnemyName(enemyId)}</li>
+              <li key={enemyId} className="text-white">
+                {getEnemyName(enemyId)}
+              </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold">Comportamientos:</h2>
-          <ul>
-            {trackerData.behaviors.map(b => <li key={b}>{b}</li>)}
+        {/* Comportamientos */}
+        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-purple-300">{t.behaviors || 'Comportamientos'}</h2>
+          <ul className="space-y-2">
+            {trackerData.behaviors.map(b => (
+              <li key={b} className="text-white">{b}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -83,3 +88,4 @@ const InitTracker = () => {
 };
 
 export default InitTracker;
+
