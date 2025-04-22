@@ -12,6 +12,7 @@ const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
+  const [selectedBehaviors, setSelectedBehaviors] = useState([]);
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const t = translations?.trackerSelect || {};
@@ -78,7 +79,8 @@ const TrackerSelect = () => {
     console.log('Confirmado:', {
       heroes: selectedHeroes,
       roles: heroRoles,
-      enemies: selectedEnemies
+      enemies: selectedEnemies,
+      behaviors: selectedBehaviors
     });
     // Aquí puedes guardar los datos globalmente o navegar a la siguiente pantalla
   };
@@ -87,6 +89,15 @@ const TrackerSelect = () => {
     navigate("/", { replace: true });
   };
 
+  // Función para manejar la selección de comportamientos
+  const handleBehaviorSelect = (behavior) => {
+    setSelectedBehaviors(prev =>
+      prev.includes(behavior)
+        ? prev.filter(b => b !== behavior)
+        : [...prev, behavior]
+    );
+  };
+  
   const RuneTitle = ({ children }) => (
       <div className="relative text-center my-6">
         <div className="inline-block border-4 border-yellow-800 rounded-2xl px-6 py-3 bg-yellow-100 shadow-xl relative font-fantasy">
