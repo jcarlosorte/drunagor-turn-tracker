@@ -9,7 +9,6 @@ import TopMenu from "@/components/TopMenu";
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  console.log("TRACKER DATA:", trackerData);
   const { translations } = useLanguage();
   const t = translations.trackerInit || {};
 
@@ -18,8 +17,12 @@ const InitTracker = () => {
   const getRoleName = (id) => translations.roles?.[id] || id;
 
   const handleAddEnemy = (color) => {
-    // Lógica para añadir enemigo del color especificado
     console.log("Añadir enemigo:", color);
+    // Lógica para añadir el enemigo correspondiente al estado
+    setTrackerData(prevState => ({
+      ...prevState,
+      enemies: [...prevState.enemies, color]  // Simplemente ejemplo de agregar
+    }));
   };
 
   const handleSelectBoss = () => {
@@ -35,9 +38,6 @@ const InitTracker = () => {
   };
 
   return (
-    .no-header {
-      display: none;
-    }
     <div className="p-4 text-gray-900">
       <TopMenu
         onAddEnemy={handleAddEnemy}
@@ -45,7 +45,9 @@ const InitTracker = () => {
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
       />
-      <h1 className="text-3xl font-bold">{t.title || 'Inicio del Tracker'}</h1>
+      <div className="no-header"></div>  {/* Esto elimina la cabecera global */}
+      
+      <h1 className="text-3xl font-bold text-white-500 font-fantasy">{t.title || 'Inicio del Tracker'}</h1>
 
       <div className="mt-6 space-y-4">
         <div>
