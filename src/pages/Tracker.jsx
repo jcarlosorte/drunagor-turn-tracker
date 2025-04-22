@@ -91,15 +91,21 @@ const TrackerSelect = () => {
 
   // Función para manejar la selección de comportamientos
   const handleBehaviorSelect = (behavior) => {
-    setSelectedBehaviors(prev => {
-      if (prev.includes(behavior)) {
-        return prev.filter(b => b !== behavior);
-      } else {
-        const newBehaviors = [...prev, behavior];
-        return newBehaviors;
+  setSelectedBehaviors(prev => {
+    if (prev.includes(behavior)) {
+      // Si el comportamiento ya está seleccionado, lo eliminamos
+      const newBehaviors = prev.filter(b => b !== behavior);
+      // Si no hay ningún comportamiento seleccionado, restauramos el comportamiento
+      if (newBehaviors.length === 0) {
+        return prev; // No dejamos que se deseleccione el último comportamiento
       }
-    });
-  };
+      return newBehaviors;
+    } else {
+      // Si el comportamiento no está seleccionado, lo añadimos
+      return [...prev, behavior];
+    }
+  });
+};
   
   const RuneTitle = ({ children }) => (
       <div className="relative text-center my-6">
