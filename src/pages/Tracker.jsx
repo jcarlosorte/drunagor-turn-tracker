@@ -23,13 +23,13 @@ const TrackerSelect = () => {
   const enemyIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.enemies);
   const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
   const enemiesInSelectedExpansions = ENEMIES.filter(
-    e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe"
+    e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero"
   );
 
   useEffect(() => {
     setSelectedEnemies(enemyIdsInSelectedExpansions.filter(id => {
       const enemy = ENEMIES.find(e => e.id === id);
-      return enemy?.color !== "jefe";
+      return enemy?.color !== "jefe" && enemy?.color !== "hero";
     }));
   }, [enemyIdsInSelectedExpansions.join(',')]);
 
