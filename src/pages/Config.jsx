@@ -4,6 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useExpansions } from "@/context/ExpansionContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { EXPANSIONS } from "@/data/expansions";
+import PageTransition from "@/components/PageTransition";
 
 export default function Config() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function Config() {
   const { selectedExpansions, toggleExpansion } = useExpansions();
 
   return (
+    <PageTransition>
     <div className="p-6 text-white">
       <h1 className="text-3xl font-bold mb-4">{translations.config.title}</h1>
 
@@ -62,5 +64,6 @@ export default function Config() {
         ← {translations.home.back_to_home}
       </button>
     </div>
+  </PageTransition>
   );
 }
