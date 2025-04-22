@@ -8,7 +8,7 @@ export default function HomeMenu() {
   const { translations } = useLanguage();
 
   return (
-    //<PageTransition>
+    <PageTransition>
     <div>
       <button
         onClick={() => navigate('/tracker')}
@@ -23,6 +23,6 @@ export default function HomeMenu() {
         {translations.home.configure_environment}
       </button>
     </div>
-    //</PageTransition>
+    </PageTransition>
   );
 }
