@@ -177,79 +177,70 @@ const TrackerSelect = () => {
         </div>
       )}
 
-      {/* Enemigos agrupados por color */}
-      <div className="border-4 rounded-3xl p-6 bg-white/70 shadow-2xl border-yellow-700">
-        <RuneTitle>{t.selectEnemies}</RuneTitle>
-      
-        {/* Contenedor general: flex con wrap */}
-        <div className="flex flex-wrap gap-2 mb-4 justify-center">
-          {COLORS.map(color => {
-            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
-            if (enemiesOfColor.length === 0) return null;
-      
-            let areaBg = "bg-white";
-            let textColor = "";
-            if (color.id === "gris") areaBg = "bg-gray-300";
-            else if (color.id === "negro") {
-              areaBg = "bg-black/60";
-              textColor = "text-white";
-            } else if (color.id === "comandante") areaBg = "bg-yellow-200";
-      
-            const isCompact = enemiesOfColor.length <= 4; // Lógica de compactación
-            const isGridLayout = !['blanco', 'gris'].includes(color.id); // Solo los demás colores usarán grid
-            
-            return (
-              <div
-                key={color.id}
-                className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-                  ${isGridLayout ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
-                `}
-              >
-                <h3 className="text-xl font-bold mb-4 text-center">
-                  {t.colors?.[color.id] || color.id}
-                </h3>
-      
-                {/* Aquí estamos eligiendo cómo mostrar las cajas dependiendo del layout */}
-                <div
-                  className={
-                    isGridLayout
-                      ? 'grid gap-4 w-full'
-                      : 'flex flex-wrap gap-4 w-full justify-start'
-                  }
-                  style={
-                    isGridLayout
-                      ? { gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' } // Grid para otros colores
-                      : {} // Flex en fila para blanco y gris
-                  }
+{/* Enemigos agrupados por color */}
+<div className="border-4 rounded-3xl p-6 bg-white/70 shadow-2xl border-yellow-700">
+  <RuneTitle>{t.selectEnemies}</RuneTitle>
+
+  {/* Contenedor general: flex con wrap */}
+  <div className="flex flex-wrap gap-2 mb-4 justify-center">
+    {COLORS.map(color => {
+      const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+      if (enemiesOfColor.length === 0) return null;
+
+      let areaBg = "bg-white";
+      let textColor = "";
+      if (color.id === "gris") areaBg = "bg-gray-300";
+      else if (color.id === "negro") {
+        areaBg = "bg-black/60";
+        textColor = "text-white";
+      } else if (color.id === "comandante") areaBg = "bg-yellow-200";
+
+      // Logica para usar grid o flex
+      const isCompact = enemiesOfColor.length <= 4; // Si hay menos de 4 enemigos, usamos flex
+      const isGridLayout = !['blanco', 'gris'].includes(color.id); // Usamos grid solo para colores distintos a blanco y gris
+
+      return (
+        <div
+          key={color.id}
+          className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor} ${isGridLayout ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}`}
+        >
+          <h3 className="text-xl font-bold mb-4 text-center">
+            {t.colors?.[color.id] || color.id}
+          </h3>
+
+          {/* Aquí estamos eligiendo cómo mostrar las cajas dependiendo del layout */}
+          <div
+            className={`w-full ${isGridLayout ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4' : 'flex flex-wrap gap-4 justify-start'}`}
+          >
+            {enemiesOfColor.map(enemy => {
+              const isSelected = selectedEnemies.includes(enemy.id);
+              return (
+                <label
+                  key={enemy.id}
+                  className={`fantasy-frame flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
+                    ${isGridLayout ? 'w-full' : 'w-[140px]'}
+                    ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
                 >
-                  {enemiesOfColor.map(enemy => {
-                    const isSelected = selectedEnemies.includes(enemy.id);
-                    return (
-                      <label
-                        key={enemy.id}
-                        className={`fantasy-frame flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                          ${isGridLayout ? 'w-full' : 'w-[140px]'}
-                          ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => handleEnemySelect(enemy.id)}
-                          className="hidden"
-                        />
-                        {enemy.imagen && (
-                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain mb-2" />
-                        )}
-                        <span className="text-sm font-fantasy">{getEnemyName(enemy.id)}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleEnemySelect(enemy.id)}
+                    className="hidden"
+                  />
+                  {enemy.imagen && (
+                    <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain mb-2" />
+                  )}
+                  <span className="text-sm font-fantasy">{getEnemyName(enemy.id)}</span>
+                </label>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      );
+    })}
+  </div>
+</div>
+
 
 
       {/* Botones */}
