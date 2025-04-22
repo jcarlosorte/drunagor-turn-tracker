@@ -21,7 +21,7 @@ function Header() {
 
 function AppContent() {
   const location = useLocation();
-  const hideHeader = ["/drunagor-turn-tracker/init", "/drunagor-turn-tracker/config"].includes(location.pathname);
+  const hideHeader = ["/init", "/config"].includes(location.pathname); // 👈 CAMBIADO
 
   return (
     <div className="text-center mt-10">
@@ -40,3 +40,4 @@ function App() {
 }
 
 export default App;
+
