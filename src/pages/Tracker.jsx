@@ -196,13 +196,13 @@ const TrackerSelect = () => {
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
             const isCompact = enemiesOfColor.length <= 4;
-            const isGridLayout = ['blanco', 'gris'].includes(color.id);
+            const isGridLayout = !['blanco', 'gris'].includes(color.id);
       
             return (
               <div
                   key={color.id}
                   className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-                    ${isCompact ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
+                    ${isGridLayout  ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
                   `}
                 >
                   <h3 className="text-xl font-bold mb-4 text-center">
