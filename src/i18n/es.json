@@ -127,7 +127,7 @@
     "heroesWithoutRoles": "Todos los héroes deben tener un rol asignado. Faltan: {heroes}",
     "maxHeroes": "Máximo 5 héroes",
     "confirmErrorNoHero": "Selecciona al menos un héroe.",
-    "confirmErrorMissingRoles": "Cada héroe seleccionado debe tener un rol asignado."
+    "confirmErrorMissingRoles": "Cada héroe seleccionado debe tener un rol asignado.",
     "chooseRole": "Elige Rol",
     "noRole": "Sin rol",
     "selectEnemies": "Enemigos",
