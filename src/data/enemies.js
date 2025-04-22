@@ -49,6 +49,12 @@ import gorgon_hexer from "@/assets/enemies/gorgon_hexer.png";
 import soul_harvester from "@/assets/enemies/soul_harvester.png";
 import fell_asteris from "@/assets/enemies/FellAsteris.png";
 import fallen_sisters from "@/assets/enemies/fallen_sisters.png";
+//heroes caidos
+import lorelai from "@/assets/heroes/Lorelai.png";
+import elros from "@/assets/heroes/Elros.png";
+import jaheen from "@/assets/heroes/Jaheen.png";
+import maya from "@/assets/heroes/Maya.png";
+import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
   { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss },
@@ -59,6 +65,11 @@ export const ENEMIES = [
   { id: "executioner", nombre: "Executioner", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "base", imagen: executioner },
   { id: "shadow_knight", nombre: "Shadow Knight", vida: 0, movimiento: 0, color: "negro", tipo: "enemigo", expansionId: "base", imagen: shadow_knight },
   { id: "abomination", nombre: "Abomination", vida: 0, movimiento: 0, color: "negro", tipo: "enemigo", expansionId: "base", imagen: abomination },
+  { id: "lorelai_corrupted", nombre: "Lorelai", vida: 0, movimiento: 0, color: "hero", tipo: "enemigo", expansionId: "base", image: lorelai },
+  { id: "elros_corrupted", nombre: "Elros", vida: 0, movimiento: 0, color: "hero", tipo: "enemigo", expansionId: "base", image: elros },
+  { id: "jaheen_corrupted", nombre: "Jaheen", vida: 0, movimiento: 0, color: "hero", tipo: "enemigo", expansionId: "base", image: jaheen },
+  { id: "maya_corrupted", nombre: "Maya", vida: 0, movimiento: 0, color: "hero", tipo: "enemigo", expansionId: "base", image: maya },
+  { id: "vorn_corrupted", nombre: "Vorn", vida: 0, movimiento: 0, color: "hero", tipo: "enemigo", expansionId: "base", image: vorn },
 
   { id: "ravager", nombre: "Ravager", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "luccanor", imagen: ravager },
   { id: "lady_claw", nombre: "Lady Claw", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "luccanor", imagen: lady_claw },
