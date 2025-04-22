@@ -1,6 +1,7 @@
 // src/pages/HomeMenu.jsx
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
+import PageTransition from "@/components/PageTransition";
 
 export default function HomeMenu() {
   const navigate = useNavigate();
