@@ -152,6 +152,16 @@
       "comandante": "Comandantes",
       "jefe": "Jefes",
       "hero": "Héroes caídos"
-    }
+    },
+    "trackerInit": {
+    "title": "Inicio del Tracker",
+    "addWhiteEnemies": "Añadir Enemigos Blancos",
+    "addGrayEnemies": "Añadir Enemigos Grises",
+    "addBlackEnemies": "Añadir Enemigos Negros",
+    "addCommanders": "Añadir Comandantes",
+    "selectBosses": "Seleccionar Jefes",
+    "selectOther": "Seleccionar Otros",
+    "addManualEnemy": "Añadir Enemigos Manuales"
+  }
   }
 }
