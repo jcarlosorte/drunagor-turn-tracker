@@ -7,6 +7,7 @@ import { ENEMIES } from '@/data/enemies';
 
 const InitTracker = () => {
   const { trackerData } = useTracker();
+  console.log("TRACKER DATA:", trackerData);
   const { translations } = useLanguage();
   const t = translations.trackerInit || {};
 
