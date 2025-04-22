@@ -12,7 +12,7 @@ const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
-  const [selectedBehaviors, setSelectedBehaviors] = useState([]);
+  const [selectedBehaviors, setSelectedBehaviors] = useState(["Estándar", "Alternativo", "Complejo"]);
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const t = translations?.trackerSelect || {};
@@ -96,10 +96,6 @@ const TrackerSelect = () => {
         return prev.filter(b => b !== behavior);
       } else {
         const newBehaviors = [...prev, behavior];
-        // Aseguramos que siempre haya al menos un comportamiento seleccionado
-        if (newBehaviors.length === 0) {
-          return ["Estándar"];
-        }
         return newBehaviors;
       }
     });
