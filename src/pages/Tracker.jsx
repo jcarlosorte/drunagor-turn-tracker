@@ -7,6 +7,7 @@ import { ROLES } from '@/data/roles';
 import { COLORS } from '@/data/color';
 import { useLanguage } from '@/context/LanguageContext';
 import { useExpansions } from '@/context/ExpansionContext';
+import { useTracker } from '@/context/TrackerContext';
 
 const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
@@ -15,6 +16,7 @@ const TrackerSelect = () => {
   const [selectedBehaviors, setSelectedBehaviors] = useState(["Estándar", "Alternativo", "Complejo"]);
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
+  const { setTrackerData } = useTracker();
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
 
@@ -82,7 +84,13 @@ const TrackerSelect = () => {
       enemies: selectedEnemies,
       behaviors: selectedBehaviors
     });
-    // Aquí puedes guardar los datos globalmente o navegar a la siguiente pantalla
+    setTrackerData({
+      heroes: selectedHeroes,
+      roles: heroRoles,
+      enemies: selectedEnemies,
+      behaviors: selectedBehaviors
+  });
+    navigate("/init", { replace: true });
   };
 
   const handleBack = () => {
