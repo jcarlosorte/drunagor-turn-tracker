@@ -1,5 +1,5 @@
 // App.jsx
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import AnimatedRoutes from "@/components/AnimatedRoutes";
 
@@ -19,17 +19,24 @@ function Header() {
   );
 }
 
+function AppContent() {
+  const location = useLocation();
+  const hideHeader = location.pathname === "/drunagor-turn-tracker/init";
+
+  return (
+    <div className="text-center mt-10">
+      {!hideHeader && <Header />}
+      <AnimatedRoutes />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router basename="/drunagor-turn-tracker/">
-      <div className="text-center mt-10">
-        <Header />
-        <AnimatedRoutes />
-      </div>
+      <AppContent />
     </Router>
   );
 }
 
 export default App;
-
-
