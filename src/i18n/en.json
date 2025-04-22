@@ -113,11 +113,11 @@
     "fallen_sisters": "Fallen Sisters"
   },
     "roles": {
-    "tank": "Tank",
-    "support": "Support",
-    "dps": "DPS",
-    "healer": "Healer",
-    "control": "Control"
+      "controlador": "Control",
+      "defensor": "Defender",
+      "lider": "Leader",
+      "agresor": "Agressor",
+      "apoyo": "Suport"
   },
   "trackerSelect": {
     "title": "Select tracker setup",
