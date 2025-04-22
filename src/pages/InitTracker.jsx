@@ -5,6 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 
+
 const InitTracker = () => {
   const { trackerData } = useTracker();
   console.log("TRACKER DATA:", trackerData);
