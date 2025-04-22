@@ -196,12 +196,13 @@ const TrackerSelect = () => {
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
             const isCompact = enemiesOfColor.length <= 4;
+            const isGridLayout = ['blanco', 'gris'].includes(color.id);
       
             return (
               <div
                   key={color.id}
                   className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
-                    ${isCompact ? 'max-w-[240px] flex-1' : 'flex-1 min-w-[300px]'}
+                    ${isCompact ? 'w-full' : 'min-w-[280px] max-w-[320px] flex-auto'}
                   `}
                 >
                   <h3 className="text-xl font-bold mb-4 text-center">
@@ -211,12 +212,12 @@ const TrackerSelect = () => {
                   {/** Aquí está la magia: cambiamos el layout según el color */}
                   <div
                     className={
-                      ['blanco', 'gris'].includes(color.id)
+                      isGridLayout
                         ? 'grid gap-4 w-full'
                         : 'flex flex-wrap gap-4 w-full justify-start'
                     }
                     style={
-                      ['blanco', 'gris'].includes(color.id)
+                      isGridLayout
                         ? { gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }
                         : {}
                     }
@@ -227,7 +228,7 @@ const TrackerSelect = () => {
                       <label
                         key={enemy.id}
                         className={`fantasy-frame flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                          ${['blanco', 'gris'].includes(color.id) ? 'w-full' : 'w-[140px]'}
+                          ${isGridLayout ? 'w-full' : 'w-[140px]'}
                           ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
                       >
                         <input
