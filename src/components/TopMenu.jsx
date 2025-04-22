@@ -1,5 +1,7 @@
 // src/components/TopMenu.jsx
 import React, { useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai'; // <-- esta línea es necesaria
+
 
 const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual, translations }) => {
   const [isOpen, setIsOpen] = useState(false);
