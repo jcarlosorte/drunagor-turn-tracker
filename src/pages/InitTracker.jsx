@@ -35,6 +35,9 @@ const InitTracker = () => {
   };
 
   return (
+    .no-header {
+      display: none;
+    }
     <div className="p-4 text-gray-900">
       <TopMenu
         onAddEnemy={handleAddEnemy}
