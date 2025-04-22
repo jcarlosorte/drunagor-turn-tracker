@@ -1,23 +1,23 @@
 // src/data/roles.js
 export const ROLES = [
   {
-    id: 'tank',
+    id: 'controlador',
     expansionId: 'base',
   },
   {
-    id: 'support',
+    id: 'defensor',
     expansionId: 'base',
   },
   {
-    id: 'dps',
+    id: 'lider',
     expansionId: 'base',
   },
   {
-    id: 'healer',
+    id: 'agresor',
     expansionId: 'base',
   },
   {
-    id: 'control',
+    id: 'apoyo',
     expansionId: 'base',
   },
 ];
