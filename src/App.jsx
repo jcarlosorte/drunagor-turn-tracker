@@ -3,6 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import Tracker from "./pages/Tracker.jsx";
 import Config from './pages/Config.jsx';
 import InitTracker from './pages/InitTracker';
+import { AnimatePresence } from "framer-motion";
 
 function Header() {
   const { translations } = useLanguage();
