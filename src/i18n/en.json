@@ -136,9 +136,15 @@
     "randomEnemy": "Select random enemy",
     "summary": "Summary",
     "selectedHeroes": "Selected heroes",
-    "selectedEnemies": "Selected enemies",
+    "selectedEnemies": "Enemies",
     "back": "Back",
     "confirm": "Confirm",
+    "comportamientos": {
+      "comportamiento": "Behavior",
+      "estandar": "Standard",
+      "alternativo": "Alternate",
+      "complejo": "Complex"
+    },
     "colors": {
       "blanco": "White Monsters",
       "gris": "Gray Monsters",
