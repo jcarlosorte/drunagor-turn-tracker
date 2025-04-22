@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-route
 import { useLanguage } from "@/context/LanguageContext";
 import Tracker from "./pages/Tracker.jsx";
 import Config from './pages/Config.jsx';
+import InitTracker from './pages/InitTracker';
 
 function Header() {
   const { translations } = useLanguage();
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" element={<HomeMenu />} />
           <Route path="/tracker" element={<Tracker />} />
           <Route path="/config" element={<Config />} />
+          <Route path="/init" element={<InitTracker />} />
         </Routes>
       </div>
     </Router>
