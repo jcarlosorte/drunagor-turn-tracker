@@ -180,7 +180,42 @@ const TrackerSelect = () => {
       {/* Enemigos agrupados por color */}
       <div className="border-4 rounded-3xl p-6 bg-white/70 shadow-2xl border-yellow-700">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
-      
+
+        {/* Comportamientos Generales */}
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
+            <div className="flex gap-4 mb-4">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("Estándar")}
+                  onChange={() => handleBehaviorSelect("Estándar")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.estandar}</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("Alternativo")}
+                  onChange={() => handleBehaviorSelect("Alternativo")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.alternativo}</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("Complejo")}
+                  onChange={() => handleBehaviorSelect("Complejo")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.complejo}</span>
+              </label>
+            </div>
+          </div>
+
+        
         {/* Flex en filas con wrap */}
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
