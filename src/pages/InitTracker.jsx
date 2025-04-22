@@ -1,8 +1,25 @@
 // src/pages/InitTracker.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
-import TopMenu from "@/components/TopMenu";
+import TopMenu from '@/components/TopMenu';
+import classNames from 'classnames';
+
+const rolesPositionMap = {
+  defensor: 0,
+  apoyo: 2,
+  lider: 4,
+  agresor: 6,
+  controlador: 8
+};
+
+const runesColorMap = {
+  orange: 1,
+  green: 3,
+  blue: 5,
+  red: 7,
+  gray: 9
+};
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -14,10 +31,10 @@ const InitTracker = () => {
   const getRoleName = (id) => translations.roles?.[id] || id;
 
   const handleAddEnemy = (color) => {
-    console.log("Añadir enemigo:", color);
-    setTrackerData(prevState => ({
-      ...prevState,
-      enemies: [...prevState.enemies, color]  // Solo ejemplo
+    const filtered = trackerData.enemiesAvailable.filter(e => e.rune === color);
+    setTrackerData(prev => ({
+      ...prev,
+      enemies: [...prev.enemies, ...filtered.map(e => ({ id: e.id, rune: e.rune }))]
     }));
   };
 
@@ -33,8 +50,75 @@ const InitTracker = () => {
     console.log("Añadir enemigo manualmente");
   };
 
+  useEffect(() => {
+    const initialHeroes = trackerData.heroes.map(id => ({ id, role: trackerData.roles[id] }));
+    setTrackerData(prev => ({
+      ...prev,
+      placedHeroes: initialHeroes.map(h => ({ ...h, position: rolesPositionMap[h.role] }))
+    }));
+  }, []);
+
+  const renderSlot = (index) => {
+    const isRune = Object.values(runesColorMap).includes(index);
+    const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && (index % 2 === 0));
+    const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && (index % 2 !== 0));
+    const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
+    const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
+
+    return (
+      <div key={index} className="flex flex-col items-center w-full">
+        <div className="h-12 flex items-center justify-center">
+          {heroesAbove?.map(h => (
+            <div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
+              {getHeroName(h.id)}
+            </div>
+          ))}
+          {isRune && enemiesAbove?.map((e, i) => (
+            <div key={e.id + '-' + i} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
+              {getEnemyName(e.id)}
+            </div>
+          ))}
+        </div>
+
+        <div
+          className={classNames(
+            'h-10 w-10 rounded-full flex items-center justify-center border-2 border-white',
+            {
+              'bg-orange-500': index === 1,
+              'bg-green-500': index === 3,
+              'bg-blue-500': index === 5,
+              'bg-red-500': index === 7,
+              'bg-gray-400': index === 9,
+              'bg-yellow-100 text-black font-bold': index % 2 === 0
+            }
+          )}
+        >
+          {index === 0 && t.defender ||
+            index === 2 && t.support ||
+            index === 4 && t.leader ||
+            index === 6 && t.aggressor ||
+            index === 8 && t.controller ||
+            index === 10 && t.rune || null}
+        </div>
+
+        <div className="h-12 flex items-center justify-center">
+          {heroesBelow?.map(h => (
+            <div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
+              {getHeroName(h.id)}
+            </div>
+          ))}
+          {isRune && enemiesBelow?.map((e, i) => (
+            <div key={e.id + '-' + i + '-b'} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
+              {getEnemyName(e.id)}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 py-4 font-sans">
+    <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
       <TopMenu
         onAddEnemy={handleAddEnemy}
         onSelectBoss={handleSelectBoss}
@@ -44,48 +128,15 @@ const InitTracker = () => {
       />
       <div className="no-header" />
 
-      <h1 className="text-4xl font-bold text-center font-fantasy text-yellow-300 mt-6 drop-shadow">
-        {t.title || 'Inicio del Tracker'}
-      </h1>
+      <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{t.title || 'Inicio del Tracker'}</h1>
 
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Héroes */}
-        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
-          <h2 className="text-2xl font-bold mb-4 text-blue-300">{t.selectedHeroes || 'Héroes Seleccionados'}</h2>
-          <ul className="space-y-2">
-            {trackerData.heroes.map(heroId => (
-              <li key={heroId} className="text-white">
-                <span className="font-semibold text-green-400">{getHeroName(heroId)}</span> – <span className="italic text-gray-300">{getRoleName(trackerData.roles[heroId])}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Enemigos */}
-        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
-          <h2 className="text-2xl font-bold mb-4 text-red-300">{t.selectedEnemies || 'Enemigos Seleccionados'}</h2>
-          <ul className="space-y-2">
-            {trackerData.enemies.map(enemyId => (
-              <li key={enemyId} className="text-white">
-                {getEnemyName(enemyId)}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Comportamientos */}
-        <div className="bg-gray-800 rounded-2xl p-4 shadow-lg">
-          <h2 className="text-2xl font-bold mb-4 text-purple-300">{t.behaviors || 'Comportamientos'}</h2>
-          <ul className="space-y-2">
-            {trackerData.behaviors.map(b => (
-              <li key={b} className="text-white">{b}</li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid grid-cols-11 gap-4">
+        {[...Array(11)].map((_, idx) => renderSlot(idx))}
       </div>
     </div>
   );
 };
 
 export default InitTracker;
+
 
