@@ -144,7 +144,7 @@
       "estandar": "Estándar",
       "alternativo": "Alternativo",
       "complejo": "Complejo"
-    },
+      },
     "colors": {
       "blanco": "Monstruos Blancos",
       "gris": "Monstruos Grises",
@@ -152,6 +152,7 @@
       "comandante": "Comandantes",
       "jefe": "Jefes",
       "hero": "Héroes caídos"
+      }
     },
     "trackerInit": {
       "title": "Control de Turnos",
@@ -164,5 +165,4 @@
       "addManualEnemy": "Añadir Enemigos Manuales",
       "rune": "Runa"
     }
-  }
 }
