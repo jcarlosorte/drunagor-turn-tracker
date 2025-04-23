@@ -143,7 +143,7 @@
       "estandar": "Standard",
       "alternativo": "Alternate",
       "complejo": "Complex"
-    },
+      },
     "colors": {
       "blanco": "White Monsters",
       "gris": "Gray Monsters",
@@ -151,6 +151,7 @@
       "comandante": "Commanders",
       "jefe": "Bosses",
       "hero": "Fallen Heroes"
+      }
     },
     "trackerInit": {
       "title": "Turn Tracker",
@@ -163,5 +164,4 @@
       "addManualEnemy": "Add Manual Enemies",
       "rune": "Rune"
     }
-  }
 }
