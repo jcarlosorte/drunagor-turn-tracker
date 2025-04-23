@@ -69,9 +69,16 @@ const InitTracker = () => {
       <div key={index} className="flex flex-col items-center w-full">
         <div className="h-12 flex items-center justify-center">
           {heroesAbove?.map(h => (
+              <div key={h.id} className="flex flex-col items-center mx-1">
+                <img
+                  src={h.image}
+                  alt={getHeroName(h.id)}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                />
             <div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
               {getHeroName(h.id)}
             </div>
+          </div>
           ))}
           {isRune && enemiesAbove?.map((e, i) => (
             <div key={e.id + '-' + i} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
