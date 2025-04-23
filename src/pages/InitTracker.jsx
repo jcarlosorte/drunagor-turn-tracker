@@ -27,7 +27,7 @@ const runesColorMap = {
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { language, translations } = useLanguage();
+  const { language, setLanguage, translations } = useLanguage();
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
@@ -166,6 +166,8 @@ const InitTracker = () => {
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
         translations={translations}
+        currentLanguage={language}          // <-- importante
+        onLanguageChange={setLanguage}      // <-- importante
       />
       <div className="no-header" />
 
