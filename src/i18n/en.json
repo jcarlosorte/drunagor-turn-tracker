@@ -162,6 +162,8 @@
       "selectBosses": "Select Bosses",
       "selectOther": "Select Others",
       "addManualEnemy": "Add Manual Enemies",
-      "rune": "Rune"
+      "rune": "Rune",
+      "backToConfig": "Back to Config",
+      "goHome ": "Home"       
     }
 }
