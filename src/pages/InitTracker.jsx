@@ -105,7 +105,7 @@ const InitTracker = () => {
           
             <div
               className={classNames(
-                'flex items-center justify-center border-4',
+                'flex items-center justify-center border-4 font-fantasy',
                 {
                   // Rombos
                   'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
@@ -115,7 +115,7 @@ const InitTracker = () => {
                   'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
             
                   // Cuadrados grandes con texto
-                  'w-full h-10 bg-gray-200 text-black font-bold text-center shadow': index % 2 === 0
+                  'w-full h-10 bg-gray-200 text-black text-center shadow': index % 2 === 0
                 }
               )}
             >
