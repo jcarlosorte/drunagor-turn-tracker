@@ -165,9 +165,6 @@ const InitTracker = () => {
         onSelectBoss={handleSelectBoss}
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
-        translations={translations}
-        currentLanguage={language}          // <-- importante
-        onLanguageChange={setLanguage}      // <-- importante
       />
       <div className="no-header" />
 
