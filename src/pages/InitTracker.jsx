@@ -169,7 +169,7 @@ const InitTracker = () => {
 
       <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{ti.title || 'Inicio del Tracker'}</h1>
 
-      <div className="grid grid-cols-11 gap-4">
+      <div className="grid grid-cols-11 gap-0">
         {[...Array(11)].map((_, idx) => renderSlot(idx))}
       </div>
     </div>
