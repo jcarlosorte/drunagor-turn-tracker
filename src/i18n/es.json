@@ -163,6 +163,8 @@
       "selectBosses": "Seleccionar Jefes",
       "selectOther": "Seleccionar Otros",
       "addManualEnemy": "Añadir Enemigos Manuales",
-      "rune": "Runa"
+      "rune": "Runa",
+      "backToConfig": "Volver a configuración",
+      "goHome ": "Inicio" 
     }
 }
