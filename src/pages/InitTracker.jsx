@@ -1,4 +1,5 @@
 // src/pages/InitTracker.jsx
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
@@ -27,6 +28,7 @@ const runesColorMap = {
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { language, translations } = useLanguage();
+  const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
 
@@ -172,6 +174,23 @@ const InitTracker = () => {
       <div className="grid grid-cols-11 gap-0">
         {[...Array(11)].map((_, idx) => renderSlot(idx))}
       </div>
+
+      {/* 🔽 Botones de navegación al final */}
+      <div className="mt-8 flex justify-center gap-4">
+        <button
+          onClick={() => navigate('/')}
+          className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow"
+        >
+          {ti.goHome || 'Ir al inicio'}
+        </button>
+        <button
+          onClick={() => navigate('/tracker')}
+          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow"
+        >
+          {ti.backToConfig || 'Volver a configuración'}
+        </button>
+      </div>
+     
     </div>
   );
 };
