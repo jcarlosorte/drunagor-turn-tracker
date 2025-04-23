@@ -99,7 +99,7 @@ const InitTracker = () => {
           ))}
         </div>
 
-        <div className="relative w-full h-20 flex items-center justify-center bg-gray-100">
+        <div className="relative w-full h-8 flex items-center justify-center bg-gray-100">
             <div
               className={classNames(
                 'flex items-center justify-center border-2 border-white',
