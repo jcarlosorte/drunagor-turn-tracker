@@ -107,8 +107,8 @@ const InitTracker = () => {
             index === 6 && t.aggressor ||
             index === 8 && t.controller ||
             index === 10 && t.rune || null}
-        </div>
-
+        </span>
+      </div>
         <div className="h-12 flex items-center justify-center">
           {heroesBelow?.map(h => (
             //<div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
@@ -121,12 +121,13 @@ const InitTracker = () => {
             <div className="mt-1 text-xs text-white text-center font-semibold">
               {getHeroName(h.id)}
             </div>
+          </div>
           ))}
           {isRune && enemiesBelow?.map((e, i) => (
             <div key={e.id + '-' + i + '-b'} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
               {getEnemyName(e.id)}
             </div>
-            </div>
+           
           ))}
         </div>
       </div>
