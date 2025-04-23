@@ -27,7 +27,8 @@ const runesColorMap = {
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { language, translations } = useLanguage();
-  const t = translations?.trackerInit || {};
+  const t = translations.trackerInit || {};
+  const tr = translations.roles || {};
 
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -85,7 +86,7 @@ const InitTracker = () => {
                   alt={getHeroName(h.id)}
                   className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
                 />
-            <div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
+            <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
               {getHeroName(h.id)}
             </div>
           </div>
@@ -118,11 +119,11 @@ const InitTracker = () => {
               'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
             })}
           >
-          {index === 0 && t.defensor ||
-            index === 2 && t.apoyo ||
-            index === 4 && t.lider ||
-            index === 6 && t.agresor ||
-            index === 8 && t.controlador ||
+          {index === 0 && tr.defensor ||
+            index === 2 && tr.apoyo ||
+            index === 4 && tr.lider ||
+            index === 6 && tr.agresor ||
+            index === 8 && tr.controlador ||
             index === 10 && t.rune || null}
         </span>
       </div>
