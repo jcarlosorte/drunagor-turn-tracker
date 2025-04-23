@@ -100,8 +100,8 @@ const InitTracker = () => {
         </div>
 
         <div className="relative flex items-center justify-center">
-          <div className="absolute inset-0 bg-gray-200 z-0" />
-
+          //<div className="absolute inset-0 bg-gray-200 z-0" />
+          <div className="absolute inset-0 bg-gray-200" />
           {/* Elemento contenido con z-10 para estar encima */}
                    
             <div
