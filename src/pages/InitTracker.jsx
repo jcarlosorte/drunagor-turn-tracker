@@ -103,8 +103,7 @@ const InitTracker = () => {
           <div className="absolute inset-0 bg-gray-200 z-0" />
 
           {/* Elemento contenido con z-10 para estar encima */}
-          <div
-          
+                   
             <div
               className={classNames(
                 'flex items-center justify-center border-2 border-white',
@@ -135,7 +134,7 @@ const InitTracker = () => {
             </span>
           </div>
         </div>
-        
+        </div>
         <div className="h-12 flex items-center justify-center">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
