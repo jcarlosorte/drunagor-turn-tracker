@@ -27,7 +27,7 @@ const runesColorMap = {
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { language, translations } = useLanguage();
-  const t = translations.trackerInit || {};
+  const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
 
   const getHeroName = (id) => translations.heroes?.[id] || id;
@@ -107,10 +107,10 @@ const InitTracker = () => {
               'w-10 h-10 rotate-45 bg-green-500': index === 3,
               'w-10 h-10 rotate-45 bg-blue-500': index === 5,
               'w-10 h-10 rotate-45 bg-red-500': index === 7,
-              'w-10 h-10 rotate-45 bg-gray-400': index === 9,
+              'w-10 h-10 rotate-45 bg-gray-500': index === 9,
         
               // Cuadrados grandes con texto
-              'w-20 h-20 bg-yellow-100 text-black font-bold text-center p-2': index % 2 === 0
+              'w-30 h-10 bg-gray-100 text-black font-bold text-center p-2': index % 2 === 0
             }
           )}
         >
@@ -124,7 +124,7 @@ const InitTracker = () => {
             index === 4 && tr.lider ||
             index === 6 && tr.agresor ||
             index === 8 && tr.controlador ||
-            index === 10 && t.rune || null}
+            index === 10 && ti.rune || null}
         </span>
       </div>
         <div className="h-12 flex items-center justify-center">
@@ -163,7 +163,7 @@ const InitTracker = () => {
       />
       <div className="no-header" />
 
-      <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{t.title || 'Inicio del Tracker'}</h1>
+      <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{ti.title || 'Inicio del Tracker'}</h1>
 
       <div className="grid grid-cols-11 gap-4">
         {[...Array(11)].map((_, idx) => renderSlot(idx))}
