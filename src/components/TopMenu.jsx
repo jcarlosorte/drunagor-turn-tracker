@@ -1,6 +1,8 @@
 // src/components/TopMenu.jsx
 import React, { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai'; // <-- esta línea es necesaria
+import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
+import { useLanguage } from "@/context/LanguageContext";
 
 const TopMenu2 = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
   return (
@@ -21,12 +23,11 @@ const TopMenu = ({
   onSelectBoss,
   onSelectOther,
   onAddManual,
-  translations,
-  onLanguageChange,   // ⬅️ nueva prop
-  currentLanguage,    // ⬅️ opcional, para mostrar el idioma actual
+  translations
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { currentLanguage, setLanguage } = useLanguage(); // ← usamos el contexto
+  
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
@@ -68,11 +69,14 @@ const TopMenu = ({
             <select
               id="lang"
               value={currentLanguage}
-              onChange={(e) => onLanguageChange(e.target.value)}
+              onChange={(e) => setLanguage(e.target.value)}
               className="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1"
             >
-              <option value="es">🇪🇸 Español</option>
-              <option value="en">🇬🇧 English</option>
+              {availableLanguages.map((lang) => (
+                <option key={lang} value={lang}>
+                  {languageNames[lang]}
+                </option>
+              ))}
             </select>
           </div>
           
