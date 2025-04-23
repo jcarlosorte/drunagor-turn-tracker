@@ -22,11 +22,10 @@ const TopMenu = ({
   onAddEnemy,
   onSelectBoss,
   onSelectOther,
-  onAddManual,
-  translations
+  onAddManual
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { currentLanguage, setLanguage } = useLanguage(); // ← usamos el contexto
+  const { language, setLanguage, translations } = useLanguage(); // ✅
   
   const toggleMenu = () => setIsOpen(!isOpen);
 
