@@ -126,6 +126,7 @@ const InitTracker = () => {
             <div key={e.id + '-' + i + '-b'} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
               {getEnemyName(e.id)}
             </div>
+            </div>
           ))}
         </div>
       </div>
