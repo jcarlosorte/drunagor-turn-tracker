@@ -160,7 +160,8 @@
       "addCommanders": "Add Commanders",
       "selectBosses": "Select Bosses",
       "selectOther": "Select Others",
-      "addManualEnemy": "Add Manual Enemies"
+      "addManualEnemy": "Add Manual Enemies",
+      "rune": "Rune",
     }
   }
 }
