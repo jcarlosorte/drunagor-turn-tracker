@@ -98,35 +98,38 @@ const InitTracker = () => {
           ))}
         </div>
 
-        <div
-          className={classNames(
-            'flex items-center justify-center border-2 border-white',
-            {
-              // Rombos
-              'w-10 h-10 rotate-45 bg-orange-500': index === 1,
-              'w-10 h-10 rotate-45 bg-green-500': index === 3,
-              'w-10 h-10 rotate-45 bg-blue-500': index === 5,
-              'w-10 h-10 rotate-45 bg-red-500': index === 7,
-              'w-10 h-10 rotate-45 bg-gray-500': index === 9,
+        <div className="relative w-full h-20 flex items-center justify-center bg-gray-200">
+            <div
+              className={classNames(
+                'flex items-center justify-center border-2 border-white',
+                {
+                  // Rombos
+                  'w-10 h-10 rotate-45 bg-orange-500': index === 1,
+                  'w-10 h-10 rotate-45 bg-green-500': index === 3,
+                  'w-10 h-10 rotate-45 bg-blue-500': index === 5,
+                  'w-10 h-10 rotate-45 bg-red-500': index === 7,
+                  'w-10 h-10 rotate-45 bg-gray-500': index === 9,
+            
+                  // Cuadrados grandes con texto
+                  'w-30 h-10 bg-gray-100 text-black font-bold text-center p-2': index % 2 === 0
+                }
+              )}
+            >
+              <span
+                className={classNames({
+                  'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
+                })}
+              >
+              {index === 0 && tr.defensor ||
+                index === 2 && tr.apoyo ||
+                index === 4 && tr.lider ||
+                index === 6 && tr.agresor ||
+                index === 8 && tr.controlador ||
+                index === 10 && ti.rune || null}
+            </span>
+          </div>
+        </div>
         
-              // Cuadrados grandes con texto
-              'w-30 h-10 bg-gray-100 text-black font-bold text-center p-2': index % 2 === 0
-            }
-          )}
-        >
-          <span
-            className={classNames({
-              'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
-            })}
-          >
-          {index === 0 && tr.defensor ||
-            index === 2 && tr.apoyo ||
-            index === 4 && tr.lider ||
-            index === 6 && tr.agresor ||
-            index === 8 && tr.controlador ||
-            index === 10 && ti.rune || null}
-        </span>
-      </div>
         <div className="h-12 flex items-center justify-center">
           {heroesBelow?.map(h => (
             //<div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
