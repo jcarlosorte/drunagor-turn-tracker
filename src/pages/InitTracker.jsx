@@ -103,7 +103,7 @@ const InitTracker = () => {
           
             <div
               className={classNames(
-                'flex items-center justify-center border-2',
+                'flex items-center justify-center border-10',
                 {
                   // Rombos
                   'w-10 h-10 rotate-45 bg-orange-500': index === 1,
