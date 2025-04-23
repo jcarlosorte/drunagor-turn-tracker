@@ -1,5 +1,8 @@
 // src/pages/InitTracker.jsx
 import React, { useEffect } from 'react';
+import { HEROES } from '@/data/heroes';
+import { ENEMIES } from '@/data/enemies';
+import { ROLES } from '@/data/roles';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import TopMenu from '@/components/TopMenu';
@@ -51,17 +54,24 @@ const InitTracker = () => {
   };
 
   useEffect(() => {
-    const initialHeroes = trackerData.heroes.map(id => ({ id, role: trackerData.roles[id] }));
+    const initialHeroes = trackerData.heroes.map(id => {
+      const role = trackerData.roles[id];
+      const image = HEROES.find(h => h.id === id)?.image;
+      return { id, role, image, position: rolesPositionMap[role] };
+    });
+  
     setTrackerData(prev => ({
       ...prev,
-      placedHeroes: initialHeroes.map(h => ({ ...h, position: rolesPositionMap[h.role] }))
+      placedHeroes: initialHeroes
     }));
   }, []);
 
   const renderSlot = (index) => {
+    const rolesOnTop = ['defensor', 'líder', 'controlador'];
+    const rolesOnBottom = ['apoyo', 'agresor'];
     const isRune = Object.values(runesColorMap).includes(index);
-    const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && (index % 2 === 0));
-    const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && (index % 2 !== 0));
+    const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnTop.includes(h.role));
+    const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
 
