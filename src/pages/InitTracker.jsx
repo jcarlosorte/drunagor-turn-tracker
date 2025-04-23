@@ -78,7 +78,7 @@ const InitTracker = () => {
 
     return (
       <div key={index} className="flex flex-col items-center w-full">
-        <div className="h-12 flex items-center justify-center">
+        <div className="h-20 flex items-center justify-center gap-1 flex-wrap">
           {heroesAbove?.map(h => (
             
             <div key={h.id} className="flex flex-col items-center mx-1">
@@ -103,17 +103,17 @@ const InitTracker = () => {
           
             <div
               className={classNames(
-                'flex items-center justify-center border-10',
+                'flex items-center justify-center border-4',
                 {
                   // Rombos
-                  'w-10 h-10 rotate-45 bg-orange-500': index === 1,
-                  'w-10 h-10 rotate-45 bg-green-500': index === 3,
-                  'w-10 h-10 rotate-45 bg-blue-500': index === 5,
-                  'w-10 h-10 rotate-45 bg-red-500': index === 7,
-                  'w-10 h-10 rotate-45 bg-gray-500': index === 9,
+                  'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
+                  'w-12 h-12 rotate-45 bg-green-500 shadow': index === 3,
+                  'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
+                  'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
+                  'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
             
                   // Cuadrados grandes con texto
-                  'w-30 h-10 bg-gray-200 text-black font-bold text-center p-2': index % 2 === 0
+                  'w-full h-10 bg-gray-200 text-black font-bold text-center shadow': index % 2 === 0
                 }
               )}
             >
@@ -132,7 +132,7 @@ const InitTracker = () => {
           </div>
         </div>
         
-        <div className="h-12 flex items-center justify-center">
+        <div className="h-20 flex items-center justify-center">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
             <img
