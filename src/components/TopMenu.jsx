@@ -16,7 +16,15 @@ const TopMenu2 = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
   );
 };
 
-const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual, translations }) => {
+const TopMenu = ({
+  onAddEnemy,
+  onSelectBoss,
+  onSelectOther,
+  onAddManual,
+  translations,
+  onLanguageChange,   // ⬅️ nueva prop
+  currentLanguage,    // ⬅️ opcional, para mostrar el idioma actual
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -51,6 +59,23 @@ const TopMenu = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual, transla
           <button className="menu-item" onClick={onAddManual}>
             {translations.addManualEnemy || 'Añadir Enemigos Manuales'}
           </button>
+
+           {/* 🌐 Selector de idioma */}
+          <div className="flex items-center gap-2 mt-2">
+            <label htmlFor="lang" className="text-sm">
+              {translations.language || 'Idioma'}:
+            </label>
+            <select
+              id="lang"
+              value={currentLanguage}
+              onChange={(e) => onLanguageChange(e.target.value)}
+              className="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1"
+            >
+              <option value="es">🇪🇸 Español</option>
+              <option value="en">🇬🇧 English</option>
+            </select>
+          </div>
+          
         </div>
       )}
     </div>
