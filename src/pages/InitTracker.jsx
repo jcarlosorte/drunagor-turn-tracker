@@ -67,7 +67,7 @@ const InitTracker = () => {
   }, []);
 
   const renderSlot = (index) => {
-    const rolesOnTop = ['defensor', 'líder', 'controlador'];
+    const rolesOnTop = ['defensor', 'lider', 'controlador'];
     const rolesOnBottom = ['apoyo', 'agresor'];
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnTop.includes(h.role));
@@ -118,11 +118,11 @@ const InitTracker = () => {
               'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
             })}
           >
-          {index === 0 && t.defender ||
-            index === 2 && t.support ||
-            index === 4 && t.leader ||
-            index === 6 && t.aggressor ||
-            index === 8 && t.controller ||
+          {index === 0 && t.defensor ||
+            index === 2 && t.apoyo ||
+            index === 4 && t.lider ||
+            index === 6 && t.agresor ||
+            index === 8 && t.controlador ||
             index === 10 && t.rune || null}
         </span>
       </div>
