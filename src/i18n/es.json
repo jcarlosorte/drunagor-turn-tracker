@@ -161,7 +161,8 @@
       "addCommanders": "Añadir Comandantes",
       "selectBosses": "Seleccionar Jefes",
       "selectOther": "Seleccionar Otros",
-      "addManualEnemy": "Añadir Enemigos Manuales"
+      "addManualEnemy": "Añadir Enemigos Manuales",
+      "rune": "Runa",
     }
   }
 }
