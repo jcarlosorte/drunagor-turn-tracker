@@ -23,8 +23,8 @@ const runesColorMap = {
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { translations } = useLanguage();
-  const t = translations.trackerInit || {};
+  const { language, translations } = useLanguage();
+  const t = translations?.trackerInit || {};
 
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -82,17 +82,25 @@ const InitTracker = () => {
 
         <div
           className={classNames(
-            'h-10 w-10 rounded-full flex items-center justify-center border-2 border-white',
+            'flex items-center justify-center border-2 border-white',
             {
-              'bg-orange-500': index === 1,
-              'bg-green-500': index === 3,
-              'bg-blue-500': index === 5,
-              'bg-red-500': index === 7,
-              'bg-gray-400': index === 9,
-              'bg-yellow-100 text-black font-bold': index % 2 === 0
+              // Rombos
+              'w-10 h-10 rotate-45 bg-orange-500': index === 1,
+              'w-10 h-10 rotate-45 bg-green-500': index === 3,
+              'w-10 h-10 rotate-45 bg-blue-500': index === 5,
+              'w-10 h-10 rotate-45 bg-red-500': index === 7,
+              'w-10 h-10 rotate-45 bg-gray-400': index === 9,
+        
+              // Cuadrados grandes con texto
+              'w-20 h-20 bg-yellow-100 text-black font-bold text-center p-2': index % 2 === 0
             }
           )}
         >
+          <span
+            className={classNames({
+              'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
+            })}
+          >
           {index === 0 && t.defender ||
             index === 2 && t.support ||
             index === 4 && t.leader ||
@@ -103,7 +111,14 @@ const InitTracker = () => {
 
         <div className="h-12 flex items-center justify-center">
           {heroesBelow?.map(h => (
-            <div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
+            //<div key={h.id} className="bg-white px-2 py-1 rounded shadow text-sm">
+          <div key={h.id} className="flex flex-col items-center mx-1">
+            <img
+              src={h.image}
+              alt={getHeroName(h.id)}
+              className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+            />
+            <div className="mt-1 text-xs text-white text-center font-semibold">
               {getHeroName(h.id)}
             </div>
           ))}
