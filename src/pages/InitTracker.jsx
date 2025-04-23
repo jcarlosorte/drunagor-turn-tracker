@@ -134,7 +134,7 @@ const InitTracker = () => {
             </span>
           </div>
         </div>
-        </div>
+        
         <div className="h-12 flex items-center justify-center">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
