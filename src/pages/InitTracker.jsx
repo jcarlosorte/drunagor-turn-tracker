@@ -33,7 +33,7 @@ const InitTracker = () => {
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
-  const te = translations.enemies?.categoria || {};
+  const tc = translations.enemies?.categoria || {};
 
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
 
