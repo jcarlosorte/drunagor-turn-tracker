@@ -24,16 +24,16 @@ const TopMenu = ({
 
       {isOpen && (
         <div className="menu">
-          <button className="menu-item" onClick={() => onAddEnemy('white')}>
+          <button className="menu-item" onClick={() => onAddEnemy('blanco')}>
             {translations.addWhiteEnemies || 'Añadir Enemigos Blancos'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('gray')}>
+          <button className="menu-item" onClick={() => onAddEnemy('gris')}>
             {translations.addGrayEnemies || 'Añadir Enemigos Grises'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('black')}>
+          <button className="menu-item" onClick={() => onAddEnemy('negro')}>
             {translations.addBlackEnemies || 'Añadir Enemigos Negros'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('commander')}>
+          <button className="menu-item" onClick={() => onAddEnemy('comandante')}>
             {translations.addCommanders || 'Añadir Comandantes'}
           </button>
           <button className="menu-item" onClick={onSelectBoss}>
