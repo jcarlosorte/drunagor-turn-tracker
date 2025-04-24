@@ -49,7 +49,7 @@ const InitTracker = () => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
 
-    const filtered = ENEMIES.filter(e => e.rune === color && e.categoria === categoryKey);
+    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey);
 
     console.log('Color:', color, 'Categoría:', categoryKey);
     console.log('Enemigos filtrados:', filtered);
