@@ -25,7 +25,7 @@ const runesColorMap = {
   gray: 9
 };
 
-const validCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
+const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -35,31 +35,26 @@ const InitTracker = () => {
   const tr = translations.roles || {};
   const te = translations.enemies?.categoria || {};
 
+  const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
+
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
   const getRoleName = (id) => translations.roles?.[id] || id;
 
-  const handleAddEnemyByColorAndCategory = async (color) => {
-    const category = prompt(`${ti.selectCategory}\n${validCategories.map(cat => `- ${te[cat] || cat}`).join('\n')}`);
-    const selectedKey = validCategories.find(cat => te[cat] === category || cat === category);
-    if (!selectedKey) return alert(ti.invalidCategory || 'Categoría inválida');
+  const openCategorySelector = (color) => {
+    setCategorySelector({ open: true, color });
+  };
 
-    const candidates = ENEMIES.filter(e =>
-      e.rune === color &&
-      validCategories.includes(e.categoria)
-    );
+  const handleCategorySelect = (categoryKey) => {
+    const color = categorySelector.color;
+    setCategorySelector({ open: false, color: null });
 
-    const filteredByCategory = candidates.filter(e => e.categoria === selectedKey);
+    const filtered = ENEMIES.filter(e => e.rune === color && e.categoria === categoryKey);
+    if (filtered.length === 0) return;
 
-    if (filteredByCategory.length === 0) return alert(ti.noEnemyFound || 'No se encontraron enemigos con esos filtros');
-
-    const randomEnemy = filteredByCategory[Math.floor(Math.random() * filteredByCategory.length)];
-
-    const newEnemy = {
-      id: randomEnemy.id,
-      rune: randomEnemy.rune,
-      runePosition: randomEnemy.runePosition
-    };
+    const selected = filtered[Math.floor(Math.random() * filtered.length)];
+    const runeIndex = runesColorMap[selected.rune];
+    const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
 
     setTrackerData(prev => ({
       ...prev,
@@ -196,6 +191,25 @@ const InitTracker = () => {
       <div className="grid grid-cols-11 gap-0">
         {[...Array(11)].map((_, idx) => renderSlot(idx))}
       </div>
+
+      {categorySelector.open && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white text-black p-6 rounded-xl shadow-xl">
+            <h2 className="text-lg font-bold mb-4">{ti.selectCategory}</h2>
+            <div className="grid grid-cols-2 gap-2">
+              {allowedCategories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => handleCategorySelect(cat)}
+                  className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded shadow"
+                >
+                  {tc[cat] || cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 🔽 Botones de navegación al final */}
       <div className="mt-8 flex justify-center gap-4">
