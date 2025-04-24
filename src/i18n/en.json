@@ -110,7 +110,14 @@
     "nagian_hunter": "Nagian Hunter",
     "hellspawn_brute": "Hellspawn Brute",
     "night_stalker": "Night Stalker",
-    "fallen_sisters": "Fallen Sisters"
+    "fallen_sisters": "Fallen Sisters",
+    "categoria": {
+      "campeon": "Champion",
+      "veterano": "Veterna",
+      "soldado": "Fighter",
+      "bisoño": "Rookie",
+      "esbirro": "Minion"
+      }
   },
     "roles": {
       "controlador": "Controller",
@@ -164,6 +171,6 @@
       "addManualEnemy": "Add Manual Enemies",
       "rune": "Rune",
       "backToConfig": "Back to Config",
-      "goHome": "Home"       
+      "goHome": "Home"
     }
 }
