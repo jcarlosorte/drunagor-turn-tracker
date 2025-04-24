@@ -56,13 +56,14 @@ const InitTracker = () => {
     
     if (filtered.length === 0) return;
     
-    console.log('Seleccionado:', selected);
-    console.log('Rune:', selected.rune);
-    console.log('Rune index:', runesColorMap[selected.rune]);
-    
+   
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
+
+    console.log('Seleccionado:', selected);
+    console.log('Rune:', selected.rune);
+    console.log('Rune index:', runesColorMap[selected.rune]);
     
     setTrackerData(prev => ({
       ...prev,
