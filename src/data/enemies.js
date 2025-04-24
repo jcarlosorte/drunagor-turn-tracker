@@ -58,7 +58,11 @@ import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
   { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "campeon",, tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "veterano", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "soldado", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "bisoño", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 3, movimiento: 3, color: "blanco", categoria: "esbirro", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
   { id: "dark_vampire", nombre: "Dark Vampire", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "base", imagen: dark_vampire, rune: "azul", runePosition: "arriba" },
   { id: "rotten_flesh", nombre: "Rotten Flesh", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "base", imagen: rotten_flesh, rune: "gris", runePosition: "abajo" },
   { id: "shadow_cultist", nombre: "Shadow Cultist", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "base", imagen: shadow_cultist, rune: "naranja", runePosition: "arriba" },
