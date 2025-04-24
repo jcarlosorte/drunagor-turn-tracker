@@ -50,16 +50,15 @@ const InitTracker = () => {
     setCategorySelector({ open: false, color: null });
 
     const filtered = ENEMIES.filter(e => e.rune === color && e.categoria === categoryKey);
+
+    console.log('Color:', color, 'Categoría:', categoryKey);
+    console.log('Enemigos filtrados:', filtered);
+    
     if (filtered.length === 0) return;
 
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
-
-    console.log('color seleccionado:', color);
-    console.log('categoría seleccionada:', categoryKey);
-    console.log('enemigos que cumplen:', ENEMIES.filter(e => e.rune === color && e.categoria === categoryKey));
-
     
     setTrackerData(prev => ({
       ...prev,
