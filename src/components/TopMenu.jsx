@@ -4,20 +4,6 @@ import { AiOutlineMenu } from 'react-icons/ai'; // <-- esta línea es necesaria
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
 
-const TopMenu2 = ({ onAddEnemy, onSelectBoss, onSelectOther, onAddManual }) => {
-  return (
-    <div className="bg-gray-800 text-white p-4 flex flex-wrap justify-around rounded-xl mb-4 shadow">
-      <button onClick={() => onAddEnemy("white")} className="btn">➕ Enemigo Blanco</button>
-      <button onClick={() => onAddEnemy("gray")} className="btn">➕ Enemigo Gris</button>
-      <button onClick={() => onAddEnemy("black")} className="btn">➕ Enemigo Negro</button>
-      <button onClick={() => onAddEnemy("commander")} className="btn">➕ Comandante</button>
-      <button onClick={onSelectBoss} className="btn">👑 Jefes</button>
-      <button onClick={onSelectOther} className="btn">🔄 Otros</button>
-      <button onClick={onAddManual} className="btn">✍️ Manual</button>
-    </div>
-  );
-};
-
 const TopMenu = ({
   onAddEnemy,
   onSelectBoss,
@@ -67,7 +53,7 @@ const TopMenu = ({
             </label>
             <select
               id="lang"
-              value={currentLanguage}
+              value={language}
               onChange={(e) => setLanguage(e.target.value)}
               className="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1"
             >
