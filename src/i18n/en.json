@@ -116,7 +116,9 @@
       "veterano": "Veterna",
       "soldado": "Fighter",
       "bisoño": "Rookie",
-      "esbirro": "Minion"
+      "esbirro": "Minion",
+      "comandante": "Commander",
+      "jefe": "Boss"
       }
   },
     "roles": {
