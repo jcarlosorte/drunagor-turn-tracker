@@ -116,7 +116,9 @@
       "veterano": "Veterano",
       "soldado": "Soldado",
       "bisoño": "Bisoño",
-      "esbirro": "Esbirro"
+      "esbirro": "Esbirro",
+      "comandante": "Comandante",
+      "jefe": "Jefe"
       }
   },
   "roles": {
