@@ -56,6 +56,11 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
 
+    console.log('color seleccionado:', color);
+    console.log('categoría seleccionada:', categoryKey);
+    console.log('enemigos que cumplen:', ENEMIES.filter(e => e.rune === color && e.categoria === categoryKey));
+
+    
     setTrackerData(prev => ({
       ...prev,
       enemies: [...prev.enemies, newEnemy]
