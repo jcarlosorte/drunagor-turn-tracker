@@ -55,7 +55,11 @@ const InitTracker = () => {
     console.log('Enemigos filtrados:', filtered);
     
     if (filtered.length === 0) return;
-
+    
+    console.log('Seleccionado:', selected);
+    console.log('Rune:', selected.rune);
+    console.log('Rune index:', runesColorMap[selected.rune]);
+    
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
@@ -99,6 +103,7 @@ const InitTracker = () => {
     const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
+    console.log("Enemigos en index", index, trackerData.enemies);
 
     return (
       <div key={index} className="flex flex-col items-center w-full">
