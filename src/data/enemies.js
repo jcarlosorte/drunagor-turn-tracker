@@ -58,7 +58,7 @@ import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
   { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "campeon",, tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "veterano", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "soldado", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "bisoño", expansionId: "base", imagen: skeleton_archer, rune: "verde", runePosition: "abajo" },
