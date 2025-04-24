@@ -110,7 +110,14 @@
     "nagian_hunter": "Cazador Nagiano",
     "hellspawn_brute": "Bruto del Inframundo",
     "night_stalker": "Acechador Nocturno",
-    "fallen_sisters": "Hermanas Caídas"
+    "fallen_sisters": "Hermanas Caídas",
+    "categoria": {
+      "campeon": "Campeón",
+      "veterano": "Veterano",
+      "soldado": "Soldado",
+      "bisoño": "Bisoño",
+      "esbirro": "Esbirro"
+      }
   },
   "roles": {
     "controlador": "Controlador",
