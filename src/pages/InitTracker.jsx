@@ -25,22 +25,45 @@ const runesColorMap = {
   gray: 9
 };
 
+const validCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
+
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { language, setLanguage, translations } = useLanguage();
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
+  const te = translations.enemies?.categoria || {};
 
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
   const getRoleName = (id) => translations.roles?.[id] || id;
 
-  const handleAddEnemy = (color) => {
-    const filtered = trackerData.enemiesAvailable.filter(e => e.rune === color);
+  const handleAddEnemyByColorAndCategory = async (color) => {
+    const category = prompt(`${ti.selectCategory}\n${validCategories.map(cat => `- ${te[cat] || cat}`).join('\n')}`);
+    const selectedKey = validCategories.find(cat => te[cat] === category || cat === category);
+    if (!selectedKey) return alert(ti.invalidCategory || 'Categoría inválida');
+
+    const candidates = ENEMIES.filter(e =>
+      e.rune === color &&
+      validCategories.includes(e.categoria)
+    );
+
+    const filteredByCategory = candidates.filter(e => e.categoria === selectedKey);
+
+    if (filteredByCategory.length === 0) return alert(ti.noEnemyFound || 'No se encontraron enemigos con esos filtros');
+
+    const randomEnemy = filteredByCategory[Math.floor(Math.random() * filteredByCategory.length)];
+
+    const newEnemy = {
+      id: randomEnemy.id,
+      rune: randomEnemy.rune,
+      runePosition: randomEnemy.runePosition
+    };
+
     setTrackerData(prev => ({
       ...prev,
-      enemies: [...prev.enemies, ...filtered.map(e => ({ id: e.id, rune: e.rune }))]
+      enemies: [...prev.enemies, newEnemy]
     }));
   };
 
@@ -161,7 +184,7 @@ const InitTracker = () => {
   return (
     <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
       <TopMenu
-        onAddEnemy={handleAddEnemy}
+        onAddEnemy={handleAddEnemyByColorAndCategory}
         onSelectBoss={handleSelectBoss}
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
