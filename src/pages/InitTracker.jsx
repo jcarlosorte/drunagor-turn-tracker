@@ -18,11 +18,11 @@ const rolesPositionMap = {
 };
 
 const runesColorMap = {
-  orange: 1,
-  green: 3,
-  blue: 5,
-  red: 7,
-  gray: 9
+  naranja: 1,
+  verde: 3,
+  azul: 5,
+  rojo: 7,
+  gris: 9
 };
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
