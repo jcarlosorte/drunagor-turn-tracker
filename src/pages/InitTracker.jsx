@@ -179,7 +179,7 @@ const InitTracker = () => {
   return (
     <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
       <TopMenu
-        onAddEnemy={handleAddEnemyByColorAndCategory}
+        onAddEnemy={openCategorySelector}
         onSelectBoss={handleSelectBoss}
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
