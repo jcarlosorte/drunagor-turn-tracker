@@ -122,7 +122,7 @@ const InitTracker = () => {
             </div>
           ))}
           {isRune && enemiesAbove?.map((e, i) => (
-            <div key={e.id + '-' + i} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
+            <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
                <div className="mt-1 text-xs text-white text-center font-semibold">
                 {getEnemyName(e.id)}
               </div>
