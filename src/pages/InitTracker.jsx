@@ -108,7 +108,7 @@ const InitTracker = () => {
     
     return (
       <div key={index} className="flex flex-col items-center w-full">
-        <div className="h-50 flex items-center justify-center gap-1 flex-wrap">
+        <div className="flex items-center justify-center gap-1 flex-wrap py-2">
           {heroesAbove?.map(h => (
             
             <div key={h.id} className="flex flex-col items-center mx-1">
@@ -169,7 +169,7 @@ const InitTracker = () => {
           </div>
         </div>
         
-        <div className="h-50 flex items-center justify-center gap-1 flex-wrap">
+        <div className="flex items-center justify-center gap-1 flex-wrap py-2">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
             <img
