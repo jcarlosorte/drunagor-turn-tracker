@@ -107,14 +107,14 @@ const InitTracker = () => {
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
     
     return (
-      <div key={index} className="flex flex-col items-center w-full">
+      <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[auto_8fr_auto] auto-rows-min">
+        {/* Sección superior */}
         <div className="flex items-center justify-center gap-1 flex-wrap py-2">
           {heroesAbove?.map(h => (
-            
             <div key={h.id} className="flex flex-col items-center mx-1">
               <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
                   {getHeroName(h.id)}
-              </div>  
+              </div>
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
@@ -136,6 +136,7 @@ const InitTracker = () => {
           ))}
         </div>
 
+        {/* Sección central (la barra) */}
         <div className="relative w-full h-8 flex items-center justify-center bg-gray-200">
           
             <div
@@ -168,7 +169,8 @@ const InitTracker = () => {
             </span>
           </div>
         </div>
-        
+
+        {/* Sección inferior */}
         <div className="flex items-center justify-center gap-1 flex-wrap py-2">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
