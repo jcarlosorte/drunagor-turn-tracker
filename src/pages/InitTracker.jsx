@@ -124,11 +124,11 @@ const InitTracker = () => {
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
 
-  let dynamicHeight = 'h-24';
+  let dynamicHeight = 'h-128';
   if (maxCharactersInAnySlot >= 5) {
-    dynamicHeight = 'h-48';
+    dynamicHeight = 'h-256';
   } else if (maxCharactersInAnySlot >= 3) {
-    dynamicHeight = 'h-32';
+    dynamicHeight = 'h-192';
   }
 
   const renderSlot = (index) => {
