@@ -53,8 +53,6 @@ const InitTracker = () => {
     
     if (filtered.length === 0) return;
     
-    const rolesOnTop = ['defensor', 'lider', 'controlador'];
-    const rolesOnBottom = ['apoyo', 'agresor'];
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba'; // Usa 'arriba' por defecto si no está especificado
@@ -85,37 +83,6 @@ const InitTracker = () => {
     console.log("Añadir enemigo manualmente");
   };
 
-
-  const countsPerIndex = Array(11).fill(0).map((_, index) => {
-  const heroesAbove = (trackerData.placedHeroes || []).filter(
-    h => h.position === index && rolesOnTop.includes(h.role)
-  );
-  const heroesBelow = (trackerData.placedHeroes || []).filter(
-    h => h.position === index && rolesOnBottom.includes(h.role)
-  );
-
-  const enemiesAbove = (trackerData.enemies || []).filter(
-    e => runesColorMap[e.rune] === index && e.runePosition === 'arriba'
-  );
-  const enemiesBelow = (trackerData.enemies || []).filter(
-    e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
-  );
-
-  return Math.max(
-    heroesAbove.length + enemiesAbove.length,
-    heroesBelow.length + enemiesBelow.length
-  );
-});
-
-const maxCharactersInAnySlot = Math.max(...countsPerIndex);
-
-let dynamicHeight = 'h-48';
-if (maxCharactersInAnySlot >= 3) {
-  dynamicHeight = 'h-128';
-} else if (maxCharactersInAnySlot >= 2) {
-  dynamicHeight = 'h-64';
-}
-  
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
       const role = trackerData.roles[id];
@@ -129,9 +96,42 @@ if (maxCharactersInAnySlot >= 3) {
     }));
   }, []);
 
- const renderSlot = (index) => {
-    const rolesOnTop = ['defensor', 'lider', 'controlador'];
-    const rolesOnBottom = ['apoyo', 'agresor'];
+  // Definir rolesOnTop y rolesOnBottom aquí, antes de renderizar los slots
+  const rolesOnTop = ['defensor', 'lider', 'controlador'];
+  const rolesOnBottom = ['apoyo', 'agresor'];
+
+  // Calcular la altura máxima en todos los slots
+  const countsPerIndex = Array(11).fill(0).map((_, index) => {
+    const heroesAbove = (trackerData.placedHeroes || []).filter(
+      h => h.position === index && rolesOnTop.includes(h.role)
+    );
+    const heroesBelow = (trackerData.placedHeroes || []).filter(
+      h => h.position === index && rolesOnBottom.includes(h.role)
+    );
+
+    const enemiesAbove = (trackerData.enemies || []).filter(
+      e => runesColorMap[e.rune] === index && e.runePosition === 'arriba'
+    );
+    const enemiesBelow = (trackerData.enemies || []).filter(
+      e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
+    );
+
+    return Math.max(
+      heroesAbove.length + enemiesAbove.length,
+      heroesBelow.length + enemiesBelow.length
+    );
+  });
+
+  const maxCharactersInAnySlot = Math.max(...countsPerIndex);
+
+  let dynamicHeight = 'h-24';
+  if (maxCharactersInAnySlot >= 5) {
+    dynamicHeight = 'h-48';
+  } else if (maxCharactersInAnySlot >= 3) {
+    dynamicHeight = 'h-32';
+  }
+
+  const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     
     const heroesAbove = (trackerData.placedHeroes || []).filter(
@@ -148,103 +148,96 @@ if (maxCharactersInAnySlot >= 3) {
       e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
     );
 
-
-     
-return (
-  <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
-
-    
-    {/* Sección superior */}
-    <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
-      {heroesAbove?.map(h => (
-        <div key={h.id} className="flex flex-col items-center mx-1">
-          <div className="mt-1 text-xs text-white text-center font-semibold">
-            {getHeroName(h.id)}
-          </div>
-          <img
-            src={h.image}
-            alt={getHeroName(h.id)}
-            className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-          />
+    return (
+      <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+        {/* Sección superior */}
+        <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
+          {heroesAbove?.map(h => (
+            <div key={h.id} className="flex flex-col items-center mx-1">
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getHeroName(h.id)}
+              </div>
+              <img
+                src={h.image}
+                alt={getHeroName(h.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+              />
+            </div>
+          ))}
+          {isRune && enemiesAbove?.map((e, i) => (
+            <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getEnemyName(e.id)}
+              </div>
+              <img
+                src={e.imagen}
+                alt={getEnemyName(e.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+              />
+            </div>
+          ))}
         </div>
-      ))}
-      {isRune && enemiesAbove?.map((e, i) => (
-        <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
-          <div className="mt-1 text-xs text-white text-center font-semibold">
-            {getEnemyName(e.id)}
-          </div>
-          <img
-            src={e.imagen}
-            alt={getEnemyName(e.id)}
-            className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-          />
-        </div>
-      ))}
-    </div>
 
-    {/* Sección central (la barra) */}
-    <div className="flex items-center justify-center h-16">
-      <div
-        className={classNames(
-          'flex items-center justify-center border-4 font-fantasy',
-          {
-            'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
-            'w-12 h-12 rotate-45 bg-green-500 shadow': index === 3,
-            'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
-            'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
-            'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
-            'w-full h-10 bg-gray-200 text-black text-center shadow': index % 2 === 0
-          }
-        )}
-      >
-        <span
-          className={classNames({
-            'rotate-[315deg]': index % 2 !== 0
-          })}
-        >
-          {index === 0 && tr.defensor ||
-            index === 2 && tr.apoyo ||
-            index === 4 && tr.lider ||
-            index === 6 && tr.agresor ||
-            index === 8 && tr.controlador ||
-            index === 10 && ti.rune || null}
-        </span>
+        {/* Sección central (la barra) */}
+        <div className="flex items-center justify-center h-16">
+          <div
+            className={classNames(
+              'flex items-center justify-center border-4 font-fantasy',
+              {
+                'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
+                'w-12 h-12 rotate-45 bg-green-500 shadow': index === 3,
+                'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
+                'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
+                'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
+                'w-full h-10 bg-gray-200 text-black text-center shadow': index % 2 === 0
+              }
+            )}
+          >
+            <span
+              className={classNames({
+                'rotate-[315deg]': index % 2 !== 0
+              })}
+            >
+              {index === 0 && tr.defensor ||
+                index === 2 && tr.apoyo ||
+                index === 4 && tr.lider ||
+                index === 6 && tr.agresor ||
+                index === 8 && tr.controlador ||
+                index === 10 && ti.rune || null}
+            </span>
+          </div>
+        </div>
+
+        {/* Sección inferior */}
+        <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
+          {heroesBelow?.map(h => (
+            <div key={h.id} className="flex flex-col items-center mx-1">
+              <img
+                src={h.image}
+                alt={getHeroName(h.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getHeroName(h.id)}
+              </div>
+            </div>
+          ))}
+          {isRune && enemiesBelow?.map((e, i) => (
+            <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
+              <img
+                src={e.imagen}
+                alt={getEnemyName(e.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getEnemyName(e.id)}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-
-    {/* Sección inferior */}
-    <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
-      {heroesBelow?.map(h => (
-        <div key={h.id} className="flex flex-col items-center mx-1">
-          <img
-            src={h.image}
-            alt={getHeroName(h.id)}
-            className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-          />
-          <div className="mt-1 text-xs text-white text-center font-semibold">
-            {getHeroName(h.id)}
-          </div>
-        </div>
-      ))}
-      {isRune && enemiesBelow?.map((e, i) => (
-        <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
-          <img
-            src={e.imagen}
-            alt={getEnemyName(e.id)}
-            className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-          />
-          <div className="mt-1 text-xs text-white text-center font-semibold">
-            {getEnemyName(e.id)}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-
-  }; // fin renderslot
-
+    );
+  };
 
   return (
     <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
@@ -296,11 +289,8 @@ return (
           {ti.backToConfig || 'Volver a configuración'}
         </button>
       </div>
-     
     </div>
   );
 };
 
 export default InitTracker;
-
-
