@@ -20,13 +20,17 @@ const TrackerSelect = () => {
   const { setTrackerData } = useTracker();
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
-
+  
   const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
   const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
   const enemyIdsInSelectedExpansions = [...new Set(fullSelectedExpansions.flatMap(exp => exp.enemies))];
   const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
-  const enemiesInSelectedExpansions = ENEMIES.filter(
-    e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero"
+  const enemiesInSelectedExpansions = Array.from(
+    new Map(
+      ENEMIES
+        .filter(e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero")
+        .map(e => [e.id, e])
+    ).values()
   );
 
   useEffect(() => {
