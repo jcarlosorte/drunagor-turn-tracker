@@ -119,11 +119,11 @@ const InitTracker = () => {
   const totalBelow = heroesBelow.length + (isRune ? enemiesBelow.length : 0);
   const maxTotal = Math.max(totalAbove, totalBelow);
 
-  let dynamicHeight = 'h-24';
-  if (maxTotal >= 5) {
-    dynamicHeight = 'h-48';
-  } else if (maxTotal >= 3) {
-    dynamicHeight = 'h-32';
+  let dynamicHeight = 'h-48';
+  if (maxTotal >= 3) {
+    dynamicHeight = 'h-128';
+  } else if (maxTotal >= 2) {
+    dynamicHeight = 'h-64';
   }
      
 return (
