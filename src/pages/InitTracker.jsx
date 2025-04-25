@@ -127,7 +127,7 @@ const InitTracker = () => {
                 {getEnemyName(e.id)}
               </div>
               <img
-                src={e.image}
+                src={e.imagen}
                 alt={getEnemyName(e.id)}
                 className="w-12 h-12 object-cover rounded-full border-2 border-red-300 shadow-md"
               />
@@ -185,7 +185,7 @@ const InitTracker = () => {
           {isRune && enemiesBelow?.map((e, i) => (
             <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
               <img
-                src={e.image}
+                src={e.imagen}
                 alt={getEnemyName(e.id)}
                 className="w-12 h-12 object-cover rounded-full border-2 border-red-300 shadow-md"
               />
