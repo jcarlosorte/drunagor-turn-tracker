@@ -53,6 +53,8 @@ const InitTracker = () => {
     
     if (filtered.length === 0) return;
     
+    const rolesOnTop = ['defensor', 'lider', 'controlador'];
+    const rolesOnBottom = ['apoyo', 'agresor'];
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba'; // Usa 'arriba' por defecto si no está especificado
