@@ -303,7 +303,7 @@ const TrackerSelect = () => {
                       <label
                         key={enemy.id}
                         className={`fantasy-frame flex flex-col items-center space-y-2 p-2 rounded-lg cursor-pointer border transition 
-                          w-full
+                          w-full max-w-[150px]
                           ${isSelected ? 'border-green-600 bg-green-100/80' : 'border-red-600 bg-white hover:bg-gray-100'}`}
                       >
                         <input
