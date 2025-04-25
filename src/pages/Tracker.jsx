@@ -168,7 +168,7 @@ const TrackerSelect = () => {
                   <img
                     src={hero.image}
                     alt={getHeroName(hero.id)}
-                    className="w-12 h-12 object-contain mb-2"
+                    className="w-30 h-30 object-contain mb-2"
                   />
                 )}
                 <span className="text-sm font-semibold">{getHeroName(hero.id)}</span>
