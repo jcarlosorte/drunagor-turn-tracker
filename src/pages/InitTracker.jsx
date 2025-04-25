@@ -50,20 +50,19 @@ const InitTracker = () => {
     setCategorySelector({ open: false, color: null });
 
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey);
-
-    //console.log('Color:', color, 'Categoría:', categoryKey);
-    //console.log('Enemigos filtrados:', filtered);
     
     if (filtered.length === 0) return;
     
-   
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
-    const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex };
-
-    //console.log('Seleccionado:', selected);
-    //console.log('Rune:', selected.rune);
-    //console.log('Rune index:', runesColorMap[selected.rune]);
+    const runePosition = selected.runePosition || 'arriba'; // Usa 'arriba' por defecto si no está especificado
+    
+    const newEnemy = { 
+      id: selected.id, 
+      rune: selected.rune, 
+      position: runeIndex, 
+      runePosition 
+    };
     
     setTrackerData(prev => ({
       ...prev,
@@ -102,8 +101,10 @@ const InitTracker = () => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
-    const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && index % 2 === 1);
+    
+    const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
+    const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    
     console.log("Enemigos en index", index, trackerData.enemies);
 
     return (
