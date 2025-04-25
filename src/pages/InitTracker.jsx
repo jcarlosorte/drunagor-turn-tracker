@@ -110,7 +110,7 @@ const InitTracker = () => {
     const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
     return (
-        <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_h-8_min-content]">
+        <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_auto_min-content]">
           {/* Sección superior con altura máxima */}
           <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
             {heroesAbove?.map(h => (
