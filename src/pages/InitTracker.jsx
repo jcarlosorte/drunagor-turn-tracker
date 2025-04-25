@@ -160,7 +160,7 @@ const InitTracker = () => {
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-20 h-20 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                className="w-30 h-30 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
               />
             </div>
           ))}
@@ -172,14 +172,14 @@ const InitTracker = () => {
               <img
                 src={e.imagen}
                 alt={getEnemyName(e.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
               />
             </div>
           ))}
         </div>
 
         {/* Sección central (la barra) */}
-        <div className="flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-8 bg-gray-300">
           <div
             className={classNames(
               'flex items-center justify-center border-4 font-fantasy',
@@ -189,7 +189,8 @@ const InitTracker = () => {
                 'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
                 'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
                 'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
-                'w-full h-10 bg-gray-200 text-black text-center shadow': index % 2 === 0
+                // Cuadrados grandes con texto
+                'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
               }
             )}
           >
@@ -209,15 +210,15 @@ const InitTracker = () => {
         </div>
 
         {/* Sección inferior */}
-        <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
+        <div className="fflex items-center justify-center gap-1 flex-wrap overflow-y-auto h-48">
           {heroesBelow?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                className="w-30 h-30 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
               />
-              <div className="mt-1 text-xs text-white text-center font-semibold">
+              <div className="mmt-1 text-m text-white text-center font-semibold">
                 {getHeroName(h.id)}
               </div>
             </div>
