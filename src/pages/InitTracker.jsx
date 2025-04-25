@@ -115,9 +115,20 @@ const InitTracker = () => {
       e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
     );
 
-    
+  const totalAbove = heroesAbove.length + (isRune ? enemiesAbove.length : 0);
+  const totalBelow = heroesBelow.length + (isRune ? enemiesBelow.length : 0);
+  const maxTotal = Math.max(totalAbove, totalBelow);
+
+  let dynamicHeight = 'h-24';
+  if (maxTotal >= 5) {
+    dynamicHeight = 'h-48';
+  } else if (maxTotal >= 3) {
+    dynamicHeight = 'h-32';
+  }
+     
 return (
-  <div key={index} className="flex flex-col w-full h-64"> {/* Altura total del slot */}
+  <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+
     
     {/* Sección superior */}
     <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
