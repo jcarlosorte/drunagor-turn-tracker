@@ -110,9 +110,9 @@ const InitTracker = () => {
     const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
     return (
-        <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_auto_min-content]">
+        <div key={index} className="relative flex flex-col items-center w-full h-full">
           {/* Sección superior con altura máxima */}
-          <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
+          <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto w-full ${maxSectionHeight}`}>
             {heroesAbove?.map(h => (
               <div key={h.id} className="flex flex-col items-center mx-1">
                 <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
@@ -139,8 +139,8 @@ const InitTracker = () => {
             ))}
           </div>
 
-          {/* Sección central (la barra) con altura fija */}
-          <div className="relative w-full h-8 flex items-center justify-center bg-gray-200">
+          {/* Sección central (la barra) con altura fija y posicionamiento absoluto */}
+          <div className="absolute top-1/2 left-0 w-full h-8 -translate-y-1/2 flex items-center justify-center bg-gray-200">
             <div
               className={classNames(
                 'flex items-center justify-center border-4 font-fantasy',
@@ -170,36 +170,35 @@ const InitTracker = () => {
                 index === 10 && ti.rune || null}
             </span>
           </div>
-        </div>
 
-        {/* Sección inferior con altura máxima */}
-        <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
-          {heroesBelow?.map(h => (
-            <div key={h.id} className="flex flex-col items-center mx-1">
-              <img
-                src={h.image}
-                alt={getHeroName(h.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-              />
-              <div className="mt-1 text-xs text-white text-center font-semibold">
-                {getHeroName(h.id)}
+          {/* Sección inferior con altura máxima */}
+          <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto w-full ${maxSectionHeight}`}>
+            {heroesBelow?.map(h => (
+              <div key={h.id} className="flex flex-col items-center mx-1">
+                <img
+                  src={h.image}
+                  alt={getHeroName(h.id)}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                />
+                <div className="mt-1 text-xs text-white text-center font-semibold">
+                    {getHeroName(h.id)}
+                  </div>
               </div>
-            </div>
-          ))}
-          {isRune && enemiesBelow?.map((e, i) => (
-            <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
-              <img
-                src={e.imagen}
-                alt={getEnemyName(e.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-              />
-              <div className="mt-1 text-xs text-white text-center font-semibold">
-                {getEnemyName(e.id)}
+            ))}
+            {isRune && enemiesBelow?.map((e, i) => (
+              <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
+                <img
+                  src={e.imagen}
+                  alt={getEnemyName(e.id)}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+                />
+                <div className="mt-1 text-xs text-white text-center font-semibold">
+                    {getEnemyName(e.id)}
+                  </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
     );
   };
 
