@@ -100,11 +100,20 @@ const InitTracker = () => {
     const rolesOnTop = ['defensor', 'lider', 'controlador'];
     const rolesOnBottom = ['apoyo', 'agresor'];
     const isRune = Object.values(runesColorMap).includes(index);
-    const heroesAbove = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnTop.includes(h.role));
-    const heroesBelow = trackerData.placedHeroes?.filter(h => h.position === index && rolesOnBottom.includes(h.role));
     
-    const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    const heroesAbove = (trackerData.placedHeroes || []).filter(
+      h => h.position === index && rolesOnTop.includes(h.role)
+    );
+    const heroesBelow = (trackerData.placedHeroes || []).filter(
+      h => h.position === index && rolesOnBottom.includes(h.role)
+    );
+    
+    const enemiesAbove = (trackerData.enemies || []).filter(
+      e => runesColorMap[e.rune] === index && e.runePosition === 'arriba'
+    );
+    const enemiesBelow = (trackerData.enemies || []).filter(
+      e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
+    );
 
     
 return (
