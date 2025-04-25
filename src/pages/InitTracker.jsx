@@ -110,40 +110,37 @@ const InitTracker = () => {
     const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
     return (
-      <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_h-8_min-content]">
-        {/* Sección superior con altura máxima */}
-        <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
-          {heroesAbove?.map(h => (
-            <div key={h.id} className="flex flex-col items-center mx-1">
-              <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
-                  {getHeroName(h.id)}
+        <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_h-8_min-content]">
+          {/* Sección superior con altura máxima */}
+          <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
+            {heroesAbove?.map(h => (
+              <div key={h.id} className="flex flex-col items-center mx-1">
+                <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
+                    {getHeroName(h.id)}
+                  </div>
+                <img
+                  src={h.image}
+                  alt={getHeroName(h.id)}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                />
               </div>
-              <img
-                src={h.image}
-                alt={getHeroName(h.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-              />
-            </div>
-          ))}
-          {isRune && enemiesAbove?.map((e, i) => (
-            <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
-               <div className="mt-1 text-xs text-white text-center font-semibold">
-                {getEnemyName(e.id)}
+            ))}
+            {isRune && enemiesAbove?.map((e, i) => (
+              <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
+                <div className="mt-1 text-xs text-white text-center font-semibold">
+                    {getEnemyName(e.id)}
+                  </div>
+                <img
+                  src={e.imagen}
+                  alt={getEnemyName(e.id)}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+                />
               </div>
-              <img
-                src={e.imagen}
-                alt={getEnemyName(e.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-              />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Sección central (la barra) con altura fija */}
-        <div className="relative w-full h-8 flex items-center justify-center bg-gray-200">
-            <div
-              className={classNames(
-          
+          {/* Sección central (la barra) con altura fija */}
+          <div className="relative w-full h-8 flex items-center justify-center bg-gray-200">
             <div
               className={classNames(
                 'flex items-center justify-center border-4 font-fantasy',
@@ -154,17 +151,17 @@ const InitTracker = () => {
                   'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
                   'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
                   'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
-            
+
                   // Cuadrados grandes con texto
                   'w-full h-10 bg-gray-200 text-black text-center shadow': index % 2 === 0
                 }
-              )}
+            )}
+          >
+            <span
+              className={classNames({
+                'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
+              })}
             >
-              <span
-                className={classNames({
-                  'rotate-[315deg]': index % 2 !== 0 // Revertir texto de los rombos
-                })}
-              >
               {index === 0 && tr.defensor ||
                 index === 2 && tr.apoyo ||
                 index === 4 && tr.lider ||
@@ -178,16 +175,16 @@ const InitTracker = () => {
         {/* Sección inferior con altura máxima */}
         <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
           {heroesBelow?.map(h => (
-          <div key={h.id} className="flex flex-col items-center mx-1">
-            <img
-              src={h.image}
-              alt={getHeroName(h.id)}
-              className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-            />
-            <div className="mt-1 text-xs text-white text-center font-semibold">
-              {getHeroName(h.id)}
+            <div key={h.id} className="flex flex-col items-center mx-1">
+              <img
+                src={h.image}
+                alt={getHeroName(h.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getHeroName(h.id)}
+              </div>
             </div>
-          </div>
           ))}
           {isRune && enemiesBelow?.map((e, i) => (
             <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
@@ -200,7 +197,6 @@ const InitTracker = () => {
                 {getEnemyName(e.id)}
               </div>
             </div>
-           
           ))}
         </div>
       </div>
