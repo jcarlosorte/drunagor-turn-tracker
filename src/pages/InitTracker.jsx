@@ -61,7 +61,8 @@ const InitTracker = () => {
       id: selected.id, 
       rune: selected.rune, 
       position: runeIndex, 
-      runePosition 
+      runePosition,
+      imagen: selected.imagen
     };
     
     setTrackerData(prev => ({
@@ -107,7 +108,7 @@ const InitTracker = () => {
     
     return (
       <div key={index} className="flex flex-col items-center w-full">
-        <div className="h-20 flex items-center justify-center gap-1 flex-wrap">
+        <div className="h-50 flex items-center justify-center gap-1 flex-wrap">
           {heroesAbove?.map(h => (
             
             <div key={h.id} className="flex flex-col items-center mx-1">
@@ -168,7 +169,7 @@ const InitTracker = () => {
           </div>
         </div>
         
-        <div className="h-20 flex items-center justify-center">
+        <div className="h-50 flex items-center justify-center gap-1 flex-wrap">
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
             <img
