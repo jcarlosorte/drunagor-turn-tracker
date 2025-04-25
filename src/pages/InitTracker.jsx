@@ -160,7 +160,7 @@ const InitTracker = () => {
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-30 h-20 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
+                className="w-30 h-25 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
               />
             </div>
           ))}
@@ -172,7 +172,7 @@ const InitTracker = () => {
               <img
                 src={e.imagen}
                 alt={getEnemyName(e.id)}
-                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
+                className="w-14 h-14 object-cover rounded-full border-2 border-red-500 shadow-md"
               />
             </div>
           ))}
@@ -184,11 +184,11 @@ const InitTracker = () => {
             className={classNames(
               'flex items-center justify-center font-fantasy',
               {
-                'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
-                'w-12 h-12 rotate-45 bg-green-500 shadow': index === 3,
-                'w-12 h-12 rotate-45 bg-blue-500 shadow': index === 5,
-                'w-12 h-12 rotate-45 bg-red-500 shadow': index === 7,
-                'w-12 h-12 rotate-45 bg-gray-500 shadow': index === 9,
+                'w-12 h-12 rotate-45 bg-orange-500 shadow border-4': index === 1,
+                'w-12 h-12 rotate-45 bg-green-500 shadow border-4': index === 3,
+                'w-12 h-12 rotate-45 bg-blue-500 shadow border-4': index === 5,
+                'w-12 h-12 rotate-45 bg-red-500 shadow border-4': index === 7,
+                'w-12 h-12 rotate-45 bg-gray-500 shadow border-4': index === 9,
                 // Cuadrados grandes con texto
                 'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
               }
