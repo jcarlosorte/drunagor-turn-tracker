@@ -105,11 +105,14 @@ const InitTracker = () => {
     
     const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+
+    // Define una altura máxima para las secciones superior e inferior (ajusta este valor según necesites)
+    const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
     return (
-      <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[auto_8fr_auto] auto-rows-min">
-        {/* Sección superior */}
-        <div className="flex items-center justify-center gap-1 flex-wrap py-2">
+      <div key={index} className="flex flex-col items-center w-full h-full grid grid-rows-[min-content_h-8_min-content]">
+        {/* Sección superior con altura máxima */}
+        <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
           {heroesAbove?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <div key={h.id} className="mt-1 text-xs text-white text-center font-semibold">
@@ -136,8 +139,10 @@ const InitTracker = () => {
           ))}
         </div>
 
-        {/* Sección central (la barra) */}
+        {/* Sección central (la barra) con altura fija */}
         <div className="relative w-full h-8 flex items-center justify-center bg-gray-200">
+            <div
+              className={classNames(
           
             <div
               className={classNames(
@@ -170,8 +175,8 @@ const InitTracker = () => {
           </div>
         </div>
 
-        {/* Sección inferior */}
-        <div className="flex items-center justify-center gap-1 flex-wrap py-2">
+        {/* Sección inferior con altura máxima */}
+        <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto ${maxSectionHeight}`}>
           {heroesBelow?.map(h => (
           <div key={h.id} className="flex flex-col items-center mx-1">
             <img
