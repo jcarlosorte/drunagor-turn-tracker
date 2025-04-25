@@ -109,7 +109,7 @@ const InitTracker = () => {
     // Define una altura máxima para las secciones superior e inferior (ajusta este valor según necesites)
     const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
-    return (
+      return (
         <div key={index} className="relative flex flex-col items-center w-full h-full">
           {/* Sección superior con altura máxima */}
           <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto w-full ${maxSectionHeight}`}>
@@ -170,35 +170,36 @@ const InitTracker = () => {
                 index === 10 && ti.rune || null}
             </span>
           </div>
-
-          {/* Sección inferior con altura máxima */}
-          <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto w-full ${maxSectionHeight}`}>
-            {heroesBelow?.map(h => (
-              <div key={h.id} className="flex flex-col items-center mx-1">
-                <img
-                  src={h.image}
-                  alt={getHeroName(h.id)}
-                  className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-                />
-                <div className="mt-1 text-xs text-white text-center font-semibold">
-                    {getHeroName(h.id)}
-                  </div>
-              </div>
-            ))}
-            {isRune && enemiesBelow?.map((e, i) => (
-              <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
-                <img
-                  src={e.imagen}
-                  alt={getEnemyName(e.id)}
-                  className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-                />
-                <div className="mt-1 text-xs text-white text-center font-semibold">
-                    {getEnemyName(e.id)}
-                  </div>
-              </div>
-            ))}
-          </div>
         </div>
+
+        {/* Sección inferior con altura máxima */}
+        <div className={`flex items-center justify-center gap-1 flex-wrap py-2 overflow-y-auto w-full ${maxSectionHeight}`}>
+          {heroesBelow?.map(h => (
+            <div key={h.id} className="flex flex-col items-center mx-1">
+              <img
+                src={h.image}
+                alt={getHeroName(h.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getHeroName(h.id)}
+              </div>
+            </div>
+          ))}
+          {isRune && enemiesBelow?.map((e, i) => (
+            <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
+              <img
+                src={e.imagen}
+                alt={getEnemyName(e.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getEnemyName(e.id)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     );
   };
 
