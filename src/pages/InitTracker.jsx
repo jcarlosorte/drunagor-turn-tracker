@@ -124,9 +124,9 @@ const InitTracker = () => {
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
 
-  let dynamicHeight = 'h-128';
+  let dynamicHeight = 'h-256';
   if (maxCharactersInAnySlot >= 5) {
-    dynamicHeight = 'h-256';
+    dynamicHeight = 'h-512';
   } else if (maxCharactersInAnySlot >= 3) {
     dynamicHeight = 'h-192';
   }
@@ -151,7 +151,7 @@ const InitTracker = () => {
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         {/* Sección superior */}
-        <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-48">
+        <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-96">
           {heroesAbove?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <div className="mt-1 text-m text-white text-center font-semibold">
@@ -160,7 +160,7 @@ const InitTracker = () => {
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-30 h-30 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
+                className="w-30 h-20 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
               />
             </div>
           ))}
@@ -182,7 +182,7 @@ const InitTracker = () => {
         <div className="flex items-center justify-center h-8 bg-gray-300">
           <div
             className={classNames(
-              'flex items-center justify-center border-4 font-fantasy',
+              'flex items-center justify-center font-fantasy',
               {
                 'w-12 h-12 rotate-45 bg-orange-500 shadow': index === 1,
                 'w-12 h-12 rotate-45 bg-green-500 shadow': index === 3,
@@ -210,13 +210,13 @@ const InitTracker = () => {
         </div>
 
         {/* Sección inferior */}
-        <div className="fflex items-center justify-center gap-1 flex-wrap overflow-y-auto h-48">
+        <div className="fflex items-center justify-center gap-1 flex-wrap overflow-y-auto h-96">
           {heroesBelow?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-30 h-30 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
+                className="w-30 h-25 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
               />
               <div className="mmt-1 text-m text-white text-center font-semibold">
                 {getHeroName(h.id)}
@@ -228,7 +228,7 @@ const InitTracker = () => {
               <img
                 src={e.imagen}
                 alt={getEnemyName(e.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+                className="w-13 h-13 object-cover rounded-full border-2 border-red-500 shadow-md"
               />
               <div className="mt-1 text-xs text-white text-center font-semibold">
                 {getEnemyName(e.id)}
