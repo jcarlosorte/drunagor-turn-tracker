@@ -154,13 +154,13 @@ const InitTracker = () => {
         <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-48">
           {heroesAbove?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
-              <div className="mt-1 text-xs text-white text-center font-semibold">
+              <div className="mt-1 text-m text-white text-center font-semibold">
                 {getHeroName(h.id)}
               </div>
               <img
                 src={h.image}
                 alt={getHeroName(h.id)}
-                className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+                className="w-20 h-20 object-cover rounded-full border-2 border-yellow-300 shadow-md"
               />
             </div>
           ))}
