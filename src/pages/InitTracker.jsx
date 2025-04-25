@@ -105,8 +105,6 @@ const InitTracker = () => {
     const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
     
-    console.log("Enemigos en index", index, trackerData.enemies);
-
     return (
       <div key={index} className="flex flex-col items-center w-full">
         <div className="h-20 flex items-center justify-center gap-1 flex-wrap">
@@ -178,7 +176,14 @@ const InitTracker = () => {
           ))}
           {isRune && enemiesBelow?.map((e, i) => (
             <div key={e.id + '-' + i + '-b'} className="bg-red-200 px-2 py-1 rounded shadow text-xs">
-              {getEnemyName(e.id)}
+              <img
+                src={e.image}
+                alt={getEnemyName(e.id)}
+                className="w-12 h-12 object-cover rounded-full border-2 border-red-300 shadow-md"
+              />
+              <div className="mt-1 text-xs text-white text-center font-semibold">
+                {getEnemyName(e.id)}
+              </div>
             </div>
            
           ))}
