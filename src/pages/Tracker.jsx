@@ -313,7 +313,7 @@ const TrackerSelect = () => {
                           className="hidden"
                         />
                         {enemy.imagen && (
-                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-12 h-12 object-contain mb-2" />
+                          <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-14 h-14 object-contain mb-2" />
                         )}
                         <span className="text-sm font-fantasy">{getEnemyName(enemy.id)}</span>
                       </label>
