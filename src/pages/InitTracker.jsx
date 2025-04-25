@@ -106,8 +106,6 @@ const InitTracker = () => {
     const enemiesAbove = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
     const enemiesBelow = trackerData.enemies?.filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
 
-    // Define una altura máxima para las secciones superior e inferior (ajusta este valor según necesites)
-    const maxSectionHeight = 'h-50'; // Por ejemplo, permite unas 2-3 filas de personajes
     
     return (
       <div key={index} className="flex flex-col w-full h-64"> {/* Altura total del slot */}
@@ -141,7 +139,7 @@ const InitTracker = () => {
         </div>
     
         {/* Sección central (la barra) */}
-        <div className="flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-8 bg-gray-200">
           <div
             className={classNames(
               'flex items-center justify-center border-4 font-fantasy',
