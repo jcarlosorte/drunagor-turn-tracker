@@ -117,40 +117,38 @@ const InitTracker = () => {
 
     
 return (
-  <div key={index} className="flex flex-col w-full">
-
+  <div key={index} className="flex flex-col w-full h-64"> {/* Altura total del slot */}
+    
     {/* Sección superior */}
-    {heroesAbove.length > 0 || enemiesAbove.length > 0 ? (
-      <div className="flex flex-wrap justify-center gap-1 overflow-y-auto py-1">
-        {heroesAbove?.map(h => (
-          <div key={h.id} className="flex flex-col items-center mx-1">
-            <div className="mt-1 text-xs text-white text-center font-semibold">
-              {getHeroName(h.id)}
-            </div>
-            <img
-              src={h.image}
-              alt={getHeroName(h.id)}
-              className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-            />
+    <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
+      {heroesAbove?.map(h => (
+        <div key={h.id} className="flex flex-col items-center mx-1">
+          <div className="mt-1 text-xs text-white text-center font-semibold">
+            {getHeroName(h.id)}
           </div>
-        ))}
-        {isRune && enemiesAbove?.map((e, i) => (
-          <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
-            <div className="mt-1 text-xs text-white text-center font-semibold">
-              {getEnemyName(e.id)}
-            </div>
-            <img
-              src={e.imagen}
-              alt={getEnemyName(e.id)}
-              className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-            />
+          <img
+            src={h.image}
+            alt={getHeroName(h.id)}
+            className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+          />
+        </div>
+      ))}
+      {isRune && enemiesAbove?.map((e, i) => (
+        <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
+          <div className="mt-1 text-xs text-white text-center font-semibold">
+            {getEnemyName(e.id)}
           </div>
-        ))}
-      </div>
-    ) : null}
+          <img
+            src={e.imagen}
+            alt={getEnemyName(e.id)}
+            className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+          />
+        </div>
+      ))}
+    </div>
 
-    {/* Sección central (barra) */}
-    <div className="flex items-center justify-center my-2">
+    {/* Sección central (la barra) */}
+    <div className="flex items-center justify-center h-16">
       <div
         className={classNames(
           'flex items-center justify-center border-4 font-fantasy',
@@ -164,7 +162,11 @@ return (
           }
         )}
       >
-        <span className={index % 2 !== 0 ? 'rotate-[315deg]' : ''}>
+        <span
+          className={classNames({
+            'rotate-[315deg]': index % 2 !== 0
+          })}
+        >
           {index === 0 && tr.defensor ||
             index === 2 && tr.apoyo ||
             index === 4 && tr.lider ||
@@ -176,34 +178,32 @@ return (
     </div>
 
     {/* Sección inferior */}
-    {heroesBelow.length > 0 || enemiesBelow.length > 0 ? (
-      <div className="flex flex-wrap justify-center gap-1 overflow-y-auto py-1">
-        {heroesBelow?.map(h => (
-          <div key={h.id} className="flex flex-col items-center mx-1">
-            <img
-              src={h.image}
-              alt={getHeroName(h.id)}
-              className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
-            />
-            <div className="mt-1 text-xs text-white text-center font-semibold">
-              {getHeroName(h.id)}
-            </div>
+    <div className="flex items-center justify-center gap-1 flex-wrap overflow-y-auto h-24">
+      {heroesBelow?.map(h => (
+        <div key={h.id} className="flex flex-col items-center mx-1">
+          <img
+            src={h.image}
+            alt={getHeroName(h.id)}
+            className="w-12 h-12 object-cover rounded-full border-2 border-yellow-300 shadow-md"
+          />
+          <div className="mt-1 text-xs text-white text-center font-semibold">
+            {getHeroName(h.id)}
           </div>
-        ))}
-        {isRune && enemiesBelow?.map((e, i) => (
-          <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
-            <img
-              src={e.imagen}
-              alt={getEnemyName(e.id)}
-              className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
-            />
-            <div className="mt-1 text-xs text-white text-center font-semibold">
-              {getEnemyName(e.id)}
-            </div>
+        </div>
+      ))}
+      {isRune && enemiesBelow?.map((e, i) => (
+        <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
+          <img
+            src={e.imagen}
+            alt={getEnemyName(e.id)}
+            className="w-12 h-12 object-cover rounded-full border-2 border-red-500 shadow-md"
+          />
+          <div className="mt-1 text-xs text-white text-center font-semibold">
+            {getEnemyName(e.id)}
           </div>
-        ))}
-      </div>
-    ) : null}
+        </div>
+      ))}
+    </div>
   </div>
 );
 
