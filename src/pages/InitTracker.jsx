@@ -83,6 +83,37 @@ const InitTracker = () => {
     console.log("Añadir enemigo manualmente");
   };
 
+
+  const countsPerIndex = Array(11).fill(0).map((_, index) => {
+  const heroesAbove = (trackerData.placedHeroes || []).filter(
+    h => h.position === index && rolesOnTop.includes(h.role)
+  );
+  const heroesBelow = (trackerData.placedHeroes || []).filter(
+    h => h.position === index && rolesOnBottom.includes(h.role)
+  );
+
+  const enemiesAbove = (trackerData.enemies || []).filter(
+    e => runesColorMap[e.rune] === index && e.runePosition === 'arriba'
+  );
+  const enemiesBelow = (trackerData.enemies || []).filter(
+    e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
+  );
+
+  return Math.max(
+    heroesAbove.length + enemiesAbove.length,
+    heroesBelow.length + enemiesBelow.length
+  );
+});
+
+const maxCharactersInAnySlot = Math.max(...countsPerIndex);
+
+let dynamicHeight = 'h-48';
+if (maxCharactersInAnySlot >= 3) {
+  dynamicHeight = 'h-128';
+} else if (maxCharactersInAnySlot >= 2) {
+  dynamicHeight = 'h-64';
+}
+  
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
       const role = trackerData.roles[id];
@@ -115,16 +146,7 @@ const InitTracker = () => {
       e => runesColorMap[e.rune] === index && e.runePosition === 'abajo'
     );
 
-  const totalAbove = heroesAbove.length + (isRune ? enemiesAbove.length : 0);
-  const totalBelow = heroesBelow.length + (isRune ? enemiesBelow.length : 0);
-  const maxTotal = Math.max(totalAbove, totalBelow);
 
-  let dynamicHeight = 'h-48';
-  if (maxTotal >= 3) {
-    dynamicHeight = 'h-128';
-  } else if (maxTotal >= 2) {
-    dynamicHeight = 'h-64';
-  }
      
 return (
   <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
