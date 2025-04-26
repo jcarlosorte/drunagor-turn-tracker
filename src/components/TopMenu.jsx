@@ -1,7 +1,7 @@
 // src/components/TopMenu.jsx
 import React, { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiDeathSkull } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { BsPeopleFill } from 'react-icons/bs';
 import { MdAddCircleOutline } from 'react-icons/md';
@@ -21,51 +21,51 @@ const TopMenu = ({
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-      <button
-        onClick={toggleMenu}
-        className="bg-gray-800 bg-opacity-70 backdrop-blur-md p-2 rounded-full shadow-md text-white hover:bg-opacity-90 transition"
-      >
-        <AiOutlineMenu size={28} />
-      </button>
+    <div className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-screen-xl">
+      <div className="flex justify-center mt-2">
+        <button
+          onClick={toggleMenu}
+          className="bg-gray-800 bg-opacity-70 backdrop-blur-md p-2 rounded-full shadow-md text-white hover:bg-opacity-90 transition"
+        >
+          <AiOutlineMenu size={28} />
+        </button>
+      </div>
 
       {isOpen && (
-        <div className="mt-4 p-4 bg-gray-900 bg-opacity-80 backdrop-blur-xl rounded-2xl shadow-xl flex flex-col gap-2 items-center text-white min-w-[280px]">
-          <button className="menu-item" onClick={() => onAddEnemy('blanco')}>
-            <GiSwordClash className="inline-block mr-2 text-blue-400" />
-            {translations.addWhiteEnemies || 'Añadir Enemigos Blancos'}
+        <div className="mt-2 px-4 py-3 bg-gray-900 bg-opacity-80 backdrop-blur-xl rounded-b-2xl shadow-xl flex flex-row flex-wrap justify-center gap-4 items-center text-white">
+          <button className="flex items-center gap-1 text-sm hover:text-blue-300" onClick={() => onAddEnemy('blanco')}>
+            <GiSwordClash className="text-blue-400" />
+            {translations.addWhiteEnemies || 'Enemigos Blancos'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('gris')}>
-            <GiSwordClash className="inline-block mr-2 text-gray-400" />
-            {translations.addGrayEnemies || 'Añadir Enemigos Grises'}
+          <button className="flex items-center gap-1 text-sm hover:text-gray-300" onClick={() => onAddEnemy('gris')}>
+            <GiSwordClash className="text-gray-400" />
+            {translations.addGrayEnemies || 'Enemigos Grises'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('negro')}>
-            <GiSwordClash className="inline-block mr-2 text-black" />
-            {translations.addBlackEnemies || 'Añadir Enemigos Negros'}
+          <button className="flex items-center gap-1 text-sm hover:text-black" onClick={() => onAddEnemy('negro')}>
+            <GiSwordClash className="text-black" />
+            {translations.addBlackEnemies || 'Enemigos Negros'}
           </button>
-          <button className="menu-item" onClick={() => onAddEnemy('comandante')}>
-            <BsPeopleFill className="inline-block mr-2 text-red-400" />
-            {translations.addCommanders || 'Añadir Comandantes'}
+          <button className="flex items-center gap-1 text-sm hover:text-red-300" onClick={() => onAddEnemy('comandante')}>
+            <BsPeopleFill className="text-red-400" />
+            {translations.addCommanders || 'Comandantes'}
           </button>
-          <button className="menu-item" onClick={onSelectBoss}>
-            <GiCrownedSkull className="inline-block mr-2 text-yellow-400" />
-            {translations.selectBosses || 'Seleccionar Jefes'}
+          <button className="flex items-center gap-1 text-sm hover:text-yellow-300" onClick={onSelectBoss}>
+            <GiCrownedSkull className="text-yellow-400" />
+            {translations.selectBosses || 'Jefes'}
           </button>
-          <button className="menu-item" onClick={onSelectOther}>
-            <GiDiceTarget className="inline-block mr-2 text-green-400" />
-            {translations.selectOther || 'Seleccionar Otros'}
+          <button className="flex items-center gap-1 text-sm hover:text-green-300" onClick={onSelectOther}>
+            <GiDiceTarget className="text-green-400" />
+            {translations.selectOther || 'Otros'}
           </button>
-          <button className="menu-item" onClick={onAddManual}>
-            <MdAddCircleOutline className="inline-block mr-2 text-purple-400" />
-            {translations.addManualEnemy || 'Añadir Enemigos Manuales'}
+          <button className="flex items-center gap-1 text-sm hover:text-purple-300" onClick={onAddManual}>
+            <MdAddCircleOutline className="text-purple-400" />
+            {translations.addManualEnemy || 'Enemigos Manuales'}
           </button>
 
           {/* 🌐 Selector de idioma */}
-          <div className="flex items-center gap-2 mt-3">
+          <div className="flex items-center gap-2 text-sm">
             <FaLanguage className="text-blue-300" />
-            <label htmlFor="lang" className="text-sm">
-              {translations.language || 'Idioma'}:
-            </label>
+            <label htmlFor="lang">{translations.language || 'Idioma'}:</label>
             <select
               id="lang"
               value={language}
@@ -80,10 +80,10 @@ const TopMenu = ({
             </select>
           </div>
 
-          {/* Botón para cerrar el menú */}
+          {/* ❌ Botón para cerrar */}
           <button
             onClick={toggleMenu}
-            className="mt-4 px-3 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+            className="px-3 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm ml-4"
           >
             {translations.close || 'Cerrar'}
           </button>
@@ -94,4 +94,5 @@ const TopMenu = ({
 };
 
 export default TopMenu;
+
 
