@@ -126,7 +126,7 @@ const InitTracker = () => {
 
   let dynamicHeight = 'h-192';
   if (maxCharactersInAnySlot >= 5) {
-    dynamicHeight = 'h-512';
+    dynamicHeight = 'h-256';
   } else if (maxCharactersInAnySlot >= 3) {
     dynamicHeight = 'h-192';
   }
@@ -151,7 +151,7 @@ const InitTracker = () => {
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         {/* Sección superior */}
-        <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
+        <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-68">
           {heroesAbove?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <div className="mt-1 text-m text-white text-center font-semibold">
@@ -210,7 +210,7 @@ const InitTracker = () => {
         </div>
 
         {/* Sección inferior */}
-        <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
+        <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-68">
           {heroesBelow?.map(h => (
             <div key={h.id} className="flex flex-col items-center mx-1">
               <img
