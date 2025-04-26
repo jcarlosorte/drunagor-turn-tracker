@@ -172,7 +172,7 @@ const InitTracker = () => {
               <img
                 src={e.imagen}
                 alt={getEnemyName(e.id)}
-                className="w-14 h-14 object-cover rounded-full border-2 border-red-500 shadow-md"
+                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
               />
             </div>
           ))}
@@ -228,7 +228,7 @@ const InitTracker = () => {
               <img
                 src={e.imagen}
                 alt={getEnemyName(e.id)}
-                className="w-13 h-13 object-cover rounded-full border-2 border-red-500 shadow-md"
+                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
               />
               <div className="mt-1 text-xs text-white text-center font-semibold">
                 {getEnemyName(e.id)}
