@@ -32,6 +32,10 @@ export default function InitTracker() {
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
 
+  // Asegurarnos de que nunca son undefined:
+  const placedHeroes = placedHeroes || [];
+  const enemies     = enemies     || [];
+  
   // ---- Estado para control de turnos ----
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -50,13 +54,13 @@ export default function InitTracker() {
     const seq = [];
 
     // 1) Defensor
-    trackerData.placedHeroes
+    placedHeroes
       .filter(h => h.role === 'defensor')
       .forEach(h => seq.push({ kind: 'hero', ...h }));
 
     // 2) Enemigos runa arriba, por color
     ['naranja','verde','azul','rojo','gris'].forEach(color => {
-      trackerData.enemies
+      enemies
         .filter(e => e.rune === color && e.runePosition === 'arriba')
         .forEach(e => {
           const meta = ENEMIES.find(x=>x.id===e.id);
@@ -65,13 +69,13 @@ export default function InitTracker() {
     });
 
     // 3) Líder
-    trackerData.placedHeroes
+    placedHeroes
       .filter(h => h.role === 'lider')
       .forEach(h => seq.push({ kind: 'hero', ...h }));
 
     // 4) Enemigos runa abajo, por color
     ['naranja','verde','azul','rojo','gris'].forEach(color => {
-      trackerData.enemies
+      enemies
         .filter(e => e.rune === color && e.runePosition === 'abajo')
         .forEach(e => {
           const meta = ENEMIES.find(x=>x.id===e.id);
@@ -81,7 +85,7 @@ export default function InitTracker() {
 
     // 5) Apoyo y Agresor
     ['apoyo','agresor'].forEach(role => {
-      trackerData.placedHeroes
+      placedHeroes
         .filter(h => h.role === role)
         .forEach(h => seq.push({ kind: 'hero', ...h }));
     });
@@ -98,7 +102,7 @@ export default function InitTracker() {
   const changeVida = (idx, delta) => {
     const item = sequence[idx];
     if (item.kind === 'enemy') {
-      // actualizar vida en trackerData.enemies
+      // actualizar vida en enemies
       setTrackerData(prev => ({
         ...prev,
         enemies: prev.enemies.map(e =>
@@ -175,8 +179,8 @@ export default function InitTracker() {
                   {(
                     ent.vida 
                     ?? (ent.kind === 'hero'
-                        ? trackerData.placedHeroes.find(h => h.id === ent.id)?.vida
-                        : trackerData.enemies.find(e => e.id === ent.id && e.runePosition === ent.runePosition)?.vida)
+                        ? placedHeroes.find(h => h.id === ent.id)?.vida
+                        : enemies.find(e => e.id === ent.id && e.runePosition === ent.runePosition)?.vida)
                   ) || 0}
                 </span>
                 <button onClick={() => changeVida(idx, +1)} className="px-1 bg-green-600 rounded text-xs">+</button>
