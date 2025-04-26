@@ -29,13 +29,13 @@ export default function InitTracker() {
   const { trackerData, setTrackerData } = useTracker();
   const { translations } = useLanguage();
   const navigate = useNavigate();
-  const ti = translations.trackerInit || {};
-  const tr = translations.roles || {};
-
   // Asegurarnos de que nunca son undefined:
   const placedHeroes = placedHeroes || [];
   const enemies     = enemies     || [];
   
+  const ti = translations.trackerInit || {};
+  const tr = translations.roles || {};
+
   // ---- Estado para control de turnos ----
   const [currentStep, setCurrentStep] = useState(0);
 
