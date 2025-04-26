@@ -1,8 +1,11 @@
 // src/components/TopMenu.jsx
 import React, { useState } from 'react';
-import { AiOutlineMenu, AiOutlineClose, AiOutlinePlusCircle } from 'react-icons/ai';
-import { GiBattleAxe, GiBossKey, GiSpellBook, GiScrollUnfurled } from 'react-icons/gi';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiDeathSkull } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
+import { BsPeopleFill } from 'react-icons/bs';
+import { MdAddCircleOutline } from 'react-icons/md';
+
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -18,78 +21,56 @@ const TopMenu = ({
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
       <button
         onClick={toggleMenu}
-        className="p-2 bg-gray-800 bg-opacity-70 backdrop-blur-md rounded-full text-white shadow-lg hover:bg-opacity-90 transition"
-        title={translations.toggleMenu || 'Abrir menú'}
+        className="bg-gray-800 bg-opacity-70 backdrop-blur-md p-2 rounded-full shadow-md text-white hover:bg-opacity-90 transition"
       >
-        {isOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+        <AiOutlineMenu size={28} />
       </button>
 
       {isOpen && (
-        <div className="mt-3 p-4 w-64 bg-gray-900 bg-opacity-80 backdrop-blur-md rounded-xl shadow-xl flex flex-col gap-3 text-white border border-gray-700">
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-white"
-            onClick={() => onAddEnemy('blanco')}
-          >
-            <GiBattleAxe className="text-white" />
+        <div className="mt-4 p-4 bg-gray-900 bg-opacity-80 backdrop-blur-xl rounded-2xl shadow-xl flex flex-col gap-2 items-center text-white min-w-[280px]">
+          <button className="menu-item" onClick={() => onAddEnemy('blanco')}>
+            <GiSwordClash className="inline-block mr-2 text-blue-400" />
             {translations.addWhiteEnemies || 'Añadir Enemigos Blancos'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-gray-300"
-            onClick={() => onAddEnemy('gris')}
-          >
-            <GiBattleAxe className="text-gray-300" />
+          <button className="menu-item" onClick={() => onAddEnemy('gris')}>
+            <GiSwordClash className="inline-block mr-2 text-gray-400" />
             {translations.addGrayEnemies || 'Añadir Enemigos Grises'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-gray-500"
-            onClick={() => onAddEnemy('negro')}
-          >
-            <GiBattleAxe className="text-gray-500" />
+          <button className="menu-item" onClick={() => onAddEnemy('negro')}>
+            <GiSwordClash className="inline-block mr-2 text-black" />
             {translations.addBlackEnemies || 'Añadir Enemigos Negros'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-red-400"
-            onClick={() => onAddEnemy('comandante')}
-          >
-            <GiScrollUnfurled className="text-red-400" />
+          <button className="menu-item" onClick={() => onAddEnemy('comandante')}>
+            <BsPeopleFill className="inline-block mr-2 text-red-400" />
             {translations.addCommanders || 'Añadir Comandantes'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-yellow-400"
-            onClick={onSelectBoss}
-          >
-            <GiBossKey className="text-yellow-400" />
+          <button className="menu-item" onClick={onSelectBoss}>
+            <GiCrownedSkull className="inline-block mr-2 text-yellow-400" />
             {translations.selectBosses || 'Seleccionar Jefes'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-purple-300"
-            onClick={onSelectOther}
-          >
-            <GiSpellBook className="text-purple-300" />
+          <button className="menu-item" onClick={onSelectOther}>
+            <GiDiceTarget className="inline-block mr-2 text-green-400" />
             {translations.selectOther || 'Seleccionar Otros'}
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 transition text-green-300"
-            onClick={onAddManual}
-          >
-            <AiOutlinePlusCircle className="text-green-300" />
+          <button className="menu-item" onClick={onAddManual}>
+            <MdAddCircleOutline className="inline-block mr-2 text-purple-400" />
             {translations.addManualEnemy || 'Añadir Enemigos Manuales'}
           </button>
 
           {/* 🌐 Selector de idioma */}
-          <div className="flex items-center gap-2 mt-3 text-sm">
-            <FaLanguage className="text-blue-400" />
-            <label htmlFor="lang" className="whitespace-nowrap">
+          <div className="flex items-center gap-2 mt-3">
+            <FaLanguage className="text-blue-300" />
+            <label htmlFor="lang" className="text-sm">
               {translations.language || 'Idioma'}:
             </label>
             <select
               id="lang"
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 ml-auto"
+              className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1"
             >
               {availableLanguages.map((lang) => (
                 <option key={lang} value={lang}>
@@ -98,6 +79,14 @@ const TopMenu = ({
               ))}
             </select>
           </div>
+
+          {/* Botón para cerrar el menú */}
+          <button
+            onClick={toggleMenu}
+            className="mt-4 px-3 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+          >
+            {translations.close || 'Cerrar'}
+          </button>
         </div>
       )}
     </div>
