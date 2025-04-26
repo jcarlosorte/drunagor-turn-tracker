@@ -198,7 +198,4 @@ export default function InitTracker() {
       </div>
     </div>
   );
-};
-
-
-export default InitTracker;
+}
