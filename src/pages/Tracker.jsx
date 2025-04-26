@@ -191,7 +191,7 @@ const TrackerSelect = () => {
                   <img
                     src={heroData.image}
                     alt={getHeroName(heroId)}
-                    className="w-30 h-30 object-contain"
+                    className="w-20 h-20 object-contain"
                   />
                   <span className="font-bold">{getHeroName(heroId)}</span>
                   <span>
@@ -276,7 +276,7 @@ const TrackerSelect = () => {
             return (
               <div
                   key={color.id}
-                  className={`flex flex-col p-4 rounded-lg shadow ${areaBg} ${textColor}
+                  className={`flex flex-col p-4 rounded-lg shadow items-center ${areaBg} ${textColor}
                     ${isCompact ? 'max-w-[480px] flex-1' : 'w-full'}
                   `}
                 >
