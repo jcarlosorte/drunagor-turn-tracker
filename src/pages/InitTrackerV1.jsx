@@ -25,7 +25,8 @@ const runesColorMap = {
   gris: 9
 };
 
-const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
+const rolesOnTop = ['defensor', 'lider', 'controlador'];
+const rolesOnBottom = ['apoyo', 'agresor'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
