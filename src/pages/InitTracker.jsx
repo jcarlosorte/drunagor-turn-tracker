@@ -170,17 +170,16 @@ export default function InitTracker() {
               </span>
               <span className="text-xs text-gray-300">{ent.kind === 'hero' ? 'Héroe' : ent.tipo}</span>
               <div className="flex items-center gap-2 mt-1">
-                <button
-                  onClick={() => changeVida(idx, -1)}
-                  className="px-1 bg-red-600 rounded text-xs"
-                >–</button>
+                <button onClick={() => changeVida(idx, -1)} className="px-1 bg-red-600 rounded text-xs">–</button>
                 <span className="text-sm">
-                  {ent.vida ?? (ent.kind==='hero'? trackerData.placedHeroes.find(h=>h.id===ent.id)?.vida : trackerData.enemies.find(e=>e.id===ent.id && e.runePosition===ent.runePosition)?.vida) || 0}
+                  {(
+                    ent.vida 
+                    ?? (ent.kind === 'hero'
+                        ? trackerData.placedHeroes.find(h => h.id === ent.id)?.vida
+                        : trackerData.enemies.find(e => e.id === ent.id && e.runePosition === ent.runePosition)?.vida)
+                  ) || 0}
                 </span>
-                <button
-                  onClick={() => changeVida(idx, +1)}
-                  className="px-1 bg-green-600 rounded text-xs"
-                >+</button>
+                <button onClick={() => changeVida(idx, +1)} className="px-1 bg-green-600 rounded text-xs">+</button>
               </div>
             </div>
           ))}
