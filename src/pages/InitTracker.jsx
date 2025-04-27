@@ -131,6 +131,14 @@ const InitTracker = () => {
     dynamicHeight = 'h-192';
   }
 
+  const CharacterCard = ({ name, image }) => (
+    <div className="flex flex-col items-center mx-1">
+      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
+      <div className="text-xs mt-1">{name}</div>
+    </div>
+  );
+
+  
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     
