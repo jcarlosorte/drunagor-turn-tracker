@@ -149,7 +149,7 @@ const InitTracker = () => {
     );
 
     return (
-      <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+      <div key={index} className={`flex flex-col w-full min-${dynamicHeight} py-2`}>
         {/* Sección superior */}
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-68">
           {heroesAbove?.map(h => (
