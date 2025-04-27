@@ -149,32 +149,14 @@ const InitTracker = () => {
     );
 
     return (
-      <div key={index} className={`flex flex-col w-full min-${dynamicHeight} py-2`}>
-        {/* Sección superior */}
-        <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-68">
-          {heroesAbove?.map(h => (
-            <div key={h.id} className="flex flex-col items-center mx-1">
-              <div className="mt-1 text-m text-white text-center font-semibold">
-                {getHeroName(h.id)}
-              </div>
-              <img
-                src={h.image}
-                alt={getHeroName(h.id)}
-                className="w-30 h-25 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
-              />
-            </div>
+     <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+        {/* Superior */}
+        <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
+          {heroesAbove.map(h => (
+            <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} />
           ))}
-          {isRune && enemiesAbove?.map((e, i) => (
-            <div key={e.id + '-' + i} className="flex flex-col items-center mx-1">
-              <div className="mt-1 text-xs text-white text-center font-semibold">
-                {getEnemyName(e.id)}
-              </div>
-              <img
-                src={e.imagen}
-                alt={getEnemyName(e.id)}
-                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
-              />
-            </div>
+          {isRune && enemiesAbove.map((e, i) => (
+            <CharacterCard key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} />
           ))}
         </div>
 
