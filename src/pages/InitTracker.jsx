@@ -194,36 +194,18 @@ const InitTracker = () => {
                 index === 4 && tr.lider ||
                 index === 6 && tr.agresor ||
                 index === 8 && tr.controlador ||
-                index === 10 && ti.rune || null}
+                index === 10 && ti.rune}
             </span>
           </div>
         </div>
 
         {/* Sección inferior */}
-        <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-68">
-          {heroesBelow?.map(h => (
-            <div key={h.id} className="flex flex-col items-center mx-1">
-              <img
-                src={h.image}
-                alt={getHeroName(h.id)}
-                className="w-30 h-25 object-cover rounded-lg border-2 border-yellow-300 shadow-md"
-              />
-              <div className="mmt-1 text-m text-white text-center font-semibold">
-                {getHeroName(h.id)}
-              </div>
-            </div>
+        <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
+          {heroesBelow.map(h => (
+            <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} />
           ))}
-          {isRune && enemiesBelow?.map((e, i) => (
-            <div key={e.id + '-' + i + '-b'} className="flex flex-col items-center mx-1">
-              <img
-                src={e.imagen}
-                alt={getEnemyName(e.id)}
-                className="w-15 h-15 object-cover rounded-full border-2 border-red-500 shadow-md"
-              />
-              <div className="mt-1 text-xs text-white text-center font-semibold">
-                {getEnemyName(e.id)}
-              </div>
-            </div>
+          {isRune && enemiesBelow.map((e, i) => (
+            <CharacterCard key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} />
           ))}
         </div>
       </div>
