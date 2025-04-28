@@ -131,14 +131,27 @@ const InitTracker = () => {
     dynamicHeight = 'h-192';
   }
 
-  const CharacterCardHero = ({ name, image }) => (
+  const CharacterCardHeroA = ({ name, image }) => (
     <div className="flex flex-col items-center mx-1">
+      <div className="text-s mt-1">{name}</div>
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
-      <div className="text-xs mt-1">{name}</div>
     </div>
   );
 
-  const CharacterCardEnemy = ({ name, image }) => (
+  const CharacterCardEnemyA = ({ name, image }) => (
+    <div className="flex flex-col items-center mx-1">
+      <div className="text-xs mt-1">{name}</div>
+      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
+    </div>
+  );
+  const CharacterCardHeroB = ({ name, image }) => (
+    <div className="flex flex-col items-center mx-1">
+      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
+      <div className="text-s mt-1">{name}</div>
+    </div>
+  );
+
+  const CharacterCardEnemyB = ({ name, image }) => (
     <div className="flex flex-col items-center mx-1">
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
       <div className="text-xs mt-1">{name}</div>
@@ -167,10 +180,10 @@ const InitTracker = () => {
         {/* Superior */}
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => (
-            <CharacterCardHero key={h.id} name={getHeroName(h.id)} image={h.image} />
+            <CharacterCardHeroA key={h.id} name={getHeroName(h.id)} image={h.image} />
           ))}
           {isRune && enemiesAbove.map((e, i) => (
-            <CharacterCardEnemy key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} />
+            <CharacterCardEnemyA key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} />
           ))}
         </div>
 
@@ -208,10 +221,10 @@ const InitTracker = () => {
         {/* Sección inferior */}
         <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesBelow.map(h => (
-            <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} />
+            <CharacterCardHeroB key={h.id} name={getHeroName(h.id)} image={h.image} />
           ))}
           {isRune && enemiesBelow.map((e, i) => (
-            <CharacterCard key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} />
+            <CharacterCardEnemyB key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} />
           ))}
         </div>
       </div>
