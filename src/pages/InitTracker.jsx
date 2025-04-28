@@ -131,13 +131,19 @@ const InitTracker = () => {
     dynamicHeight = 'h-192';
   }
 
-  const CharacterCard = ({ name, image }) => (
+  const CharacterCardHero = ({ name, image }) => (
     <div className="flex flex-col items-center mx-1">
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
       <div className="text-xs mt-1">{name}</div>
     </div>
   );
 
+  const CharacterCardEnemy = ({ name, image }) => (
+    <div className="flex flex-col items-center mx-1">
+      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
+      <div className="text-xs mt-1">{name}</div>
+    </div>
+  );
   
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
@@ -161,10 +167,10 @@ const InitTracker = () => {
         {/* Superior */}
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => (
-            <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} />
+            <CharacterCardHero key={h.id} name={getHeroName(h.id)} image={h.image} />
           ))}
           {isRune && enemiesAbove.map((e, i) => (
-            <CharacterCard key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} />
+            <CharacterCardEnemy key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} />
           ))}
         </div>
 
