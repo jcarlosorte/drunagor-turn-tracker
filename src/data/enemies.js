@@ -57,12 +57,16 @@ import maya from "@/assets/heroes/Maya.png";
 import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
-  { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "veterano", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "soldado", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 4, movimiento: 4, color: "blanco", categoria: "bisoño", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba" },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 3, movimiento: 3, color: "blanco", categoria: "esbirro", expansionId: "base", imagen: skeleton_archer, rune: "esbirro", runePosition: "arriba" },
+  { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba", comportamiento: "jefe" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 7, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 18, movimiento: 5, ataque: 6, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 12, movimiento: 5, ataque: 6, color: "blanco", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 5, color: "blanco", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 9, movimiento: 4, ataque: 5, color: "blanco", categoria: "soldado", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 12, movimiento: 4, ataque: 4, color: "blanco", categoria: "soldado", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 6, movimiento: 4, ataque: 4, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 9, movimiento: 4, ataque: 3, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 0, movimiento: 0, ataque: 0, color: "esbirro", categoria: "esbirro", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "esbirro", runePosition: "esbirro" },
   { id: "dark_vampire", nombre: "Dark Vampire", vida: 0, movimiento: 0, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: dark_vampire, rune: "verde", runePosition: "arriba" },
   { id: "dark_vampire", nombre: "Dark Vampire", vida: 0, movimiento: 0, color: "gris", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: dark_vampire, rune: "verde", runePosition: "arriba" },
   { id: "dark_vampire", nombre: "Dark Vampire", vida: 0, movimiento: 0, color: "gris", categoria: "soldado", tipo: "enemigo", expansionId: "base", imagen: dark_vampire, rune: "verde", runePosition: "arriba" },
