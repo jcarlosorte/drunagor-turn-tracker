@@ -38,6 +38,14 @@ const TrackerSelect = () => {
       const enemy = ENEMIES.find(e => e.id === id);
       return enemy?.color !== "jefe" && enemy?.color !== "hero";
     }));
+    const stored = localStorage.getItem("trackerData");
+    if (stored) {
+      const data = JSON.parse(stored);
+      if (data.heroes) setSelectedHeroes(data.heroes);
+      if (data.roles) setHeroRoles(data.roles);
+      if (data.enemies) setSelectedEnemies(data.enemies);
+      if (data.behaviors) setSelectedBehaviors(data.behaviors);
+    }
   }, [enemyIdsInSelectedExpansions.join(',')]);
 
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
@@ -86,7 +94,7 @@ const TrackerSelect = () => {
     if (selectedHeroes.length === 0) {
       alert(t.noHeroesSelected || "Debes seleccionar al menos un héroe.");
       return;
-  }
+    }
    const heroesWithoutRole = selectedHeroes.filter(h => !heroRoles[h]);
     if (heroesWithoutRole.length > 0) {
       const names = heroesWithoutRole.map(getHeroName).join(', ');
@@ -101,10 +109,39 @@ const TrackerSelect = () => {
       roles: heroRoles,
       enemies: selectedEnemies,
       behaviors: selectedBehaviors
-  });
+      });
+    localStorage.setItem(
+      "trackerData",
+      JSON.stringify({
+        heroes: selectedHeroes,
+        roles: heroRoles,
+        enemies: selectedEnemies,
+        behaviors: selectedBehaviors,
+      })
+    );
     navigate("/init", { replace: true });
   };
 
+
+  const handleReset = () => {
+    
+    // Limpiar los estados locales
+    setSelectedHeroes([]);
+    setHeroRoles({});
+    setSelectedEnemies([]);
+    setSelectedBehaviors(["estandar", "alternativo", "complejo"]); // en minúsculas para coincidir con el contexto
+  
+    // Limpiar el contexto
+    setTrackerData({
+      heroes: [],
+      roles: {},
+      enemies: [],
+      behaviors: ["estandar", "alternativo", "complejo"],
+    });
+  
+    // Borrar del localStorage
+    localStorage.removeItem("trackerData");
+  };
   const handleBack = () => {
     navigate("/", { replace: true });
   };
@@ -337,6 +374,12 @@ const TrackerSelect = () => {
           className="px-4 py-2 rounded-lg bg-red-200 hover:bg-red-300 shadow font-bold"
         >
           {t.back}
+        </button>
+        <button
+          onClick={handleReset}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+        >
+          {t.reset}
         </button>
         <button
           onClick={handleConfirm}
