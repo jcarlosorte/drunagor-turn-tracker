@@ -105,7 +105,8 @@ const TrackerSelect = () => {
       alert(t.noHeroesSelected || "Debes seleccionar al menos un héroe.");
       return;
     }
-   const heroesWithoutRole = selectedHeroes.filter(h => !heroRoles[h]);
+  
+    const heroesWithoutRole = selectedHeroes.filter(h => !heroRoles[h]);
     if (heroesWithoutRole.length > 0) {
       const names = heroesWithoutRole.map(getHeroName).join(', ');
       alert(
@@ -114,23 +115,25 @@ const TrackerSelect = () => {
       );
       return;
     }
-    setTrackerData({
+  
+    // (opcional) Refiltrar enemigos por si el estado no estaba 100% sincronizado
+    const validEnemies = selectedEnemies.filter(id => {
+      const enemy = ENEMIES.find(e => e.id === id);
+      return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
+    });
+  
+    const trackerData = {
       heroes: selectedHeroes,
       roles: heroRoles,
-      enemies: selectedEnemies,
-      behaviors: selectedBehaviors
-      });
-    localStorage.setItem(
-      "trackerData",
-      JSON.stringify({
-        heroes: selectedHeroes,
-        roles: heroRoles,
-        enemies: selectedEnemies,
-        behaviors: selectedBehaviors,
-      })
-    );
+      enemies: validEnemies,
+      behaviors: selectedBehaviors,
+    };
+  
+    setTrackerData(trackerData);
+    localStorage.setItem("trackerData", JSON.stringify(trackerData));
     navigate("/init", { replace: true });
   };
+
 
 
   const handleReset = () => {
