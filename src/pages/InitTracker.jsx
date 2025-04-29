@@ -107,6 +107,14 @@ const InitTracker = () => {
     };
   }, []);
 
+  if (!isLandscape) {
+    return (
+      <div className="flex items-center justify-center h-screen text-center bg-black text-white p-4">
+        <p className="text-lg">Por favor, gira tu dispositivo a orientación horizontal para usar el control de turnos.</p>
+      </div>
+    );
+  }
+  
   // Definir rolesOnTop y rolesOnBottom aquí, antes de renderizar los slots
   const rolesOnTop = ['defensor', 'lider', 'controlador'];
   const rolesOnBottom = ['apoyo', 'agresor'];
