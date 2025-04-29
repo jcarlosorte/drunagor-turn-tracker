@@ -244,6 +244,7 @@ const InitTracker = () => {
         onSelectBoss={handleSelectBoss}
         onSelectOther={handleSelectOther}
         onAddManual={handleAddManual}
+        behaviors={behaviors}
       />
 
       
