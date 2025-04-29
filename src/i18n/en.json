@@ -147,6 +147,7 @@
     "selectedEnemies": "Selected enemies",
     "back": "Back",
     "confirm": "Confirm",
+    "reset": "Reset",
     "comportamientos": {
       "comportamiento": "Behavior",
       "estandar": "Standard",
