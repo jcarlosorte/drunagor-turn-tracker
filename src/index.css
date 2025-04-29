@@ -3,6 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Forzar vista horizontal (apaisada) cuando el dispositivo está en orientación vertical */
+.portrait-lock {
+  transform: rotate(90deg);
+  transform-origin: left top;
+  width: 100vh;
+  height: 100vw;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 body {
   @apply bg-gray-900;
 }
