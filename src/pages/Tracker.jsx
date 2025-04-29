@@ -36,7 +36,7 @@ const TrackerSelect = () => {
   useEffect(() => {
     setSelectedEnemies(enemyIdsInSelectedExpansions.filter(id => {
       const enemy = ENEMIES.find(e => e.id === id);
-      return enemy?.color !== "jefe" && enemy?.color !== "hero";
+      return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
     }));
     const stored = localStorage.getItem("trackerData");
     if (stored) {
