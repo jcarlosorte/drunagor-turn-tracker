@@ -129,7 +129,7 @@
     "apoyo": "Apoyo"
   },
   "trackerSelect": {
-    "title": "Seleccionar configuración del tracker",
+    "title": "Configuración del control de turnos",
     "selectHeroes": "Selecciona tus héroes",
     "assignRoles": "Asigna roles de mazmorra",
     "noHeroesSelected": "Debes seleccionar al menos un héroe.",
