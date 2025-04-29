@@ -34,19 +34,29 @@ const TrackerSelect = () => {
   );
 
   useEffect(() => {
-    setSelectedEnemies(enemyIdsInSelectedExpansions.filter(id => {
+    const validEnemies = enemyIdsInSelectedExpansions.filter(id => {
       const enemy = ENEMIES.find(e => e.id === id);
       return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
-    }));
+    });
+  
     const stored = localStorage.getItem("trackerData");
     if (stored) {
       const data = JSON.parse(stored);
       if (data.heroes) setSelectedHeroes(data.heroes);
       if (data.roles) setHeroRoles(data.roles);
-      if (data.enemies) setSelectedEnemies(data.enemies);
+      if (data.enemies) {
+        // Filtra solo enemigos válidos según expansiones activas
+        const filteredEnemies = data.enemies.filter(id => validEnemies.includes(id));
+        setSelectedEnemies(filteredEnemies);
+      } else {
+        setSelectedEnemies(validEnemies);
+      }
       if (data.behaviors) setSelectedBehaviors(data.behaviors);
+    } else {
+      setSelectedEnemies(validEnemies);
     }
   }, [enemyIdsInSelectedExpansions.join(',')]);
+
 
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
   const getEnemyName = (enemyId) => translations.enemies?.[enemyId] || enemyId;
