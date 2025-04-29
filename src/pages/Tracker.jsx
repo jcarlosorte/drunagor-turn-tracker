@@ -14,7 +14,7 @@ const TrackerSelect = () => {
   const [selectedHeroes, setSelectedHeroes] = useState([]);
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
-  const [selectedBehaviors, setSelectedBehaviors] = useState(["Estándar", "Alternativo", "Complejo"]);
+  const [selectedBehaviors, setSelectedBehaviors] = useState(["estandar", "alternativo", "complejo"]);
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const { setTrackerData } = useTracker();
