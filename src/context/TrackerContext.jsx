@@ -16,7 +16,7 @@ export const TrackerProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('trackerData', JSON.stringify(trackerData));
-    //console.log('[TrackerContext] Datos seleccionados:', trackerData);
+    console.log('[TrackerContext] Datos seleccionados:', trackerData);
   }, [trackerData]);
 
   return (
