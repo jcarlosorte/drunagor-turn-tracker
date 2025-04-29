@@ -148,6 +148,7 @@
     "selectedEnemies": "Enemigos seleccionados",
     "back": "Volver",
     "confirm": "Confirmar",
+    "reset": "Resetear",
     "comportamientos": {
       "comportamiento": "Comportamiento",
       "estandar": "Estándar",
