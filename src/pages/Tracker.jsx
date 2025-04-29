@@ -28,7 +28,7 @@ const TrackerSelect = () => {
   const enemiesInSelectedExpansions = Array.from(
     new Map(
       ENEMIES
-        .filter(e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero")
+        .filter(e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro")
         .map(e => [e.id, e])
     ).values()
   );
@@ -371,19 +371,19 @@ const TrackerSelect = () => {
       <div className="flex justify-between gap-4 mt-6">
         <button
           onClick={handleBack}
-          className="px-4 py-2 rounded-lg bg-red-200 hover:bg-red-300 shadow font-bold"
+          className="px-4 py-2 rounded-lg bg-blue-200 hover:bg-blue-400 shadow font-bold"
         >
           {t.back}
         </button>
         <button
           onClick={handleReset}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition shadow "
         >
           {t.reset}
         </button>
         <button
           onClick={handleConfirm}
-          className="px-4 py-2 rounded-lg bg-green-200 hover:bg-green-300 shadow font-bold"
+          className="px-4 py-2 rounded-lg bg-green-200 hover:bg-green-400 shadow font-bold"
         >
           {t.confirm}
         </button>
