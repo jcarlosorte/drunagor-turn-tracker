@@ -13,7 +13,8 @@ const TopMenu = ({
   onAddEnemy,
   onSelectBoss,
   onSelectOther,
-  onAddManual
+  onAddManual,
+  behaviors
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
