@@ -124,24 +124,29 @@ const TrackerSelect = () => {
 
 
   const handleReset = () => {
-    
-    // Limpiar los estados locales
+    const validEnemies = enemyIdsInSelectedExpansions.filter(id => {
+      const enemy = ENEMIES.find(e => e.id === id);
+      return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
+    });
+  
+    // Restaurar estados con valores por defecto
     setSelectedHeroes([]);
     setHeroRoles({});
-    setSelectedEnemies([]);
-    setSelectedBehaviors(["estandar", "alternativo", "complejo"]); // en minúsculas para coincidir con el contexto
+    setSelectedEnemies(validEnemies);
+    setSelectedBehaviors(["estandar", "alternativo", "complejo"]);
   
-    // Limpiar el contexto
+    // Restaurar datos en el contexto
     setTrackerData({
       heroes: [],
       roles: {},
-      enemies: [],
+      enemies: validEnemies,
       behaviors: ["estandar", "alternativo", "complejo"],
     });
   
-    // Borrar del localStorage
+    // Eliminar datos persistentes
     localStorage.removeItem("trackerData");
   };
+
   const handleBack = () => {
     navigate("/", { replace: true });
   };
