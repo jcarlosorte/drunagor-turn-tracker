@@ -229,30 +229,33 @@ const TrackerSelect = () => {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedBehaviors.includes("Estándar")}
-                onChange={() => handleBehaviorSelect("Estándar")}
+                checked={selectedBehaviors.includes("estandar")}
+                onChange={() => handleBehaviorSelect("estandar")}
                 className="form-checkbox"
               />
               <span className="text-sm">{t?.comportamientos?.estandar}</span>
             </label>
+            
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedBehaviors.includes("Alternativo")}
-                onChange={() => handleBehaviorSelect("Alternativo")}
+                checked={selectedBehaviors.includes("alternativo")}
+                onChange={() => handleBehaviorSelect("alternativo")}
                 className="form-checkbox"
               />
               <span className="text-sm">{t?.comportamientos?.alternativo}</span>
             </label>
+            
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedBehaviors.includes("Complejo")}
-                onChange={() => handleBehaviorSelect("Complejo")}
+                checked={selectedBehaviors.includes("complejo")}
+                onChange={() => handleBehaviorSelect("complejo")}
                 className="form-checkbox"
               />
               <span className="text-sm">{t?.comportamientos?.complejo}</span>
             </label>
+
           </div>
         </div>
 
