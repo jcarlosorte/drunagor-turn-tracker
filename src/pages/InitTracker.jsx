@@ -34,6 +34,7 @@ const InitTracker = () => {
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
+  const behaviors = trackerData.behaviors;
 
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
 
