@@ -30,6 +30,7 @@ const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { language, setLanguage, translations } = useLanguage();
+  const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
@@ -90,11 +91,20 @@ const InitTracker = () => {
       const image = HEROES.find(h => h.id === id)?.image;
       return { id, role, image, position: rolesPositionMap[role] };
     });
-  
+    const handleResize = () => {
+      setIsLandscape(window.matchMedia("(orientation: landscape)").matches);
+    };
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+    
     setTrackerData(prev => ({
       ...prev,
       placedHeroes: initialHeroes
     }));
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
   }, []);
 
   // Definir rolesOnTop y rolesOnBottom aquí, antes de renderizar los slots
@@ -233,6 +243,7 @@ const InitTracker = () => {
   };
 
   return (
+  <div className={isLandscape ? "" : "portrait-lock"}>
     <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
 
       <div className="no-header" />
@@ -287,6 +298,7 @@ const InitTracker = () => {
         </button>
       </div>
     </div>
+  </div>
   );
 };
 
