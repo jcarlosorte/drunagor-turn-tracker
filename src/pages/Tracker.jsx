@@ -199,8 +199,8 @@ const TrackerSelect = () => {
   
   return (
   <PageTransition>
-    <div className="p-4 space-y-8 text-white font-fantasy bg-slate-700 min-h-screen">
-      <h1 className="text-3xl font-bold text-center">{t.title}</h1>
+    <div className="p-4 space-y-8 font-fantasy bg-slate-700 min-h-screen">
+      <h1 className="text-3xl text-white font-bold text-center">{t.title}</h1>
       <div className="no-header" />
       {/* Selección de héroes */}
       <div className="border-4 rounded-3xl p-2 bg-white/80 shadow-2xl border-yellow-700">
