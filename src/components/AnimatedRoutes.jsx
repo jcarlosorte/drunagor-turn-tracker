@@ -17,17 +17,6 @@ export default function AnimatedRoutes() {
         <Route path="/config" element={<Config />} />
         <Route path="/init" element={<InitTracker />} />
       </Routes>
-      {!hideHeader && (
-        <motion.div
-          key="header"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Header />
-        </motion.div>
-      )}
     </AnimatePresence>
   );
 }
