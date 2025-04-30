@@ -205,7 +205,7 @@ const TrackerSelect = () => {
       <h1 className="text-3xl text-white font-bold text-center">{t.title}</h1>
       
       {/* Selección de héroes */}
-      <div className="border-4 rounded-3xl p-2 bg-white/80 shadow-2xl border-yellow-700 text-black">
+      <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {heroesInSelectedExpansions.map((hero) => {
