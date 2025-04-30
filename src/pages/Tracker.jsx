@@ -282,7 +282,7 @@ const TrackerSelect = () => {
         <RuneTitle>{t.selectEnemies}</RuneTitle>
 
         {/* Comportamientos Generales */}
-        <div className="mb-4 bg-white/70">
+        <div className="mb-4 bg-white/70 rounded-3xl">
           <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
           <div className="flex justify-center items-center gap-4 mb-4">
             <label className="flex items-center space-x-2">
@@ -330,6 +330,7 @@ const TrackerSelect = () => {
             if (color.id === "gris") areaBg = "bg-gray-300";
             else if (color.id === "negro") {
               areaBg = "bg-black/60";
+              textColor = "text-white";
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
             const isCompact = enemiesOfColor.length <= 4;
@@ -376,7 +377,7 @@ const TrackerSelect = () => {
                         {enemy.imagen && (
                           <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-30 h-30 object-contain mb-2" />
                         )}
-                        <span className="text-sm font-fantasy">{getEnemyName(enemy.id)}</span>
+                        <span className="text-sm font-fantasy text-black">{getEnemyName(enemy.id)}</span>
                       </label>
                     );
                   })}
