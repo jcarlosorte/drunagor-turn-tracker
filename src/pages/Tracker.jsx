@@ -239,14 +239,14 @@ const TrackerSelect = () => {
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border-4 rounded-3xl p-2 bg-slate-700 shadow-2xl border-green-600 text-black">
+        <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-green-600 text-black">
           <RuneTitle>{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
               return (
-                <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-green-100/80 rounded-2xl border-2 border-green-600 shadow-md">
+                <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-green-100/80 rounded-2xl border-0 border-green-600 shadow-md">
                   <img
                     src={heroData.image}
                     alt={getHeroName(heroId)}
@@ -278,11 +278,11 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-      <div className="border-4 rounded-3xl p-2 bg-white/70 shadow-2xl border-yellow-700 text-black">
+      <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
 
         {/* Comportamientos Generales */}
-        <div className="mb-4">
+        <div className="mb-4 bg-white/70">
           <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
           <div className="flex justify-center items-center gap-4 mb-4">
             <label className="flex items-center space-x-2">
