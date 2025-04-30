@@ -149,7 +149,6 @@
     "back": "Inicio",
     "confirm": "Confirmar",
     "reset": "Resetear",
-    "menu": "Menú",
     "comportamientos": {
       "comportamiento": "Comportamiento",
       "estandar": "Estándar",
@@ -167,6 +166,7 @@
     },
     "trackerInit": {
       "title": "Control de Turnos",
+      "menu": "Menú",
       "addWhiteEnemies": "Añadir Enemigos Blancos",
       "addGrayEnemies": "Añadir Enemigos Grises",
       "addBlackEnemies": "Añadir Enemigos Negros",
