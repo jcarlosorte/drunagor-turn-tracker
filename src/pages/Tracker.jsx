@@ -229,7 +229,7 @@ const TrackerSelect = () => {
                     className="w-30 h-30 object-contain mb-2"
                   />
                 )}
-                <span className="text-sm font-semibold">{getHeroName(hero.id)}</span>
+                <span className="text-sm">{getHeroName(hero.id)}</span>
               </label>
             );
           })}
@@ -238,14 +238,14 @@ const TrackerSelect = () => {
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border-4 rounded-3xl p-2 bg-slate-700 shadow-2xl border-blue-600 text-black">
+        <div className="border-4 rounded-3xl p-2 bg-slate-700 shadow-2xl border-green-600 text-black">
           <RuneTitle>{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
               const usedRoles = Object.values(heroRoles);
               return (
-                <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-blue-500 shadow-md">
+                <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-green-100/80 rounded-2xl border-2 border-green-600 shadow-md">
                   <img
                     src={heroData.image}
                     alt={getHeroName(heroId)}
@@ -291,7 +291,7 @@ const TrackerSelect = () => {
                 onChange={() => handleBehaviorSelect("estandar")}
                 className="form-checkbox"
               />
-              <span className="text-sm">{t?.comportamientos?.estandar}</span>
+              <span className="text-sm">{t?.comportamientos?.estandar}:</span>
             </label>
             
             <label className="flex items-center space-x-2">
@@ -329,7 +329,6 @@ const TrackerSelect = () => {
             if (color.id === "gris") areaBg = "bg-gray-300";
             else if (color.id === "negro") {
               areaBg = "bg-black/60";
-              textColor = "text-white";
             } else if (color.id === "comandante") areaBg = "bg-yellow-200";
       
             const isCompact = enemiesOfColor.length <= 4;
