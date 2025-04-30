@@ -167,6 +167,7 @@
       "title": "Turn Tracker",
       "menu": "Menu",
       "language": "Language",
+      "addEnemies": "Add Random Enemies",
       "addWhiteEnemies": "Add White Enemies",
       "addGrayEnemies": "Add Gray Enemies",
       "addBlackEnemies": "Add Black Enemies",
