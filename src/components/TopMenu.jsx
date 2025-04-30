@@ -65,7 +65,7 @@ const TopMenu = ({
       </div>
 
       {isOpen && (
-        <div className="px-4 pb-4 pt-2 flex flex-wrap justify-center items-center gap-4 text-white font-fantasy">
+        <div className="px-4 pb-4 pt-2 flex flex-wrap justify-center items-center gap-4 text-white">
           {/* 🔘 Selector combinado de enemigos */}
           <div className="flex items-center gap-2">
             <GiSwordClash className="text-blue-400" />
@@ -73,7 +73,7 @@ const TopMenu = ({
             <select
               id="enemySelect"
               onChange={handleEnemySelect}
-              className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1"
+              className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
               defaultValue=""
             >
               <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
