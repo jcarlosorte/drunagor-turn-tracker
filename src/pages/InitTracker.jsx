@@ -8,6 +8,7 @@ import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
+import PageTransition from "@/components/PageTransition";
 
 const rolesPositionMap = {
   defensor: 0,
@@ -251,62 +252,64 @@ const InitTracker = () => {
   };
 
   return (
-  <div className={isLandscape ? "" : "portrait-lock"}>
-    <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
-
-      <div className="no-header" />
-
-      <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{ti.title || 'Inicio del Tracker'}</h1>
-
-      <TopMenu
-        onAddEnemy={openCategorySelector}
-        onSelectBoss={handleSelectBoss}
-        onSelectOther={handleSelectOther}
-        onAddManual={handleAddManual}
-        behaviors={behaviors}
-      />
-
-      
-      <div className="grid grid-cols-11 gap-0 auto-rows-auto">
-        {[...Array(11)].map((_, idx) => renderSlot(idx))}
-      </div>
-
-      {categorySelector.open && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white text-black p-6 rounded-xl shadow-xl">
-            <h2 className="text-lg font-bold mb-4">{ti.selectCategory}</h2>
-            <div className="grid grid-cols-2 gap-2">
-              {allowedCategories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => handleCategorySelect(cat)}
-                  className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded shadow"
-                >
-                  {tc[cat] || cat}
-                </button>
-              ))}
+    <PageTransition>
+      <div className={isLandscape ? "" : "portrait-lock"}>
+        <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
+    
+          <div className="no-header" />
+    
+          <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{ti.title || 'Inicio del Tracker'}</h1>
+    
+          <TopMenu
+            onAddEnemy={openCategorySelector}
+            onSelectBoss={handleSelectBoss}
+            onSelectOther={handleSelectOther}
+            onAddManual={handleAddManual}
+            behaviors={behaviors}
+          />
+    
+          
+          <div className="grid grid-cols-11 gap-0 auto-rows-auto">
+            {[...Array(11)].map((_, idx) => renderSlot(idx))}
+          </div>
+    
+          {categorySelector.open && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white text-black p-6 rounded-xl shadow-xl">
+                <h2 className="text-lg font-bold mb-4">{ti.selectCategory}</h2>
+                <div className="grid grid-cols-2 gap-2">
+                  {allowedCategories.map(cat => (
+                    <button
+                      key={cat}
+                      onClick={() => handleCategorySelect(cat)}
+                      className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded shadow"
+                    >
+                      {tc[cat] || cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
+          )}
+    
+          {/* 🔽 Botones de navegación al final */}
+          <div className="mt-8 flex justify-center gap-4">
+            <button
+              onClick={() => navigate('/')}
+              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow"
+            >
+              {ti.goHome || 'Ir al inicio'}
+            </button>
+            <button
+              onClick={() => navigate('/tracker')}
+              className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow"
+            >
+              {ti.backToConfig || 'Volver a configuración'}
+            </button>
           </div>
         </div>
-      )}
-
-      {/* 🔽 Botones de navegación al final */}
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={() => navigate('/')}
-          className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow"
-        >
-          {ti.goHome || 'Ir al inicio'}
-        </button>
-        <button
-          onClick={() => navigate('/tracker')}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow"
-        >
-          {ti.backToConfig || 'Volver a configuración'}
-        </button>
       </div>
-    </div>
-  </div>
+    </PageTransition>
   );
 };
 
