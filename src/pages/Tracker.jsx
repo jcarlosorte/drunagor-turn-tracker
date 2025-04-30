@@ -8,6 +8,7 @@ import { COLORS } from '@/data/color';
 import { useLanguage } from '@/context/LanguageContext';
 import { useExpansions } from '@/context/ExpansionContext';
 import { useTracker } from '@/context/TrackerContext';
+import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
 
 const TrackerSelect = () => {
