@@ -167,6 +167,7 @@
     "trackerInit": {
       "title": "Control de Turnos",
       "menu": "Menú",
+      "language": "Idioma",
       "addWhiteEnemies": "Añadir Enemigos Blancos",
       "addGrayEnemies": "Añadir Enemigos Grises",
       "addBlackEnemies": "Añadir Enemigos Negros",
