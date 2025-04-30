@@ -204,7 +204,7 @@ const TrackerSelect = () => {
       <h1 className="text-3xl text-white font-bold text-center">{t.title}</h1>
       
       {/* Selección de héroes */}
-      <div className="border-4 rounded-3xl p-2 bg-white/80 shadow-2xl border-yellow-700">
+      <div className="border-4 rounded-3xl p-2 bg-white/80 shadow-2xl border-yellow-700 text-black">
         <RuneTitle>{t.selectHeroes}</RuneTitle>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {heroesInSelectedExpansions.map((hero) => {
@@ -238,7 +238,7 @@ const TrackerSelect = () => {
 
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
-        <div className="border-4 rounded-3xl p-2 bg-slate-700 shadow-2xl border-blue-600">
+        <div className="border-4 rounded-3xl p-2 bg-slate-700 shadow-2xl border-blue-600 text-black">
           <RuneTitle>{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
@@ -277,7 +277,7 @@ const TrackerSelect = () => {
       )}
 
       {/* Enemigos agrupados por color */}
-      <div className="border-4 rounded-3xl p-2 bg-white/70 shadow-2xl border-yellow-700">
+      <div className="border-4 rounded-3xl p-2 bg-white/70 shadow-2xl border-yellow-700 text-black">
         <RuneTitle>{t.selectEnemies}</RuneTitle>
 
         {/* Comportamientos Generales */}
@@ -389,7 +389,7 @@ const TrackerSelect = () => {
 
 
       {/* Botones */}
-      <div className="flex justify-between gap-4 mt-6">
+      <div className="flex justify-between gap-4 mt-6 text-black">
         <button
           onClick={handleBack}
           className="px-4 py-2 rounded-lg bg-blue-200 hover:bg-blue-400 shadow font-bold"
