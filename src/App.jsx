@@ -21,8 +21,7 @@ function Header() {
 
 function AppContent() {
   const location = useLocation();
-  const noHeaderRoutes = ["/init", "/config", "/tracker", "/InitTracker"].includes(location.pathname); // 👈 CAMBIADO
-  const hideHeader = noHeaderRoutes.includes(location.pathname);
+  const hideHeader = ["/init", "/config", "/tracker", "/InitTracker"].includes(location.pathname); // 👈 CAMBIADO
 
   return (
     <div className="text-center mt-10">
