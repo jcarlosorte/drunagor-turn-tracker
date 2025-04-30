@@ -166,6 +166,7 @@
     "trackerInit": {
       "title": "Turn Tracker",
       "menu": "Menu",
+      "language": "Language",
       "addWhiteEnemies": "Add White Enemies",
       "addGrayEnemies": "Add Gray Enemies",
       "addBlackEnemies": "Add Black Enemies",
