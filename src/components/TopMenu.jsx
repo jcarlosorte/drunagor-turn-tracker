@@ -65,7 +65,7 @@ const TopMenu = ({
       </div>
 
       {isOpen && (
-        <div className="px-4 pb-4 pt-2 flex flex-wrap justify-center items-center gap-4 text-white">
+        <div className="px-4 pb-4 pt-2 flex flex-wrap justify-center items-center gap-4 text-white font-fantasy">
           {/* 🔘 Selector combinado de enemigos */}
           <div className="flex items-center gap-2">
             <GiSwordClash className="text-blue-400" />
