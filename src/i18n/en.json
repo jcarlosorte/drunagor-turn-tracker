@@ -169,15 +169,16 @@
       "language": "Language",
       "addEnemies": "Add Random Enemies",
       "selectType": "Select Type",
-      "addWhiteEnemies": "Add White Enemies",
-      "addGrayEnemies": "Add Gray Enemies",
-      "addBlackEnemies": "Add Black Enemies",
+      "addWhiteEnemies": "WM (White)",
+      "addGrayEnemies": "GM (Grey)",
+      "addBlackEnemies": "BM (Black)",
       "addCommanders": "Add Commanders",
       "selectBosses": "Select Bosses",
       "selectOther": "Select Others",
       "addManualEnemy": "Add Manual Enemies",
       "rune": "Rune",
       "backToConfig": "Back to Config",
-      "goHome": "Home"
+      "goHome": "Home",
+      "close": "Close",
     }
 }
