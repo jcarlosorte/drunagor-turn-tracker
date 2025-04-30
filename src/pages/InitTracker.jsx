@@ -258,7 +258,7 @@ const InitTracker = () => {
     
           <div className="no-header" />
     
-          <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">{ti.title || 'Inicio del Tracker'}</h1>
+          <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
     
           <TopMenu
             onAddEnemy={openCategorySelector}
@@ -269,7 +269,7 @@ const InitTracker = () => {
           />
     
           
-          <div className="grid grid-cols-11 gap-0 auto-rows-auto">
+          <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
             {[...Array(11)].map((_, idx) => renderSlot(idx))}
           </div>
     
