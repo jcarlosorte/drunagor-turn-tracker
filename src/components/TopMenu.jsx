@@ -33,13 +33,15 @@ const TopMenu = ({
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
-        <button
-          onClick={toggleMenu}
-          className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700 w-200"
-        >
-          <AiOutlineMenu size={24} />
-        </button>
-
+        <div className="w-196">
+          <button
+            onClick={toggleMenu}
+            className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
+          >
+            <AiOutlineMenu size={24} />
+          </button>
+        </div>
+        
         <div className="text-white font-bold text-lg">
           {t.menu || 'Menú'}
         </div>
@@ -67,41 +69,41 @@ const TopMenu = ({
           {/* 🔘 Selector combinado de enemigos */}
           <div className="flex items-center gap-2">
             <GiSwordClash className="text-blue-400" />
-            <label htmlFor="enemySelect">{translations.addEnemies || 'Añadir enemigos'}:</label>
+            <label htmlFor="enemySelect">{t.addEnemies || 'Añadir enemigos'}:</label>
             <select
               id="enemySelect"
               onChange={handleEnemySelect}
               className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1"
               defaultValue=""
             >
-              <option value="" disabled>{translations.selectType || 'Selecciona tipo'}</option>
-              <option value="blanco">{translations.addWhiteEnemies || 'Enemigos Blancos'}</option>
-              <option value="gris">{translations.addGrayEnemies || 'Enemigos Grises'}</option>
-              <option value="negro">{translations.addBlackEnemies || 'Enemigos Negros'}</option>
-              <option value="comandante">{translations.addCommanders || 'Comandantes'}</option>
+              <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
+              <option value="blanco">{t.addWhiteEnemies || 'Enemigos Blancos'}</option>
+              <option value="gris">{t.addGrayEnemies || 'Enemigos Grises'}</option>
+              <option value="negro">{t.addBlackEnemies || 'Enemigos Negros'}</option>
+              <option value="comandante">{t.addCommanders || 'Comandantes'}</option>
             </select>
           </div>
 
           <button className="flex items-center gap-1 text-sm hover:text-yellow-300" onClick={onSelectBoss}>
             <GiCrownedSkull className="text-yellow-400" />
-            {translations.selectBosses || 'Jefes'}
+            {t.selectBosses || 'Jefes'}
           </button>
 
           <button className="flex items-center gap-1 text-sm hover:text-green-300" onClick={onSelectOther}>
             <GiDiceTarget className="text-green-400" />
-            {translations.selectOther || 'Otros'}
+            {t.selectOther || 'Otros'}
           </button>
 
           <button className="flex items-center gap-1 text-sm hover:text-purple-300" onClick={onAddManual}>
             <MdAddCircleOutline className="text-purple-400" />
-            {translations.addManualEnemy || 'Enemigos Manuales'}
+            {t.addManualEnemy || 'Enemigos Manuales'}
           </button>
 
           <button
             onClick={toggleMenu}
             className="px-3 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
           >
-            {translations.close || 'Cerrar'}
+            {t.close || 'Cerrar'}
           </button>
         </div>
       )}
