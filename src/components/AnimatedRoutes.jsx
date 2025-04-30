@@ -1,6 +1,6 @@
 // src/components/AnimatedRoutes.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import HomeMenu from "@/pages/HomeMenu"; // Lo importamos desde App.jsx ya que estaba ahí
 import Tracker from "@/pages/Tracker";
 import Config from "@/pages/Config";
@@ -17,6 +17,17 @@ export default function AnimatedRoutes() {
         <Route path="/config" element={<Config />} />
         <Route path="/init" element={<InitTracker />} />
       </Routes>
+      {!hideHeader && (
+        <motion.div
+          key="header"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Header />
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }
