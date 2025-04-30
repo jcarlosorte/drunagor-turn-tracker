@@ -179,6 +179,7 @@
       "addManualEnemy": "Añadir Enemigos Manuales",
       "rune": "Runa",
       "backToConfig": "Volver a configuración",
-      "goHome": "Inicio" 
+      "goHome": "Inicio",
+      "close": "Cerrar"
     }
 }
