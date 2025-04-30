@@ -35,18 +35,18 @@ const TopMenu = ({
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
         <button
           onClick={toggleMenu}
-          className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
+          className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700 w-200"
         >
           <AiOutlineMenu size={24} />
         </button>
 
         <div className="text-white font-bold text-lg">
-          Drunagor Tracker
+          {t.menu || 'Menú'}
         </div>
 
         <div className="flex items-center gap-2 text-white text-sm">
           <FaLanguage className="text-blue-300" />
-          <label htmlFor="lang">{translations.language || 'Idioma'}:</label>
+          <label htmlFor="lang">{t.language || 'Idioma'}:</label>
           <select
             id="lang"
             value={language}
