@@ -18,6 +18,7 @@ const TopMenu = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
+  const t = translations?.trackerInit || {};
 
   const toggleMenu = () => setIsOpen(!isOpen);
   
