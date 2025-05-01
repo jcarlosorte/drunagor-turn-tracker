@@ -59,7 +59,7 @@ const InitTracker = () => {
   const handleRandomCommander = () => {
     const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
     if (filtered.length === 0) return;
-  
+    console.log(filtered);
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba';
