@@ -56,6 +56,25 @@ const InitTracker = () => {
     setTrackerData(prev => ({ ...prev, enemies: [...prev.enemies, newEnemy] }));
   };
 
+  const handleRandomCommander = (color) => {
+    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === 'comandante');
+    if (filtered.length === 0) return;
+    const selected = filtered[Math.floor(Math.random() * filtered.length)];
+    const runeIndex = runesColorMap[selected.rune];
+    const runePosition = selected.runePosition || 'arriba';
+    const newEnemy = { 
+      id: selected.id, 
+      rune: selected.rune, 
+      position: runeIndex, 
+      runePosition,
+      imagen: selected.imagen
+    };
+    setTrackerData(prev => ({
+      ...prev,
+      enemies: [...prev.enemies, newEnemy]
+    }));
+  };
+  
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
   const handleAddManual = () => console.log("Añadir enemigo manualmente");
