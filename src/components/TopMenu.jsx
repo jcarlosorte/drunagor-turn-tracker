@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiCrownedSkull, GiDiceTarget } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
-import { BsPeopleFill } from 'react-icons/bs';
 import { MdAddCircleOutline } from 'react-icons/md';
 
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
@@ -22,12 +21,20 @@ const TopMenu = ({
   const t = translations?.trackerInit || {};
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  
+
   const handleEnemySelect = (e) => {
     const value = e.target.value;
     if (value) {
       onAddEnemy(value);
-      e.target.value = ''; // Reinicia el select tras seleccionar
+      e.target.value = '';
+    }
+  };
+
+  const handleManualSelect = (e) => {
+    const value = e.target.value;
+    if (value) {
+      onAddManual(value);
+      e.target.value = '';
     }
   };
 
@@ -42,7 +49,7 @@ const TopMenu = ({
             <AiOutlineMenu size={24} />
           </button>
         </div>
-        
+
         <div className="text-white font-bold text-lg">
           {t.menu || 'Menú'}
         </div>
@@ -65,54 +72,75 @@ const TopMenu = ({
         </div>
       </div>
 
-      {isOpen && (
-        <div className="px-4 pb-4 pt-2 flex flex-wrap justify-center items-center gap-4 text-white">
-          {/* 🔘 Selector combinado de enemigos */}
-          <div className="flex items-center gap-2">
-            <GiSwordClash className="text-blue-400" />
-            <label htmlFor="enemySelect">{t.addEnemies || 'Añadir enemigos'}:</label>
-            <select
-              id="enemySelect"
-              onChange={handleEnemySelect}
-              className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
-              defaultValue=""
-            >
-              <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
-              <option value="blanco">{t.addWhiteEnemies || 'Enemigos Blancos'}</option>
-              <option value="gris">{t.addGrayEnemies || 'Enemigos Grises'}</option>
-              <option value="negro">{t.addBlackEnemies || 'Enemigos Negros'}</option>
-              <option value="comandante">{t.addCommanders || 'Comandantes'}</option>
-            </select>
-          </div>
-
-          <button className="flex items-center gap-1 text-sm hover:text-yellow-300" onClick={onSelectBoss}>
-            <GiCrownedSkull className="text-yellow-400" />
-            {t.selectBosses || 'Jefes'}
-          </button>
-
-          <button className="flex items-center gap-1 text-sm hover:text-green-300" onClick={onSelectOther}>
-            <GiDiceTarget className="text-green-400" />
-            {t.selectOther || 'Otros'}
-          </button>
-
-          <button className="flex items-center gap-1 text-sm hover:text-purple-300" onClick={onAddManual}>
-            <MdAddCircleOutline className="text-purple-400" />
-            {t.addManualEnemy || 'Enemigos Manuales'}
-          </button>
-
-          <button
-            onClick={toggleMenu}
-            className="px-3 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
-            {t.close || 'Cerrar'}
-          </button>
-        </div>
-      )}
+            {/* Aleatorios */}
+            <div className="flex items-center gap-2">
+              <GiSwordClash className="text-blue-400" />
+              <label htmlFor="enemySelect">{t.addEnemies || 'Añadir enemigos'}:</label>
+              <select
+                id="enemySelect"
+                onChange={handleEnemySelect}
+                className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
+                defaultValue=""
+              >
+                <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
+                <option value="blanco">⚪ {t.addWhiteEnemies || 'Enemigos Blancos'}</option>
+                <option value="gris">⚙️ {t.addGrayEnemies || 'Enemigos Grises'}</option>
+                <option value="negro">⚫ {t.addBlackEnemies || 'Enemigos Negros'}</option>
+                <option value="comandante">🎖️ {t.addCommanders || 'Comandantes'}</option>
+              </select>
+            </div>
+
+            {/* Manuales */}
+            <div className="flex items-center gap-2">
+              <MdAddCircleOutline className="text-purple-400" />
+              <label htmlFor="manualSelect">{t.addManualEnemy || 'Enemigos Manuales'}:</label>
+              <select
+                id="manualSelect"
+                onChange={handleManualSelect}
+                className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
+                defaultValue=""
+              >
+                <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
+                <option value="blanco">⚪ {t.addWhiteEnemies || 'Enemigos Blancos'}</option>
+                <option value="gris">⚙️ {t.addGrayEnemies || 'Enemigos Grises'}</option>
+                <option value="negro">⚫ {t.addBlackEnemies || 'Enemigos Negros'}</option>
+                <option value="comandante">🎖️ {t.addCommanders || 'Comandantes'}</option>
+              </select>
+            </div>
+
+            {/* Jefes y Otros */}
+            <div className="flex gap-4 flex-wrap justify-center">
+              <button className="flex items-center gap-1 text-sm hover:text-yellow-300" onClick={onSelectBoss}>
+                <GiCrownedSkull className="text-yellow-400" />
+                {t.selectBosses || 'Jefes'}
+              </button>
+
+              <button className="flex items-center gap-1 text-sm hover:text-green-300" onClick={onSelectOther}>
+                <GiDiceTarget className="text-green-400" />
+                {t.selectOther || 'Otros'}
+              </button>
+            </div>
+
+            <button
+              onClick={toggleMenu}
+              className="mx-auto mt-2 px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+            >
+              {t.close || 'Cerrar'}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-
 export default TopMenu;
-
-
