@@ -114,20 +114,10 @@ const TopMenu = ({
                 <option value="gris">⚙️ {t.addGrayEnemies || 'Enemigos Grises'}</option>
                 <option value="negro">⚫ {t.addBlackEnemies || 'Enemigos Negros'}</option>
                 <option value="comandante">🎖️ {t.addCommanders || 'Comandantes'}</option>
+                <option value="jefe"><GiCrownedSkull className="text-yellow-400" /> {t.selectBosses || 'Jefe'}</option>
+                <option value="otros"><GiDiceTarget className="text-green-400" /> {t.selectOther || 'Otros'}</option>
+                
               </select>
-            </div>
-
-            {/* Jefes y Otros */}
-            <div className="flex gap-4 flex-wrap justify-center">
-              <button className="flex items-center gap-1 text-sm hover:text-yellow-300" onClick={onSelectBoss}>
-                <GiCrownedSkull className="text-yellow-400" />
-                {t.selectBosses || 'Jefes'}
-              </button>
-
-              <button className="flex items-center gap-1 text-sm hover:text-green-300" onClick={onSelectOther}>
-                <GiDiceTarget className="text-green-400" />
-                {t.selectOther || 'Otros'}
-              </button>
             </div>
 
             <button
