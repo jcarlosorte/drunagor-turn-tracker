@@ -186,7 +186,14 @@ const InitTracker = () => {
         <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
           <div className="no-header" />
           <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
-          <TopMenu onAddEnemy={openCategorySelector} onSelectBoss={handleSelectBoss} onSelectOther={handleSelectOther} onAddManual={handleAddManual} behaviors={behaviors} />
+          <TopMenu
+            onAddEnemy={openCategorySelector}
+            onSelectCommander={handleRandomCommander} // 👈 aquí
+            onSelectBoss={handleSelectBoss}
+            onSelectOther={handleSelectOther}
+            onAddManual={handleAddManual}
+            behaviors={behaviors}
+          />
           <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
             {[...Array(11)].map((_, idx) => renderSlot(idx))}
           </div>
