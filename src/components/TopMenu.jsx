@@ -11,6 +11,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const TopMenu = ({
   onAddEnemy,
+  onSelectCommander,
   onSelectBoss,
   onSelectOther,
   onAddManual,
@@ -24,11 +25,19 @@ const TopMenu = ({
 
   const handleEnemySelect = (e) => {
     const value = e.target.value;
-    if (value) {
-      onAddEnemy(value);
-      e.target.value = '';
+    if (!value) return;
+  
+    if (value === 'comandante') {
+      // Ejecuta selección aleatoria de comandante por color (puedes añadir un prompt o color fijo si quieres)
+      onSelectCommander('negro'); // 👈 aquí eliges el color que quieras por defecto o...
+      // Mejor: podrías abrir otro select para que elija color del comandante.
+    } else {
+      onAddEnemy(value); // blanco, gris, negro normales van por categoría
     }
+  
+    e.target.value = '';
   };
+
 
   const handleManualSelect = (e) => {
     const value = e.target.value;
