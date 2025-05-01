@@ -29,7 +29,7 @@ const TopMenu = ({
   
     if (value === 'comandante') {
       // Ejecuta selección aleatoria de comandante por color (puedes añadir un prompt o color fijo si quieres)
-      onSelectCommander('negro'); // 👈 aquí eliges el color que quieras por defecto o...
+      onSelectCommander(); // 👈 aquí eliges el color que quieras por defecto o...
       // Mejor: podrías abrir otro select para que elija color del comandante.
     } else {
       onAddEnemy(value); // blanco, gris, negro normales van por categoría
