@@ -275,9 +275,9 @@ const InitTracker = () => {
     
           {categorySelector.open && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-              <div className="bg-white text-black p-6 rounded-xl shadow-xl">
-                <h2 className="text-lg font-bold mb-4">{ti.selectCategory}</h2>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white text-black p-6 rounded-xl shadow-xl w-[90%] max-w-md">
+                <h2 className="text-lg font-bold mb-4 text-center">{ti.selectCategory}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
                   {allowedCategories.map(cat => (
                     <button
                       key={cat}
