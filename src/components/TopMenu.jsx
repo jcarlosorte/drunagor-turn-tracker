@@ -1,5 +1,6 @@
 // src/components/TopMenu.jsx
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiCrownedSkull, GiDiceTarget } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
