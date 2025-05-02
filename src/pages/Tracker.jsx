@@ -295,7 +295,13 @@ const TrackerSelect = () => {
         {/* Flex en filas con wrap */}
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
-            const enemiesOfColor = enemiesInSelectedExpansions.filter(e => e.color === color.id);
+            const enemiesOfColorMap = new Map();
+            enemiesInSelectedExpansions.forEach(e => {
+              if (e.color === color.id && !enemiesOfColorMap.has(e.id)) {
+                enemiesOfColorMap.set(e.id, e);
+              }
+            });
+            const enemiesOfColor = Array.from(enemiesOfColorMap.values());
             if (enemiesOfColor.length === 0) return null;
       
             let areaBg = "bg-white";
