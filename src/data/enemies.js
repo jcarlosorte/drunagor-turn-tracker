@@ -168,8 +168,8 @@ export const ENEMIES = [
   { id: "shadow_mistress", nombre: "Shadow Mistress", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "war_loot", imagen: shadow_mistress, rune: "naranja", runePosition: "arriba" },
   { id: "walking_horror", nombre: "Walking Horror", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "war_loot", imagen: walking_horror, rune: "verde", runePosition: "abajo" },
   { id: "bone_reaper", nombre: "Bone Reaper", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "war_loot", imagen: bone_reaper, rune: "azul", runePosition: "arriba" },
-  { id: "commander_twins", nombre: "Commander Twins", vida: 0, movimiento: 0, color: "comandante", tipo: "enemigo", expansionId: "war_loot", imagen: commander_twins, rune: "rojo", runePosition: "abajo" },
-  { id: "commander_thern", nombre: "Commander Thern", vida: 0, movimiento: 0, color: "comandante", tipo: "enemigo", expansionId: "war_loot", imagen: commander_thern, rune: "gris", runePosition: "arriba" },
+  { id: "commander_twins", nombre: "Commander Twins", vida: 0, movimiento: 0, color: "comandante", categoria: "comandante", tipo: "enemigo", expansionId: "war_loot", imagen: commander_twins, rune: "rojo", runePosition: "abajo" },
+  { id: "commander_thern", nombre: "Commander Thern", vida: 0, movimiento: 0, color: "comandante", categoria: "comandante", tipo: "enemigo", expansionId: "war_loot", imagen: commander_thern, rune: "gris", runePosition: "arriba" },
 
   { id: "dream_titan", nombre: "Dream Titan", vida: 0, movimiento: 0, color: "shadow", tipo: "enemigo", expansionId: "apocalypse_adventures", imagen: dream_titan, rune: "naranja", runePosition: "abajo" },
   { id: "chain_master", nombre: "Chain Master", vida: 0, movimiento: 0, color: "dark", tipo: "enemigo", expansionId: "apocalypse_adventures", imagen: chain_master, rune: "verde", runePosition: "arriba" },
