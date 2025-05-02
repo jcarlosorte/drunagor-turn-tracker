@@ -318,7 +318,7 @@ const TrackerSelect = () => {
               <div
                   key={color.id}
                   className={`flex flex-col p-4 rounded-lg shadow items-center ${areaBg} ${textColor}
-                    ${isCompact ? 'max-w-[480px] flex-1' : 'w-full'}
+                    ${isCompact ? 'max-w-[600px] flex-1' : 'w-full'}
                   `}
                 >
                   <h3 className="text-xl font-bold mb-4 text-center">
