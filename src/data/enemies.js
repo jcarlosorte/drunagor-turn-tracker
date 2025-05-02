@@ -141,8 +141,15 @@ export const ENEMIES = [
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo" },
   { id: "aralhezec", nombre: "Aral´hezec", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
 
-  { id: "wermunggdir", nombre: "Wermunggdir", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "desert", imagen: wermunggdir, rune: "azul", runePosition: "abajo" },
-  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "gris", runePosition: "arriba" },
+  { id: "wermunggdir", nombre: "Wermunggdir", vida: 8, movimiento: 3, ataque: 5, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "desert", imagen: wermunggdir, rune: "naranja", runePosition: "arriba" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 7, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 8, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 15, movimiento: 6, ataque: 6, color: "gris", categoria: "veterano", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 15, movimiento: 6, ataque: 7, color: "gris", categoria: "veterano", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 12, movimiento: 5, ataque: 5, color: "gris", categoria: "soldado", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 12, movimiento: 5, ataque: 6, color: "gris", categoria: "soldado", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "estandar" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 9, movimiento: 5, ataque: 4, color: "gris", categoria: "bisoño", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
+  { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 9, movimiento: 5, ataque: 5, color: "gris", categoria: "bisoño", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "estandar" },
 
   { id: "shadow_pain", nombre: "Shadow Pain", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "dark_world", imagen: shadow_pain, rune: "naranja", runePosition: "abajo" },
   { id: "shadow_guardian", nombre: "Shadow Guardian", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "dark_world", imagen: shadow_guardian, rune: "verde", runePosition: "arriba" },
