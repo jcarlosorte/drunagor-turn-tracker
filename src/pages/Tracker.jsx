@@ -23,8 +23,12 @@ const TrackerSelect = () => {
   const navigate = useNavigate();
   
   const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
-  const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
-  const enemyIdsInSelectedExpansions = [...new Set(fullSelectedExpansions.flatMap(exp => exp.enemies))];
+  //const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
+  //const enemyIdsInSelectedExpansions = [...new Set(fullSelectedExpansions.flatMap(exp => exp.enemies))];
+  const heroIdsInSelectedExpansions = HEROES.filter(hero => selectedExpansions.includes(hero.expansionId)).map(hero => hero.id);
+  
+  const enemyIdsInSelectedExpansions = ENEMIES.filter(enemy => selectedExpansions.includes(enemy.expansionId)).map(enemy => enemy.id);
+  
   const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
   const enemiesInSelectedExpansions = Array.from(
     new Map(
