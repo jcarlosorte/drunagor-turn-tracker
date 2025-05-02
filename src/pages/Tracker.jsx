@@ -22,27 +22,14 @@ const TrackerSelect = () => {
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
   
-  const fullSelectedExpansions = EXPANSIONS.filter(exp => selectedExpansions.includes(exp.id));
-  //const heroIdsInSelectedExpansions = fullSelectedExpansions.flatMap(exp => exp.heroes);
-  //const enemyIdsInSelectedExpansions = [...new Set(fullSelectedExpansions.flatMap(exp => exp.enemies))];
-  const heroIdsInSelectedExpansions = HEROES.filter(hero => selectedExpansions.includes(hero.expansionId)).map(hero => hero.id);
-  
-  const enemyIdsInSelectedExpansions = ENEMIES.filter(enemy => selectedExpansions.includes(enemy.expansionId)).map(enemy => enemy.id);
-  
-  const heroesInSelectedExpansions = HEROES.filter(h => heroIdsInSelectedExpansions.includes(h.id));
-  const enemiesInSelectedExpansions = Array.from(
-    new Map(
-      ENEMIES
-        .filter(e => enemyIdsInSelectedExpansions.includes(e.id) && e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro")
-        .map(e => [e.id, e])
-    ).values()
+  const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.includes(h.expansionId));
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => 
+    selectedExpansions.includes(e.expansionId) &&
+    e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro"
   );
-
+  
   useEffect(() => {
-    const validEnemies = enemyIdsInSelectedExpansions.filter(id => {
-      const enemy = ENEMIES.find(e => e.id === id);
-      return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
-    });
+    const validEnemies = enemiesInSelectedExpansions.map(e => e.id);
   
     const stored = localStorage.getItem("trackerData");
     if (stored) {
@@ -60,7 +47,7 @@ const TrackerSelect = () => {
     } else {
       setSelectedEnemies(validEnemies);
     }
-  }, [enemyIdsInSelectedExpansions.join(',')]);
+  }, [selectedExpansions.join(',')]);
 
 
   const getHeroName = (heroId) => translations.heroes?.[heroId] || heroId;
@@ -143,7 +130,7 @@ const TrackerSelect = () => {
 
   const handleReset = () => {
     // Volver a calcular los enemigos válidos según expansiones
-    const validEnemies = enemyIdsInSelectedExpansions.filter(id => {
+    const validEnemies = enemiesInSelectedExpansions.filter(id => {
       const enemy = ENEMIES.find(e => e.id === id);
       return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
     });
