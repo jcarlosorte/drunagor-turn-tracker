@@ -146,7 +146,7 @@ export const ENEMIES = [
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 12, ataque: 4, movimiento: 5, color: "blanco", categoria: "soldado", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "estandar" },
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 9, ataque: 4, movimiento: 4, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "alternativo" },
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 9, ataque: 4, movimiento: 3, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "estandar" },
-  { id: "aralhezec", nombre: "Aral´hezec", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
+  { id: "aralhezec", nombre: "Aral´hezec", vida: 25, ataque: 4, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
 
   { id: "wermunggdir", nombre: "Wermunggdir", vida: 8, movimiento: 3, ataque: 5, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "desert", imagen: wermunggdir, rune: "naranja", runePosition: "arriba" },
   { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 7, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
