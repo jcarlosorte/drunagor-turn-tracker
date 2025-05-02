@@ -84,14 +84,6 @@ const TrackerSelect = () => {
     );
   };
 
-  const handleRandomEnemySelect = (color) => {
-    const matching = enemiesInSelectedExpansions.filter(e => e.color === color && !selectedEnemies.includes(e.id));
-    if (matching.length > 0) {
-      const randomEnemy = matching[Math.floor(Math.random() * matching.length)];
-      handleEnemySelect(randomEnemy.id);
-    }
-  };
-
   const handleConfirm = () => {
     if (selectedHeroes.length === 0) {
       alert(t.noHeroesSelected || "Debes seleccionar al menos un héroe.");
