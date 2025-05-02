@@ -136,6 +136,7 @@ export const ENEMIES = [
 
   { id: "ravager", nombre: "Ravager", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "luccanor", imagen: ravager, rune: "gris", runePosition: "abajo" },
   { id: "lady_claw", nombre: "Lady Claw", vida: 0, movimiento: 0, color: "gris", tipo: "enemigo", expansionId: "luccanor", imagen: lady_claw, rune: "naranja", runePosition: "arriba" },
+  { id: "luccanor_com", nombre: "Commander Luccanor", vida: 7, movimiento: 5, ataque: 4, color: "comandante", categoria: "comandante", tipo: "enemigo", expansionId: "luccanor", imagen: ravager, rune: "azul", runePosition: "arriba" },
 
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 0, movimiento: 0, color: "blanco", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo" },
   { id: "aralhezec", nombre: "Aral´hezec", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
