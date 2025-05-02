@@ -8,7 +8,7 @@ function Header() {
   return (
     <>
       <img
-        src={`${import.meta.env.BASE_URL}logo.png`}
+        src={`${import.meta.env.BASE_URL}Corebox_Logo-1536x864.png`}
         alt="Drunagor Logo"
         className="mx-auto w-40 mb-4"
       />
