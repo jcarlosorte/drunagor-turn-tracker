@@ -10,7 +10,7 @@ function Header() {
       <img
         src={`${import.meta.env.BASE_URL}Corebox_Logo-1536x864.png`}
         alt="Drunagor Logo"
-        className="mx-auto mb-4"
+        className="mx-auto mb-4 w-1/2 "
       />
       <h1 className="text-4xl font-bold mb-6">
         {translations.home.title}
