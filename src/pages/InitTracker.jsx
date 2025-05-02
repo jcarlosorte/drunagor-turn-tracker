@@ -78,7 +78,6 @@ const InitTracker = () => {
     }));
   };
 
-  
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
   const handleAddManual = () => console.log("Añadir enemigo manualmente");
