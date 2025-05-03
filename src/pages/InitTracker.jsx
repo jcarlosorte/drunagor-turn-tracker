@@ -56,7 +56,6 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba';
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
-    //setTrackerData(prev => ({ ...prev, enemies: [...prev.enemies, newEnemy] })); 
     placeEnemy({
       enemy: {
         id: selected.id,
@@ -71,7 +70,6 @@ const InitTracker = () => {
   const handleRandomCommander = () => {
     const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
     if (filtered.length === 0) return;
-    console.log(filtered);
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba';
@@ -93,7 +91,7 @@ const InitTracker = () => {
       },
       position: runeIndex
     });
-    //setTrackerData(prev => ({ ...prev, enemies: [...prev.enemies, newEnemy] }));
+   
   };
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
@@ -178,9 +176,8 @@ const InitTracker = () => {
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="top" />)}
-          //{isRune && enemiesAbove.map((e, i) => <EnemyCard key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} position="top" />)}
-          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />
-))}
+     
+          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />))}
         </div>
 
         <div className="flex items-center justify-center h-8 bg-gray-300">
@@ -207,7 +204,7 @@ const InitTracker = () => {
 
         <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesBelow.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="bottom" />)}
-          //{isRune && enemiesBelow.map((e, i) => <EnemyCard key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} position="bottom" />)}
+       
           {isRune && enemiesBelow.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i + '-b'} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="bottom" />))}
         </div>
       </div>
