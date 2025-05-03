@@ -72,7 +72,7 @@ const InitTracker = () => {
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
-    const runePosition = selected.runePosition || 'arriba';
+    const runePosition = selected.runePosition;
   
     //const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
 
