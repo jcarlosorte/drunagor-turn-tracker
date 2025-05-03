@@ -6,14 +6,26 @@ export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
 
   const placeEnemy = (enemy, position) => {
-    setPlacedEnemies(prev => [...prev, { enemy, position }]);
+    const newEnemy = { enemy, position };
+    console.log('Placing enemy:', newEnemy);
+    setPlacedEnemies(prev => {
+      const updated = [...prev, newEnemy];
+      console.log('Updated placedEnemies:', updated);
+      return updated;
+    });
   };
 
   const removeEnemyAt = (position) => {
-    setPlacedEnemies(prev => prev.filter(e => e.position !== position));
+    console.log('Removing enemy at position:', position);
+    setPlacedEnemies(prev => {
+      const updated = prev.filter(e => e.position !== position);
+      console.log('Updated placedEnemies after removal:', updated);
+      return updated;
+    });
   };
 
   const resetPlacedEnemies = () => {
+    console.log('Resetting placedEnemies');
     setPlacedEnemies([]);
   };
 
@@ -31,3 +43,4 @@ export const useInitEnemies = () => {
   }
   return context;
 };
+
