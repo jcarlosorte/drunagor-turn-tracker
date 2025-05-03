@@ -57,7 +57,15 @@ const InitTracker = () => {
     const runePosition = selected.runePosition || 'arriba';
     const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
     //setTrackerData(prev => ({ ...prev, enemies: [...prev.enemies, newEnemy] })); 
-    placeEnemy(newEnemy);
+    placeEnemy({
+      enemy: {
+        id: selected.id,
+        rune: selected.rune,
+        imagen: selected.imagen,
+        runePosition
+      },
+      position: runeIndex
+    });
   };
 
   const handleRandomCommander = () => {
@@ -76,7 +84,15 @@ const InitTracker = () => {
       imagen: selected.imagen
     };
 
-    placeEnemy(newEnemy);
+    placeEnemy({
+      enemy: {
+        id: selected.id,
+        rune: selected.rune,
+        imagen: selected.imagen,
+        runePosition
+      },
+      position: runeIndex
+    });
     //setTrackerData(prev => ({ ...prev, enemies: [...prev.enemies, newEnemy] }));
   };
 
