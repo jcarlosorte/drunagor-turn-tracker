@@ -7,7 +7,6 @@ import { ROLES } from '@/data/roles';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
-import { InitEnemiesProvider } from '@/context/InitEnemiesContext';
 import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
@@ -187,7 +186,7 @@ const InitTracker = () => {
   };
 
   return (
-    <InitEnemiesProvider>
+    
       <PageTransition>
         <div className={isLandscape ? "" : "portrait-lock"}>
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
@@ -231,7 +230,7 @@ const InitTracker = () => {
           </div>
         </div>
       </PageTransition>
-    </InitEnemiesProvider>
+    
   );
 };
 
