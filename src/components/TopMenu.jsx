@@ -5,9 +5,13 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiCrownedSkull, GiDiceTarget } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
+import { useInitEnemies } from "@/context/InitEnemiesContext";
 
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
+
+const { resetPlacedEnemies } = useInitEnemies();
+
 
 const TopMenu = ({
   onAddEnemy,
@@ -128,7 +132,12 @@ const TopMenu = ({
                 
               </select>
             </div>
-
+            <button
+              onClick={resetPlacedEnemies}
+              className="mx-auto px-4 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-full text-sm"
+            >
+              {t.resetEnemies || 'Resetear enemigos'}
+            </button>
             <button
               onClick={toggleMenu}
               className="mx-auto mt-2 px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
