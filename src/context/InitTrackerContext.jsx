@@ -1,18 +1,37 @@
-// src/context/InitTrackerContext.jsx
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-const InitTrackerContext = createContext();
+const InitEnemiesContext = createContext();
 
-export const InitTrackerProvider = ({ children }) => {
-  const [selectedEnemies, setSelectedEnemies] = useState([]);
+export const InitEnemiesProvider = ({ children }) => {
+  const [placedEnemies, setPlacedEnemies] = useState([]);
 
-  const resetEnemies = () => setSelectedEnemies([]);
+  const placeEnemy = (enemy, position) => {
+    setPlacedEnemies((prev) => [
+      ...prev.filter((e) => e.position !== position),
+      { ...enemy, position },
+    ]);
+  };
+
+  const removeEnemyAt = (position) => {
+    setPlacedEnemies((prev) => prev.filter((e) => e.position !== position));
+  };
+
+  const resetPlacedEnemies = () => {
+    setPlacedEnemies([]);
+  };
 
   return (
-    <InitTrackerContext.Provider value={{ selectedEnemies, setSelectedEnemies, resetEnemies }}>
+    <InitEnemiesContext.Provider
+      value={{
+        placedEnemies,
+        placeEnemy,
+        removeEnemyAt,
+        resetPlacedEnemies,
+      }}
+    >
       {children}
-    </InitTrackerContext.Provider>
+    </InitEnemiesContext.Provider>
   );
 };
 
-export const useInitTracker = () => useContext(InitTrackerContext);
+export const useInitEnemies = () => useContext(InitEnemiesContext);
