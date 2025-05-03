@@ -134,8 +134,11 @@ const InitTracker = () => {
   const countsPerIndex = Array(11).fill(0).map((_, index) => {
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    //const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
+    //const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    const enemiesAbove = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'arriba');
+    const enemiesBelow = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'abajo');
+
     return Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
   });
 
@@ -165,14 +168,19 @@ const InitTracker = () => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    //const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
+    //const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    const enemiesAbove = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'arriba');
+    const enemiesBelow = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'abajo');
+
 
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="top" />)}
-          {isRune && enemiesAbove.map((e, i) => <EnemyCard key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} position="top" />)}
+          //{isRune && enemiesAbove.map((e, i) => <EnemyCard key={e.id + '-' + i} name={getEnemyName(e.id)} image={e.imagen} position="top" />)}
+          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />
+))}
         </div>
 
         <div className="flex items-center justify-center h-8 bg-gray-300">
@@ -199,7 +207,8 @@ const InitTracker = () => {
 
         <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesBelow.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="bottom" />)}
-          {isRune && enemiesBelow.map((e, i) => <EnemyCard key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} position="bottom" />)}
+          //{isRune && enemiesBelow.map((e, i) => <EnemyCard key={e.id + '-' + i + '-b'} name={getEnemyName(e.id)} image={e.imagen} position="bottom" />)}
+          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i + '-b'} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="bottom" />))}
         </div>
       </div>
     );
