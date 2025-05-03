@@ -118,8 +118,8 @@ const InitTracker = () => {
   const countsPerIndex = Array(11).fill(0).map((_, index) => {
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = (placedEnemy.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    const enemiesBelow = (placedEnemy.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
+    const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
     return Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
   });
 
@@ -149,8 +149,8 @@ const InitTracker = () => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = (placedEnemy.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    const enemiesBelow = (placedEnemy.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
+    const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
+    const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
 
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
