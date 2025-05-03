@@ -55,7 +55,7 @@ const InitTracker = () => {
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba';
-    const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
+    //const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
     placeEnemy({
       enemy: {
         id: selected.id,
@@ -74,13 +74,7 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition || 'arriba';
   
-    const newEnemy = { 
-      id: selected.id, 
-      rune: selected.rune, 
-      position: runeIndex, 
-      runePosition,
-      imagen: selected.imagen
-    };
+    //const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
 
     placeEnemy({
       enemy: {
