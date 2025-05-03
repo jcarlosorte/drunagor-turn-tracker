@@ -6,14 +6,11 @@ export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
 
   const placeEnemy = (enemy, position) => {
-    setPlacedEnemies((prev) => [
-      ...prev.filter((e) => e.position !== position),
-      { ...enemy, position },
-    ]);
+    setPlacedEnemies(prev => [...prev, { enemy, position }]);
   };
 
   const removeEnemyAt = (position) => {
-    setPlacedEnemies((prev) => prev.filter((e) => e.position !== position));
+    setPlacedEnemies(prev => prev.filter(e => e.position !== position));
   };
 
   const resetPlacedEnemies = () => {
@@ -21,17 +18,16 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider
-      value={{
-        placedEnemies,
-        placeEnemy,
-        removeEnemyAt,
-        resetPlacedEnemies,
-      }}
-    >
+    <InitEnemiesContext.Provider value={{ placedEnemies, placeEnemy, removeEnemyAt, resetPlacedEnemies }}>
       {children}
     </InitEnemiesContext.Provider>
   );
 };
 
-export const useInitEnemies = () => useContext(InitEnemiesContext);
+export const useInitEnemies = () => {
+  const context = useContext(InitEnemiesContext);
+  if (!context) {
+    throw new Error('useInitEnemies must be used within an InitEnemiesProvider');
+  }
+  return context;
+};
