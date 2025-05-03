@@ -1,5 +1,6 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
+import { MdScreenRotation } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
@@ -101,8 +102,12 @@ const InitTracker = () => {
 
   if (!isLandscape) {
     return (
-      <div className="flex items-center justify-center h-screen text-center bg-black text-white p-4">
-        <p className="text-lg">Por favor, gira tu dispositivo a orientación horizontal para usar el control de turnos.</p>
+      <div className="flex flex-col items-center justify-center h-screen text-center bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
+        <div className="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl backdrop-blur-md animate-fade-in">
+          <MdScreenRotation className="text-6xl mb-4 animate-spin-slow" />
+          <p className="text-xl font-semibold">Por favor, gira tu dispositivo a orientación horizontal</p>
+          <p className="text-sm mt-2 text-gray-300">Para disfrutar correctamente del control de turnos</p>
+        </div>
       </div>
     );
   }
