@@ -6,6 +6,7 @@ import { ENEMIES } from '@/data/enemies';
 import { ROLES } from '@/data/roles';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { InitTrackerProvider } from '@/context/InitTrackerContext';
 import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
@@ -30,6 +31,7 @@ const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
+  const { selectedEnemies, setSelectedEnemies, resetEnemies } = useInitTracker();
   const { language, translations } = useLanguage();
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
