@@ -318,7 +318,7 @@ const TrackerSelect = () => {
               <div
                   key={color.id}
                   className={`flex flex-col p-4 rounded-lg shadow items-center ${areaBg} ${textColor}
-                    ${isCompact ? 'flex-wrap max-w-[800px] flex-1' : 'w-full'}
+                    ${isCompact ? 'max-w-[800px] flex-1' : 'w-full'}
                   `}
                 >
                   <h3 className="text-xl font-bold mb-4 text-center">
@@ -330,7 +330,8 @@ const TrackerSelect = () => {
                     className={
                       ['blanco', 'gris'].includes(color.id)
                         ? 'grid gap-4 w-full'
-                        : 'flex flex-row gap-4'
+                        //: 'flex flex-row gap-4'
+                        : 'flex flex-wrap gap-4 justify-center w-full'
                     }
                     style={
                       ['blanco', 'gris'].includes(color.id)
