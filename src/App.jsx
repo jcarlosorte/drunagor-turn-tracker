@@ -1,6 +1,7 @@
 // App.jsx
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
+import { InitEnemiesProvider } from '@/context/InitEnemiesContext';
 import AnimatedRoutes from "@/components/AnimatedRoutes";
 
 function Header() {
@@ -33,9 +34,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router basename="/drunagor-turn-tracker/">
-      <AppContent />
-    </Router>
+    <InitEnemiesProvider>
+      <Router basename="/drunagor-turn-tracker/">
+        <AppContent />
+      </Router>
+    </InitEnemiesProvider>
   );
 }
 
