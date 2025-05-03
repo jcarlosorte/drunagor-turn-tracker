@@ -182,6 +182,7 @@
       "rune": "Runa",
       "backToConfig": "Volver a configuración",
       "goHome": "Inicio",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "resetEnemies": "Reset"      
     }
 }
