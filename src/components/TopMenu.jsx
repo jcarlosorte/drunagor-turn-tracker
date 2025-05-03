@@ -10,8 +10,6 @@ import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
 
-const { resetPlacedEnemies } = useInitEnemies();
-
 
 const TopMenu = ({
   onAddEnemy,
@@ -24,6 +22,7 @@ const TopMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
   const t = translations?.trackerInit || {};
+  const { resetPlacedEnemies } = useInitEnemies();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
