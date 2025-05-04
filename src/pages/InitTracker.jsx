@@ -71,6 +71,7 @@ const InitTracker = () => {
   };
 
   const handleManualEnemyAdd = (enemyId, behaviorType) => {
+    console.log(enemyId);
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
