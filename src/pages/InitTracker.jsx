@@ -129,8 +129,8 @@ const InitTracker = () => {
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     //const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
     //const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
-    const enemiesAbove = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'arriba');
-    const enemiesBelow = (placedEnemies.enemies || []).filter(e => e.position === index && e.enemy.runePosition === 'abajo');
+    const enemiesAbove = (placedEnemies.enemies || []).filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
+    const enemiesBelow = (placedEnemies.enemies || []).filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
     return Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
   });
