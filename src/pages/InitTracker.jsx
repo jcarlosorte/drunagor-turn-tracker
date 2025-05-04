@@ -29,6 +29,7 @@ const runesColorMap = {
 };
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
+const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -38,6 +39,7 @@ const InitTracker = () => {
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
+  const tb = translations.trackerSelect?.comportamientos || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
