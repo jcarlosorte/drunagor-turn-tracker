@@ -46,6 +46,7 @@ const TopMenu = ({
 
   const handleManualSelect = (e) => {
     const value = e.target.value;
+    console.log(value);
     if (!value) return;
   
     if (value === 'jefe') {
