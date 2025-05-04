@@ -23,9 +23,11 @@ const TopMenu = ({
   const { language, setLanguage, translations } = useLanguage();
   const t = translations?.trackerInit || {};
   const { resetPlacedEnemies } = useInitEnemies();
-
+  const [enemySelect, setEnemySelect] = useState('');
+  const [manualSelect, setManualSelect] = useState('');
+  
   const toggleMenu = () => setIsOpen(!isOpen);
-
+  
   const handleEnemySelect = (e) => {
     const value = e.target.value;
     if (!value) return;
@@ -38,16 +40,23 @@ const TopMenu = ({
       onAddEnemy(value); // blanco, gris, negro normales van por categoría
     }
   
-    e.target.value = '';
+    setEnemySelect(''); // resetear
   };
 
 
   const handleManualSelect = (e) => {
     const value = e.target.value;
-    if (value) {
+    if (!value) return;
+  
+    if (value === 'jefe') {
+      onSelectBoss();
+    } else if (value === 'otros') {
+      onSelectOther();
+    } else {
       onAddManual(value);
-      e.target.value = '';
     }
+  
+    setManualSelect('');
   };
 
   return (
