@@ -6,7 +6,7 @@ export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
 
   const placeEnemy = (enemy, position) => {
-    const newEnemy = { enemy, position };
+    const newEnemy = { ..enemy, position };
     console.log('Placing enemy:', newEnemy);
     setPlacedEnemies(prev => {
       const updated = [...prev, newEnemy];
