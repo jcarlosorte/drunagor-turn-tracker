@@ -171,6 +171,7 @@
       "menu": "Menú",
       "language": "Idioma",
       "addEnemies": "Añadir Enemigos Aleatorios",
+      "addEnemie": "Añadir",
       "selectType": "Selecciona Tipo",
       "addWhiteEnemies": "MB (Blanco)",
       "addGrayEnemies": "MG (Gris)",
@@ -183,6 +184,6 @@
       "backToConfig": "Volver a configuración",
       "goHome": "Inicio",
       "close": "Cerrar",
-      "resetEnemies": "Resetear"      
+      "resetEnemies": "Resetear"
     }
 }
