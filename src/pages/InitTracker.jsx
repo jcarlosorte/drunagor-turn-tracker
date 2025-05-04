@@ -42,7 +42,7 @@ const InitTracker = () => {
   const enemies = trackerData.enemies;
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
   const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
-  const [selectedColor, setSelectedColor] = useState('');
+  const [manualSelector, setManualSelector] = useState({ open: false, color: null });
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -96,7 +96,7 @@ const InitTracker = () => {
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
-  const handleAddManual = () => console.log("Añadir enemigo manualmente");
+  const handleAddManual = () => setManualSelector({ open: true, color: null });
 
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
@@ -132,8 +132,6 @@ const InitTracker = () => {
   const countsPerIndex = Array(11).fill(0).map((_, index) => {
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    //const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    //const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
@@ -166,8 +164,6 @@ const InitTracker = () => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    //const enemiesAbove = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'arriba');
-    //const enemiesBelow = (placedEnemies.enemies || []).filter(e => runesColorMap[e.rune] === index && e.runePosition === 'abajo');
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
@@ -244,6 +240,70 @@ const InitTracker = () => {
                 </div>
               </div>
             )}
+
+            {manualSelector.open && !manualSelector.color && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white text-black p-6 rounded-xl shadow-xl w-[90%] max-w-md">
+                  <h2 className="text-lg font-bold mb-4 text-center">{ti.selectColor}</h2>
+                  <div className="grid grid-cols-3 gap-2 mb-6">
+                    {['blanco', 'gris', 'negro'].map(color => (
+                      <button key={color} onClick={() => setManualSelector({ open: true, color })} className={`bg-${color}-500 hover:opacity-90 px-4 py-2 rounded text-white`}>
+                        {color}
+                      </button>
+                    ))}
+                  </div>
+                  <button onClick={() => setManualSelector({ open: false, color: null })} className="w-full text-center mt-2 text-sm text-gray-600 hover:text-gray-900">
+                    {ti.cancel}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {manualSelector.open && manualSelector.color && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-auto">
+                <div className="bg-white text-black p-6 rounded-xl shadow-xl w-[90%] max-w-3xl">
+                  <h2 className="text-lg font-bold mb-4 text-center">
+                    {ti.selectEnemyFromColor} ({manualSelector.color})
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {ENEMIES
+                      .filter(e => e.color === manualSelector.color && enemies.includes(e.id))
+                      .map(e => (
+                        <div key={e.id} className="border p-2 rounded shadow text-center">
+                          <img src={e.imagen} alt={e.id} className="w-full h-24 object-cover rounded mb-2" />
+                          <p className="text-sm font-semibold">{getEnemyName(e.id)}</p>
+                          {['campeon', 'veterano', 'soldado', 'bisoño'].includes(e.categoria) && (
+                            <div className="text-xs text-gray-600">{tc[e.categoria]}</div>
+                          )}
+                          <button
+                            className="mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded"
+                            onClick={() => {
+                              const runeIndex = runesColorMap[e.rune];
+                              const runePosition = e.runePosition;
+                              placeEnemy({
+                                enemy: {
+                                  id: e.id,
+                                  rune: e.rune,
+                                  imagen: e.imagen,
+                                  runePosition,
+                                  position: runeIndex
+                                }
+                              });
+                              setManualSelector({ open: false, color: null });
+                            }}
+                          >
+                            {ti.add}
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                  <button onClick={() => setManualSelector({ open: false, color: null })} className="mt-4 block text-center text-sm text-gray-600 hover:text-gray-900">
+                    {ti.cancel}
+                  </button>
+                </div>
+              </div>
+            )}
+
   
             <div className="mt-8 flex justify-center gap-4">
               <button onClick={() => navigate('/')} className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow">
