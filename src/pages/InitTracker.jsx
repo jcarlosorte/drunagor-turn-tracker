@@ -89,6 +89,26 @@ const InitTracker = () => {
    
   };
 
+
+const [manualSelect, setManualSelect] = useState('');
+const { activeExpansions } = useContext(ExpansionContext);
+const { enemies } = useContext(GameDataContext);
+
+const filteredEnemies = useMemo(() => {
+  return enemies.filter((e) =>
+    e.color === manualSelect && activeExpansions.includes(e.expansionId)
+  );
+}, [manualSelect, enemies, activeExpansions]);
+
+const handleEnemySelection = (enemy) => {
+  if (['blanco', 'gris', 'negro'].includes(enemy.color)) {
+    openCategoryAndBehaviorModal(enemy);
+  } else {
+    addEnemyDirectly(enemy); // Jefes, Comandantes, Otros
+  }
+};
+
+
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
   const handleAddManual = () => console.log("Añadir enemigo manualmente");
