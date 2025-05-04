@@ -39,9 +39,11 @@ const InitTracker = () => {
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
   const behaviors = trackerData.behaviors;
+  const enemies = trackerData.enemies;
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
   const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
-
+  const [selectedColor, setSelectedColor] = useState('');
+  
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
 
@@ -74,9 +76,6 @@ const InitTracker = () => {
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
-  
-    //const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
-
     placeEnemy({
       enemy: {
         id: selected.id,
@@ -89,25 +88,10 @@ const InitTracker = () => {
    
   };
 
-
-const [manualSelect, setManualSelect] = useState('');
-const { activeExpansions } = useContext(ExpansionContext);
-const { enemies } = useContext(GameDataContext);
-
-const filteredEnemies = useMemo(() => {
-  return enemies.filter((e) =>
-    e.color === manualSelect && activeExpansions.includes(e.expansionId)
-  );
-}, [manualSelect, enemies, activeExpansions]);
-
-const handleEnemySelection = (enemy) => {
-  if (['blanco', 'gris', 'negro'].includes(enemy.color)) {
-    openCategoryAndBehaviorModal(enemy);
-  } else {
-    addEnemyDirectly(enemy); // Jefes, Comandantes, Otros
-  }
-};
-
+  const getEnemiesByColor = (trackerEnemies, color) => {
+      return trackerEnemies.map(id => ENEMIES.find(e => e.id === id)).filter(enemy == enemy && enemy.color === color);
+       
+  };
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
