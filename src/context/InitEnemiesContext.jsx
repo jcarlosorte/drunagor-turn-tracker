@@ -5,11 +5,10 @@ const InitEnemiesContext = createContext();
 export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
 
-  const placeEnemy = (enemy, position) => {
-    const newEnemy = { enemy, position };
-    console.log('Placing enemy:', newEnemy);
+  const placeEnemy = (enemyWithPosition) => {
+    console.log('Placing enemy:', enemyWithPosition);
     setPlacedEnemies(prev => {
-      const updated = [...prev, newEnemy];
+      const updated = [...prev, enemyWithPosition];
       console.log('Updated placedEnemies:', updated);
       return updated;
     });
