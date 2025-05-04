@@ -130,7 +130,10 @@ const TopMenu = ({
                   {['blanco', 'gris', 'negro', 'comandante', 'jefe', 'otros'].map((color) => (
                     <button
                       key={color}
-                      onClick={() => setManualSelect(color)}
+                      onClick={() => {
+                        setManualSelect(color);
+                        handleManualSelect({ target: { value: color } });
+                      }}
                       className={`px-3 py-1 rounded ${
                         manualSelect === color ? 'bg-purple-500' : 'bg-gray-700'
                       }`}
