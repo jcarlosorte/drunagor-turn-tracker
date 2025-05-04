@@ -81,9 +81,9 @@ const InitTracker = () => {
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
-        runePosition
-      },
-      position: runeIndex
+        runePosition,
+        position: runeIndex
+      }
     });
    
   };
