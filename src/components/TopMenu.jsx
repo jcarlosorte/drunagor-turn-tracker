@@ -132,7 +132,12 @@ const TopMenu = ({
                       key={color}
                       onClick={() => {
                         setManualSelect(color);
-                        handleManualSelect({ target: { value: color } });
+                        if (color === 'jefe') {
+                          onSelectBoss();
+                        } else if (color === 'otros') {
+                          onSelectOther();
+                        }
+                        // Para los demás, se abrirá el listado debajo, así que no hace falta llamar nada aquí.
                       }}
                       className={`px-3 py-1 rounded ${
                         manualSelect === color ? 'bg-purple-500' : 'bg-gray-700'
