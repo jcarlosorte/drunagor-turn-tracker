@@ -122,42 +122,42 @@ const TopMenu = ({
 
             {/* Manuales */}
             <div className="flex flex-col gap-4">
-  <div className="flex items-center gap-2">
-    <MdAddCircleOutline className="text-purple-400" />
-    <label>{t.addManualEnemy || 'Enemigos Manuales'}:</label>
-    <div className="flex gap-2">
-      {['blanco', 'gris', 'negro', 'comandante', 'jefe', 'otros'].map((color) => (
-        <button
-          key={color}
-          onClick={() => setManualSelect(color)}
-          className={`px-3 py-1 rounded ${
-            manualSelect === color ? 'bg-purple-500' : 'bg-gray-700'
-          }`}
-        >
-          {color === 'blanco' && '⚪'}
-          {color === 'gris' && '⚙️'}
-          {color === 'negro' && '⚫'}
-          {color === 'comandante' && '🎖️'}
-          {color === 'jefe' && <GiCrownedSkull className="inline text-yellow-400" />}
-          {color === 'otros' && <GiDiceTarget className="inline text-green-400" />}
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* Lista de enemigos filtrados por color */}
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-    {filteredEnemies.map((enemy) => (
-      <button
-        key={enemy.id}
-        className="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded px-2 py-1 text-left"
-        onClick={() => handleEnemySelection(enemy)}
-      >
-        {getTranslatedName(enemy.id)}
-      </button>
-    ))}
-  </div>
-</div>
+              <div className="flex items-center gap-2">
+                <MdAddCircleOutline className="text-purple-400" />
+                <label>{t.addManualEnemy || 'Enemigos Manuales'}:</label>
+                <div className="flex gap-2">
+                  {['blanco', 'gris', 'negro', 'comandante', 'jefe', 'otros'].map((color) => (
+                    <button
+                      key={color}
+                      onClick={() => setManualSelect(color)}
+                      className={`px-3 py-1 rounded ${
+                        manualSelect === color ? 'bg-purple-500' : 'bg-gray-700'
+                      }`}
+                    >
+                      {color === 'blanco' && '⚪'}
+                      {color === 'gris' && '⚙️'}
+                      {color === 'negro' && '⚫'}
+                      {color === 'comandante' && '🎖️'}
+                      {color === 'jefe' && <GiCrownedSkull className="inline text-yellow-400" />}
+                      {color === 'otros' && <GiDiceTarget className="inline text-green-400" />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            
+              {/* Lista de enemigos filtrados por color */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {filteredEnemies.map((enemy) => (
+                  <button
+                    key={enemy.id}
+                    className="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded px-2 py-1 text-left"
+                    onClick={() => handleEnemySelection(enemy)}
+                  >
+                    {getTranslatedName(enemy.id)}
+                  </button>
+                ))}
+              </div>
+            </div>
             <button
               onClick={resetPlacedEnemies}
               className="mx-auto px-4 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-full text-sm"
