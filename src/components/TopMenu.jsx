@@ -145,18 +145,6 @@ const TopMenu = ({
                 </div>
               </div>
             
-              {/* Lista de enemigos filtrados por color */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {filteredEnemies.map((enemy) => (
-                  <button
-                    key={enemy.id}
-                    className="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded px-2 py-1 text-left"
-                    onClick={() => handleEnemySelection(enemy)}
-                  >
-                    {getTranslatedName(enemy.id)}
-                  </button>
-                ))}
-              </div>
             </div>
             <button
               onClick={resetPlacedEnemies}
