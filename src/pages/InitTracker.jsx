@@ -89,7 +89,8 @@ const InitTracker = () => {
   };
 
   const getEnemiesByColor = (trackerEnemies, color) => {
-      return trackerEnemies.map(id => ENEMIES.find(e => e.id === id)).filter(enemy == enemy && enemy.color === color);
+    console.log("Añadir enemigo manualmente");
+    return trackerEnemies.map(id => ENEMIES.find(e => e.id === id)).filter(enemy == enemy && enemy.color === color);
        
   };
 
