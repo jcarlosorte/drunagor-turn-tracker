@@ -54,7 +54,7 @@ const InitTracker = () => {
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
-    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey);
+    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
@@ -71,7 +71,7 @@ const InitTracker = () => {
   };
 
   const handleManualEnemyAdd = (enemyId, behaviorType) => {
-    const selected = ENEMIES.find(e => e.id === enemyId);
+    const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
