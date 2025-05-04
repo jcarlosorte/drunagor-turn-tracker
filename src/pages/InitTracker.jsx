@@ -74,8 +74,6 @@ const InitTracker = () => {
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
-  
-    //const newEnemy = { id: selected.id, rune: selected.rune, position: runeIndex, runePosition, imagen: selected.imagen };
 
     placeEnemy({
       enemy: {
@@ -89,6 +87,13 @@ const InitTracker = () => {
    
   };
 
+  const filteredEnemies = enemiesData.filter(e => selectedExpansions.includes(e.expansionId));
+  const enemyListByColor = filteredEnemies.reduce((acc, enemy) => {
+    if (!acc[enemy.color]) acc[enemy.color] = [];
+    acc[enemy.color].push(enemy);
+    return acc;
+  }, {});
+  
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
   const handleAddManual = () => console.log("Añadir enemigo manualmente");
