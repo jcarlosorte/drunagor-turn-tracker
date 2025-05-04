@@ -108,9 +108,9 @@ const TopMenu = ({
               <label htmlFor="enemySelect">{t.addEnemies || 'Añadir enemigos'}:</label>
               <select
                 id="enemySelect"
+                value={enemySelect}
                 onChange={handleEnemySelect}
                 className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
-                defaultValue=""
               >
                 <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
                 <option value="blanco">⚪ {t.addWhiteEnemies || 'Enemigos Blancos'}</option>
@@ -126,9 +126,9 @@ const TopMenu = ({
               <label htmlFor="manualSelect">{t.addManualEnemy || 'Enemigos Manuales'}:</label>
               <select
                 id="manualSelect"
+                value={manualSelect}
                 onChange={handleManualSelect}
                 className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
-                defaultValue=""
               >
                 <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
                 <option value="blanco">⚪ {t.addWhiteEnemies || 'Enemigos Blancos'}</option>
