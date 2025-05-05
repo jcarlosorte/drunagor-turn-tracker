@@ -271,27 +271,30 @@ const InitTracker = () => {
                       <div key={enemy.id} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
                         <img src={enemy.imagen} alt={enemy.id} className="w-20 h-20 object-cover mb-2 rounded" />
                         <div className="text-sm text-white text-center mb-1">{getEnemyName(enemy.id)}</div>
-                        {allowedCategories.includes(enemy.categoria) ? (
-                          behaviors.filter(type =>
-                              !enemy.comportamiento || enemy.comportamiento.includes(type)
-                            ).
-                            map(type => (
+                      {allowedCategories.includes(enemy.categoria) ? (
+                        <div className="flex flex-col items-center">
+                          <div className="text-xs text-yellow-400 font-bold mb-1">
+                            {ti.category?.[enemy.categoria] || enemy.categoria}
+                          </div>
+                          {trackerData.behaviors.includes(enemy.comportamiento) && (
                             <button
-                              key={type}
+                              key={enemy.comportamiento}
                               className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded mb-1"
-                              onClick={() => handleManualEnemyAdd(enemy.id, type)} // Pasar el tipo de comportamiento
+                              onClick={() => handleManualEnemyAdd(enemy.id, enemy.comportamiento, enemy.categoria)}
                             >
-                              {ti.behavior?.[type] || type}
+                              {ti.behavior?.[enemy.comportamiento] || enemy.comportamiento}
                             </button>
-                          ))
-                        ) : (
-                          <button
-                            className="text-xs bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded"
-                            onClick={() => handleManualEnemyAdd(enemy.id)} // Si no tiene categoría, solo agregar
-                          >
-                            {ti.addEnemy || 'Añadir'}
-                          </button>
-                        )}
+                          )}
+                        </div>
+                      ) : (
+                        <button
+                          className="text-xs bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded"
+                          onClick={() => handleManualEnemyAdd(enemy.id)}
+                        >
+                          {ti.addEnemy || 'Añadir'}
+                        </button>
+                      )}
+
                       </div>
 
                     ))}
