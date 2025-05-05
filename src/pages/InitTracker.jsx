@@ -11,6 +11,7 @@ import { useInitEnemies } from '@/context/InitEnemiesContext';
 import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
+import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
   defensor: 0,
@@ -63,6 +64,7 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     placeEnemy({
       enemy: {
+        uuid: uuidv4(),
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
@@ -80,6 +82,7 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     placeEnemy({
       enemy: {
+        uuid: uuidv4(),
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
@@ -100,6 +103,7 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     placeEnemy({
       enemy: {
+        uuid: uuidv4(),
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
