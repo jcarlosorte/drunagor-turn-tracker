@@ -75,7 +75,6 @@ const InitTracker = () => {
   };
 
   const handleManualEnemyAdd = (enemyId, behaviorType = null) => {
-    console.log(enemyId, behaviorType); // Verificar el comportamiento
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
@@ -93,8 +92,6 @@ const InitTracker = () => {
     });
   };
 
-
-  
   const handleRandomCommander = () => {
     const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
     if (filtered.length === 0) return;
@@ -111,7 +108,6 @@ const InitTracker = () => {
         position: runeIndex
       }
     });
-   
   };
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
@@ -120,7 +116,6 @@ const InitTracker = () => {
       .filter(enemy => enemy && enemy.color === color && 
         (behaviorType ? enemy.comportamiento === behaviorType : true)); // Filtrar por comportamiento si se especifica
   };
-
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
@@ -241,7 +236,7 @@ const InitTracker = () => {
             <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
             <TopMenu
               onAddEnemy={openCategorySelector}
-              onSelectCommander={handleRandomCommander} // 👈 aquí
+              onSelectCommander={handleRandomCommander}
               onSelectBoss={handleSelectBoss}
               onSelectOther={handleSelectOther}
               onAddManual={openManualSelector}
@@ -277,7 +272,11 @@ const InitTracker = () => {
                         <img src={enemy.imagen} alt={enemy.id} className="w-20 h-20 object-cover mb-2 rounded" />
                         <div className="text-sm text-white text-center mb-1">{getEnemyName(enemy.id)}</div>
                         {allowedCategories.includes(enemy.categoria) ? (
-                          behaviors.map(type => (
+                          behaviors.filter(type =>
+                              trackerData.behaviors.includes(type) &&
+                              (!enemy.comportamiento || enemy.comportamiento.includes(type))
+                            ).
+                            map(type => (
                             <button
                               key={type}
                               className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded mb-1"
