@@ -110,12 +110,13 @@ const InitTracker = () => {
     });
   };
 
-  const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
-    return trackerEnemies
-      .map(id => ENEMIES.find(e => e.id === id))
-      .filter(enemy => enemy && enemy.color === color && 
-        (behaviorType ? enemy.comportamiento === behaviorType : true)); // Filtrar por comportamiento si se especifica
-  };
+const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
+  return ENEMIES.filter(e =>
+    trackerEnemies.includes(e.id) &&
+    e.color === color &&
+    (behaviorType ? e.comportamiento === behaviorType : true)
+  );
+};
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
