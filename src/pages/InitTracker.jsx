@@ -72,8 +72,8 @@ const InitTracker = () => {
     });
   };
 
-  const handleManualEnemyAdd = (enemyId, behaviorType) => {
-    console.log(enemyId);
+  const handleManualEnemyAdd = (enemyId, behaviorType = null) => {
+    console.log(enemyId, behaviorType); // Verificar el comportamiento
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
@@ -85,10 +85,11 @@ const InitTracker = () => {
         imagen: selected.imagen,
         runePosition,
         position: runeIndex,
-        comportamiento: behaviorType
+        comportamiento: behaviorType // Aquí se asigna el comportamiento
       }
     });
   };
+
 
   
   const handleRandomCommander = () => {
@@ -109,12 +110,13 @@ const InitTracker = () => {
    
   };
 
-  const getEnemiesByColor = (trackerEnemies, color) => {
+  const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     return trackerEnemies
       .map(id => ENEMIES.find(e => e.id === id))
-      .filter(enemy => enemy && enemy.color === color);
-       
+      .filter(enemy => enemy && enemy.color === color && 
+        (behaviorType ? enemy.comportamiento === behaviorType : true)); // Filtrar por comportamiento si se especifica
   };
+
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
@@ -275,7 +277,7 @@ const InitTracker = () => {
                             <button
                               key={type}
                               className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded mb-1"
-                              onClick={() => handleManualEnemyAdd(enemy.id, type)}
+                              onClick={() => handleManualEnemyAdd(enemy.id, type)} // Pasar el tipo de comportamiento
                             >
                               {ti.behavior?.[type] || type}
                             </button>
@@ -283,12 +285,13 @@ const InitTracker = () => {
                         ) : (
                           <button
                             className="text-xs bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded"
-                            onClick={() => handleManualEnemyAdd(enemy.id)}
+                            onClick={() => handleManualEnemyAdd(enemy.id)} // Si no tiene categoría, solo agregar
                           >
                             {ti.addEnemy || 'Añadir'}
                           </button>
                         )}
                       </div>
+
                     ))}
                   </div>
                   <div className="mt-4 text-center">
