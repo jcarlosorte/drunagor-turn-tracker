@@ -198,7 +198,7 @@ const InitTracker = () => {
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="top" />)}
      
-          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />))}
+          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.uuid} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />))}
         </div>
 
         <div className="flex items-center justify-center h-8 bg-gray-300">
@@ -226,7 +226,7 @@ const InitTracker = () => {
         <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesBelow.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="bottom" />)}
        
-          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard key={e.enemy.id + '-' + i + '-b'} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="bottom" />))}
+          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard key={e.enemy.uuid} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="bottom" />))}
         </div>
       </div>
     );
