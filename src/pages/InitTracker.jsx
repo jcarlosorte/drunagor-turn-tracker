@@ -273,8 +273,7 @@ const InitTracker = () => {
                         <div className="text-sm text-white text-center mb-1">{getEnemyName(enemy.id)}</div>
                         {allowedCategories.includes(enemy.categoria) ? (
                           behaviors.filter(type =>
-                              trackerData.behaviors.includes(type) &&
-                              (!enemy.comportamiento || enemy.comportamiento.includes(type))
+                              !enemy.comportamiento || enemy.comportamiento.includes(type)
                             ).
                             map(type => (
                             <button
