@@ -250,17 +250,19 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
               {[...Array(11)].map((_, idx) => renderSlot(idx))}
             </div>
   
-            {categorySelector.open && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-white text-black p-6 rounded-xl shadow-xl w-[90%] max-w-md">
-                  <h2 className="text-lg font-bold mb-4 text-center">{ti.selectCategory}</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
-                    {allowedCategories.map(cat => (
-                      <button key={cat} onClick={() => handleCategorySelect(cat)} className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded shadow">
-                        {tc[cat] || cat}
-                      </button>
-                    ))}
-                  </div>
+            {categorySelector && (
+              <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                <div className="bg-gray-900 p-4 rounded-xl shadow-lg text-white text-center">
+                  <h2 className="text-lg mb-4">{ti.selectCategory || 'Selecciona una categoría'}</h2>
+                  {allowedCategories.map(cat => (
+                    <button
+                      key={cat}
+                      className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded m-1"
+                      onClick={() => handleCategorySelect(cat)}
+                    >
+                      {ti.category?.[cat] || cat}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
