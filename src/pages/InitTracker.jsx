@@ -70,7 +70,12 @@ const InitTracker = () => {
         rune: selected.rune,
         imagen: selected.imagen,
         runePosition,
-        position: runeIndex
+        position: runeIndex,
+        categoria: selected.categoria,
+        comportamiento: selected.comportamiento,
+        vida: selected.vida, 
+        movimiento: selected.movimiento, 
+        ataque: selected.ataque
       }
     });
   };
@@ -92,7 +97,10 @@ const InitTracker = () => {
         runePosition,
         position: runeIndex,
         categoria: category,
-        comportamiento: behaviorType // Aquí se asigna el comportamiento
+        comportamiento: behaviorType,
+        vida: selected.vida, 
+        movimiento: selected.movimiento, 
+        ataque: selected.ataque
       }
     });
   };
