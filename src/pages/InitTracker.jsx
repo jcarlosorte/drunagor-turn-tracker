@@ -249,24 +249,20 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => renderSlot(idx))}
             </div>
-  
-            {categorySelector && (
-              <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+
+            {categorySelector.open && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-gray-900 p-4 rounded-xl shadow-lg text-white text-center">
-                  <h2 className="text-lg mb-4">{ti.selectCategory || 'Selecciona una categoría'}</h2>
-                  {allowedCategories.map(cat => (
-                    <button
-                      key={cat}
-                      className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded m-1"
-                      onClick={() => handleCategorySelect(cat)}
-                    >
-                      {ti.category?.[cat] || cat}
-                    </button>
-                  ))}
+                  <h2 className="text-lg mb-4">{ti.selectCategory}</h2>
+                    {allowedCategories.map(cat => (
+                      <button key={cat} onClick={() => handleCategorySelect(cat)} className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded m-1">
+                        {tc[cat] || cat}
+                      </button>
+                    ))}
                 </div>
               </div>
             )}
-
+            
             {/* Manual Selector Modal */}
             {manualSelector.open && (
               <div className="fixed inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center z-50">
