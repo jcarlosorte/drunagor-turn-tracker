@@ -60,6 +60,7 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
+    console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     placeEnemy({
@@ -76,7 +77,7 @@ const InitTracker = () => {
 
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
-
+    setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
@@ -293,7 +294,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                     
                             {Object.entries(categories).map(([categoria, variants]) => (
                               <div key={categoria} className="mb-2 w-full">
-                                <div className="text-xs text-yellow-300 mb-1 text-center">{ti.category?.[categoria] || categoria}</div>
+                                <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
                                 <div className="flex flex-wrap justify-center gap-1">
                                   {variants.map(variant => (
                                     <button
