@@ -259,6 +259,14 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                         {tc[cat] || cat}
                       </button>
                     ))}
+                  <div className="mt-4 text-center">
+                    <button
+                      className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      onClick={() => setCategorySelector({ open: false, color: null })}
+                    >
+                      {ti.close || 'Cerrar'}
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -293,7 +301,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                                       className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
                                       onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
                                     >
-                                      {ti.behavior?.[variant.comportamiento] || variant.comportamiento}
+                                      {tb?.[variant.comportamiento] || variant.comportamiento}
                                     </button>
                                   ))}
                                 </div>
