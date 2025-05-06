@@ -74,7 +74,9 @@ const InitTracker = () => {
     });
   };
 
-  const handleManualEnemyAdd = (enemyId, behaviorType = null) => {
+  const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
+    console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
+
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
@@ -87,6 +89,7 @@ const InitTracker = () => {
         imagen: selected.imagen,
         runePosition,
         position: runeIndex,
+        categoria: category,
         comportamiento: behaviorType // Aquí se asigna el comportamiento
       }
     });
