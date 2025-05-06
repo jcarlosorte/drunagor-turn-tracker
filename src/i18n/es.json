@@ -184,6 +184,8 @@
       "backToConfig": "Volver a configuración",
       "goHome": "Inicio",
       "close": "Cerrar",
-      "resetEnemies": "Resetear"
+      "resetEnemies": "Resetear",
+      "selectCategory": "Selecciona una categoría"
+      
     }
 }
