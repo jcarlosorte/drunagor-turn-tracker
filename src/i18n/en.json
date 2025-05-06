@@ -183,6 +183,7 @@
       "backToConfig": "Back to Config",
       "goHome": "Home",
       "close": "Close",
-      "resetEnemies": "Reset"
+      "resetEnemies": "Reset",
+      "selectCategory": "Select Category"
     }
 }
