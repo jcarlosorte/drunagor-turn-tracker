@@ -268,37 +268,39 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                 <div className="bg-gray-900 p-6 rounded-xl shadow-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto">
                   <h2 className="text-xl text-yellow-300 mb-4">{ti.manualTitle || 'Seleccionar enemigo manualmente'}</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {getEnemiesByColor(enemies, manualSelector.color).map((enemy) => (
-                      <div key={`${enemy.id}-${enemy.categoria}-${enemy.comportamiento}`} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
-                        <img src={enemy.imagen} alt={enemy.id} className="w-20 h-20 object-cover mb-2 rounded" />
-                        <div className="text-sm text-white text-center mb-1">{getEnemyName(enemy.id)}</div>
-                          {allowedCategories.includes(enemy.categoria) ? (
-                            <div className="flex flex-col items-center">
-                              <div className="text-xs text-yellow-400 font-bold mb-1">
-                                {ti.category?.[enemy.categoria] || enemy.categoria}
+                    {Object.entries(
+                        getEnemiesByColor(enemies, manualSelector.color).reduce((acc, enemy) => {
+                          if (!acc[enemy.id]) acc[enemy.id] = {};
+                          if (!acc[enemy.id][enemy.categoria]) acc[enemy.id][enemy.categoria] = [];
+                          acc[enemy.id][enemy.categoria].push(enemy);
+                          return acc;
+                        }, {})
+                      ).map(([enemyId, categories]) => {
+                        const sampleEnemy = Object.values(categories)[0][0]; // Para imagen y nombre
+                        return (
+                          <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
+                            <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
+                            <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
+                    
+                            {Object.entries(categories).map(([categoria, variants]) => (
+                              <div key={categoria} className="mb-2 w-full">
+                                <div className="text-xs text-yellow-300 mb-1 text-center">{ti.category?.[categoria] || categoria}</div>
+                                <div className="flex flex-wrap justify-center gap-1">
+                                  {variants.map(variant => (
+                                    <button
+                                      key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
+                                      className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
+                                      onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
+                                    >
+                                      {ti.behavior?.[variant.comportamiento] || variant.comportamiento}
+                                    </button>
+                                  ))}
+                                </div>
                               </div>
-                              {trackerData.behaviors.includes(enemy.comportamiento) && (
-                                <button
-                                  key={enemy.comportamiento}
-                                  className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded mb-1"
-                                  onClick={() => handleManualEnemyAdd(enemy.id, enemy.comportamiento, enemy.categoria)}
-                                >
-                                  {ti.behavior?.[enemy.comportamiento] || enemy.comportamiento}
-                                </button>
-                              )}
-                            </div>
-                          ) : (
-                            <button
-                              className="text-xs bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded"
-                              onClick={() => handleManualEnemyAdd(enemy.id)}
-                            >
-                              {ti.addEnemy || 'Añadir'}
-                            </button>
-                          )}
-
-                      </div>
-
-                    ))}
+                            ))}
+                          </div>
+                        );
+                      })}
                   </div>
                   <div className="mt-4 text-center">
                     <button
