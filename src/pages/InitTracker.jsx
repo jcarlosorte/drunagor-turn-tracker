@@ -79,6 +79,7 @@ const InitTracker = () => {
     console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
+    console.log(selected);
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
