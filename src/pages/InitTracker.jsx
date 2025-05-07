@@ -166,6 +166,12 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     };
   }, []);
 
+  const toast = toastMessage && (
+    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-4 py-2 rounded shadow-lg z-50 animate-fade-in">
+      {toastMessage}
+    </div>
+  );
+  
   if (!isLandscape) {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-center bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
@@ -358,6 +364,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
+        {toast}
       </PageTransition>
     
   );
