@@ -409,7 +409,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                             <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
                             <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
                     
-                            {{isSpecialCategory ? (
+                            {isSpecialCategory ? (
                                 <div className="flex flex-wrap justify-center gap-1">
                                   {variants.map(variant => (
                                     <button
