@@ -308,6 +308,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   return (
     
       <PageTransition>
+        {toast}
         <div className={isLandscape ? "" : "portrait-lock"}>
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
@@ -406,7 +407,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
-        {toastElement}
+        
       </PageTransition>
     
   );
