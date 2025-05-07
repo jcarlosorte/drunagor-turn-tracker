@@ -187,7 +187,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     // Mapeo de clases para fondo y texto
     const bgClasses = {
       blanco: 'bg-white text-black',
-      gris: 'bg-gray-400 text-white',
+      gris: 'bg-gray-600 text-white',
       negro: 'bg-black text-white',
       jefe: 'bg-red-500 text-white',
       blue: 'bg-blue-700 text-white',
@@ -200,7 +200,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const iconColorClasses = {
       blanco: 'text-white',
       gris: 'text-gray-300',
-      negro: 'text-black',
+      negro: 'text-white',
       jefe: 'text-red-400',
       blue: 'text-blue-400',
       green: 'text-green-400',
