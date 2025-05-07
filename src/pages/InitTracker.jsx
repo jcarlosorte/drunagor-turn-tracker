@@ -58,6 +58,7 @@ const InitTracker = () => {
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
     setToastMessage(`${ti.enemyAdded}: ${translatedName}`);
+    setSelectedColor(enemyData.color);
     setTimeout(() => setToastMessage(''), 2000);
   };
 
@@ -167,8 +168,19 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   }, []);
 
   const toast = toastMessage && (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-4 py-2 rounded shadow-lg z-50 animate-fade-in">
-      {toastMessage}
+    <div className={classNames(
+      'fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-xl shadow-xl text-white font-semibold flex items-center gap-3 z-50',
+      {
+        'bg-white-500': selectedColor === 'blanco',
+        'bg-grey-600': selectedColor === 'gris',
+        'bg-black-300 text-white': selectedColor === 'negro',
+        'bg-yellow-600': selectedColor === 'comandante',
+        'bg-red-500': selectedColor === 'jefe',
+        'bg-black': !['blanco', 'gris', 'negro', 'comandante', 'jefe'].includes(selectedColor)
+      }
+    )}>
+      <img src="/icons/skull.svg" alt="icon" className="w-6 h-6" />
+      <span>{toastMessage}</span>
     </div>
   );
   
@@ -267,6 +279,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     
       <PageTransition>
         <div className={isLandscape ? "" : "portrait-lock"}>
+          {toast}
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
             <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
@@ -364,7 +377,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
-        {toast}
+        
       </PageTransition>
     
   );
