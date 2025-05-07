@@ -424,7 +424,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                                     </button>
                                     ))}
                                   </div>
-                                </div>
+                                
                                 ) : (
                                 <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
                                 <div className="flex flex-wrap justify-center gap-1">
