@@ -129,7 +129,7 @@ const InitTracker = () => {
         runePosition,
         position: runeIndex,
         categoria: selected.categoria,
-        comportamiento: behaviorType,
+        comportamiento: selected.comportamiento,
         vida: selected.vida, 
         movimiento: selected.movimiento, 
         ataque: selected.ataque
