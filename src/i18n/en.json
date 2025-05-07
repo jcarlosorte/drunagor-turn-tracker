@@ -184,6 +184,7 @@
       "goHome": "Home",
       "close": "Close",
       "resetEnemies": "Reset",
-      "selectCategory": "Select Category"
+      "selectCategory": "Select Category",
+      "enemyAdded": "Enemy Added"
     }
 }
