@@ -34,6 +34,7 @@ const runesColorMap = {
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
+const isSpecialCategory = ['comandante', 'jefe', 'otros'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -126,7 +127,7 @@ const InitTracker = () => {
         imagen: selected.imagen,
         runePosition,
         position: runeIndex,
-        categoria: category,
+        categoria: selected.categoria,
         comportamiento: behaviorType,
         vida: selected.vida, 
         movimiento: selected.movimiento, 
@@ -410,6 +411,21 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                     
                             {Object.entries(categories).map(([categoria, variants]) => (
                               <div key={categoria} className="mb-2 w-full">
+                                {isSpecialCategory ? (
+                                
+                                <div className="flex flex-wrap justify-center gap-1">
+                                  {variants.map(variant => (
+                                    <button
+                                      key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
+                                      className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
+                                      onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
+                                    >
+                                      {ti.addEnemy}
+                                    </button>
+                                    ))}
+                                  </div>
+                                </div>
+                                ) : (
                                 <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
                                 <div className="flex flex-wrap justify-center gap-1">
                                   {variants.map(variant => (
@@ -420,9 +436,10 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                                     >
                                       {tb?.[variant.comportamiento] || variant.comportamiento}
                                     </button>
-                                  ))}
+                                    ))}
+                                  </div>
                                 </div>
-                              </div>
+                                )}
                             ))}
                           </div>
                         );
