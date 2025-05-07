@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { MdScreenRotation } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
@@ -186,7 +187,54 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       <span>{toastMessage}</span>
     </div>
   );
+  const showToast = (enemyData) => {
+    const translatedName = translations?.enemies?.[enemyData.id];
   
+    // Mapeo de clases para fondo y texto
+    const bgClasses = {
+      blanco: 'bg-white text-black',
+      gris: 'bg-gray-400 text-white',
+      negro: 'bg-black text-white',
+      jefe: 'bg-red-500 text-white',
+      blue: 'bg-blue-700 text-white',
+      green: 'bg-green-700 text-white',
+      comandante: 'bg-yellow-600 text-black',
+      purple: 'bg-purple-500 text-white',
+    };
+  
+    // Mapeo de clases para el icono
+    const iconColorClasses = {
+      blanco: 'text-white',
+      gris: 'text-gray-300',
+      negro: 'text-black',
+      jefe: 'text-red-400',
+      blue: 'text-blue-400',
+      green: 'text-green-400',
+      comandante: 'text-yellow-400',
+      purple: 'text-purple-400',
+    };
+  
+    const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
+    const iconClass = iconColorClasses[enemyData.color] || 'text-white';
+  
+    toast(
+      <div className="flex items-center gap-2">
+        <GiBullyMinion className={`text-2xl ${iconClass}`} />
+        <span>{`${ti.enemyAdded}: ${translatedName}`}</span>
+      </div>,
+      {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        className: `${bgClass} rounded-xl shadow-xl font-semibold px-4 py-2`,
+      }
+    );
+  };
+
   if (!isLandscape) {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-center bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
@@ -309,7 +357,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   return (
     
       <PageTransition>
-        {toastElement}
+       
         <div className={isLandscape ? "" : "portrait-lock"}>
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
@@ -408,7 +456,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
-        
+        <ToastContainer />
       </PageTransition>
     
   );
