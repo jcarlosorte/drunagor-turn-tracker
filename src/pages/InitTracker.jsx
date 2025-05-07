@@ -2,6 +2,8 @@
 import { useNavigate } from 'react-router-dom';
 import { MdScreenRotation } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { ROLES } from '@/data/roles';
