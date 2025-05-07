@@ -409,10 +409,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                             <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
                             <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
                     
-                            {Object.entries(categories).map(([categoria, variants]) => (
-                              <div key={categoria} className="mb-2 w-full">
-                                {isSpecialCategory ? (
-                                
+                            {{isSpecialCategory ? (
                                 <div className="flex flex-wrap justify-center gap-1">
                                   {variants.map(variant => (
                                     <button
@@ -422,24 +419,25 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                                     >
                                       {ti.addEnemy}
                                     </button>
-                                    ))}
-                                  </div>
-                                
-                                ) : (
-                                <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
-                                <div className="flex flex-wrap justify-center gap-1">
-                                  {variants.map(variant => (
-                                    <button
-                                      key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
-                                      className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
-                                      onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
-                                    >
-                                      {tb?.[variant.comportamiento] || variant.comportamiento}
-                                    </button>
-                                    ))}
-                                  </div>
+                                  ))}
                                 </div>
-                                )}
+                              ) : (
+                                <>
+                                  <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
+                                  <div className="flex flex-wrap justify-center gap-1">
+                                    {variants.map(variant => (
+                                      <button
+                                        key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
+                                        className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
+                                        onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
+                                      >
+                                        {tb?.[variant.comportamiento] || variant.comportamiento}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </>
+                              )}
+
                             ))}
                           </div>
                         );
