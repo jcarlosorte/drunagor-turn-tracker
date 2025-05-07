@@ -169,7 +169,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     };
   }, []);
 
-  const toast = toastMessage && (
+  const toastElement = toastMessage && (
     <div className={classNames(
       'fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-xl shadow-xl text-white font-semibold flex items-center gap-3 z-50',
       {
@@ -222,11 +222,23 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     </div>
   );
 
-  const EnemyCard = ({ name, image, position }) => (
-    <div className="flex flex-col items-center mx-1">
-      {position === 'top' && <div className="text-xs mt-1">{name}</div>}
+  const EnemyCard = ({ name, behavior, category, image, position, uuid }) => (
+    <div key={uuid} className="flex flex-col items-center mx-1">
+      {position === 'top' && (
+        <div className="text-xs mt-1">
+          {name}
+          {category && ` (${translations.categories?.[category] || category})`}
+          {behavior && ` (${translations.behaviors?.[behavior] || behavior})`}
+        </div>
+      )}
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
-      {position === 'bottom' && <div className="text-xs mt-1">{name}</div>}
+      {position === 'bottom' && (
+        <div className="text-xs mt-1">
+          {name}
+          {category && ` (${translations.categories?.[category] || category})`}
+          {behavior && ` (${translations.behaviors?.[behavior] || behavior})`}
+        </div>
+      )}
     </div>
   );
 
@@ -243,7 +255,15 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesAbove.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="top" />)}
      
-          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard key={e.enemy.uuid} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="top" />))}
+          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard
+                                                      key={e.enemy.uuid}
+                                                      uuid={e.enemy.uuid}
+                                                      name={getEnemyName(e.enemy.id)}
+                                                      image={e.enemy.imagen}
+                                                      behavior={e.enemy.behavior}
+                                                      category={e.enemy.category}
+                                                      position="top"
+                                                    />))}
         </div>
 
         <div className="flex items-center justify-center h-8 bg-gray-300">
@@ -271,7 +291,15 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
           {heroesBelow.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="bottom" />)}
        
-          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard key={e.enemy.uuid} name={getEnemyName(e.enemy.id)} image={e.enemy.imagen} position="bottom" />))}
+          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard
+                                                      key={e.enemy.uuid}
+                                                      uuid={e.enemy.uuid}
+                                                      name={getEnemyName(e.enemy.id)}
+                                                      image={e.enemy.imagen}
+                                                      behavior={e.enemy.behavior}
+                                                      category={e.enemy.category}
+                                                      position="bottom"
+                                                    />))}
         </div>
       </div>
     );
@@ -281,7 +309,6 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     
       <PageTransition>
         <div className={isLandscape ? "" : "portrait-lock"}>
-          {toast}
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
             <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
@@ -379,7 +406,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
-        
+        {toastElement}
       </PageTransition>
     
   );
