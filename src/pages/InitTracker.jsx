@@ -58,14 +58,6 @@ const InitTracker = () => {
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
 
-  const showToast = (enemyData) => {
-    const translatedName = translations?.enemies?.[enemyData.id];
-    setToastMessage(`${ti.enemyAdded}: ${translatedName}`);
-    setSelectedColor(enemyData.color);
-    setTimeout(() => setToastMessage(''), 2000);
-  };
-
-
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
@@ -216,7 +208,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   
     const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
     const iconClass = iconColorClasses[enemyData.color] || 'text-white';
-  
+
+    setTimeout(() => setToastMessage(''), 2000);
     toast(
       <div className="flex items-center gap-2">
         <GiBullyMinion className={`text-2xl ${iconClass}`} />
