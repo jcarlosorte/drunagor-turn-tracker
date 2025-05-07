@@ -181,7 +181,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         'bg-black': !['blanco', 'gris', 'negro', 'comandante', 'jefe'].includes(selectedColor)
       }
     )}>
-      <img src="/icons/skull.svg" alt="icon" className="w-6 h-6" />
+      
+      <GiBullyMinion className={`text-2xl bg-red-500`} />
       <span>{toastMessage}</span>
     </div>
   );
