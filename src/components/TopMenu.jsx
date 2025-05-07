@@ -133,8 +133,8 @@ const TopMenu = ({
                   { key: 'gris', label: t.addGrayEnemies, color: 'text-gray-400' },
                   { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
                   { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
-                  { key: 'jefe', label: t.bosses, color: 'text-red-500' },
-                  { key: 'otros', label: t.others, color: 'text-green-500' },
+                  { key: 'jefe', label: t.selectBosses, color: 'text-red-500' },
+                  { key: 'otros', label: t.selectOther, color: 'text-purple-500' },
                 ].map(({ key, label, color }) => (
                   <button
                     key={key}
@@ -146,7 +146,7 @@ const TopMenu = ({
                       manualSelect === key ? 'bg-purple-600' : 'bg-gray-700'
                     }`}
                   >
-                    <GiShield className={`text-2xl ${color}`} />
+                    <GiBullyMinion className={`text-2xl ${color}`} />
                     <span className="text-xs text-center">{label}</span>
                   </button>
                 ))}
