@@ -57,7 +57,7 @@ import maya from "@/assets/heroes/Maya.png";
 import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
-  { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba", comportamiento: "jefe" },
+  { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba", comportamiento: "jefe" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 7, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 18, movimiento: 5, ataque: 6, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar" },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 12, movimiento: 5, ataque: 6, color: "blanco", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo" },
@@ -160,7 +160,7 @@ export const ENEMIES = [
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 12, ataque: 4, movimiento: 5, color: "blanco", categoria: "soldado", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "estandar" },
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 9, ataque: 4, movimiento: 4, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "alternativo" },
   { id: "corrupted_farmer", nombre: "Corrupted Farmer", vida: 9, ataque: 4, movimiento: 3, color: "blanco", categoria: "bisoño", tipo: "enemigo", expansionId: "undead_dragon", imagen: corrupted_farmer, rune: "verde", runePosition: "abajo", comportamiento: "estandar" },
-  { id: "aralhezec", nombre: "Aral´hezec", vida: 25, ataque: 4, movimiento: 0, color: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
+  { id: "aralhezec", nombre: "Aral´hezec", vida: 25, ataque: 4, movimiento: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "rojo", runePosition: "arriba" },
 
   { id: "wermunggdir", nombre: "Wermunggdir", vida: 8, movimiento: 3, ataque: 5, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "desert", imagen: wermunggdir, rune: "naranja", runePosition: "arriba" },
   { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 7, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
@@ -205,7 +205,7 @@ export const ENEMIES = [
   { id: "death_messenger", nombre: "Death Messenger", vida: 16, movimiento: 3, ataque: 6, color: "gris", categoria: "soldado", tipo: "enemigo", expansionId: "monster_pack", imagen: death_messenger, rune: "rojo", runePosition: "arriba", comportamiento: "estandar"  },
   { id: "death_messenger", nombre: "Death Messenger", vida: 9, movimiento: 4, ataque: 4, color: "gris", categoria: "bisoño", tipo: "enemigo", expansionId: "monster_pack", imagen: death_messenger, rune: "rojo", runePosition: "arriba", comportamiento: "alternativo"  },
   { id: "death_messenger", nombre: "Death Messenger", vida: 12, movimiento: 3, ataque: 5, color: "gris", categoria: "bisoño", tipo: "enemigo", expansionId: "monster_pack", imagen: death_messenger, rune: "rojo", runePosition: "arriba", comportamiento: "estandar"  },
-  { id: "demon_lord", nombre: "Demon Lord", vida: 9, movimiento: 2, ataque: 5, color: "jefe", tipo: "enemigo", expansionId: "monster_pack", imagen: demon_lord, rune: "naranja", runePosition: "arriba" },
+  { id: "demon_lord", nombre: "Demon Lord", vida: 9, movimiento: 2, ataque: 5, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "monster_pack", imagen: demon_lord, rune: "naranja", runePosition: "arriba" },
 
   { id: "shadow_mistress", nombre: "Shadow Mistress", vida: 18, movimiento: 5, ataque: 6, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "war_loot", imagen: shadow_mistress, rune: "verde", runePosition: "arriba", comportamiento: "alternativo" },
   { id: "shadow_mistress", nombre: "Shadow Mistress", vida: 18, movimiento: 5, ataque: 5, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "war_loot", imagen: shadow_mistress, rune: "naranja", runePosition: "arriba", comportamiento: "estandar" },
