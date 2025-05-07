@@ -26,3 +26,14 @@ body {
 .btn {
   @apply bg-blue-500 text-white px-4 py-2 rounded-xl m-1 hover:bg-blue-600 transition;
 }
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.animate-fadeInOut {
+  animation: fadeInOut 2s ease-in-out;
+}
