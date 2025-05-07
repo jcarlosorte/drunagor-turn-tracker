@@ -34,7 +34,7 @@ const runesColorMap = {
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
-const isSpecialCategory = ['comandante', 'jefe', 'otros'];
+
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -52,6 +52,7 @@ const InitTracker = () => {
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
   const [selectedColor, setSelectedColor] = useState('');
   const [toastMessage, setToastMessage] = useState('');
+  const specialCategories = ['comandante', 'jefe', 'otros'];
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -396,20 +397,23 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                   <h2 className="text-xl text-yellow-300 mb-4">{ti.manualTitle || 'Seleccionar enemigo manualmente'}</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {Object.entries(
-                        getEnemiesByColor(enemies, manualSelector.color).reduce((acc, enemy) => {
-                          if (!acc[enemy.id]) acc[enemy.id] = {};
-                          if (!acc[enemy.id][enemy.categoria]) acc[enemy.id][enemy.categoria] = [];
-                          acc[enemy.id][enemy.categoria].push(enemy);
-                          return acc;
-                        }, {})
-                      ).map(([enemyId, categories]) => {
-                        const sampleEnemy = Object.values(categories)[0][0]; // Para imagen y nombre
-                        return (
-                          <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
-                            <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
-                            <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
+                      getEnemiesByColor(enemies, manualSelector.color).reduce((acc, enemy) => {
+                        if (!acc[enemy.id]) acc[enemy.id] = {};
+                        if (!acc[enemy.id][enemy.categoria]) acc[enemy.id][enemy.categoria] = [];
+                        acc[enemy.id][enemy.categoria].push(enemy);
+                        return acc;
+                      }, {})
+                    ).map(([enemyId, categories]) => {
+                      const sampleEnemy = Object.values(categories)[0][0]; // Para imagen y nombre
                     
-                            {isSpecialCategory ? (
+                      return (
+                        <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
+                          <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
+                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
+                    
+                          {Object.entries(categories).map(([categoria, variants]) => (
+                            <div key={categoria} className="w-full mb-2">
+                              {specialCategories.includes(categoria) ? (
                                 <div className="flex flex-wrap justify-center gap-1">
                                   {variants.map(variant => (
                                     <button
@@ -437,11 +441,12 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                                   </div>
                                 </>
                               )}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
 
-                            ))}
-                          </div>
-                        );
-                      })}
                   </div>
                   <div className="mt-4 text-center">
                     <button
