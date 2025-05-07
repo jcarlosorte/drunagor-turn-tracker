@@ -185,7 +185,7 @@
       "goHome": "Inicio",
       "close": "Cerrar",
       "resetEnemies": "Resetear",
-      "selectCategory": "Selecciona una categoría"
-      
+      "selectCategory": "Selecciona una categoría",
+      "enemyAdded": "Enemigo Añadido"
     }
 }
