@@ -104,21 +104,33 @@ const TopMenu = ({
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
             {/* Aleatorios */}
-            <div className="flex items-center gap-2">
-              <GiSwordClash className="text-blue-400" />
-              <label htmlFor="enemySelect">{t.addEnemies || 'Añadir enemigos'}:</label>
-              <select
-                id="enemySelect"
-                value={enemySelect}
-                onChange={handleEnemySelect}
-                className="bg-gray-800 text-white border border-gray-600 rounded px-2 py-1 font-fantasy"
-              >
-                <option value="" disabled>{t.selectType || 'Selecciona tipo'}</option>
-                <option value="blanco">⚪ {t.addWhiteEnemies || 'Enemigos Blancos'}</option>
-                <option value="gris">⚙️ {t.addGrayEnemies || 'Enemigos Grises'}</option>
-                <option value="negro">⚫ {t.addBlackEnemies || 'Enemigos Negros'}</option>
-                <option value="comandante">🎖️ {t.addCommanders || 'Comandantes'}</option>
-              </select>
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiSwordClash className="text-blue-400 text-xl" />
+                <span className="font-semibold">{t.addEnemies || 'Enemigos aleatorios'}</span>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                {[
+                  { key: 'blanco', label: t.addWhiteEnemies, color: 'text-white' },
+                  { key: 'gris', label: t.addGrayEnemies, color: 'text-gray-400' },
+                  { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
+                  { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
+                ].map(({ key, label, color }) => (
+                  <button
+                    key={key}
+                    onClick={() => {
+                      setEnemySelect(key);
+                      handleEnemySelect({ target: { value: key } });
+                    }}
+                    className={`flex flex-col items-center gap-1 px-2 py-2 text-sm rounded-lg font-semibold hover:bg-blue-500 transition ${
+                      enemySelect === key ? 'bg-blue-600' : 'bg-gray-700'
+                    }`}
+                  >
+                    <GiBullyMinion className={`text-2xl ${color}`} />
+                    <span className="text-xs text-center">{label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Manuales */}
