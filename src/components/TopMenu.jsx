@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
+import {  } from 'react-icons/gi';
 
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
@@ -121,40 +122,44 @@ const TopMenu = ({
             </div>
 
             {/* Manuales */}
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2">
-                <MdAddCircleOutline className="text-purple-400" />
-                <label>{t.addManualEnemy || 'Enemigos Manuales'}:</label>
-                <div className="flex gap-2">
-                  {['blanco', 'gris', 'negro', 'comandante', 'jefe', 'otros'].map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => {
-                        setManualSelect(color);
-                        handleManualSelect({ target: { value: color } });
-                      }}
-                      className={`px-3 py-1 rounded ${
-                        manualSelect === color ? 'bg-purple-500' : 'bg-gray-700'
-                      }`}
-                    >
-                      {color === 'blanco' && '⚪'}
-                      {color === 'gris' && '⚙️'}
-                      {color === 'negro' && '⚫'}
-                      {color === 'comandante' && '🎖️'}
-                      {color === 'jefe' && <GiCrownedSkull className="inline text-yellow-400" />}
-                      {color === 'otros' && <GiDiceTarget className="inline text-green-400" />}
-                    </button>
-                  ))}
-                </div>
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <MdAddCircleOutline className="text-purple-400 text-xl" />
+                <span className="font-semibold">{t.addManualEnemy || 'Enemigos manuales'}</span>
               </div>
-            
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                {[
+                  { key: 'blanco', label: t.addWhiteEnemies, color: 'text-white' },
+                  { key: 'gris', label: t.addGrayEnemies, color: 'text-gray-400' },
+                  { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
+                  { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
+                  { key: 'jefe', label: t.bosses, color: 'text-red-500' },
+                  { key: 'otros', label: t.others, color: 'text-green-500' },
+                ].map(({ key, label, color }) => (
+                  <button
+                    key={key}
+                    onClick={() => {
+                      setManualSelect(key);
+                      handleManualSelect({ target: { value: key } });
+                    }}
+                    className={`flex flex-col items-center gap-1 px-2 py-2 text-sm rounded-lg font-semibold hover:bg-purple-500 transition ${
+                      manualSelect === key ? 'bg-purple-600' : 'bg-gray-700'
+                    }`}
+                  >
+                    <GiShield className={`text-2xl ${color}`} />
+                    <span className="text-xs text-center">{label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
+
             <button
               onClick={resetPlacedEnemies}
               className="mx-auto px-4 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-full text-sm"
             >
               {t.resetEnemies || 'Resetear enemigos'}
             </button>
+
             <button
               onClick={toggleMenu}
               className="mx-auto mt-2 px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
