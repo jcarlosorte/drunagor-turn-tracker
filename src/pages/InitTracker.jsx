@@ -47,6 +47,7 @@ const InitTracker = () => {
   const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
   const [selectedColor, setSelectedColor] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -54,15 +55,23 @@ const InitTracker = () => {
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
 
+  const showToast = (enemyData) => {
+    const translatedName = translations?.enemies?.[enemyData.id];
+    setToastMessage(`${ti.enemyAdded}: ${translatedName}`);
+    setTimeout(() => setToastMessage(''), 2000);
+  };
+
+
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    console.log(selected);
+    //console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    showToast(selected);
     placeEnemy({
       enemy: {
         uuid: uuidv4(),
@@ -81,13 +90,14 @@ const InitTracker = () => {
   };
 
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
-    console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
+    //console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
-    console.log(selected);
+    //console.log(selected);
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    showToast(selected);
     placeEnemy({
       enemy: {
         uuid: uuidv4(),
@@ -111,6 +121,7 @@ const InitTracker = () => {
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    showToast(selected);
     placeEnemy({
       enemy: {
         uuid: uuidv4(),
@@ -118,7 +129,12 @@ const InitTracker = () => {
         rune: selected.rune,
         imagen: selected.imagen,
         runePosition,
-        position: runeIndex
+        position: runeIndex,
+        categoria: category,
+        comportamiento: behaviorType,
+        vida: selected.vida, 
+        movimiento: selected.movimiento, 
+        ataque: selected.ataque
       }
     });
   };
