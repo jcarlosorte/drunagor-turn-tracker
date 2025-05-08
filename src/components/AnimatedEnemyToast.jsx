@@ -48,18 +48,22 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
       <img
          src={image}
          alt={name}
-         className="w-35 h-35 object-cover rounded-md border border-white shadow-md"
+         className="w-36 h-36 object-cover rounded-md border border-white shadow-md"
        />
-       <GiBullyMinion className={`text-2xl ${iconClass}`} />
-        <div className="text-sm leading-tight space-y-1">
-         <div className="font-bold">{name}</div>
-         <div>{category} — {com}</div>
-       <div className="flex items-center gap-2 text-xs">
-          <span className="flex items-center gap-1"><GiHeartBeats /> {life}</span>
-          <span className="flex items-center gap-1"><GiFootprint /> {move}</span>
-          <span className="flex items-center gap-1"><GiBroadsword /> {attack}</span>
-        </div>
-       </div>
+
+     <div className="flex flex-col justify-center gap-2 py-1">
+      <div className="flex items-center gap-2">
+        <GiBullyMinion className={`text-3xl ${iconClass}`} />
+        <span className="font-bold text-lg">{name}</span>
+      </div>
+      <div className="text-sm">{category} — {com}</div>
+      <div className="flex items-center gap-4 text-sm mt-2">
+        <span className="flex items-center gap-1"><GiHeartBeats /> {life}</span>
+        <span className="flex items-center gap-1"><GiFootprint /> {move}</span>
+        <span className="flex items-center gap-1"><GiBroadsword /> {attack}</span>
+      </div>
+    </div>
+     
     </motion.div>
   );
 }
