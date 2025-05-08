@@ -199,6 +199,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
+        toastClassName: 'max-w-full overflow-visible break-keep',
+        bodyClassName: 'flex justify-center items-center',
       }
     );
   };
