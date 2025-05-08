@@ -1,8 +1,10 @@
 // components/AnimatedEnemyToast.jsx
 import { motion } from 'framer-motion';
 import { GiBullyMinion } from 'react-icons/gi';
+import { useTranslation } from 'react-i18next';
 
-export default function AnimatedEnemyToast({ color, name, ti }) {
+export default function AnimatedEnemyToast({ enemyData, t }) {
+ 
   const bgClasses = {
     blanco: 'bg-white text-black',
     gris: 'bg-gray-600 text-white',
@@ -25,9 +27,12 @@ export default function AnimatedEnemyToast({ color, name, ti }) {
     purple: 'text-purple-400',
   };
 
-  const bgClass = bgClasses[color] || 'bg-black text-white';
-  const iconClass = iconColorClasses[color] || 'text-white';
+  const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
+  const iconClass = iconColorClasses[enemyData.color] || 'text-white';
 
+  const name = translations?.enemies?.[enemyData.id] ;
+
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -37,7 +42,7 @@ export default function AnimatedEnemyToast({ color, name, ti }) {
       className={`flex items-center gap-2 rounded-xl shadow-xl font-semibold px-4 py-2 ${bgClass}`}
     >
       <GiBullyMinion className={`text-2xl ${iconClass}`} />
-      <span>{`${ti.enemyAdded}: ${name}`}</span>
+      <span>{`${t.trackerInit.enemyAdded}: ${name}`}</span>
     </motion.div>
   );
 }
