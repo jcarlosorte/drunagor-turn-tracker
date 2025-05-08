@@ -37,3 +37,11 @@ body {
 .animate-fadeInOut {
   animation: fadeInOut 2s ease-in-out;
 }
+
+.toast-expand {
+  max-width: 800px !important;
+  width: auto !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
