@@ -218,9 +218,9 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
 
   const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
-      {position === 'top' && <div className="text-xs mt-1">{name}</div>}
+      {position === 'top' && <div className="text-xs mt-5">{name}</div>}
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
-      {position === 'bottom' && <div className="text-xs mt-1">{name}</div>}
+      {position === 'bottom' && <div className="text-xs mb-5">{name}</div>}
     </div>
   );
 
