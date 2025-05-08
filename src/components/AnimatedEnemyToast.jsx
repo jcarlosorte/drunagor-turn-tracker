@@ -15,7 +15,7 @@ export default function AnimatedEnemyToast({ color, name, ti }) {
   };
 
   const iconColorClasses = {
-    blanco: 'text-white',
+    blanco: 'text-black',
     gris: 'text-gray-300',
     negro: 'text-white',
     jefe: 'text-red-400',
