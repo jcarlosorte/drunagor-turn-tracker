@@ -427,7 +427,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </div>
           </div>
         </div>
-        <ToastContainer />
+        <ToastContainer toastClassName="toast-expand" bodyClassName="" />
       </PageTransition>
     
   );
