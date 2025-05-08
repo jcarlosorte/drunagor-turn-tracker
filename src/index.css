@@ -42,6 +42,6 @@ body {
   max-width: 800px !important;
   width: auto !important;
   overflow: visible !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 2 !important;
+  margin: 2 !important;
 }
