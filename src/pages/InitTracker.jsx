@@ -251,29 +251,44 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
   
+    const renderStack = (items, isTop, isEnemy = false) => {
+      // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
+      const reversed = [...items].reverse();
+      return reversed.map((item, i) => {
+        const zIndex = items.length - i; // mayor zIndex al primero
+        const offset = i * 30;
+        const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+        return (
+          <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
+            {isEnemy ? (
+              <EnemyCard
+                uuid={item.enemy.uuid}
+                name={getEnemyName(item.enemy.id)}
+                image={item.enemy.imagen}
+                behavior={item.enemy.behavior}
+                category={item.enemy.category}
+                position={isTop ? "top" : "bottom"}
+              />
+            ) : (
+              <CharacterCard
+                name={getHeroName(item.id)}
+                image={item.image}
+                position={isTop ? "top" : "bottom"}
+              />
+            )}
+          </div>
+        );
+      });
+    };
+  
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         
         {/* Escalonado arriba */}
-        <div className="relative flex justify-center h-52">
-          <div className="absolute bottom-20" >
-            {heroesAbove.map((h, i) => (
-              <div key={h.id} className="absolute" style={{ bottom: `${i * 30}px`, zIndex: i }}>
-                <CharacterCard name={getHeroName(h.id)} image={h.image} position="top" />
-              </div>
-            ))}
-            {isRune && enemiesAbove.map((e, i) => (
-              <div key={e.enemy.uuid} className="absolute" style={{ bottom: `${(heroesAbove.length + i) * 30}px`, zIndex: heroesAbove.length + i }}>
-                <EnemyCard
-                  uuid={e.enemy.uuid}
-                  name={getEnemyName(e.enemy.id)}
-                  image={e.enemy.imagen}
-                  behavior={e.enemy.behavior}
-                  category={e.enemy.category}
-                  position="top"
-                />
-              </div>
-            ))}
+        <div className="relative flex justify-center h-52 w-full">
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+            {renderStack(heroesAbove, true)}
+            {isRune && renderStack(enemiesAbove, true, true)}
           </div>
         </div>
   
@@ -301,31 +316,17 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         </div>
   
         {/* Escalonado abajo */}
-        <div className="relative flex justify-center h-52">
-          <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
-            {heroesBelow.map((h, i) => (
-              <div key={h.id} className="absolute" style={{ top: `${i * 30}px`, zIndex: i }}>
-                <CharacterCard name={getHeroName(h.id)} image={h.image} position="bottom" />
-              </div>
-            ))}
-            {isRune && enemiesBelow.map((e, i) => (
-              <div key={e.enemy.uuid} className="absolute" style={{ top: `${(heroesBelow.length + i) * 30}px`, zIndex: heroesBelow.length + i }}>
-                <EnemyCard
-                  uuid={e.enemy.uuid}
-                  name={getEnemyName(e.enemy.id)}
-                  image={e.enemy.imagen}
-                  behavior={e.enemy.behavior}
-                  category={e.enemy.category}
-                  position="bottom"
-                />
-              </div>
-            ))}
+        <div className="relative flex justify-center h-52 w-full">
+          <div className="absolute top-0 left-0 right-0 flex justify-center">
+            {renderStack(heroesBelow, false)}
+            {isRune && renderStack(enemiesBelow, false, true)}
           </div>
         </div>
   
       </div>
     );
   };
+
 
 
   return (
