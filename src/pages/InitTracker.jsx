@@ -12,6 +12,7 @@ import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
 import TopMenu from '@/components/TopMenu';
+import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
 import { v4 as uuidv4 } from 'uuid';
@@ -184,48 +185,20 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
   
-    // Mapeo de clases para fondo y texto
-    const bgClasses = {
-      blanco: 'bg-white text-black',
-      gris: 'bg-gray-600 text-white',
-      negro: 'bg-black text-white',
-      jefe: 'bg-red-500 text-white',
-      blue: 'bg-blue-700 text-white',
-      green: 'bg-green-700 text-white',
-      comandante: 'bg-yellow-600 text-black',
-      purple: 'bg-purple-500 text-white',
-    };
-  
-    // Mapeo de clases para el icono
-    const iconColorClasses = {
-      blanco: 'text-white',
-      gris: 'text-gray-300',
-      negro: 'text-white',
-      jefe: 'text-red-400',
-      blue: 'text-blue-400',
-      green: 'text-green-400',
-      comandante: 'text-yellow-400',
-      purple: 'text-purple-400',
-    };
-  
-    const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
-    const iconClass = iconColorClasses[enemyData.color] || 'text-white';
-
-    setTimeout(() => setToastMessage(''), 10000);
     toast(
-      <div className="flex items-center gap-2">
-        <GiBullyMinion className={`text-2xl ${iconClass}`} />
-        <span>{`${ti.enemyAdded}: ${translatedName}`}</span>
-      </div>,
+      <AnimatedEnemyToast
+        color={enemyData.color}
+        name={translatedName}
+        ti={ti}
+      />,
       {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 10000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        className: `${bgClass} rounded-xl shadow-xl font-semibold px-4 py-2`,
       }
     );
   };
