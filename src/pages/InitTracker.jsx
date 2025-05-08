@@ -67,7 +67,7 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    console.log(selected);
+    //console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     showToast(selected);
@@ -91,8 +91,8 @@ const InitTracker = () => {
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     //console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
     setManualSelector({ open: false, color: null });
-    const selected = ENEMIES.find(e => e.id === enemyId && enemies.includes(e.id));
-    //console.log(selected);
+    const selected = ENEMIES.find(e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id));
+    console.log(selected);
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
