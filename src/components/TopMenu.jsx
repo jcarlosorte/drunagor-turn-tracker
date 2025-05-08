@@ -165,19 +165,21 @@ const TopMenu = ({
               </div>
             </div>
 
-            <button
-              onClick={resetPlacedEnemies}
-              className="mx-auto px-4 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-full text-sm"
-            >
-              {t.resetEnemies || 'Resetear enemigos'}
-            </button>
-
-            <button
-              onClick={toggleMenu}
-              className="mx-auto mt-2 px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
-            >
-              {t.close || 'Cerrar'}
-            </button>
+            <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={resetPlacedEnemies}
+                className="px-4 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-full text-sm"
+              >
+                {t.resetEnemies || 'Resetear enemigos'}
+              </button>
+            
+              <button
+                onClick={toggleMenu}
+                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+              >
+                {t.close || 'Cerrar'}
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
