@@ -256,7 +256,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       const reversed = [...items].reverse();
       return reversed.map((item, i) => {
         const zIndex = items.length - i; // mayor zIndex al primero
-        const offset = i * 60;
+        const offset = i * 90;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
