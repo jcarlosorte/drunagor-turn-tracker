@@ -258,7 +258,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
 
     
     const renderStack = (items, isTop, isEnemy = false) => {
-      console.log(item.enemy.category, item.enemy.behavior);
+      
       const spacing = items.length <= 2
         ? 100
         : items.length === 3
@@ -272,6 +272,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         const zIndex = items.length - i; // mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+        console.log(item.enemy.category, item.enemy.behavior);
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
             {isEnemy ? (
