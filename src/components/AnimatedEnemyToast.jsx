@@ -33,6 +33,7 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
   const life = enemyData.vida ;
   const category = t?.enemies?.categoria[enemyData.categoria] ;
   const com = t?.trackerSelect?.comportamientos[enemyData.comportamiento] ;
+  const image = enemyData.imagen ;
  
   return (
     <motion.div
@@ -42,12 +43,17 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
       transition={{ duration: 0.3 }}
       className={`flex items-center gap-2 rounded-xl shadow-xl font-semibold px-4 py-2 ${bgClass}`}
     >
-      <GiBullyMinion className={`text-2xl ${iconClass}`} />
-       <div className="text-sm leading-tight space-y-1">
-        <div className="font-bold">{name}</div>
-        <div>{categoria} — {com} </div>
-        <div className="text-xs opacity-80">{translatedExpansion}</div>
-      </div>
+      <img
+         src={image}
+         alt={name}
+         className="w-16 h-16 object-cover rounded-md border border-white shadow-md"
+       />
+       <GiBullyMinion className={`text-2xl ${iconClass}`} />
+        <div className="text-sm leading-tight space-y-1">
+         <div className="font-bold">{name}</div>
+         <div>{categoria} — {com} </div>
+         <div className="text-xs opacity-80">{translatedExpansion}</div>
+       </div>
     </motion.div>
   );
 }
