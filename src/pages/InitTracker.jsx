@@ -217,7 +217,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   else if (maxCharactersInAnySlot >= 3) dynamicHeight = 'h-192';
 
   const CharacterCard = ({ name, image, position }) => (
-    <div className="flex flex-col items-center mx-1 mb-5">
+    <div className="flex flex-col items-center mx-1">
       {position === 'top' && <div className="text-xs">{name}</div>}
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
       {position === 'bottom' && <div className="text-xs">{name}</div>}
@@ -238,6 +238,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
         <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-center text-xs p-1">
           {name}
+           {category}
         </div>
       </div>
       {position === 'bottom' && (
