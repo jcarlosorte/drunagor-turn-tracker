@@ -165,23 +165,6 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     };
   }, []);
 
-  const toastElement = toastMessage && (
-    <div className={classNames(
-      'fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-xl shadow-xl text-white font-semibold flex items-center gap-3 z-50',
-      {
-        'bg-white-500': selectedColor === 'blanco',
-        'bg-grey-600': selectedColor === 'gris',
-        'bg-black-300 text-white': selectedColor === 'negro',
-        'bg-yellow-600': selectedColor === 'comandante',
-        'bg-red-500': selectedColor === 'jefe',
-        'bg-black': !['blanco', 'gris', 'negro', 'comandante', 'jefe'].includes(selectedColor)
-      }
-    )}>
-      
-      <GiBullyMinion className={`text-2xl bg-red-500`} />
-      <span>{toastMessage}</span>
-    </div>
-  );
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
   
