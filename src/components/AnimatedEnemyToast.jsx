@@ -43,21 +43,22 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className={`flex items-center gap-2 rounded-xl shadow-2xl font-semibold px-1 py-2 text-base ${bgClass}`}
+      className={`flex flex-col sm:flex-row items-center sm:items-start gap-2 rounded-xl shadow-2xl font-semibold px-1 py-2 text-base ${bgClass}`}
     >
       <img
          src={image}
          alt={name}
-         className="w-36 h-36 object-cover rounded-md border border-white shadow-md"
+         className="w-24 h-24 sm:w-36 sm:h-36 object-cover rounded-md border border-white shadow-md"
        />
 
-     <div className="flex flex-col justify-center gap-2 py-1">
-      <div className="flex items-center gap-2">
-        <GiBullyMinion className={`text-3xl ${iconClass}`} />
+     <div className="flex flex-col justify-center gap-2 text-center sm:text-left">
+      <div className="flex items-center justify-center sm:justify-start gap-2">
+        <GiBullyMinion className={`text-2xl sm:text-3xl ${iconClass}`} />
         <span className="font-bold text-lg">{name}</span>
       </div>
-      <div className="text-sm">{category} — {com}</div>
-      <div className="flex items-center gap-4 text-sm mt-2">
+      <div className="text-sm">{category}</div>
+      <div className="text-sm">— {com} —</div>
+      <div className="flex items-center justify-center sm:justify-start gap-4 text-sm mt-2">
         <span className="flex items-center gap-1"><GiHeartBeats /> {life}</span>
         <span className="flex items-center gap-1"><GiFootprint /> {move}</span>
         <span className="flex items-center gap-1"><GiBroadsword /> {attack}</span>
