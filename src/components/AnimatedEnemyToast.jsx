@@ -43,7 +43,7 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className={`flex flex-col sm:flex-row items-center sm:items-start gap-2 rounded-xl shadow-2xl font-semibold px-1 py-2 text-base ${bgClass}`}
+      className={`flex flex-col sm:flex-row items-center sm:items-start gap-2 rounded-xl shadow-2xl font-semibold px-1 py-2 text-base ${bgClass} min-w-fit max-w-full`}
     >
       <img
          src={image}
