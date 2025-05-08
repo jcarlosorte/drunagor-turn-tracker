@@ -254,16 +254,15 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
-    const spacing = items.length <= 2
-      ? 100
-      : items.length === 3
-        ? 70
-        : items.length === 4
-          ? 30
-          : 20; // Más elementos = menos separación (más solapados)
-
     
     const renderStack = (items, isTop, isEnemy = false) => {
+      const spacing = items.length <= 2
+        ? 100
+        : items.length === 3
+          ? 70
+          : items.length === 4
+            ? 30
+            : 20; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = [...items].reverse();
       return reversed.map((item, i) => {
