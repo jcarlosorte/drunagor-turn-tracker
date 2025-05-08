@@ -254,18 +254,26 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
 
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
-        <div className="flex items-end justify-center gap-1 flex-wrap overflow-y-auto h-52">
-          {heroesAbove.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="top" />)}
-     
-          {isRune && enemiesAbove.map((e, i) => ( <EnemyCard
-                                                      key={e.enemy.uuid}
-                                                      uuid={e.enemy.uuid}
-                                                      name={getEnemyName(e.enemy.id)}
-                                                      image={e.enemy.imagen}
-                                                      behavior={e.enemy.behavior}
-                                                      category={e.enemy.category}
-                                                      position="top"
-                                                    />))}
+        <div className="relative flex justify-center h-52">
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+            {heroesAbove.map((h, i) => (
+              <div key={h.id} className="absolute" style={{ bottom: `${i * 30}px`, zIndex: i }}>
+                <CharacterCard name={getHeroName(h.id)} image={h.image} position="top" />
+              </div>
+            ))}
+            {enemiesAbove.map((e, i) => (
+              <div key={e.enemy.uuid} className="absolute" style={{ bottom: `${(heroesAbove.length + i) * 30}px`, zIndex: heroesAbove.length + i }}>
+                <EnemyCard
+                  name={getEnemyName(e.enemy.id)}
+                  behavior={e.enemy.comportamiento}
+                  category={e.enemy.categoria}
+                  image={e.enemy.imagen}
+                  uuid={e.enemy.uuid}
+                  position="top"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="flex items-center justify-center h-8 bg-gray-300">
@@ -290,19 +298,28 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
           </div>
         </div>
 
-        <div className="flex items-start justify-center gap-1 flex-wrap overflow-y-auto h-52">
-          {heroesBelow.map(h => <CharacterCard key={h.id} name={getHeroName(h.id)} image={h.image} position="bottom" />)}
-       
-          {isRune && enemiesBelow.map((e, i) => ( <EnemyCard
-                                                      key={e.enemy.uuid}
-                                                      uuid={e.enemy.uuid}
-                                                      name={getEnemyName(e.enemy.id)}
-                                                      image={e.enemy.imagen}
-                                                      behavior={e.enemy.behavior}
-                                                      category={e.enemy.category}
-                                                      position="bottom"
-                                                    />))}
+        <div className="relative flex justify-center h-52">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+            {heroesBelow.map((h, i) => (
+              <div key={h.id} className="absolute" style={{ top: `${i * 30}px`, zIndex: i }}>
+                <CharacterCard name={getHeroName(h.id)} image={h.image} position="bottom" />
+              </div>
+            ))}
+            {enemiesBelow.map((e, i) => (
+              <div key={e.enemy.uuid} className="absolute" style={{ top: `${(heroesBelow.length + i) * 30}px`, zIndex: heroesBelow.length + i }}>
+                <EnemyCard
+                  name={getEnemyName(e.enemy.id)}
+                  behavior={e.enemy.comportamiento}
+                  category={e.enemy.categoria}
+                  image={e.enemy.imagen}
+                  uuid={e.enemy.uuid}
+                  position="bottom"
+                />
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     );
   };
