@@ -250,10 +250,11 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
-
-
+  
     return (
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+        
+        {/* Escalonado arriba */}
         <div className="relative flex justify-center h-52">
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
             {heroesAbove.map((h, i) => (
@@ -261,21 +262,22 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                 <CharacterCard name={getHeroName(h.id)} image={h.image} position="top" />
               </div>
             ))}
-            {enemiesAbove.map((e, i) => (
+            {isRune && enemiesAbove.map((e, i) => (
               <div key={e.enemy.uuid} className="absolute" style={{ bottom: `${(heroesAbove.length + i) * 30}px`, zIndex: heroesAbove.length + i }}>
                 <EnemyCard
-                  name={getEnemyName(e.enemy.id)}
-                  behavior={e.enemy.comportamiento}
-                  category={e.enemy.categoria}
-                  image={e.enemy.imagen}
                   uuid={e.enemy.uuid}
+                  name={getEnemyName(e.enemy.id)}
+                  image={e.enemy.imagen}
+                  behavior={e.enemy.behavior}
+                  category={e.enemy.category}
                   position="top"
                 />
               </div>
             ))}
           </div>
         </div>
-
+  
+        {/* Centro del slot */}
         <div className="flex items-center justify-center h-8 bg-gray-300">
           <div className={classNames(
             'flex items-center justify-center font-fantasy',
@@ -297,7 +299,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
             </span>
           </div>
         </div>
-
+  
+        {/* Escalonado abajo */}
         <div className="relative flex justify-center h-52">
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
             {heroesBelow.map((h, i) => (
@@ -305,24 +308,25 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                 <CharacterCard name={getHeroName(h.id)} image={h.image} position="bottom" />
               </div>
             ))}
-            {enemiesBelow.map((e, i) => (
+            {isRune && enemiesBelow.map((e, i) => (
               <div key={e.enemy.uuid} className="absolute" style={{ top: `${(heroesBelow.length + i) * 30}px`, zIndex: heroesBelow.length + i }}>
                 <EnemyCard
-                  name={getEnemyName(e.enemy.id)}
-                  behavior={e.enemy.comportamiento}
-                  category={e.enemy.categoria}
-                  image={e.enemy.imagen}
                   uuid={e.enemy.uuid}
+                  name={getEnemyName(e.enemy.id)}
+                  image={e.enemy.imagen}
+                  behavior={e.enemy.behavior}
+                  category={e.enemy.category}
                   position="bottom"
                 />
               </div>
             ))}
           </div>
         </div>
-
+  
       </div>
     );
   };
+
 
   return (
     
