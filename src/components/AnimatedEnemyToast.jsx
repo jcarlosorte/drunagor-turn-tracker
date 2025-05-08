@@ -29,10 +29,10 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
   const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
   const iconClass = iconColorClasses[enemyData.color] || 'text-white';
 
-  const name = translations?.enemies?.[enemyData.id] ;
+  const name = t?.enemies?.[enemyData.id] ;
   const life = enemyData.vida ;
-  const category = enemyData.categoria ;
-  const com = enemyData.comportamiento ;
+  const category = t?.enemies?.categoria[enemyData.categoria] ;
+  const com = t?.trackerSelect?.comportamientos[enemyData.comportamiento] ;
  
   return (
     <motion.div
