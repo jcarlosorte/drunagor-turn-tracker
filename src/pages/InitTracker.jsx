@@ -233,9 +233,12 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
           {behavior && ` (${translations.behaviors?.[behavior] || behavior})`}
         </div>
       )}
-      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
-      <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-center text-sm p-1">
-        {name}
+      
+      <div className="relative w-full">
+        <img src={image} alt={name} className="w-full object-cover rounded-lg border-2 border-white-400" />
+        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-center text-sm p-1">
+          {name}
+        </div>
       </div>
       {position === 'bottom' && (
         <div className="text-xs mt-1">
@@ -259,7 +262,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       const spacing = items.length <= 2
         ? 100
         : items.length === 3
-          ? 70
+          ? 60
           : items.length === 4
             ? 30
             : 20; // Más elementos = menos separación (más solapados)
