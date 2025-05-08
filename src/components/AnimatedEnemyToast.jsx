@@ -51,7 +51,7 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
        <GiBullyMinion className={`text-2xl ${iconClass}`} />
         <div className="text-sm leading-tight space-y-1">
          <div className="font-bold">{name}</div>
-         <div>{categoria} — {com} </div>
+         <div>{category} — {com} </div>
          <div className="text-xs opacity-80">{translatedExpansion}</div>
        </div>
     </motion.div>
