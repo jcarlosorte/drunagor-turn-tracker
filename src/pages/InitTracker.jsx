@@ -234,6 +234,9 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         </div>
       )}
       <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
+      <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-center text-sm p-1">
+        {name}
+      </div>
       {position === 'bottom' && (
         <div className="text-xs mt-1">
           {name}
@@ -250,13 +253,22 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
-  
+
+    const spacing = items.length <= 2
+      ? 100
+      : items.length === 3
+        ? 70
+        : items.length === 4
+          ? 30
+          : 20; // Más elementos = menos separación (más solapados)
+
+    
     const renderStack = (items, isTop, isEnemy = false) => {
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = [...items].reverse();
       return reversed.map((item, i) => {
         const zIndex = items.length - i; // mayor zIndex al primero
-        const offset = i * 90;
+        const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
