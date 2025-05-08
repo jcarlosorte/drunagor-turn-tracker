@@ -211,7 +211,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
     const iconClass = iconColorClasses[enemyData.color] || 'text-white';
 
-    setTimeout(() => setToastMessage(''), 2000);
+    setTimeout(() => setToastMessage(''), 10000);
     toast(
       <div className="flex items-center gap-2">
         <GiBullyMinion className={`text-2xl ${iconClass}`} />
