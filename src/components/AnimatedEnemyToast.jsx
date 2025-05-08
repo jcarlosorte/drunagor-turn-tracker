@@ -57,7 +57,7 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
         <span className="font-bold text-lg">{name}</span>
       </div>
       <div className="text-sm">{category}</div>
-      <div className="text-sm">— {com} —</div>
+      <div className="fst-italic text-center text-xs">— {com} —</div>
       <div className="flex items-center justify-center sm:justify-start gap-4 text-sm mt-2">
         <span className="flex items-center gap-1"><GiHeartBeats /> {life}</span>
         <span className="flex items-center gap-1"><GiFootprint /> {move}</span>
