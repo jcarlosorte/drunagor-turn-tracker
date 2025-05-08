@@ -228,17 +228,15 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     <div key={uuid} className="flex flex-col items-center mx-1">
       {position === 'top' && (
         <div className="text-xs mt-1">
-          {name}
-          {category && `(${tc?.[category] || category})`}
+          {category}
           {behavior && `(${tb?.[behavior] || behavior})`}
         </div>
       )}
       
       <div className="relative w-24">
         <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
-        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-center text-xs p-1">
+        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 rounded-lg text-white text-center text-xs p-1">
           {name}
-           {category}
         </div>
       </div>
       {position === 'bottom' && (
@@ -260,6 +258,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
 
     
     const renderStack = (items, isTop, isEnemy = false) => {
+      console.log(item.enemy.category, item.enemy.behavior);
       const spacing = items.length <= 2
         ? 100
         : items.length === 3
