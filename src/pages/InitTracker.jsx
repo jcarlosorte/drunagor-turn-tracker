@@ -299,7 +299,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
         
         {/* Escalonado arriba */}
-        <div className="relative flex justify-center h-52 w-full">
+        <div className="relative flex justify-center h-52 w-full mt-5">
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
             {renderStack(heroesAbove, true)}
             {isRune && renderStack(enemiesAbove, true, true)}
@@ -330,7 +330,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         </div>
   
         {/* Escalonado abajo */}
-        <div className="relative flex justify-center h-52 w-full">
+        <div className="relative flex justify-center h-52 w-full mb-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
             {renderStack(heroesBelow, false)}
             {isRune && renderStack(enemiesBelow, false, true)}
