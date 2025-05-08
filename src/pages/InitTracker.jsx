@@ -256,7 +256,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
         
         {/* Escalonado arriba */}
         <div className="relative flex justify-center h-52">
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
             {heroesAbove.map((h, i) => (
               <div key={h.id} className="absolute" style={{ bottom: `${i * 30}px`, zIndex: i }}>
                 <CharacterCard name={getHeroName(h.id)} image={h.image} position="top" />
@@ -302,7 +302,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
   
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-52">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+          <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
             {heroesBelow.map((h, i) => (
               <div key={h.id} className="absolute" style={{ top: `${i * 30}px`, zIndex: i }}>
                 <CharacterCard name={getHeroName(h.id)} image={h.image} position="bottom" />
