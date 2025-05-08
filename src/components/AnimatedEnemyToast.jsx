@@ -34,6 +34,8 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
   const category = t?.enemies?.categoria[enemyData.categoria] ;
   const com = t?.trackerSelect?.comportamientos[enemyData.comportamiento] ;
   const image = enemyData.imagen ;
+  const move = enemyData.movimiento ;
+  const attack = enemyData.ataque ;
  
   return (
     <motion.div
@@ -51,8 +53,12 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
        <GiBullyMinion className={`text-2xl ${iconClass}`} />
         <div className="text-sm leading-tight space-y-1">
          <div className="font-bold">{name}</div>
-         <div>{category} — {com} </div>
-      
+         <div>{category} — {com}</div>
+       <div className="flex items-center gap-2 text-xs">
+          <span className="flex items-center gap-1"><GiHeartBeats /> {life}</span>
+          <span className="flex items-center gap-1"><GiFootprint /> {move}</span>
+          <span className="flex items-center gap-1"><GiBroadsword /> {attack}</span>
+        </div>
        </div>
     </motion.div>
   );
