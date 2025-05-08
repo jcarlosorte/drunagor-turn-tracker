@@ -1,7 +1,6 @@
 // components/AnimatedEnemyToast.jsx
 import { motion } from 'framer-motion';
 import { GiBullyMinion } from 'react-icons/gi';
-import { useTranslation } from 'react-i18next';
 
 export default function AnimatedEnemyToast({ enemyData, t }) {
  
