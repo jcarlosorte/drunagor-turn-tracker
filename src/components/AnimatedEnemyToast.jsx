@@ -30,8 +30,10 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
   const iconClass = iconColorClasses[enemyData.color] || 'text-white';
 
   const name = translations?.enemies?.[enemyData.id] ;
-
-  
+  const life = enemyData.vida ;
+  const category = enemyData.categoria ;
+  const com = enemyData.comportamiento ;
+ 
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -41,7 +43,11 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
       className={`flex items-center gap-2 rounded-xl shadow-xl font-semibold px-4 py-2 ${bgClass}`}
     >
       <GiBullyMinion className={`text-2xl ${iconClass}`} />
-      <span>{`${t.trackerInit.enemyAdded}: ${name}`}</span>
+       <div className="text-sm leading-tight space-y-1">
+        <div className="font-bold">{name}</div>
+        <div>{categoria} — {com} </div>
+        <div className="text-xs opacity-80">{translatedExpansion}</div>
+      </div>
     </motion.div>
   );
 }
