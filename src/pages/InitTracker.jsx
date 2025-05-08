@@ -188,7 +188,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     toast(
       <AnimatedEnemyToast
         enemyData={enemyData}
-        trCom={translations}
+        t={translations}
 
       />,
       {
