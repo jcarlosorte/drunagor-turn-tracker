@@ -51,10 +51,10 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
          className="w-24 h-24 sm:w-36 sm:h-36 object-cover rounded-md border border-white shadow-md"
        />
 
-     <div className="flex flex-col justify-center gap-2 text-center sm:text-left min-w-fit">
+     <div className="flex flex-col justify-center gap-2 text-center sm:text-left shrink-0">
       <div className="flex items-center justify-center sm:justify-start gap-2">
         <GiBullyMinion className={`text-2xl sm:text-3xl ${iconClass}`} />
-        <span className="font-bold text-lg whitespace-nowrap font-fantasy">{name}</span>
+        <span className="font-bold text-lg font-fantasy">{name}</span>
       </div>
       <div className="text-center text-sm">{category}</div>
       <div className="fst-italic text-center text-xs">— {com} —</div>
