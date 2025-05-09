@@ -160,7 +160,7 @@ const InitTracker = () => {
     bisoño: 'glow-bisono',
     soldado: 'glow-soldado',
     veterano: 'glow-veterano',
-    campeón: 'glow-campeon',
+    campeon: 'glow-campeon',
   };
   
   useEffect(() => {
