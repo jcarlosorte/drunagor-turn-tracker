@@ -282,8 +282,8 @@ const InitTracker = () => {
         console.log('Enemigos para renderizar:', reversed.map(i => ({
           uuid: i.enemy.uuid,
           name: getEnemyName(i.enemy.id),
-          category: i.enemy.category,
-          behavior: i.enemy.behavior
+          category: i.enemy.categoria,
+          behavior: i.enemy.comportamiento
         })));
       }
       
