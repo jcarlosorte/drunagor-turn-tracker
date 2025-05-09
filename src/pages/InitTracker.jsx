@@ -290,8 +290,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
                 uuid={item.enemy.uuid}
                 name={getEnemyName(item.enemy.id)}
                 image={item.enemy.imagen}
-                comportamiento={item.enemy.behavior}
-                categoria={item.enemy.category}
+                comportamiento={item.enemy.comportamiento}
+                categoria={item.enemy.categoria}
                 position={isTop ? "top" : "bottom"}
               />
             ) : (
