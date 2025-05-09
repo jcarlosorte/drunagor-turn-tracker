@@ -2,10 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   safelist: [
-    {
-      pattern: /drop-shadow-\[0_0_6px_rgba\(.*\)\]/,
-    },
-  ],
+  'drop-shadow-[0_0_6px_rgba(255,0,0,0.5)]',
+  'drop-shadow-[0_0_6px_rgba(0,255,0,0.5)]',
+  'drop-shadow-[0_0_6px_rgba(0,0,255,0.5)]',
+  'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
+  'drop-shadow-[0_0_6px_rgba(234,179,8,1)]',     // amarillo
+  'drop-shadow-[0_0_6px_rgba(251,146,60,1)]',   // naranja
+  'drop-shadow-[0_0_6px_rgba(239,68,68,1)]'      // rojo
+],
   theme: {
     extend: {
       fontFamily: {
