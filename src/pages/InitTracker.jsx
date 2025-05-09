@@ -83,7 +83,8 @@ const InitTracker = () => {
         comportamiento: selected.comportamiento,
         vida: selected.vida, 
         movimiento: selected.movimiento, 
-        ataque: selected.ataque
+        ataque: selected.ataque,
+        color: selected.color
       }
     });
   };
@@ -109,7 +110,8 @@ const InitTracker = () => {
         comportamiento: behaviorType,
         vida: selected.vida, 
         movimiento: selected.movimiento, 
-        ataque: selected.ataque
+        ataque: selected.ataque,
+        color: selected.color
       }
     });
   };
@@ -133,7 +135,8 @@ const InitTracker = () => {
           comportamiento: selected.comportamiento,
           vida: selected.vida, 
           movimiento: selected.movimiento, 
-          ataque: selected.ataque
+          ataque: selected.ataque,
+          color: selected.color
         }
       });
     };
@@ -283,7 +286,8 @@ const InitTracker = () => {
           uuid: i.enemy.uuid,
           name: getEnemyName(i.enemy.id),
           category: i.enemy.categoria,
-          behavior: i.enemy.comportamiento
+          behavior: i.enemy.comportamiento,
+          color: i.enemy.color
         })));
       }
       
