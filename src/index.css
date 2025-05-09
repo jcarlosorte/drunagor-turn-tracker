@@ -66,22 +66,22 @@ body {
   text-shadow: 0 0 2px purple, 0 0 4px purple;
 }
 
-.border-white {
+.border-blanco {
   border-color: white;
 }
 
-.border-gray {
+.border-gris {
   border-color: gray;
 }
 
-.border-black {
+.border-negro {
   border-color: black;
 }
 
-.border-gold {
+.border-dorado {
   border-color: gold;
 }
 
-.border-purple-custom {
+.border-morado {
   border-color: purple;
 }
