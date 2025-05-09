@@ -45,3 +45,20 @@ body {
   padding: 2 !important;
   margin: 2 !important;
 }
+
+.glow-bisono {
+  text-shadow: 0 0 2px #00ffff, 0 0 4px #00ffff, 0 0 6px #00ffff;
+}
+
+.glow-soldado {
+  text-shadow: 0 0 2px #ffff00, 0 0 4px #ffff00, 0 0 6px #ffff00;
+}
+
+.glow-veterano {
+  text-shadow: 0 0 2px #ffa500, 0 0 4px #ffcc00, 0 0 6px #ffcc00;
+}
+
+.glow-campeon {
+  text-shadow: 0 0 2px #ff0000, 0 0 4px #ff0000, 0 0 6px #ff0000;
+}
+
