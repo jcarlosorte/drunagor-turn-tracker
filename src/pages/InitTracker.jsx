@@ -174,6 +174,14 @@ const InitTracker = () => {
     comandante: 'border-dorado',
     jefe: 'border-morado',
   };
+
+  const textBgColorMap = {
+    blanco: 'bg-white/70',      // Blanco con opacidad
+    gris: 'bg-gray-500/70',     // Gris medio
+    negro: 'bg-black/70',       // Negro
+    comandante: 'bg-yellow-400/70', // Dorado aproximado
+    jefe: 'bg-purple-700/70',   // Morado
+  };
   
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
@@ -254,7 +262,7 @@ const InitTracker = () => {
     <div key={uuid} className="flex flex-col items-center mx-1">
       <div className="relative w-24">
         <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
-        <div className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-60 rounded-lg text-white text-center text-xs p-1 ${categoryTextGlowMap[categoria] || ''}`}>
+        <div className={`absolute bottom-0 left-0 w-full rounded-lg text-white text-center text-xs p-1 ${textBgColorMap[color] || 'bg-black/60'} ${categoryTextGlowMap[categoria] || ''}`}>
           {name}
         </div>
       </div>
