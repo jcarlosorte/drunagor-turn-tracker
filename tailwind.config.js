@@ -8,7 +8,11 @@ export default {
   'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
   'drop-shadow-[0_0_6px_rgba(234,179,8,1)]',     // amarillo
   'drop-shadow-[0_0_6px_rgba(251,146,60,1)]',   // naranja
-  'drop-shadow-[0_0_6px_rgba(239,68,68,1)]'      // rojo
+  'drop-shadow-[0_0_6px_rgba(239,68,68,1)]',      // rojo
+  'glow-bisono',
+  'glow-soldado',
+  'glow-veterano',
+  'glow-campeon',
 ],
   theme: {
     extend: {
