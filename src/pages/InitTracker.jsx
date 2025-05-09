@@ -253,7 +253,7 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
     <div key={uuid} className="flex flex-col items-center mx-1">
       <div className="relative w-24">
-        <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[comportamiento] || ''}`} />
+        <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
         <div className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-60 rounded-lg text-white text-center text-xs p-1 ${categoryTextGlowMap[categoria] || ''}`}>
           {name}
         </div>
