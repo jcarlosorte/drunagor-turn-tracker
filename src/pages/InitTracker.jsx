@@ -242,7 +242,7 @@ const InitTracker = () => {
       
       <div className="relative w-24">
         <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
-        <div className={`absolute bottom-0 left-0 w-full bg-slate bg-opacity-30 rounded-lg text-white text-center text-xs p-1 ${categoryGlowMap[categoria] || ''}`}>
+        <div className={`absolute bottom-0 left-0 w-full bg-slate bg-opacity-60 rounded-lg text-white text-center text-xs p-1 ${categoryGlowMap[categoria] || ''}`}>
           {name}
         </div>
       </div>
