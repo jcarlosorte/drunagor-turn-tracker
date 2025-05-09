@@ -62,3 +62,26 @@ body {
   text-shadow: 0 0 2px #ff0000, 0 0 4px #ff0000, 0 0 6px #ff0000;
 }
 
+.glow-commander {
+  text-shadow: 0 0 2px purple, 0 0 4px purple;
+}
+
+.border-white-custom {
+  border-color: white;
+}
+
+.border-gray-custom {
+  border-color: gray;
+}
+
+.border-black-custom {
+  border-color: black;
+}
+
+.border-gold-custom {
+  border-color: gold;
+}
+
+.border-purple-custom {
+  border-color: purple;
+}
