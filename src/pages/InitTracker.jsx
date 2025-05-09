@@ -224,11 +224,11 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     </div>
   );
 
-  const EnemyCard = ({ name, behavior, category, image, position, uuid }) => (
+  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid }) => (
     <div key={uuid} className="flex flex-col items-center mx-1">
       {position === 'top' && (
         <div className="text-xs mt-1">
-          {category}
+          {categoria}
           {behavior && `(${tb?.[behavior] || behavior})`}
         </div>
       )}
