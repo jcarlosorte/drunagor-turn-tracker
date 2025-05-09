@@ -113,41 +113,48 @@ const InitTracker = () => {
       }
     });
   };
+  
+    const handleRandomCommander = () => {
+      const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
+      if (filtered.length === 0) return;
+      const selected = filtered[Math.floor(Math.random() * filtered.length)];
+      const runeIndex = runesColorMap[selected.rune];
+      const runePosition = selected.runePosition;
+      showToast(selected);
+      placeEnemy({
+        enemy: {
+          uuid: uuidv4(),
+          id: selected.id,
+          rune: selected.rune,
+          imagen: selected.imagen,
+          runePosition,
+          position: runeIndex,
+          categoria: selected.categoria,
+          comportamiento: selected.comportamiento,
+          vida: selected.vida, 
+          movimiento: selected.movimiento, 
+          ataque: selected.ataque
+        }
+      });
+    };
 
-  const handleRandomCommander = () => {
-    const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
-    if (filtered.length === 0) return;
-    const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    const runeIndex = runesColorMap[selected.rune];
-    const runePosition = selected.runePosition;
-    showToast(selected);
-    placeEnemy({
-      enemy: {
-        uuid: uuidv4(),
-        id: selected.id,
-        rune: selected.rune,
-        imagen: selected.imagen,
-        runePosition,
-        position: runeIndex,
-        categoria: selected.categoria,
-        comportamiento: selected.comportamiento,
-        vida: selected.vida, 
-        movimiento: selected.movimiento, 
-        ataque: selected.ataque
-      }
-    });
+  const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
+    return ENEMIES.filter(e =>
+      trackerEnemies.includes(e.id) &&
+      e.color === color &&
+      (behaviorType ? e.comportamiento === behaviorType : true)
+    );
   };
-
-const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
-  return ENEMIES.filter(e =>
-    trackerEnemies.includes(e.id) &&
-    e.color === color &&
-    (behaviorType ? e.comportamiento === behaviorType : true)
-  );
-};
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
+
+  const categoryGlowMap = {
+    bisoño: 'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
+    soldado: 'drop-shadow-[0_0_6px_rgba(234,179,8,1)]',     // amarillo
+    veterano: 'drop-shadow-[0_0_6px_rgba(251,146,60,1)]',   // naranja
+    campeon: 'drop-shadow-[0_0_6px_rgba(239,68,68,1)]'      // rojo
+  };
 
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
@@ -235,7 +242,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       
       <div className="relative w-24">
         <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-white-400" />
-        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 rounded-lg text-white text-center text-xs p-1">
+        <div className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-60 rounded-lg text-white text-center text-xs p-1 ${categoryGlowMap[categoria] || ''}`}>
           {name}
         </div>
       </div>
