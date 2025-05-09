@@ -229,7 +229,7 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       {position === 'top' && (
         <div className="text-xs mt-1">
           {categoria}
-          {behavior && `(${tb?.[behavior] || behavior})`}
+          {comportamiento && `(${tb?.[comportamiento] || comportamiento})`}
         </div>
       )}
       
@@ -242,8 +242,8 @@ const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
       {position === 'bottom' && (
         <div className="text-xs mt-1">
           {name}
-          {category && ` (${translations.categories?.[category] || category})`}
-          {behavior && ` (${translations.behaviors?.[behavior] || behavior})`}
+          {categoria && ` (${translations.categories?.[categoria] || categoria})`}
+          {comportamiento && ` (${comportamiento.behaviors?.[comportamiento] || comportamiento})`}
         </div>
       )}
     </div>
