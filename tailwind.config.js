@@ -1,22 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  extend: {
-    fontFamily: {
-      fantasy: ['"Uncial Antiqua"', 'cursive'],
+  safelist: [
+    {
+      pattern: /drop-shadow-\[0_0_6px_rgba\(.*\)\]/,
     },
-  },
-  plugins: [],
-  extend: {
-    animation: {
-      'spin-slow': 'spin 3s linear infinite',
-      'fade-in': 'fadeIn 1s ease-out forwards',
-    },
-    keyframes: {
-      fadeIn: {
-        '0%': { opacity: 0, transform: 'scale(0.95)' },
-        '100%': { opacity: 1, transform: 'scale(1)' },
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        fantasy: ['"Uncial Antiqua"', 'cursive'],
+      },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'fade-in': 'fadeIn 1s ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0, transform: 'scale(0.95)' },
+          '100%': { opacity: 1, transform: 'scale(1)' },
+        },
       },
     },
   },
+  plugins: [],
 }
