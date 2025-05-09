@@ -156,6 +156,13 @@ const InitTracker = () => {
     campeon: 'drop-shadow-[0_0_6px_rgba(239,68,68,1)]'      // rojo
   };
 
+  const categoryTextGlowMap = {
+    bisoño: 'glow-bisono',
+    soldado: 'glow-soldado',
+    veterano: 'glow-veterano',
+    campeón: 'glow-campeon',
+  };
+  
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
       const role = trackerData.roles[id];
