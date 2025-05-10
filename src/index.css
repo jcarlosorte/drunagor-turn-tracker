@@ -87,8 +87,18 @@ body {
 }
 
 .enemy-text {
-  font-size: clamp(0.5rem, 1.2vw, 0.75rem); /* se adapta al ancho disponible */
-  white-space: nowrap;                     /* evita que salte a otra línea */
-  overflow: hidden;                        /* oculta el desborde */
-  text-overflow: ellipsis;                 /* añade "..." si se desborda */
+  display: inline-block;
+  max-width: 100%;
+  font-size: 0.75rem;
+  text-align: center;
+  transform: scale(1);
+  transform-origin: left;
+}
+
+.enemy-text-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
 }
