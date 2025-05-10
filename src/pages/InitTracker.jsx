@@ -262,7 +262,7 @@ const InitTracker = () => {
     <div key={uuid} className="flex flex-col items-center mx-1">
       <div className="relative w-24">
         <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
-        <div className={`absolute bottom-0 left-0 w-full rounded-lg text-white text-center text-xs p-1 ${textBgColorMap[color] || 'bg-black/60'} ${categoryTextGlowMap[categoria] || ''}`}>
+        <div className={`absolute bottom-1 left-0 w-20 border-2 rounded-lg text-white text-center text-xs p-1 ${borderColorMap[color] || ''} ${textBgColorMap[color] || 'bg-black/60'} ${categoryTextGlowMap[categoria] || ''}`}>
           {name}
         </div>
       </div>
