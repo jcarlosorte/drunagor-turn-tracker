@@ -85,3 +85,10 @@ body {
 .border-morado {
   border-color: purple;
 }
+
+.enemy-text {
+  font-size: clamp(0.5rem, 1.2vw, 0.75rem); /* se adapta al ancho disponible */
+  white-space: nowrap;                     /* evita que salte a otra línea */
+  overflow: hidden;                        /* oculta el desborde */
+  text-overflow: ellipsis;                 /* añade "..." si se desborda */
+}
