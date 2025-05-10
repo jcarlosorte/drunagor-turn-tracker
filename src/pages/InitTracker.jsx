@@ -264,7 +264,7 @@ const InitTracker = () => {
         <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
         <div className={`absolute bottom-0 w-full border-2 rounded-lg items-center text-white text-center text-xs p-1 ${borderColorMap[color] || ''} ${textBgColorMap[color] || 'bg-black/60'} ${categoryTextGlowMap[categoria] || ''}`}>
           {name}
-          <div className={`absolute bottom-0 w-full border-2 rounded-lg items-center text-white text-center text-[0.5rem] p-1`}>
+          <div className={`text-[0.5rem]`}>
             -{tb[comportamiento]}-
           </div>
         </div>
