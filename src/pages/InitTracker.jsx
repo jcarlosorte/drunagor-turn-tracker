@@ -364,7 +364,7 @@ const InitTracker = () => {
             })}>
             <span
               className={classNames(
-                'rotate-[315deg] block text-[0.6rem] sm:text-xs md:text-sm lg:text-base leading-none text-center whitespace-nowrap max-w-full overflow-hidden text-ellipsis'
+                'block text-[0.6rem] sm:text-xs md:text-sm lg:text-base leading-none text-center whitespace-nowrap max-w-full overflow-hidden text-ellipsis'
               )}
               style={{ width: 'fit-content', maxWidth: '100%' }}
             >
