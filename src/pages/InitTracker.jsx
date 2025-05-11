@@ -250,13 +250,26 @@ const InitTracker = () => {
   if (maxCharactersInAnySlot >= 5) dynamicHeight = 'h-256';
   else if (maxCharactersInAnySlot >= 3) dynamicHeight = 'h-192';
 
-  const CharacterCard = ({ name, image, position }) => (
+ const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
-      {position === 'top' && <div className="text-xs">{name}</div>}
-      <img src={image} alt={name} className="w-24 h-24 object-cover rounded-lg border-2 border-yellow-400" />
-      {position === 'bottom' && <div className="text-xs">{name}</div>}
+      <div className="relative w-24 h-24">
+        <img
+          src={image}
+          alt={name}
+          className="w-24 h-24 object-cover rounded-lg border-2 border-[#800020]/70"
+        />
+        <div
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
+          style={{
+            textShadow: '0 0 4px #b87333aa',
+          }}
+        >
+          {name}
+        </div>
+      </div>
     </div>
   );
+
 
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
     <div key={uuid} className="flex flex-col items-center mx-1">
