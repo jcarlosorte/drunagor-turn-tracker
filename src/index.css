@@ -89,7 +89,7 @@ body {
 .enemy-text {
   display: inline-block;
   max-width: 100%;
-  font-size: 0.70rem;
+  font-size: 0.65rem;
   text-align: center;
   transform: scale(1);
   transform-origin: left;
