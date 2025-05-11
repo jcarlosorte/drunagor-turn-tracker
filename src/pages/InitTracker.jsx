@@ -270,7 +270,7 @@ const InitTracker = () => {
           <div className="flex flex-col items-center leading-none">
             <span className="enemy-text leading-none">{name}</span>
             {comportamiento && (
-              <span className="text-[0.55rem] italic leading-none mt-0.5 opacity-90">
+              <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
                 {tb?.[comportamiento] || comportamiento}
               </span>
             )}
