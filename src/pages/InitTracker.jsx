@@ -366,7 +366,7 @@ const InitTracker = () => {
               className={classNames(
                 'rotate-[315deg] block text-[0.6rem] sm:text-xs md:text-sm lg:text-base leading-none text-center whitespace-nowrap max-w-full overflow-hidden text-ellipsis'
               )}
-              style={{ width: 'fit-content', maxWidth: '100%', transform: 'rotate(315deg)' }}
+              style={{ width: 'fit-content', maxWidth: '100%' }}
             >
               {index === 0 && tr.defensor ||
                 index === 2 && tr.apoyo ||
