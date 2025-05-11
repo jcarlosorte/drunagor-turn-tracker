@@ -316,7 +316,7 @@ const InitTracker = () => {
       const spacing = items.length <= 2
         ? 90
         : items.length === 3
-          ? 50
+          ? 45
           : items.length === 4
             ? 30
             : 20; // Más elementos = menos separación (más solapados)
