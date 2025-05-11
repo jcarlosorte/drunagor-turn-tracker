@@ -259,7 +259,7 @@ const InitTracker = () => {
           className="w-24 h-30 object-cover rounded-lg border-2 border-[#800020]/70"
         />
         <div
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
           style={{
             textShadow: '0 0 4px #b87333aa',
           }}
