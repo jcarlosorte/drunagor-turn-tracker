@@ -272,14 +272,23 @@ const InitTracker = () => {
 
 
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
-    <div key={uuid} className="flex flex-col items-center mx-1">
-      <div className="relative w-full">
-        <img src={image} alt={name} className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
-        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
-          ${borderColorMap[color] || ''} 
-          ${textBgColorMap[color] || 'bg-black/60'} 
-          ${categoryTextGlowMap[categoria] || ''} 
-          enemy-text-wrapper`}>
+    <div
+      key={uuid}
+      className="flex flex-col items-center mx-1 relative z-10 transition-transform hover:-translate-y-1"
+    >
+      <div className="relative w-full shadow-lg rounded-lg">
+        <img
+          src={image}
+          alt={name}
+          className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+        />
+        <div
+          className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
+            ${borderColorMap[color] || ''} 
+            ${textBgColorMap[color] || 'bg-black/60'} 
+            ${categoryTextGlowMap[categoria] || ''} 
+            enemy-text-wrapper`}
+        >
           <div className="flex flex-col items-center leading-none">
             <span className="enemy-text leading-none">{name}</span>
             {comportamiento && (
@@ -292,6 +301,7 @@ const InitTracker = () => {
       </div>
     </div>
   );
+
 
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
