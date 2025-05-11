@@ -252,11 +252,11 @@ const InitTracker = () => {
 
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
-      <div className="relative w-24 h-24">
+      <div className="relative w-24 h-30">
         <img
           src={image}
           alt={name}
-          className="w-24 h-24 object-cover rounded-lg border-2 border-[#800020]/70"
+          className="w-24 h-30 object-cover rounded-lg border-2 border-[#800020]/70"
         />
         <div
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
@@ -304,9 +304,9 @@ const InitTracker = () => {
     const renderStack = (items, isTop, isEnemy = false) => {
       
       const spacing = items.length <= 2
-        ? 100
+        ? 90
         : items.length === 3
-          ? 60
+          ? 50
           : items.length === 4
             ? 30
             : 20; // Más elementos = menos separación (más solapados)
