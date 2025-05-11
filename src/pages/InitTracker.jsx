@@ -355,14 +355,16 @@ const InitTracker = () => {
           <div className={classNames(
             'flex items-center justify-center font-fantasy',
             {
-              'w-12 h-12 rotate-45 bg-orange-500 shadow border-4': index === 1,
-              'w-12 h-12 rotate-45 bg-green-500 shadow border-4': index === 3,
-              'w-12 h-12 rotate-45 bg-blue-500 shadow border-4': index === 5,
-              'w-12 h-12 rotate-45 bg-red-500 shadow border-4': index === 7,
-              'w-12 h-12 rotate-45 bg-gray-500 shadow border-4': index === 9,
+              'w-12 h-12 rotate-45 border-4 gem-orange': index === 1,
+              'w-12 h-12 rotate-45 border-4 gem-green': index === 3,
+              'w-12 h-12 rotate-45 border-4 gem-blue': index === 5,
+              'w-12 h-12 rotate-45 border-4 gem-red': index === 7,
+              'w-12 h-12 rotate-45 border-4 gem-gray': index === 9,
               'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
             })}>
-            <span className={classNames({ 'rotate-[315deg]': index % 2 !== 0 })}>
+            <span className={classNames({
+              'rotate-[315deg] text-xs sm:text-sm md:text-base': index % 2 !== 0
+            })}>
               {index === 0 && tr.defensor ||
                 index === 2 && tr.apoyo ||
                 index === 4 && tr.lider ||
@@ -372,6 +374,7 @@ const InitTracker = () => {
             </span>
           </div>
         </div>
+
   
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-52 w-full mt-5">
