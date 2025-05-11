@@ -267,9 +267,11 @@ const InitTracker = () => {
           ${textBgColorMap[color] || 'bg-black/60'} 
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}>
-          <span className="enemy-text">{name}</span> 
-          <div className={`text-[0.5rem]`}>
-            -{tb[comportamiento]}-
+          <div className="flex flex-col items-center w-full">
+            <span className="enemy-text">{name}</span>
+            {comportamiento && (
+              <span className="enemy-text text-[0.6rem] opacity-80">{comportamiento}</span>
+            )}
           </div>
         </div>
       </div>
