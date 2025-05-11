@@ -262,15 +262,17 @@ const InitTracker = () => {
     <div key={uuid} className="flex flex-col items-center mx-1">
       <div className="relative w-24">
         <img src={image} alt={name} className={`w-24 h-24 object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`} />
-        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 border-2 rounded-lg text-white text-xs p-1
+        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 min-w-[4.5rem] px-1 py-0.5 border-2 rounded-lg text-white text-xs
           ${borderColorMap[color] || ''} 
           ${textBgColorMap[color] || 'bg-black/60'} 
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}>
-          <div className="flex flex-col items-center w-full">
-            <span className="enemy-text">{name}</span>
+          <div className="flex flex-col items-center leading-none">
+            <span className="enemy-text leading-none">{name}</span>
             {comportamiento && (
-              <span className="enemy-text text-[0.6rem] opacity-80">{comportamiento}</span>
+              <span className="text-[0.55rem] italic leading-none mt-0.5 opacity-90">
+                {tb?.[comportamiento] || comportamiento}
+              </span>
             )}
           </div>
         </div>
