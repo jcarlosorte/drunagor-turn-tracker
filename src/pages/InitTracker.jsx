@@ -362,9 +362,9 @@ const InitTracker = () => {
               'w-12 h-12 rotate-45 border-4 gem-gray': index === 9,
               'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
             })}>
-            <span className={classNames({
-              'rotate-[315deg] text-xs sm:text-sm md:text-base': index % 2 !== 0
-            })}>
+            <span
+              className="rotate-[315deg] text-[min(3.5vw,12px)] leading-none text-center block whitespace-nowrap max-w-full overflow-hidden text-ellipsis"
+            >
               {index === 0 && tr.defensor ||
                 index === 2 && tr.apoyo ||
                 index === 4 && tr.lider ||
