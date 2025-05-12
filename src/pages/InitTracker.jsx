@@ -337,7 +337,7 @@ const InitTracker = () => {
       return reversed.map((item, i) => {
         const zIndex = items.length + i; // mayor zIndex al primero
         const offset = i * spacing;
-        const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+        const style = isTop ? { top: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
