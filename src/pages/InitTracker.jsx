@@ -322,7 +322,7 @@ const InitTracker = () => {
             ? 30
             : 20; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
-      const reversed = [...items].reverse();
+      const reversed = isTop ? [...items].reverse() : items;
 
       if (isEnemy) {
         console.log('Enemigos para renderizar:', reversed.map(i => ({
@@ -335,7 +335,7 @@ const InitTracker = () => {
       }
       
       return reversed.map((item, i) => {
-        const zIndex = items.length + i; // mayor zIndex al primero
+        const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         
