@@ -274,7 +274,7 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
     <div
       key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 transition-transform duration-200 hover:translate-y-8"
+      className="flex flex-col items-center mx-1 relative z-10 transition-transform duration-200 hover:translate-y-10"
     >
       <div className="relative w-full rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
         <img
@@ -322,7 +322,7 @@ const InitTracker = () => {
             ? 30
             : 20; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
-      const reversed = isTop && isEnemy ? items : [...items].reverse();
+      const reversed = [...items].reverse();
 
       if (isEnemy) {
         console.log('Enemigos para renderizar:', reversed.map(i => ({
@@ -337,7 +337,7 @@ const InitTracker = () => {
       return reversed.map((item, i) => {
         const zIndex = items.length - i; // mayor zIndex al primero
         const offset = i * spacing;
-        const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+        const style = isTop ? { top: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
