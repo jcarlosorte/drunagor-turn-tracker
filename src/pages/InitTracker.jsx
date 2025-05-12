@@ -274,9 +274,9 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
     <div
       key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 transition-transform hover:-translate-y-1"
+      className="flex flex-col items-center mx-1 relative z-10 transition-transform duration-200 hover:translate-y-3"
     >
-      <div className="relative w-full shadow-lg rounded-lg">
+      <div className="relative w-full rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
         <img
           src={image}
           alt={name}
@@ -301,6 +301,7 @@ const InitTracker = () => {
       </div>
     </div>
   );
+
 
 
   const renderSlot = (index) => {
