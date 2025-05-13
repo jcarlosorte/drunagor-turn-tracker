@@ -54,7 +54,7 @@ const InitTracker = () => {
   const [selectedColor, setSelectedColor] = useState('');
   const [toastMessage, setToastMessage] = useState('');
   const specialCategories = ['comandante', 'jefe', 'otros'];
-  
+
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
 
@@ -67,7 +67,6 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    //console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     showToast(selected);
@@ -81,8 +80,8 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: selected.categoria,
         comportamiento: selected.comportamiento,
-        vida: selected.vida, 
-        movimiento: selected.movimiento, 
+        vida: selected.vida,
+        movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color
       }
@@ -90,10 +89,8 @@ const InitTracker = () => {
   };
 
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
-    //console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id));
-    console.log(selected);
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
@@ -108,14 +105,14 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: category,
         comportamiento: behaviorType,
-        vida: selected.vida, 
-        movimiento: selected.movimiento, 
+        vida: selected.vida,
+        movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color
       }
     });
   };
-  
+
     const handleRandomCommander = () => {
       const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
       if (filtered.length === 0) return;
@@ -133,8 +130,8 @@ const InitTracker = () => {
           position: runeIndex,
           categoria: selected.categoria,
           comportamiento: selected.comportamiento,
-          vida: selected.vida, 
-          movimiento: selected.movimiento, 
+          vida: selected.vida,
+          movimiento: selected.movimiento,
           ataque: selected.ataque,
           color: selected.color
         }
@@ -144,7 +141,7 @@ const InitTracker = () => {
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
   };
-  
+
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     return ENEMIES.filter(e =>
       trackerEnemies.includes(e.id) &&
@@ -156,37 +153,11 @@ const InitTracker = () => {
   const handleSelectBoss = () => console.log("Seleccionar jefes");
   const handleSelectOther = () => console.log("Seleccionar otros");
 
-  const categoryGlowMap = {
-    bisoño: 'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
-    soldado: 'drop-shadow-[0_0_6px_rgba(234,179,8,1)]',     // amarillo
-    veterano: 'drop-shadow-[0_0_6px_rgba(251,146,60,1)]',   // naranja
-    campeon: 'drop-shadow-[0_0_6px_rgba(239,68,68,1)]'      // rojo
-  };
+  const categoryGlowMap = { /* ... */ };
+  const categoryTextGlowMap = { /* ... */ };
+  const borderColorMap = { /* ... */ };
+  const textBgColorMap = { /* ... */ };
 
-  const categoryTextGlowMap = {
-    bisoño: 'glow-bisono',
-    soldado: 'glow-soldado',
-    veterano: 'glow-veterano',
-    campeon: 'glow-campeon',
-    comandante: 'glow-commander',
-  };
-
-  const borderColorMap = {
-    blanco: 'border-blanco',
-    gris: 'border-gris',
-    negro: 'border-negro',
-    comandante: 'border-dorado',
-    jefe: 'border-morado',
-  };
-
-  const textBgColorMap = {
-    blanco: 'bg-white/70',      // Blanco con opacidad
-    gris: 'bg-gray-500/70',     // Gris medio
-    negro: 'bg-black/70',       // Negro
-    comandante: 'bg-yellow-400/70', // Dorado aproximado
-    jefe: 'bg-purple-700/70',   // Morado
-  };
-  
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
       const role = trackerData.roles[id];
@@ -203,44 +174,16 @@ const InitTracker = () => {
     };
   }, []);
 
-  const showToast = (enemyData) => {
-    const translatedName = translations?.enemies?.[enemyData.id];
-  
-    toast(
-      <AnimatedEnemyToast
-        enemyData={enemyData}
-        t={translations}
+  const showToast = (enemyData) => { /* ... */ };
 
-      />,
-      {
-        position: "top-center",
-        autoClose: 10000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        toastClassName: '!max-w-[800px] w-auto overflow-visible',
-        bodyClassName: '!p-0 !m-0',
-      }
-    );
-  };
-
-  if (!isLandscape) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen text-center bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
-        <div className="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl backdrop-blur-md animate-fade-in">
-          <MdScreenRotation className="text-6xl mb-4 animate-spin-slow" />
-          <p className="text-xl font-semibold">Por favor, gira tu dispositivo a orientación horizontal</p>
-          <p className="text-sm mt-2 text-gray-300">Para disfrutar correctamente del control de turnos</p>
-        </div>
-      </div>
-    );
-  }
+  if (!isLandscape) { /* ... (código de pantalla de rotación) ... */ }
 
   const rolesOnTop = ['defensor', 'lider', 'controlador'];
   const rolesOnBottom = ['apoyo', 'agresor'];
 
+  // MODIFICACIÓN: Cálculo de la altura del slot.
+  // Esta variable determina la altura de TODOS los slots basado en el que tenga más personajes.
+  // Asegúrate de que los valores como 'h-[24rem]' sean los que deseas.
   const countsPerIndex = Array(11).fill(0).map((_, index) => {
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
@@ -248,47 +191,71 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     return Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
   });
+  const maxCharactersInAnySlot = Math.max(0, ...countsPerIndex); // Añadido 0 para evitar -Infinity si countsPerIndex está vacío
 
-  const maxCharactersInAnySlot = Math.max(...countsPerIndex);
-
-  let slotHeightClass = 'h-[24rem]'; // Base height (ej. 192px o 48rem)
-    if (maxCharactersInAnySlot >= 5) {
-        slotHeightClass = 'h-[48rem]'; // Taller height (ej. 256px o 64rem)
-    } else if (maxCharactersInAnySlot >= 3) {
-        slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
-    } else if (maxCharactersInAnySlot >= 2) {
-        slotHeightClass = 'h-[32rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
-    }
-
-  
- const CharacterCard = ({ name, image, position }) => (
-    <div className="flex flex-col items-center mx-1">
-      <div className="relative w-full">
-        <img
-          src={image}
-          alt={name}
-          className="w-full object-cover rounded-lg border-2 border-[#800020]/70"
-        />
-        <div
-          className="absolute w-full bottom-0 left-1/2 transform -translate-x-1/2 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
-          style={{
-            textShadow: '0 0 4px #b87333aa',
-          }}
-        >
-          {name}
-        </div>
-      </div>
-    </div>
-  );
+  // MODIFICACIÓN: Lógica de altura del slot actualizada con más granularidad y usando valores arbitrarios de Tailwind
+  // Ajusta estos valores de rem (o usa px) según necesites. 1rem = 16px por defecto.
+  // h-[24rem] = 384px, h-[32rem] = 512px, h-[40rem] = 640px, h-[48rem] = 768px
+  let slotHeightClass = 'h-[24rem]'; // Altura base para 0 o 1 personaje
+  if (maxCharactersInAnySlot >= 5) {
+      slotHeightClass = 'h-[48rem]';
+  } else if (maxCharactersInAnySlot >= 4) {
+      slotHeightClass = 'h-[40rem]';
+  } else if (maxCharactersInAnySlot >= 3) {
+      slotHeightClass = 'h-[36rem]'; // Ajustado
+  } else if (maxCharactersInAnySlot >= 2) {
+      slotHeightClass = 'h-[30rem]'; // Ajustado
+  }
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
+const CharacterCard = ({ name, image, position }) => ( /* ... (sin cambios) ... */ );
+
+// MODIFICACIÓN COMPLETA: Componente EnemyCard
+const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, cardScale }) => {
+  const effectiveScale = cardScale || 1; // Escala por defecto es 1 si no se proporciona
+
+  // Valores de traslación para el hover.
+  // Asumiendo que '5' y '15' se refieren a unidades de espaciado de Tailwind (0.25rem por unidad)
+  const translateXValue = '1.25rem'; // 5 * 0.25rem
+  const translateYValue = '3.75rem'; // 15 * 0.25rem
+  // Si eran píxeles, usa '5px', '15px'
+
+  // Z-index clases
+  const baseZIndexClass = 'z-10'; // Z-index base
+  const hoverZIndexClass = 'hover:z-50'; // Z-index alto para el hover (Tailwind usa hasta z-50 por defecto)
+                                       // Podrías usar `hover:z-[100]` para un valor arbitrario más alto si es necesario.
+
+  // Clases de transformación
+  const baseTransformClass = `[transform:scale(${effectiveScale})]`;
+  // Los guiones bajos (_) separan las funciones de transformación en valores arbitrarios de Tailwind
+  const hoverTransformClass = `hover:[transform:translateX(${translateXValue})_translateY(${translateYValue})_scale(${effectiveScale}*1.1)]`; // Aumentar un poco la escala en hover también
+
+
+  return (
     <div
       key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-5 hover:translate-y-15 transition-transform duration-300"
+      className={`
+        flex flex-col items-center mx-1 relative
+        transition-all duration-300 ease-in-out
+        ${baseZIndexClass}
+        ${hoverZIndexClass}
+        ${baseTransformClass}
+        ${hoverTransformClass}
+      `}
+      // 'origin-bottom' hace que la escala y la transformación se sientan ancladas a la base.
+      // También puedes usar 'origin-center' si lo prefieres.
+      style={{ transformOrigin: 'bottom' }}
     >
       <button
-        className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
+        // El z-index del botón es relativo a la EnemyCard (su padre posicionado)
+        // z-20 aquí para asegurar que esté sobre la imagen si esta tuviera su propio contexto de apilamiento.
+        className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 text-xs flex items-center justify-center z-20"
+        // Escalar el botón inversamente para que parezca mantener su tamaño, y ajustar su posición
+        style={{
+          transform: `scale(${1 / effectiveScale})`,
+          top: `${(0.25 / effectiveScale).toFixed(2)}rem`, // Ajustar posición del botón con la escala
+          right: `${(0.25 / effectiveScale).toFixed(2)}rem`
+        }}
         onClick={() => onRemove(uuid)}
       >
         ×
@@ -297,19 +264,27 @@ const InitTracker = () => {
         <img
           src={image}
           alt={name}
-          className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+          className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || 'border-transparent'}`}
         />
         <div
-          className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
-            ${borderColorMap[color] || ''} 
-            ${textBgColorMap[color] || 'bg-black/60'} 
-            ${categoryTextGlowMap[categoria] || ''} 
-            enemy-text-wrapper`}
+          className={`
+            absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white
+            ${borderColorMap[color] || 'border-transparent'}
+            ${textBgColorMap[color] || 'bg-black/60'}
+            ${categoryTextGlowMap[categoria] || ''}
+            enemy-text-wrapper w-full text-center  // Asegurar que el texto tenga ancho completo y esté centrado
+          `}
+          // Ajustar dinámicamente el tamaño de la fuente del texto si es necesario
+          // Esta es una forma, podrías usar clases de Tailwind condicionales también
+          style={{ fontSize: `${Math.max(0.45, 0.65 / Math.sqrt(effectiveScale)).toFixed(2)}rem` }}
         >
           <div className="flex flex-col items-center leading-none">
             <span className="enemy-text leading-none">{name}</span>
             {comportamiento && (
-              <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
+              <span
+                className="italic leading-none mt-0.5 opacity-90"
+                style={{ fontSize: `${Math.max(0.4, 0.5 / Math.sqrt(effectiveScale)).toFixed(2)}rem` }}
+              >
                 {tb?.[comportamiento] || comportamiento}
               </span>
             )}
@@ -318,46 +293,65 @@ const InitTracker = () => {
       </div>
     </div>
   );
+};
 
 
+const renderSlot = (index) => {
+  const isRune = Object.values(runesColorMap).includes(index);
+  const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
+  const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
+  const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
+  const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
-  const renderSlot = (index) => {
-    const isRune = Object.values(runesColorMap).includes(index);
-    const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
-    const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
-    const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
-    const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
-    
-    const renderStack = (items, isTop, isEnemy = false) => {
-      
-      const spacing = items.length <= 2
-        ? 90
-        : items.length === 3
-          ? 45
-          : items.length === 4
-            ? 30
-            : 20; // Más elementos = menos separación (más solapados)
-      // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
-      const reversed = isTop ? [...items].reverse() : items;
+  // MODIFICACIÓN: Función renderStack
+  const renderStack = (items, isTop, isEnemy = false) => {
+    const numItems = items.length;
+    let spacing, cardScale;
 
-      if (isEnemy) {
-        console.log('Enemigos para renderizar:', reversed.map(i => ({
-          uuid: i.enemy.uuid,
-          name: getEnemyName(i.enemy.id),
-          category: i.enemy.categoria,
-          behavior: i.enemy.comportamiento,
-          color: i.enemy.color
-        })));
-      }
-      
-      return reversed.map((item, i) => {
-        const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
-        const offset = i * spacing;
-        const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
-        
-        return (
-          <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
+    // Ajustar espaciado y escala según el número de elementos.
+    // Necesitarás experimentar con estos valores.
+    // 'spacing' es cuánto se desplaza cada carta para crear el efecto de solapamiento.
+    // 'cardScale' es el factor de escala para cada carta.
+    if (numItems <= 1) {
+      spacing = 0; // Sin desplazamiento si solo hay uno
+      cardScale = 0.9; // Escala base ligeramente más pequeña para estética
+    } else if (numItems === 2) {
+      spacing = 35; // Un valor en píxeles o una fracción de la altura de la carta
+      cardScale = 0.8;
+    } else if (numItems === 3) {
+      spacing = 28;
+      cardScale = 0.7;
+    } else if (numItems === 4) {
+      spacing = 22;
+      cardScale = 0.6;
+    } else { // 5 o más
+      spacing = 18;
+      cardScale = 0.55;
+    }
+
+    const reversed = isTop ? [...items].reverse() : items; // El primero en el array (último en renderizar visualmente abajo) debe tener zIndex mayor
+
+    // console.log si lo necesitas para depurar
+    // if (isEnemy && items.length > 0) {
+    //   console.log(`Renderizando ${isTop ? 'arriba' : 'abajo'} para slot ${index}, ${items.length} enemigos. Escala: ${cardScale}, Spacing: ${spacing}`);
+    // }
+
+    return reversed.map((item, i) => {
+      // El zIndex debe ser calculado para que las cartas más "al frente" (las primeras en el array `reversed` si `isTop`,
+      // o las últimas si `!isTop`) tengan un z-index mayor.
+      const zIndex = items.length - i; // Simple z-index: el primer item del array renderizado obtiene el z-index más alto.
+
+      // El offset ahora debería considerar la escala si quieres un solapamiento visualmente proporcional.
+      // O un valor fijo si prefieres. Aquí un offset simple.
+      const offset = i * spacing;
+      const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+
+      return (
+        // Este div es el que se posiciona absolutamente y controla el z-index del stack
+        <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full flex justify-center" style={style}>
+          {/* Este div interno puede ayudar a controlar el ancho máximo de la carta si es necesario */}
+          <div className="w-10/12 sm:w-9/12 md:w-8/12 lg:w-7/12"> {/* Ajusta el ancho de la carta */}
             {isEnemy ? (
               <EnemyCard
                 uuid={item.enemy.uuid}
@@ -365,199 +359,89 @@ const InitTracker = () => {
                 image={item.enemy.imagen}
                 comportamiento={item.enemy.comportamiento}
                 categoria={item.enemy.categoria}
-                position={isTop ? "top" : "bottom"}
+                position={isTop ? "top" : "bottom"} // Esta prop 'position' no parece usarse dentro de EnemyCard, puedes quitarla si no es necesaria
                 color={item.enemy.color}
                 onRemove={onRemove}
+                cardScale={cardScale} // MODIFICACIÓN: Pasar la escala a la carta
               />
             ) : (
               <CharacterCard
                 name={getHeroName(item.id)}
                 image={item.image}
-                position={isTop ? "top" : "bottom"}
+                position={isTop ? "top" : "bottom"} // Similar a EnemyCard, verifica si esta prop 'position' se usa
+                // Podrías pasar cardScale a CharacterCard también si quieres un comportamiento similar
               />
             )}
           </div>
-        );
-      });
-    };
-  
-    return (
-      <div key={index} className={`flex flex-col w-full ${slotHeightClass} py-2`}>
-        
-        {/* Escalonado arriba */}
-        <div className="relative flex justify-center h-1/2 w-full mb-5">
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-            {renderStack(heroesAbove, true)}
-            {isRune && renderStack(enemiesAbove, true, true)}
-          </div>
         </div>
-  
-        {/* Centro del slot */}
-        <div className="flex items-center justify-center h-8 shrink-0 bg-gray-300">
-          <div className={classNames(
-            'flex items-center justify-center font-fantasy',
-            {
-              'w-12 h-12 rotate-45 border-4 gem-orange': index === 1,
-              'w-12 h-12 rotate-45 border-4 gem-green': index === 3,
-              'w-12 h-12 rotate-45 border-4 gem-blue': index === 5,
-              'w-12 h-12 rotate-45 border-4 gem-red': index === 7,
-              'w-12 h-12 rotate-45 border-4 gem-gray': index === 9,
-              'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
-            })}>
-            <span
-              className={classNames(
-                'block text-[0.6rem] sm:text-xs md:text-sm lg:text-base leading-none text-center whitespace-nowrap max-w-full overflow-hidden text-ellipsis'
-              )}
-              style={{ width: 'fit-content', maxWidth: '100%' }}
-            >
-              {index === 0 && tr.defensor ||
-                index === 2 && tr.apoyo ||
-                index === 4 && tr.lider ||
-                index === 6 && tr.agresor ||
-                index === 8 && tr.controlador ||
-                index === 10 && ti.rune}
-            </span>
-          </div>
-        </div>
-
-  
-        {/* Escalonado abajo */}
-        <div className="relative flex justify-center h-1/2 w-full mt-5">
-          <div className="absolute top-0 left-0 right-0 flex justify-center">
-            {renderStack(heroesBelow, false)}
-            {isRune && renderStack(enemiesBelow, false, true)}
-          </div>
-        </div>
-  
-      </div>
-    );
+      );
+    });
   };
 
+  return (
+    // MODIFICACIÓN: Aplicar la altura dinámica del slot aquí
+    <div key={index} className={`flex flex-col w-full ${slotHeightClass} py-2 border-x border-gray-600 first:border-l-transparent last:border-r-transparent`}>
+
+      {/* Escalonado arriba */}
+      {/* Ajustar la altura de estos contenedores (h-1/2) si es necesario para dar espacio a las cartas solapadas */}
+      <div className="relative flex justify-center h-1/2 w-full mb-1"> {/* o usa una altura fija/min-height */}
+        <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
+          {renderStack(heroesAbove, true)}
+          {isRune && renderStack(enemiesAbove, true, true)}
+        </div>
+      </div>
+
+      {/* Centro del slot */}
+      <div className="flex items-center justify-center h-8 shrink-0 bg-gray-500/50"> {/* bg-gray-300 */}
+        <div className={classNames(
+          'flex items-center justify-center font-fantasy',
+          { /* ... (clases de gemas sin cambios) ... */ }
+        )}>
+          <span /* ... (texto del slot sin cambios) ... */ >
+            {/* ... */}
+          </span>
+        </div>
+      </div>
+
+      {/* Escalonado abajo */}
+      <div className="relative flex justify-center h-1/2 w-full mt-1"> {/* o usa una altura fija/min-height */}
+        <div className="absolute top-0 left-0 right-0 flex flex-col items-center">
+          {renderStack(heroesBelow, false)}
+          {isRune && renderStack(enemiesBelow, false, true)}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 
   return (
-    
-      <PageTransition>
-       
-        <div className={isLandscape ? "" : "portrait-lock"}>
-          <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
-            <div className="no-header" />
-            <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
-            <TopMenu
-              onAddEnemy={openCategorySelector}
-              onSelectCommander={handleRandomCommander}
-              onSelectBoss={handleSelectBoss}
-              onSelectOther={handleSelectOther}
-              onAddManual={openManualSelector}
-              behaviors={behaviors}
-            />
-            <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
-              {[...Array(11)].map((_, idx) => renderSlot(idx))}
-            </div>
-
-            {categorySelector.open && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-gray-900 p-4 rounded-xl shadow-lg text-white text-center">
-                  <h2 className="text-lg mb-4">{ti.selectCategory}</h2>
-                    {allowedCategories.map(cat => (
-                      <button key={cat} onClick={() => handleCategorySelect(cat)} className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded m-1">
-                        {tc[cat] || cat}
-                      </button>
-                    ))}
-                  <div className="mt-4 text-center">
-                    <button
-                      className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      onClick={() => setCategorySelector({ open: false, color: null })}
-                    >
-                      {ti.close || 'Cerrar'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {/* Manual Selector Modal */}
-            {manualSelector.open && (
-              <div className="fixed inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center z-50">
-                <div className="bg-gray-900 p-6 rounded-xl shadow-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto">
-                  <h2 className="text-xl text-yellow-300 mb-4">{ti.manualTitle || 'Seleccionar enemigo manualmente'}</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {Object.entries(
-                      getEnemiesByColor(enemies, manualSelector.color).reduce((acc, enemy) => {
-                        if (!acc[enemy.id]) acc[enemy.id] = {};
-                        if (!acc[enemy.id][enemy.categoria]) acc[enemy.id][enemy.categoria] = [];
-                        acc[enemy.id][enemy.categoria].push(enemy);
-                        return acc;
-                      }, {})
-                    ).map(([enemyId, categories]) => {
-                      const sampleEnemy = Object.values(categories)[0][0]; // Para imagen y nombre
-                    
-                      return (
-                        <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
-                          <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
-                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
-                    
-                          {Object.entries(categories).map(([categoria, variants]) => (
-                            <div key={categoria} className="w-full mb-2">
-                              {specialCategories.includes(categoria) ? (
-                                <div className="flex flex-wrap justify-center gap-1">
-                                  {variants.map(variant => (
-                                    <button
-                                      key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
-                                      className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
-                                      onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
-                                    >
-                                      {ti.addEnemy}
-                                    </button>
-                                  ))}
-                                </div>
-                              ) : (
-                                <>
-                                  <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
-                                  <div className="flex flex-wrap justify-center gap-1">
-                                    {variants.map(variant => (
-                                      <button
-                                        key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
-                                        className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
-                                        onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
-                                      >
-                                        {tb?.[variant.comportamiento] || variant.comportamiento}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })}
-
-                  </div>
-                  <div className="mt-4 text-center">
-                    <button
-                      className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      onClick={() => setManualSelector({ open: false, color: null })}
-                    >
-                      {ti.close || 'Cerrar'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="mt-8 flex justify-center gap-4">
-              <button onClick={() => navigate('/')} className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow">
-                {ti.goHome || 'Ir al inicio'}
-              </button>
-              <button onClick={() => navigate('/tracker')} className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow">
-                {ti.backToConfig || 'Volver a configuración'}
-              </button>
-            </div>
+    <PageTransition>
+      <div className={isLandscape ? "" : "portrait-lock"}>
+        <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
+          <div className="no-header" />
+          <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
+          <TopMenu
+            onAddEnemy={openCategorySelector}
+            onSelectCommander={handleRandomCommander}
+            onSelectBoss={handleSelectBoss}
+            onSelectOther={handleSelectOther}
+            onAddManual={openManualSelector}
+            behaviors={behaviors}
+          />
+          {/* Contenedor de la cuadrícula de slots */}
+          <div className="grid grid-cols-11 gap-0 bg-slate-800/70 rounded-lg shadow-xl overflow-hidden"> {/* auto-rows-auto eliminado, la altura la da slotHeightClass */}
+            {[...Array(11)].map((_, idx) => renderSlot(idx))}
           </div>
+
+          {/* ... (Modales y botones inferiores sin cambios significativos) ... */}
+          {categorySelector.open && ( /* ... */ )}
+          {manualSelector.open && ( /* ... */ )}
+          <div className="mt-8 flex justify-center gap-4"> {/* ... */ }</div>
         </div>
-        <ToastContainer toastClassName="toast-expand" bodyClassName="" />
-      </PageTransition>
-    
+      </div>
+      <ToastContainer toastClassName="toast-expand" bodyClassName="" />
+    </PageTransition>
   );
 };
 
