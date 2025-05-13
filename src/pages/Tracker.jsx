@@ -16,6 +16,9 @@ const TrackerSelect = () => {
   const [heroRoles, setHeroRoles] = useState({});
   const [selectedEnemies, setSelectedEnemies] = useState([]);
   const [selectedBehaviors, setSelectedBehaviors] = useState(["estandar", "alternativo", "complejo"]);
+  const [showHeroes, setShowHeroes] = useState(false);
+  const [showEnemies, setShowEnemies] = useState(false);
+  
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const { setTrackerData } = useTracker();
@@ -179,35 +182,41 @@ const TrackerSelect = () => {
       
       {/* Selección de héroes */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
-        <RuneTitle>{t.selectHeroes}</RuneTitle>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
-          {heroesInSelectedExpansions.map((hero) => {
-            const isSelected = selectedHeroes.includes(hero.id);
-            return (
-              <label
-                key={hero.id}
-                className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
-                  ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={isSelected}
-                  onChange={() => handleHeroSelect(hero.id)}
-                  disabled={!isSelected && selectedHeroes.length >= 5}
-                  className="hidden"
-                />
-                {hero.image && (
-                  <img
-                    src={hero.image}
-                    alt={getHeroName(hero.id)}
-                    className="w-30 h-30 object-contain mb-2"
-                  />
-                )}
-                <span className="text-sm">{getHeroName(hero.id)}</span>
-              </label>
-            );
-          })}
+        <div className="cursor-pointer" onClick={() => setShowHeroes(!showHeroes)}>
+          <RuneTitle>{t.selectHeroes}</RuneTitle>
         </div>
+        {showHeroes && (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
+            {heroesInSelectedExpansions.map((hero) => {
+              const isSelected = selectedHeroes.includes(hero.id);
+              return (
+                <label
+                  key={hero.id}
+                  className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
+                    ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleHeroSelect(hero.id)}
+                    disabled={!isSelected && selectedHeroes.length >= 5}
+                    className="hidden"
+                  />
+                  {hero.image && (
+                    <img
+                      src={hero.image}
+                      alt={getHeroName(hero.id)}
+                      className="w-30 h-30 object-contain mb-2"
+                    />
+                  )}
+                  <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
+                    {getEnemyName(enemy.id)}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+      )}  
       </div>
 
       {/* Asignación de roles */}
