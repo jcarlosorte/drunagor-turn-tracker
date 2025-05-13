@@ -253,7 +253,7 @@ const InitTracker = () => {
 
   let slotHeightClass = 'h-[24rem]'; // Base height (ej. 192px o 48rem)
     if (maxCharactersInAnySlot >= 5) {
-        slotHeightClass = 'h-[48rem]'; // Taller height (ej. 256px o 64rem)
+        slotHeightClass = 'h-[40rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
         slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     } else if (maxCharactersInAnySlot >= 2) {
@@ -285,7 +285,7 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
     <div
       key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-15 hover:translate-y-15 transition-transform duration-300"
+      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-10 hover:translate-y-10 transition-transform duration-300"
     >
       <button
         className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
@@ -337,7 +337,7 @@ const InitTracker = () => {
           ? 70
           : items.length === 4
             ? 40
-            : 20; // Más elementos = menos separación (más solapados)
+            : 30; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = isTop ? [...items].reverse() : items;
 
