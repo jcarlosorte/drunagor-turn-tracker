@@ -23,6 +23,10 @@ export const InitEnemiesProvider = ({ children }) => {
     });
   };
 
+  const removeEnemyAt = (uuid) => {
+    setPlacedEnemies((prev) => prev.filter(e => e.enemy.uuid !== uuid));
+  };
+  
   const resetPlacedEnemies = () => {
     console.log('Resetting placedEnemies');
     setPlacedEnemies([]);
