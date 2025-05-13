@@ -249,18 +249,17 @@ const InitTracker = () => {
     return Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
   });
 
-  // Helper function to determine slot height based on character count in that slot
-  const getSlotHeightClass = (characterCount) => {
-    if (characterCount >= 5) {
-      return 'h-[48rem]';
-    } else if (characterCount >= 3) {
-      return 'h-[40rem]';
-    } else if (characterCount >= 2) {
-      return 'h-[32rem]';
-    } else {
-      return 'h-[24rem]'; // Base height for 0 or 1 character
+  const maxCharactersInAnySlot = Math.max(...countsPerIndex);
+
+  let slotHeightClass = 'h-[24rem]'; // Base height (ej. 192px o 48rem)
+    if (maxCharactersInAnySlot >= 5) {
+        slotHeightClass = 'h-[48rem]'; // Taller height (ej. 256px o 64rem)
+    } else if (maxCharactersInAnySlot >= 3) {
+        slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+    } else if (maxCharactersInAnySlot >= 2) {
+        slotHeightClass = 'h-[32rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
-  };
+
   
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
@@ -329,8 +328,6 @@ const InitTracker = () => {
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
 
-    // Calculate the number of characters in the taller stack for this specific slot
-    const charactersInThisSlot = Math.max(heroesAbove.length + enemiesAbove.length, heroesBelow.length + enemiesBelow.length);
     
     const renderStack = (items, isTop, isEnemy = false) => {
       
@@ -383,10 +380,7 @@ const InitTracker = () => {
         );
       });
     };
-
-    // Get the dynamic height class based on characters in THIS slot
-    const slotHeightClass = getSlotHeightClass(charactersInThisSlot);
-
+  
     return (
       <div key={index} className={`flex flex-col w-full ${slotHeightClass} py-2`}>
         
