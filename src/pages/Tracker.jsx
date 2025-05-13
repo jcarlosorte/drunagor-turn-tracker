@@ -264,8 +264,9 @@ const TrackerSelect = () => {
         <div className="cursor-pointer" onClick={() => setShowEnemies(!showEnemies)}>
           <RuneTitle>{t.selectEnemies}</RuneTitle>
         </div>
-        {showEnemies && (
+        
         {/* Comportamientos Generales */}
+        {showEnemies && (
         <div className="mb-4 bg-white/70 rounded-3xl">
           <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
           <div className="flex justify-center items-center gap-4 mb-4">
