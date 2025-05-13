@@ -303,8 +303,6 @@ const TrackerSelect = () => {
           </div>
         </div>
 
-        
-        {/* Flex en filas con wrap */}
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
             const enemiesOfColorMap = new Map();
@@ -337,7 +335,6 @@ const TrackerSelect = () => {
                     {t.colors?.[color.id] || color.id}
                   </h3>
               
-                  {/** Aquí está la magia: cambiamos el layout según el color */}
                   <div
                     className={
                       ['blanco', 'gris'].includes(color.id)
