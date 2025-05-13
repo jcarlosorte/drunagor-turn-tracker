@@ -254,6 +254,14 @@ const InitTracker = () => {
   if (maxCharactersInAnySlot >= 5) dynamicHeight = 'h-256';
   else if (maxCharactersInAnySlot >= 3) dynamicHeight = 'h-192';
 
+  let slotHeightClass = 'h-[48rem]'; // Base height (ej. 192px o 48rem)
+    if (maxCharactersInThisSlot >= 5) {
+        slotHeightClass = 'h-[64rem]'; // Taller height (ej. 256px o 64rem)
+    } else if (maxCharactersInThisSlot >= 3) {
+        slotHeightClass = 'h-[56rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+    }
+
+  
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
       <div className="relative w-full">
@@ -375,10 +383,10 @@ const InitTracker = () => {
     };
   
     return (
-      <div key={index} className={`flex flex-col w-full ${dynamicHeight} py-2`}>
+      <div key={index} className={`flex flex-col w-full ${slotHeightClass} py-2`}>
         
         {/* Escalonado arriba */}
-        <div className="relative flex justify-center h-52 w-full mb-5">
+        <div className="relative flex justify-center h-1/2 w-full mb-5">
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
             {renderStack(heroesAbove, true)}
             {isRune && renderStack(enemiesAbove, true, true)}
@@ -386,7 +394,7 @@ const InitTracker = () => {
         </div>
   
         {/* Centro del slot */}
-        <div className="flex items-center justify-center h-8 bg-gray-300">
+        <div className="flex items-center justify-center h-8 shrink-0 bg-gray-300">
           <div className={classNames(
             'flex items-center justify-center font-fantasy',
             {
@@ -415,7 +423,7 @@ const InitTracker = () => {
 
   
         {/* Escalonado abajo */}
-        <div className="relative flex justify-center h-52 w-full mt-5">
+        <div className="relative flex justify-center h-1/2 w-full mt-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
             {renderStack(heroesBelow, false)}
             {isRune && renderStack(enemiesBelow, false, true)}
