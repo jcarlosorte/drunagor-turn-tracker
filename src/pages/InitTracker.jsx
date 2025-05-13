@@ -276,6 +276,12 @@ const InitTracker = () => {
       key={uuid}
       className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-5 hover:translate-y-15transition-transform duration-300"
     >
+      <button
+        className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
+        onClick={() => onRemove(uuid)}
+      >
+        ×
+      </button>
       <div className="relative w-full rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
         <img
           src={image}
@@ -350,6 +356,7 @@ const InitTracker = () => {
                 categoria={item.enemy.categoria}
                 position={isTop ? "top" : "bottom"}
                 color={item.enemy.color}
+                onRemove={(id) => handleRemoveEnemy(id)}
               />
             ) : (
               <CharacterCard
