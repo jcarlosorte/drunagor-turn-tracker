@@ -23,7 +23,8 @@ export const InitEnemiesProvider = ({ children }) => {
     });
   };
 
-  const removeEnemyAt = (uuid) => {
+  const removeEnemyByUUID = (uuid) => {
+    console.log('Removing enemy with UUID:', uuid);
     setPlacedEnemies((prev) => prev.filter(e => e.enemy.uuid !== uuid));
   };
   
@@ -33,7 +34,7 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, placeEnemy, removeEnemyAt, resetPlacedEnemies }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies }}>
       {children}
     </InitEnemiesContext.Provider>
   );
