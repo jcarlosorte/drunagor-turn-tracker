@@ -141,6 +141,10 @@ const InitTracker = () => {
       });
     };
 
+  const onRemove = (uuid) => {
+    removeEnemyAt(uuid);
+  };
+  
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     return ENEMIES.filter(e =>
       trackerEnemies.includes(e.id) &&
@@ -271,7 +275,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color }) => (
+  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
     <div
       key={uuid}
       className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-5 hover:translate-y-15transition-transform duration-300"
@@ -356,7 +360,7 @@ const InitTracker = () => {
                 categoria={item.enemy.categoria}
                 position={isTop ? "top" : "bottom"}
                 color={item.enemy.color}
-                onRemove={(id) => handleRemoveEnemy(id)}
+                onRemove={onRemove}
               />
             ) : (
               <CharacterCard
