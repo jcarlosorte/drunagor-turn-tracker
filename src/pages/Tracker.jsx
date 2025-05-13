@@ -210,7 +210,7 @@ const TrackerSelect = () => {
                     />
                   )}
                   <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
-                    {getEnemyName(enemy.id)}
+                    {getHeroName(hero.id)}
                   </span>
                 </label>
               );
