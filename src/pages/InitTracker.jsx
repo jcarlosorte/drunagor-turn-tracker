@@ -142,7 +142,7 @@ const InitTracker = () => {
     };
 
   const onRemove = (uuid) => {
-    removeEnemyAt(uuid);
+    removeEnemyByUUID(uuid);
   };
   
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
