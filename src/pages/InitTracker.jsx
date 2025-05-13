@@ -255,9 +255,9 @@ const InitTracker = () => {
   else if (maxCharactersInAnySlot >= 3) dynamicHeight = 'h-192';
 
   let slotHeightClass = 'h-[48rem]'; // Base height (ej. 192px o 48rem)
-    if (maxCharactersInThisSlot >= 5) {
+    if (maxCharactersInAnySlot >= 5) {
         slotHeightClass = 'h-[64rem]'; // Taller height (ej. 256px o 64rem)
-    } else if (maxCharactersInThisSlot >= 3) {
+    } else if (maxCharactersInAnySlot >= 3) {
         slotHeightClass = 'h-[56rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
