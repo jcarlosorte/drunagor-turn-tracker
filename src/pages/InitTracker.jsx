@@ -255,7 +255,9 @@ const InitTracker = () => {
     if (maxCharactersInAnySlot >= 5) {
         slotHeightClass = 'h-[48rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
-        slotHeightClass = 'h-[56rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+        slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+    } else if (maxCharactersInAnySlot >= 2) {
+        slotHeightClass = 'h-[32rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
   
