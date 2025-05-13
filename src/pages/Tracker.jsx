@@ -261,8 +261,10 @@ const TrackerSelect = () => {
 
       {/* Enemigos agrupados por color */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
-        <RuneTitle>{t.selectEnemies}</RuneTitle>
-
+        <div className="cursor-pointer" onClick={() => setShowEnemies(!showEnemies)}>
+          <RuneTitle>{t.selectEnemies}</RuneTitle>
+        </div>
+        {showEnemies && (
         {/* Comportamientos Generales */}
         <div className="mb-4 bg-white/70 rounded-3xl">
           <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
@@ -366,7 +368,9 @@ const TrackerSelect = () => {
                         {enemy.imagen && (
                           <img src={enemy.imagen} alt={getEnemyName(enemy.id)} className="w-30 h-30 object-contain mb-2" />
                         )}
-                        <span className="text-sm font-fantasy text-black">{getEnemyName(enemy.id)}</span>
+                        <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
+                          {getEnemyName(enemy.id)}
+                        </span>
                       </label>
                     );
                   })}
@@ -375,6 +379,7 @@ const TrackerSelect = () => {
             );
           })}
         </div>
+      )}
       </div>
 
 
