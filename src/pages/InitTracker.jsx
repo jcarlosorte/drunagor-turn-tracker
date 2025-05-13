@@ -250,13 +250,10 @@ const InitTracker = () => {
   });
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
-  let dynamicHeight = 'h-192';
-  if (maxCharactersInAnySlot >= 5) dynamicHeight = 'h-256';
-  else if (maxCharactersInAnySlot >= 3) dynamicHeight = 'h-192';
 
-  let slotHeightClass = 'h-[48rem]'; // Base height (ej. 192px o 48rem)
+  let slotHeightClass = 'h-[24rem]'; // Base height (ej. 192px o 48rem)
     if (maxCharactersInAnySlot >= 5) {
-        slotHeightClass = 'h-[64rem]'; // Taller height (ej. 256px o 64rem)
+        slotHeightClass = 'h-[48rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
         slotHeightClass = 'h-[56rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
