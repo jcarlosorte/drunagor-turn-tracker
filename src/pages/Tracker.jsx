@@ -166,25 +166,25 @@ const TrackerSelect = () => {
     yellow: {
       border: "border-yellow-800",
       bg: "bg-yellow-100",
-      text: "text-yellow-900",
+      text: "text-yellow-900 font-fantasy",
       dot: "bg-yellow-800",
     },
     green: {
       border: "border-green-700",
       bg: "bg-green-100",
-      text: "text-green-900",
+      text: "text-green-900 font-fantasy",
       dot: "bg-green-700",
     },
     red: {
       border: "border-red-700",
       bg: "bg-red-100",
-      text: "text-red-900",
+      text: "text-red-900 font-fantasy",
       dot: "bg-red-700",
     },
     blue: {
       border: "border-blue-700",
       bg: "bg-blue-100",
-      text: "text-blue-900",
+      text: "text-blue-900 font-fantasy",
       dot: "bg-blue-700",
     },
   };
