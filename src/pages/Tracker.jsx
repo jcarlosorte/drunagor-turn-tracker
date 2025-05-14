@@ -186,13 +186,13 @@ const TrackerSelect = () => {
           <RuneTitle>{t.selectHeroes}</RuneTitle>
         </div>
         {showHeroes && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4">
             {heroesInSelectedExpansions.map((hero) => {
               const isSelected = selectedHeroes.includes(hero.id);
               return (
                 <label
                   key={hero.id}
-                  className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
+                  className={`relative cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
                     ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
                 >
                   <input
