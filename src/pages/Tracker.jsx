@@ -234,12 +234,14 @@ const TrackerSelect = () => {
               const usedRoles = Object.values(heroRoles);
               return (
                 <div key={heroId} className="flex flex-col items-center gap-2 p-4 bg-green-100/80 rounded-2xl border-0 border-green-600 shadow-md">
-                  <img
-                    src={heroData.image}
-                    alt={getHeroName(heroId)}
-                    className="w-20 h-20 object-contain"
-                  />
-                  <span className="font-bold">{getHeroName(heroId)}</span>
+                  <div className="relative w-full max-w-[150px] mx-auto">
+                    <img
+                      src={heroData.image}
+                      alt={getHeroName(heroId)}
+                      className="w-full h-auto object-contain"
+                    />
+                    <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">{getHeroName(heroId)}</span>
+                  </div>
                   <span>
                     {heroRoles[heroId]
                       ? `- ${getRoleName(heroRoles[heroId])} -`
