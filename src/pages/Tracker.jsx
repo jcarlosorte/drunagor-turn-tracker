@@ -204,15 +204,18 @@ const TrackerSelect = () => {
                     className="hidden"
                   />
                   {hero.image && (
-                    <img
-                      src={hero.image}
-                      alt={getHeroName(hero.id)}
-                      className="w-30 h-30 object-contain mb-2"
-                    />
+                    <div className="relative w-full max-w-[150px] mx-auto">
+                      <img
+                        src={hero.image}
+                        alt={getHeroName(hero.id)}
+                        className="w-full h-auto object-contain"
+                      />
+                      <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
+                        {getHeroName(hero.id)}
+                      </span>
+                    </div>
                   )}
-                  <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
-                    {getHeroName(hero.id)}
-                  </span>
+                  
                 </label>
       
               );
