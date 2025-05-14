@@ -161,36 +161,43 @@ const TrackerSelect = () => {
   });
 };
   
- const RuneTitle = ({ children, color = "yellow" }) => {
-  const colors = {
-    yellow: {
-      border: "border-yellow-800",
-      bg: "bg-yellow-100",
-      text: "text-yellow-900 font-fantasy",
-      dot: "bg-yellow-800",
-    },
-    green: {
-      border: "border-green-700",
-      bg: "bg-green-100",
-      text: "text-green-900 font-fantasy",
-      dot: "bg-green-700",
-    },
-    red: {
-      border: "border-red-700",
-      bg: "bg-red-100",
-      text: "text-red-900 font-fantasy",
-      dot: "bg-red-700",
-    },
-    blue: {
-      border: "border-blue-700",
-      bg: "bg-blue-100",
-      text: "text-blue-900 font-fantasy",
-      dot: "bg-blue-700",
-    },
-  };
-
-  const c = colors[color] || colors.yellow;
+   const RuneTitle = ({ children, color = "yellow" }) => {
+    const colors = {
+      yellow: {
+        border: "border-yellow-800",
+        bg: "bg-yellow-100",
+        text: "text-yellow-900 font-fantasy",
+        dot: "bg-yellow-800",
+      },
+      green: {
+        border: "border-green-700",
+        bg: "bg-green-100",
+        text: "text-green-900 font-fantasy",
+        dot: "bg-green-700",
+      },
+      red: {
+        border: "border-red-700",
+        bg: "bg-red-100",
+        text: "text-red-900 font-fantasy",
+        dot: "bg-red-700",
+      },
+      blue: {
+        border: "border-blue-700",
+        bg: "bg-blue-100",
+        text: "text-blue-900 font-fantasy",
+        dot: "bg-blue-700",
+      },
+    };
   
+    const c = colors[color] || colors.yellow;
+  
+    return (
+      <div className={`flex items-center justify-start gap-2 mb-2 px-3 py-1 border-l-8 rounded-r-xl ${c.bg} ${c.border}`}>
+        <div className={`w-3 h-3 rounded-full ${c.dot}`} />
+        <span className={`text-lg font-bold ${c.text}`}>{children}</span>
+      </div>
+    );
+  };
   
   return (
   <PageTransition>
@@ -436,7 +443,7 @@ const TrackerSelect = () => {
       </div>
     </PageTransition>
   );
-   };
+
 };
 
 export default TrackerSelect;
