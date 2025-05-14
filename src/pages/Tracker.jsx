@@ -190,29 +190,31 @@ const TrackerSelect = () => {
             {heroesInSelectedExpansions.map((hero) => {
               const isSelected = selectedHeroes.includes(hero.id);
               return (
-                <label
-                  key={hero.id}
-                  className={`relative cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
-                    ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={isSelected}
-                    onChange={() => handleHeroSelect(hero.id)}
-                    disabled={!isSelected && selectedHeroes.length >= 5}
-                    className="hidden"
-                  />
-                  {hero.image && (
-                    <img
-                      src={hero.image}
-                      alt={getHeroName(hero.id)}
-                      className="w-30 h-30 object-contain mb-2"
+                <div className="relative w-full max-w-[150px]">
+                  <label
+                    key={hero.id}
+                    className={`cursor-pointer border-2 rounded-lg p-2 flex flex-col items-center text-center transition w-full max-w-[150px] mx-auto
+                      ${isSelected ? 'border-green-600 bg-green-100/80 shadow-lg' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleHeroSelect(hero.id)}
+                      disabled={!isSelected && selectedHeroes.length >= 5}
+                      className="hidden"
                     />
-                  )}
-                  <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
-                    {getHeroName(hero.id)}
-                  </span>
-                </label>
+                    {hero.image && (
+                      <img
+                        src={hero.image}
+                        alt={getHeroName(hero.id)}
+                        className="w-30 h-30 object-contain mb-2"
+                      />
+                    )}
+                    <span className="absolute bottom-1 left-0 right-0 text-xs text-white bg-black bg-opacity-60 p-1 text-center">
+                      {getHeroName(hero.id)}
+                    </span>
+                  </label>
+                </div>
               );
             })}
           </div>
