@@ -190,7 +190,7 @@ const TrackerSelect = () => {
   };
 
   const c = colors[color] || colors.yellow;
-  };
+  
   
   return (
   <PageTransition>
@@ -436,6 +436,7 @@ const TrackerSelect = () => {
       </div>
     </PageTransition>
   );
+   };
 };
 
 export default TrackerSelect;
