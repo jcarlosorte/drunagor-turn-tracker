@@ -161,17 +161,35 @@ const TrackerSelect = () => {
   });
 };
   
-  const RuneTitle = ({ children }) => (
-      <div className="relative text-center my-6">
-        <div className="inline-block border-4 border-yellow-800 rounded-2xl px-6 py-3 bg-yellow-100 shadow-xl relative font-fantasy">
-          <span className="text-4xl tracking-wider text-yellow-900">{children}</span>
-          <span className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-          <span className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-          <span className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-          <span className="absolute -bottom-2 -right-2 w-4 h-4 bg-yellow-800 rounded-full shadow" />
-        </div>
-      </div>
-    );
+ const RuneTitle = ({ children, color = "yellow" }) => {
+  const colors = {
+    yellow: {
+      border: "border-yellow-800",
+      bg: "bg-yellow-100",
+      text: "text-yellow-900",
+      dot: "bg-yellow-800",
+    },
+    green: {
+      border: "border-green-700",
+      bg: "bg-green-100",
+      text: "text-green-900",
+      dot: "bg-green-700",
+    },
+    red: {
+      border: "border-red-700",
+      bg: "bg-red-100",
+      text: "text-red-900",
+      dot: "bg-red-700",
+    },
+    blue: {
+      border: "border-blue-700",
+      bg: "bg-blue-100",
+      text: "text-blue-900",
+      dot: "bg-blue-700",
+    },
+  };
+
+  const c = colors[color] || colors.yellow;
 
   
   return (
@@ -183,7 +201,7 @@ const TrackerSelect = () => {
       {/* Selección de héroes */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer" onClick={() => setShowHeroes(!showHeroes)}>
-          <RuneTitle>{t.selectHeroes}</RuneTitle>
+          <RuneTitle color="yellow">{t.selectHeroes}</RuneTitle>
         </div>
         {showHeroes && (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4">
@@ -227,7 +245,7 @@ const TrackerSelect = () => {
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
         <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-green-600 text-black">
-          <RuneTitle>{t.assignRoles}</RuneTitle>
+          <RuneTitle color="green">{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
@@ -269,7 +287,7 @@ const TrackerSelect = () => {
       {/* Enemigos agrupados por color */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer" onClick={() => setShowEnemies(!showEnemies)}>
-          <RuneTitle>{t.selectEnemies}</RuneTitle>
+          <RuneTitle color="red">{t.selectEnemies}</RuneTitle>
         </div>
         
         {/* Comportamientos Generales */}
