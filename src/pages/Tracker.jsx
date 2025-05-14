@@ -187,10 +187,10 @@ const TrackerSelect = () => {
       text: "text-blue-900 font-fantasy",
       dot: "bg-blue-700",
     },
-  };};
+  };
 
   const c = colors[color] || colors.yellow;
-
+  };
   
   return (
   <PageTransition>
