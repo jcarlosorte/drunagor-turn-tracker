@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GiSwordClash, GiBadGnome } from 'react-icons/gi';
+import { GiSwordClash, GiAttachedShield, GiBadGnome } from 'react-icons/gi';
 import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
@@ -205,13 +205,14 @@ const TrackerSelect = () => {
     <div className="p-4 space-y-8 font-fantasy bg-slate-700 min-h-screen">
       <div className="no-header" />
       <h1 className="flex justify-center items-center gap-3 text-4xl font-extrabold text-yellow-300 drop-shadow-lg uppercase tracking-wider">
-        <GiBadGnome className="text-yellow-900 text-5xl" />
+        <GiBadGnome className="text-yellow-400 text-5xl" />
         {t.title}
       </h1>
       
       {/* Selección de héroes */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer" onClick={() => setShowHeroes(!showHeroes)}>
+          <GiAttachedShield className="text-yellow-800 text-2xl" />
           <RuneTitle color="yellow">{t.selectHeroes}</RuneTitle>
         </div>
         {showHeroes && (
