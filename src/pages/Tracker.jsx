@@ -195,7 +195,7 @@ const TrackerSelect = () => {
     return (
       <div className={`flex items-center justify-start gap-2 mb-2 px-3 py-1 border-l-8 rounded-r-xl ${c.bg} ${c.border}`}>
         <div className={`w-3 h-3 rounded-full ${c.dot}`} />
-        <span className={`text-lg font-bold ${c.text}`}>{children}</span>
+        <span className={`flex items-center gap-2 text-lg font-bold ${c.text}`}>{children}</span>
       </div>
     );
   };
@@ -212,7 +212,6 @@ const TrackerSelect = () => {
       {/* Selección de héroes */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer flex items-center gap-2" onClick={() => setShowHeroes(!showHeroes)}>
-         
           <RuneTitle color="yellow"> <GiAttachedShield className="text-yellow-800 text-2xl" />{t.selectHeroes}</RuneTitle>
         </div>
         {showHeroes && (
