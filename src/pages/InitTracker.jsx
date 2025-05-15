@@ -11,6 +11,7 @@ import { ROLES } from '@/data/roles';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
+import { useExpansions } from '@/context/ExpansionContext';
 import TopMenu from '@/components/TopMenu';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
@@ -41,6 +42,7 @@ const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { placedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies } = useInitEnemies();
   const { language, translations } = useLanguage();
+  const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
@@ -61,6 +63,11 @@ const InitTracker = () => {
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
 
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => 
+    selectedExpansions.includes(e.expansionId) &&
+    e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro"
+  );
+  
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
@@ -483,7 +490,7 @@ const InitTracker = () => {
                   <h2 className="text-xl text-yellow-300 mb-4">{ti.manualTitle || 'Seleccionar enemigo manualmente'}</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {Object.entries(
-                      getEnemiesByColor(enemies, manualSelector.color).reduce((acc, enemy) => {
+                      getEnemiesByColor(enemiesInSelectedExpansions, manualSelector.color).reduce((acc, enemy) => {
                         if (!acc[enemy.id]) acc[enemy.id] = {};
                         if (!acc[enemy.id][enemy.categoria]) acc[enemy.id][enemy.categoria] = [];
                         acc[enemy.id][enemy.categoria].push(enemy);
