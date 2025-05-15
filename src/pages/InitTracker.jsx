@@ -293,11 +293,11 @@ const InitTracker = () => {
       >
         ×
       </button>
-      <div className="relative w-full rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
+      <div className="relative w-full max-w-[100px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
         <img
           src={image}
           alt={name}
-          className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+          className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
         />
         <div
           className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
