@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GiSwordClash, GiAttachedShield, GiBadGnome, GiShadowFollower } from 'react-icons/gi';
+import { GiSwordClash, GiAttachedShield, GiBadGnome, GiShadowFollower, GiSharpedTeethSkull } from 'react-icons/gi';
 import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
@@ -298,7 +298,7 @@ const TrackerSelect = () => {
       {/* Enemigos agrupados por color */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer" onClick={() => setShowEnemies(!showEnemies)}>
-          <RuneTitle color="red">{t.selectEnemies}</RuneTitle>
+          <RuneTitle color="red"><GiSharpedTeethSkull className="text-red-700 text-2xl" />{t.selectEnemies}</RuneTitle>
         </div>
         
         {/* Comportamientos Generales */}
