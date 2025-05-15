@@ -212,8 +212,8 @@ const TrackerSelect = () => {
       {/* Selección de héroes */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
         <div className="cursor-pointer flex items-center gap-2" onClick={() => setShowHeroes(!showHeroes)}>
-          <GiAttachedShield className="text-yellow-800 text-2xl" />
-          <RuneTitle color="yellow">{t.selectHeroes}</RuneTitle>
+         
+          <RuneTitle color="yellow"> <GiAttachedShield className="text-yellow-800 text-2xl" />{t.selectHeroes}</RuneTitle>
         </div>
         {showHeroes && (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4">
