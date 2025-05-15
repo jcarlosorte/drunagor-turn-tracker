@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GiSwordClash, GiAttachedShield, GiBadGnome } from 'react-icons/gi';
+import { GiSwordClash, GiAttachedShield, GiBadGnome, GiShadowFollower } from 'react-icons/gi';
 import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
@@ -256,7 +256,7 @@ const TrackerSelect = () => {
       {/* Asignación de roles */}
       {selectedHeroes.length > 0 && (
         <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-green-600 text-black">
-          <RuneTitle color="green">{t.assignRoles}</RuneTitle>
+          <RuneTitle color="green"><GiShadowFollower className="text-green-700 text-2xl" />{t.assignRoles}</RuneTitle>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
             {selectedHeroes.map((heroId) => {
               const heroData = HEROES.find((h) => h.id === heroId);
