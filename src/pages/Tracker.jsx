@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { GiSwordClash, GiBadGnome, GiSpikedHelmet } from 'react-icons/gi';
 import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
@@ -204,6 +205,7 @@ const TrackerSelect = () => {
     <div className="p-4 space-y-8 font-fantasy bg-slate-700 min-h-screen">
       <div className="no-header" />
       <h1 className="text-4xl font-extrabold text-yellow-300 text-center drop-shadow-lg uppercase tracking-wider">
+        <GiBadGnome className="text-blue-400 text-xl" />
         {t.title}
       </h1>
       
