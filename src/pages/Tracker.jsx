@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GiSwordClash, GiBadGnome, GiSpikedHelmet } from 'react-icons/gi';
+import { GiSwordClash, GiBadGnome } from 'react-icons/gi';
 import { useNavigate } from "react-router-dom";
 import { EXPANSIONS } from '@/data/expansions';
 import { HEROES } from '@/data/heroes';
