@@ -263,11 +263,11 @@ const InitTracker = () => {
   
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
-      <div className="relative w-full">
+      <div className="relative w-full max-w-[100px]">
         <img
           src={image}
           alt={name}
-          className="w-full object-cover rounded-lg border-2 border-[#800020]/70"
+          className="w-full h-auto object-cover rounded-lg border-2 border-[#800020]/70"
         />
         <div
           className="absolute w-full bottom-0 left-1/2 transform -translate-x-1/2 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight"
@@ -285,7 +285,7 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
     <div
       key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-10 hover:translate-y-10 transition-transform duration-300"
+      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300"
     >
       <button
         className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
