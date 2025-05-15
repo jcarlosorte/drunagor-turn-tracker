@@ -288,7 +288,7 @@ const InitTracker = () => {
       className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300"
     >
       <button
-        className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
+        className="absolute top-0 right-2 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10"
         onClick={() => onRemove(uuid)}
       >
         ×
