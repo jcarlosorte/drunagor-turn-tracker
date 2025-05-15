@@ -153,6 +153,7 @@ const InitTracker = () => {
   };
   
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
+    console.log(trackerEnemies)
     return ENEMIES.filter(e =>
       trackerEnemies.includes(e.id) &&
       e.color === color &&
