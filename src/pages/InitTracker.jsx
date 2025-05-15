@@ -153,9 +153,10 @@ const InitTracker = () => {
   };
   
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
-    console.log(trackerEnemies)
+    const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
+    console.log(validEnemies)
     return ENEMIES.filter(e =>
-      trackerEnemies.includes(e.id) &&
+      validEnemies.includes(e.id) &&
       e.color === color &&
       (behaviorType ? e.comportamiento === behaviorType : true)
     );
