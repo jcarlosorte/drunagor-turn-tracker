@@ -285,7 +285,7 @@ const InitTracker = () => {
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
     <div
       key={uuid}
-      className="flex flex-col items-center max-h-[6rem] mx-1 relative z-10 hover:translate-x-10 hover:translate-y-10 transition-transform duration-300"
+      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-10 hover:translate-y-10 transition-transform duration-300"
     >
       <button
         className="absolute top-1 right-1 text-white bg-red-600 hover:bg-red-700 rounded-full w-6 h-6 flex items-center justify-center z-10"
@@ -297,7 +297,7 @@ const InitTracker = () => {
         <img
           src={image}
           alt={name}
-          className={`w-full object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+          className={`w-full max-h-[6rem] object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
         />
         <div
           className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
