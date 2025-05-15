@@ -204,8 +204,8 @@ const TrackerSelect = () => {
   <PageTransition>
     <div className="p-4 space-y-8 font-fantasy bg-slate-700 min-h-screen">
       <div className="no-header" />
-      <h1 className="text-4xl font-extrabold text-yellow-300 text-center items-center drop-shadow-lg uppercase tracking-wider">
-        <GiBadGnome className="text-yellow-900 text-xl" />
+      <h1 className="flex justify-center items-center gap-3 text-4xl font-extrabold text-yellow-300 drop-shadow-lg uppercase tracking-wider">
+        <GiBadGnome className="text-yellow-900 text-5xl" />
         {t.title}
       </h1>
       
