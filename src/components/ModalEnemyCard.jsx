@@ -19,4 +19,3 @@ export const ModalEnemyCard = ({ enemy, onClose }) => {
   );
 };
 
-export default ModalEnemyCard;
