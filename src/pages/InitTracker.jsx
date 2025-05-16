@@ -41,7 +41,7 @@ const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
