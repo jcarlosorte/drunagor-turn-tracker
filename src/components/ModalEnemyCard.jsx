@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
-  const [vidaActual, setVidaActual] = useState(enemy?.vida || 0);
+  const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
 
   useEffect(() => {
     if (enemy) {
-      setVidaActual(enemy.vida);
+      setVidaLocal(enemy.vida);
     }
   }, [enemy]);
   
