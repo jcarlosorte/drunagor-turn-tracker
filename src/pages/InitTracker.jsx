@@ -327,13 +327,14 @@ const InitTracker = () => {
             </span>
             )}
           {/* Barra de vida */}
-          <div className="w-full h-2 bg-red-900 rounded mt-1 text-white text-center">
+          <div className="w-full h-2 bg-red-900 rounded mt-1 text-white text-center text-[0.50rem]">
             <div
               className="h-full bg-red-500 rounded"
               style={{ width: `${(vida / vidaMax) * 100}%` }}
             >
-              {vida} / {vidaMax}
+              
             </div>
+            {vida} / {vidaMax}
           </div>
         </div>
       </div>
