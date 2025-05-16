@@ -569,6 +569,7 @@ const InitTracker = () => {
             key={selectedEnemyUuid}
             enemy={placedEnemies.find(e => e.enemy.uuid === selectedEnemyUuid)?.enemy}
             onClose={() => setSelectedEnemyUuid(null)}
+            onDelete={onRemove}
           />
           )}
       </PageTransition>
