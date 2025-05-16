@@ -1,5 +1,12 @@
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
-  console.log(uuid);
+  const [vidaActual, setVidaActual] = useState(enemy?.vida || 0);
+
+  useEffect(() => {
+    if (enemy) {
+      setVidaActual(enemy.vida);
+    }
+  }, [enemy]);
+  
   if (!enemy) {
     //console.log(enemy);
     return (
@@ -44,6 +51,10 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
     comandante: 'glow-commander',
   };
 
+  const handleVidaChange = (delta) => {
+    setVidaActual((prev) => Math.max(0, Math.min(vidaMax, prev + delta)));
+  };
+  
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`bg-white rounded-lg shadow-lg max-w-sm w-full relative border-4 ${borderColorMap[color] || ''}`}>
@@ -113,6 +124,22 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
             </div>
           </div>
 
+          {/* Botones + / - */}
+          <div className="flex items-center gap-4 mb-3">
+            <button
+              onClick={() => handleVidaChange(-1)}
+              className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              −
+            </button>
+            <button
+              onClick={() => handleVidaChange(1)}
+              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              +
+            </button>
+          </div>
+          
           {/* Barra de vida */}
           <div className="w-full relative h-3">
             <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
