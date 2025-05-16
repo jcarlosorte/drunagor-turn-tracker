@@ -156,7 +156,9 @@ const InitTracker = () => {
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
   };
-  
+  const openEnemyModal = (uuid) => {
+    setSelectedEnemyUuid(uuid);
+  };
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
     console.log(validEnemies)
@@ -559,7 +561,7 @@ const InitTracker = () => {
         {selectedEnemyUUID && (
           <ModalEnemyCard
             uuid={selectedEnemyUUID}
-            onClose={() => setSelectedEnemyUUID(null)}
+            onClose={() => setSelectedEnemyUuid(null)}
           />
           )}
       </PageTransition>
