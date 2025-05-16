@@ -187,6 +187,14 @@
       "close": "Cerrar",
       "resetEnemies": "Resetear",
       "selectCategory": "Selecciona una categoría",
-      "enemyAdded": "Enemigo Añadido"
+      "enemyAdded": "Enemigo Añadido",
+      "health": "Vida",
+      "movement": "Movimiento",
+      "attack": "Ataque",
+      "behavior": "Comportamiento",
+      "category": "Categoría",
+      "remove": "Eliminar",
+      "close": "Cerrar",
+      "enemyNotFound": "Enemigo no encontrado"
     }
 }
