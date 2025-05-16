@@ -16,6 +16,7 @@ import TopMenu from '@/components/TopMenu';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
+import ModalEnemyCard from "@/components/ModalEnemyCard";
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
@@ -55,6 +56,7 @@ const InitTracker = () => {
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
   const [selectedColor, setSelectedColor] = useState('');
   const [toastMessage, setToastMessage] = useState('');
+  const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
@@ -294,7 +296,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, movimiento, ataque }) => (
+  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, onModalClick }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300">
       <div className="relative w-full max-w-[100px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
        <button className="absolute top-0 right-0 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10" onClick={() => onRemove(uuid)}>
@@ -312,7 +314,7 @@ const InitTracker = () => {
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}
       >
-        <div className="flex flex-col items-center leading-none">
+        <div className="flex flex-col items-center leading-none" onClick={onModalClick}>
           <span className="enemy-text leading-none">{name}</span>
           {comportamiento && (
             <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
@@ -323,7 +325,7 @@ const InitTracker = () => {
           <div className="w-20 h-2 bg-red-900 rounded mt-1">
             <div
               className="h-full bg-red-500 rounded"
-              style={{ width: `${(vida / vida) * 100}%` }}
+              style={{ width: `${(vida / vidaMax) * 100}%` }}
             ></div>
           </div>
         </div>
@@ -332,18 +334,13 @@ const InitTracker = () => {
   </div>
   );
 
-
-
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
-
-    
     const renderStack = (items, isTop, isEnemy = false) => {
-      
       const spacing = items.length <= 2
         ? 90
         : items.length === 3
@@ -352,18 +349,7 @@ const InitTracker = () => {
             ? 40
             : 30; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
-      const reversed = isTop ? [...items].reverse() : items;
-
-      if (isEnemy) {
-        console.log('Enemigos para renderizar:', reversed.map(i => ({
-          uuid: i.enemy.uuid,
-          name: getEnemyName(i.enemy.id),
-          category: i.enemy.categoria,
-          behavior: i.enemy.comportamiento,
-          color: i.enemy.color
-        })));
-      }
-      
+      const reversed = isTop ? [...items].reverse() : items; 
       return reversed.map((item, i) => {
         const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
@@ -382,8 +368,10 @@ const InitTracker = () => {
                 color={item.enemy.color}
                 onRemove={onRemove}
                 vida={item.enemy.vida}
+                vidaMax={item.enemy.vidaMax}
                 movimiento={item.enemy.movimiento}
                 ataque={item.enemy.ataque}
+                onModalClick={() => setSelectedEnemyUuid(item.enemy.uuid)}
               />
             ) : (
               <CharacterCard
@@ -436,7 +424,6 @@ const InitTracker = () => {
           </div>
         </div>
 
-  
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-1/2 w-full mt-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
@@ -449,10 +436,7 @@ const InitTracker = () => {
     );
   };
 
-
-
-  return (
-    
+  return ( 
       <PageTransition>
        
         <div className={isLandscape ? "" : "portrait-lock"}>
@@ -572,10 +556,14 @@ const InitTracker = () => {
           </div>
         </div>
         <ToastContainer toastClassName="toast-expand" bodyClassName="" />
+        {selectedEnemyUUID && (
+          <ModalEnemyCard
+            uuid={selectedEnemyUUID}
+            onClose={() => setSelectedEnemyUUID(null)}
+          />
+          )}
       </PageTransition>
-    
   );
 };
 
 export default InitTracker;
-
