@@ -281,13 +281,13 @@ const InitTracker = () => {
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
 
-  let slotHeightClass = 'h-[21rem]'; // Base height (ej. 192px o 48rem)
+  let slotHeightClass = 'h-[22rem]'; // Base height (ej. 192px o 48rem)
     if (maxCharactersInAnySlot >= 5) {
         slotHeightClass = 'h-[40rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
         slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     } else if (maxCharactersInAnySlot >= 2) {
-        slotHeightClass = 'h-[30rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+        slotHeightClass = 'h-[34rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
   
