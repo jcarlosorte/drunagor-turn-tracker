@@ -28,7 +28,8 @@ export const EXPANSIONS = [
     roles: ['tank', 'support', 'dps', 'healer', 'control'],
     // Campos vacíos para otras expansiones o datos adicionales
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "luccanor",
@@ -39,7 +40,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "undead_dragon",
@@ -50,7 +52,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "infernal_desert",
@@ -61,7 +64,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "dark_world",
@@ -72,7 +76,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "handuriel",
@@ -83,7 +88,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "lord_of_wrath",
@@ -94,7 +100,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "monsters_pack_1",
@@ -105,7 +112,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "war_loot",
@@ -119,7 +127,8 @@ export const EXPANSIONS = [
     pets: ["wog"],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "on"
   },
   {
     id: "apocalypse_adventures",
@@ -134,7 +143,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "off"
   },
   {
     id: "apocalypse_heroes_1",
@@ -145,7 +155,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "off"
   },
   {
     id: "apocalypse_lorien",
@@ -156,7 +167,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "off"
   },
   {
     id: "apocalypse_awakenings",
@@ -170,7 +182,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "off"
   },
   {
     id: "apocalypse_sisters",
@@ -181,7 +194,8 @@ export const EXPANSIONS = [
     pets: [],
     roles: [],
     dungeonRoles: [],
-    language: { en: '', es: '' }
+    language: { en: '', es: '' },
+    active: "off"
   }
 ];
 
