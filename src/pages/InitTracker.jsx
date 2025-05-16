@@ -162,6 +162,17 @@ const InitTracker = () => {
   const openEnemyModal = (uuid) => {
     setSelectedEnemyUuid(uuid);
   };
+
+  const updateEnemyVida = (uuid, nuevaVida) => {
+    setPlacedEnemies(prev =>
+      prev.map(e =>
+        e.enemy.uuid === uuid
+          ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
+          : e
+      )
+    );
+  };
+    
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
     console.log(validEnemies)
@@ -578,6 +589,7 @@ const InitTracker = () => {
             enemy={placedEnemies.find(e => e.enemy.uuid === selectedEnemyUuid)?.enemy}
             onClose={() => setSelectedEnemyUuid(null)}
             onDelete={onRemove}
+            onVidaChange={updateEnemyVida}
           />
           )}
       </PageTransition>
