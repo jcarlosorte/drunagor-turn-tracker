@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { TrackerContext } from '@/context/TrackerContext';
+import { useTracker } from '@/context/TrackerContext';
 
 export default function ModalEnemyCard({ uuid, onClose, onUpdateLife }) {
-  const { enemies } = useContext(TrackerContext);
+  const { enemies } = useContext(useTracker);
 
   const enemy = enemies.find(e => e.uuid === uuid);
 
