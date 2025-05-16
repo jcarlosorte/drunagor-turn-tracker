@@ -48,7 +48,7 @@ export default function Config() {
                     className={`w-full h-32 object-cover rounded ${isInactive ? "opacity-50" : ""}`}
                   />
                   {isInactive && (
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 text-white text-sm font-semibold text-center px-2">
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-30 text-white text-sm font-semibold text-center px-2 rotate-[-15deg]">
                       {translations.config.waiting_for_spanish_copy || "Esperando copia en español"}
                     </div>
                   )}
