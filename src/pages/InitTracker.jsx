@@ -317,7 +317,7 @@ const InitTracker = () => {
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}
       >
-        <div className="flex flex-col items-center leading-none" onClick={() => {
+        <div className="flex flex-col w-full items-center leading-none" onClick={() => {
                                                                               console.log('CLICK!');
                                                                               openEnemyModal(uuid);
                                                                             }}>
