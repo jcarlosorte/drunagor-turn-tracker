@@ -327,7 +327,7 @@ const InitTracker = () => {
           <div className="w-full h-2 bg-red-900 rounded mt-1">
             <div
               className="h-full bg-red-500 rounded"
-              style={{ width: `${(5 / vidaMax) * 100}%` }}
+              style={{ width: `${(vida / vidaMax) * 100}%` }}
             ></div>
           </div>
         </div>
