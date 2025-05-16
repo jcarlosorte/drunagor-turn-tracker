@@ -88,7 +88,8 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: selected.categoria,
         comportamiento: selected.comportamiento,
-        vida: selected.vida, 
+        vida: selected.vida,
+        vidaMax: selected.vida,
         movimiento: selected.movimiento, 
         ataque: selected.ataque,
         color: selected.color
@@ -115,7 +116,8 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: category,
         comportamiento: behaviorType,
-        vida: selected.vida, 
+        vida: selected.vida,
+        vidaMax: selected.vida,
         movimiento: selected.movimiento, 
         ataque: selected.ataque,
         color: selected.color
@@ -140,7 +142,8 @@ const InitTracker = () => {
           position: runeIndex,
           categoria: selected.categoria,
           comportamiento: selected.comportamiento,
-          vida: selected.vida, 
+          vida: selected.vida,
+          vidaMax: selected.vida,
           movimiento: selected.movimiento, 
           ataque: selected.ataque,
           color: selected.color
@@ -260,13 +263,13 @@ const InitTracker = () => {
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
 
-  let slotHeightClass = 'h-[24rem]'; // Base height (ej. 192px o 48rem)
+  let slotHeightClass = 'h-[20rem]'; // Base height (ej. 192px o 48rem)
     if (maxCharactersInAnySlot >= 5) {
         slotHeightClass = 'h-[40rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
         slotHeightClass = 'h-[40rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     } else if (maxCharactersInAnySlot >= 2) {
-        slotHeightClass = 'h-[32rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
+        slotHeightClass = 'h-[30rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
   
@@ -291,7 +294,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
+  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, movimiento, ataque }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300">
       <div className="relative w-full max-w-[100px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
        <button className="absolute top-0 right-0 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10" onClick={() => onRemove(uuid)}>
@@ -316,10 +319,17 @@ const InitTracker = () => {
               {tb?.[comportamiento] || comportamiento}
             </span>
             )}
+          {/* Barra de vida */}
+          <div className="w-20 h-2 bg-red-900 rounded mt-1">
+            <div
+              className="h-full bg-red-500 rounded"
+              style={{ width: `${(vida / vida) * 100}%` }}
+            ></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   );
 
 
@@ -371,6 +381,9 @@ const InitTracker = () => {
                 position={isTop ? "top" : "bottom"}
                 color={item.enemy.color}
                 onRemove={onRemove}
+                vida={item.enemy.vida}
+                movimiento={item.enemy.movimiento}
+                ataque={item.enemy.ataque}
               />
             ) : (
               <CharacterCard
