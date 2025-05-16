@@ -11,7 +11,8 @@
     "title": "Settings",
     "language_section_title": "App Language",
     "select_language": "Select language",
-    "select_expansions": "Select expansions"
+    "select_expansions": "Select expansions",
+    "waiting_for_spanish_copy": "Esperando copia en español"
   },
   "expansions": {
     "base": "Chronicles of Drunagor (Base Game)",
