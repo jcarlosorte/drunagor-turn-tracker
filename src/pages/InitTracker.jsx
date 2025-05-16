@@ -327,7 +327,7 @@ const InitTracker = () => {
             </span>
             )}
           {/* Barra de vida */}
-          <div className="w-full relative h-4 mt-2">
+          <div className="w-full relative h-2 mt-2">
             {/* Texto encima de la barra */}
             <div className="absolute inset-0 flex items-center justify-center text-white text-[0.6rem] font-bold z-10">
               {vida} / {vidaMax}
