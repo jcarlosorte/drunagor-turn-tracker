@@ -1,4 +1,4 @@
-const ModalEnemyCard = ({ enemy, onClose }) => {
+export const ModalEnemyCard = ({ enemy, onClose }) => {
   if (!enemy) return null;
 
   const { name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria } = enemy;
