@@ -384,7 +384,7 @@ const InitTracker = () => {
               <EnemyCard
                 uuid={item.enemy.uuid}
                 id={item.enemy.id}
-                name={item.enemy.nombre}
+                name={getEnemyName(item.enemy.id)}
                 image={item.enemy.imagen}
                 comportamiento={item.enemy.comportamiento}
                 categoria={item.enemy.categoria}
