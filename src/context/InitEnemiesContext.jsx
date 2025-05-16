@@ -34,7 +34,7 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies }}>
       {children}
     </InitEnemiesContext.Provider>
   );
