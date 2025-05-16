@@ -1,4 +1,4 @@
-export const ModalEnemyCard = ({ enemy, onClose }) => {
+export const ModalEnemyCard = ({ enemy, onClose, onDelete }) => {
   if (!enemy) {
     console.log(enemy);
     return (
