@@ -298,7 +298,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, onModalClick }) => (
+  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300">
       <div className="relative w-full max-w-[100px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
        <button className="absolute top-0 right-0 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10" onClick={() => onRemove(uuid)}>
@@ -318,7 +318,7 @@ const InitTracker = () => {
       >
         <div className="flex flex-col items-center leading-none" onClick={() => {
                                                                               console.log('CLICK!');
-                                                                              onModalClick();
+                                                                              openEnemyModal(uuid);
                                                                             }}>
           <span className="enemy-text leading-none">{name}</span>
           {comportamiento && (
@@ -376,7 +376,7 @@ const InitTracker = () => {
                 vidaMax={item.enemy.vidaMax}
                 movimiento={item.enemy.movimiento}
                 ataque={item.enemy.ataque}
-                onModalClick={() => setSelectedEnemyUuid(item.enemy.uuid)}
+                openEnemyModal={openEnemyModal}
               />
             ) : (
               <CharacterCard
@@ -563,6 +563,7 @@ const InitTracker = () => {
         <ToastContainer toastClassName="toast-expand" bodyClassName="" />
         {selectedEnemyUuid && (
           <ModalEnemyCard
+            key={selectedEnemyUuid}
             uuid={selectedEnemyUuid}
             onClose={() => setSelectedEnemyUuid(null)}
           />
