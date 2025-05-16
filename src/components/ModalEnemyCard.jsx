@@ -1,5 +1,5 @@
-export default function ModalEnemyCard({ enemy, onClose, onUpdateLife }) {
-  const { name, comportamiento, image, vidaActual, vidaMax, uuid, color } = enemy;
+export default function ModalEnemyCard({ uuid, onClose, onUpdateLife }) {
+  const { name, comportamiento, image, vidaActual, vidaMax, uuid, color } = uuid;
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
