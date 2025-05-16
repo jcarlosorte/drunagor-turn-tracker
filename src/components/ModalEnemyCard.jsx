@@ -85,7 +85,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           className="absolute top-2 right-2 text-white hover:text-black bg-red-600 hover:bg-red-700 text-xl rounded-full font-bold"
           aria-label="Cerrar modal"
         >
-          ×
+          X
         </button>
 
         {/* Botón eliminar */}
@@ -98,7 +98,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           </button>
         )}
 
-        <div className="flex flex-col gap-3 items-center p-6">
+        <div className="flex flex-col gap-1 items-center p-6">
 
           {/* Nombre como título */}
           <h2 className={`text-2xl font-bold text-center text-white px-1 py-0 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
@@ -120,13 +120,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           </div>
 
           {/* Imagen y stats */}
-          <div className="flex w-full items-center gap-4 mt-2">
+          <div className="flex w-full items-center gap-1 mt-2">
             <img
               src={imagen}
               alt={name}
               className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
             />
-            <div className={`flex-1 grid grid-cols-1 gap-2 text-gray-800 font-semibold text-sm bg-gray-200 rounded-full ${categoryTextGlowMap[categoria] || ''}`}>
+            <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
               <div>
                 <span className="text-gray-500">{ti.health}:</span> {vidaLocal} / {vidaMax}
               </div>
@@ -137,22 +137,6 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 <span className="text-gray-500">{ti.attack}:</span> {ataque}
               </div>
             </div>
-          </div>
-
-          {/* Vida botones + / - */}
-          <div className="flex items-center gap-4 mt-3">
-            <button
-              onClick={() => handleVidaChange(-1)}
-              className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-            >
-              −
-            </button>
-            <button
-              onClick={() => handleVidaChange(1)}
-              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-            >
-              +
-            </button>
           </div>
 
           {/* Barra de vida */}
@@ -168,6 +152,22 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
             </div>
           </div>
 
+          {/* Vida botones + / - */}
+          <div className="flex items-center gap-6 mt-1">
+            <button
+              onClick={() => handleVidaChange(-1)}
+              className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              −
+            </button>
+            <button
+              onClick={() => handleVidaChange(1)}
+              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              +
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>
