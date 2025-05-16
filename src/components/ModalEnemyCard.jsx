@@ -1,4 +1,4 @@
-export const ModalEnemyCard = ({ enemy, onClose, onDelete }) => {
+export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
   if (!enemy) {
     console.log(enemy);
     return (
@@ -90,7 +90,7 @@ export const ModalEnemyCard = ({ enemy, onClose, onDelete }) => {
 
             {onDelete && (
               <button
-                onClick={onDelete}
+                onClick={() => onDelete(uuid)}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 font-semibold"
               >
                 Eliminar
