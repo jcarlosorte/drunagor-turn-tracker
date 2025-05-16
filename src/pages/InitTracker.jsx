@@ -560,7 +560,7 @@ const InitTracker = () => {
         <ToastContainer toastClassName="toast-expand" bodyClassName="" />
         {selectedEnemyUuid && (
           <ModalEnemyCard
-            uuid={selectedEnemyUUID}
+            uuid={selectedEnemyUuid}
             onClose={() => setSelectedEnemyUuid(null)}
           />
           )}
