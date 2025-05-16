@@ -558,7 +558,7 @@ const InitTracker = () => {
           </div>
         </div>
         <ToastContainer toastClassName="toast-expand" bodyClassName="" />
-        {selectedEnemyUUID && (
+        {selectedEnemyUuid && (
           <ModalEnemyCard
             uuid={selectedEnemyUUID}
             onClose={() => setSelectedEnemyUuid(null)}
