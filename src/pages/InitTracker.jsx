@@ -83,6 +83,7 @@ const InitTracker = () => {
     placeEnemy({
       enemy: {
         uuid: uuidv4(),
+        name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
@@ -111,6 +112,7 @@ const InitTracker = () => {
     placeEnemy({
       enemy: {
         uuid: uuidv4(),
+        name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
         imagen: selected.imagen,
@@ -137,6 +139,7 @@ const InitTracker = () => {
       placeEnemy({
         enemy: {
           uuid: uuidv4(),
+          name: selected.nombre,
           id: selected.id,
           rune: selected.rune,
           imagen: selected.imagen,
