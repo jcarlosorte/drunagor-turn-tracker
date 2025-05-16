@@ -1,8 +1,10 @@
 export const ModalEnemyCard = ({ enemy, onClose }) => {
   if (!enemy) {
     return (
+      console.log(enemy);
       <div className="modal">
-        <p>Enemigo no encontrado</p>{enemy}
+        <p>Enemigo no encontrado</p>
+        
         <button onClick={onClose}>Cerrar</button>
       </div>
     );
