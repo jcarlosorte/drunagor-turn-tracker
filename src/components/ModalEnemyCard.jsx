@@ -1,6 +1,7 @@
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
+  console.log(uuid);
   if (!enemy) {
-    console.log(enemy);
+    //console.log(enemy);
     return (
       <div className="modal">
         <p>Enemigo no encontrado</p>
