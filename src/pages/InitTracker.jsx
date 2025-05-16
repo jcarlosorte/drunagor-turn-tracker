@@ -564,7 +564,7 @@ const InitTracker = () => {
         {selectedEnemyUuid && (
           <ModalEnemyCard
             key={selectedEnemyUuid}
-            uuid={placedEnemies.find(e => e.enemy.uuid === selectedEnemyUuid)?.enemy}
+            uuid={selectedEnemyUuid}
             onClose={() => setSelectedEnemyUuid(null)}
           />
           )}
