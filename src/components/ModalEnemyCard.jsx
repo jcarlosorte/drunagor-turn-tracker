@@ -2,7 +2,7 @@ export const ModalEnemyCard = ({ enemy, onClose }) => {
   if (!enemy) {
     return (
       <div className="modal">
-        <p>Enemigo no encontrado</p>
+        <p>Enemigo no encontrado</p>{enemy}
         <button onClick={onClose}>Cerrar</button>
       </div>
     );
