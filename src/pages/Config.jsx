@@ -37,24 +37,36 @@ export default function Config() {
       <div>
         <h2 className="text-xl font-semibold mb-2">{translations.config.select_expansions}</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {EXPANSIONS.map((exp) => (
-            <div key={exp.id} className="border rounded p-2 bg-zinc-800">
-              <img
-                src={exp.imagen}
-                alt={translations.expansions[exp.id]}
-                className="w-full h-32 object-cover rounded"
-              />
-              <div className="flex items-center justify-between mt-2">
-                <span>{translations.expansions[exp.id]}</span>
-                <input
-                  type="checkbox"
-                  checked={selectedExpansions.includes(exp.id)}
-                  onChange={() => toggleExpansion(exp.id)}
-                />
+          {EXPANSIONS.map((exp) => {
+            const isInactive = exp.active === "off";
+            return (
+              <div key={exp.id} className="relative border rounded p-2 bg-zinc-800 overflow-hidden">
+                <div className="relative">
+                  <img
+                    src={exp.imagen}
+                    alt={translations.expansions[exp.id]}
+                    className={`w-full h-32 object-cover rounded ${isInactive ? "opacity-50" : ""}`}
+                  />
+                  {isInactive && (
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 text-white text-sm font-semibold text-center px-2">
+                      {translations.config.waiting_for_spanish_copy || "Esperando copia en español"}
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span>{translations.expansions[exp.id]}</span>
+                  <input
+                    type="checkbox"
+                    checked={selectedExpansions.includes(exp.id)}
+                    onChange={() => toggleExpansion(exp.id)}
+                    disabled={isInactive}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
       </div>
 
       <button
