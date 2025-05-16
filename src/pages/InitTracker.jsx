@@ -16,7 +16,7 @@ import TopMenu from '@/components/TopMenu';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
-import ModalEnemyCard from "@/components/ModalEnemyCard";
+import { ModalEnemyCard } from "@/components/ModalEnemyCard";
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
