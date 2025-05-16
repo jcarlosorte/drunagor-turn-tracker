@@ -327,14 +327,20 @@ const InitTracker = () => {
             </span>
             )}
           {/* Barra de vida */}
-          <div className="w-full h-2 bg-red-900 rounded mt-1 text-white text-center text-[0.50rem]">
-            <div
-              className="h-full bg-red-500 rounded"
-              style={{ width: `${(vida / vidaMax) * 100}%` }}
-            >
-              
+          <div className="w-full relative h-4 mt-2">
+            {/* Texto encima de la barra */}
+            <div className="absolute inset-0 flex items-center justify-center text-white text-[0.6rem] font-bold z-10">
+              {vida} / {vidaMax}
             </div>
-            {vida} / {vidaMax}
+          
+            {/* Barra de fondo */}
+            <div className="w-full h-full bg-red-900 rounded">
+              {/* Barra de vida actual */}
+              <div
+                className="h-full bg-red-500 rounded"
+                style={{ width: `${(vida / vidaMax) * 100}%` }}
+              />
+            </div>
           </div>
         </div>
       </div>
