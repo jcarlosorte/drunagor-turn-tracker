@@ -37,11 +37,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   };
 
   const bgColorMap = {
-    blanco: 'bg-white/70',
-    gris: 'bg-gray-500/70',
-    negro: 'bg-black/70',
-    comandante: 'bg-yellow-400/70',
-    jefe: 'bg-purple-700/70',
+    blanco: 'bg-white',
+    gris: 'bg-gray-500',
+    negro: 'bg-black',
+    comandante: 'bg-yellow-400',
+    jefe: 'bg-purple-700',
   };
   
   const textBgColorMap = {
@@ -82,7 +82,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
         {/* Botón cerrar */}
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-700 hover:text-black text-xl font-bold"
+          className="absolute top-2 right-2 text-white hover:text-black bg-red-600 hover:bg-red-700 text-xl rounded-full font-bold"
           aria-label="Cerrar modal"
         >
           ×
@@ -106,15 +106,15 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           </h2>
 
           {/* Categoría y comportamiento */}
-          <div className="flex gap-4 text-sm font-medium text-gray-700">
+          <div className="flex gap-4 text-sm ">
             {categoria && (
-              <span className={`px-3 py-1 bg-gray-200 rounded-full ${categoryGlowMap[categoria] || ''}`}>
-                {ti.category}: {tc[categoria] || categoria}
+              <span className={`px-3 py-1 ${categoryGlowMap[categoria] || ''}`}>
+                {tc[categoria] || categoria}
               </span>
             )}
             {comportamiento && (
-              <span className="italic text-gray-600">
-                {ti.behavior}: {tb[comportamiento] || comportamiento}
+              <span className="italic ">
+                {tb[comportamiento] || comportamiento}
               </span>
             )}
           </div>
