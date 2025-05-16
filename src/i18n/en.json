@@ -186,6 +186,14 @@
       "close": "Close",
       "resetEnemies": "Reset",
       "selectCategory": "Select Category",
-      "enemyAdded": "Enemy Added"
+      "enemyAdded": "Enemy Added",
+      "health": "Health",
+      "movement": "Movement",
+      "attack": "Attack",
+      "behavior": "Behavior",
+      "category": "Category",
+      "remove": "Remove",
+      "close": "Close",
+      "enemyNotFound": "Enemy Not Found"
     }
 }
