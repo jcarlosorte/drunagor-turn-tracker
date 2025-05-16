@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
+  const { language, translations } = useLanguage();
+  const ti = translations.trackerInit || {};
+  const tr = translations.roles || {};
+  const te = translations.enemies || {};
+  const tc = translations.enemies?.categoria || {};
+  const tb = translations.trackerSelect?.comportamientos || {};
 
   useEffect(() => {
     if (enemy) {
@@ -13,14 +20,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     //console.log(enemy);
     return (
       <div className="modal">
-        <p>Enemigo no encontrado</p>
-        
-        <button onClick={onClose}>Cerrar</button>
+        <p>{ti.enemyNotFound}</p>
+        <button onClick={onClose}>{ti.close}</button>
       </div>
     );
   }
 
-  const { name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria } = enemy;
+  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria } = enemy;
   
   const borderColorMap = {
     blanco: 'border-blanco',
@@ -30,6 +36,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     jefe: 'border-morado',
   };
 
+  const bgColorMap = {
+    blanco: 'bg-white/70',
+    gris: 'bg-gray-500/70',
+    negro: 'bg-black/70',
+    comandante: 'bg-yellow-400/70',
+    jefe: 'bg-purple-700/70',
+  };
+  
   const textBgColorMap = {
     blanco: 'bg-white/70',
     gris: 'bg-gray-500/70',
@@ -63,8 +77,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
-      <div className={`bg-white rounded-lg shadow-lg max-w-sm w-full relative border-4 ${borderColorMap[color] || ''}`}>
-        {/* Cerrar */}
+      <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-md relative border-4 ${borderColorMap[color] || ''}`}>
+        
+        {/* Botón cerrar */}
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-700 hover:text-black text-xl font-bold"
@@ -73,65 +88,59 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           ×
         </button>
 
-        {/* Eliminar */}
+        {/* Botón eliminar */}
         {onDelete && (
           <button
             onClick={() => onDelete(uuid)}
             className="absolute top-2 left-2 text-white bg-red-600 hover:bg-red-700 rounded-full px-2 py-1 text-xs"
           >
-            🗑 Eliminar
+            🗑 {ti.remove}
           </button>
         )}
 
-        <div className="flex flex-col items-center p-6">
-          {/* Imagen */}
-          <img
-            src={imagen}
-            alt={name}
-            className={`w-40 h-40 object-cover rounded-lg mb-4 border-2 ${borderColorMap[color] || ''}`}
-          />
+        <div className="flex flex-col gap-3 items-center p-6">
 
-          {/* Nombre */}
-          <h2
-            className={`text-2xl font-bold mb-2 text-center text-white px-3 py-1 rounded 
-              ${textBgColorMap[color] || ''} 
-              ${categoryTextGlowMap[categoria] || ''}`}
-          >
-            {name}
+          {/* Nombre como título */}
+          <h2 className={`text-2xl font-bold text-center text-white px-4 py-2 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
+            {te[id]}
           </h2>
 
-          {/* Categoría */}
-          {categoria && (
-            <span className={`inline-block mb-3 px-3 py-1 bg-gray-200 rounded-full text-sm font-semibold text-gray-700 ${categoryGlowMap[categoria] || ''}`}>
-              Categoría: {categoria}
-            </span>
-          )}
+          {/* Categoría y comportamiento */}
+          <div className="flex gap-4 text-sm font-medium text-gray-700">
+            {categoria && (
+              <span className={`px-3 py-1 bg-gray-200 rounded-full ${categoryGlowMap[categoria] || ''}`}>
+                {ti.category}: {tc[categoria] || categoria}
+              </span>
+            )}
+            {comportamiento && (
+              <span className="italic text-gray-600">
+                {ti.behavior}: {tb[comportamiento] || comportamiento}
+              </span>
+            )}
+          </div>
 
-          {/* Comportamiento */}
-          {comportamiento && (
-            <p className="italic text-gray-600 mb-4 text-center">
-              Comportamiento: {comportamiento}
-            </p>
-          )}
-
-          {/* Vida / Movimiento / Ataque */}
-          <div className="w-full grid grid-cols-3 gap-4 text-center font-semibold text-gray-800 mb-3">
-            <div>
-              <div className="text-sm text-gray-500">Vida</div>
-              <div>{vida} / {vidaMax}</div>
-            </div>
-            <div>
-              <div className="text-sm text-gray-500">Movimiento</div>
-              <div>{movimiento}</div>
-            </div>
-            <div>
-              <div className="text-sm text-gray-500">Ataque</div>
-              <div>{ataque}</div>
+          {/* Imagen y stats */}
+          <div className="flex w-full items-center gap-4 mt-2">
+            <img
+              src={imagen}
+              alt={name}
+              className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
+            />
+            <div className="flex-1 grid grid-cols-1 gap-2 text-gray-800 font-semibold text-sm">
+              <div>
+                <span className="text-gray-500">{ti.health}:</span> {vidaLocal} / {vidaMax}
+              </div>
+              <div>
+                <span className="text-gray-500">{ti.movement}:</span> {movimiento}
+              </div>
+              <div>
+                <span className="text-gray-500">{ti.attack}:</span> {ataque}
+              </div>
             </div>
           </div>
 
-          {/* Botones + / - */}
-          <div className="flex items-center gap-4 mb-3">
+          {/* Vida botones + / - */}
+          <div className="flex items-center gap-4 mt-3">
             <button
               onClick={() => handleVidaChange(-1)}
               className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
@@ -145,19 +154,20 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               +
             </button>
           </div>
-          
+
           {/* Barra de vida */}
           <div className="w-full relative h-3">
             <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
-              {vida} / {vidaMax}
+              {vidaLocal} / {vidaMax}
             </div>
             <div className="w-full h-full bg-red-900 rounded">
               <div
                 className="h-full bg-red-500 rounded"
-                style={{ width: `${(vida / vidaMax) * 100}%` }}
+                style={{ width: `${(vidaLocal / vidaMax) * 100}%` }}
               />
             </div>
           </div>
+
         </div>
       </div>
     </div>
