@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
+export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
   const [vidaActual, setVidaActual] = useState(enemy?.vida || 0);
 
   useEffect(() => {
@@ -54,7 +54,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
   };
 
   const handleVidaChange = (delta) => {
-    setVidaActual((prev) => Math.max(0, Math.min(vidaMax, prev + delta)));
+    const nuevaVida = Math.min(vidaMax, Math.max(0, vidaLocal + delta));
+    setVidaLocal(nuevaVida);
+    if (onVidaChange) {
+      onVidaChange(enemy.uuid, nuevaVida);
+    }
   };
   
   return (
