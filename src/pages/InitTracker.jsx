@@ -292,35 +292,29 @@ const InitTracker = () => {
 
 
   const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove }) => (
-    <div
-      key={uuid}
-      className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300"
-    >
-      <button
-        className="absolute top-0 right-0 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10"
-        onClick={() => onRemove(uuid)}
-      >
-        ×
-      </button>
+    <div key={uuid} className="flex flex-col items-center mx-1 relative z-10 hover:translate-x-8 transition-transform duration-300">
       <div className="relative w-full max-w-[100px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
-        <img
-          src={image}
-          alt={name}
-          className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
-        />
-        <div
-          className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
-            ${borderColorMap[color] || ''} 
-            ${textBgColorMap[color] || 'bg-black/60'} 
-            ${categoryTextGlowMap[categoria] || ''} 
-            enemy-text-wrapper`}
-        >
-          <div className="flex flex-col items-center leading-none">
-            <span className="enemy-text leading-none">{name}</span>
-            {comportamiento && (
-              <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
-                {tb?.[comportamiento] || comportamiento}
-              </span>
+       <button className="absolute top-0 right-0 text-white bg-red-600 hover:bg-red-700 rounded-full w-5 h-5 flex items-center justify-center z-10" onClick={() => onRemove(uuid)}>
+        X
+       </button>
+      <img
+        src={image}
+        alt={name}
+        className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+      />
+      <div
+        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
+          ${borderColorMap[color] || ''} 
+          ${textBgColorMap[color] || 'bg-black/60'} 
+          ${categoryTextGlowMap[categoria] || ''} 
+          enemy-text-wrapper`}
+      >
+        <div className="flex flex-col items-center leading-none">
+          <span className="enemy-text leading-none">{name}</span>
+          {comportamiento && (
+            <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
+              {tb?.[comportamiento] || comportamiento}
+            </span>
             )}
           </div>
         </div>
