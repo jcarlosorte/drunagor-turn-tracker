@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete }) => {
   const [vidaActual, setVidaActual] = useState(enemy?.vida || 0);
 
