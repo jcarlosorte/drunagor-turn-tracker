@@ -316,7 +316,10 @@ const InitTracker = () => {
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}
       >
-        <div className="flex flex-col items-center leading-none" onClick={onModalClick}>
+        <div className="flex flex-col items-center leading-none" onClick={() => {
+                                                                              console.log('CLICK!');
+                                                                              onModalClick();
+                                                                            }}>
           <span className="enemy-text leading-none">{name}</span>
           {comportamiento && (
             <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
