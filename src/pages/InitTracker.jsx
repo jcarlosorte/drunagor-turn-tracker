@@ -312,7 +312,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10">
       <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
    
@@ -328,10 +328,7 @@ const InitTracker = () => {
           ${categoryTextGlowMap[categoria] || ''} 
           enemy-text-wrapper`}
       >
-        <div className="flex flex-col w-full items-center leading-none" onClick={() => {
-                                                                              console.log('CLICK!');
-                                                                              openEnemyModal(uuid);
-                                                                            }}>
+        <div className="flex flex-col w-full items-center leading-none" onClick={() => {openEnemyModal(uuid);}}>
           <span className="enemy-text leading-none">{name}</span>
           {comportamiento && (
             <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
@@ -386,7 +383,8 @@ const InitTracker = () => {
             {isEnemy ? (
               <EnemyCard
                 uuid={item.enemy.uuid}
-                name={getEnemyName(item.enemy.id)}
+                id={item.enemy.id}
+                name={item.enemy.nombre}
                 image={item.enemy.imagen}
                 comportamiento={item.enemy.comportamiento}
                 categoria={item.enemy.categoria}
