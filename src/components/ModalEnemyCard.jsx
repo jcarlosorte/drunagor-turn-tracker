@@ -1,7 +1,7 @@
 export const ModalEnemyCard = ({ enemy, onClose }) => {
   if (!enemy) {
+    console.log(enemy);
     return (
-      console.log(enemy);
       <div className="modal">
         <p>Enemigo no encontrado</p>
         
