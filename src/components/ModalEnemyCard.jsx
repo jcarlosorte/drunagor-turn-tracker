@@ -101,19 +101,19 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
         <div className="flex flex-col gap-3 items-center p-6">
 
           {/* Nombre como título */}
-          <h2 className={`text-2xl font-bold text-center text-white px-4 py-2 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
+          <h2 className={`text-2xl font-bold text-center text-white px-1 py-0 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
             {te[id]}
           </h2>
 
           {/* Categoría y comportamiento */}
-          <div className="flex gap-4 text-sm ">
+          <div className="flex gap-1 text-sm">
             {categoria && (
-              <span className={`px-3 py-1 ${categoryGlowMap[categoria] || ''}`}>
-                {tc[categoria] || categoria}
+              <span className={`${categoryGlowMap[categoria] || ''}`}>
+                {tc[categoria] || categoria}:
               </span>
             )}
             {comportamiento && (
-              <span className="italic ">
+              <span className="italic">
                 {tb[comportamiento] || comportamiento}
               </span>
             )}
@@ -126,7 +126,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               alt={name}
               className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
             />
-            <div className="flex-1 grid grid-cols-1 gap-2 text-gray-800 font-semibold text-sm">
+            <div className={`flex-1 grid grid-cols-1 gap-2 text-gray-800 font-semibold text-sm bg-gray-200 rounded-full ${categoryTextGlowMap[categoria] || ''}`}>
               <div>
                 <span className="text-gray-500">{ti.health}:</span> {vidaLocal} / {vidaMax}
               </div>
