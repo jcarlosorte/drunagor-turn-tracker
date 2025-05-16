@@ -11,7 +11,8 @@
     "title": "Configuración",
     "language_section_title": "Idioma de la Aplicación",
     "select_language": "Selecciona el idioma",
-    "select_expansions": "Selecciona las expansiones"
+    "select_expansions": "Selecciona las expansiones",
+    "waiting_for_spanish_copy": "Esperando copia en español"
   },
   "expansions": {
     "base": "Crónicas de Drunagor (Juego Base)",
