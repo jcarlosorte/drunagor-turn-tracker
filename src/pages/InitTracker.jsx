@@ -100,14 +100,25 @@ const InitTracker = () => {
     });
   };
 
+  const getCommanderHealth = (baseVida) => {
+    const pcStr = prompt("Introduce el valor de PC:");
+    const pc = parseInt(pcStr);
+    if (isNaN(pc) || pc <= 0) {
+      alert("PC inválido, se usará PC = 1 por defecto.");
+      return baseVida * (1 + selectedHeroes.length);
+    }
+    return baseVida * (pc + selectedHeroes.length);
+  };
+  
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
-    //console.log(`Enemigo añadido: ${enemyId}, Comportamiento: ${behaviorType}, Categoría: ${category}`);
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id));
-    console.log(selected);
+    //console.log(selected);
     if (!selected) return;
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    const isCommander = selected.categoria === 'comandante';
+    const adjustedVida = isCommander ? getCommanderHealth(selected.vida) : selected.vida;
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -120,8 +131,8 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: category,
         comportamiento: behaviorType,
-        vida: selected.vida,
-        vidaMax: selected.vida,
+        vida: adjustedVida,
+        vidaMax: adjustedVida,
         movimiento: selected.movimiento, 
         ataque: selected.ataque,
         color: selected.color
@@ -135,6 +146,7 @@ const InitTracker = () => {
       const selected = filtered[Math.floor(Math.random() * filtered.length)];
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
+      const adjustedVida = getCommanderHealth(selected.vida);
       showToast(selected);
       placeEnemy({
         enemy: {
@@ -147,8 +159,8 @@ const InitTracker = () => {
           position: runeIndex,
           categoria: selected.categoria,
           comportamiento: selected.comportamiento,
-          vida: selected.vida,
-          vidaMax: selected.vida,
+          vida: adjustedVida,
+          vidaMax: adjustedVida,
           movimiento: selected.movimiento, 
           ataque: selected.ataque,
           color: selected.color
