@@ -51,6 +51,7 @@ const InitTracker = () => {
   const tb = translations.trackerSelect?.comportamientos || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
+  const selectedHeroes = trackerData.heroes;
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
   const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
