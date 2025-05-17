@@ -223,11 +223,11 @@ const InitTracker = () => {
   };
 
   const textBgColorMap = {
-    blanco: 'bg-white/70',      // Blanco con opacidad
-    gris: 'bg-gray-500/70',     // Gris medio
-    negro: 'bg-black/70',       // Negro
-    comandante: 'bg-yellow-400/70', // Dorado aproximado
-    jefe: 'bg-purple-700/70',   // Morado
+    blanco: 'bg-white',      // Blanco con opacidad
+    gris: 'bg-gray-500',     // Gris medio
+    negro: 'bg-black',       // Negro
+    comandante: 'bg-orange-400 ', // Dorado aproximado
+    jefe: 'bg-purple-700',   // Morado
   };
   
   useEffect(() => {
