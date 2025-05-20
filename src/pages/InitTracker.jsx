@@ -655,7 +655,6 @@ const InitTracker = () => {
             onPCConfirm?.(pcValue);
             closePCModal();
           }}
-          onCancel={closePCModal}
         />
       )}
       </PageTransition>
