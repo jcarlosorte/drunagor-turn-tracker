@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
-const ModalCommanderPC = ({ onConfirm, color = 'gray' }) => {
+const ModalCommanderPC = ({ onConfirm }) => {
   const [pcValue, setPcValue] = useState('');
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {}
@@ -19,7 +19,7 @@ const ModalCommanderPC = ({ onConfirm, color = 'gray' }) => {
 
   return (
     <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}>
-      <div className={`bg-${color}-800 text-white p-4 rounded-xl shadow-lg`}>
+      <div className={`bg-yellow-400 text-white p-4 rounded-xl shadow-lg`}>
         <h2 className="text-lg font-bold mb-2">{ti.PC}</h2>
         <input
           type="number"
@@ -30,7 +30,7 @@ const ModalCommanderPC = ({ onConfirm, color = 'gray' }) => {
         />
         <div className="flex justify-end gap-2 mt-3">
           <button
-            className={`bg-${color}-600 hover:bg-${color}-700 text-white py-1 px-3 rounded`}
+            className={`bg-yellow-600 hover:bg-yellow-700 text-white py-1 px-3 rounded`}
             onClick={handleSubmit}
           >
             {ts.confirm}
