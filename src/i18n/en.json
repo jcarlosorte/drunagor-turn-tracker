@@ -195,7 +195,8 @@
     "category": "Category",
     "remove": "Remove",
     "close": "Close",
-    "enemyNotFound": "Enemy Not Found"
+    "enemyNotFound": "Enemy Not Found",
+    "PC": "Insert CP"
   },
   "condiciones_t": {
     "ABSORCION": "ABSORPTION",
