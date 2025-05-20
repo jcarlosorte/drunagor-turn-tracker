@@ -17,6 +17,7 @@ import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
 import { ModalEnemyCard } from "@/components/ModalEnemyCard";
+import ModalCommanderPC from '@/ModalCommanderPC';
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
@@ -52,6 +53,7 @@ const InitTracker = () => {
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
+  const numHeroes = selectedHeroes.length;
   const [categorySelector, setCategorySelector] = useState({ open: false, color: null });
   const [isLandscape, setIsLandscape] = useState(window.matchMedia("(orientation: landscape)").matches);
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
@@ -59,12 +61,27 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
+
+  const [showPCModal, setShowPCModal] = useState(false);
+  const [onPCConfirm, setOnPCConfirm] = useState(null);
+  const [modalColor, setModalColor] = useState('gray');
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
 
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
+
+  const openCommanderPCModal = (color, callback) => {
+    setModalColor(color);
+    setOnPCConfirm(() => callback);
+    setShowPCModal(true);
+  };
+  
+  const closePCModal = () => {
+    setShowPCModal(false);
+    setOnPCConfirm(null);
+  };
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
@@ -113,13 +130,40 @@ const InitTracker = () => {
   
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     setManualSelector({ open: false, color: null });
-    const selected = ENEMIES.find(e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id));
-    //console.log(selected);
+    const selected = ENEMIES.find(
+      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
+    );
     if (!selected) return;
+
+    if (selected.categoria === 'comandante') {
+      openCommanderPCModal(selected.color, (pcValue) => {
+        const totalVida = selected.vida * (pcValue + numHeroes);
+        const runeIndex = runesColorMap[selected.rune];
+        const runePosition = selected.runePosition;
+        const enemy = {
+          uuid: uuidv4(),
+          name: selected.nombre,
+          id: selected.id,
+          rune: selected.rune,
+          imagen: selected.imagen,
+          runePosition,
+          position: runeIndex,
+          categoria: category,
+          comportamiento: behaviorType,
+          vida: totalVida,
+          vidaMax: totalVida,
+          movimiento: selected.movimiento,
+          ataque: selected.ataque,
+          color: selected.color
+        };
+        showToast(enemy);
+        placeEnemy({ enemy });
+      });
+      return;
+    }
+
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
-    const isCommander = selected.categoria === 'comandante';
-    const adjustedVida = isCommander ? getCommanderHealth(selected.vida) : selected.vida;
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -132,42 +176,43 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: category,
         comportamiento: behaviorType,
-        vida: adjustedVida,
-        vidaMax: adjustedVida,
-        movimiento: selected.movimiento, 
+        vida: selected.vida,
+        vidaMax: selected.vida,
+        movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color
       }
     });
   };
   
-    const handleRandomCommander = () => {
-      const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
-      if (filtered.length === 0) return;
-      const selected = filtered[Math.floor(Math.random() * filtered.length)];
+  const handleRandomCommander = () => {
+    const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
+    if (filtered.length === 0) return;
+    const selected = filtered[Math.floor(Math.random() * filtered.length)];
+    openCommanderPCModal(selected.color, (pcValue) => {
+      const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
-      const adjustedVida = getCommanderHealth(selected.vida);
-      showToast(selected);
-      placeEnemy({
-        enemy: {
-          uuid: uuidv4(),
-          name: selected.nombre,
-          id: selected.id,
-          rune: selected.rune,
-          imagen: selected.imagen,
-          runePosition,
-          position: runeIndex,
-          categoria: selected.categoria,
-          comportamiento: selected.comportamiento,
-          vida: adjustedVida,
-          vidaMax: adjustedVida,
-          movimiento: selected.movimiento, 
-          ataque: selected.ataque,
-          color: selected.color
-        }
-      });
-    };
+      const enemy = {
+        uuid: uuidv4(),
+        name: selected.nombre,
+        id: selected.id,
+        rune: selected.rune,
+        imagen: selected.imagen,
+        runePosition,
+        position: runeIndex,
+        categoria: selected.categoria,
+        comportamiento: selected.comportamiento,
+        vida: totalVida,
+        vidaMax: totalVida,
+        movimiento: selected.movimiento,
+        ataque: selected.ataque,
+        color: selected.color
+      };
+      showToast(enemy);
+      placeEnemy({ enemy });
+    });
+  };
 
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
@@ -603,6 +648,16 @@ const InitTracker = () => {
             onVidaChange={updateEnemyVida}
           />
           )}
+        {showPCModal && (
+        <ModalCommanderPC
+          color={modalColor}
+          onConfirm={(pcValue) => {
+            onPCConfirm?.(pcValue);
+            closePCModal();
+          }}
+          onCancel={closePCModal}
+        />
+      )}
       </PageTransition>
   );
 };
