@@ -195,7 +195,8 @@
       "category": "Categoría",
       "remove": "Eliminar",
       "close": "Cerrar",
-      "enemyNotFound": "Enemigo no encontrado"
+      "enemyNotFound": "Enemigo no encontrado",
+      "PC": "Introduce el valor de PC"
     },
     "condiciones_t": {
       "ABSORCION": "ABSORCIÓN",
