@@ -64,7 +64,6 @@ const InitTracker = () => {
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
-  const [modalColor, setModalColor] = useState('gray');
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id) => translations.enemies?.[id] || id;
@@ -72,16 +71,11 @@ const InitTracker = () => {
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
 
-  const openCommanderPCModal = (color, callback) => {
-    setModalColor(color);
+  const openCommanderPCModal = (callback) => {
     setOnPCConfirm(() => callback);
     setShowPCModal(true);
   };
   
-  const closePCModal = () => {
-    setShowPCModal(false);
-    setOnPCConfirm(null);
-  };
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
@@ -118,15 +112,6 @@ const InitTracker = () => {
     });
   };
 
-  const getCommanderHealth = (baseVida) => {
-    const pcStr = prompt("Introduce el valor de PC:");
-    const pc = parseInt(pcStr);
-    if (isNaN(pc) || pc <= 0) {
-      alert("PC inválido, se usará PC = 1 por defecto.");
-      return baseVida * (1 + selectedHeroes.length);
-    }
-    return baseVida * (pc + selectedHeroes.length);
-  };
   
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     setManualSelector({ open: false, color: null });
@@ -136,7 +121,7 @@ const InitTracker = () => {
     if (!selected) return;
 
     if (selected.categoria === 'comandante') {
-      openCommanderPCModal(selected.color, (pcValue) => {
+      openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
@@ -189,7 +174,7 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    openCommanderPCModal(selected.color, (pcValue) => {
+    openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
@@ -650,7 +635,6 @@ const InitTracker = () => {
           )}
         {showPCModal && (
         <ModalCommanderPC
-          color={modalColor}
           onConfirm={(pcValue) => {
             onPCConfirm?.(pcValue);
             closePCModal();
