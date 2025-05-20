@@ -18,7 +18,7 @@ const ModalCommanderPC = ({ onConfirm }) => {
   };
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}>
+    <div className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50`}>
       <div className={`bg-yellow-400 text-white p-4 rounded-xl shadow-lg`}>
         <h2 className="text-lg font-bold mb-2">{ti.PC}</h2>
         <input
