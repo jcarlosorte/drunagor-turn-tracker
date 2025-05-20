@@ -17,7 +17,7 @@ import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
 import PageTransition from "@/components/PageTransition";
 import { ModalEnemyCard } from "@/components/ModalEnemyCard";
-import ModalCommanderPC from '@/ModalCommanderPC';
+import ModalCommanderPC from '@/components/ModalCommanderPC';
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
