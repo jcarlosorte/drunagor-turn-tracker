@@ -75,7 +75,11 @@ const InitTracker = () => {
     setOnPCConfirm(() => callback);
     setShowPCModal(true);
   };
-  
+
+  const closePCModal = () => {
+    setShowPCModal(false);
+    setOnPCConfirm(null);
+  };
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
