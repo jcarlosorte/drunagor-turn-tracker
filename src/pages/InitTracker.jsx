@@ -112,7 +112,9 @@ const InitTracker = () => {
         movimiento: selected.movimiento, 
         ataque: selected.ataque,
         color: selected.color,
-        inmunidad: selected.inmunidad
+        inmunidad: selected.inmunidad,
+        tipo_ataque: selected.tipo_ataque,
+        capacidades: selected.capacidades
       }
     });
   };
@@ -145,7 +147,9 @@ const InitTracker = () => {
           movimiento: selected.movimiento,
           ataque: selected.ataque,
           color: selected.color,
-          inmunidad: selected.inmunidad
+          inmunidad: selected.inmunidad,
+          tipo_ataque: selected.tipo_ataque,
+          capacidades: selected.capacidades
         };
         showToast(enemy);
         placeEnemy({ enemy });
@@ -172,7 +176,9 @@ const InitTracker = () => {
         movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color,
-        inmunidad: selected.inmunidad
+        inmunidad: selected.inmunidad,
+        tipo_ataque: selected.tipo_ataque,
+        capacidades: selected.capacidades
       }
     });
   };
@@ -200,7 +206,9 @@ const InitTracker = () => {
         movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color,
-        inmunidad: selected.inmunidad
+        inmunidad: selected.inmunidad,
+        tipo_ataque: selected.tipo_ataque,
+        capacidades: selected.capacidades
       };
       showToast(enemy);
       placeEnemy({ enemy });
@@ -448,6 +456,8 @@ const InitTracker = () => {
                 ataque={item.enemy.ataque}
                 openEnemyModal={openEnemyModal}
                 inmunidad={item.enemy.inmunidad}
+                tipo_ataque={item.enemy.tipo_ataque}
+                capacidades={item.enemy.capacidades}
               />
             ) : (
               <CharacterCard
