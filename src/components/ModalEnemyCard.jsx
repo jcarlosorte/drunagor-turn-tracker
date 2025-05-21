@@ -145,11 +145,12 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   ? inmunidad.map((clave, idx) => (
                       <span key={clave} className="inline-flex items-center gap-1 mr-2">
                         {tt[clave] || clave}
-                        {idx < inmunidad.length - 1 ? ', ' : ''}
                         <FiInfo
                           title={tte[clave] || ''}
                           className="text-gray-500 hover:text-gray-800 cursor-help"
                         />
+                        {idx < inmunidad.length - 1 ? ', ' : ''}
+                        
                       </span>
                     ))
                   : tt.none}
