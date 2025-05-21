@@ -197,7 +197,12 @@
     "enemyNotFound": "Enemy Not Found",
     "PC": "Insert CP",
     "inmunidad": "Immunities",
-    "tipo_ataque": "Attack Type",
+    "tipo_ataque": {
+      "label": "Attack Type",
+      "distancia": "Ranged",
+      "cuerpo": "Melee",
+      "magia": "Magical"
+    },
     "capacidades": "Special Abilities"
   },
   "condiciones_t": {
