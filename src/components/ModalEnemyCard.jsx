@@ -26,7 +26,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     );
   }
 
-  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria } = enemy;
+  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad } = enemy;
   
   const borderColorMap = {
     blanco: 'border-blanco',
@@ -135,6 +135,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               </div>
               <div>
                 <span className="text-gray-500">{ti.attack}:</span> {ataque}
+              </div>
+              <div>
+                <span className="text-gray-500">{ti.inmunidad}:</span> {ataque}
               </div>
             </div>
           </div>
