@@ -58,7 +58,7 @@ import vorn from "@/assets/heroes/Vorn.png";
 
 export const ENEMIES = [
   { id: "undead_king_boss", nombre: "Undead King Boss", vida: 0, movimiento: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "rojo", runePosition: "arriba", comportamiento: "jefe", inmunidad: []  },
-  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 7, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo", inmunidad: ["fuego", "veneno"] },
+  { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 7, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo", inmunidad: ["ATURDIMIENTO", "DERRIBO"] },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 18, movimiento: 5, ataque: 6, color: "blanco", categoria: "campeon", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar", inmunidad: [] },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 12, movimiento: 5, ataque: 6, color: "blanco", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "alternativo", inmunidad: []  },
   { id: "skeleton_archer", nombre: "Skeleton Archer", vida: 15, movimiento: 5, ataque: 5, color: "blanco", categoria: "veterano", tipo: "enemigo", expansionId: "base", imagen: skeleton_archer, rune: "azul", runePosition: "arriba", comportamiento: "estandar", inmunidad: []  },
