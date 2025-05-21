@@ -82,7 +82,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
-      <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-md relative border-4 ${borderColorMap[color] || ''}`}>
+      <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-lg relative border-4 ${borderColorMap[color] || ''}`}>
         
         {/* Botón cerrar */}
         <button
