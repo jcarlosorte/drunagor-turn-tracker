@@ -111,7 +111,8 @@ const InitTracker = () => {
         vidaMax: selected.vida,
         movimiento: selected.movimiento, 
         ataque: selected.ataque,
-        color: selected.color
+        color: selected.color,
+        inmunidad: selected.inmunidad
       }
     });
   };
@@ -143,7 +144,8 @@ const InitTracker = () => {
           vidaMax: totalVida,
           movimiento: selected.movimiento,
           ataque: selected.ataque,
-          color: selected.color
+          color: selected.color,
+          inmunidad: selected.inmunidad
         };
         showToast(enemy);
         placeEnemy({ enemy });
@@ -169,7 +171,8 @@ const InitTracker = () => {
         vidaMax: selected.vida,
         movimiento: selected.movimiento,
         ataque: selected.ataque,
-        color: selected.color
+        color: selected.color,
+        inmunidad: selected.inmunidad
       }
     });
   };
@@ -196,7 +199,8 @@ const InitTracker = () => {
         vidaMax: totalVida,
         movimiento: selected.movimiento,
         ataque: selected.ataque,
-        color: selected.color
+        color: selected.color,
+        inmunidad: selected.inmunidad
       };
       showToast(enemy);
       placeEnemy({ enemy });
@@ -443,6 +447,7 @@ const InitTracker = () => {
                 movimiento={item.enemy.movimiento}
                 ataque={item.enemy.ataque}
                 openEnemyModal={openEnemyModal}
+                inmunidad={item.enemy.inmunidad}
               />
             ) : (
               <CharacterCard
