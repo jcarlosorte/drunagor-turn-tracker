@@ -164,6 +164,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                       <GiSwordClash className="text-white text-lg" />
                     )}
                   </span>
+                  {ataque}
                 </span>
               </div>
               <div className="flex items-start gap-2">
