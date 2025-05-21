@@ -133,7 +133,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
             />
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
               {/* Vida */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cursor-help" title={ti.health || ''>
                 <GiHealthPotion className="text-red-600" />
                 {vidaLocal} / {vidaMax}
               </div>
