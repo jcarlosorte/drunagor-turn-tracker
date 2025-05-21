@@ -140,16 +140,16 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               {/* Movimiento + Ataque en la misma línea */}
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1">
-                  <GiSteeltoeBoots className="text-blue-600" />
+                  <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help" title={ti.movement || ''}" />
                   {movimiento}
                 </span>
                 <span className="flex items-center gap-1">
-                  <GiSwordClash className="text-yellow-600" />
+                  <GiSwordClash className="text-yellow-600 text-2xl cursor-help" title={ti.attack || ''}" />
                   {ataque}
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <GiShieldReflect className="text-purple-700 mt-1" />
+                <GiShieldReflect className="text-purple-700 mt-1 text-2xl cursor-help" title={ti.inmunidad || ''}" />
                 <div className="flex flex-wrap gap-2">
                   {Array.isArray(inmunidad) && inmunidad.length > 0
                     ? inmunidad.map((clave, idx) => (
