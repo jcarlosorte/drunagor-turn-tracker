@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
-import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots  } from "react-icons/gi";
+import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots, GiBloodySword, GiArcheryTarget, GiMoebiusTrefoil } from "react-icons/gi";
 
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
@@ -31,7 +31,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     );
   }
 
-  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad } = enemy;
+  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades } = enemy;
   
   const borderColorMap = {
     blanco: 'border-blanco',
@@ -79,7 +79,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
       onVidaChange(enemy.uuid, nuevaVida);
     }
   };
-  
+
+  const tipoAtaqueIconMap = {
+    "cuerpo": <GiBloodySword className="text-white text-2xl cursor-help" title={ti.tipo_ataque.cuerpo || ''} />,
+    "distancia": <GiArcheryTarget className="text-white text-2xl cursor-help" title={ti.tipo_ataque.distancia || ''} />,
+    "magia": <GiMoebiusTrefoil className="text-white text-2xl cursor-help" title={ti.tipo_ataque.magia || ''} />
+  };
+
+  const tipoAtaqueCircleClass = {
+    "distancia": "bg-red-600",
+    "cuerpo": "bg-orange-500",
+    "magia": "bg-blue-600"
+  };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-xl relative border-4 ${borderColorMap[color] || ''}`}>
@@ -143,8 +154,16 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   {movimiento}
                 </span>
                 <span className="flex items-center gap-1">
-                  <GiSwordClash className="text-yellow-600 text-2xl cursor-help" title={ti.attack || ''} />
-                  {ataque}
+                  <span
+                    className={`w-7 h-7 flex items-center justify-center rounded-full border border-white ${
+                      tipoAtaqueCircleClass[tipo_ataque] || "bg-gray-500"
+                    }`}
+                    title={ti.tipo_ataque?.label || ''}
+                  >
+                    {tipoAtaqueIconMap[tipo_ataque] || (
+                      <GiSwordClash className="text-white text-lg" />
+                    )}
+                  </span>
                 </span>
               </div>
               <div className="flex items-start gap-2">
