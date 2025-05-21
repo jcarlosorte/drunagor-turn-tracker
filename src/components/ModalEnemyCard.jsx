@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
+import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect } from "react-icons/gi";
+
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
@@ -130,30 +132,36 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
             />
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
-              <div>
-                <span className="text-gray-500">{ti.health}:</span> {vidaLocal} / {vidaMax}
+              {/* Vida */}
+              <div className="flex items-center gap-2">
+                <GiHealthPotion className="text-red-600" />
+                {vidaLocal} / {vidaMax}
               </div>
-              <div>
-                <span className="text-gray-500">{ti.movement}:</span> {movimiento}
-              </div>
-              <div>
-                <span className="text-gray-500">{ti.attack}:</span> {ataque}
-              </div>
-              <div>
-                <span className="text-gray-500">{ti.inmunidad}:</span>{" "}
-                {Array.isArray(inmunidad) && inmunidad.length > 0
-                  ? inmunidad.map((clave, idx) => (
-                      <span key={clave} className="inline-flex items-center gap-1 mr-2">
-                        {tt[clave] || clave}
-                        <FiInfo
-                          title={tte[clave] || ''}
-                          className="text-gray-500 hover:text-gray-800 cursor-help"
-                        />
-                        {idx < inmunidad.length - 1 ? ', ' : ''}
-                        
-                      </span>
-                    ))
-                  : tt.none}
+              {/* Movimiento + Ataque en la misma línea */}
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1">
+                  <GiRunningNinja className="text-blue-600" />
+                  {movimiento}
+                </span>
+                <span className="flex items-center gap-1">
+                  <GiSwordClash className="text-yellow-600" />
+                  {ataque}
+                </span>
+              <div className="flex items-start gap-2">
+                <GiShieldReflect className="text-purple-700 mt-1" />
+                <div className="flex flex-wrap gap-2">
+                  {Array.isArray(inmunidad) && inmunidad.length > 0
+                    ? inmunidad.map((clave, idx) => (
+                        <span key={clave} className="inline-flex items-center gap-1 mr-2">
+                          {tt[clave] || clave}
+                          <FiInfo
+                            title={tte[clave] || ''}
+                            className="text-gray-500 hover:text-gray-800 cursor-help"
+                          />
+                        </span>
+                      ))
+                    : tt.none}
+                </div>
               </div>
             </div>
           </div>
