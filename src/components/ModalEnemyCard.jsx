@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
-import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect } from "react-icons/gi";
+import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots  } from "react-icons/gi";
 
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
@@ -133,14 +133,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
             />
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
               {/* Vida */}
-              <div className="flex items-center gap-2 cursor-help" title={ti.health || ''>
+              <div className="flex items-center gap-2 cursor-help" title={ti.health || ''}>
                 <GiHealthPotion className="text-red-600" />
                 {vidaLocal} / {vidaMax}
               </div>
               {/* Movimiento + Ataque en la misma línea */}
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1">
-                  <GiRunningNinja className="text-blue-600" />
+                  <GiSteeltoeBoots className="text-blue-600" />
                   {movimiento}
                 </span>
                 <span className="flex items-center gap-1">
