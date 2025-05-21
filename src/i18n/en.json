@@ -195,7 +195,8 @@
     "category": "Category",
     "remove": "Remove",
     "enemyNotFound": "Enemy Not Found",
-    "PC": "Insert CP"
+    "PC": "Insert CP",
+    "inmunidad": "Immunities"
   },
   "condiciones_t": {
     "ABSORCION": "ABSORPTION",
