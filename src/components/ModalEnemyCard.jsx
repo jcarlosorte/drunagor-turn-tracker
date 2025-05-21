@@ -113,12 +113,12 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           {/* Categoría y comportamiento */}
           <div className="flex gap-1 text-sm">
             {categoria && (
-              <span className={`${categoryGlowMap[categoria] || ''}`}>
+              <span className={`${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
                 {tc[categoria] || categoria}:
               </span>
             )}
             {comportamiento && (
-              <span className="italic">
+              <span className={`italic ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
                 {tb[comportamiento] || comportamiento}
               </span>
             )}
@@ -167,7 +167,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           </div>
 
             {/* Barra de vida */}
-            <div className="w-full relative h-3">
+            <div className="w-full relative h-5">
               <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
                 {vidaLocal} / {vidaMax}
               </div>
