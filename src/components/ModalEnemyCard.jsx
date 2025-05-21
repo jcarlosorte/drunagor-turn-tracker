@@ -9,6 +9,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const te = translations.enemies || {};
   const tc = translations.enemies?.categoria || {};
   const tb = translations.trackerSelect?.comportamientos || {};
+  const tt = translations.condiciones_t || {};
 
   useEffect(() => {
     if (enemy) {
@@ -137,7 +138,15 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 <span className="text-gray-500">{ti.attack}:</span> {ataque}
               </div>
               <div>
-                <span className="text-gray-500">{ti.inmunidad}:</span> {inmunidad}
+                <span className="text-gray-500">{ti.inmunidad}:</span>{" "}
+                {Array.isArray(inmunidad) && inmunidad.length > 0
+                  ? inmunidad.map((clave, idx) => (
+                      <span key={clave}>
+                        {tt[clave] || clave}
+                        {idx < inmunidad.length - 1 ? ', ' : ''}
+                      </span>
+                    ))
+                  : tt.none}
               </div>
             </div>
           </div>
