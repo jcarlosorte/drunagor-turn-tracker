@@ -137,7 +137,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 <span className="text-gray-500">{ti.attack}:</span> {ataque}
               </div>
               <div>
-                <span className="text-gray-500">{ti.inmunidad}:</span> {ataque}
+                <span className="text-gray-500">{ti.inmunidad}:</span> {inmunidad}
               </div>
             </div>
           </div>
