@@ -254,7 +254,7 @@
       "FRUTO_DE_VIDA": "FRUTO DE VIDA",
       "FURIA": "FURIA",
       "HEMORRAGIA_X": "HEMORRAGIA X",
-      "HEMORRAGIA": "HEMORRAGIA",
+      "HEMORRAGIA_I": "HEMORRAGIA",
       "HENDEDURA_X": "HENDEDURA X",
       "HEROE_MAS_CANSADO": "HÉROE MÁS CANSADO",
       "HEROE_MAS_CORRUPTO": "HÉROE MÁS CORRUPTO",
@@ -314,6 +314,7 @@
       "TRUCO_O_TRATO": "TRUCO O TRATO",
       "UNICA": "ÚNICA",
       "VENENO_X": "VENENO X",
+      "VENENO_I": "VENENO",
       "VENGATIVO": "VENGATIVO",
       "VORAGINE": "VORÁGINE"
     },
@@ -426,6 +427,7 @@
       "TRUCO_O_TRATO": "Cuando Tharmagar se Activa, su controlador elige: un Héroe a Alcance 1 de Tharmagar gana SANAR 2 o un Monstruo a Alcance 1 de Tharmagar sufre, a elección de su controlador, HEMORRAGIA 2, QUEMADURA 2, o VENENO 2.",
       "UNICA": "Esta Mascota está de alguna manera ligada a la historia y no se puede Invocar por ningún otro medio que no sea la Habilidad que lo permite específicamente. Mientras está en el tablero, cualquier otra Habilidad genérica de Activación de Mascotas que tenga tu Héroe funciona con ella.",
       "VENENO_X": "El objetivo recibe X fichas de VENENO. Al principio del siguiente turno de ese personaje, recibe 1 daño no prevenible por cada ficha de VENENO que tenga. A diferencia de HEMORRAGIA O QUEMADURA, VENENO no se retira despues de infligir su daño. Sin embargo, cuando un personaje recibe un efecto de PURIFICACIÓN, también retira el VENENO que lo afecta. VENENO es una Condición acumulable.",
+      "VENENO_I": "Inmune a Veneno",
       "VENGATIVO": "Un Monstruo Vengativo elige como objetivo principal al Heroe mas corrupto (el que tenga más cubos de Maldición).",
       "VORAGINE": "Esta es una Capacidad de los Señores supremos. Al comienzo de su Activación, un Señor supremo debe añadir sus cartas de Ataque al mazo, barajarlo y robar una nueva «mano>>> (1 carta por cada Héroe en la Aventura). Por tanto, la combinación de Ataques del Señor supremo puede cambiar de una ronda a otra."
     }
