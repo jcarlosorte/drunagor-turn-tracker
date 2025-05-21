@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
@@ -10,6 +11,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const tc = translations.enemies?.categoria || {};
   const tb = translations.trackerSelect?.comportamientos || {};
   const tt = translations.condiciones_t || {};
+  const tte = translations.condiciones_d || {};
 
   useEffect(() => {
     if (enemy) {
@@ -141,9 +143,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 <span className="text-gray-500">{ti.inmunidad}:</span>{" "}
                 {Array.isArray(inmunidad) && inmunidad.length > 0
                   ? inmunidad.map((clave, idx) => (
-                      <span key={clave}>
+                      <span key={clave} className="inline-flex items-center gap-1 mr-2">
                         {tt[clave] || clave}
                         {idx < inmunidad.length - 1 ? ', ' : ''}
+                        <FiInfo
+                          title={tte[clave] || ''}
+                          className="text-gray-500 hover:text-gray-800 cursor-help"
+                        />
                       </span>
                     ))
                   : tt.none}
