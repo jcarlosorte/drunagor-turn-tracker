@@ -196,7 +196,9 @@
     "remove": "Remove",
     "enemyNotFound": "Enemy Not Found",
     "PC": "Insert CP",
-    "inmunidad": "Immunities"
+    "inmunidad": "Immunities",
+    "tipo_ataque": "Attack Type",
+    "capacidades": "Special Abilities"
   },
   "condiciones_t": {
     "ABSORCION": "ABSORPTION",
