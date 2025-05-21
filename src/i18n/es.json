@@ -195,7 +195,8 @@
       "category": "Categoría",
       "remove": "Eliminar",
       "enemyNotFound": "Enemigo no encontrado",
-      "PC": "Introduce el valor de PC"
+      "PC": "Introduce el valor de PC",
+      "inmunidad": "Inmunidad"
     },
     "condiciones_t": {
       "ABSORCION": "ABSORCIÓN",
