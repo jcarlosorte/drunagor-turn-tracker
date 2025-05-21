@@ -377,7 +377,7 @@
       "MARCA_DE_MONTARAZ": "Cuando se marca a un personaje con este efecto, recibe una ficha de MARCA DE MONTARAZ. Todos los Ataques con Arma y Hechizo de la Montaraz contra un personaje al que haya marcado infligen DAÑO +1. Como vimos antes, este daño se duplica si el personaje obtiene un crítico.",
       "MASCOTA": "Algunos Héroes tienen Mascotas, cada una con su propia ficha y carta con sus atributos. Tienes más detalles sobre las Mascotas en la página 9.",
       "MATANZA": "Un Monstruo con Matanza elige como objetivo principal las fichas de PNJ (no Compañeros).",
-      "MONSTRUO_GRANDE": "Este Monstruo se considera grande (aunque su base sea de tamaño pequeño). Los Monstruos grandes son inmunes a DERRIBO, EMPUJÓN, ATURDIMIENTO  TELEQUINESIS.",
+      "MONSTRUO_GRANDE": "Este Monstruo se considera grande (aunque su base sea de tamaño pequeño). Los Monstruos grandes son inmunes a DERRIBO, EMPUJÓN, ATURDIMIENTO y TELEQUINESIS.",
       "MOVER_X": "El objetivo puede Moverse hasta X casillas respetando las reglas normales de Movimiento (página 22).",
       "MOVER_MAS_X": "Recibes X puntos de Movimiento adicionales cada vez que recibes un efecto de Movimiento.",
       "NO_PREVENIBLE": "Este daño no puede prevenirse con ningún tipo de efecto, incluidos ESCUDO  PREVENIR. El daño no prevenible no se considera una amenaza, así que no se puede responder a este efecto con reacciones.",
