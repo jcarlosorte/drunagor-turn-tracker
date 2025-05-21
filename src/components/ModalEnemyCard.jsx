@@ -132,13 +132,12 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
             />
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
-              {/* Vida */}
-              <div className="flex items-center gap-2" >
-                <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
-                {vidaLocal} / {vidaMax}
-              </div>
-              {/* Movimiento + Ataque en la misma línea */}
+              {/* Vida + Movimiento + Ataque en la misma línea */}
               <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2" >
+                  <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
+                  {vidaLocal} / {vidaMax}
+                </div>
                 <span className="flex items-center gap-1">
                   <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help" title={ti.movement || ''} />
                   {movimiento}
