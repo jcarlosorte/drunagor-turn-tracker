@@ -147,6 +147,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   <GiSwordClash className="text-yellow-600" />
                   {ataque}
                 </span>
+              </div>
               <div className="flex items-start gap-2">
                 <GiShieldReflect className="text-purple-700 mt-1" />
                 <div className="flex flex-wrap gap-2">
@@ -166,34 +167,34 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
             </div>
           </div>
 
-          {/* Barra de vida */}
-          <div className="w-full relative h-3">
-            <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
-              {vidaLocal} / {vidaMax}
+            {/* Barra de vida */}
+            <div className="w-full relative h-3">
+              <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
+                {vidaLocal} / {vidaMax}
+              </div>
+              <div className="w-full h-full bg-red-900 rounded">
+                <div
+                  className="h-full bg-red-500 rounded"
+                  style={{ width: `${(vidaLocal / vidaMax) * 100}%` }}
+                />
+              </div>
             </div>
-            <div className="w-full h-full bg-red-900 rounded">
-              <div
-                className="h-full bg-red-500 rounded"
-                style={{ width: `${(vidaLocal / vidaMax) * 100}%` }}
-              />
-            </div>
-          </div>
 
-          {/* Vida botones + / - */}
-          <div className="flex items-center gap-6 mt-1">
-            <button
-              onClick={() => handleVidaChange(-1)}
-              className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-            >
-              −
-            </button>
-            <button
-              onClick={() => handleVidaChange(1)}
-              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-            >
-              +
-            </button>
-          </div>
+            {/* Vida botones + / - */}
+            <div className="flex items-center gap-6 mt-1">
+              <button
+                onClick={() => handleVidaChange(-1)}
+                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+              >
+                −
+              </button>
+              <button
+                onClick={() => handleVidaChange(1)}
+                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                +
+              </button>
+            </div>
           
         </div>
       </div>
