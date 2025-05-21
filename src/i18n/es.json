@@ -197,7 +197,12 @@
       "enemyNotFound": "Enemigo no encontrado",
       "PC": "Introduce el valor de PC",
       "inmunidad": "Inmunidad",
-      "tipo_ataque": "Tipo de Ataque",
+      "tipo_ataque": {
+        "label": "Tipo de Ataque",
+        "distancia": "A distancia",
+        "cuerpo": "Cuerpo a cuerpo",
+        "magia": "Mágico"
+        },
       "capacidades": "Capacidades Especiales"
     },
     "condiciones_t": {
