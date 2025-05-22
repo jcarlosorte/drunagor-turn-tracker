@@ -206,6 +206,7 @@
     "capacidades": "Special Abilities"
   },
   "condiciones_t": {
+    "none": "",
     "ABSORCION": "ABSORPTION",
     "AC_ALCANCE_DE_CUBO": "CR (CUBE RANGE)",
     "ACCION_DE_CUBO": "CUBE ACTION",
