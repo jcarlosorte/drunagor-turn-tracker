@@ -92,6 +92,21 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     "magia": "bg-blue-600"
   };
 
+  const traducirCapacidad = (clave, traducciones) => {
+    const regex = /^(.*?)[ _]?(\d+)$/; // Captura base y número (con espacio o guion bajo)
+    const match = clave.match(regex);
+  
+    if (match) {
+      const base = match[1].toUpperCase();
+      const numero = match[2];
+      const keyBase = `${base}_X`; // por ejemplo: HEMORRAGIA_X
+      const plantilla = traducciones[keyBase];
+      return plantilla ? plantilla.replace('{x}', numero) : clave;
+    }
+  
+    return traducciones[clave] || clave;
+  };
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
@@ -186,20 +201,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 </div>
               </div>
               {Array.isArray(capacidades) && capacidades.length > 0 && (
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-2 mt-1">
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
                   <div className="flex flex-wrap gap-2">
-                    {Array.isArray(capacidades) && capacidades.length > 0
-                      ? capacidades.map((clave, idx) => (
-                        <span key={clave} className="inline-flex items-center gap-1 mr-2">
-                          {tt[clave] || clave}
-                          <FiInfo
-                            title={tte[clave] || ''}
-                            className="text-gray-500 hover:text-gray-800 cursor-help"
-                          />
-                        </span>
-                      ))
-                      : tt.none}
+                    {capacidades.map((clave, idx) => (
+                      <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
+                        {traducirCapacidad(clave, tt)}
+                        <FiInfo
+                          title={traducirCapacidad(clave, tte)}
+                          className="text-gray-500 hover:text-gray-800 cursor-help"
+                        />
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
