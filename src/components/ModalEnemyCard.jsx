@@ -92,22 +92,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     "magia": "bg-blue-600"
   };
 
-  const traducirCapacidad = (clave, traducciones) => {
-    const regex = /^(.*?)[ _]?(\d+)$/; // Captura base y número (con espacio o guion bajo)
-    const match = clave.match(regex);
-  
+  const traducirClaveConNumero = (clave, base, detalles) => {
+    const match = clave.match(/^([A-Z_]+)\s*(\d+)$/);
     if (match) {
-      const base = match[1].toUpperCase();
+      const baseKey = `${match[1]}_X`;
       const numero = match[2];
-      const keyBase = `${base}_X`; // por ejemplo: HEMORRAGIA_X
-      const plantilla = traducciones[keyBase];
-      return plantilla ? plantilla.replace('{x}', numero) : clave;
+      const traduccion = base[baseKey]?.replace('{x}', numero);
+      const detalle = detalles[baseKey]?.replace('{x}', numero);
+      return { texto: traduccion || clave, detalle: detalle || '' };
     }
-  
-    return traducciones[clave] || clave;
+    return { texto: base[clave] || clave, detalle: detalles[clave] || '' };
   };
   
-  const sinTooltip = [';', ',', '.', ':'];
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-xl relative border-4 ${borderColorMap[color] || ''}`}>
@@ -200,22 +196,29 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                     : tt.none}
                 </div>
               </div>
+              {/* Capacidades */}
               {Array.isArray(capacidades) && capacidades.length > 0 && (
                 <div className="flex items-start gap-2 mt-1">
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
                   <div className="flex flex-wrap gap-2">
-                    {capacidades.map((clave, idx) => (
-                      
-                      <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
-                        {traducirCapacidad(clave, tt)}
-                        {!sinTooltip && (
-                          <FiInfo
-                            title={traducirCapacidad(clave, tte)}
-                            className="text-gray-500 hover:text-gray-800 cursor-help"
-                          />
-                        )}
-                      </span>
-                    ))}
+                    {capacidades.map((clave, idx) => {
+                      // No mostrar icono si es solo un separador
+                      const sinTooltip = [';', ',', '.', ':'].includes(clave);
+              
+                      const { texto, detalle } = traducirClaveConNumero(clave, tt, tte);
+              
+                      return (
+                        <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
+                          {texto}
+                          {!sinTooltip && (
+                            <FiInfo
+                              title={detalle}
+                              className="text-gray-500 hover:text-gray-800 cursor-help"
+                            />
+                          )}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               )}
