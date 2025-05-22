@@ -95,14 +95,19 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const traducirClaveConNumero = (clave, base, detalles) => {
     const match = clave.match(/^([A-Z_]+)\s*(\d+)$/);
     if (match) {
-      const baseKey = `${match[1]}_X`;
-      const numero = match[2];
-      const traduccion = base[baseKey]?.replace('{x}', numero);
-      const detalle = detalles[baseKey]?.replace('{x}', numero);
-      return { texto: traduccion || clave, detalle: detalle || '' };
+      const nombre = match[1]; // ej. "HEMORRAGIA"
+      const numero = match[2]; // ej. "2"
+      const claveGeneral = `${nombre}_X`;
+      const texto = base[claveGeneral]?.replace('{x}', numero) || clave;
+      const detalle = detalles[claveGeneral]?.replace('{x}', numero) || '';
+      return { claveGeneral, texto, detalle };
     }
-    return { texto: base[clave] || clave, detalle: detalles[clave] || '' };
+  
+    return { claveGeneral: clave, texto: base[clave] || clave, detalle: detalles[clave] || '' };
   };
+
+  const clavesRosa = ['SANGUINARIO', 'ILUSION_X'];
+  const clavesAzul = ['MENTALISMO_X', 'PSIQUICO_X'];
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
@@ -202,13 +207,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
                   <div className="flex flex-wrap gap-2">
                     {capacidades.map((clave, idx) => {
-                      // No mostrar icono si es solo un separador
                       const sinTooltip = [';', ',', '.', ':'].includes(clave);
+                      const { claveGeneral, texto, detalle } = traducirClaveConNumero(clave, tt, tte);
               
-                      const { texto, detalle } = traducirClaveConNumero(clave, tt, tte);
+                      // Color especial
+                      const classColor = clavesRosa.includes(claveGeneral)
+                        ? 'text-pink-500 font-semibold'
+                        : clavesAzul.includes(claveGeneral)
+                          ? 'text-blue-500 font-semibold'
+                          : '';
               
                       return (
-                        <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
+                        <span key={clave + idx} className={`inline-flex items-center gap-1 mr-2 ${classColor}`}>
                           {texto}
                           {!sinTooltip && (
                             <FiInfo
@@ -222,6 +232,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   </div>
                 </div>
               )}
+
             </div>
           </div>
 
