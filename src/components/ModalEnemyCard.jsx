@@ -205,12 +205,15 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
                   <div className="flex flex-wrap gap-2">
                     {capacidades.map((clave, idx) => (
+                      const sinTooltip = [';', ',', '.', ':'].includes(clave);
                       <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
                         {traducirCapacidad(clave, tt)}
-                        <FiInfo
-                          title={traducirCapacidad(clave, tte)}
-                          className="text-gray-500 hover:text-gray-800 cursor-help"
-                        />
+                        {!sinTooltip && (
+                          <FiInfo
+                            title={traducirCapacidad(clave, tte)}
+                            className="text-gray-500 hover:text-gray-800 cursor-help"
+                          />
+                        )}
                       </span>
                     ))}
                   </div>
