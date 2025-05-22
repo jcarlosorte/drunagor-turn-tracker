@@ -91,6 +91,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     "cuerpo": "bg-orange-500",
     "magia": "bg-blue-600"
   };
+
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-xl relative border-4 ${borderColorMap[color] || ''}`}>
@@ -183,6 +185,24 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                     : tt.none}
                 </div>
               </div>
+              {Array.isArray(capacidades) && capacidades.length > 0 && (
+                <div className="flex items-start gap-2">
+                  <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
+                  <div className="flex flex-wrap gap-2">
+                    {Array.isArray(capacidades) && capacidades.length > 0
+                      ? capacidades.map((clave, idx) => (
+                        <span key={clave} className="inline-flex items-center gap-1 mr-2">
+                          {tt.[clave] || clave}
+                          <FiInfo
+                            title={tte.[clave] || ''}
+                            className="text-gray-500 hover:text-gray-800 cursor-help"
+                          />
+                        </span>
+                      ))
+                      : tt.none}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
