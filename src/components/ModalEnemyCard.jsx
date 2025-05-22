@@ -107,7 +107,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     return traducciones[clave] || clave;
   };
   
-
+  const sinTooltip = [';', ',', '.', ':'].includes(clave);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-xl relative border-4 ${borderColorMap[color] || ''}`}>
@@ -205,7 +205,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
                   <div className="flex flex-wrap gap-2">
                     {capacidades.map((clave, idx) => (
-                      const sinTooltip = [';', ',', '.', ':'].includes(clave);
+                      
                       <span key={clave + idx} className="inline-flex items-center gap-1 mr-2">
                         {traducirCapacidad(clave, tt)}
                         {!sinTooltip && (
