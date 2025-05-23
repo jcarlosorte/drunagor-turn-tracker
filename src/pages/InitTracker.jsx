@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { MdScreenRotation } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiAbstract065  } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
@@ -62,6 +62,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
+  const { runes, addRune, removeRune, getRuneCount } = useGame();
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
