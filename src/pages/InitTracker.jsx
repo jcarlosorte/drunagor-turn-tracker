@@ -99,6 +99,7 @@ const InitTracker = () => {
     //console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -118,7 +119,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
+        capacidades: adjustedCaps
       }
     });
   };
@@ -136,6 +137,7 @@ const InitTracker = () => {
         const totalVida = selected.vida * (pcValue + numHeroes);
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
+        const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
         const enemy = {
           uuid: uuidv4(),
           name: selected.nombre,
@@ -153,7 +155,7 @@ const InitTracker = () => {
           color: selected.color,
           inmunidad: selected.inmunidad,
           tipo_ataque: selected.tipo_ataque,
-          capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
+          capacidades: adjustedCaps
         };
         showToast(enemy);
         placeEnemy({ enemy });
@@ -163,6 +165,7 @@ const InitTracker = () => {
 
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -182,7 +185,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
+        capacidades: adjustedCaps
       }
     });
   };
@@ -195,6 +198,7 @@ const InitTracker = () => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
+      const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
       const enemy = {
         uuid: uuidv4(),
         name: selected.nombre,
@@ -212,7 +216,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
+        capacidades: adjustedCaps
       };
       showToast(enemy);
       placeEnemy({ enemy });
