@@ -5,7 +5,7 @@ export const adjustCapabilitiesByRunes = (capabilities, runeColor, getRuneCount)
   return capabilities.map(cap => {
     if (runeDependentCapabilities.includes(cap)) {
       const count = getRuneCount(runeColor);
-      return cap.replace('_X', `_${count}`);
+      return cap.replace('X', `_${count}`);
     }
     return cap;
   });
