@@ -14,11 +14,13 @@ import { useInitEnemies } from '@/context/InitEnemiesContext';
 import { useExpansions } from '@/context/ExpansionContext';
 import { useGame } from '@/context/GameContext';
 import TopMenu from '@/components/TopMenu';
-import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
+import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import PageTransition from "@/components/PageTransition";
 import { ModalEnemyCard } from "@/components/ModalEnemyCard";
 import ModalCommanderPC from '@/components/ModalCommanderPC';
+import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
+
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
@@ -116,7 +118,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: selected.capacidades
+        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
       }
     });
   };
@@ -151,7 +153,7 @@ const InitTracker = () => {
           color: selected.color,
           inmunidad: selected.inmunidad,
           tipo_ataque: selected.tipo_ataque,
-          capacidades: selected.capacidades
+          capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
         };
         showToast(enemy);
         placeEnemy({ enemy });
@@ -180,7 +182,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: selected.capacidades
+        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
       }
     });
   };
@@ -210,7 +212,7 @@ const InitTracker = () => {
         color: selected.color,
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
-        capacidades: selected.capacidades
+        capacidades: adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount)
       };
       showToast(enemy);
       placeEnemy({ enemy });
