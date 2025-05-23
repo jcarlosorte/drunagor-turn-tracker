@@ -62,7 +62,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
-  const { runes, addRune, removeRune, getRuneCount } = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
@@ -515,7 +515,7 @@ const InitTracker = () => {
                 <GiAbstract065 className="text-white text-sm" />
                 <span className="text-white text-xs font-bold">
                   {
-                    runeCounts[
+                    getRuneCount[
                       Object.keys(runesColorMap).find(key => runesColorMap[key] === index)
                     ]
                   }
