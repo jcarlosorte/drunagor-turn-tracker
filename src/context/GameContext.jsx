@@ -28,7 +28,7 @@ export const GameProvider = ({ children }) => {
   const getRuneCount = (color) => runes[color] || 0;
 
   const clearRunes = () => {
-    setRunes({ red: 0, green: 0, blue: 0, orange: 0, gray: 0 });
+    setRunes({ rojo: 0, azul: 0, verde: 0, naranja: 0, gris: 0 });
   };
 
   return (
