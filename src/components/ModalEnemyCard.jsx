@@ -262,37 +262,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
               </div>
               {/* Capacidades */}
               {mostrarAccionesCapacidad(capacidades, tt, tte, ti)}
-              {Array.isArray(capacidades) && capacidades.length > 0 && (
-                <div className="flex items-start gap-2 mt-1">
-                  <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
-                  <div className="flex flex-wrap gap-2">
-                    {capacidades.map((clave, idx) => {
-                      const sinTooltip = [';', ',', '.', ':'].includes(clave);
-                      const { claveGeneral, texto, detalle } = traducirClaveConNumero(clave, tt, tte);
               
-                      // Color especial
-                      const classColor = clavesRosa.includes(claveGeneral)
-                        ? 'text-pink-500 font-semibold'
-                        : clavesAzul.includes(claveGeneral)
-                          ? 'text-blue-500 font-semibold'
-                          : '';
-              
-                      return (
-                        <span key={clave + idx} className={`inline-flex items-center gap-1 mr-2 ${classColor}`}>
-                          {texto}
-                          {!sinTooltip && (
-                            <FiInfo
-                              title={detalle}
-                              className="text-gray-500 hover:text-gray-800 cursor-help"
-                            />
-                          )}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
             </div>
           </div>
 
