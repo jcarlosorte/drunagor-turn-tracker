@@ -271,11 +271,11 @@ const InitTracker = () => {
   };
 
   const textBgColorMap = {
-    blanco: 'bg-white',      // Blanco con opacidad
-    gris: 'bg-gray-500',     // Gris medio
-    negro: 'bg-black',       // Negro
-    comandante: 'bg-orange-400 ', // Dorado aproximado
-    jefe: 'bg-purple-700',   // Morado
+    blanco: 'bg-white',
+    gris: 'bg-gray-500',
+    negro: 'bg-black',
+    comandante: 'bg-orange-400 ',
+    jefe: 'bg-purple-700',
   };
   
   useEffect(() => {
@@ -417,7 +417,7 @@ const InitTracker = () => {
     </div>
   </div>
   );
-
+  
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
@@ -509,6 +509,19 @@ const InitTracker = () => {
                 index === 8 && tr.controlador ||
                 index === 10 && ti.rune}
             </span>
+            {/* Icono y contador si es runa */}
+            {isRune && (
+              <div className="absolute -bottom-1 right-1 rotate-0 flex items-center gap-1 z-20">
+                <GiAbstract065 className="text-white text-sm" />
+                <span className="text-white text-xs font-bold">
+                  {
+                    runeCounts[
+                      Object.keys(runesColorMap).find(key => runesColorMap[key] === index)
+                    ]
+                  }
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
