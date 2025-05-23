@@ -27,8 +27,12 @@ export const GameProvider = ({ children }) => {
 
   const getRuneCount = (color) => runes[color] || 0;
 
+  const clearRunes = () => {
+    setRunes({ red: 0, green: 0, blue: 0, orange: 0, gray: 0 });
+  };
+
   return (
-    <GameContext.Provider value={{ runes, addRune, removeRune, getRuneCount }}>
+    <GameContext.Provider value={{ runes, addRune, removeRune, getRuneCount, clearRunes }}>
       {children}
     </GameContext.Provider>
   );
