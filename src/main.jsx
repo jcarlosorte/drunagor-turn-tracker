@@ -13,8 +13,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LanguageProvider>
       <ExpansionProvider>
-        <TrackerProvider>
-          <App />
+        <TrackerProvider> 
+          <GameProvider>
+            <App />
+          </GameProvider>
         </TrackerProvider>
       </ExpansionProvider>
     </LanguageProvider>
