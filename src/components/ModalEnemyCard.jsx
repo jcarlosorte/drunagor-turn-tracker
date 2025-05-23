@@ -232,7 +232,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 </span>
                 <span className="flex items-center gap-1">
                   <span
-                    className={`w-7 h-7 flex items-center justify-center rounded-full border border-white ${
+                    className={`w-7 h-7 flex items-center justify-center rounded-full border-2 border-white ${
                       tipoAtaqueCircleClass[tipo_ataque] || "bg-gray-500"
                     }`}
                     title={ti.tipo_ataque?.label || ''}
