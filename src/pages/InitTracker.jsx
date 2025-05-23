@@ -99,7 +99,7 @@ const InitTracker = () => {
     //console.log(selected);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
-    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -137,7 +137,7 @@ const InitTracker = () => {
         const totalVida = selected.vida * (pcValue + numHeroes);
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
-        const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
+        const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
         const enemy = {
           uuid: uuidv4(),
           name: selected.nombre,
@@ -165,7 +165,7 @@ const InitTracker = () => {
 
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
-    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -198,7 +198,7 @@ const InitTracker = () => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
-      const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, runeCount);
+      const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
       const enemy = {
         uuid: uuidv4(),
         name: selected.nombre,
