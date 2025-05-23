@@ -512,7 +512,7 @@ const InitTracker = () => {
             </span>
             {/* Icono y contador si es runa */}
             {isRune && (
-              <div className="absolute -bottom-1 right-1 rotate-[-45deg] flex items-center gap-1 z-20">
+              <div className="absolute rotate-[-45deg] flex items-center gap-1 z-20">
                 <GiAbstract065 className="text-white text-sm" />
                 <span className="text-white text-xs font-bold">
                   {getRuneCount(runeColor)}
