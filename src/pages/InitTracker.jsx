@@ -12,6 +12,7 @@ import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
 import { useExpansions } from '@/context/ExpansionContext';
+import { useGame } from '@/context/GameContext';
 import TopMenu from '@/components/TopMenu';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import classNames from 'classnames';
