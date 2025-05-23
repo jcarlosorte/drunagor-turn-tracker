@@ -106,7 +106,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     return { claveGeneral: clave, texto: base[clave] || clave, detalle: detalles[clave] || '' };
   };
 
-  const clavesRosa = ['SANGUINARIO', 'REGENERACION'];
+  const clavesRosa = ['SANGUINARIO', 'REGENERACION_X'];
   const clavesAzul = ['MENTALISMO_X', 'PSIQUICO_X'];
   
   return (
