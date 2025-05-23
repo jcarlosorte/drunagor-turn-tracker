@@ -420,6 +420,7 @@ const InitTracker = () => {
   
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
+    const runeColor = runesColorMap[index];
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
@@ -514,11 +515,7 @@ const InitTracker = () => {
               <div className="absolute -bottom-1 right-1 rotate-0 flex items-center gap-1 z-20">
                 <GiAbstract065 className="text-white text-sm" />
                 <span className="text-white text-xs font-bold">
-                  {
-                    getRuneCount[
-                      Object.keys(runesColorMap).find(key => runesColorMap[key] === index)
-                    ]
-                  }
+                  {getRuneCount(runeColor)}
                 </span>
               </div>
             )}
