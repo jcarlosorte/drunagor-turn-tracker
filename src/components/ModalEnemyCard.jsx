@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
 import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots, GiBloodySword, GiArcheryTarget, GiMoebiusTrefoil } from "react-icons/gi";
+import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
@@ -32,7 +33,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   }
 
   const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades } = enemy;
-  
+  const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
   const borderColorMap = {
     blanco: 'border-blanco',
     gris: 'border-gris',
@@ -108,6 +109,64 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
 
   const clavesRosa = ['SANGUINARIO', 'REGENERACION_X'];
   const clavesAzul = ['MENTALISMO_X', 'PSIQUICO_X'];
+
+  const mostrarAccionesCapacidad = (capacidades, tt, tte, ti) => {
+    if (!Array.isArray(capacidades) || capacidades.length === 0) return null;
+  
+    // Agrupar acciones por ";"
+    const acciones = [];
+    let actual = [];
+  
+    capacidades.forEach(clave => {
+      if (clave === ';') {
+        if (actual.length > 0) {
+          acciones.push(actual);
+          actual = [];
+        }
+      } else if (![':', ',', '.'].includes(clave)) {
+        actual.push(clave);
+      }
+    });
+  
+    if (actual.length > 0) {
+      acciones.push(actual);
+    }
+  
+    return (
+      <div className="flex items-start gap-2 mt-1">
+        <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
+        <div className="flex flex-col gap-1">
+          {acciones.map((accion, index) => (
+            <div key={`accion-${index}`} className="flex items-start gap-2">
+              <span className="text-xl text-gray-600">{numeroIconos[index] || `${index + 1}.`}</span>
+              <div className="flex flex-wrap gap-2">
+                {accion.map((clave, idx) => {
+                  const { claveGeneral, texto, detalle } = traducirClaveConNumero(clave, tt, tte);
+                  const classColor = clavesRosa.includes(claveGeneral)
+                    ? 'text-pink-500 font-semibold'
+                    : clavesAzul.includes(claveGeneral)
+                      ? 'text-blue-500 font-semibold'
+                      : '';
+  
+                  return (
+                    <span key={clave + idx} className={`inline-flex items-center gap-1 mr-2 ${classColor}`}>
+                      {texto}
+                      {detalle && (
+                        <FiInfo
+                          title={detalle}
+                          className="text-gray-500 hover:text-gray-800 cursor-help"
+                        />
+                      )}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
@@ -202,6 +261,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 </div>
               </div>
               {/* Capacidades */}
+              {mostrarAccionesCapacidad(capacidades, tt, tte, ti)}
               {Array.isArray(capacidades) && capacidades.length > 0 && (
                 <div className="flex items-start gap-2 mt-1">
                   <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
