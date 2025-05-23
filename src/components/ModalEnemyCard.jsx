@@ -108,7 +108,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   };
 
   const clavesRosa = ['PSIQUICO_X', 'REGENERACION_X'];
-  const clavesAzul = ['SANGUINARIO', 'PSIQUICO_X'];
+  const clavesAzul = ['SANGUINARIO', 'IMPLACABLE', 'DESAFIO', 'SALTO', 'VENGATIVO'];
 
   const mostrarAccionesCapacidad = (capacidades, tt, tte, ti) => {
     if (!Array.isArray(capacidades) || capacidades.length === 0) return null;
