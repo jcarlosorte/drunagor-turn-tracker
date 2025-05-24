@@ -503,7 +503,14 @@ const InitTracker = () => {
         const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
-        
+        console.log("Comparando:", {
+          isEnemy,
+          itemId: isEnemy ? item.enemy.uuid : item.id,
+          currentTurnId: currentTurnEntity?.uuid || currentTurnEntity?.id,
+          match: isEnemy
+            ? item.enemy.uuid === currentTurnEntity?.uuid
+            : item.id === currentTurnEntity?.id
+        });
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
             {isEnemy ? (
