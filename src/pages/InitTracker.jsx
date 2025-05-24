@@ -596,7 +596,12 @@ const InitTracker = () => {
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         
         return (
-          <div key={isEnemy ? item.enemy.uuid : item.id} className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1] z-[999]' : ''}`} style={style}>
+          <div key={isEnemy ? item.enemy.uuid : item.id} className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1]' : ''}`} style=style={{
+              ...style,
+              zIndex: isCurrentTurn ? 999 : style.zIndex ?? 100,
+              transform: isCurrentTurn ? 'scale(1.1)' : 'scale(1)',
+              transition: 'all 0.3s ease-in-out'
+            }}>
             {isEnemy ? (
               <div className="relative">
                 {isCurrentTurn && (
