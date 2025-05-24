@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
+import { MdScreenRotation } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
@@ -386,8 +387,8 @@ const InitTracker = () => {
       <div className="flex flex-col items-center justify-center h-screen text-center bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
         <div className="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl backdrop-blur-md animate-fade-in">
           <MdScreenRotation className="text-6xl mb-4 animate-spin-slow" />
-          <p className="text-xl font-semibold">Por favor, gira tu dispositivo a orientación horizontal</p>
-          <p className="text-sm mt-2 text-gray-300">Para disfrutar correctamente del control de turnos</p>
+          <p className="text-xl font-semibold">{ti.movil1}</p>
+          <p className="text-sm mt-2 text-gray-300">{ti.movil2}</p>
         </div>
       </div>
     );
