@@ -328,6 +328,7 @@ const InitTracker = () => {
   
   useEffect(() => {
     const next = getNextActiveEntity(turnIndex);
+    console.log('Turno actual:', next);
     setCurrentTurnEntity(next);
   }, [turnIndex, placedEnemies, trackerData.placedHeroes]);
   
@@ -498,15 +499,6 @@ const InitTracker = () => {
             : 30; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = isTop ? [...items].reverse() : items; 
-      console.log("Comparando:", {
-        isEnemy,
-        itemId: isEnemy ? item.enemy.uuid : item.id,
-        currentTurnId: currentTurnEntity?.uuid || currentTurnEntity?.id,
-        match: isEnemy
-          ? item.enemy.uuid === currentTurnEntity?.uuid
-          : item.id === currentTurnEntity?.id
-      });
-
       return reversed.map((item, i) => {
         const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
@@ -543,15 +535,16 @@ const InitTracker = () => {
             )}
           </div>
         );
+
+        {currentTurnEntity &&
+          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+           (!isEnemy && item.id === currentTurnEntity.id)) && (
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+              <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
+            </div>
+        )}
+        
       });
-      
-      {currentTurnEntity &&
-        ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-         (!isEnemy && item.id === currentTurnEntity.id)) && (
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
-          </div>
-      )}
       
     };
   
