@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
 import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
+import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
 import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots, GiBloodySword, GiArcheryTarget, GiMoebiusTrefoil } from "react-icons/gi";
 import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
@@ -16,6 +17,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const tb = translations.trackerSelect?.comportamientos || {};
   const tt = translations.condiciones_t || {};
   const tte = translations.condiciones_d || {};
+  const { getRuneCount } = useGame();
 
   useEffect(() => {
     if (enemy) {
@@ -35,7 +37,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
 
   const { id, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales } = enemy;
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
-  const capacidadesAjustadas = useRenderEnemyCapabilities(capacidadesOriginales, rune);
+  const capacidadesAjustadas = adjustCapabilitiesByRunes(capacidadesOriginales, rune, getRuneCount);
 
   const borderColorMap = {
     blanco: 'border-blanco',
