@@ -503,23 +503,16 @@ const InitTracker = () => {
         const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
-        console.log("Comparando:", {
-          isEnemy,
-          itemId: isEnemy ? item.enemy.uuid : item.id,
-          currentTurnId: currentTurnEntity?.uuid || currentTurnEntity?.id,
-          match: isEnemy
-            ? item.enemy.uuid === currentTurnEntity?.uuid
-            : item.id === currentTurnEntity?.id
-        });
-        {currentTurnEntity &&
-          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-           (!isEnemy && item.id === currentTurnEntity.id)) && (
-            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-              <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
-            </div>
-        )}
+        const isCurrentTurn = currentTurnEntity &&
+        ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+         (!isEnemy && item.id === currentTurnEntity.id));
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
+            {isCurrentTurn && (
+              <div className="absolute rounded-full border-2 border-white bg-blue-600 -top-6 left-1/2 transform -translate-x-1/2 z-20">
+                <GiWingedSword className="text-white animate-bounce " size={24} />
+              </div>
+            )}
             {isEnemy ? (
               <EnemyCard
                 uuid={item.enemy.uuid}
