@@ -33,8 +33,10 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     );
   }
 
-  const { id, name, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales } = enemy;
+  const { id, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales } = enemy;
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
+  const capacidadesAjustadas = useRenderEnemyCapabilities(capacidadesOriginales, rune);
+
   const borderColorMap = {
     blanco: 'border-blanco',
     gris: 'border-gris',
@@ -111,14 +113,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const clavesRosa = ['ESCUDO_X', 'REGENERACION_X', 'MANDO', 'EVOLUCION', 'SANAR_X', 'HASTA_2_MOSTRUOS_MAS_DEBILES'];
   const clavesAzul = ['SANGUINARIO', 'IMPLACABLE', 'DESAFIO', 'SALTO', 'VENGATIVO', 'CODICIA', 'BRUTAL'];
 
-  const mostrarAccionesCapacidad = (capacidades, tt, tte, ti) => {
-    if (!Array.isArray(capacidades) || capacidades.length === 0) return null;
+  const mostrarAccionesCapacidad = (capacidadesAjustadas, tt, tte, ti) => {
+    if (!Array.isArray(capacidadesAjustadas) || capacidadesAjustadas.length === 0) return null;
   
     // Agrupar acciones por ";"
     const acciones = [];
     let actual = [];
   
-    capacidades.forEach(clave => {
+    capacidadesAjustadas.forEach(clave => {
       if (clave === ';') {
         if (actual.length > 0) {
           acciones.push(actual);
@@ -262,7 +264,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                 </div>
               </div>
               {/* Capacidades */}
-              {mostrarAccionesCapacidad(capacidades, tt, tte, ti)}
+              {mostrarAccionesCapacidad(capacidadesAjustadas, tt, tte, ti)}
               
             </div>
           </div>
