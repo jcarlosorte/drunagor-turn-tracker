@@ -368,6 +368,7 @@ const InitTracker = () => {
                 e.enemy.position === step.index &&
                 e.enemy.runePosition === step.position
             );
+            return enemies.length > 0 ? enemies[0] : null;
           }
           return null;
         })();
@@ -537,37 +538,46 @@ const InitTracker = () => {
          (!isEnemy && item.id === currentTurnEntity.id));
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
-            {isCurrentTurn && (
-              <div className="absolute rounded-full border-2 border-white bg-blue-600 -top-6 left-1/2 transform -translate-x-1/2 z-20">
-                <GiWingedSword className="text-white animate-bounce " size={24} />
-              </div>
-            )}
             {isEnemy ? (
-              <EnemyCard
-                uuid={item.enemy.uuid}
-                id={item.enemy.id}
-                name={getEnemyName(item.enemy.id)}
-                image={item.enemy.imagen}
-                comportamiento={item.enemy.comportamiento}
-                categoria={item.enemy.categoria}
-                position={isTop ? "top" : "bottom"}
-                color={item.enemy.color}
-                onRemove={onRemove}
-                vida={item.enemy.vida}
-                vidaMax={item.enemy.vidaMax}
-                movimiento={item.enemy.movimiento}
-                ataque={item.enemy.ataque}
-                openEnemyModal={openEnemyModal}
-                inmunidad={item.enemy.inmunidad}
-                tipo_ataque={item.enemy.tipo_ataque}
-                capacidades={item.enemy.capacidades}
-              />
+              <div className="relative">
+                {isCurrentTurn && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
+                    <GiWingedSword className="text-yellow-400 animate-bounce" size={20} />
+                  </div>
+                )}
+                <EnemyCard
+                  uuid={item.enemy.uuid}
+                  id={item.enemy.id}
+                  name={getEnemyName(item.enemy.id)}
+                  image={item.enemy.imagen}
+                  comportamiento={item.enemy.comportamiento}
+                  categoria={item.enemy.categoria}
+                  position={isTop ? "top" : "bottom"}
+                  color={item.enemy.color}
+                  onRemove={onRemove}
+                  vida={item.enemy.vida}
+                  vidaMax={item.enemy.vidaMax}
+                  movimiento={item.enemy.movimiento}
+                  ataque={item.enemy.ataque}
+                  openEnemyModal={openEnemyModal}
+                  inmunidad={item.enemy.inmunidad}
+                  tipo_ataque={item.enemy.tipo_ataque}
+                  capacidades={item.enemy.capacidades}
+                />
+              </div>
             ) : (
-              <CharacterCard
-                name={getHeroName(item.id)}
-                image={item.image}
-                position={isTop ? "top" : "bottom"}
-              />
+              <div className="relative">
+                {isCurrentTurn && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
+                    <GiWingedSword className="text-yellow-400 animate-bounce" size={20} />
+                  </div>
+                )}
+                <CharacterCard
+                  name={getHeroName(item.id)}
+                  image={item.image}
+                  position={isTop ? "top" : "bottom"}
+                />
+              </div>
             )}
           </div>
         );
