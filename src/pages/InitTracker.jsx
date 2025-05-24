@@ -348,7 +348,13 @@ const InitTracker = () => {
     return null;
   };
   
-  const handleNextTurn = () => setTurnIndex((prev) => (prev + 1) % TURN_ORDER.length);
+  const handleNextTurn = () => {
+    setTurnIndex((prev) => {
+      const nextIndex = (prev + 1) % TURN_ORDER.length;
+      console.log('Avanzando al turno', nextIndex);
+      return nextIndex;
+    });
+  };
 
   
   const showToast = (enemyData) => {
@@ -707,6 +713,16 @@ const InitTracker = () => {
                 </div>
               </div>
             )}
+            
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={handleNextTurn}
+                className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
+              >
+                {ti.nextTurn || 'Siguiente turno'}
+              </button>
+            </div>
+            
             <div className="mt-8 flex justify-center gap-4">
               <button onClick={() => navigate('/')} className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow">
                 {ti.goHome || 'Ir al inicio'}
@@ -736,14 +752,7 @@ const InitTracker = () => {
           }}
         />
       )}
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={handleNextTurn}
-          className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
-        >
-          {ti.nextTurn || 'Siguiente turno'}
-        </button>
-      </div>
+      
       </PageTransition>
   );
 };
