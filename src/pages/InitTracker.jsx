@@ -567,7 +567,7 @@ const InitTracker = () => {
             {isEnemy ? (
               <div className="relative">
                 {isCurrentTurn && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
                     <GiWingedSword className="text-white animate-bounce" size={20} />
                   </div>
                 )}
@@ -594,8 +594,8 @@ const InitTracker = () => {
             ) : (
               <div className="relative">
                 {isCurrentTurn && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
-                    <GiWingedSword className="text-yellow-400 animate-bounce" size={20} />
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                    <GiWingedSword className="text-white animate-bounce" size={20} />
                   </div>
                 )}
                 <CharacterCard
