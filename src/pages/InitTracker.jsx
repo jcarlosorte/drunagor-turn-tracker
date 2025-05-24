@@ -326,12 +326,28 @@ const InitTracker = () => {
 
   const [turnIndex, setTurnIndex] = useState(0);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
-  
+  const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
+
   useEffect(() => {
-    const next = getNextActiveEntity(turnIndex);
-    console.log('Turno actual:', next);
-    setCurrentTurnEntity(next);
-  }, [turnIndex, placedEnemies, trackerData.placedHeroes]);
+    const step = TURN_ORDER[turnIndex];
+    if (step.type === 'enemy') {
+      const enemies = placedEnemies
+        .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+        .map(e => e.enemy);
+  
+      if (enemies.length > 0) {
+        const currentEnemy = enemies[groupTurnTracker.index] || enemies[0];
+        setCurrentTurnEntity({ ...currentEnemy, type: 'enemy', group: enemies });
+        setGroupTurnTracker({ group: enemies, index: groupTurnTracker.index });
+        return;
+      }
+    }
+  
+    const entity = getNextActiveEntity(turnIndex);
+    setCurrentTurnEntity(entity);
+    setGroupTurnTracker({ group: [], index: 0 });
+  }, [turnIndex, placedEnemies, trackerData.placedHeroes, groupTurnTracker.index]);
+
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
@@ -349,8 +365,17 @@ const InitTracker = () => {
     }
     return null;
   };
-  
+
   const handleNextTurn = () => {
+    if (currentTurnEntity?.group?.length > 1 && groupTurnTracker.index < currentTurnEntity.group.length - 1) {
+      setGroupTurnTracker(prev => ({ ...prev, index: prev.index + 1 }));
+    } else {
+      setGroupTurnTracker({ group: [], index: 0 });
+      setTurnIndex(prev => (prev + 1) % TURN_ORDER.length);
+    }
+  };
+  
+  const handleNextTurn2 = () => {
     setTurnIndex((prev) => {
       let nextIndex = prev;
       let attempts = 0;
