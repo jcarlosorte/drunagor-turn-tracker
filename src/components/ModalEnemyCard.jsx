@@ -3,6 +3,7 @@ import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
 import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
+import { useGame } from '@/context/GameContext';
 import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots, GiBloodySword, GiArcheryTarget, GiMoebiusTrefoil } from "react-icons/gi";
 import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
