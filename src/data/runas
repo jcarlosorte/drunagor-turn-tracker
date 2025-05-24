@@ -1,0 +1,3 @@
+export const RUNAS = [
+  { id: "runa1", nombre: "Runa", accion: "Roba 1 runa"  },
+];
