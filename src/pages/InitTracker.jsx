@@ -633,7 +633,11 @@ const InitTracker = () => {
               behaviors={behaviors}
             />
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
-              {[...Array(11)].map((_, idx) => renderSlot(idx))}
+              {[...Array(11)].map((_, idx) => (
+                <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
+                  {renderSlot(idx)}
+                </React.Fragment>
+              ))}
             </div>
 
             {categorySelector.open && (
