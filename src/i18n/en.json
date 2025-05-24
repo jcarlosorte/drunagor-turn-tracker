@@ -197,6 +197,7 @@
     "enemyNotFound": "Enemy Not Found",
     "PC": "Insert CP",
     "inmunidad": "Immunities",
+    "nextTurn": "Next Turn",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
