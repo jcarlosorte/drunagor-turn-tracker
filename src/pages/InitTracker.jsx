@@ -1,7 +1,7 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { GiAbstract065 } from 'react-icons/gi';
+import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
