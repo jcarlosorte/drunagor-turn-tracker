@@ -511,6 +511,13 @@ const InitTracker = () => {
             ? item.enemy.uuid === currentTurnEntity?.uuid
             : item.id === currentTurnEntity?.id
         });
+        {currentTurnEntity &&
+          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+           (!isEnemy && item.id === currentTurnEntity.id)) && (
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+              <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
+            </div>
+        )}
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
             {isEnemy ? (
@@ -543,18 +550,12 @@ const InitTracker = () => {
           </div>
         );
 
-        {currentTurnEntity &&
-          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-           (!isEnemy && item.id === currentTurnEntity.id)) && (
-            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-              <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
-            </div>
-        )}
+        
         
       });
       
     };
-  
+    console.log("Renderizando slot", index, "con entidad actual", currentTurnEntity);
     return (
       <div key={index} className={`flex flex-col w-full ${slotHeightClass} py-2`}>
         
@@ -613,7 +614,7 @@ const InitTracker = () => {
   
       </div>
     );
-    console.log("Renderizando slot", index, "con entidad actual", currentTurnEntity);
+    
 
   };
 
