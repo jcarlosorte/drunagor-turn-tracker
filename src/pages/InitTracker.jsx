@@ -367,12 +367,45 @@ const InitTracker = () => {
   };
 
   const handleNextTurn = () => {
-    if (currentTurnEntity?.group?.length > 1 && groupTurnTracker.index < currentTurnEntity.group.length - 1) {
-      setGroupTurnTracker(prev => ({ ...prev, index: prev.index + 1 }));
-    } else {
-      setGroupTurnTracker({ group: [], index: 0 });
-      setTurnIndex(prev => (prev + 1) % TURN_ORDER.length);
+    let nextIndex = turnIndex;
+    let groupIndex = groupTurnTracker.index;
+    let nextEntity = null;
+  
+    if (currentTurnEntity?.group?.length > 1 && groupIndex < currentTurnEntity.group.length - 1) {
+      groupIndex++;
+      nextEntity = currentTurnEntity.group[groupIndex];
+      setGroupTurnTracker({ group: currentTurnEntity.group, index: groupIndex });
+      setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: currentTurnEntity.group });
+      return;
     }
+  
+    for (let i = 1; i <= TURN_ORDER.length; i++) {
+      const idx = (turnIndex + i) % TURN_ORDER.length;
+      const step = TURN_ORDER[idx];
+  
+      if (step.type === 'hero') {
+        const hero = trackerData.placedHeroes?.find(h => h.role === step.role && h.position === step.index);
+        if (hero) {
+          setTurnIndex(idx);
+          setCurrentTurnEntity({ ...hero, type: 'hero' });
+          setGroupTurnTracker({ group: [], index: 0 });
+          return;
+        }
+      } else if (step.type === 'enemy') {
+        const enemies = placedEnemies
+          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+          .map(e => e.enemy);
+  
+        if (enemies.length > 0) {
+          setTurnIndex(idx);
+          setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
+          setGroupTurnTracker({ group: enemies, index: 0 });
+          return;
+        }
+      }
+    }
+  
+    console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
   
   const handleNextTurn2 = () => {
