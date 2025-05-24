@@ -38,6 +38,26 @@ const runesColorMap = {
   gris: 9
 };
 
+const TURN_ORDER = [
+  { type: 'hero', role: 'defensor', position: 'arriba', index: 0 },
+  { type: 'enemy', rune: 'naranja', position: 'arriba', index: 1 },
+  { type: 'enemy', rune: 'verde', position: 'arriba', index: 3 },
+  { type: 'hero', role: 'lider', position: 'arriba', index: 4 },
+  { type: 'enemy', rune: 'azul', position: 'arriba', index: 5 },
+  { type: 'enemy', rune: 'rojo', position: 'arriba', index: 7 },
+  { type: 'hero', role: 'controlador', position: 'arriba', index: 8 },
+  { type: 'enemy', rune: 'gris', position: 'arriba', index: 9 },
+  { type: 'companion', position: 'arriba', index: 10 },
+  { type: 'enemy', rune: 'naranja', position: 'abajo', index: 1 },
+  { type: 'hero', role: 'apoyo', position: 'abajo', index: 2 },
+  { type: 'enemy', rune: 'verde', position: 'abajo', index: 3 },
+  { type: 'enemy', rune: 'azul', position: 'abajo', index: 5 },
+  { type: 'hero', role: 'agresor', position: 'abajo', index: 6 },
+  { type: 'enemy', rune: 'rojo', position: 'abajo', index: 7 },
+  { type: 'enemy', rune: 'gris', position: 'abajo', index: 9 },
+  { type: 'companion', position: 'abajo', index: 10 },
+];
+
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 
@@ -303,6 +323,34 @@ const InitTracker = () => {
     };
   }, []);
 
+  const [turnIndex, setTurnIndex] = useState(0);
+  const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
+  
+  useEffect(() => {
+    const next = getNextActiveEntity(turnIndex);
+    setCurrentTurnEntity(next);
+  }, [turnIndex, placedEnemies, trackerData.placedHeroes]);
+  
+  const getNextActiveEntity = (startIndex) => {
+    for (let i = 0; i < TURN_ORDER.length; i++) {
+      const idx = (startIndex + i) % TURN_ORDER.length;
+      const step = TURN_ORDER[idx];
+  
+      if (step.type === 'hero') {
+        const hero = trackerData.placedHeroes?.find(h => h.role === step.role && h.position === step.index);
+        if (hero) return { ...hero, type: 'hero' };
+      } else if (step.type === 'enemy') {
+        const enemies = placedEnemies
+          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position);
+        if (enemies.length > 0) return { ...enemies[0].enemy, type: 'enemy' };
+      } // Puedes extender para companions
+    }
+    return null;
+  };
+  
+  const handleNextTurn = () => setTurnIndex((prev) => (prev + 1) % TURN_ORDER.length);
+
+  
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
   
@@ -481,6 +529,13 @@ const InitTracker = () => {
           </div>
         );
       });
+      
+      {currentTurnEntity && currentTurnEntity.uuid === (isEnemy ? item.enemy.uuid : item.id) && (
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+          <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
+        </div>
+      )}
+      
     };
   
     return (
@@ -681,6 +736,14 @@ const InitTracker = () => {
           }}
         />
       )}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={handleNextTurn}
+          className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
+        >
+          {ti.nextTurn || 'Siguiente turno'}
+        </button>
+      </div>
       </PageTransition>
   );
 };
