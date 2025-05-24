@@ -131,7 +131,7 @@ const InitTracker = () => {
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
     );
     if (!selected) return;
-
+    console.log('cap before adjust:', selected.capacidades);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
