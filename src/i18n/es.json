@@ -168,6 +168,8 @@
       }
     },
     "trackerInit": {
+      "movil1": "Por favor, gira tu dispositivo a orientación horizontal",
+      "movil2": "para disfrutar correctamente del control de turnos",
       "title": "Control de Turnos",
       "menu": "Menú",
       "language": "Idioma",
