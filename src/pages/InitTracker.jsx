@@ -605,7 +605,7 @@ const InitTracker = () => {
             {isEnemy ? (
               <div className="relative">
                 {isCurrentTurn && (
-                  <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
                     <GiWingedSword className="text-white animate-bounce" size={30} />
                   </div>
                 )}
@@ -632,7 +632,7 @@ const InitTracker = () => {
             ) : (
               <div className="relative">
                 {isCurrentTurn && (
-                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
                     <GiWingedSword className="text-white animate-bounce" size={30} />
                   </div>
                 )}
