@@ -1,2 +1,2 @@
 // constants.js
-export const runeDependentCapabilities = ['DEFENSA X', 'SANAR X'];
+export const runeDependentCapabilities = ['ESCUDO X', 'SANAR X'];
