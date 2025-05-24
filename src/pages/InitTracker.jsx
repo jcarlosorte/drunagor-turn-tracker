@@ -536,10 +536,12 @@ const InitTracker = () => {
         );
       });
       
-      {currentTurnEntity && currentTurnEntity.uuid === (isEnemy ? item.enemy.uuid : item.id) && (
-        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-          <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
-        </div>
+      {currentTurnEntity &&
+        ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+         (!isEnemy && item.id === currentTurnEntity.id)) && (
+          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+            <GiWingedSword className="text-yellow-400 animate-bounce" size={24} />
+          </div>
       )}
       
     };
