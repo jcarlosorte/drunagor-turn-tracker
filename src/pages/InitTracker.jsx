@@ -1,13 +1,11 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
-import { MdScreenRotation } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiAbstract065  } from 'react-icons/gi';
+import { GiAbstract065 } from 'react-icons/gi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
-import { ROLES } from '@/data/roles';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
@@ -97,7 +95,7 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    console.log('cap before adjust:', selected.capacidades);
+    //console.log('cap before adjust:', selected.capacidades);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
@@ -133,7 +131,7 @@ const InitTracker = () => {
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
     );
     if (!selected) return;
-    console.log('cap before adjust:', selected.capacidades);
+    //console.log('cap before adjust:', selected.capacidades);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -247,7 +245,7 @@ const InitTracker = () => {
     
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
-    console.log(validEnemies)
+    //console.log(validEnemies)
     return ENEMIES.filter(e =>
       validEnemies.includes(e.id) &&
       e.color === color &&
