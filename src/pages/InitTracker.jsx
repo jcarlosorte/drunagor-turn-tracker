@@ -498,6 +498,15 @@ const InitTracker = () => {
             : 30; // Más elementos = menos separación (más solapados)
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = isTop ? [...items].reverse() : items; 
+      console.log("Comparando:", {
+        isEnemy,
+        itemId: isEnemy ? item.enemy.uuid : item.id,
+        currentTurnId: currentTurnEntity?.uuid || currentTurnEntity?.id,
+        match: isEnemy
+          ? item.enemy.uuid === currentTurnEntity?.uuid
+          : item.id === currentTurnEntity?.id
+      });
+
       return reversed.map((item, i) => {
         const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
         const offset = i * spacing;
@@ -604,6 +613,8 @@ const InitTracker = () => {
   
       </div>
     );
+    console.log("Renderizando slot", index, "con entidad actual", currentTurnEntity);
+
   };
 
   return ( 
