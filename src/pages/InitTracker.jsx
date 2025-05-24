@@ -530,19 +530,20 @@ const InitTracker = () => {
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = isTop ? [...items].reverse() : items; 
       return reversed.map((item, i) => {
-        const zIndex = isTop ? items.length + i : items.length - i;  // mayor zIndex al primero
+        const isCurrentTurn = currentTurnEntity &&
+          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+           (!isEnemy && item.id === currentTurnEntity.id));
+        const zIndex = isCurrentTurn ? 999 : (isTop ? 100 + i : 100 - i); // mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
-        const isCurrentTurn = currentTurnEntity &&
-        ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-         (!isEnemy && item.id === currentTurnEntity.id));
+        
         return (
-          <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full" style={style}>
+          <div key={isEnemy ? item.enemy.uuid : item.id} className="absolute w-full transition-transform duration-300" style={style}>
             {isEnemy ? (
               <div className="relative">
                 {isCurrentTurn && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
-                    <GiWingedSword className="text-yellow-400 animate-bounce" size={20} />
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue">
+                    <GiWingedSword className="text-white animate-bounce" size={20} />
                   </div>
                 )}
                 <EnemyCard
