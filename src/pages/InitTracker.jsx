@@ -558,7 +558,7 @@ const InitTracker = () => {
         const isCurrentTurn = currentTurnEntity &&
           ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
            (!isEnemy && item.id === currentTurnEntity.id));
-        const zIndex = isCurrentTurn ? 999 : (isTop ? 100 + i : 100 - i); // mayor zIndex al primero
+        const zIndex = isTop ? items.length + i : items.length - i;// mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
         
