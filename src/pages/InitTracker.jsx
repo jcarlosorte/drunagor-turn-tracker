@@ -20,6 +20,7 @@ import PageTransition from "@/components/PageTransition";
 import { ModalEnemyCard } from "@/components/ModalEnemyCard";
 import ModalCommanderPC from '@/components/ModalCommanderPC';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
+import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
 
 import { v4 as uuidv4 } from 'uuid';
 
