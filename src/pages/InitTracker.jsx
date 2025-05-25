@@ -501,34 +501,34 @@ const InitTracker = () => {
     }
 
   const RuneCard = ({ rune, onRemove }) => {
-  if (!rune) return null;
-
-  return (
-    <div className="flex flex-col items-center mx-1 relative">
-      <div className="relative w-full max-w-[140px]">
-        <div className="bg-gradient-to-br from-indigo-900 to-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
-          <div className="flex justify-center mb-1">
-            <GiAbstract065 className="text-yellow-300 text-2xl" />
+    if (!rune) return null;
+  
+    return (
+      <div className="flex flex-col items-center mx-1 relative">
+        <div className="relative w-full max-w-[140px]">
+          <div className="bg-gradient-to-br from-indigo-900 to-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
+            <div className="flex justify-center mb-1">
+              <GiAbstract065 className="text-yellow-300 text-2xl" />
+            </div>
+            <div className="text-xs font-bold text-center text-white">
+              {rune.nombre} ({rune.cara})
+            </div>
+            <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">
+              {rune.accion}
+            </div>
           </div>
-          <div className="text-xs font-bold text-center text-white">
-            {rune.nombre} ({rune.cara})
-          </div>
-          <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">
-            {rune.accion}
-          </div>
+  
+          <button
+            onClick={() => onRemove(rune.uuid)}
+            className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
+            title="Eliminar"
+          >
+            ✕
+          </button>
         </div>
-
-        <button
-          onClick={() => onRemove(rune.uuid)}
-          className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
-          title="Eliminar"
-        >
-          ✕
-        </button>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 
  const CharacterCard = ({ name, image, position }) => (
@@ -608,25 +608,20 @@ const InitTracker = () => {
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
 
-    const renderStack = (items, isTop, isEnemy = false) => {
-      const spacing = items.length <= 2
-        ? 90
-        : items.length === 3
-          ? 70
-          : items.length === 4
-            ? 40
-            : 30; // Más elementos = menos separación (más solapados)
-      // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
-      const reversed = isTop ? [...items].reverse() : items; 
+    const renderStack = (items, isTop, type = 'hero') => {
+      const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
+      const reversed = isTop ? [...items].reverse() : items;
+      
       return reversed.map((item, i) => {
-        const isCurrentTurn = currentTurnEntity && (
-          (isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-          (!isEnemy && item.uuid && item.uuid === currentTurnEntity.uuid) ||  // RuneCard
-          (!isEnemy && item.id && item.id === currentTurnEntity.id)          // Hero
-        );
-        const zIndex = isTop ? items.length + i : items.length - i;// mayor zIndex al primero
+        const zIndex = isTop ? items.length + i : items.length - i;
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
+    
+        const isCurrentTurn = currentTurnEntity && (
+          (type === 'enemy' && item.enemy.uuid === currentTurnEntity.uuid) ||
+          (type === 'rune' && item.uuid === currentTurnEntity.uuid) ||
+          (type === 'hero' && item.id === currentTurnEntity.id)
+        );
         
         return (
           <div key={isEnemy ? item.enemy.uuid : item.id} className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1]' : ''}`} style={{
@@ -711,9 +706,9 @@ const InitTracker = () => {
         {/* Escalonado arriba */}
         <div className="relative flex justify-center h-1/2 w-full mb-5">
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-            {renderStack(heroesAbove, true)}
-            {isRune && renderStack(enemiesAbove, true, true)}
-            {isRuneTextSlot && renderStack(runesAbove.map(r => r.rune), true, 'rune')}
+            renderStack(heroesAbove, true, 'hero')
+            renderStack(enemiesAbove, true, 'enemy')
+            renderStack(runesAbove.map(r => r.rune), true, 'rune')
           </div>
         </div>
   
@@ -757,9 +752,9 @@ const InitTracker = () => {
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-1/2 w-full mt-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
-            {renderStack(heroesBelow, false)}
-            {isRune && renderStack(enemiesBelow, false, true)}
-            {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), false, 'rune')}
+            renderStack(heroesBelow, true, 'hero')
+            renderStack(enemiesBelow, true, 'enemy')
+            renderStack(runesBelow.map(r => r.rune), true, 'rune')
           </div>
         </div>
   
