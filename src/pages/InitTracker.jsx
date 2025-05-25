@@ -411,43 +411,6 @@ const InitTracker = () => {
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
   
-  const handleNextTurn2 = () => {
-    setTurnIndex((prev) => {
-      let nextIndex = prev;
-      let attempts = 0;
-  
-      while (attempts < TURN_ORDER.length) {
-        nextIndex = (nextIndex + 1) % TURN_ORDER.length;
-        const step = TURN_ORDER[nextIndex];
-  
-        const found = (() => {
-          if (step.type === 'hero') {
-            return trackerData.placedHeroes?.find(h => h.role === step.role && h.position === step.index);
-          } else if (step.type === 'enemy') {
-            return placedEnemies.find(
-              e => e.enemy.rune === step.rune &&
-                e.enemy.position === step.index &&
-                e.enemy.runePosition === step.position
-            );
-            return enemies.length > 0 ? enemies[0] : null;
-          }
-          return null;
-        })();
-  
-        if (found) {
-          console.log('Turno siguiente válido encontrado:', nextIndex, step);
-          return nextIndex;
-        }
-  
-        attempts++;
-      }
-  
-      console.warn('No se encontró ningún actor válido para el turno.');
-      return prev;
-    });
-  };
-
-
   
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
