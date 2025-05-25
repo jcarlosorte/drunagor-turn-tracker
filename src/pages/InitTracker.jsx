@@ -344,6 +344,8 @@ const InitTracker = () => {
   const [turnIndex, setTurnIndex] = useState(0);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
+  const placedHeroes = trackerData.placedHeroes;
+  const groupIndex = groupTurnTracker.index;
   
   useEffect(() => {
     const step = TURN_ORDER[turnIndex];
@@ -354,9 +356,9 @@ const InitTracker = () => {
         .map(e => e.enemy);
   
       if (enemies.length > 0) {
-        const currentEnemy = enemies[groupTurnTracker.index] || enemies[0];
+        const currentEnemy = enemies[groupIndex] || enemies[0];
         setCurrentTurnEntity({ ...currentEnemy, type: 'enemy', group: enemies });
-        setGroupTurnTracker({ group: enemies, index: groupTurnTracker.index });
+        setGroupTurnTracker({ group: enemies, index: groupIndex });
         return;
       }
     }
@@ -367,8 +369,8 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        setCurrentTurnEntity({ ...runes[0], type: 'rune' });
-        setGroupTurnTracker({ group: [], index: 0 });
+        setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
+        setGroupTurnTracker({ group: runes, index: 0 });
         return;
       }
     }
@@ -376,10 +378,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes, trackerData.placedHeroes, groupTurnTracker.index]);
-
-
-
+  }, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
   
   const entity = getNextActiveEntity(turnIndex);
   setCurrentTurnEntity(entity);
