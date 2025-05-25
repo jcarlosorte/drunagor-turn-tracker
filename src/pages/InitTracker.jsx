@@ -506,7 +506,37 @@ const InitTracker = () => {
         slotHeightClass = 'h-[34rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
-  
+  const RuneCard = ({ rune, onRemove }) => {
+  if (!rune) return null;
+
+  return (
+    <div className="flex flex-col items-center mx-1 relative">
+      <div className="relative w-full max-w-[140px]">
+        <div className="bg-gradient-to-br from-indigo-900 to-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
+          <div className="flex justify-center mb-1">
+            <GiAbstract065 className="text-yellow-300 text-2xl" />
+          </div>
+          <div className="text-xs font-bold text-center text-white">
+            {rune.nombre} ({rune.cara})
+          </div>
+          <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">
+            {rune.accion}
+          </div>
+        </div>
+
+        <button
+          onClick={() => onRemove(rune.uuid)}
+          className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
+          title="Eliminar"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
       <div className="relative w-full max-w-[140px]">
