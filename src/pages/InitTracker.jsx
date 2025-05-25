@@ -250,6 +250,20 @@ const InitTracker = () => {
     });
   };
 
+  const handleAddRuneCard = (runeCard) => {
+    const newRune = {
+      uuid: uuidv4(),
+      id: runeCard.id,
+      nombre: runeCard.nombre,
+      cara: runeCard.cara,
+      posicion: runeCard.posicion, // 'arriba' o 'abajo'
+      accion: runeCard.accion,
+      colorIndex: 10 // siempre en la posición 10: "Runas"
+    };
+  
+    placeRune({ rune: newRune });
+  };
+
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
   };
@@ -750,7 +764,7 @@ const InitTracker = () => {
               onSelectOther={handleSelectOther}
               onAddManual={openManualSelector}
               behaviors={behaviors}
-              onSelectRuneCard={(rune) => placeRune({ rune })}
+              onSelectRuneCard={handleAddRuneCard}
             />
               
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
