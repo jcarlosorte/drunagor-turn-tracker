@@ -88,6 +88,8 @@ const InitTracker = () => {
   const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes } = useInitRunes();
+  const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
+  const [flippedCards, setFlippedCards] = useState([]);
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
@@ -401,16 +403,58 @@ const InitTracker = () => {
   };
 
   const handleNextTurn = () => {
+    // 1. Si la entidad actual tiene cara, rotarla
+    if (currentTurnEntity?.cara) {
+      const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
+  
+      if (currentTurnEntity.type === 'enemy') {
+        const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
+        if (nuevo) {
+          setPlacedEnemies(prev =>
+            prev.map(item =>
+              item.enemy.uuid === currentTurnEntity.uuid
+                ? {
+                    ...item,
+                    enemy: {
+                      ...item.enemy,
+                      ...nuevo,
+                      cara: nuevaCara,
+                      capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
+                      capacidadesOriginales: nuevo.capacidades,
+                    },
+                  }
+                : item
+            )
+          );
+        }
+      }
+  
+      if (currentTurnEntity.type === 'rune') {
+        const nueva = RUNAS.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
+        if (nueva) {
+          setPlacedRunes(prev =>
+            prev.map(item =>
+              item.rune.uuid === currentTurnEntity.uuid
+                ? {
+                    rune: {
+                      ...item.rune,
+                      ...nueva,
+                      cara: nuevaCara,
+                    },
+                  }
+                : item
+            )
+          );
+        }
+      }
+    }
+  
+    // 2. Avanzar al siguiente como ya hacías
     let nextIndex = turnIndex;
     let groupIndex = groupTurnTracker.index;
     let nextEntity = null;
   
-    // Avanzar dentro del grupo (solo enemigos)
-    if (
-      currentTurnEntity?.type === 'enemy' &&
-      currentTurnEntity?.group?.length > 1 &&
-      groupIndex < currentTurnEntity.group.length - 1
-    ) {
+    if (currentTurnEntity?.group?.length > 1 && groupIndex < currentTurnEntity.group.length - 1) {
       groupIndex++;
       nextEntity = currentTurnEntity.group[groupIndex];
       setGroupTurnTracker({ group: currentTurnEntity.group, index: groupIndex });
@@ -418,7 +462,6 @@ const InitTracker = () => {
       return;
     }
   
-    // Buscar siguiente entidad válida en TURN_ORDER
     for (let i = 1; i <= TURN_ORDER.length; i++) {
       const idx = (turnIndex + i) % TURN_ORDER.length;
       const step = TURN_ORDER[idx];
@@ -431,14 +474,9 @@ const InitTracker = () => {
           setGroupTurnTracker({ group: [], index: 0 });
           return;
         }
-  
       } else if (step.type === 'enemy') {
         const enemies = placedEnemies
-          .filter(e =>
-            e.enemy.rune === step.rune &&
-            e.enemy.position === step.index &&
-            e.enemy.runePosition === step.position
-          )
+          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
           .map(e => e.enemy);
   
         if (enemies.length > 0) {
@@ -447,13 +485,9 @@ const InitTracker = () => {
           setGroupTurnTracker({ group: enemies, index: 0 });
           return;
         }
-  
       } else if (step.type === 'rune') {
         const runes = placedRunes
-          .filter(r =>
-            r.rune.posicion === step.position &&
-            r.rune.colorIndex === step.index
-          )
+          .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
           .map(r => r.rune);
   
         if (runes.length > 0) {
@@ -467,6 +501,7 @@ const InitTracker = () => {
   
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
+
 
   
   
@@ -527,35 +562,45 @@ const InitTracker = () => {
         slotHeightClass = 'h-[34rem]'; // Intermediate height (ej. 224px o 56rem) - puedes añadir más granularidad
     }
 
-  const RuneCard = ({ rune, onRemove }) => {
-    if (!rune) return null;
-  
+  const RuneCard = ({ rune, onRemove, flipped }) => {
     return (
-      <div className="flex flex-col items-center mx-1 relative">
-        <div className="relative w-full max-w-[140px]">
-          <div className="bg-gradient-to-br from-indigo-900 to-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
-            <div className="flex justify-center mb-1">
-              <GiAbstract065 className="text-yellow-300 text-2xl" />
-            </div>
-            <div className="text-xs font-bold text-center text-white">
-              {rune.nombre} ({rune.cara})
-            </div>
-            <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">
-              {rune.accion}
+      <div className="relative w-full max-w-[140px] perspective">
+        <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
+          
+          {/* Cara A */}
+          <div className="absolute w-full h-full backface-hidden">
+            <div className="bg-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
+              <div className="flex justify-center mb-1">
+                <GiAbstract065 className="text-yellow-300 text-2xl" />
+              </div>
+              <div className="text-xs font-bold text-center text-white">{rune.nombre} ({rune.cara})</div>
+              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{rune.accion}</div>
             </div>
           </div>
   
-          <button
-            onClick={() => onRemove(rune.uuid)}
-            className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
-            title="Eliminar"
-          >
-            ✕
-          </button>
+          {/* Cara B - copia visual invertida */}
+          <div className="absolute w-full h-full backface-hidden rotate-y-180">
+            <div className="bg-indigo-900 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
+              <div className="flex justify-center mb-1">
+                <GiAbstract065 className="text-yellow-200 text-2xl" />
+              </div>
+              <div className="text-xs font-bold text-center text-white">{rune.nombre} ({rune.cara})</div>
+              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{rune.accion}</div>
+            </div>
+          </div>
         </div>
+  
+        <button
+          onClick={() => onRemove(rune.uuid)}
+          className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center z-10"
+          title="Eliminar"
+        >
+          ✕
+        </button>
       </div>
     );
   };
+
 
 
  const CharacterCard = ({ name, image, position }) => (
