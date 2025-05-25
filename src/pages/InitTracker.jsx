@@ -378,7 +378,12 @@ const InitTracker = () => {
     let groupIndex = groupTurnTracker.index;
     let nextEntity = null;
   
-    if (currentTurnEntity?.group?.length > 1 && groupIndex < currentTurnEntity.group.length - 1) {
+    // Avanzar dentro del grupo (solo enemigos)
+    if (
+      currentTurnEntity?.type === 'enemy' &&
+      currentTurnEntity?.group?.length > 1 &&
+      groupIndex < currentTurnEntity.group.length - 1
+    ) {
       groupIndex++;
       nextEntity = currentTurnEntity.group[groupIndex];
       setGroupTurnTracker({ group: currentTurnEntity.group, index: groupIndex });
@@ -386,6 +391,7 @@ const InitTracker = () => {
       return;
     }
   
+    // Buscar siguiente entidad válida en TURN_ORDER
     for (let i = 1; i <= TURN_ORDER.length; i++) {
       const idx = (turnIndex + i) % TURN_ORDER.length;
       const step = TURN_ORDER[idx];
@@ -398,9 +404,14 @@ const InitTracker = () => {
           setGroupTurnTracker({ group: [], index: 0 });
           return;
         }
+  
       } else if (step.type === 'enemy') {
         const enemies = placedEnemies
-          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+          .filter(e =>
+            e.enemy.rune === step.rune &&
+            e.enemy.position === step.index &&
+            e.enemy.runePosition === step.position
+          )
           .map(e => e.enemy);
   
         if (enemies.length > 0) {
@@ -409,11 +420,27 @@ const InitTracker = () => {
           setGroupTurnTracker({ group: enemies, index: 0 });
           return;
         }
+  
+      } else if (step.type === 'rune') {
+        const runes = placedRunes
+          .filter(r =>
+            r.rune.posicion === step.position &&
+            r.rune.colorIndex === step.index
+          )
+          .map(r => r.rune);
+  
+        if (runes.length > 0) {
+          setTurnIndex(idx);
+          setCurrentTurnEntity({ ...runes[0], type: 'rune' });
+          setGroupTurnTracker({ group: [], index: 0 });
+          return;
+        }
       }
     }
   
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
+
   
   
   const showToast = (enemyData) => {
