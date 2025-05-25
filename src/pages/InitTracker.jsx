@@ -12,6 +12,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
 import { useExpansions } from '@/context/ExpansionContext';
 import { useGame } from '@/context/GameContext';
+import { useInitRunes } from '@/context/InitRunesContext';
 import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
@@ -86,6 +87,7 @@ const InitTracker = () => {
   const specialCategories = ['comandante', 'jefe', 'otros'];
   const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
+  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes } = useInitRunes();
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
