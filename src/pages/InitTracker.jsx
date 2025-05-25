@@ -88,7 +88,7 @@ const InitTracker = () => {
   const specialCategories = ['comandante', 'jefe', 'otros'];
   const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
-  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes } = useInitRunes();
+  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
 
