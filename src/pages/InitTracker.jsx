@@ -364,6 +364,10 @@ const InitTracker = () => {
         const enemies = placedEnemies
           .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position);
         if (enemies.length > 0) return { ...enemies[0].enemy, type: 'enemy' };
+      } else if (step.type === 'rune') {
+        const runes = placedRunes
+          .filter(r => r.rune.position === step.position && r.rune.colorIndex === step.index);
+        if (runes.length > 0) return { ...runes[0].rune, type: 'rune' };
       } // Puedes extender para companions
     }
     return null;
