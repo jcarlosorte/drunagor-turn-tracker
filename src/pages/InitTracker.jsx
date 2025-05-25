@@ -630,7 +630,7 @@ const InitTracker = () => {
               transform: isCurrentTurn ? 'scale(1.1)' : 'scale(1)',
               transition: 'all 0.3s ease-in-out'
             }}>
-            <div className="relative">
+            <div className="relative w-full flex justify-center">
               {isCurrentTurn && (
                 <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
                   <GiWingedSword className="text-white animate-bounce" size={32} />
