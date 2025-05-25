@@ -629,33 +629,8 @@ const InitTracker = () => {
     </div>
   );
 
-  const EnemyCard = ({ enemy, flipped, onRemove, openEnemyModal }) => {
-    return (
-      <div className="flex flex-col items-center mx-1 relative perspective">
-        <div className={`relative w-full max-w-[140px] transition-transform duration-700 transform-style ${flipped ? 'rotate-y-180' : ''}`}>
-          
-          {/* Cara A */}
-          <div className="absolute w-full h-full backface-hidden">
-            <img src={enemy.imagen} className={`w-full h-auto rounded-lg border-2 ${borderColorMap[enemy.color]}`} />
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-1 rounded">
-              {enemy.name} ({enemy.cara})
-            </div>
-          </div>
-  
-          {/* Cara B (igual, o cambia visualmente si lo deseas) */}
-          <div className="absolute w-full h-full backface-hidden rotate-y-180">
-            <img src={enemy.imagen} className={`w-full h-auto rounded-lg border-2 ${borderColorMap[enemy.color]}`} />
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-yellow-200 text-xs px-1 rounded">
-              {enemy.name} ({enemy.cara})
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
-
-  const EnemyCard_ori = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10">
       <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
    
@@ -740,7 +715,25 @@ const InitTracker = () => {
                 </div>
               )}
               {type === 'enemy' ? (
-                <EnemyCard enemy={item.enemy} flipped={flippedCards.includes(item.enemy.uuid)} />
+                <EnemyCard
+                  uuid={item.enemy.uuid}
+                  id={item.enemy.id}
+                  name={getEnemyName(item.enemy.id)}
+                  image={item.enemy.imagen}
+                  comportamiento={item.enemy.comportamiento}
+                  categoria={item.enemy.categoria}
+                  position={isTop ? "top" : "bottom"}
+                  color={item.enemy.color}
+                  onRemove={onRemove}
+                  vida={item.enemy.vida}
+                  vidaMax={item.enemy.vidaMax}
+                  movimiento={item.enemy.movimiento}
+                  ataque={item.enemy.ataque}
+                  openEnemyModal={openEnemyModal}
+                  inmunidad={item.enemy.inmunidad}
+                  tipo_ataque={item.enemy.tipo_ataque}
+                  capacidades={item.enemy.capacidades}
+                />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
               ) : (
