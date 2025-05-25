@@ -258,7 +258,7 @@ const InitTracker = () => {
       cara: runeCard.cara,
       posicion: runeCard.posicion, // 'arriba' o 'abajo'
       accion: runeCard.accion,
-      colorIndex: 10 // siempre en la posición 10: "Runas"
+      colorIndex: 10
     };
     console.log("Añadiendo runa:", newRune);
     placeRune({ rune: newRune });
@@ -638,7 +638,10 @@ const InitTracker = () => {
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
     console.log("placedRunes", placedRunes);
     console.log("Render slot", index);
-    console.log("runesAbove slot 10", runesBelow.map(r => r.rune));
+    if (isRuneTextSlot == 10) {
+      console.log("runesBelow slot 10", runesBelow.map(r => r.rune));
+    };
+    
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
