@@ -799,9 +799,9 @@ const InitTracker = () => {
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-1/2 w-full mt-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
-            {renderStack(heroesBelow, true, 'hero')}
-            {isRune && renderStack(enemiesBelow, true, 'enemy')}
-            {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), true, 'rune')}
+            {renderStack(heroesBelow, false, 'hero')}
+            {isRune && renderStack(enemiesBelow, false, 'enemy')}
+            {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), false, 'rune')}
           </div>
         </div>
   
