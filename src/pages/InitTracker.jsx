@@ -18,7 +18,6 @@ import TopMenu from '@/components/TopMenu';
 import classNames from 'classnames';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import PageTransition from "@/components/PageTransition";
-import { Modal } from "@/components/Modal";
 import ModalCommanderPC from '@/components/ModalCommanderPC';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
 import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
