@@ -19,7 +19,8 @@ const TopMenu = ({
   onSelectBoss,
   onSelectOther,
   onAddManual,
-  behaviors
+  behaviors,
+  onSelectRuneCard
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
