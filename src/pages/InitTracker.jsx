@@ -568,6 +568,7 @@ const InitTracker = () => {
   
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
+    const isRuneTextSlot = index === 10;
     const runeColor = runesColorMap[index];
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
@@ -575,6 +576,7 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
+
     const renderStack = (items, isTop, isEnemy = false) => {
       const spacing = items.length <= 2
         ? 90
@@ -627,6 +629,15 @@ const InitTracker = () => {
                   capacidades={item.enemy.capacidades}
                 />
               </div>
+            ) : type === 'rune' ? (
+              <div className="relative">
+                {isCurrentTurn && (
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                    <GiWingedSword className="text-white animate-bounce" size={30} />
+                  </div>
+                )}
+                <RuneCard rune={item.rune} onRemove={removeRuneByUUID} />
+              </div>
             ) : (
               <div className="relative">
                 {isCurrentTurn && (
@@ -669,6 +680,7 @@ const InitTracker = () => {
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
             {renderStack(heroesAbove, true)}
             {isRune && renderStack(enemiesAbove, true, true)}
+            {isRuneTextSlot && renderStack(runesAbove, true, 'rune')}
           </div>
         </div>
   
@@ -714,6 +726,7 @@ const InitTracker = () => {
           <div className="absolute top-0 left-0 right-0 flex justify-center">
             {renderStack(heroesBelow, false)}
             {isRune && renderStack(enemiesBelow, false, true)}
+            {isRuneTextSlot && renderStack(runesBelow, false, 'rune')}
           </div>
         </div>
   
