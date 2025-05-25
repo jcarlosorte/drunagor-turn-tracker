@@ -588,9 +588,11 @@ const InitTracker = () => {
       // Revertimos el orden para que el primero tenga el mayor zIndex y quede al frente
       const reversed = isTop ? [...items].reverse() : items; 
       return reversed.map((item, i) => {
-        const isCurrentTurn = currentTurnEntity &&
-          ((isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
-           (!isEnemy && item.id === currentTurnEntity.id));
+        const isCurrentTurn = currentTurnEntity && (
+          (isEnemy && item.enemy.uuid === currentTurnEntity.uuid) ||
+          (!isEnemy && item.uuid && item.uuid === currentTurnEntity.uuid) ||  // RuneCard
+          (!isEnemy && item.id && item.id === currentTurnEntity.id)          // Hero
+        );
         const zIndex = isTop ? items.length + i : items.length - i;// mayor zIndex al primero
         const offset = i * spacing;
         const style = isTop ? { bottom: `${offset}px`, zIndex } : { top: `${offset}px`, zIndex };
@@ -680,7 +682,7 @@ const InitTracker = () => {
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
             {renderStack(heroesAbove, true)}
             {isRune && renderStack(enemiesAbove, true, true)}
-            {isRuneTextSlot && renderStack(runesAbove, true, 'rune')}
+            {isRuneTextSlot && renderStack(runesAbove.map(r => r.rune), true, 'rune')}
           </div>
         </div>
   
@@ -726,7 +728,7 @@ const InitTracker = () => {
           <div className="absolute top-0 left-0 right-0 flex justify-center">
             {renderStack(heroesBelow, false)}
             {isRune && renderStack(enemiesBelow, false, true)}
-            {isRuneTextSlot && renderStack(runesBelow, false, 'rune')}
+            {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), false, 'rune')}
           </div>
         </div>
   
