@@ -260,7 +260,6 @@ const InitTracker = () => {
       accion: runeCard.accion,
       colorIndex: 10
     };
-    console.log("Añadiendo runa:", newRune);
     placeRune({ rune: newRune });
   };
 
@@ -283,7 +282,6 @@ const InitTracker = () => {
     
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
-    //console.log(validEnemies)
     return ENEMIES.filter(e =>
       validEnemies.includes(e.id) &&
       e.color === color &&
@@ -636,12 +634,7 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
-    console.log("placedRunes", placedRunes);
-    console.log("Render slot", index);
-    if (isRuneTextSlot) {
-      console.log("Estoy emn el slot de las runas. RunesBelow slot 10", runesBelow.map(r => r.rune));
-    };
-    
+     
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
