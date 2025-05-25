@@ -644,6 +644,17 @@ const InitTracker = () => {
                 />
               </div>
             )}
+            {isRune && selectedRuneCards
+                .filter(c => runesColorMap[c.id.replace('runa', '')] === index)
+                .map((c, i) => (
+                  <div
+                    key={`${c.id}-${c.cara}-${i}`}
+                    className={`absolute ${c.posicion === 'arriba' ? '-top-6' : '-bottom-6'} left-1/2 transform -translate-x-1/2 text-[0.55rem] text-white text-center bg-black bg-opacity-60 px-2 py-1 rounded z-30 max-w-[90%]`}
+                  >
+                    {c.accion}
+                  </div>
+              ))}
+
           </div>
         );
 
