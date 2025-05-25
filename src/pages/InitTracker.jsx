@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
+import { RUNAS } from '@/data/runas';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
