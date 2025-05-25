@@ -448,11 +448,6 @@ const InitTracker = () => {
         }
       }
     }
-
-    setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
-setTimeout(() => {
-    setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-}, 700); // tiempo de animación
   
     // 2. Avanzar al siguiente como ya hacías
     let nextIndex = turnIndex;
@@ -734,7 +729,7 @@ setTimeout(() => {
                   capacidades={item.enemy.capacidades}
                 />
               ) : type === 'rune' ? (
-                <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
+                <RuneCard rune={item} onRemove={removeRuneByUUID} />
               ) : (
                 <CharacterCard
                   name={getHeroName(item.id)}
@@ -799,7 +794,7 @@ setTimeout(() => {
 
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-1/2 w-full mt-5">
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+          <div className="absolute top-0 left-0 right-0 flex justify-center">
             {renderStack(heroesBelow, true, 'hero')}
             {isRune && renderStack(enemiesBelow, true, 'enemy')}
             {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), true, 'rune')}
