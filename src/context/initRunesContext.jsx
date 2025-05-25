@@ -10,7 +10,7 @@ const removeRuneByUUID = (uuid) => { setPlacedRunes(prev => prev.filter(r => r.r
 
 const resetPlacedRunes = () => { setPlacedRunes([]); };
 
-return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes }}> {children} </InitRunesContext.Provider> ); };
+return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes }}> {children} </InitRunesContext.Provider> ); };
 
 export const useInitRunes = () => useContext(InitRunesContext);
 
