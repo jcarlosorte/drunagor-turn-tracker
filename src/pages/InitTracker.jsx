@@ -638,6 +638,7 @@ const InitTracker = () => {
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
     console.log("placedRunes", placedRunes);
     console.log("Render slot", index);
+    console.log("runesAbove slot 10", runesAbove.map(r => r.rune));
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
@@ -687,6 +688,7 @@ const InitTracker = () => {
                   capacidades={item.enemy.capacidades}
                 />
               ) : type === 'rune' ? (
+                console.log("Rendering rune", item);
                 <RuneCard rune={item} onRemove={removeRuneByUUID} />
               ) : (
                 <CharacterCard
