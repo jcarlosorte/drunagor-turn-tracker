@@ -638,8 +638,8 @@ const InitTracker = () => {
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
     console.log("placedRunes", placedRunes);
     console.log("Render slot", index);
-    if (isRuneTextSlot == 10) {
-      console.log("runesBelow slot 10", runesBelow.map(r => r.rune));
+    if (isRuneTextSlot) {
+      console.log("Estoy emn el slot de las runas. RunesBelow slot 10", runesBelow.map(r => r.rune));
     };
     
     const renderStack = (items, isTop, type = 'hero') => {
