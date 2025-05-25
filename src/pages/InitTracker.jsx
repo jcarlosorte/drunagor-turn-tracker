@@ -148,7 +148,7 @@ const InitTracker = () => {
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
-        cara: selected.capacidades
+        cara: selected.cara
       }
     });
   };
@@ -186,7 +186,7 @@ const InitTracker = () => {
           tipo_ataque: selected.tipo_ataque,
           capacidades: adjustedCaps,
           capacidadesOriginales: selected.capacidades,
-          cara: selected.capacidades
+          cara: selected.cara
         };
         showToast(enemy);
         placeEnemy({ enemy });
@@ -218,7 +218,7 @@ const InitTracker = () => {
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
-        cara: selected.capacidades
+        cara: selected.cara
       }
     });
   };
@@ -250,7 +250,8 @@ const InitTracker = () => {
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
-        capacidadesOriginales: selected.capacidades
+        capacidadesOriginales: selected.capacidades,
+        cara: selected.cara
       };
       showToast(enemy);
       placeEnemy({ enemy });
