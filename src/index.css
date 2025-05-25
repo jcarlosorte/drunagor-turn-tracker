@@ -128,3 +128,19 @@ body {
 .animate-spin-y {
   animation: spin-y 0.6s ease-in-out;
 }
+
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
