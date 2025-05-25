@@ -347,9 +347,14 @@ const InitTracker = () => {
 
   useEffect(() => {
     const step = TURN_ORDER[turnIndex];
+  
     if (step.type === 'enemy') {
       const enemies = placedEnemies
-        .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+        .filter(e =>
+          e.enemy.rune === step.rune &&
+          e.enemy.position === step.index &&
+          e.enemy.runePosition === step.position
+        )
         .map(e => e.enemy);
   
       if (enemies.length > 0) {
@@ -359,6 +364,33 @@ const InitTracker = () => {
         return;
       }
     }
+  
+    if (step.type === 'rune') {
+      const runes = placedRunes
+        .filter(r =>
+          r.rune.colorIndex === step.index &&
+          r.rune.posicion === step.position
+        )
+        .map(r => r.rune);
+  
+      if (runes.length > 0) {
+        setCurrentTurnEntity({ ...runes[0], type: 'rune' });
+        setGroupTurnTracker({ group: [], index: 0 });
+        return;
+      }
+    }
+  
+    if (step.type === 'hero') {
+      const hero = trackerData.placedHeroes?.find(h => h.role === step.role && h.position === step.index);
+      if (hero) {
+        setCurrentTurnEntity({ ...hero, type: 'hero' });
+        setGroupTurnTracker({ group: [], index: 0 });
+        return;
+      }
+    }
+  
+  }, [turnIndex, placedEnemies, placedRunes, trackerData.placedHeroes, groupTurnTracker.index]);
+
   
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
