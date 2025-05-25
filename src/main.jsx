@@ -9,6 +9,8 @@ import { LanguageProvider } from './context/LanguageContext';
 import { ExpansionProvider } from './context/ExpansionContext';
 import { TrackerProvider } from '@/context/TrackerContext';
 import { GameProvider } from './context/GameContext';
+import { InitRunesProvider } from '@/context/InitRunesContext';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ExpansionProvider>
         <TrackerProvider> 
           <GameProvider>
-            <App />
+            <InitRunesProvider>
+              <App />
+            </InitRunesProvider>
           </GameProvider>
         </TrackerProvider>
       </ExpansionProvider>
