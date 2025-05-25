@@ -63,6 +63,7 @@ const TURN_ORDER = [
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
+const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
 
 
 const InitTracker = () => {
@@ -417,20 +418,28 @@ const InitTracker = () => {
         const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
         if (nuevo) {
           setPlacedEnemies(prev =>
-            prev.map(item =>
-              item.enemy.uuid === currentTurnEntity.uuid
-                ? {
-                    ...item,
-                    enemy: {
-                      ...item.enemy,
-                      ...nuevo,
-                      cara: nuevaCara,
-                      capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
-                      capacidadesOriginales: nuevo.capacidades,
-                    },
+            prev.map(item => {
+              if (item.enemy.uuid === currentTurnEntity.uuid) {
+                const nuevasProps = {};
+                for (const key of PROPIEDADES_ACTUALIZABLES) {
+                  if (nuevo[key] !== undefined) {
+                    nuevasProps[key] = nuevo[key];
                   }
-                : item
-            )
+                }
+          
+                return {
+                  ...item,
+                  enemy: {
+                    ...item.enemy,
+                    ...nuevasProps,
+                    cara: nuevaCara,
+                    capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
+                    capacidadesOriginales: nuevo.capacidades,
+                  },
+                };
+              }
+              return item;
+            })
           );
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
