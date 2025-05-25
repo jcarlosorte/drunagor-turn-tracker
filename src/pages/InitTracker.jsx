@@ -688,7 +688,7 @@ const InitTracker = () => {
                   capacidades={item.enemy.capacidades}
                 />
               ) : type === 'rune' ? (
-                console.log("Rendering rune", item);
+                console.log("Rendering rune", item)
                 <RuneCard rune={item} onRemove={removeRuneByUUID} />
               ) : (
                 <CharacterCard
