@@ -13,7 +13,6 @@ import { useInitEnemies } from '@/context/InitEnemiesContext';
 import { useExpansions } from '@/context/ExpansionContext';
 import { useGame } from '@/context/GameContext';
 import TopMenu from '@/components/TopMenu';
-import RuneMenu from '@/components/RuneMenu';
 import classNames from 'classnames';
 import AnimatedEnemyToast from '@/components/AnimatedEnemyToast';
 import PageTransition from "@/components/PageTransition";
@@ -722,17 +721,16 @@ const InitTracker = () => {
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
             <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
-            <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-4">
-              <TopMenu
-                onAddEnemy={openCategorySelector}
-                onSelectCommander={handleRandomCommander}
-                onSelectBoss={handleSelectBoss}
-                onSelectOther={handleSelectOther}
-                onAddManual={openManualSelector}
-                behaviors={behaviors}
-              />
-              <RuneMenu onSelectCard={(card) => setSelectedRuneCards(prev => [...prev, card])} />
-            </div>
+            
+            <TopMenu
+              onAddEnemy={openCategorySelector}
+              onSelectCommander={handleRandomCommander}
+              onSelectBoss={handleSelectBoss}
+              onSelectOther={handleSelectOther}
+              onAddManual={openManualSelector}
+              behaviors={behaviors}
+            />
+              
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
                 <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
