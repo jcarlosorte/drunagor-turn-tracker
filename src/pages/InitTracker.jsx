@@ -507,9 +507,6 @@ const InitTracker = () => {
   
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
-
-
-  
   
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
@@ -630,7 +627,7 @@ const InitTracker = () => {
   );
 
 
-  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
+  const EnemyCard_ori = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
     <div key={uuid} className="flex flex-col items-center mx-1 relative z-10">
       <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
    
@@ -675,6 +672,64 @@ const InitTracker = () => {
   </div>
   );
   
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, isFlipping }) => {
+    const [flipped, setFlipped] = useState(false);
+  
+    useEffect(() => {
+      if (isFlipping) {
+        setFlipped(true);
+        const timer = setTimeout(() => setFlipped(false), 600); // duración de flip
+        return () => clearTimeout(timer);
+      }
+    }, [isFlipping]);
+  
+    return (
+      <div
+        key={uuid}
+        className={classNames(
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-500",
+          flipped ? "rotate-y-180" : ""
+        )}
+        style={{ perspective: "1000px" }}
+      >
+        <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d">
+          <img
+            src={image}
+            alt={name}
+            className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+          />
+          <div
+            className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
+              ${borderColorMap[color] || ''} 
+              ${textBgColorMap[color] || 'bg-black/60'} 
+              ${categoryTextGlowMap[categoria] || ''} 
+              enemy-text-wrapper`}
+          >
+            <div className="flex flex-col w-full items-center leading-none" onClick={() => { openEnemyModal(uuid); }}>
+              <span className="enemy-text leading-none">{name}</span>
+              {comportamiento && (
+                <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
+                  {tb?.[comportamiento] || comportamiento}
+                </span>
+              )}
+              <div className="w-full relative h-2 mt-2">
+                <div className="absolute inset-0 flex items-center justify-center text-white text-[0.6rem] font-bold z-10">
+                  {vida} / {vidaMax}
+                </div>
+                <div className="w-full h-full bg-red-900 rounded">
+                  <div
+                    className="h-full bg-red-500 rounded"
+                    style={{ width: `${(vida / vidaMax) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     const isRuneTextSlot = index === 10;
@@ -700,7 +755,8 @@ const InitTracker = () => {
           (type === 'rune' && item.uuid === currentTurnEntity.uuid) ||
           (type === 'hero' && item.id === currentTurnEntity.id)
         );
-        
+        const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
+
         return (
           <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1]' : ''}`} style={{
               ...style,
@@ -733,6 +789,7 @@ const InitTracker = () => {
                   inmunidad={item.enemy.inmunidad}
                   tipo_ataque={item.enemy.tipo_ataque}
                   capacidades={item.enemy.capacidades}
+                  isFlipping={isEntityFlipping}
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
