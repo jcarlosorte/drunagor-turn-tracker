@@ -379,11 +379,6 @@ const InitTracker = () => {
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
   }, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
-  
-  const entity = getNextActiveEntity(turnIndex);
-  setCurrentTurnEntity(entity);
-  setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, trackerData.placedHeroes, groupTurnTracker.index]);
 
   
   const getNextActiveEntity = (startIndex) => {
