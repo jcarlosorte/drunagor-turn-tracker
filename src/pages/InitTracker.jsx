@@ -49,7 +49,7 @@ const TURN_ORDER = [
   { type: 'enemy', rune: 'rojo', position: 'arriba', index: 7 },
   { type: 'hero', role: 'controlador', position: 'arriba', index: 8 },
   { type: 'enemy', rune: 'gris', position: 'arriba', index: 9 },
-  { type: 'companion', position: 'arriba', index: 10 },
+  { type: 'rune', position: 'arriba', index: 10 },
   { type: 'enemy', rune: 'naranja', position: 'abajo', index: 1 },
   { type: 'hero', role: 'apoyo', position: 'abajo', index: 2 },
   { type: 'enemy', rune: 'verde', position: 'abajo', index: 3 },
@@ -57,7 +57,7 @@ const TURN_ORDER = [
   { type: 'hero', role: 'agresor', position: 'abajo', index: 6 },
   { type: 'enemy', rune: 'rojo', position: 'abajo', index: 7 },
   { type: 'enemy', rune: 'gris', position: 'abajo', index: 9 },
-  { type: 'companion', position: 'abajo', index: 10 },
+  { type: 'rune', position: 'abajo', index: 10 },
 ];
 
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
