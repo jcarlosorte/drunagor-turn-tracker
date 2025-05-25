@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
+import { RUNAS } from '@/data/runas';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import {  } from 'react-icons/gi';
 
@@ -26,6 +27,8 @@ const TopMenu = ({
   const { resetPlacedEnemies } = useInitEnemies();
   const [enemySelect, setEnemySelect] = useState('');
   const [manualSelect, setManualSelect] = useState('');
+  const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
+  const [isRunesOpen, setIsRunesOpen] = useState(false);
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
@@ -63,12 +66,18 @@ const TopMenu = ({
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
-        <div className="w-196">
+        <div className="flex items-center gap-2">
           <button
             onClick={toggleMenu}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
-            <AiOutlineMenu size={24} />
+            <GiMinions size={24} />
+          </button>
+          <button
+            onClick={() => setIsRunesOpen(prev => !prev)}
+            className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
+          >
+            <GiRuneStone size={24} />
           </button>
         </div>
 
@@ -183,6 +192,76 @@ const TopMenu = ({
           </motion.div>
         )}
       </AnimatePresence>
+      
+      <AnimatePresence>
+        {isRunesOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
+          >
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiShield className="text-indigo-400 text-xl" />
+                <span className="font-semibold">Cartas de Runa</span>
+              </div>
+      
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => {
+                    const defaultRunes = RUNAS.filter(r => r.cara === 'A');
+                    defaultRunes.forEach(r => onSelectRuneCard(r));
+                  }}
+                  className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                >
+                  Añadir Runas (cara A)
+                </button>
+      
+                <button
+                  onClick={() => setShowRuneFaceOptions(prev => !prev)}
+                  className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                >
+                  Seleccionar Runa por cara
+                </button>
+      
+                <button
+                  onClick={() => alert('Funcionalidad de runas especiales próximamente')}
+                  className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
+                >
+                  Añadir Runa Especial
+                </button>
+              </div>
+      
+              {showRuneFaceOptions && (
+                <div className="flex gap-2 flex-wrap mt-2">
+                  {RUNAS.map((card, index) => (
+                    <button
+                      key={`${card.id}-${card.cara}-${index}`}
+                      onClick={() => onSelectRuneCard(card)}
+                      className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {card.nombre} ({card.cara})
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+      
+            <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={() => setIsRunesOpen(false)}
+                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+              >
+                Cerrar Runas
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      
     </div>
   );
 };
