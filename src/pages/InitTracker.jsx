@@ -428,6 +428,10 @@ const InitTracker = () => {
                 : item
             )
           );
+          setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
+          setTimeout(() => {
+            setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
+          }, 700); // tiempo de animación
         }
       }
   
@@ -447,13 +451,14 @@ const InitTracker = () => {
                 : item
             )
           );
+          setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
+          setTimeout(() => {
+            setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
+          }, 700); // tiempo de animación
         }
       }
     }
-    setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
-    setTimeout(() => {
-      setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-    }, 700); // tiempo de animación
+    
 
     // 2. Avanzar al siguiente como ya hacías
     let nextIndex = turnIndex;
