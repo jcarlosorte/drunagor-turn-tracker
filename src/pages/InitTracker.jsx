@@ -624,80 +624,49 @@ const InitTracker = () => {
         );
         
         return (
-          <div key={isEnemy ? item.enemy.uuid : item.id} className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1]' : ''}`} style={{
+          <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-yellow-400 shadow-xl scale-[1.1]' : ''}`} style={{
               ...style,
               zIndex: isCurrentTurn ? 40 : style.zIndex ?? 100,
               transform: isCurrentTurn ? 'scale(1.1)' : 'scale(1)',
               transition: 'all 0.3s ease-in-out'
             }}>
-            {isEnemy ? (
-              <div className="relative">
-                {isCurrentTurn && (
-                  <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
-                    <GiWingedSword className="text-white animate-bounce" size={30} />
-                  </div>
-                )}
-                <EnemyCard
-                  uuid={item.enemy.uuid}
-                  id={item.enemy.id}
-                  name={getEnemyName(item.enemy.id)}
-                  image={item.enemy.imagen}
-                  comportamiento={item.enemy.comportamiento}
-                  categoria={item.enemy.categoria}
-                  position={isTop ? "top" : "bottom"}
-                  color={item.enemy.color}
-                  onRemove={onRemove}
-                  vida={item.enemy.vida}
-                  vidaMax={item.enemy.vidaMax}
-                  movimiento={item.enemy.movimiento}
-                  ataque={item.enemy.ataque}
-                  openEnemyModal={openEnemyModal}
-                  inmunidad={item.enemy.inmunidad}
-                  tipo_ataque={item.enemy.tipo_ataque}
-                  capacidades={item.enemy.capacidades}
-                />
-              </div>
-            ) : type === 'rune' ? (
-              <div className="relative">
-                {isCurrentTurn && (
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
-                    <GiWingedSword className="text-white animate-bounce" size={30} />
-                  </div>
-                )}
-                <RuneCard rune={item.rune} onRemove={removeRuneByUUID} />
-              </div>
-            ) : (
-              <div className="relative">
-                {isCurrentTurn && (
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
-                    <GiWingedSword className="text-white animate-bounce" size={30} />
-                  </div>
-                )}
-                <CharacterCard
-                  name={getHeroName(item.id)}
-                  image={item.image}
-                  position={isTop ? "top" : "bottom"}
-                />
+            {isCurrentTurn && (
+              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                <GiWingedSword className="text-white animate-bounce" size={32} />
               </div>
             )}
-            {isRune && selectedRuneCards
-                .filter(c => runesColorMap[c.id.replace('runa', '')] === index)
-                .map((c, i) => (
-                  <div
-                    key={`${c.id}-${c.cara}-${i}`}
-                    className={`absolute ${c.posicion === 'arriba' ? '-top-6' : '-bottom-6'} left-1/2 transform -translate-x-1/2 text-[0.55rem] text-white text-center bg-black bg-opacity-60 px-2 py-1 rounded z-30 max-w-[90%]`}
-                  >
-                    {c.accion}
-                  </div>
-              ))}
-
+            {type === 'enemy' ? (
+              <EnemyCard
+                uuid={item.enemy.uuid}
+                id={item.enemy.id}
+                name={getEnemyName(item.enemy.id)}
+                image={item.enemy.imagen}
+                comportamiento={item.enemy.comportamiento}
+                categoria={item.enemy.categoria}
+                position={isTop ? "top" : "bottom"}
+                color={item.enemy.color}
+                onRemove={onRemove}
+                vida={item.enemy.vida}
+                vidaMax={item.enemy.vidaMax}
+                movimiento={item.enemy.movimiento}
+                ataque={item.enemy.ataque}
+                openEnemyModal={openEnemyModal}
+                inmunidad={item.enemy.inmunidad}
+                tipo_ataque={item.enemy.tipo_ataque}
+                capacidades={item.enemy.capacidades}
+              />
+            ) : type === 'rune' ? (
+              <RuneCard rune={item} onRemove={removeRuneByUUID} />
+            ) : (
+              <CharacterCard
+                name={getHeroName(item.id)}
+                image={item.image}
+                position={isTop ? "top" : "bottom"}
+              />
+            )}
           </div>
-        );
-
-        
-        
+        );   
       });
-      
     };
     
     return (
