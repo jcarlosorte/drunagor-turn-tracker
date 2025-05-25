@@ -4,7 +4,7 @@ const InitRunesContext = createContext();
 
 export const InitRunesProvider = ({ children }) => { const [placedRunes, setPlacedRunes] = useState([]);
 
-const placeRune = ({ rune }) => { const colorIndex = parseInt(rune.id.replace('runa', '')); setPlacedRunes(prev => [ ...prev, { rune: { uuid: uuidv4(), ...rune, colorIndex, }, } ]); };
+const placeRune = ({ rune }) => { setPlacedRunes(prev => [ ...prev, { rune: { uuid: uuidv4(), ...rune, }, } ]); };
 
 const removeRuneByUUID = (uuid) => { setPlacedRunes(prev => prev.filter(r => r.rune.uuid !== uuid)); };
 
