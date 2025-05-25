@@ -147,7 +147,8 @@ const InitTracker = () => {
         inmunidad: selected.inmunidad,
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
-        capacidadesOriginales: selected.capacidades
+        capacidadesOriginales: selected.capacidades,
+        cara: selected.capacidades
       }
     });
   };
