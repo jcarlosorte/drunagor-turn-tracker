@@ -85,6 +85,7 @@ const InitTracker = () => {
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
   const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
+  const [selectedRuneCards, setSelectedRuneCards] = useState([]);
 
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
@@ -729,6 +730,7 @@ const InitTracker = () => {
               onSelectOther={handleSelectOther}
               onAddManual={openManualSelector}
               behaviors={behaviors}
+              onSelectRuneCard={(card) => setSelectedRuneCards(prev => [...prev, card])}
             />
               
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
