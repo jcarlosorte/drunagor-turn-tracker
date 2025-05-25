@@ -637,6 +637,7 @@ const InitTracker = () => {
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
     console.log("placedRunes", placedRunes);
+    console.log("Render slot", index);
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
