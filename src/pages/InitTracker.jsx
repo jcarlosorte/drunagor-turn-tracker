@@ -260,7 +260,7 @@ const InitTracker = () => {
       accion: runeCard.accion,
       colorIndex: 10 // siempre en la posición 10: "Runas"
     };
-  
+    console.log("Añadiendo runa:", newRune);
     placeRune({ rune: newRune });
   };
 
