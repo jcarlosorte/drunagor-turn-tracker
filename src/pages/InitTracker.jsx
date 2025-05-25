@@ -675,9 +675,9 @@ const InitTracker = () => {
         {/* Escalonado arriba */}
         <div className="relative flex justify-center h-1/2 w-full mb-5">
           <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-            renderStack(heroesAbove, true, 'hero')
-            renderStack(enemiesAbove, true, 'enemy')
-            renderStack(runesAbove.map(r => r.rune), true, 'rune')
+            {renderStack(heroesAbove, true, 'hero')}
+            {isRune && renderStack(enemiesAbove, true, 'enemy')}
+            {isRuneTextSlot && renderStack(runesAbove.map(r => r.rune), true, 'rune')}
           </div>
         </div>
   
@@ -721,9 +721,9 @@ const InitTracker = () => {
         {/* Escalonado abajo */}
         <div className="relative flex justify-center h-1/2 w-full mt-5">
           <div className="absolute top-0 left-0 right-0 flex justify-center">
-            renderStack(heroesBelow, true, 'hero')
-            renderStack(enemiesBelow, true, 'enemy')
-            renderStack(runesBelow.map(r => r.rune), true, 'rune')
+            {renderStack(heroesBelow, true, 'hero')}
+            {isRune && renderStack(enemiesBelow, true, 'enemy')}
+            {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), true, 'rune')}
           </div>
         </div>
   
