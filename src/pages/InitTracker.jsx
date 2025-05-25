@@ -743,7 +743,7 @@ const InitTracker = () => {
               onSelectOther={handleSelectOther}
               onAddManual={openManualSelector}
               behaviors={behaviors}
-              onSelectRuneCard={(card) => setSelectedRuneCards(prev => [...prev, card])}
+              onSelectRuneCard={(rune) => placeRune({ rune })}
             />
               
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
