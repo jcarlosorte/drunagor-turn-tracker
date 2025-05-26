@@ -255,7 +255,7 @@ const TopMenu = ({
                 <span className="font-semibold">Fichas de Runa</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['roja', 'azul', 'verde', 'gris', 'naranja'].map(color => (
+                {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
                   <button
                     key={color}
                     onClick={() => {
