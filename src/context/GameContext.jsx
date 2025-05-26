@@ -20,6 +20,7 @@ export const GameProvider = ({ children }) => {
   const [usedTiles, setUsedTiles] = useState([]);
     
   const addRune = (color) => {
+    console.log(color);
     setRunes(prev => ({
       ...prev,
       [color]: prev[color] + 1
@@ -27,7 +28,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeRune = (color) => {
-    console.log(color);
+    
     setRunes(prev => ({
       ...prev,
       [color]: Math.max(prev[color] - 1, 0)
