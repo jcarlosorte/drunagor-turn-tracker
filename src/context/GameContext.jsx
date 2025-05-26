@@ -3,11 +3,6 @@ import { FICHAS } from '@/data/fichas';
 import { v4 as uuidv4 } from 'uuid';
 
 const GameContext = createContext();
-const [availableTiles, setAvailableTiles] = useState(
-  FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
-);
-const [tileWarning, setTileWarning] = useState(null);
-const [usedTiles, setUsedTiles] = useState([]);
 
 export const GameProvider = ({ children }) => {
   const [runes, setRunes] = useState({
@@ -17,7 +12,13 @@ export const GameProvider = ({ children }) => {
     naranja: 0,
     gris: 0
   });
-
+  
+  const [availableTiles, setAvailableTiles] = useState(
+    FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
+  );
+  const [tileWarning, setTileWarning] = useState(null);
+  const [usedTiles, setUsedTiles] = useState([]);
+    
   const addRune = (color) => {
     setRunes(prev => ({
       ...prev,
