@@ -44,25 +44,26 @@ const TETRIS_SHAPES = {
   ]
 };
 
-const TetrisPiece = ({ type = 'T', color = 'text-blue-500' }) => {
+const TetrisPiece = ({ type = 'T', color = 'bg-blue-500' }) => {
   const shape = TETRIS_SHAPES[type];
 
   return (
     <div className="inline-block">
       {shape.map((row, rowIndex) => (
-        <div key={rowIndex} className="flex h-[24px]">
+        <div key={rowIndex} className="flex" style={{ height: `${blockSize}px` }}>
           {row.map((cell, colIndex) =>
             cell ? (
               <div
                 key={colIndex}
-                className={`w-[${blockSize}px] h-[${blockSize}px] flex items-center justify-center ${color}`}
+                className={`flex items-center justify-center ${color} rounded-sm`}`}
+                style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
               >
-                <GiBrickWall size={blockSize} />
+                <GiBrickWall size={blockSize - 4} className="text-white" />
               </div>
             ) : (
               <div
                 key={colIndex}
-                className={`w-[${blockSize}px] h-[${blockSize}px]`}
+                style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
               />
             )
           )}
