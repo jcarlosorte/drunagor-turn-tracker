@@ -758,7 +758,7 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
-     
+    console.log("Contador de ", runeColor, "=", runes[runeColor]);
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
@@ -866,7 +866,7 @@ const InitTracker = () => {
               <div className="absolute rotate-[-45deg] flex items-center gap-1 z-20">
                 <GiAbstract065 className="text-white text-sm" />
                 <span className="text-white text-xs font-bold">
-                  {getRuneCount(runeColor)}
+                  {runes[runeColor] || 0}
                 </span>
               </div>
             )}
