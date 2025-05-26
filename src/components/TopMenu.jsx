@@ -247,7 +247,34 @@ const TopMenu = ({
                 </div>
               )}
             </div>
-      
+
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiBrickWall className="text-green-300 text-xl" />
+                <span className="font-semibold">Fichas de Runa</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['roja', 'azul', 'verde', 'gris', 'naranja'].map(color => (
+                  <button
+                    key={color}
+                    onClick={() => {
+                      const tile = drawTileByColor(color);
+                      if (tile) {
+                        addRune(color); // del GameContext
+                        // lo puedes guardar visualmente también (ej. en InitTracker)
+                      } else {
+                        alert(`No quedan fichas de color ${color}`);
+                      }
+                    }}
+                    className="bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded text-xs"
+                  >
+                    Añadir {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+                        
             <div className="flex justify-center gap-4 mt-2">
               <button
                 onClick={() => setIsRunesOpen(false)}
