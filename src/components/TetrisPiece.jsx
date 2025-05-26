@@ -5,10 +5,10 @@ import { GiBrickWall } from 'react-icons/gi';
 const blockSize = 24; // tamaño del icono (en px)
 
 const TETRIS_SHAPES = {
-  I: [
+  II: [
     [1, 1, 1, 1],
   ],
-  -: [
+  I: [
     [1, 1],
   ],
   T: [
@@ -25,8 +25,8 @@ const TETRIS_SHAPES = {
     [1, 1],
   ],
   S: [
-    [0, 1, 1],
     [1, 1, 0],
+    [0, 1, 1],
   ],
   Z: [
     [1, 1, 0],
@@ -36,7 +36,12 @@ const TETRIS_SHAPES = {
   U: [
     [1, 0, 1],
     [1, 1, 1],
-]
+  ],
+  Y: [
+    [1, 0, 1],
+    [1, 1, 1],
+    [0, 1, 0],
+  ]
 };
 
 const TetrisPiece = ({ type = 'T', color = 'text-blue-500' }) => {
