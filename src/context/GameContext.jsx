@@ -27,6 +27,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeRune = (color) => {
+    console.log(color);
     setRunes(prev => ({
       ...prev,
       [color]: Math.max(prev[color] - 1, 0)
