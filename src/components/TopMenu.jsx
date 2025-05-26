@@ -261,7 +261,7 @@ const TopMenu = ({
                     onClick={() => {
                       const tile = drawTileByColor(color);
                       if (tile) {
-                        addRune(color); // del GameContext
+                        //addRune(color); // del GameContext
                         // lo puedes guardar visualmente también (ej. en InitTracker)
                       } else {
                         alert(`No quedan fichas de color ${color}`);
