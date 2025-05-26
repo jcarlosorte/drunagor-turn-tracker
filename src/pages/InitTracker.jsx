@@ -103,6 +103,11 @@ const InitTracker = () => {
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
 
+  const getRuneColorFromIndex = (index) => {
+    return Object.entries(runesColorMap).find(([color, idx]) => idx === index)?.[0];
+  };
+
+  
   const openCommanderPCModal = (callback) => {
     setOnPCConfirm(() => callback);
     setShowPCModal(true);
@@ -643,52 +648,6 @@ const InitTracker = () => {
       </div>
     </div>
   );
-
-
-  const EnemyCard_ori = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal }) => (
-    <div key={uuid} className="flex flex-col items-center mx-1 relative z-10">
-      <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
-   
-      <img
-        src={image}
-        alt={name}
-        className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
-      />
-      <div
-        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
-          ${borderColorMap[color] || ''} 
-          ${textBgColorMap[color] || 'bg-black/60'} 
-          ${categoryTextGlowMap[categoria] || ''} 
-          enemy-text-wrapper`}
-      >
-        <div className="flex flex-col w-full items-center leading-none" onClick={() => {openEnemyModal(uuid);}}>
-          <span className="enemy-text leading-none">{name}</span>
-          {comportamiento && (
-            <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
-              {tb?.[comportamiento] || comportamiento}
-            </span>
-            )}
-          {/* Barra de vida */}
-          <div className="w-full relative h-2 mt-2">
-            {/* Texto encima de la barra */}
-            <div className="absolute inset-0 flex items-center justify-center text-white text-[0.6rem] font-bold z-10">
-              {vida} / {vidaMax}
-            </div>
-          
-            {/* Barra de fondo */}
-            <div className="w-full h-full bg-red-900 rounded">
-              {/* Barra de vida actual */}
-              <div
-                className="h-full bg-red-500 rounded"
-                style={{ width: `${(vida / vidaMax) * 100}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  );
   
   const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, isFlipping }) => {
     const [flipped, setFlipped] = useState(false);
@@ -751,7 +710,7 @@ const InitTracker = () => {
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
     const isRuneTextSlot = index === 10;
-    const runeColor = runesColorMap[index];
+    const runeColor = getRuneColorFromIndex(index);
     const heroesAbove = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnTop.includes(h.role));
     const heroesBelow = (trackerData.placedHeroes || []).filter(h => h.position === index && rolesOnBottom.includes(h.role));
     const enemiesAbove = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'arriba');
