@@ -33,7 +33,11 @@ const TETRIS_SHAPES = {
   Z: [
     [1, 1, 0],
     [0, 1, 1],
-  ]
+  ],
+  U: [
+  [1, 0, 1],
+  [1, 1, 1],
+]
 };
 
 const TetrisPiece = ({ type = 'T', color = 'text-blue-500' }) => {
