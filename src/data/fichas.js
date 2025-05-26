@@ -1,4 +1,43 @@
 export const FICHAS = [
-  { id: "1", runa: "azul", dibujo: "-|=" },
-  { id: "2", runa: "azul", dibujo: "-|=" }
+  { id: 'ficha1', runa: 'gris', dibujo: '/fichas/ficha1.png' },
+  { id: 'ficha2', runa: 'gris', dibujo: '/fichas/ficha2.png' },
+  { id: 'ficha3', runa: 'gris', dibujo: '/fichas/ficha3.png' },
+  { id: 'ficha4', runa: 'gris', dibujo: '/fichas/ficha4.png' },
+  { id: 'ficha5', runa: 'gris', dibujo: '/fichas/ficha5.png' },
+  { id: 'ficha6', runa: 'gris', dibujo: '/fichas/ficha6.png' },
+  { id: 'ficha7', runa: 'gris', dibujo: '/fichas/ficha7.png' },
+
+  { id: 'ficha8', runa: 'roja', dibujo: '/fichas/ficha8.png' },
+  { id: 'ficha9', runa: 'roja', dibujo: '/fichas/ficha9.png' },
+  { id: 'ficha10', runa: 'roja', dibujo: '/fichas/ficha10.png' },
+  { id: 'ficha11', runa: 'roja', dibujo: '/fichas/ficha11.png' },
+  { id: 'ficha12', runa: 'roja', dibujo: '/fichas/ficha12.png' },
+  { id: 'ficha13', runa: 'roja', dibujo: '/fichas/ficha13.png' },
+  { id: 'ficha14', runa: 'roja', dibujo: '/fichas/ficha14.png' },
+
+  { id: 'ficha15', runa: 'verde', dibujo: '/fichas/ficha15.png' },
+  { id: 'ficha16', runa: 'verde', dibujo: '/fichas/ficha16.png' },
+  { id: 'ficha17', runa: 'verde', dibujo: '/fichas/ficha17.png' },
+  { id: 'ficha18', runa: 'verde', dibujo: '/fichas/ficha18.png' },
+  { id: 'ficha19', runa: 'verde', dibujo: '/fichas/ficha19.png' },
+  { id: 'ficha20', runa: 'verde', dibujo: '/fichas/ficha20.png' },
+  { id: 'ficha21', runa: 'verde', dibujo: '/fichas/ficha21.png' },
+
+  { id: 'ficha22', runa: 'naranja', dibujo: '/fichas/ficha22.png' },
+  { id: 'ficha23', runa: 'naranja', dibujo: '/fichas/ficha23.png' },
+  { id: 'ficha24', runa: 'naranja', dibujo: '/fichas/ficha24.png' },
+  { id: 'ficha25', runa: 'naranja', dibujo: '/fichas/ficha25.png' },
+  { id: 'ficha26', runa: 'naranja', dibujo: '/fichas/ficha26.png' },
+  { id: 'ficha27', runa: 'naranja', dibujo: '/fichas/ficha27.png' },
+  { id: 'ficha28', runa: 'naranja', dibujo: '/fichas/ficha28.png' },
+
+  { id: 'ficha29', runa: 'azul', dibujo: '/fichas/ficha29.png' },
+  { id: 'ficha30', runa: 'azul', dibujo: '/fichas/ficha30.png' },
+  { id: 'ficha31', runa: 'azul', dibujo: '/fichas/ficha31.png' },
+  { id: 'ficha32', runa: 'azul', dibujo: '/fichas/ficha32.png' },
+  { id: 'ficha33', runa: 'azul', dibujo: '/fichas/ficha33.png' },
+  { id: 'ficha34', runa: 'azul', dibujo: '/fichas/ficha34.png' },
+  { id: 'ficha35', runa: 'azul', dibujo: '/fichas/ficha35.png' },
+  { id: 'ficha36', runa: 'azul', dibujo: '/fichas/ficha36.png' },
 ];
+
