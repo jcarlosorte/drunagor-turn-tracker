@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
+import { FICHAS } from '@/data/fichas';
+import { v4 as uuidv4 } from 'uuid';
 
 const GameContext = createContext();
+const [availableTiles, setAvailableTiles] = useState(
+  FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
+);
+const [tileWarning, setTileWarning] = useState(null);
+const [usedTiles, setUsedTiles] = useState([]);
 
 export const GameProvider = ({ children }) => {
   const [runes, setRunes] = useState({
@@ -31,8 +38,64 @@ export const GameProvider = ({ children }) => {
     setRunes({ rojo: 0, azul: 0, verde: 0, naranja: 0, gris: 0 });
   };
 
+  const drawTileByColor = (color) => {
+    const candidates = availableTiles.filter(t => t.runa === color);
+    if (candidates.length === 0) return null;
+  
+    const random = candidates[Math.floor(Math.random() * candidates.length)];
+    setAvailableTiles(prev => prev.filter(t => t.uuid !== random.uuid));
+    setUsedTiles(prev => [...prev, random]);
+  
+    addRune(color);
+    return random;
+  };
+
+  const drawMultipleTiles = (count) => {
+    const available = [...availableTiles];
+     if (available.length < count) {
+      setTileWarning(`No hay suficientes fichas disponibles (${available.length} / ${count})`);
+      return null;
+    }
+  
+    const selected = [];
+  
+    for (let i = 0; i < count; i++) {
+      const randomIndex = Math.floor(Math.random() * available.length);
+      const tile = available.splice(randomIndex, 1)[0];
+      selected.push(tile);
+      addRune(tile.runa);
+    }
+  
+    setAvailableTiles(available);
+    setUsedTiles(prev => [...prev, ...selected]);
+  
+    return selected;
+  };
+
+
+  const resetTiles = () => {
+    setAvailableTiles(FICHAS.map(f => ({ ...f, uuid: uuidv4() })));
+    setUsedTiles([]);
+  };
+
+  
   return (
-    <GameContext.Provider value={{ runes, addRune, removeRune, getRuneCount, clearRunes }}>
+    <GameContext.Provider
+      value={{
+        runes,
+        addRune,
+        removeRune,
+        getRuneCount,
+        clearRunes,
+        availableTiles,
+        usedTiles,
+        drawTileByColor,
+        drawMultipleTiles,
+        resetTiles,
+        tileWarning, 
+        setTileWarning
+      }}
+    >
       {children}
     </GameContext.Provider>
   );
