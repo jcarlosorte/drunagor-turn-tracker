@@ -7,8 +7,6 @@ import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
-import {  } from 'react-icons/gi';
-
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
 
