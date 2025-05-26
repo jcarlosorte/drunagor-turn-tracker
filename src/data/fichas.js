@@ -11,13 +11,13 @@ export const FICHAS = [
   { id: 'ficha_7', runa: 'gris', dibujo: 'L' },
 
   // Roja (7)
-  { id: 'ficha_8', runa: 'roja', dibujo: 'Z' },
-  { id: 'ficha_9', runa: 'roja', dibujo: 'I' },
-  { id: 'ficha_10', runa: 'roja', dibujo: 'II' },
-  { id: 'ficha_11', runa: 'roja', dibujo: 'T' },
-  { id: 'ficha_12', runa: 'roja', dibujo: 'J' },
-  { id: 'ficha_13', runa: 'roja', dibujo: 'Y' },
-  { id: 'ficha_14', runa: 'roja', dibujo: 'L' },
+  { id: 'ficha_8', runa: 'rojo', dibujo: 'Z' },
+  { id: 'ficha_9', runa: 'rojo', dibujo: 'I' },
+  { id: 'ficha_10', runa: 'rojo', dibujo: 'II' },
+  { id: 'ficha_11', runa: 'rojo', dibujo: 'T' },
+  { id: 'ficha_12', runa: 'rojo', dibujo: 'J' },
+  { id: 'ficha_13', runa: 'rojo', dibujo: 'Y' },
+  { id: 'ficha_14', runa: 'rojo', dibujo: 'L' },
 
   // Verde (7)
   { id: 'ficha_15', runa: 'verde', dibujo: 'II' },
