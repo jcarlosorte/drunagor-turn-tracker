@@ -28,7 +28,7 @@ const TopMenu = ({
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
-  const { addRune, drawMultipleTiles, drawTileByColor  } = useGame();
+  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning } = useGame();
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
