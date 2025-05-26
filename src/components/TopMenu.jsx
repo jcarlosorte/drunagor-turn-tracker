@@ -9,7 +9,7 @@ import { RUNAS } from '@/data/runas';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
-
+import { useGame } from '@/context/GameContext';
 
 const TopMenu = ({
   onAddEnemy,
@@ -28,6 +28,7 @@ const TopMenu = ({
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
+  const { drawMultipleTiles, drawTileByColor  } = useGame();
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
