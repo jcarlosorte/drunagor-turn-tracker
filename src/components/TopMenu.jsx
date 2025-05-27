@@ -18,7 +18,8 @@ const TopMenu = ({
   onSelectOther,
   onAddManual,
   behaviors,
-  onSelectRuneCard
+  onSelectRuneCard,
+  onTileDraw
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
@@ -29,6 +30,15 @@ const TopMenu = ({
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning } = useGame();
+
+  const colorMap = {
+    rojo: 'bg-red-700 hover:bg-red-600',
+    azul: 'bg-blue-700 hover:bg-blue-600',
+    verde: 'bg-green-700 hover:bg-green-600',
+    naranja: 'bg-orange-700 hover:bg-orange-600',
+    gris: 'bg-gray-700 hover:bg-gray-600',
+  };
+
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
@@ -260,16 +270,16 @@ const TopMenu = ({
                     key={color}
                     onClick={() => {
                       const tile = drawTileByColor(color);
-                      if (tile) {
+                      if (tile && onTileDraw) {
                         //addRune(color); // del GameContext
-                        // lo puedes guardar visualmente también (ej. en InitTracker)
+                        onTileDraw(tile);
                       } else {
                         alert(`No quedan fichas de color ${color}`);
                       }
                     }}
-                    className="bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded text-xs"
+                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
-                    Añadir {color}
+                    {color}
                   </button>
                 ))}
               </div>
