@@ -201,6 +201,7 @@
       "inmunidad": "Inmunidad",
       "nextTurn": "Siguiente Truno",
       "aviso": "No hay suficientes fichas de Runa para continuar.",
+      "aviso1": "⚠️ HAS PERDIDO ⚠️",
       "aviso2": "No quedan fichas del color:",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
