@@ -1030,7 +1030,10 @@ const InitTracker = () => {
           <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
         ))}
       </div>
-      <TileWarningModal />
+      <TileWarningModal
+        message={tileWarning}
+        onClose={() => setTileWarning(null)}
+      />
       </PageTransition>
   );
 };
