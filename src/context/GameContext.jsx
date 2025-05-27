@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { FICHAS } from '@/data/fichas';
+import { useLanguage } from '@/context/LanguageContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const GameContext = createContext();
@@ -12,7 +13,8 @@ export const GameProvider = ({ children }) => {
     naranja: 0,
     gris: 0
   });
-  
+  const { language, translations } = useLanguage();
+  const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
     FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
   );
@@ -56,7 +58,7 @@ export const GameProvider = ({ children }) => {
   const drawMultipleTiles = (count) => {
     const available = [...availableTiles];
      if (available.length < count) {
-      setTileWarning(`No hay suficientes fichas disponibles (${available.length} / ${count})`);
+      setTileWarning(`(${ti.aviso3}) (${available.length} / ${count})`);
       return null;
     }
   
