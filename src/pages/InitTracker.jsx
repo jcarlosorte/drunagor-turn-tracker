@@ -87,7 +87,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles } = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
 
@@ -384,6 +384,15 @@ const InitTracker = () => {
       if (runes.length > 0) {
         setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: 0 });
+
+        // 🔄 Nuevo: extraer fichas si tiene numRunas
+        if (currentRune.numRunas) {
+          const tiles = drawMultipleTiles(currentRune.numRunas);
+          if (!tiles) {
+            setTileWarning(`No hay suficientes fichas para "${currentRune.nombre}"`);
+          }
+        }
+        
         return;
       }
     }
@@ -457,7 +466,7 @@ const InitTracker = () => {
       if (currentTurnEntity.type === 'rune') {
         const nueva = RUNAS.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
         if (nueva) {
-          drawMultipleTiles(currentTurnEntity.numRunas)
+          
           setPlacedRunes(prev =>
             prev.map(item =>
               item.rune.uuid === currentTurnEntity.uuid
