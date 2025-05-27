@@ -63,7 +63,7 @@ const TetrisPiece = ({ type = 'T', color = 'bg-blue-500' }) => {
             ) : (
               <div
                 key={colIndex}
-                style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
+                style={{ width: `${blockSize}px`, height: `${blockSize}px`, padding: 0, margin: 0  }}
               />
             )
           )}
