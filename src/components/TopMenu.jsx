@@ -274,7 +274,7 @@ const TopMenu = ({
                         //addRune(color); // del GameContext
                         onTileDraw(tile);
                       } else {
-                        alert(`No quedan fichas de color ${color}`);
+                        alert(`${t.aviso2} ${t.colores[color]}`);
                       }
                     }}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
