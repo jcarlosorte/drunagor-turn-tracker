@@ -56,7 +56,7 @@ const TetrisPiece = ({ type = 'T', color = 'bg-blue-500' }) => {
               <div
                 key={colIndex}
                 className={`flex items-center justify-center ${color} rounded-full`}
-                style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
+                style={{ width: `${blockSize}px`, height: `${blockSize}px`, lineHeight: 0, padding: 0, margin: 0 }}
               >
                 <GiBrickWall size={blockSize - 4} className="text-white" />
               </div>
