@@ -206,6 +206,10 @@
     "aviso3": "There are not enough Rune tokens available:",
     "fichas": "Rune Tokens",
     "cartas": "Rune Cards",
+    "addRunes": "Add Rune Tokens",
+    "addRunesCara": "Add Rune Tokens",
+    "caraA": "Face A",
+    "caraB": "Face B",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
