@@ -203,6 +203,7 @@
     "aviso": "There are not enough Rune tokens to continue.",
     "aviso1": "⚠️ YOU HAVE LOST ⚠️",
     "aviso2": "There are no more tokens of color:",
+    "aviso3": "There are not enough Rune tokens available:",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
