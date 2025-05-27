@@ -200,13 +200,21 @@
     "PC": "Insert CP",
     "inmunidad": "Immunities",
     "nextTurn": "Next Turn",
+    "aviso": "There are not enough Rune tokens to continue.",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
       "cuerpo": "Melee",
       "magia": "Magical"
     },
-    "capacidades": "Special Abilities"
+    "capacidades": "Special Abilities",
+    "colores": {
+      "rojo": "Red",
+      "gris": "Gray",
+      "verde": "Green",
+      "naranja": "Oranje",
+      "azul": "Blue"
+    }
   },
   "condiciones_t": {
     "none": "",
