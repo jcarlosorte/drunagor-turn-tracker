@@ -20,7 +20,7 @@ export const GameProvider = ({ children }) => {
   const [usedTiles, setUsedTiles] = useState([]);
     
   const addRune = (color) => {
-    console.log(color);
+    
     setRunes(prev => ({
       ...prev,
       [color]: prev[color] + 1
