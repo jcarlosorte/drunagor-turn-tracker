@@ -400,7 +400,7 @@ const InitTracker = () => {
           const tiles = drawMultipleTiles(currentRune.numRunas);
           tiles?.forEach(tile => handleTileDraw(tile));
           if (!tiles) {
-            setTileWarning(`No hay suficientes fichas para continuar. HAS PERDIDO`);
+            setTileWarning(`No hay suficientes fichas de Runa para continuar.`);
           }
         }
         
