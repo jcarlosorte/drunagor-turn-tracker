@@ -1,7 +1,8 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { GiAbstract065, GiWingedSword, RiArrowTurnBackLine } from 'react-icons/gi';
+import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
+import { RiArrowTurnBackLine } from "react-icons/ri";
 import { MdScreenRotation } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
