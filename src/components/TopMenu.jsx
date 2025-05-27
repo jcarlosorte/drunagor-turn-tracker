@@ -279,7 +279,7 @@ const TopMenu = ({
                     }}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
-                    {color}
+                    {t.colores[color]}
                   </button>
                 ))}
               </div>
@@ -291,7 +291,7 @@ const TopMenu = ({
                 onClick={() => setIsRunesOpen(false)}
                 className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
               >
-                Cerrar Runas
+                {t.close}
               </button>
             </div>
           </motion.div>
