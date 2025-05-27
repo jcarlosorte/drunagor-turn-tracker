@@ -87,7 +87,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'otros'];
-  const { runes, addRune, removeRune, getRuneCount, clearRunes } = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
 
@@ -457,10 +457,10 @@ const InitTracker = () => {
       if (currentTurnEntity.type === 'rune') {
         const nueva = RUNAS.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
         if (nueva) {
+          drawMultipleTiles(currentTurnEntity.numRunas)
           setPlacedRunes(prev =>
             prev.map(item =>
               item.rune.uuid === currentTurnEntity.uuid
-              drawMultipleTiles(currentTurnEntity.numRunas)
                 ? {
                     rune: {
                       ...item.rune,
