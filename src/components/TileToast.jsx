@@ -10,10 +10,11 @@ const colorMap = {
   naranja: 'bg-orange-500',
   gris: 'bg-gray-500',
 };
-const { language, translations } = useLanguage();
-const ti = translations.trackerInit || {};
+
 
 const TileToast = ({ tile, onClose }) => {
+  const { language, translations } = useLanguage();
+  const ti = translations.trackerInit || {};
   useEffect(() => {
     const timeout = setTimeout(onClose, 3000);
     return () => clearTimeout(timeout);
