@@ -390,7 +390,8 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
+        const currentRune = runes[0];
+        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: 0 });
 
         // 🔄 Nuevo: extraer fichas si tiene numRunas
