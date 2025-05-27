@@ -90,6 +90,7 @@ const InitTracker = () => {
   const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
+  const [shownTiles, setShownTiles] = useState([]);
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -107,6 +108,13 @@ const InitTracker = () => {
     return Object.entries(runesColorMap).find(([color, idx]) => idx === index)?.[0];
   };
 
+  const handleTileDraw = (tile) => {
+    setShownTiles(prev => [...prev, tile]);
+  };
+  
+  const handleCloseToast = (uuid) => {
+    setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
+  };
   
   const openCommanderPCModal = (callback) => {
     setOnPCConfirm(() => callback);
@@ -388,6 +396,7 @@ const InitTracker = () => {
         // 🔄 Nuevo: extraer fichas si tiene numRunas
         if (currentRune.numRunas) {
           const tiles = drawMultipleTiles(currentRune.numRunas);
+          tiles?.forEach(tile => handleTileDraw(tile));
           if (!tiles) {
             setTileWarning(`No hay suficientes fichas para "${currentRune.nombre}"`);
           }
@@ -1013,6 +1022,11 @@ const InitTracker = () => {
           }}
         />
       )}
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-[999] pointer-events-none">
+        {shownTiles.map(tile => (
+          <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
+        ))}
+      </div>
       <TileWarningModal />
       </PageTransition>
   );
