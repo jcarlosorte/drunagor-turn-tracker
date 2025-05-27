@@ -212,7 +212,7 @@
     "cara": "Face",
     "caraA": "Face A",
     "caraB": "Face B",
-    "Roba": "DRAW",
+    "Roba": "draw",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
