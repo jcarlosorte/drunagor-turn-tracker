@@ -883,6 +883,7 @@ const InitTracker = () => {
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
+              onTileDraw={handleTileDraw}
             />
               
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
