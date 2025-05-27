@@ -1,7 +1,7 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
+import { GiAbstract065, GiWingedSword, RiArrowTurnBackLine } from 'react-icons/gi';
 import { MdScreenRotation } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -621,8 +621,10 @@ const InitTracker = () => {
               <div className="flex justify-center mb-1">
                 <GiAbstract065 className="text-yellow-300 text-2xl" />
               </div>
-              <div className="text-xs font-bold text-center text-white">{rune.nombre} ({rune.cara})</div>
-              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{rune.accion}</div>
+              <div className="text-xl font-bold text-center text-white">{ti.[rune.numRunas]} {rune.numRunas}</div>
+              <div className="text-xl font-bold text-center text-white">{ti.rune}</div>
+              <div className="text-xl font-bold text-center text-white"><RiArrowTurnBackLine /></div>
+              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
             </div>
           </div>
   
