@@ -233,14 +233,14 @@ const TopMenu = ({
                   onClick={() => setShowRuneFaceOptions(prev => !prev)}
                   className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                 >
-                  Seleccionar Runa por cara
+                  {t.addRunesCara}
                 </button>
       
                 <button
                   onClick={() => alert('Funcionalidad de runas especiales próximamente')}
                   className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
                 >
-                  Añadir Runa Especial
+                  {t.addSpecial}
                 </button>
               </div>
       
@@ -252,7 +252,7 @@ const TopMenu = ({
                       onClick={() => onSelectRuneCard(card)}
                       className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                     >
-                      {card.nombre} ({card.cara})
+                      {t.rune} ({card.cara})
                     </button>
                   ))}
                 </div>
@@ -304,4 +304,3 @@ const TopMenu = ({
 };
 
 export default TopMenu;
-
