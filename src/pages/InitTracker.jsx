@@ -621,7 +621,7 @@ const InitTracker = () => {
               <div className="flex justify-center mb-1">
                 <GiAbstract065 className="text-yellow-300 text-2xl" />
               </div>
-              <div className="text-xl font-bold text-center text-white">{ti.[rune.numRunas]} {rune.numRunas}</div>
+              <div className="text-xl font-bold text-center text-white">{ti[rune.accion]} {rune.numRunas}</div>
               <div className="text-xl font-bold text-center text-white">{ti.rune}</div>
               <div className="text-xl font-bold text-center text-white"><RiArrowTurnBackLine /></div>
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
