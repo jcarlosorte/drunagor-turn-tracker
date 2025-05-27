@@ -201,6 +201,7 @@
     "inmunidad": "Immunities",
     "nextTurn": "Next Turn",
     "aviso": "There are not enough Rune tokens to continue.",
+    "aviso2": "There are no more tokens of color:",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
