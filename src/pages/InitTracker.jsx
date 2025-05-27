@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
-import { RiArrowTurnBackLine } from "react-icons/ri";
+import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
 import { MdScreenRotation } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -620,10 +620,10 @@ const InitTracker = () => {
           <div className="absolute w-full h-full backface-hidden">
             <div className="bg-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
               <div className="flex justify-center mb-1">
-                <GiAbstract065 className="text-yellow-300 text-2xl" />
+                <GiAbstract065 className="text-yellow-300 text-xl" />
               </div>
               <div className="text-xl text-center text-white">{ti[rune.accion]} {rune.numRunas}</div>
-              <div className="text-xl font-bold text-center text-white">{ti.rune}</div>
+              <div className="text-xl text-center text-white">{ti.rune}</div>
               <div className="flex justify-center mb-1"><RiArrowTurnBackLine className="text-white text-xl"/></div>
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
             </div>
@@ -633,11 +633,11 @@ const InitTracker = () => {
           <div className="absolute w-full h-full backface-hidden rotate-y-180">
             <div className="bg-indigo-900 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
               <div className="flex justify-center mb-1">
-                <GiAbstract065 className="text-yellow-200 text-2xl" />
+                <GiAbstract065 className="text-yellow-200 text-xl" />
               </div>
               <div className="text-xl text-center text-white">{ti[rune.accion]} {rune.numRunas}</div>
-              <div className="text-xl font-bold text-center text-white">{ti.rune}</div>
-              <div className="flex justify-center mb-1"><RiArrowTurnBackLine className="text-white text-xl"/></div>
+              <div className="text-xl text-center text-white">{ti.rune}</div>
+              <div className="flex justify-center mb-1"><RiArrowTurnForwardLine className="text-white text-xl"/></div>
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
             </div>
           </div>
