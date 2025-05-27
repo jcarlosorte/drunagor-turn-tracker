@@ -23,6 +23,7 @@ import { ModalEnemyCard } from '@/components/ModalEnemyCard';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
 import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
 import TileWarningModal from '@/components/TileWarningModal';
+import TileToast from '@/components/TileToast';
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
