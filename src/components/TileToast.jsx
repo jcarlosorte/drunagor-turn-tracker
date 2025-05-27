@@ -1,5 +1,6 @@
 // src/components/TileToast.jsx
 import React, { useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import TetrisPiece from './TetrisPiece';
 
 const colorMap = {
@@ -9,6 +10,8 @@ const colorMap = {
   naranja: 'bg-orange-500',
   gris: 'bg-gray-500',
 };
+const { language, translations } = useLanguage();
+const ti = translations.trackerInit || {};
 
 const TileToast = ({ tile, onClose }) => {
   useEffect(() => {
@@ -18,7 +21,7 @@ const TileToast = ({ tile, onClose }) => {
 
   return (
     <div className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-xl text-white ${colorMap[tile.runa]} border-2 border-white`}>
-      <div className="text-xs font-bold mb-1">+1 Runa {tile.runa}</div>
+      <div className="text-xs font-bold mb-1">+1 {ti.rune}: {ti.colores[tile.runa]}</div>
       <TetrisPiece type={tile.dibujo} color="text-white" />
     </div>
   );
