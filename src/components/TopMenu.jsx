@@ -215,7 +215,7 @@ const TopMenu = ({
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
                 <GiShield className="text-indigo-400 text-xl" />
-                <span className="font-semibold">Cartas de Runa</span>
+                <span className="font-semibold">{t.cartas}</span>
               </div>
       
               <div className="flex flex-wrap gap-2">
@@ -226,7 +226,7 @@ const TopMenu = ({
                   }}
                   className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                 >
-                  Añadir Runas (cara A)
+                  {t.addRunes} ({t.caraA})
                 </button>
       
                 <button
@@ -262,7 +262,7 @@ const TopMenu = ({
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
                 <GiBrickWall className="text-green-300 text-xl" />
-                <span className="font-semibold">Fichas de Runa</span>
+                <span className="font-semibold">{t.fichas}</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
