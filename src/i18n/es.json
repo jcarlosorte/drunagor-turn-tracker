@@ -200,13 +200,21 @@
       "PC": "Introduce el valor de PC",
       "inmunidad": "Inmunidad",
       "nextTurn": "Siguiente Truno",
+      "aviso": "No hay suficientes fichas de Runa para continuar.",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
         "cuerpo": "Cuerpo a cuerpo",
         "magia": "Mágico"
         },
-      "capacidades": "Capacidades Especiales"
+      "capacidades": "Capacidades Especiales",
+      "colores": {
+        "rojo": "Rojo",
+        "gris": "Gris",
+        "verde": "Verde",
+        "naranja": "Naranja",
+        "azul": "Azul"
+      }
     },
     "condiciones_t": {
       "none": "",
