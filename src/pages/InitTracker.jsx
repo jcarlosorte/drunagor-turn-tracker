@@ -272,6 +272,7 @@ const InitTracker = () => {
       cara: runeCard.cara,
       posicion: runeCard.posicion, // 'arriba' o 'abajo'
       accion: runeCard.accion,
+      numRunas: numRunas.accion,
       colorIndex: 10
     };
     placeRune({ rune: newRune });
@@ -459,6 +460,7 @@ const InitTracker = () => {
           setPlacedRunes(prev =>
             prev.map(item =>
               item.rune.uuid === currentTurnEntity.uuid
+              drawMultipleTiles(currentTurnEntity.numRunas)
                 ? {
                     rune: {
                       ...item.rune,
