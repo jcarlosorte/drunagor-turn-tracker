@@ -272,7 +272,7 @@ const InitTracker = () => {
       cara: runeCard.cara,
       posicion: runeCard.posicion, // 'arriba' o 'abajo'
       accion: runeCard.accion,
-      numRunas: numRunas.accion,
+      numRunas: runeCard.numRunas,
       colorIndex: 10
     };
     placeRune({ rune: newRune });
