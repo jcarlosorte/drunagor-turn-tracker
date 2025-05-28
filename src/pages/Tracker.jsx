@@ -317,7 +317,7 @@ const TrackerSelect = () => {
         {/* Comportamientos Generales */}
         {showEnemies && (
         <div>
-          <div className="flex flex-wrap justify-center gap-4 mb-4">
+          <div className="flex flex-cols justify-center gap-4 mb-4">
             
             <div className="bg-white/70 rounded-lg p-4 w-full sm:w-[300px]">
               <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
