@@ -19,13 +19,12 @@ const TrackerSelect = () => {
   const [selectedBehaviors, setSelectedBehaviors] = useState(["estandar", "alternativo", "complejo"]);
   const [showHeroes, setShowHeroes] = useState(false);
   const [showEnemies, setShowEnemies] = useState(false);
-  
   const { selectedExpansions } = useExpansions();
   const { language, translations } = useLanguage();
   const { setTrackerData } = useTracker();
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
-  
+  const [activeEnemyExpansions, setActiveEnemyExpansions] = useState([...selectedExpansions]);
   const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.includes(h.expansionId));
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
@@ -146,21 +145,29 @@ const TrackerSelect = () => {
 
   // Función para manejar la selección de comportamientos
   const handleBehaviorSelect = (behavior) => {
-  setSelectedBehaviors(prev => {
-    if (prev.includes(behavior)) {
-      // Si el comportamiento ya está seleccionado, lo eliminamos
-      const newBehaviors = prev.filter(b => b !== behavior);
-      // Si no hay ningún comportamiento seleccionado, restauramos el comportamiento
-      if (newBehaviors.length === 0) {
-        return prev; // No dejamos que se deseleccione el último comportamiento
+    setSelectedBehaviors(prev => {
+      if (prev.includes(behavior)) {
+        // Si el comportamiento ya está seleccionado, lo eliminamos
+        const newBehaviors = prev.filter(b => b !== behavior);
+        // Si no hay ningún comportamiento seleccionado, restauramos el comportamiento
+        if (newBehaviors.length === 0) {
+          return prev; // No dejamos que se deseleccione el último comportamiento
+        }
+        return newBehaviors;
+      } else {
+        // Si el comportamiento no está seleccionado, lo añadimos
+        return [...prev, behavior];
       }
-      return newBehaviors;
-    } else {
-      // Si el comportamiento no está seleccionado, lo añadimos
-      return [...prev, behavior];
-    }
-  });
-};
+    });
+  };
+
+  const toggleEnemyExpansion = (expansionId) => {
+    setActiveEnemyExpansions(prev =>
+      prev.includes(expansionId)
+        ? prev.filter(id => id !== expansionId)
+        : [...prev, expansionId]
+    );
+  };
   
    const RuneTitle = ({ children, color = "yellow" }) => {
     const colors = {
@@ -302,6 +309,29 @@ const TrackerSelect = () => {
         </div>
         
         {/* Comportamientos Generales */}
+        <div className="mb-4">
+          <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Filtrar por expansión'}</p>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {selectedExpansions.map(exp => {
+              const isActive = activeEnemyExpansions.includes(exp);
+              const expData = EXPANSIONS.find(e => e.id === exp);
+              return (
+                <button
+                  key={exp}
+                  onClick={() => toggleEnemyExpansion(exp)}
+                  className={`px-3 py-1 rounded-full border font-semibold text-sm transition ${
+                    isActive
+                      ? 'bg-green-600 text-white border-green-800'
+                      : 'bg-gray-300 text-gray-700 border-gray-400'
+                  }`}
+                >
+                  {translations.expansions?.[exp] || expData?.name || exp}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {showEnemies && (
         <div>
         <div className="mb-4 bg-white/70 rounded-3xl">
@@ -344,7 +374,7 @@ const TrackerSelect = () => {
           {COLORS.map(color => {
             const enemiesOfColorMap = new Map();
             enemiesInSelectedExpansions.forEach(e => {
-              if (e.color === color.id && !enemiesOfColorMap.has(e.id)) {
+              if (e.color === color.id && activeEnemyExpansions.includes(e.expansionId) && !enemiesOfColorMap.has(e.id)) {
                 enemiesOfColorMap.set(e.id, e);
               }
             });
