@@ -24,7 +24,6 @@ const TrackerSelect = () => {
   const { setTrackerData } = useTracker();
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
-  const [activeEnemyExpansions, setActiveEnemyExpansions] = useState([...selectedExpansions]);
   const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.includes(h.expansionId));
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
@@ -161,13 +160,20 @@ const TrackerSelect = () => {
     });
   };
 
-  const toggleEnemyExpansion = (expansionId) => {
-    setActiveEnemyExpansions(prev =>
-      prev.includes(expansionId)
-        ? prev.filter(id => id !== expansionId)
-        : [...prev, expansionId]
-    );
+  const toggleExpansionEnemies = (expansionId) => {
+    const enemiesOfExpansion = ENEMIES.filter(e => e.expansionId === expansionId).map(e => e.id);
+  
+    const allSelected = enemiesOfExpansion.every(id => selectedEnemies.includes(id));
+  
+    if (allSelected) {
+      // Si todos están seleccionados, los desmarcamos
+      setSelectedEnemies(prev => prev.filter(id => !enemiesOfExpansion.includes(id)));
+    } else {
+      // Si alguno no está seleccionado, los añadimos todos
+      setSelectedEnemies(prev => [...new Set([...prev, ...enemiesOfExpansion])]);
+    }
   };
+
   
    const RuneTitle = ({ children, color = "yellow" }) => {
     const colors = {
@@ -309,72 +315,69 @@ const TrackerSelect = () => {
         </div>
         
         {/* Comportamientos Generales */}
-        <div className="mb-4">
-          <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Filtrar por expansión'}</p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {selectedExpansions.map(exp => {
-              const isActive = activeEnemyExpansions.includes(exp);
-              const expData = EXPANSIONS.find(e => e.id === exp);
-              return (
-                <button
-                  key={exp}
-                  onClick={() => toggleEnemyExpansion(exp)}
-                  className={`px-3 py-1 rounded-full border font-semibold text-sm transition ${
-                    isActive
-                      ? 'bg-green-600 text-white border-green-800'
-                      : 'bg-gray-300 text-gray-700 border-gray-400'
-                  }`}
-                >
-                  {translations.expansions?.[exp] || expData?.name || exp}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {showEnemies && (
         <div>
-        <div className="mb-4 bg-white/70 rounded-3xl">
-          <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
-          <div className="flex justify-center items-center gap-4 mb-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={selectedBehaviors.includes("estandar")}
-                onChange={() => handleBehaviorSelect("estandar")}
-                className="form-checkbox"
-              />
-              <span className="text-sm">{t?.comportamientos?.estandar}:</span>
-            </label>
-            
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={selectedBehaviors.includes("alternativo")}
-                onChange={() => handleBehaviorSelect("alternativo")}
-                className="form-checkbox"
-              />
-              <span className="text-sm">{t?.comportamientos?.alternativo}</span>
-            </label>
-            
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={selectedBehaviors.includes("complejo")}
-                onChange={() => handleBehaviorSelect("complejo")}
-                className="form-checkbox"
-              />
-              <span className="text-sm">{t?.comportamientos?.complejo}</span>
-            </label>
-
+          <div className="mb-4 bg-white/70 rounded-3xl">
+            <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
+            <div className="flex justify-center items-center gap-4 mb-4">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("estandar")}
+                  onChange={() => handleBehaviorSelect("estandar")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.estandar}:</span>
+              </label>
+              
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("alternativo")}
+                  onChange={() => handleBehaviorSelect("alternativo")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.alternativo}</span>
+              </label>
+              
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBehaviors.includes("complejo")}
+                  onChange={() => handleBehaviorSelect("complejo")}
+                  className="form-checkbox"
+                />
+                <span className="text-sm">{t?.comportamientos?.complejo}</span>
+              </label>
+  
+            </div>
           </div>
-        </div>
+
+          {/*  Expansiones */}
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Seleccionar enemigos por expansión'}</p>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {selectedExpansions.map(exp => {
+                const expData = EXPANSIONS.find(e => e.id === exp);
+                return (
+                  <button
+                    key={exp}
+                    onClick={() => toggleExpansionEnemies(exp)}
+                    className="px-3 py-1 rounded-full border bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
+                  >
+                    {translations.expansions?.[exp] || expData?.name || exp}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
 
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
           {COLORS.map(color => {
             const enemiesOfColorMap = new Map();
             enemiesInSelectedExpansions.forEach(e => {
-              if (e.color === color.id && activeEnemyExpansions.includes(e.expansionId) && !enemiesOfColorMap.has(e.id)) {
+              if (e.color === color.id && !enemiesOfColorMap.has(e.id)) {
                 enemiesOfColorMap.set(e.id, e);
               }
             });
