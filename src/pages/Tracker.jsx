@@ -274,14 +274,14 @@ const TrackerSelect = () => {
                   <span>
                     {heroRoles[heroId]
                       ? `- ${getRoleName(heroRoles[heroId])} -`
-                      : <em>- Elige rol -</em>}
+                      : <em>- {t.chooseRole} -</em>}
                   </span>
                   <select
                     value={heroRoles[heroId] || ""}
                     onChange={(e) => handleRoleSelect(heroId, e.target.value)}
                     className="mt-1 p-1 border border-gray-400 rounded text-sm"
                   >
-                    <option value="">Elige rol</option>
+                    <option value="">{t.chooseRole}</option>
                     {ROLES.filter(role => !usedRoles.includes(role.id)).map(role => (
                       <option key={role.id} value={role.id}>
                         {getRoleName(role.id)}
@@ -297,7 +297,7 @@ const TrackerSelect = () => {
 
       {/* Enemigos agrupados por color */}
       <div className="border-0 rounded-3xl p-2 bg-slate-600 shadow-2xl border-yellow-700 text-black">
-        <div className="cursor-pointer" onClick={() => setShowEnemies(!showEnemies)}>
+        <div className="cursor-pointerflex items-center gap-2" onClick={() => setShowEnemies(!showEnemies)}>
           <RuneTitle color="red"><GiSharpedTeethSkull className="text-red-700 text-2xl" />{t.selectEnemies}</RuneTitle>
         </div>
         
