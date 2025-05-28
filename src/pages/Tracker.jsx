@@ -322,7 +322,7 @@ const TrackerSelect = () => {
           {/* Comportamientos */}
           <div className="bg-white/70 rounded-lg p-4 w-full sm:w-1/3 text-center">
             <p className="text-lg font-semibold mb-2 text-center">{t?.comportamientos?.comportamiento}</p>
-            <div className="flex flex-wrap text-center gap-2">
+            <div className="flex flex-col text-center items-center gap-2">
               {["estandar", "alternativo", "complejo"].map(tipo => (
                 <label key={tipo} className="flex items-center space-x-2">
                   <input
