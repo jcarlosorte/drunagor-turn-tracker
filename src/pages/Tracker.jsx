@@ -320,8 +320,8 @@ const TrackerSelect = () => {
           <div className="flex flex-wrap justify-center gap-4 mb-4">
 
           {/* Comportamientos */}
-          <div className="bg-white/70 rounded-lg p-4 sm:w-1/2 md:w-1/2 lg:w-5/12">
-            <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
+          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-1/3 text-center">
+            <p className="text-lg font-semibold mb-2 text-center">{t?.comportamientos?.comportamiento}</p>
             <div className="flex flex-wrap text-center gap-2">
               {["estandar", "alternativo", "complejo"].map(tipo => (
                 <label key={tipo} className="flex items-center space-x-2">
@@ -338,7 +338,7 @@ const TrackerSelect = () => {
           </div>
       
           {/* Expansiones */}
-          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-5/12">
+          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-2/3">
             <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Seleccionar enemigos por expansión'}</p>
             <div className="flex flex-wrap gap-2 justify-center">
               {selectedExpansions.map(exp => {
