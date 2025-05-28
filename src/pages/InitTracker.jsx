@@ -961,14 +961,24 @@ const InitTracker = () => {
                                 <>
                                   <div className="text-xs text-yellow-300 mb-1 text-center">{tc?.[categoria] || categoria}</div>
                                   <div className="flex flex-wrap justify-center gap-1">
-                                    {variants.map(variant => (
-                                      <button
-                                        key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
-                                        className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
-                                        onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
-                                      >
-                                        {tb?.[variant.comportamiento] || variant.comportamiento}
-                                      </button>
+                                    {variants
+                                      .filter((variant, index, self) =>
+                                        index === self.findIndex(v =>
+                                          v.id === variant.id &&
+                                          v.categoria === variant.categoria &&
+                                          v.comportamiento === variant.comportamiento &&
+                                          (v.cara === 'A' || !v.cara) // si tiene cara, preferimos la A
+                                        )
+                                      )
+                                      .filter(v => v.cara === 'A' || !v.cara) // segunda seguridad: solo mostramos cara A o sin cara
+                                      .map(variant => (
+                                        <button
+                                          key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
+                                          className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
+                                          onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
+                                        >
+                                          {tb?.[variant.comportamiento] || variant.comportamiento}
+                                        </button>
                                     ))}
                                   </div>
                                 </>
