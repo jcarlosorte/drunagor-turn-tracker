@@ -317,11 +317,11 @@ const TrackerSelect = () => {
         {/* Comportamientos Generales */}
         {showEnemies && (
         <div>
-          <div className="flex flex-wrap gap-2 mb-4 justify-center">
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
             
-            <div className="mb-4 bg-white/70 rounded-3xl">
+            <div className="bg-white/70 rounded-lg p-4 w-full sm:w-[300px]">
               <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
-              <div className="flex justify-center items-center gap-4 mb-4">
+              <div className="flex flex-col justify-center items-center gap-4 mb-4">
                 <label className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -356,7 +356,7 @@ const TrackerSelect = () => {
             </div>
 
           {/*  Expansiones */}
-          <div className="mb-4 bg-white/70 rounded-3xl">
+          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-[400px]">
             <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Seleccionar enemigos por expansión'}</p>
             <div className="flex flex-wrap gap-2 justify-center">
               {selectedExpansions.map(exp => {
