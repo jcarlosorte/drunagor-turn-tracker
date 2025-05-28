@@ -317,46 +317,28 @@ const TrackerSelect = () => {
         {/* Comportamientos Generales */}
         {showEnemies && (
         <div>
-          <div className="flex flex-cols justify-center gap-4 mb-4">
-            
-            <div className="bg-white/70 rounded-lg p-4 w-full sm:w-[300px]">
-              <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
-              <div className="flex flex-col justify-center items-center gap-4 mb-4">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedBehaviors.includes("estandar")}
-                    onChange={() => handleBehaviorSelect("estandar")}
-                    className="form-checkbox"
-                  />
-                  <span className="text-sm">{t?.comportamientos?.estandar}:</span>
-                </label>
-                
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedBehaviors.includes("alternativo")}
-                    onChange={() => handleBehaviorSelect("alternativo")}
-                    className="form-checkbox"
-                  />
-                  <span className="text-sm">{t?.comportamientos?.alternativo}</span>
-                </label>
-                
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedBehaviors.includes("complejo")}
-                    onChange={() => handleBehaviorSelect("complejo")}
-                    className="form-checkbox"
-                  />
-                  <span className="text-sm">{t?.comportamientos?.complejo}</span>
-                </label>
-    
-              </div>
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
 
-          {/*  Expansiones */}
-          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-[400px]">
+          {/* Comportamientos */}
+          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-5/12">
+            <p className="text-lg font-semibold mb-2">{t?.comportamientos?.comportamiento}</p>
+            <div className="flex flex-col gap-2">
+              {["estandar", "alternativo", "complejo"].map(tipo => (
+                <label key={tipo} className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedBehaviors.includes(tipo)}
+                    onChange={() => handleBehaviorSelect(tipo)}
+                    className="form-checkbox"
+                  />
+                  <span className="text-sm">{t?.comportamientos?.[tipo]}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+      
+          {/* Expansiones */}
+          <div className="bg-white/70 rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-5/12">
             <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Seleccionar enemigos por expansión'}</p>
             <div className="flex flex-wrap gap-2 justify-center">
               {selectedExpansions.map(exp => {
@@ -373,7 +355,7 @@ const TrackerSelect = () => {
               })}
             </div>
           </div>
-
+      
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
