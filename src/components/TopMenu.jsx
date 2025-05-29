@@ -31,7 +31,7 @@ const TopMenu = ({
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const { resetPlacedRunes } = useInitRunes();
-  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning, resetTiles, availableTiles } = useGame();
+  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning, resetTiles, availableTiles, usedTiles } = useGame();
 
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
