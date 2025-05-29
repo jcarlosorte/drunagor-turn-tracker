@@ -152,6 +152,7 @@
     "back": "Inicio",
     "confirm": "Confirmar",
     "reset": "Resetear",
+    "RuneRepeat": "Ya existe una carta de runa de este tipo",
     "comportamientos": {
       "comportamiento": "Comportamiento",
       "estandar": "Estándar",
