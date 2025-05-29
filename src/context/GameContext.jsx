@@ -13,14 +13,16 @@ export const GameProvider = ({ children }) => {
     naranja: 0,
     gris: 0
   });
-  
-  const { language, translations } = useLanguage();
-  const ti = translations.trackerInit || {};
+
   const [availableTiles, setAvailableTiles] = useState(
     FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
   );
   const [tileWarning, setTileWarning] = useState(null);
   const [usedTiles, setUsedTiles] = useState([]);
+  
+  const { language, translations } = useLanguage();
+  const ti = translations.trackerInit || {};
+
     
   const addRune = (color) => {
     
