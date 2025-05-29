@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
+import { useInitRunes } from "@/context/InitRunesContext";
 import { useGame } from '@/context/GameContext';
 
 const TopMenu = ({
@@ -29,7 +30,8 @@ const TopMenu = ({
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
-  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning } = useGame();
+  const { resetPlacedRunes } = useInitRunes();
+  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning, resetTiles } = useGame();
 
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -214,7 +216,7 @@ const TopMenu = ({
           >
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
-                <GiShield className="text-indigo-400 text-xl" />
+                <GiCardPlay className="text-indigo-400 text-xl" />
                 <span className="font-semibold">{t.cartas}</span>
               </div>
       
@@ -287,6 +289,15 @@ const TopMenu = ({
             
                         
             <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={() => {
+                  resetPlacedRunes(); // Borra las cartas de runa
+                  resetTiles();        // Borra las fichas de runa
+                }}
+                className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
+              >
+                {t.resetRunes || 'Resetear Runas'}
+              </button>
               <button
                 onClick={() => setIsRunesOpen(false)}
                 className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
