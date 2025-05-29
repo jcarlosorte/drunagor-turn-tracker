@@ -341,18 +341,23 @@ const TrackerSelect = () => {
           <div className="bg-white/70 rounded-lg p-4 w-full sm:w-2/3">
             <p className="text-lg font-semibold mb-2">{t?.selectExpansions || 'Seleccionar enemigos por expansión'}</p>
             <div className="flex flex-wrap gap-2 justify-center">
-              {selectedExpansions.map(exp => {
-                const expData = EXPANSIONS.find(e => e.id === exp);
-                return (
-                  <button
-                    key={exp}
-                    onClick={() => toggleExpansionEnemies(exp)}
-                    className="px-3 py-1 rounded-full border bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
-                  >
-                    {translations.expansions?.[exp] || expData?.name || exp}
-                  </button>
-                );
-              })}
+              {selectedExpansions
+                .filter(exp => {
+                  const expData = EXPANSIONS.find(e => e.id === exp);
+                  return expData?.enemies?.length > 0; // 👈 Filtra las expansiones con enemigos
+                })
+                .map(exp => {
+                  const expData = EXPANSIONS.find(e => e.id === exp);
+                  return (
+                    <button
+                      key={exp}
+                      onClick={() => toggleExpansionEnemies(exp)}
+                      className="px-3 py-1 rounded-full border bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
+                    >
+                      {translations.expansions?.[exp] || expData?.name || exp}
+                    </button>
+                  );
+                })}
             </div>
           </div>
       
