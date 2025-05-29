@@ -79,7 +79,9 @@ export const GameProvider = ({ children }) => {
 
 
   const resetTiles = () => {
-    setAvailableTiles(FICHAS.map(f => ({ ...f, uuid: uuidv4() })));
+    console.log("RESETTING TILES...");
+    const fresh = FICHAS.map(f => ({ ...f, uuid: uuidv4() }));
+    setAvailableTiles(fresh);
     setUsedTiles([]);
   };
 
