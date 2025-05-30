@@ -216,7 +216,7 @@ const TopMenu = ({
           >
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
-                <GiShield className="text-indigo-400 text-xl" />
+                <GiCardPlay className="text-indigo-400 text-xl" />
                 <span className="font-semibold">{t.cartas}</span>
               </div>
       
