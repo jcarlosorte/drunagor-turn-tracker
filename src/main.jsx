@@ -12,6 +12,9 @@ import { GameProvider } from './context/GameContext';
 import { InitRunesProvider } from '@/context/InitRunesContext';
 import { InitEnemiesProvider } from '@/context/InitEnemiesContext'; // MOVIDO AQUÍ
 
+
+import AppWrapper from './AppWrapper'; // 👈 nuevo
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LanguageProvider>
@@ -19,8 +22,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <TrackerProvider> 
           <GameProvider>
             <InitRunesProvider>
-              <InitEnemiesProvider> {/* ✅ MOVIDO AQUÍ */}
-                <App />
+              <InitEnemiesProvider>
+                <AppWrapper /> {/* 👈 nuevo componente que controla el inicio */}
               </InitEnemiesProvider>
             </InitRunesProvider>
           </GameProvider>
@@ -28,5 +31,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </ExpansionProvider>
     </LanguageProvider>
   </React.StrictMode>,
-)
-
+);
