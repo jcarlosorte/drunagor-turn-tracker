@@ -13,7 +13,6 @@ export const GameProvider = ({ children }) => {
     naranja: 0,
     gris: 0
   });
-  
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
