@@ -16,8 +16,8 @@ const AppWrapper = () => {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center bg-black text-white text-xl font-bold">
-        Cargando...
+      <div className="h-screen w-screen flex items-center justify-center bg-black">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
       </div>
     );
   }
