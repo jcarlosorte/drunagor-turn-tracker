@@ -215,6 +215,7 @@
       "caraB": "Cara B",
       "Roba": "roba",
       "resetRunes": "Resetear Runas",
+      "RuneRepeat": "Ya existe una Carta de Runa.",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
