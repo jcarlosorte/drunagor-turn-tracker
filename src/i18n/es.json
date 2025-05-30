@@ -344,7 +344,8 @@
       "VENENO_X": "VENENO {x}",
       "VENENO_I": "VENENO",
       "VENGATIVO": "VENGATIVO",
-      "VORAGINE": "VORÁGINE"
+      "VORAGINE": "VORÁGINE",
+      "Y": "&"
     },
     "condiciones_d": {
       "ABSORCION": "Absorber es robar recursos. Cuando un personaje absorbe algo de un objetivo, el personaje que lo sufre pierde lo absorbido y se lo da al personaje que absorbe. Absorber Salud no es igual que infligir daño, así que no se puede responder a este efecto con reacciones",
