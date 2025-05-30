@@ -343,7 +343,8 @@
     "VENENO_X": "POISON {x}",
     "VENENO_I": "POISON",
     "VENGATIVO": "BLOODSEEKER",
-    "VORAGINE": "SWIRL"
+    "VORAGINE": "SWIRL",
+    "Y": "&"
   },
   "condiciones_d": {
     "ABSORCION": "Draining is resource stealing. When a characters drains something from a Target, it means that the drained character loses whatever is being drained and then gives it to the draining character. Draining Health is not the same as dealing damage, so this effect can't be responded to with Reactions.",
