@@ -291,6 +291,8 @@ const TopMenu = ({
             <div className="flex justify-center gap-4 mt-2">
               <button
                 onClick={() => {
+                  console.log("Available:", availableTiles);
+                  console.log("Used:", usedTiles);
                   resetPlacedRunes(); // Borra las cartas de runa
                   resetTiles();        // Borra las fichas de runa
                 }}
