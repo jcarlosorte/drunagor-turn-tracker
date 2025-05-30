@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useState } from 'react';
-import { useLanguage } from "@/context/LanguageContext";
+
 import { v4 as uuidv4 } from 'uuid';
 
 const InitRunesContext = createContext();
 
 export const InitRunesProvider = ({ children }) => { 
-  const { translations } = useLanguage();
-  const t = translations?.trackerInit || {};
+
   const [placedRunes, setPlacedRunes] = useState([]);
 
   const placeRune = ({ rune }) => {
@@ -15,7 +14,7 @@ export const InitRunesProvider = ({ children }) => {
       (r) => r.rune.id === rune.id
     );
     if (exists) {
-      alert(t.RuneRepeat);
+      alert("");
       return;
     }
     setPlacedRunes(prev => [
