@@ -7,7 +7,7 @@ const ExpansionContext = createContext();
 export const ExpansionProvider = ({ children }) => {
   const stored = localStorage.getItem('expansions');
   const [selectedExpansions, setSelectedExpansions] = useState(
-    stored ? JSON.parse(stored) : EXPANSIONS.map(e => e.id)
+    stored ? JSON.parse(stored) : ['base']
   );
 
   useEffect(() => {
