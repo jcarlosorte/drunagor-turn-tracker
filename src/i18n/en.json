@@ -233,6 +233,7 @@
   "condiciones_t": {
     "none": "",
     "ABSORCION": "ABSORPTION",
+    "ABSORBER_SALUD_X": "DRAIN HEALTH {x}",
     "AC_ALCANCE_DE_CUBO": "CR (CUBE RANGE)",
     "ACCION_DE_CUBO": "CUBE ACTION",
     "ACCION_DE_RECOBRAR_GRATUITA": "FREE RECALL ACTION",
@@ -346,6 +347,7 @@
   },
   "condiciones_d": {
     "ABSORCION": "Draining is resource stealing. When a characters drains something from a Target, it means that the drained character loses whatever is being drained and then gives it to the draining character. Draining Health is not the same as dealing damage, so this effect can't be responded to with Reactions.",
+    "ABSORBER_SALUD_X": "Draining is resource stealing. When a characters drains something from a Target, it means that the drained character loses whatever is being drained and then gives it to the draining character. Draining Health {x} is not the same as dealing damage, so this effect can't be responded to with Reactions.",
     "AC_ALCANCE_DE_CUBO": "This term refers to the Range of an effect, which is defined by the color of the cube spent to use the Skill or Reaction that cast it.",
     "ACCION_DE_CUBO": "This is the name given to actions that a Hero takes by spending an Action Cube. During their turn, a Hero can perform up to two Cube Actions. Some special actions can be considered as one of these Cube Actions, such as, for example, the purchase of an additional Move Action by Expending an AC. Reactions are not considered Cube Actions.",
     "ACCION_DE_RECOBRAR_GRATUITA": "A Free Recall Action is a Recall Action (see page 20) that can be taken without generating the Curse Cube penalty to the Hero who took it.",
