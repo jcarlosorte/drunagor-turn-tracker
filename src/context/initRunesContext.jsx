@@ -4,7 +4,25 @@ const InitRunesContext = createContext();
 
 export const InitRunesProvider = ({ children }) => { const [placedRunes, setPlacedRunes] = useState([]);
 
-const placeRune = ({ rune }) => { setPlacedRunes(prev => [ ...prev, { rune: { uuid: uuidv4(), ...rune, }, } ]); };
+const placeRune = ({ rune }) => {
+  // Verificar si ya existe una carta con el mismo id
+  const exists = placedRunes.some((r) => r.rune.id === rune.id);
+  if (exists) {
+    alert(`Ya existe una carta de runa con ID ${rune.id}`);
+    return;
+  }
+
+  setPlacedRunes(prev => [
+    ...prev,
+    {
+      rune: {
+        uuid: uuidv4(),
+        ...rune,
+        colorIndex: 10, // siempre se colocan en índice 10
+      },
+    },
+  ]);
+};
 
 const removeRuneByUUID = (uuid) => { setPlacedRunes(prev => prev.filter(r => r.rune.uuid !== uuid)); };
 
