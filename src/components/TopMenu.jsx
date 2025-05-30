@@ -10,6 +10,7 @@ import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
 import { useGame } from '@/context/GameContext';
+import { useInitRunes } from "@/context/InitRunesContext";
 
 const TopMenu = ({
   onAddEnemy,
@@ -30,6 +31,7 @@ const TopMenu = ({
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning } = useGame();
+  const { resetPlacedRunes } = useInitRunes();
 
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -287,6 +289,15 @@ const TopMenu = ({
             
                         
             <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={() => {
+                  resetPlacedRunes(); // Borra las cartas de runa
+                  resetTiles();        // Borra las fichas de runa
+                }}
+                className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
+              >
+                {t.resetRunes || 'Resetear Runas'}
+              </button>
               <button
                 onClick={() => setIsRunesOpen(false)}
                 className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
