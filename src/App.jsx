@@ -1,7 +1,6 @@
 // App.jsx
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
-import { InitEnemiesProvider } from '@/context/InitEnemiesContext';
 import AnimatedRoutes from "@/components/AnimatedRoutes";
 
 function Header() {
@@ -22,7 +21,7 @@ function Header() {
 
 function AppContent() {
   const location = useLocation();
-  const hideHeader = ["/init", "/config", "/tracker"].includes(location.pathname); // 👈 CAMBIADO
+  const hideHeader = ["/init", "/config", "/tracker"].includes(location.pathname);
 
   return (
     <div className="text-center mt-10">
@@ -34,13 +33,10 @@ function AppContent() {
 
 function App() {
   return (
-    <InitEnemiesProvider>
-      <Router basename="/drunagor-turn-tracker/">
-        <AppContent />
-      </Router>
-    </InitEnemiesProvider>
+    <Router basename="/drunagor-turn-tracker/">
+      <AppContent />
+    </Router>
   );
 }
 
 export default App;
-
