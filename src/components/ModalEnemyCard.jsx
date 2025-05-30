@@ -128,7 +128,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
           acciones.push(actual);
           actual = [];
         }
-      } else if (![':', ',', '.'].includes(clave)) {
+      } else if (![':', ',', 'Y'].includes(clave)) {
         actual.push(clave);
       }
     });
