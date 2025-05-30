@@ -30,7 +30,7 @@ const TopMenu = ({
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
-  const { addRune, drawMultipleTiles, drawTileByColor, tileWarning, setTileWarning } = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
 
   const colorMap = {
