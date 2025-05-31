@@ -216,6 +216,7 @@
       "Roba": "roba",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
+      "fichaAleatoria": "Aleatoria",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
