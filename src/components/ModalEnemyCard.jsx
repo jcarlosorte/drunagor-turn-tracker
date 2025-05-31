@@ -102,9 +102,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     const match = clave.match(/^([A-Z_]+)\s*(\d+)$/);
     if (match) {
       const nombre = match[1]; // ej. "HEMORRAGIA"
+      console.log(nombre);
       const numero = match[2]; // ej. "2"
+      console.log(numero);
       const claveGeneral = `${nombre}_X`;
+      console.log(claveGeneral);
       const texto = base[claveGeneral]?.replace('{x}', numero) || clave;
+      console.log(texto);
       const detalle = detalles[claveGeneral]?.replace('{x}', numero) || '';
       return { claveGeneral, texto, detalle };
     }
