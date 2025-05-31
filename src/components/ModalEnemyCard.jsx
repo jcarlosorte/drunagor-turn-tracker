@@ -99,7 +99,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   };
 
   const traducirClaveConNumero = (clave, base, detalles) => {
-    const match = clave.match(/^([A-Z_]+)\s*(\d+)$/);
+    const match = clave.match(/^([A-Z_ ]+?)\s+(\d+)$/);
     console.log(clave);
     if (match) {
       const nombre = match[1]; // ej. "HEMORRAGIA"
