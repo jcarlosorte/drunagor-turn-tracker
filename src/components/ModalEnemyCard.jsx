@@ -99,17 +99,21 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   };
 
   const traducirClaveConNumero = (clave, base, detalles) => {
-    const match = clave.match(/^([A-Z_]+)\s*(\d+)$/);
+    const match = clave.match(/^(.+?)_(\d+)$/);
     if (match) {
-      const nombre = match[1]; // ej. "HEMORRAGIA"
+      const nombre = match[1]; // ej. "MOVER_ENEMIGOS"
       const numero = match[2]; // ej. "2"
-      const claveGeneral = ${nombre}_X;
+      const claveGeneral = `${nombre}_X`;
       const texto = base[claveGeneral]?.replace('{x}', numero) || clave;
       const detalle = detalles[claveGeneral]?.replace('{x}', numero) || '';
       return { claveGeneral, texto, detalle };
     }
   
-    return { claveGeneral: clave, texto: base[clave] || clave, detalle: detalles[clave] || '' };
+    return {
+      claveGeneral: clave,
+      texto: base[clave] || clave,
+      detalle: detalles[clave] || '',
+    };
   };
 
   const clavesRosa = ['ESCUDO_X', 'REGENERACION_X', 'MANDO', 'EVOLUCION', 'SANAR_X', 'HASTA_2_MOSTRUOS_MAS_DEBILES'];
