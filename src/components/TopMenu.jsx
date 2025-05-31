@@ -284,6 +284,23 @@ const TopMenu = ({
                     {t.colores[color]}
                   </button>
                 ))}
+
+                {/* 🟣 Botón de ficha aleatoria */}
+                <button
+                  onClick={() => {
+                    const allColors = ['rojo', 'azul', 'verde', 'gris', 'naranja'];
+                    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                    const tile = drawTileByColor(randomColor);
+                    if (tile && onTileDraw) {
+                      onTileDraw(tile);
+                    } else {
+                      alert(`${t.aviso2} ${t.colores[randomColor]}`);
+                    }
+                  }}
+                  className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
+                >
+                  🎲 {t.fichaAleatoria || 'Aleatoria'}
+                </button>
               </div>
             </div>
             
