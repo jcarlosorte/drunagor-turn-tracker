@@ -215,6 +215,7 @@
     "Roba": "draw",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
+    "fichaAleatoria": "Random",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
