@@ -96,7 +96,6 @@ const InitTracker = () => {
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
-  const [placedSpecialCards, setPlacedSpecialCards] = useState([]);
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -294,12 +293,11 @@ const InitTracker = () => {
         capacidades: carta.capacidades,
         rune: carta.rune,
         runePosition: carta.runePosition,
-        colorIndex: runesColorMap[carta.rune],
+        position: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
       },
     }));
   
-    //setPlacedSpecialCards(prev => [...prev, ...nuevas]);
     setPlacedEnemies(prev => [...prev, ...nuevas]);
 
   };
@@ -774,8 +772,6 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
-    const commanderAbove = placedSpecialCards.filter(c => c.colorIndex === index && c.posicion === 'arriba');
-    const commanderBelow = placedSpecialCards.filter(c => c.colorIndex === index && c.posicion === 'abajo');
 
     //console.log("Contador de ", runeColor, "=", runes[runeColor]);
     const renderStack = (items, isTop, type = 'hero') => {
@@ -790,7 +786,6 @@ const InitTracker = () => {
         const isCurrentTurn = currentTurnEntity && (
           (type === 'enemy' && item.enemy.uuid === currentTurnEntity.uuid) ||
           (type === 'rune' && item.uuid === currentTurnEntity.uuid) ||
-          (type === 'commander' && item.id === currentTurnEntity.uuid) ||
           (type === 'hero' && item.id === currentTurnEntity.id)
         );
         const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
