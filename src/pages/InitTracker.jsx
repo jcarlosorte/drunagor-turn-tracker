@@ -828,7 +828,7 @@ const InitTracker = () => {
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
               ) : type === 'commander' ? (
-                <CommanderCard carta={rune} />
+                <CommanderCard carta={item} />
               ) : (
                 <CharacterCard
                   name={getHeroName(item.id)}
