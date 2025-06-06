@@ -285,18 +285,22 @@ const InitTracker = () => {
   const placeCommanderCards = (rune, runePosition) => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
-  
+    
     const nuevas = selected.map(carta => ({
-      uuid: uuidv4(),
-      ...carta,
-      tipo: 'comandante',
-      rune,
-      runePosition,
-      colorIndex: runesColorMap[rune],
-      posicion: runePosition
+      enemy: {
+        uuid: uuidv4(),
+        id: carta.id,
+        nombre: carta.nombre,
+        capacidades: carta.capacidades,
+        rune: carta.rune,
+        runePosition: carta.runePosition,
+        colorIndex: runesColorMap[rune],
+        tipo: 'especial', // o 'comandante'
+      },
     }));
   
-    setPlacedSpecialCards(prev => [...prev, ...nuevas]);
+    //setPlacedSpecialCards(prev => [...prev, ...nuevas]);
+    setPlacedEnemies(prev => [...prev, ...nuevas]);
 
   };
 
@@ -804,7 +808,10 @@ const InitTracker = () => {
                   <GiWingedSword className="text-white animate-bounce" size={32} />
                 </div>
               )}
-              {type === 'enemy' ? (
+              {type === 'enemy' && item.enemy.tipo === 'especial' ? (
+                <CommanderCard carta={item.enemy} />
+              ) : (
+                type === 'enemy' ? (
                 <EnemyCard
                   uuid={item.enemy.uuid}
                   id={item.enemy.id}
@@ -827,8 +834,6 @@ const InitTracker = () => {
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
-              ) : type === 'commander' ? (
-                <CommanderCard carta={item} />
               ) : (
                 <CharacterCard
                   name={getHeroName(item.id)}
