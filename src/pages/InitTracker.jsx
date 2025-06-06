@@ -96,6 +96,7 @@ const InitTracker = () => {
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
+  const [placedSpecialCards, setPlacedSpecialCards] = useState([]);
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -294,7 +295,7 @@ const InitTracker = () => {
         colorIndex: runesColorMap[rune], // del mapa actual
         posicion: runePosition // redundante, puede usarse también
       };
-      placeRune({ rune: cartaInstancia });
+      setPlacedSpecialCards(prev => [...prev, ...nuevas]);
     });
   };
 
@@ -768,6 +769,9 @@ const InitTracker = () => {
     const enemiesBelow = placedEnemies.filter(e => e.enemy.position === index && e.enemy.runePosition === 'abajo');
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
+    const commanderAbove = placedSpecialCards.filter(c => c.colorIndex === index && c.posicion === 'arriba');
+    const commanderBelow = placedSpecialCards.filter(c => c.colorIndex === index && c.posicion === 'abajo');
+
     //console.log("Contador de ", runeColor, "=", runes[runeColor]);
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
@@ -781,6 +785,7 @@ const InitTracker = () => {
         const isCurrentTurn = currentTurnEntity && (
           (type === 'enemy' && item.enemy.uuid === currentTurnEntity.uuid) ||
           (type === 'rune' && item.uuid === currentTurnEntity.uuid) ||
+          (type === 'commander' && item.id === currentTurnEntity.uuid) ||
           (type === 'hero' && item.id === currentTurnEntity.id)
         );
         const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
@@ -821,7 +826,7 @@ const InitTracker = () => {
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
-              ) : type === 'comandante' ? (
+              ) : type === 'commander' ? (
                 <CommanderCard carta={rune} />
               ) : (
                 <CharacterCard
@@ -845,6 +850,7 @@ const InitTracker = () => {
             {renderStack(heroesAbove, true, 'hero')}
             {isRune && renderStack(enemiesAbove, true, 'enemy')}
             {isRuneTextSlot && renderStack(runesAbove.map(r => r.rune), true, 'rune')}
+            {renderStack(commanderAbove, true, 'commander')}
           </div>
         </div>
   
@@ -891,6 +897,7 @@ const InitTracker = () => {
             {renderStack(heroesBelow, false, 'hero')}
             {isRune && renderStack(enemiesBelow, false, 'enemy')}
             {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), false, 'rune')}
+            {renderStack(commanderBelow, false, 'commander')}
           </div>
         </div>
   
