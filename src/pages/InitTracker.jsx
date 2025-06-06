@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { RUNAS } from '@/data/runas';
+import { CARTAS_COMANDANTE } from '@/data/cartasEspeciales';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
@@ -24,7 +25,8 @@ import { ModalEnemyCard } from '@/components/ModalEnemyCard';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
 import { useRenderEnemyCapabilities } from '@/components/renderEnemyCapabilities';
 import TileWarningModal from '@/components/TileWarningModal';
-import TileToast from '@/components/TileToast';
+import TileToast from '@/data/TileToast';
+import CommanderCard from '@/components/CommanderCard';
 import { v4 as uuidv4 } from 'uuid';
 
 const rolesPositionMap = {
@@ -78,6 +80,7 @@ const InitTracker = () => {
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
   const tb = translations.trackerSelect?.comportamientos || {};
+  const ta = translations.cartas_ataque || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -206,6 +209,8 @@ const InitTracker = () => {
         };
         showToast(enemy);
         placeEnemy({ enemy });
+        // 👉 Añadir cartas de ataque del comandante:
+        placeCommanderCards(selected.rune, selected.runePosition);
       });
       return;
     }
@@ -271,6 +276,24 @@ const InitTracker = () => {
       };
       showToast(enemy);
       placeEnemy({ enemy });
+      // 👉 Añadir cartas de ataque del comandante:
+      placeCommanderCards(selected.rune, selected.runePosition);
+    });
+  };
+
+  const placeCommanderCards = (rune, runePosition) => {
+    const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, numHeroes);
+  
+    selected.forEach(carta => {
+      const cartaInstancia = {
+        uuid: uuidv4(),
+        ...carta,
+        tipo: 'comandante',
+        colorIndex: runesColorMap[rune],
+        posicion: runePosition,
+      };
+      placeRune({ rune: cartaInstancia });
     });
   };
 
@@ -654,8 +677,6 @@ const InitTracker = () => {
     );
   };
 
-
-
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
       <div className="relative w-full max-w-[140px]">
@@ -733,6 +754,8 @@ const InitTracker = () => {
       </div>
     );
   };
+
+
   
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
@@ -797,6 +820,8 @@ const InitTracker = () => {
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
+              ) : type === 'comandante' ? (
+                <CommanderCard carta={rune} />
               ) : (
                 <CharacterCard
                   name={getHeroName(item.id)}
