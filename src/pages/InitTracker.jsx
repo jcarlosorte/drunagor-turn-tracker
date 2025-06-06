@@ -211,7 +211,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards(selected.rune, selected.runePosition);
+        placeCommanderCards();
       });
       return;
     }
@@ -278,11 +278,11 @@ const InitTracker = () => {
       showToast(enemy);
       placeEnemy({ enemy });
       // 👉 Añadir cartas de ataque del comandante:
-      placeCommanderCards(selected.rune, selected.runePosition);
+      placeCommanderCards();
     });
   };
 
-  const placeCommanderCards = (rune, runePosition) => {
+  const placeCommanderCards = () => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -294,7 +294,7 @@ const InitTracker = () => {
         capacidades: carta.capacidades,
         rune: carta.rune,
         runePosition: carta.runePosition,
-        colorIndex: runesColorMap[rune],
+        colorIndex: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
       },
     }));
