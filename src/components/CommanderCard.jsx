@@ -11,14 +11,22 @@ const CommanderCard = ({ carta }) => {
   const runa = carta.rune;
   const numRunasColor = getRuneCount(runa);
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
-  const capacidad = ta.capacidad?.[carta.id]?.replace('{X}', numRunasColor) || carta.capacidad;
+  let capacidad = ta.capacidad?.[carta.id] || carta.capacidad;
 
+    // Reemplazar múltiples ocurrencias
+  if (capacidad) {
+    capacidad = capacidad
+      .replaceAll('{X}', numRunasColor)
+      .replaceAll('{2*X}', numRunasColor * 2)
+  }
+  
   return (
     <div className="relative w-full max-w-[140px] bg-orange-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md">
       <div className="text-sm text-yellow-300 font-bold text-center mb-1">
         {nombre}
       </div>
-      <div className="text-xs text-white text-center whitespace-pre-line">
+      <div className="text-[0.65rem] text-white text-center whitespace-pre-line leading-tight"
+        style={{ fontFamily: 'Impact, Charcoal, sans-serif' }} >
         {capacidad}
       </div>
     </div>
