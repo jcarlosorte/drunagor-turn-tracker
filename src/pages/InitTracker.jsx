@@ -850,7 +850,6 @@ const InitTracker = () => {
             {renderStack(heroesAbove, true, 'hero')}
             {isRune && renderStack(enemiesAbove, true, 'enemy')}
             {isRuneTextSlot && renderStack(runesAbove.map(r => r.rune), true, 'rune')}
-            {renderStack(commanderAbove, true, 'commander')}
           </div>
         </div>
   
@@ -897,7 +896,6 @@ const InitTracker = () => {
             {renderStack(heroesBelow, false, 'hero')}
             {isRune && renderStack(enemiesBelow, false, 'enemy')}
             {isRuneTextSlot && renderStack(runesBelow.map(r => r.rune), false, 'rune')}
-            {renderStack(commanderBelow, false, 'commander')}
           </div>
         </div>
   
