@@ -11,7 +11,7 @@ const CommanderCard = ({ carta }) => {
   const runa = carta.rune;
   const numRunasColor = getRuneCount(runa);
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
-  const capacidad = ta.capacidad?.[carta.id]?.replace('{x}', numRunasColor) || carta.capacidad;
+  const capacidad = ta.capacidad?.[carta.id]?.replace('{X}', numRunasColor) || carta.capacidad;
 
   return (
     <div className="relative w-full max-w-[140px] bg-orange-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md">
