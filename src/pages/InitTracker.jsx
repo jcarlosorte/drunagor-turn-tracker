@@ -297,7 +297,7 @@ const InitTracker = () => {
     }));
   
     setPlacedSpecialCards(prev => [...prev, ...nuevas]);
-    });
+
   };
 
   const handleAddRuneCard = (runeCard) => {
