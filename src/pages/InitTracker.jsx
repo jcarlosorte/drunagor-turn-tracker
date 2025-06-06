@@ -810,8 +810,7 @@ const InitTracker = () => {
               )}
               {type === 'enemy' && item.enemy.tipo === 'especial' ? (
                 <CommanderCard carta={item.enemy} />
-              ) : (
-                type === 'enemy' ? (
+              ) : type === 'enemy' ? (
                 <EnemyCard
                   uuid={item.enemy.uuid}
                   id={item.enemy.id}
