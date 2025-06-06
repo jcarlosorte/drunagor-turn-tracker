@@ -289,9 +289,10 @@ const InitTracker = () => {
       const cartaInstancia = {
         uuid: uuidv4(),
         ...carta,
-        tipo: 'comandante',
-        colorIndex: runesColorMap[rune],
-        posicion: runePosition,
+        rune: rune, // necesario para determinar color
+        runePosition: runePosition, // arriba o abajo
+        colorIndex: runesColorMap[rune], // del mapa actual
+        posicion: runePosition // redundante, puede usarse también
       };
       placeRune({ rune: cartaInstancia });
     });
