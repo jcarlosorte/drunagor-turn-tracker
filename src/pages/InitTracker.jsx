@@ -286,16 +286,17 @@ const InitTracker = () => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
   
-    selected.forEach(carta => {
-      const cartaInstancia = {
-        uuid: uuidv4(),
-        ...carta,
-        rune: rune, // necesario para determinar color
-        runePosition: runePosition, // arriba o abajo
-        colorIndex: runesColorMap[rune], // del mapa actual
-        posicion: runePosition // redundante, puede usarse también
-      };
-      setPlacedSpecialCards(prev => [...prev, ...nuevas]);
+    const nuevas = selected.map(carta => ({
+      uuid: uuidv4(),
+      ...carta,
+      tipo: 'comandante',
+      rune,
+      runePosition,
+      colorIndex: runesColorMap[rune],
+      posicion: runePosition
+    }));
+  
+    setPlacedSpecialCards(prev => [...prev, ...nuevas]);
     });
   };
 
