@@ -21,11 +21,11 @@ const CommanderCard = ({ carta }) => {
   }
   
   return (
-    <div className="relative w-full max-w-[140px] bg-orange-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md">
+    <div className="relative w-full max-w-[140px] bg-orange-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md" style={{ fontFamily: 'Impact, Charcoal, sans-serif' }} >
       <div className="text-sm text-yellow-300 font-bold text-center mb-1">
         {nombre}
       </div>
-      <div className="text-[0.65rem] text-white text-center whitespace-pre-line leading-tight"
+      <div className="text-[0.5rem] text-white text-center whitespace-pre-line leading-tight"
         style={{ fontFamily: 'Impact, Charcoal, sans-serif' }} >
         {capacidad}
       </div>
