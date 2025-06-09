@@ -19,6 +19,7 @@ const placeRune = ({ rune }) => {
         uuid: uuidv4(),
         ...rune,
         colorIndex: 10, // siempre se colocan en índice 10
+        applyEffect: true,
       },
     },
   ]);
@@ -28,7 +29,24 @@ const removeRuneByUUID = (uuid) => { setPlacedRunes(prev => prev.filter(r => r.r
 
 const resetPlacedRunes = () => { setPlacedRunes([]); };
 
-return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes }}> {children} </InitRunesContext.Provider> ); };
+const toggleRuneEffect = (uuid) => {
+  setPlacedRunes(prev =>
+    prev.map(item =>
+      item.rune.uuid === uuid
+        ? {
+            ...item,
+            rune: {
+              ...item.rune,
+              applyEffect: !item.rune.applyEffect
+            }
+          }
+        : item
+    )
+  );
+};
+                                                    
+
+return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, toggleRuneEffect }}> {children} </InitRunesContext.Provider> ); };
 
 export const useInitRunes = () => useContext(InitRunesContext);
 
