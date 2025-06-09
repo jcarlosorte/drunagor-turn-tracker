@@ -474,6 +474,7 @@
     "VORAGINE": "This is an Overlord Ability. At the start of their Activation, an Overlord must add their Attack cards to the deck, shuffle it, and draw a new \"hand\" (1 card per Hero in the Adventure). Thus, the Overlord's combination of Attacks can change from round to round."
   },
   "cartas_ataque": {
+    "ataqueC": "Commander Action",
     "nombre": {
       "cmd_1": "SUPERNATURAL SHELL",
       "cmd_2": "POISONOUS STINGER",
