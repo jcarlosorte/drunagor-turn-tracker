@@ -213,6 +213,7 @@
     "caraA": "Face A",
     "caraB": "Face B",
     "Roba": "draw",
+    "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
     "fichaAleatoria": "Random",
