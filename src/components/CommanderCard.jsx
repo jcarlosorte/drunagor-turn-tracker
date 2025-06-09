@@ -1,8 +1,7 @@
 // src/components/CommanderCard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import CommanderCardModal from '@/components/CommanderCardModal';
-import { useGame } from '@/context/GameContext';
 
 const CommanderCard = ({ carta }) => {
   const { translations } = useLanguage();
