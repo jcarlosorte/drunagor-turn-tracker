@@ -14,13 +14,19 @@ const CommanderCard = ({ carta }) => {
     <>
       <div
         onClick={() => setShowModal(true)}
-        className="cursor-pointer relative w-full max-w-[140px] bg-orange-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md hover:scale-105 transition"
+        className="cursor-pointer relative w-full bg-black-800 p-2 rounded-lg border-2 border-yellow-400 shadow-md hover:scale-105 transition"
       >
         <div
-          className="text-sm text-yellow-300 font-bold text-center"
+          className="text-sm text-yellow-300 text-center"
           style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
         >
           {nombre}
+        </div>
+        <div
+          className="text-s text-white-300 text-center"
+          style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
+        >
+          -{ta.ataqueC}-
         </div>
       </div>
 
