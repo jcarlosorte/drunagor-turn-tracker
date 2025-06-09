@@ -640,7 +640,9 @@ const InitTracker = () => {
     }
 
   const RuneCard = ({ rune, onRemove, flipped }) => {
-    const [applyEffect, setApplyEffect] = useState(true);
+    const { toggleRuneEffect } = useInitRunes();
+    const applyEffect = rune.applyEffect !== false;
+    
     return (
       <div className="relative w-full max-w-[140px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
@@ -655,6 +657,16 @@ const InitTracker = () => {
               <div className="text-xl text-center text-white">{ti.rune}</div>
               <div className="flex justify-center mb-1"><RiArrowTurnBackLine className="text-white text-xl"/></div>
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
+              {/* Checkbox */}
+              <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
+                <input
+                  type="checkbox"
+                  checked={applyEffect}
+                  onChange={() => toggleRuneEffect(rune.uuid)}
+                  className="mr-1"
+                />
+                <label>{ti.applyEffect || 'Aplicar efecto'}</label>
+              </div>
             </div>
           </div>
   
@@ -668,18 +680,18 @@ const InitTracker = () => {
               <div className="text-xl text-center text-white">{ti.rune}</div>
               <div className="flex justify-center mb-1"><RiArrowTurnForwardLine className="text-white text-xl"/></div>
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
+              {/* Checkbox */}
+              <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
+                <input
+                  type="checkbox"
+                  checked={applyEffect}
+                  onChange={() => toggleRuneEffect(rune.uuid)}
+                  className="mr-1"
+                />
+                <label>{ti.applyEffect || 'Aplicar efecto'}</label>
+              </div>
             </div>
           </div>
-
-          {/* Nuevo: checkbox para activar efecto */}
-          <div className="flex items-center justify-center mt-2 text-white text-[0.6rem]">
-            <input
-              type="checkbox"
-              checked={applyEffect}
-              onChange={() => setApplyEffect(!applyEffect)}
-              className="mr-1"
-            />
-            <label>Aplicar efecto</label>
         </div>
   
         <button
