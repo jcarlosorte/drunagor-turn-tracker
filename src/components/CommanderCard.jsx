@@ -11,7 +11,7 @@ const CommanderCard = ({ carta }) => {
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
   
   return (
-    <div className="relative items-center">
+    
       <div
         onClick={() => setShowModal(true)}
         className="cursor-pointer relative w-full max-w-[140px] bg-black p-2 rounded-lg border-2 border-yellow-400 shadow-md hover:scale-105 transition"
@@ -33,7 +33,7 @@ const CommanderCard = ({ carta }) => {
       {showModal && (
         <CommanderCardModal carta={carta} onClose={() => setShowModal(false)} />
       )}
-    </div>
+   
   );
 };
 
