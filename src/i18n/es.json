@@ -475,6 +475,7 @@
       "VORAGINE": "Esta es una Capacidad de los Señores supremos. Al comienzo de su Activación, un Señor supremo debe añadir sus cartas de Ataque al mazo, barajarlo y robar una nueva «mano>>> (1 carta por cada Héroe en la Aventura). Por tanto, la combinación de Ataques del Señor supremo puede cambiar de una ronda a otra."
     },
   "cartas_ataque": {
+    "ataqueC": "Acción de Comandante",
     "nombre":{
       "cmd_1": "CAPARAZÓN SOBRENATURAL",
       "cmd_2": "AGUIJÓN ENVENENADO",
