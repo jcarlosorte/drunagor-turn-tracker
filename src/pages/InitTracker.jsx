@@ -425,7 +425,7 @@ const InitTracker = () => {
         setGroupTurnTracker({ group: runes, index: 0 });
 
         // 🔄 Nuevo: extraer fichas si tiene numRunas
-        if (currentRune.numRunas) {
+        if (currentRune.numRunas && currentRune.applyEffect !== false) {
           const tiles = drawMultipleTiles(currentRune.numRunas);
           tiles?.forEach(tile => handleTileDraw(tile));
           if (!tiles) {
@@ -640,8 +640,9 @@ const InitTracker = () => {
     }
 
   const RuneCard = ({ rune, onRemove, flipped }) => {
+    const [applyEffect, setApplyEffect] = useState(true);
     return (
-      <div className="relative w-full max-w-[140px] perspective">
+      <div className="relative w-full max-w-[140px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
           
           {/* Cara A */}
@@ -669,6 +670,16 @@ const InitTracker = () => {
               <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
             </div>
           </div>
+
+          {/* Nuevo: checkbox para activar efecto */}
+          <div className="flex items-center justify-center mt-2 text-white text-[0.6rem]">
+            <input
+              type="checkbox"
+              checked={applyEffect}
+              onChange={() => setApplyEffect(!applyEffect)}
+              className="mr-1"
+            />
+            <label>Aplicar efecto</label>
         </div>
   
         <button
@@ -684,7 +695,7 @@ const InitTracker = () => {
 
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
-      <div className="relative w-full max-w-[140px]">
+      <div className="relative w-full max-w-[140px] hover:scale-105">
         <img
           src={image}
           alt={name}
@@ -722,7 +733,7 @@ const InitTracker = () => {
         )}
         style={{ perspective: "1000px" }}
       >
-        <div className="relative w-full max-w-[140px] rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d">
+        <div className="relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d">
           <img
             src={image}
             alt={name}
