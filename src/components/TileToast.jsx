@@ -13,6 +13,7 @@ const colorMap = {
 
 
 const TileToast = ({ tile, tipo = 'add', onClose }) => {
+  if (!tile?.runa) return null;
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const mensaje = tipo === 'remove'
