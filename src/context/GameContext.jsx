@@ -30,11 +30,14 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeRune = (color) => {
-    
-    setRunes(prev => ({
-      ...prev,
-      [color]: Math.max(prev[color] - 1, 0)
-    }));
+    if (runes[color] > 0) {
+      setRunes(prev => ({
+        ...prev,
+        [color]: Math.max(prev[color] - 1, 0)
+      }));
+      return { runa: color }; // ⬅️ DEVUELVE UN OBJETO COMPATIBLE CON TileToast
+    }
+    return null;
   };
 
   const getRuneCount = (color) => runes[color] || 0;
