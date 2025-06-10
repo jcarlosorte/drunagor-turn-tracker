@@ -786,7 +786,7 @@ const InitTracker = () => {
             }}>
             <div className="relative items-center">
               {isCurrentTurn && (
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-blue-600">
+                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-purple-600">
                   <GiWingedSword className="text-white animate-bounce" size={32} />
                 </div>
               )}
