@@ -623,56 +623,39 @@ const InitTracker = () => {
   const RuneCard = ({ rune, onRemove, flipped }) => {
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
-    
+  
+    const renderSide = (caraB = false) => (
+      <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
+        <div className={`p-2 rounded-lg border-2 border-indigo-400 shadow-md ${caraB ? 'bg-indigo-900' : 'bg-indigo-700'}`}>
+          <div className="flex justify-center mb-1">
+            <GiAbstract065 className="text-yellow-300 text-xl" />
+          </div>
+          <div className="text-xs text-white text-center font-bold">{ti[rune.accion]} {rune.numRunas || ''}</div>
+          <div className="text-xs text-white text-center">{ti.rune}</div>
+          <div className="flex justify-center mb-1">
+            {caraB ? <RiArrowTurnForwardLine className="text-white text-xl" /> : <RiArrowTurnBackLine className="text-white text-xl" />}
+          </div>
+          <div className="text-[0.6rem] italic text-indigo-100 text-center">{ti.cara} {rune.cara}</div>
+  
+          {/* Checkbox */}
+          <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
+            <input
+              type="checkbox"
+              checked={applyEffect}
+              onChange={() => toggleRuneEffect(rune.uuid)}
+              className="mr-1"
+            />
+            <label>{ti.applyEffect || 'Aplicar efecto'}</label>
+          </div>
+        </div>
+      </div>
+    );
+  
     return (
       <div className="relative w-full max-w-[140px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
-          
-          {/* Cara A */}
-          <div className="absolute w-full h-full backface-hidden">
-            <div className="bg-indigo-700 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
-              <div className="flex justify-center mb-1">
-                <GiAbstract065 className="text-yellow-300 text-xl" />
-              </div>
-              <div className="text-xl text-center text-white">{ti[rune.accion]} {rune.numRunas}</div>
-              <div className="text-xl text-center text-white">{ti.rune}</div>
-              <div className="flex justify-center mb-1"><RiArrowTurnBackLine className="text-white text-xl"/></div>
-              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
-              {/* Checkbox */}
-              <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
-                <input
-                  type="checkbox"
-                  checked={applyEffect}
-                  onChange={() => toggleRuneEffect(rune.uuid)}
-                  className="mr-1"
-                />
-                <label>{ti.applyEffect || 'Aplicar efecto'}</label>
-              </div>
-            </div>
-          </div>
-  
-          {/* Cara B - copia visual invertida */}
-          <div className="absolute w-full h-full backface-hidden rotate-y-180">
-            <div className="bg-indigo-900 p-2 rounded-lg border-2 border-indigo-400 shadow-md">
-              <div className="flex justify-center mb-1">
-                <GiAbstract065 className="text-yellow-200 text-xl" />
-              </div>
-              <div className="text-xl text-center text-white">{ti[rune.accion]} {rune.numRunas}</div>
-              <div className="text-xl text-center text-white">{ti.rune}</div>
-              <div className="flex justify-center mb-1"><RiArrowTurnForwardLine className="text-white text-xl"/></div>
-              <div className="text-[0.6rem] italic text-indigo-100 text-center mt-1">{ti.cara} {rune.cara}</div>
-              {/* Checkbox */}
-              <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
-                <input
-                  type="checkbox"
-                  checked={applyEffect}
-                  onChange={() => toggleRuneEffect(rune.uuid)}
-                  className="mr-1"
-                />
-                <label>{ti.applyEffect || 'Aplicar efecto'}</label>
-              </div>
-            </div>
-          </div>
+          {renderSide(false)}  {/* Cara A */}
+          {renderSide(true)}   {/* Cara B */}
         </div>
   
         <button
