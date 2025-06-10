@@ -303,7 +303,41 @@ const TopMenu = ({
                 </button>
               </div>
             </div>
+
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiBrickWall className="text-red-400 text-xl" />
+                <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
+                  <button
+                    key={color}
+                    onClick={() => removeRune(color)}
+                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                  >
+                    -1 {t.colores[color]}
+                  </button>
+                ))}
             
+                {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
+                <button
+                  onClick={() => {
+                    const colors = ['rojo', 'azul', 'verde', 'gris', 'naranja'].filter(c => runes[c] > 0);
+                    if (colors.length === 0) {
+                      alert(t.noTilesToRemove || "No hay fichas para eliminar.");
+                      return;
+                    }
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    removeRune(randomColor);
+                    alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
+                  }}
+                  className="bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 text-white text-xs px-2 py-1 rounded-full"
+                >
+                  🎲 {t.removeRandom || 'Aleatoria'}
+                </button>
+              </div>
+            </div>
                         
             <div className="flex justify-center gap-4 mt-2">
               <button
