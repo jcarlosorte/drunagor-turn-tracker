@@ -746,8 +746,6 @@ const InitTracker = () => {
       </div>
     );
   };
-
-
   
   const renderSlot = (index) => {
     const isRune = Object.values(runesColorMap).includes(index);
@@ -760,7 +758,6 @@ const InitTracker = () => {
     const runesAbove = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'arriba');
     const runesBelow = placedRunes.filter(r => r.rune.colorIndex === index && r.rune.posicion === 'abajo');
 
-    //console.log("Contador de ", runeColor, "=", runes[runeColor]);
     const renderStack = (items, isTop, type = 'hero') => {
       const spacing = items.length <= 2 ? 90 : items.length === 3 ? 70 : items.length === 4 ? 40 : 30;
       const reversed = isTop ? [...items].reverse() : items;
@@ -777,6 +774,9 @@ const InitTracker = () => {
         );
         const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
 
+        if (type === 'rune') {
+          console.log("🔍 Render rune uuid:", item.uuid, "== currentTurnEntity.uuid?", currentTurnEntity?.uuid);
+        }
         return (
           <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-blue-500 rounded shadow-xl' : ''}`} style={{
               ...style,
