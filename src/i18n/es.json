@@ -218,6 +218,10 @@
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
       "fichaAleatoria": "Aleatoria",
+      "removeTiles": "Eliminar fichas de runa",
+      "removeRandom": "Aleatoria",
+      "removeOneRandom": "Eliminada una ficha de",
+      "noTilesToRemove": "No hay fichas para eliminar."
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
