@@ -12,9 +12,13 @@ const colorMap = {
 };
 
 
-const TileToast = ({ tile, onClose }) => {
+const TileToast = ({ tile, tipo = 'add', onClose }) => {
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
+  const mensaje = tipo === 'remove'
+    ? `−1 ${ti.rune}: ${ti.colores[tile.runa]}`
+    : `+1 ${ti.rune}: ${ti.colores[tile.runa]}`;
+ 
   useEffect(() => {
     const timeout = setTimeout(onClose, 3000);
     return () => clearTimeout(timeout);
@@ -22,7 +26,7 @@ const TileToast = ({ tile, onClose }) => {
 
   return (
     <div className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-xl text-white ${colorMap[tile.runa]} border-2 border-white`}>
-      <div className="text-xs font-bold mb-1">+1 {ti.rune}: {ti.colores[tile.runa]}</div>
+      <div className="text-xs font-bold mb-1">{mensaje}</div>
       <TetrisPiece type={tile.dibujo} color="text-white" />
     </div>
   );
