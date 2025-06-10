@@ -220,7 +220,7 @@
     "removeTiles": "Remove rune tiles",
     "removeRandom": "Random",
     "removeOneRandom": "Removed one",
-    "noTilesToRemove": "No tiles to remove."
+    "noTilesToRemove": "No tiles to remove.",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
