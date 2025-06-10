@@ -11,6 +11,7 @@ import { languages as availableLanguages, languageNames } from "@/i18n/languageD
 import { useLanguage } from "@/context/LanguageContext";
 import { useGame } from '@/context/GameContext';
 import { useInitRunes } from "@/context/InitRunesContext";
+import TileToast from '@/components/TileToast';
 
 const TopMenu = ({
   onAddEnemy,
@@ -33,7 +34,8 @@ const TopMenu = ({
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
-
+  const [tileToasts, setTileToasts] = useState([]);
+  
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
     azul: 'bg-blue-700 hover:bg-blue-600',
@@ -42,9 +44,16 @@ const TopMenu = ({
     gris: 'bg-gray-700 hover:bg-gray-600',
   };
 
-  
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const showTileToast = (tile, tipo = 'remove') => {
+    const uuid = uuidv4();
+    const tileWithId = { ...tile, tipo, uuid };
+    setTileToasts(prev => [...prev, tileWithId]);
+    setTimeout(() => {
+      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
+    }, 3000);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -90,6 +99,7 @@ const TopMenu = ({
   };
 
   return (
+    <>
     <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
         <div className="flex items-center gap-2">
@@ -329,7 +339,11 @@ const TopMenu = ({
                 {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
                   <button
                     key={color}
-                    onClick={() => removeRune(color)}
+                    onClick={() => {
+                        const removed = removeRune(color);
+                        if (removed) showTileToast(removed, 'remove');
+                        else alert(`${t.avisoNoFicha} ${t.colores[color]}`);
+                      }}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
                     {t.colores[color]}
@@ -345,8 +359,10 @@ const TopMenu = ({
                       return;
                     }
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    removeRune(randomColor);
-                    alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
+                    const removed = removeRune(randomColor);
+                    if (removed) showTileToast(removed, 'remove');
+                    else alert(t.noTilesToRemove);
+                    //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
                   }}
                   className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
                 >
@@ -380,6 +396,15 @@ const TopMenu = ({
 
       
     </div>
+
+
+    {/* Toast visual para eliminación */}
+      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
+        {tileToasts.map(tile => (
+          <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
+        ))}
+      </div>
+    </>
   );
 };
 
