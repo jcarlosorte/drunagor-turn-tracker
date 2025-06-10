@@ -316,7 +316,7 @@ const TopMenu = ({
                     onClick={() => removeRune(color)}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
-                    -1 {t.colores[color]}
+                    {t.colores[color]}
                   </button>
                 ))}
             
@@ -332,7 +332,7 @@ const TopMenu = ({
                     removeRune(randomColor);
                     alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
                   }}
-                  className="bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 text-white text-xs px-2 py-1 rounded-full"
+                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
                 >
                   🎲 {t.removeRandom || 'Aleatoria'}
                 </button>
