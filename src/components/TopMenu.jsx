@@ -1,5 +1,5 @@
 // src/components/TopMenu.jsx
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay } from 'react-icons/gi';
@@ -32,6 +32,7 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
+  const menuRef = useRef(null);
 
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -43,7 +44,20 @@ const TopMenu = ({
 
   
   const toggleMenu = () => setIsOpen(!isOpen);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setIsRunesOpen(false);
+      }
+    };
   
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+    
   const handleEnemySelect = (e) => {
     const value = e.target.value;
     if (!value) return;
@@ -118,6 +132,7 @@ const TopMenu = ({
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={menuRef}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
