@@ -343,7 +343,7 @@ const TopMenu = ({
                     onClick={() => {
                         const removed = removeRune(color);
                         if (removed) showTileToast(removed, 'remove');
-                        else alert(`${t.avisoNoFicha} ${t.colores[color]}`);
+                        else alert(`${t.removeOneRandom} ${t.colores[color]}`);
                       }}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
@@ -361,8 +361,10 @@ const TopMenu = ({
                     }
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
                     const removed = removeRune(randomColor);
-                    if (removed) showTileToast(removed, 'remove');
-                    else alert(t.noTilesToRemove);
+                    if (removed && removed.runa) {
+                      showTileToast(removed, 'remove');
+                    }
+                    else {alert(t.noTilesToRemove);}
                     //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
                   }}
                   className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
