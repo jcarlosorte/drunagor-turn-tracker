@@ -343,7 +343,7 @@ const TopMenu = ({
                     onClick={() => {
                         const removed = removeRune(color);
                         if (removed) showTileToast(removed, 'remove');
-                        else alert(`${t.removeOneRandom} ${t.colores[color]}`);
+                        else alert(`${t.noTilesToRemove}`);
                       }}
                     className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
