@@ -2,5 +2,19 @@
 export const TURN_ORDER = [
   { type: 'hero', role: 'defensor', position: 'arriba', index: 0 },
   { type: 'enemy', rune: 'naranja', position: 'arriba', index: 1 },
-  ...
+  { type: 'enemy', rune: 'verde', position: 'arriba', index: 3 },
+  { type: 'hero', role: 'lider', position: 'arriba', index: 4 },
+  { type: 'enemy', rune: 'azul', position: 'arriba', index: 5 },
+  { type: 'enemy', rune: 'rojo', position: 'arriba', index: 7 },
+  { type: 'hero', role: 'controlador', position: 'arriba', index: 8 },
+  { type: 'enemy', rune: 'gris', position: 'arriba', index: 9 },
+  { type: 'rune', position: 'arriba', index: 10 },
+  { type: 'enemy', rune: 'naranja', position: 'abajo', index: 1 },
+  { type: 'hero', role: 'apoyo', position: 'abajo', index: 2 },
+  { type: 'enemy', rune: 'verde', position: 'abajo', index: 3 },
+  { type: 'enemy', rune: 'azul', position: 'abajo', index: 5 },
+  { type: 'hero', role: 'agresor', position: 'abajo', index: 6 },
+  { type: 'enemy', rune: 'rojo', position: 'abajo', index: 7 },
+  { type: 'enemy', rune: 'gris', position: 'abajo', index: 9 },
+  { type: 'rune', position: 'abajo', index: 10 },
 ];
