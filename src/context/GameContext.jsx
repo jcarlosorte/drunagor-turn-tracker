@@ -30,14 +30,22 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeRune = (color) => {
-    if (runes[color] > 0) {
-      setRunes(prev => ({
-        ...prev,
-        [color]: Math.max(prev[color] - 1, 0)
-      }));
-      return { runa: color }; // ⬅️ DEVUELVE UN OBJETO COMPATIBLE CON TileToast
-    }
-    return null;
+    // Buscar una ficha usada del color indicado
+    const index = usedTiles.findIndex(tile => tile.runa === color);
+    if (index === -1) return null; // No hay ficha del color
+  
+    const removed = usedTiles[index];
+  
+    // Eliminarla del array
+    setUsedTiles(prev => prev.filter((_, i) => i !== index));
+  
+    // Reducir el contador
+    setRunes(prev => ({
+      ...prev,
+      [color]: Math.max(prev[color] - 1, 0)
+    }));
+  
+    return removed; // Devolvemos la ficha real para el toast
   };
 
   const getRuneCount = (color) => runes[color] || 0;
