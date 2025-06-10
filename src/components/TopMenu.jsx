@@ -12,6 +12,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useGame } from '@/context/GameContext';
 import { useInitRunes } from "@/context/InitRunesContext";
 import TileToast from '@/components/TileToast';
+import { v4 as uuidv4 } from 'uuid';
 
 const TopMenu = ({
   onAddEnemy,
