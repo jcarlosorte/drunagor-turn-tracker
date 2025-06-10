@@ -217,6 +217,10 @@
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
     "fichaAleatoria": "Random",
+    "removeTiles": "Remove rune tiles",
+    "removeRandom": "Random",
+    "removeOneRandom": "Removed one",
+    "noTilesToRemove": "No tiles to remove."
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
