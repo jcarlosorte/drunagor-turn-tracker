@@ -293,7 +293,7 @@ const TopMenu = ({
                 <span className="font-semibold">{t.fichas}</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
+                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                   <button
                     key={color}
                     onClick={() => {
@@ -314,7 +314,7 @@ const TopMenu = ({
                 {/* 🟣 Botón de ficha aleatoria */}
                 <button
                   onClick={() => {
-                    const allColors = ['rojo', 'azul', 'verde', 'gris', 'naranja'];
+                    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
                     const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
                     const tile = drawTileByColor(randomColor);
                     if (tile && onTileDraw) {
@@ -336,7 +336,7 @@ const TopMenu = ({
                 <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['rojo', 'azul', 'verde', 'gris', 'naranja'].map(color => (
+                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                   <button
                     key={color}
                     onClick={() => {
@@ -353,7 +353,7 @@ const TopMenu = ({
                 {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
                 <button
                   onClick={() => {
-                    const colors = ['rojo', 'azul', 'verde', 'gris', 'naranja'].filter(c => runes[c] > 0);
+                    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'].filter(c => runes[c] > 0);
                     if (colors.length === 0) {
                       alert(t.noTilesToRemove || "No hay fichas para eliminar.");
                       return;
