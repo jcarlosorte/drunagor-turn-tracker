@@ -788,7 +788,7 @@ const InitTracker = () => {
             <div className="relative items-center">
               {isCurrentTurn && (
                 <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 rounded-full border-2 border-white bg-purple-600">
-                  <GiWingedSword className="text-white animate-bounce" size={32} />
+                  <GiWingedSword className="text-white animate-bounce" size={40} />
                 </div>
               )}
               {type === 'enemy' && item.enemy.tipo === 'especial' ? (
