@@ -96,16 +96,16 @@ export const CARTAS_JEFE = [
 export const CARTAS_HEROE_CAIDO = [
   {
     id: 'fallen_1',
-    nombre: 'Caídos de Elros',
-    rune: 'verde',
+    nombre: 'fallen_1',
+    rune: 'naranja',
     runePosition: 'arriba',
-    capacidades: ['SOMBRA_ATAQUE', 'BLOQUEO_2']
+    capacidades: 'fallen_1'
   },
   {
     id: 'fallen_2',
-    nombre: 'Venganza de Lorelai',
-    rune: 'rojo',
+    nombre: 'fallen_2',
+    rune: 'naranja',
     runePosition: 'abajo',
-    capacidades: ['FURIA_FINAL', 'DAÑO_AREA']
+    capacidades: 'fallen_2'
   }
 ];
