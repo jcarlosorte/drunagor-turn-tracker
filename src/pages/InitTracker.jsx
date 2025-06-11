@@ -652,7 +652,7 @@ const InitTracker = () => {
     );
   
     return (
-      <div className="relative w-full max-w-[140px] pb-10 perspective hover:scale-105">
+      <div className="relative w-full max-w-[140px] min-h-[100px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
           {renderSide(false)}  {/* Cara A */}
           {renderSide(true)}   {/* Cara B */}
