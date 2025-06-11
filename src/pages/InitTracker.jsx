@@ -161,7 +161,7 @@ const InitTracker = () => {
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
     );
     if (!selected) return;
-    console.log('cap before adjust:', selected.capacidades);
+    //console.log('cap before adjust:', selected.capacidades);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -779,10 +779,6 @@ const InitTracker = () => {
           (type === 'hero' && item.id === currentTurnEntity.id)
         );
         const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
-
-        if (type === 'rune') {
-          console.log("🔍 Render rune uuid:", item.uuid, "== currentTurnEntity.uuid?", currentTurnEntity?.uuid);
-        }
         return (
           <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className="absolute w-full transition-transform duration-300"
               style={{
