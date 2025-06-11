@@ -1,8 +1,14 @@
-import React, { createContext, useContext, useState } from 'react'; import { useLanguage } from "@/context/LanguageContext"; import { v4 as uuidv4 } from 'uuid';
+import React, { createContext, useContext, useState } from 'react';
+import { useLanguage } from "@/context/LanguageContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const InitRunesContext = createContext();
 
-export const InitRunesProvider = ({ children }) => { const [placedRunes, setPlacedRunes] = useState([]); const { translations } = useLanguage(); const t = translations?.trackerInit || {};
+export const InitRunesProvider = ({ children }) => { 
+  const [placedRunes, setPlacedRunes] = useState([]);
+  const [executedRunes, setExecutedRunes] = useState([]);
+  const { translations } = useLanguage();
+  const t = translations?.trackerInit || {};
 
 const placeRune = ({ rune }) => {
   // Verificar si ya existe una carta con el mismo id
