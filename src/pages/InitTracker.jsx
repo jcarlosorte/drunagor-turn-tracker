@@ -77,6 +77,7 @@ const InitTracker = () => {
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
+  const [executedRunes, setExecutedRunes] = useState([]);
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -406,12 +407,14 @@ const InitTracker = () => {
         setGroupTurnTracker({ group: runes, index: 0 });
 
         // 🔄 Nuevo: extraer fichas si tiene numRunas
-        if (currentRune.numRunas && currentRune.applyEffect !== false) {
+        if (currentRune.numRunas && currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
           const tiles = drawMultipleTiles(currentRune.numRunas);
           tiles?.forEach(tile => handleTileDraw(tile));
           if (!tiles) {
             setTileWarning(ti.aviso);
           }
+          // ✅ Marca esta rune como ejecutada
+          setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
         
         return;
