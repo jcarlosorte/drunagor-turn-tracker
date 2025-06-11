@@ -77,7 +77,7 @@ const InitTracker = () => {
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
-  const [executedRunes, setExecutedRunes] = useState([]);
+  const { executedRunes, setExecutedRunes } = useInitRunes();
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
