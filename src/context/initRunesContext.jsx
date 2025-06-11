@@ -49,7 +49,7 @@ const toggleRuneEffect = (uuid) => {
 };
                                                     
 
-return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, toggleRuneEffect }}> {children} </InitRunesContext.Provider> ); };
+return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, toggleRuneEffect, executedRunes, setExecutedRunes }}> {children} </InitRunesContext.Provider> ); };
 
 export const useInitRunes = () => useContext(InitRunesContext);
 
