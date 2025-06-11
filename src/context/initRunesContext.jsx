@@ -27,7 +27,10 @@ const placeRune = ({ rune }) => {
 
 const removeRuneByUUID = (uuid) => { setPlacedRunes(prev => prev.filter(r => r.rune.uuid !== uuid)); };
 
-const resetPlacedRunes = () => { setPlacedRunes([]); };
+const resetPlacedRunes = () => {
+  setPlacedRunes([]);
+  setExecutedRunes([]); // ✅ también resetear ejecuciones
+};
 
 const toggleRuneEffect = (uuid) => {
   setPlacedRunes(prev =>
