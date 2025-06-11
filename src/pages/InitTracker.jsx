@@ -778,7 +778,8 @@ const InitTracker = () => {
           console.log("🔍 Render rune uuid:", item.uuid, "== currentTurnEntity.uuid?", currentTurnEntity?.uuid);
         }
         return (
-          <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className={`absolute w-full transition-transform duration-300 ${isCurrentTurn ? 'ring-4 ring-blue-500 rounded shadow-xl' : ''}`} style={{
+          <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className="absolute w-full transition-transform duration-300"
+              style={{
               ...style,
               zIndex: isCurrentTurn ? 40 : style.zIndex ?? 100,
               transform: isCurrentTurn ? 'scale(1.1)' : 'scale(1)',
