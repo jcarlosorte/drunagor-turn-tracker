@@ -424,6 +424,9 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
+    if (turnIndex === 0) {
+      setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
+    }
   }, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
 
   
