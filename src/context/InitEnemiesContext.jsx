@@ -1,9 +1,12 @@
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
+import { useLanguage } from '@/context/LanguageContext';
 import { createContext, useContext, useState } from 'react';
 
 const InitEnemiesContext = createContext();
 
 export const InitEnemiesProvider = ({ children }) => {
+  const { language, translations } = useLanguage();
+  const ti = translations.trackerInit || {};
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [usedColors, setUsedColors] = useState([]);
   const [enemyColorMap, setEnemyColorMap] = useState({});
@@ -18,7 +21,7 @@ export const InitEnemiesProvider = ({ children }) => {
     const available = getNextAvailableColor();
     
     if (!available) {
-      alert(translations.trackerInit?.noColorsAvailable || 'No hay más colores disponibles');
+      alert(ti.noColorsAvailable || 'No hay más colores disponibles');
       return undefined; // Permite continuar, pero sin color asignado
     }
   
