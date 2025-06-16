@@ -1,10 +1,31 @@
+import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { createContext, useContext, useState } from 'react';
 
 const InitEnemiesContext = createContext();
 
 export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
-
+  const [usedColors, setUsedColors] = useState([]);
+  
+  // Función para obtener un color libre
+  const getNextAvailableColor = () => {
+    const used = new Set(usedColors);
+    return ENEMY_RING_COLORS.find(c => !used.has(c.id));
+  };
+  
+  // Función para asignar un color a un enemigo
+  const assignColorToEnemy = (enemyUUID) => {
+    const available = getNextAvailableColor();
+    if (!available) return null;
+    setUsedColors(prev => [...prev, available.id]);
+    return available.id;
+  };
+  
+  // Función para liberar el color
+  const releaseColor = (colorId) => {
+    setUsedColors(prev => prev.filter(c => c !== colorId));
+  };
+  
   const placeEnemy = (enemyWithPosition) => {
     console.log('Placing enemy:', enemyWithPosition);
     setPlacedEnemies(prev => {
@@ -34,7 +55,7 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors }}>
       {children}
     </InitEnemiesContext.Provider>
   );
