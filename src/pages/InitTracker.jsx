@@ -162,7 +162,7 @@ const InitTracker = () => {
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(
-      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B" || !e.cara
+      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
     );
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
