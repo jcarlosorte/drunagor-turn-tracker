@@ -16,7 +16,12 @@ export const InitEnemiesProvider = ({ children }) => {
   // Función para asignar un color a un enemigo
   const assignColorToEnemy = (enemyUUID) => {
     const available = getNextAvailableColor();
-    if (!available) return null;
+    
+    if (!available) {
+      alert(translations.trackerInit?.noColorsAvailable || 'No hay más colores disponibles');
+      return undefined; // Permite continuar, pero sin color asignado
+    }
+  
     setUsedColors(prev => [...prev, available.id]);
     setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available.id }));
     return available.id;
