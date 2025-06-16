@@ -122,7 +122,7 @@ const InitTracker = () => {
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
-    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id));
+    const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id) && e.cara !=="B" || !e.cara);
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     //console.log('cap before adjust:', selected.capacidades);
@@ -162,7 +162,7 @@ const InitTracker = () => {
   const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(
-      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id)
+      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B" || !e.cara
     );
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
