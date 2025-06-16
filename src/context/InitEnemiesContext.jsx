@@ -6,7 +6,7 @@ const InitEnemiesContext = createContext();
 export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [usedColors, setUsedColors] = useState([]);
-  
+  const [enemyColorMap, setEnemyColorMap] = useState({});
   // Función para obtener un color libre
   const getNextAvailableColor = () => {
     const used = new Set(usedColors);
@@ -18,12 +18,21 @@ export const InitEnemiesProvider = ({ children }) => {
     const available = getNextAvailableColor();
     if (!available) return null;
     setUsedColors(prev => [...prev, available.id]);
+    setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available.id }));
     return available.id;
   };
   
   // Función para liberar el color
-  const releaseColor = (colorId) => {
+  const releaseColor = (enemyUUID) => {
+    const colorId = enemyColorMap[enemyUUID];
+    if (!colorId) return;
+  
     setUsedColors(prev => prev.filter(c => c !== colorId));
+    setEnemyColorMap(prev => {
+      const updated = { ...prev };
+      delete updated[enemyUUID];
+      return updated;
+    });
   };
   
   const placeEnemy = (enemyWithPosition) => {
