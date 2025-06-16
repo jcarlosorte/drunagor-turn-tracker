@@ -250,7 +250,7 @@ const InitTracker = () => {
     const colorId = assignColorToEnemy(uuid) || null;
     if (!colorId) {
       alert(ti.noColorsAvailable);
-      return;
+      return null;
     }
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
@@ -323,6 +323,7 @@ const InitTracker = () => {
 
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
+    releaseColor(uuid)
   };
   const openEnemyModal = (uuid) => {
     setSelectedEnemyUuid(uuid);
