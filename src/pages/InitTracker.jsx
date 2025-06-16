@@ -128,10 +128,11 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
+    const uuid = uuidv4();
     showToast(selected);
     placeEnemy({
       enemy: {
-        uuid: uuidv4(),
+        uuid: uuid,
         name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
@@ -162,6 +163,7 @@ const InitTracker = () => {
     );
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
+    const uuid = uuidv4();
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -169,7 +171,7 @@ const InitTracker = () => {
         const runePosition = selected.runePosition;
         const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
         const enemy = {
-          uuid: uuidv4(),
+          uuid: uuid,
           name: selected.nombre,
           id: selected.id,
           rune: selected.rune,
@@ -203,7 +205,7 @@ const InitTracker = () => {
     showToast(selected);
     placeEnemy({
       enemy: {
-        uuid: uuidv4(),
+        uuid: uuid,
         name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
@@ -230,13 +232,14 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.categoria === 'comandante');
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
+    const uuid = uuidv4();
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
       const runePosition = selected.runePosition;
       const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
       const enemy = {
-        uuid: uuidv4(),
+        uuid: uuid,
         name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
