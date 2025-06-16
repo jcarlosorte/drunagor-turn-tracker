@@ -132,7 +132,7 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const colorId = assignColorToEnemy(uuid);
     if (!colorId) {
-      alert('No hay colores disponibles');
+      alert(ti.noColorsAvailable);
       return;
     }
     showToast(selected);
@@ -173,7 +173,7 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const colorId = assignColorToEnemy(uuid);
     if (!colorId) {
-      alert('No hay colores disponibles');
+      alert(ti.noColorsAvailable);
       return;
     }
     if (selected.categoria === 'comandante') {
@@ -249,7 +249,7 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const colorId = assignColorToEnemy(uuid);
     if (!colorId) {
-      alert('No hay colores disponibles');
+      alert(ti.noColorsAvailable);
       return;
     }
     openCommanderPCModal((pcValue) => {
