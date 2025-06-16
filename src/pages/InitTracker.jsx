@@ -11,7 +11,7 @@ import { ENEMIES } from '@/data/enemies';
 import { RUNAS } from '@/data/runas';
 import { CARTAS_COMANDANTE } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
-import { ENEMY_RING_COLOR } from '@/data/enemyRings';
+import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
@@ -720,7 +720,7 @@ const InitTracker = () => {
   
   const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping }) => {
     const [flipped, setFlipped] = useState(false);
-    const ringClass = ENEMY_RING_COLOR.find(r => r.id === ringColor)?.className || '';
+    const ringClass = ENEMY_RING_COLORS.find(r => r.id === ringColor)?.className || '';
 
     useEffect(() => {
       if (isFlipping) {
