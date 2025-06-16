@@ -11,6 +11,7 @@ import { ENEMIES } from '@/data/enemies';
 import { RUNAS } from '@/data/runas';
 import { CARTAS_COMANDANTE } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
+import { ENEMY_COLOR_RINGS } from '@/data/enemyColorRings';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
@@ -129,6 +130,11 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     const uuid = uuidv4();
+    const colorId = assignColorToEnemy(uuid);
+    if (!colorId) {
+      alert('No hay colores disponibles');
+      return;
+    }
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -150,6 +156,7 @@ const InitTracker = () => {
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
+        ringColor: colorId,
         cara: selected.cara
       }
     });
@@ -164,6 +171,11 @@ const InitTracker = () => {
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
     const uuid = uuidv4();
+    const colorId = assignColorToEnemy(uuid);
+    if (!colorId) {
+      alert('No hay colores disponibles');
+      return;
+    }
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -189,6 +201,7 @@ const InitTracker = () => {
           tipo_ataque: selected.tipo_ataque,
           capacidades: adjustedCaps,
           capacidadesOriginales: selected.capacidades,
+          ringColor: colorId,
           cara: selected.cara
         };
         showToast(enemy);
@@ -223,6 +236,7 @@ const InitTracker = () => {
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
+        ringColor: colorId,
         cara: selected.cara
       }
     });
@@ -233,6 +247,11 @@ const InitTracker = () => {
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const uuid = uuidv4();
+    const colorId = assignColorToEnemy(uuid);
+    if (!colorId) {
+      alert('No hay colores disponibles');
+      return;
+    }
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
@@ -257,6 +276,7 @@ const InitTracker = () => {
         tipo_ataque: selected.tipo_ataque,
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
+        ringColor: colorId,
         cara: selected.cara
       };
       showToast(enemy);
@@ -698,9 +718,10 @@ const InitTracker = () => {
     </div>
   );
   
-  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, isFlipping }) => {
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping }) => {
     const [flipped, setFlipped] = useState(false);
-  
+    const ringClass = ENEMY_COLOR_RINGS.find(r => r.id === ringColor)?.className || '';
+
     useEffect(() => {
       if (isFlipping) {
         setFlipped(true);
@@ -817,6 +838,7 @@ const InitTracker = () => {
                   inmunidad={item.enemy.inmunidad}
                   tipo_ataque={item.enemy.tipo_ataque}
                   capacidades={item.enemy.capacidades}
+                  ringColor={item.enemy.ringColor}
                   isFlipping={isEntityFlipping}
                 />
               ) : type === 'rune' ? (
