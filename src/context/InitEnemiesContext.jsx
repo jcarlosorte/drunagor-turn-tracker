@@ -62,13 +62,15 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   const removeEnemyByUUID = (uuid) => {
-    console.log('Removing enemy with UUID:', uuid);
+    //console.log('Removing enemy with UUID:', uuid);
     setPlacedEnemies((prev) => prev.filter(e => e.enemy.uuid !== uuid));
   };
   
   const resetPlacedEnemies = () => {
-    console.log('Resetting placedEnemies');
+    //console.log('Resetting placedEnemies');
     setPlacedEnemies([]);
+    setUsedColors([]);
+    setEnemyColorMap({});
   };
 
   return (
