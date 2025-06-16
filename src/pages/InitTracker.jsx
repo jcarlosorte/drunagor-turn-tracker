@@ -739,7 +739,10 @@ const InitTracker = () => {
         )}
         style={{ perspective: "1000px" }}
       >
-        <div className="relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d">
+        <div className={classNames(
+          "relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d",
+          ringClass  // 👈 Aquí aplicas el anillo de color
+        )}>
           <img
             src={image}
             alt={name}
