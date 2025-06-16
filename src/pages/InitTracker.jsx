@@ -323,7 +323,7 @@ const InitTracker = () => {
 
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
-    releaseColor(uuid)
+    releaseColor(uuid);
   };
   const openEnemyModal = (uuid) => {
     setSelectedEnemyUuid(uuid);
