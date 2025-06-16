@@ -133,7 +133,7 @@ const InitTracker = () => {
     const colorId = assignColorToEnemy(uuid) || null;
     if (!colorId) {
       alert(ti.noColorsAvailable);
-      return;
+      return null;
     }
     showToast(selected);
     placeEnemy({
@@ -174,7 +174,7 @@ const InitTracker = () => {
     const colorId = assignColorToEnemy(uuid) || null;
     if (!colorId) {
       alert(ti.noColorsAvailable);
-      return;
+      return null;
     }
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
