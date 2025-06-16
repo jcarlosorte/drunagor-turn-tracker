@@ -170,6 +170,7 @@
   "trackerInit": {
     "movil1": "Please rotate your device to landscape orientation",
     "movil2": "to properly enjoy turn tracker control.",
+    "noColorsAvailable": "No colors available to stands",
     "title": "Turn Tracker",
     "menu": "Menu",
     "language": "Language",
