@@ -130,7 +130,7 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid) || null;
+    const colorId = assignColorToEnemy(uuid);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -167,7 +167,7 @@ const InitTracker = () => {
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid) || null;
+    const colorId = assignColorToEnemy(uuid);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -239,7 +239,7 @@ const InitTracker = () => {
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid) || null;
+    const colorId = assignColorToEnemy(uuid);
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
