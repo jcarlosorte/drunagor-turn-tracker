@@ -197,7 +197,7 @@ const TopMenu = ({
                   { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
                   { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
                   { key: 'jefe', label: t.selectBosses, color: 'text-red-500' },
-                  { key: 'hero', label: t.selectOther, color: 'text-purple-500' }, // <- este es nuestro objetivo
+                  { key: 'hero', label: t.selectHeroFall, color: 'text-purple-500' },
                 ].map(({ key, label, color }) => (
                   <React.Fragment key={key}>
                     <button
@@ -241,7 +241,7 @@ const TopMenu = ({
                             }}
                             className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full"
                           >
-                            🎲 {t.randomHeroEnemy || 'Aleatorio'}
+                            🎲 {t.random || 'Aleatorio'}
                           </button>
                         </div>
                       </div>
