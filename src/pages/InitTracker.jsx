@@ -972,7 +972,7 @@ const InitTracker = () => {
               onAddEnemy={openCategorySelector}
               onSelectCommander={handleRandomCommander}
               onSelectBoss={handleSelectBoss}
-              onSelectOther={handleSelectOther}
+              onAddHeroEnemy={handleAddHeroEnemy}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
