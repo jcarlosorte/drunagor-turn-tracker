@@ -129,7 +129,7 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid);
+    const colorId = null;
   
     showToast(selected);
   
