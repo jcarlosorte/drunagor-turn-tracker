@@ -6,6 +6,7 @@ import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, Gi
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
+import { ENEMIES } from '@/data/enemies';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
@@ -18,7 +19,7 @@ const TopMenu = ({
   onAddEnemy,
   onSelectCommander,
   onSelectBoss,
-  onSelectOther,
+  onAddHeroEnemy,
   onAddManual,
   behaviors,
   onSelectRuneCard,
@@ -36,6 +37,7 @@ const TopMenu = ({
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
+  const [showHeroEnemyMenu, setShowHeroEnemyMenu] = useState(false);
   
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -92,11 +94,13 @@ const TopMenu = ({
       onSelectBoss();
     } else if (value === 'otros') {
       onSelectOther();
+    } else if (value === 'hero') {
+      setShowHeroEnemyMenu(true); // 👉 mostramos menú de selección de héroes enemigos
     } else {
       onAddManual(value);
     }
   
-    setManualSelect('');
+    setManualSelect(value);
   };
 
   return (
@@ -193,25 +197,63 @@ const TopMenu = ({
                   { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
                   { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
                   { key: 'jefe', label: t.selectBosses, color: 'text-red-500' },
-                  { key: 'otros', label: t.selectOther, color: 'text-purple-500' },
+                  { key: 'hero', label: t.selectOther, color: 'text-purple-500' }, // <- este es nuestro objetivo
                 ].map(({ key, label, color }) => (
-                  <button
-                    key={key}
-                    onClick={() => {
-                      setManualSelect(key);
-                      handleManualSelect({ target: { value: key } });
-                    }}
-                    className={`flex flex-col items-center gap-1 px-2 py-2 text-sm rounded-lg font-semibold hover:bg-purple-500 transition ${
-                      manualSelect === key ? 'bg-purple-600' : 'bg-gray-700'
-                    }`}
-                  >
-                    <GiBullyMinion className={`text-2xl ${color}`} />
-                    <span className="text-xs text-center">{label}</span>
-                  </button>
+                  <React.Fragment key={key}>
+                    <button
+                      onClick={() => {
+                        setManualSelect(key);
+                        handleManualSelect({ target: { value: key } });
+                      }}
+                      className={`flex flex-col items-center gap-1 px-2 py-2 text-sm rounded-lg font-semibold hover:bg-purple-500 transition ${
+                        manualSelect === key ? 'bg-purple-600' : 'bg-gray-700'
+                      }`}
+                    >
+                      <GiBullyMinion className={`text-2xl ${color}`} />
+                      <span className="text-xs text-center">{label}</span>
+                    </button>
+                
+                    {/* Mostrar selección de enemigos 'hero' debajo del botón */}
+                    {key === 'hero' && manualSelect === 'hero' && (
+                      <div className="col-span-full bg-gray-700 p-2 rounded-lg mt-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          {ENEMIES.filter(e => e.color === 'hero').map(enemy => (
+                            <button
+                              key={enemy.id}
+                              onClick={() => {
+                                onAddHeroEnemy(enemy.id);
+                                setManualSelect(''); // Cierra el submenú tras seleccionar
+                              }}
+                              className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
+                            >
+                              {enemy.nombre}
+                            </button>
+                          ))}
+                        </div>
+                
+                        <div className="flex justify-center mt-2">
+                          <button
+                            onClick={() => {
+                              const heroEnemies = ENEMIES.filter(e => e.color === 'hero');
+                              const random = heroEnemies[Math.floor(Math.random() * heroEnemies.length)];
+                              onAddHeroEnemy(random.id);
+                              setManualSelect('');
+                            }}
+                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full"
+                          >
+                            🎲 {t.randomHeroEnemy || 'Aleatorio'}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </React.Fragment>
                 ))}
               </div>
             </div>
 
+            
+
+            
             <div className="flex justify-center gap-4 mt-2">
               <button
                 onClick={resetPlacedEnemies}
