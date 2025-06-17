@@ -69,6 +69,11 @@
     "catharina": "Catharina"
   },
   "enemies": {
+    "lorelai_corrupted": "Lorelai Maga Caída",
+    "elros_corrupted": "Elros Asesino Caído",
+    "jaheen_corrupted": "Jaheen Clérigo Caído",
+    "maya_corrupted": "Maya Montaraz Caída",
+    "vorn_corrupted": "Vorn Guerrero Caído",
     "undead_king_boss": "Rey Redivivo",
     "skeleton_archer": "Arquero Esqueleto",
     "dark_vampire": "Vampiro Oscuro",
