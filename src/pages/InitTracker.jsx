@@ -119,6 +119,47 @@ const InitTracker = () => {
     selectedExpansions.includes(e.expansionId) &&
     e.color !== "jefe" && e.color !== "supremo" && e.color !== "hero" && e.color !== "esbirro"
   );
+
+
+  const handleAddHeroEnemy = (enemyId) => {
+    const selected = ENEMIES.find(e => e.id === enemyId);
+    if (!selected) return;
+  
+    const runeIndex = runesColorMap[selected.rune];
+    const runePosition = selected.runePosition;
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
+    const uuid = uuidv4();
+    const colorId = assignColorToEnemy(uuid);
+  
+    showToast(selected);
+  
+    placeEnemy({
+      enemy: {
+        uuid,
+        name: selected.nombre,
+        id: selected.id,
+        rune: selected.rune,
+        imagen: selected.imagen,
+        runePosition,
+        position: runeIndex,
+        categoria: selected.categoria,
+        comportamiento: selected.comportamiento,
+        vida: selected.vida,
+        vidaMax: selected.vida,
+        movimiento: selected.movimiento,
+        ataque: selected.ataque,
+        color: selected.color,
+        inmunidad: selected.inmunidad,
+        tipo_ataque: selected.tipo_ataque,
+        capacidades: adjustedCaps,
+        capacidadesOriginales: selected.capacidades,
+        ringColor: colorId,
+        cara: selected.cara,
+      }
+    });
+  };
+
+
   
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
