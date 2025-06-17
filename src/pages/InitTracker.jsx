@@ -12,6 +12,7 @@ import { RUNAS } from '@/data/runas';
 import { CARTAS_COMANDANTE } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
+import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
@@ -130,7 +131,8 @@ const InitTracker = () => {
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid);
+    const isBig = selected.size === 'grande';
+    const colorId = assignColorToEnemy(uuid, isBig);
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -167,7 +169,8 @@ const InitTracker = () => {
     if (!selected) return;
     //console.log('cap before adjust:', selected.capacidades);
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid);
+    const isBig = selected.size === 'grande';
+    const colorId = assignColorToEnemy(uuid, isBig);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -239,7 +242,8 @@ const InitTracker = () => {
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
     const uuid = uuidv4();
-    const colorId = assignColorToEnemy(uuid);
+    const isBig = selected.size === 'grande';
+    const colorId = assignColorToEnemy(uuid, isBig);
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
@@ -709,7 +713,10 @@ const InitTracker = () => {
   
   const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping }) => {
     const [flipped, setFlipped] = useState(false);
-    const ringClass = ENEMY_RING_COLORS.find(r => r.id === ringColor)?.className || '';
+    const ringClass =
+      ENEMY_RING_COLORS.find(r => r.id === ringColor)?.className ||
+      ENEMY_RING_COLORS_BIG.find(r => r.id === ringColor)?.className ||
+      '';
 
     useEffect(() => {
       if (isFlipping) {
