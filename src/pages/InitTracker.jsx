@@ -124,7 +124,8 @@ const InitTracker = () => {
   const handleAddHeroEnemy = (enemyId) => {
     const selected = ENEMIES.find(e => e.id === enemyId);
     if (!selected) return;
-  
+
+    const totalVida = selected.vida * (numHeroes);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
@@ -144,8 +145,8 @@ const InitTracker = () => {
         position: runeIndex,
         categoria: selected.categoria,
         comportamiento: selected.comportamiento,
-        vida: selected.vida,
-        vidaMax: selected.vida,
+        vida: totalVida,
+        vidaMax: totalVida,
         movimiento: selected.movimiento,
         ataque: selected.ataque,
         color: selected.color,
