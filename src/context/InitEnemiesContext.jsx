@@ -1,4 +1,5 @@
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
+import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
 import { useLanguage } from '@/context/LanguageContext';
 import { createContext, useContext, useState } from 'react';
 
@@ -9,33 +10,39 @@ export const InitEnemiesProvider = ({ children }) => {
   const ti = translations.trackerInit || {};
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [usedColors, setUsedColors] = useState([]);
+  const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
   // Función para obtener un color libre
-  const getNextAvailableColor = () => {
-    const used = new Set(usedColors);
-    return ENEMY_RING_COLORS.find(c => !used.has(c.id));
+  const getNextAvailableColor = (isBig = false) => {
+    const used = new Set(isBig ? usedColorsBig : usedColors);
+    const source = isBig ? ENEMY_RING_COLORS_BIG : ENEMY_RING_COLORS;
+    return source.find(c => !used.has(c.id));
   };
   
   // Función para asignar un color a un enemigo
-  const assignColorToEnemy = (enemyUUID) => {
-    const available = getNextAvailableColor();
-    
+  const assignColorToEnemy = (enemyUUID, isBig = false) => {
+    const available = getNextAvailableColor(isBig);
     if (!available) {
       alert(ti.noColorsAvailable || 'No hay más colores disponibles');
-      return undefined; // Permite continuar, pero sin color asignado
+      return undefined;
     }
   
-    setUsedColors(prev => [...prev, available.id]);
+    if (isBig) {
+      setUsedColorsBig(prev => [...prev, available.id]);
+    } else {
+      setUsedColors(prev => [...prev, available.id]);
+    }
+  
     setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available.id }));
     return available.id;
   };
-  
   // Función para liberar el color
   const releaseColor = (enemyUUID) => {
     const colorId = enemyColorMap[enemyUUID];
     if (!colorId) return;
   
     setUsedColors(prev => prev.filter(c => c !== colorId));
+    setUsedColorsBig(prev => prev.filter(c => c !== colorId));
     setEnemyColorMap(prev => {
       const updated = { ...prev };
       delete updated[enemyUUID];
@@ -70,6 +77,7 @@ export const InitEnemiesProvider = ({ children }) => {
     //console.log('Resetting placedEnemies');
     setPlacedEnemies([]);
     setUsedColors([]);
+    setUsedColorsBig([]);
     setEnemyColorMap({});
   };
 
