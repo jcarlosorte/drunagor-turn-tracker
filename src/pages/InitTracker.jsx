@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { RUNAS } from '@/data/runas';
-import { CARTAS_COMANDANTE } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
@@ -322,6 +322,27 @@ const InitTracker = () => {
 
   const placeCommanderCards = () => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, numHeroes);
+    
+    const nuevas = selected.map(carta => ({
+      enemy: {
+        uuid: uuidv4(),
+        id: carta.id,
+        nombre: carta.nombre,
+        capacidades: carta.capacidades,
+        rune: carta.rune,
+        runePosition: carta.runePosition,
+        position: runesColorMap[carta.rune],
+        tipo: 'especial', // o 'comandante'
+      },
+    }));
+  
+    setPlacedEnemies(prev => [...prev, ...nuevas]);
+
+  };
+
+  const placeOverlordCards = () => {
+    const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
     const nuevas = selected.map(carta => ({
