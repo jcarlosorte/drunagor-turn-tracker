@@ -158,6 +158,7 @@ const InitTracker = () => {
         cara: selected.cara,
       }
     });
+    placeOverlordCards();
   };
 
 
