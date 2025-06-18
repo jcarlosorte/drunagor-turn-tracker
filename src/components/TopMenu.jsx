@@ -196,9 +196,9 @@ const TopMenu = ({
                   { key: 'gris', label: t.addGrayEnemies, color: 'text-gray-400' },
                   { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
                   { key: 'comandante', label: t.addCommanders, color: 'text-yellow-500' },
-                  { key: 'supremo', label: t.selectOverlord, color: 'text-blue-500' },
+                  { key: 'supremo', label: t.selectOverlord, color: 'text-purple-700' },
                   { key: 'jefe', label: t.selectBosses, color: 'text-red-500' },
-                  { key: 'hero', label: t.selectHeroFall, color: 'text-purple-500' },
+                  { key: 'hero', label: t.selectHeroFall, color: 'text-purple-400' },
                 ].map(({ key, label, color }) => (
                   <React.Fragment key={key}>
                     <button
