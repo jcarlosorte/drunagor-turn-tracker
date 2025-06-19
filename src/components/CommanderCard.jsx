@@ -6,20 +6,10 @@ import CommanderCardModal from '@/components/CommanderCardModal';
 const CommanderCard = ({ carta }) => {
   const { translations } = useLanguage();
   const [showModal, setShowModal] = useState(false);
-  const [highlight, setHighlight] = useState(false);
   const ta = translations.cartas_ataque || {};
 
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
-
-  // ⚡ Quitar highlight tras 1.5s
-  useEffect(() => {
-    if (carta.highlight && !highlight) {
-      setHighlight(true);
-      const timeout = setTimeout(() => setHighlight(false), 1500);
-      return () => clearTimeout(timeout);
-    }
-  }, [carta.highlight]);
-
+  
   // 🎨 Clases visuales condicionales por tipo
   const ringClass =
     carta.sourceOverlordId
