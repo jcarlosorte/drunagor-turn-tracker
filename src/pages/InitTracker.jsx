@@ -121,6 +121,15 @@ const InitTracker = () => {
     e.color !== "jefe" && e.color !== "supremo" && e.color !== "hero" && e.color !== "esbirro"
   );
 
+  const clearCardHighlight = (uuid) => {
+    setPlacedEnemies(prev =>
+      prev.map(item =>
+        item.enemy.uuid === uuid
+          ? { ...item, enemy: { ...item.enemy, highlight: false } }
+          : item
+      )
+    );
+  };
 
   const handleAddHeroEnemy = (enemyId) => {
     const selected = ENEMIES.find(e => e.id === enemyId);
@@ -343,6 +352,9 @@ const InitTracker = () => {
   
     setPlacedEnemies(prev => [...prev, ...nuevas]);
 
+    nuevas.forEach(carta => {
+      setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
+    });
   };
 
   const placeOverlordCards = (overlordUUID, isTurnActivation = false) => {
@@ -366,20 +378,20 @@ const InitTracker = () => {
 
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
-    console.log(isTurnActivation);
+   
     if (isTurnActivation) {
       setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
       setTimeout(() => setWarningMessage(null), 3000);
     }
 
-    setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
-    setTimeout(() => {
-      setWarningMessage(null); // borra aviso tras 3 segundos
-    }, 3000);
   
     // 2. Añadir nuevas cartas
     setPlacedEnemies(prev => [...prev, ...nuevas]);
 
+
+    nuevas.forEach(carta => {
+      setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
+    });
   };
 
   const handleAddRuneCard = (runeCard) => {
