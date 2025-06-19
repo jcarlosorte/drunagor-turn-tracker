@@ -337,11 +337,22 @@ const InitTracker = () => {
         position: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
         sourceCommanderId: commanderUUID,
+        highlight: true,
       },
     }));
   
     setPlacedEnemies(prev => [...prev, ...nuevas]);
 
+    // 🧼 quitar animación visual tras un tiempo
+    setTimeout(() => {
+      setPlacedEnemies(prev =>
+        prev.map(e =>
+          e.enemy.highlight
+            ? { ...e, enemy: { ...e.enemy, highlight: false } }
+            : e
+        )
+      );
+    }, 1500);
   };
 
   const placeOverlordCards = (overlordUUID, isTurnActivation = false) => {
