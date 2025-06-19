@@ -80,6 +80,7 @@ const InitTracker = () => {
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
   const { executedRunes, setExecutedRunes } = useInitRunes();
+  const [warningMessage, setWarningMessage] = useState(null);
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -358,10 +359,30 @@ const InitTracker = () => {
         position: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
         sourceOverlordId: overlordUUID,
+        highlight: true,
       },
     }));
+
+     // 1. Mostrar mensaje visual temporal
+    setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado);
   
+    setTimeout(() => {
+      setWarningMessage(null); // borra aviso tras 3 segundos
+    }, 3000);
+  
+    // 2. Añadir nuevas cartas
     setPlacedEnemies(prev => [...prev, ...nuevas]);
+  
+    // 3. Borrar highlight tras 1.5 segundos
+    setTimeout(() => {
+      setPlacedEnemies(prev =>
+        prev.map(e =>
+          e.enemy.highlight
+            ? { ...e, enemy: { ...e.enemy, highlight: false } }
+            : e
+        )
+      );
+    }, 1500);
 
   };
 
@@ -893,7 +914,7 @@ const InitTracker = () => {
                 </div>
               )}
               {type === 'enemy' && item.enemy.tipo === 'especial' ? (
-                <CommanderCard carta={item.enemy} />
+                <CommanderCard carta={item.enemy} highlight={item.enemy.highlight} />
               ) : type === 'enemy' ? (
                 <EnemyCard
                   uuid={item.enemy.uuid}
@@ -1170,6 +1191,11 @@ const InitTracker = () => {
         message={tileWarning}
         onClose={() => setTileWarning(null)}
       />
+      {warningMessage && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
+          {warningMessage}
+        </div>
+      )}
       </PageTransition>
   );
 };
