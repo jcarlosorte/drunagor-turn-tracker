@@ -136,7 +136,7 @@ const InitTracker = () => {
   
     placeEnemy({
       enemy: {
-        uuid,
+        uuid: uuid,
         name: selected.nombre,
         id: selected.id,
         rune: selected.rune,
@@ -158,7 +158,7 @@ const InitTracker = () => {
         cara: selected.cara,
       }
     });
-    placeOverlordCards();
+    placeOverlordCards(uuid);
   };
 
 
@@ -245,7 +245,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards();
+        placeCommanderCards(uuid);
       });
       return;
     }
@@ -317,11 +317,11 @@ const InitTracker = () => {
       showToast(enemy);
       placeEnemy({ enemy });
       // 👉 Añadir cartas de ataque del comandante:
-      placeCommanderCards();
+      placeCommanderCards(uuid);
     });
   };
 
-  const placeCommanderCards = () => {
+  const placeCommanderCards = (commanderUUID) => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -335,6 +335,7 @@ const InitTracker = () => {
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
+        sourceCommanderId: commanderUUID,
       },
     }));
   
@@ -342,7 +343,7 @@ const InitTracker = () => {
 
   };
 
-  const placeOverlordCards = () => {
+  const placeOverlordCards = (overlordUUID) => {
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -356,6 +357,7 @@ const InitTracker = () => {
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
         tipo: 'especial', // o 'comandante'
+        sourceOverlordId: overlordUUID,
       },
     }));
   
