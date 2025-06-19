@@ -632,6 +632,16 @@ const InitTracker = () => {
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
           setGroupTurnTracker({ group: enemies, index: 0 });
+          if (
+            enemies[0]?.categoria === 'overlord' &&
+            Array.isArray(enemies[0]?.capacidades) &&
+            enemies[0].capacidades.includes('VORAGINE')
+          ) {
+            setPlacedEnemies(prev => prev.filter(e =>
+              !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemies[0].uuid)
+            ));
+            placeOverlordCards(enemies[0].uuid);
+          }
           return;
         }
       } else if (step.type === 'rune') {
