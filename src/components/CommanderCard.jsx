@@ -13,7 +13,7 @@ const CommanderCard = ({ carta }) => {
 
   // ⚡ Quitar highlight tras 1.5s
   useEffect(() => {
-    if (carta.highlight) {
+    if (carta.highlight && !highlight) {
       setHighlight(true);
       const timeout = setTimeout(() => setHighlight(false), 1500);
       return () => clearTimeout(timeout);
