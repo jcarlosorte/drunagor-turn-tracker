@@ -343,16 +343,6 @@ const InitTracker = () => {
   
     setPlacedEnemies(prev => [...prev, ...nuevas]);
 
-    // 🧼 quitar animación visual tras un tiempo
-    setTimeout(() => {
-      setPlacedEnemies(prev =>
-        prev.map(e =>
-          e.enemy.highlight
-            ? { ...e, enemy: { ...e.enemy, highlight: false } }
-            : e
-        )
-      );
-    }, 1500);
   };
 
   const placeOverlordCards = (overlordUUID, isTurnActivation = false) => {
@@ -376,6 +366,7 @@ const InitTracker = () => {
 
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
+    console.log(isTurnActivation);
     if (isTurnActivation) {
       setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
       setTimeout(() => setWarningMessage(null), 3000);
@@ -387,17 +378,6 @@ const InitTracker = () => {
   
     // 2. Añadir nuevas cartas
     setPlacedEnemies(prev => [...prev, ...nuevas]);
-  
-    // 3. Borrar highlight tras 1.5 segundos
-    setTimeout(() => {
-      setPlacedEnemies(prev =>
-        prev.map(e =>
-          e.enemy.highlight
-            ? { ...e, enemy: { ...e.enemy, highlight: false } }
-            : e
-        )
-      );
-    }, 1500);
 
   };
 
