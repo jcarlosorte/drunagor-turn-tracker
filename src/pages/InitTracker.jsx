@@ -344,7 +344,7 @@ const InitTracker = () => {
 
   };
 
-  const placeOverlordCards = (overlordUUID) => {
+  const placeOverlordCards = (overlordUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -364,7 +364,11 @@ const InitTracker = () => {
     }));
 
      // 1. Mostrar mensaje visual temporal
-    setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
+      // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
+    if (isTurnActivation) {
+      setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
+      setTimeout(() => setWarningMessage(null), 3000);
+    }
   
     setTimeout(() => {
       setWarningMessage(null); // borra aviso tras 3 segundos
@@ -661,7 +665,7 @@ const InitTracker = () => {
             setPlacedEnemies(prev => prev.filter(e =>
               !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemies[0].uuid)
             ));
-            placeOverlordCards(enemies[0].uuid);
+            placeOverlordCards(enemies[0].uuid), true;
           }
           return;
         }
