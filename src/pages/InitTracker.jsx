@@ -371,7 +371,8 @@ const InitTracker = () => {
       setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
       setTimeout(() => setWarningMessage(null), 3000);
     }
-  
+
+    setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
     setTimeout(() => {
       setWarningMessage(null); // borra aviso tras 3 segundos
     }, 3000);
