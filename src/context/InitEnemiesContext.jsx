@@ -69,8 +69,26 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   const removeEnemyByUUID = (uuid) => {
-    //console.log('Removing enemy with UUID:', uuid);
-    setPlacedEnemies((prev) => prev.filter(e => e.enemy.uuid !== uuid));
+   setPlacedEnemies((prev) => {
+      const target = prev.find(e => e.enemy.uuid === uuid);
+      if (!target) return prev;
+  
+      const isCommander = target.enemy.categoria === 'comandante';
+      const isOverlord = target.enemy.categoria === 'overlord';
+  
+      const updated = prev.filter(e => {
+        const enemy = e.enemy;
+        if (enemy.uuid === uuid) return false;
+  
+        if (isCommander && enemy.tipo === 'especial' && enemy.sourceCommanderId === uuid) return false;
+        if (isOverlord && enemy.tipo === 'especial' && enemy.sourceOverlordId === uuid) return false;
+  
+        return true;
+      });
+  
+      return updated;
+    });
+
   };
   
   const resetPlacedEnemies = () => {
