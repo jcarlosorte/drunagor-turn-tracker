@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import CommanderCardModal from '@/components/CommanderCardModal';
 
-const CommanderCard = ({ carta }) => {
+const CommanderCard = ({ carta, highlight = false }) => {
   const { translations } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const ta = translations.cartas_ataque || {};
@@ -14,7 +14,8 @@ const CommanderCard = ({ carta }) => {
     <div className="flex flex-col items-center mx-1">
       <div
         onClick={() => setShowModal(true)}
-        className="cursor-pointer relative w-full max-w-[140px] bg-black p-2 rounded-lg border-2 border-yellow-400 shadow-md hover:scale-105 transition"
+        className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          ${highlight ? 'animate-pulse ring-4 ring-red-500' : 'bg-black border-yellow-400'}`}
       >
         <div
           className="text-sm text-yellow-300 text-center"
