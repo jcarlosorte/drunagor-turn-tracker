@@ -657,7 +657,7 @@ const InitTracker = () => {
             setPlacedEnemies(prev => prev.filter(e =>
               !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemies[0].uuid)
             ));
-            placeOverlordCards(enemies[0].uuid), true;
+            placeOverlordCards(enemies[0].uuid, true);
           }
           return;
         }
