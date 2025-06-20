@@ -19,6 +19,15 @@ const CommanderCard = ({ carta }) => {
       : carta.sourceBossId
       ? 'ring-4 ring-purple-400 animate-pulse'
       : '';
+
+  const enemyClass =
+    carta.sourceOverlordId
+      ? ta.ataqueO
+      : carta.sourceCommanderId
+      ? ta.ataqueC
+      : carta.sourceBossId
+      ? ta.ataqueB
+      : '';
   
   return (
     <div className="flex flex-col items-center mx-1">
@@ -37,7 +46,7 @@ const CommanderCard = ({ carta }) => {
           className="text-[0.50rem] italic text-white-300 text-center"
           style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
         >
-          -{ta.ataqueC}-
+          -{enemyClass}-
         </div>
       </div>
 
