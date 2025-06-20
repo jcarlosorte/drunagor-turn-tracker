@@ -491,6 +491,7 @@
   "cartas_ataque": {
     "ataqueC": "Commander Action",
     "ataqueO": "Overlord Action",
+    "ataqueB": "Boss Action",
     "nombre": {
       "cmd_1": "SUPERNATURAL SHELL",
       "cmd_2": "POISONOUS STINGER",
