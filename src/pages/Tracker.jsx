@@ -103,10 +103,10 @@ const TrackerSelect = () => {
     }
   
     // (opcional) Refiltrar enemigos por si el estado no estaba 100% sincronizado
-    const validEnemies = selectedEnemies.filter(id => {
-      const enemy = ENEMIES.find(e => e.id === id);
-      return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
-    });
+    //const validEnemies = selectedEnemies.filter(id => {
+    //  const enemy = ENEMIES.find(e => e.id === id);
+    //  return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
+    //});
   
     const trackerData = {
       heroes: selectedHeroes,
