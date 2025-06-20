@@ -25,7 +25,7 @@ const CommanderCard = ({ carta }) => {
       <div
         onClick={() => setShowModal(true)}
         className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
-          ${highlight ? ringClass : 'bg-black border-yellow-400'}`}
+          ${carta.highlight ? ringClass : 'bg-black border-yellow-400'}`}
       >
         <div
           className="text-sm text-yellow-300 text-center"
