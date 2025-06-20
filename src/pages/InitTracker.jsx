@@ -331,7 +331,7 @@ const InitTracker = () => {
     });
   };
 
-  const placeCommanderCards = (commanderUUID) => {
+  const placeCommanderCards = (commanderUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -349,9 +349,11 @@ const InitTracker = () => {
         highlight: true,
       },
     }));
-  
+    if (isTurnActivation) {
+      setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
+      setTimeout(() => setWarningMessage(null), 3000);
+    }
     setPlacedEnemies(prev => [...prev, ...nuevas]);
-
     nuevas.forEach(carta => {
       setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
     });
@@ -378,17 +380,12 @@ const InitTracker = () => {
 
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
-   
     if (isTurnActivation) {
       setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
       setTimeout(() => setWarningMessage(null), 3000);
     }
-
-  
     // 2. Añadir nuevas cartas
     setPlacedEnemies(prev => [...prev, ...nuevas]);
-
-
     nuevas.forEach(carta => {
       setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
     });
@@ -661,18 +658,27 @@ const InitTracker = () => {
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
           setGroupTurnTracker({ group: enemies, index: 0 });
-          if (
-            enemies[0]?.categoria === 'overlord' &&
-            Array.isArray(enemies[0]?.capacidades) &&
-            enemies[0].capacidades.includes('VORAGINE')
-          ) {
-            setPlacedEnemies(prev => prev.filter(e =>
-              !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemies[0].uuid)
-            ));
-            placeOverlordCards(enemies[0].uuid, true);
+
+          const current = enemies[0];
+          const tieneVoragine = Array.isArray(current?.capacidades) && current.capacidades.includes('VORAGINE');
+          if (tieneVoragine) {
+              if (current.categoria === 'overlord') {
+                setPlacedEnemies(prev => prev.filter(e =>
+                  !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)
+                ));
+                placeOverlordCards(current.uuid, true); // true = show highlight
+              }
+          
+              if (current.categoria === 'comandante') {
+                setPlacedEnemies(prev => prev.filter(e =>
+                  !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
+                ));
+                placeCommanderCards(current.uuid, true); // true = show highlight
+              }
+            }
+          
+            return;
           }
-          return;
-        }
       } else if (step.type === 'rune') {
         const runes = placedRunes
           .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
