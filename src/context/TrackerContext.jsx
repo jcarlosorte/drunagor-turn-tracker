@@ -10,7 +10,7 @@ export const TrackerProvider = ({ children }) => {
       heroes: [],
       roles: {},
       enemies: [],
-      behaviors: ["estandar", "alternativo", "compejo"],
+      behaviors: ["estandar", "alternativo", "complejo"],
     };
   });
 
