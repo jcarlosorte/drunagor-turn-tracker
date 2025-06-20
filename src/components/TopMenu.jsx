@@ -38,6 +38,7 @@ const TopMenu = ({
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [showHeroEnemyMenu, setShowHeroEnemyMenu] = useState(false);
+  const [showOverlordEnemyMenu, setShowOverlordEnemyMenu] = useState(false);
   
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -78,8 +79,10 @@ const TopMenu = ({
       // Ejecuta selección aleatoria de comandante por color (puedes añadir un prompt o color fijo si quieres)
       onSelectCommander(); // 👈 aquí eliges el color que quieras por defecto o...
       // Mejor: podrías abrir otro select para que elija color del comandante.
+    } else if (value === 'supremo') {
+      setShowOverlordEnemyMenu(true);
     } else {
-      onAddEnemy(value); // blanco, gris, negro normales van por categoría
+      onAddManual(value);
     }
   
     setEnemySelect(''); // resetear
@@ -247,6 +250,41 @@ const TopMenu = ({
                         </div>
                       </div>
                     )}
+
+                    {key === 'supremo' && manualSelect === 'supremo' && (
+                    <div className="col-span-full bg-gray-700 p-2 rounded-lg mt-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        {ENEMIES.filter(e => e.color === 'overlord').map(enemy => (
+                          <button
+                            key={enemy.id}
+                            onClick={() => {
+                              onAddOverlordEnemy(enemy.id);
+                              setManualSelect('');
+                            }}
+                            className="bg-red-700 hover:bg-red-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {enemy.nombre}
+                          </button>
+                        ))}
+                      </div>
+                  
+                      <div className="flex justify-center mt-2">
+                        <button
+                          onClick={() => {
+                            const overlordEnemies = ENEMIES.filter(e => e.color === 'overlord');
+                            const random = overlordEnemies[Math.floor(Math.random() * overlordEnemies.length)];
+                            onAddOverlordEnemy(random.id);
+                            setManualSelect('');
+                          }}
+                          className="bg-gradient-to-r from-red-700 via-yellow-500 to-purple-700 text-white text-xs px-3 py-1 rounded-full"
+                        >
+                          🎲 {t.random || 'Aleatorio'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                    
                   </React.Fragment>
                 ))}
               </div>
