@@ -184,6 +184,7 @@
       "addEnemies": "Enemigos Aleatorios",
       "addEnemy": "Añadir",
       "selectType": "Selecciona Tipo",
+      "manualTitle": "Seleccionar enemigo manualmente",
       "addWhiteEnemies": "MB (Blanco)",
       "addGrayEnemies": "MG (Gris)",
       "addBlackEnemies": "MN (Negro)",
