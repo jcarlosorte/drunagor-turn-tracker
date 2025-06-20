@@ -20,6 +20,7 @@ const TopMenu = ({
   onSelectCommander,
   onSelectBoss,
   onAddHeroEnemy,
+  onAddOverlordEnemy,
   onAddManual,
   behaviors,
   onSelectRuneCard,
