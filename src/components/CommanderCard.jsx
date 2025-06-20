@@ -13,11 +13,11 @@ const CommanderCard = ({ carta }) => {
   // 🎨 Clases visuales condicionales por tipo
   const ringClass =
     carta.sourceOverlordId
-      ? 'ring-4 ring-purple-500 animate-pulse'
+      ? 'ring-4 ring-orange-400 animate-pulse'
       : carta.sourceCommanderId
       ? 'ring-4 ring-yellow-400 animate-pulse'
       : carta.sourceBossId
-      ? 'ring-4 ring-red-500 animate-pulse'
+      ? 'ring-4 ring-purple-400 animate-pulse'
       : '';
   
   return (
