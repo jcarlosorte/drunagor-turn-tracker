@@ -79,7 +79,7 @@ const TopMenu = ({
     if (value === 'comandante') {
       onSelectCommander(); 
     } else {
-      onAddManual(value);
+      onAddEnemy(value);
     }
   
     setEnemySelect(''); // resetear
