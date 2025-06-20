@@ -77,11 +77,7 @@ const TopMenu = ({
     if (!value) return;
   
     if (value === 'comandante') {
-      // Ejecuta selección aleatoria de comandante por color (puedes añadir un prompt o color fijo si quieres)
-      onSelectCommander(); // 👈 aquí eliges el color que quieras por defecto o...
-      // Mejor: podrías abrir otro select para que elija color del comandante.
-    } else if (value === 'supremo') {
-      setShowOverlordEnemyMenu(true);
+      onSelectCommander(); 
     } else {
       onAddManual(value);
     }
