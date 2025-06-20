@@ -25,8 +25,8 @@ const TrackerSelect = () => {
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
   const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.includes(h.expansionId));
-  //const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId) && e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro");
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId));
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId) && e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro");
+  //const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId));
   
   useEffect(() => {
     const validEnemies = enemiesInSelectedExpansions.map(e => e.id);
