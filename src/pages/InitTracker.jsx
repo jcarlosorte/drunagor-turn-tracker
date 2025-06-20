@@ -344,7 +344,7 @@ const InitTracker = () => {
         rune: carta.rune,
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
-        tipo: 'especial', // o 'comandante'
+        tipo: 'especial',
         sourceCommanderId: commanderUUID,
         highlight: true,
       },
@@ -372,7 +372,7 @@ const InitTracker = () => {
         rune: carta.rune,
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
-        tipo: 'especial', // o 'comandante'
+        tipo: 'especial',
         sourceOverlordId: overlordUUID,
         highlight: true,
       },
