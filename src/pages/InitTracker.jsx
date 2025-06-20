@@ -168,7 +168,8 @@ const InitTracker = () => {
         cara: selected.cara,
       }
     });
-    placeOverlordCards(uuid);// estos usan las cartas de comandante esto es una priba mientras
+    //placeOverlordCards(uuid);// estos usan las cartas de comandante esto es una priba mientras
+    placeCommanderCards(uuid);
   };
 
 
@@ -179,7 +180,6 @@ const InitTracker = () => {
     const filtered = ENEMIES.filter(e => e.color === color && e.categoria === categoryKey && enemies.includes(e.id) && e.cara !=="B");
     if (filtered.length === 0) return;
     const selected = filtered[Math.floor(Math.random() * filtered.length)];
-    //console.log('cap before adjust:', selected.capacidades);
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
