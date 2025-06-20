@@ -118,7 +118,7 @@ const InitTracker = () => {
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
-    e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro"
+    e.color !== "jefe" && e.color !== "esbirro"
   );
 
   const clearCardHighlight = (uuid) => {
@@ -1082,7 +1082,8 @@ const InitTracker = () => {
               onSelectCommander={handleRandomCommander}
               onSelectBoss={handleSelectBoss}
               onAddHeroEnemy={handleAddHeroEnemy}
-              onAddOverlordEnemy={handleAddOverlordEnemy}
+              //onAddOverlordEnemy={handleAddOverlordEnemy}
+              onAddOverlordEnemy={openManualSelector}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
