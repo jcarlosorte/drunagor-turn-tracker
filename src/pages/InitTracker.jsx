@@ -168,7 +168,7 @@ const InitTracker = () => {
         cara: selected.cara,
       }
     });
-    placeOverlordCards(uuid);
+    placeOverlordCards(uuid);// estos usan las cartas de comandante esto es una priba mientras
   };
 
 
