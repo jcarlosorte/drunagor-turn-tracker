@@ -183,6 +183,7 @@
     "addEnemies": "Random Enemies",
     "addEnemy": "Add",
     "selectType": "Select Type",
+    "manualTitle": "Manually select enemy",
     "addWhiteEnemies": "WM (White)",
     "addGrayEnemies": "GM (Grey)",
     "addBlackEnemies": "BM (Black)",
