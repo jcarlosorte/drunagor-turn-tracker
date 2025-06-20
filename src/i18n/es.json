@@ -492,6 +492,7 @@
   "cartas_ataque": {
     "ataqueC": "Acción de Comandante",
     "ataqueO": "Acción de Señor Supremo",
+    "ataqueB": "Acción de Jefe",
     "nombre":{
       "cmd_1": "CAPARAZÓN SOBRENATURAL",
       "cmd_2": "AGUIJÓN ENVENENADO",
