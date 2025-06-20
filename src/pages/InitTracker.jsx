@@ -118,7 +118,7 @@ const InitTracker = () => {
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
-    e.color !== "jefe" && e.color !== "supremo" && e.color !== "hero" && e.color !== "esbirro"
+    e.color !== "jefe" && e.color !== "overlord" && e.color !== "hero" && e.color !== "esbirro"
   );
 
   const clearCardHighlight = (uuid) => {
@@ -131,6 +131,46 @@ const InitTracker = () => {
     );
   };
 
+  const handleAddOverlordEnemy = (enemyId) => {
+    const selected = ENEMIES.find(e => e.id === enemyId && e.color === 'overlord');
+    if (!selected) return;
+  
+    const runeIndex = runesColorMap[selected.rune];
+    const runePosition = selected.runePosition;
+    const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
+    const uuid = uuidv4();
+    const colorId = null;
+  
+    showToast(selected);
+  
+    placeEnemy({
+      enemy: {
+        uuid,
+        name: selected.nombre,
+        id: selected.id,
+        rune: selected.rune,
+        imagen: selected.imagen,
+        runePosition,
+        position: runeIndex,
+        categoria: selected.categoria,
+        comportamiento: selected.comportamiento,
+        vida: selected.vida,
+        vidaMax: selected.vida,
+        movimiento: selected.movimiento,
+        ataque: selected.ataque,
+        color: selected.color,
+        inmunidad: selected.inmunidad,
+        tipo_ataque: selected.tipo_ataque,
+        capacidades: adjustedCaps,
+        capacidadesOriginales: selected.capacidades,
+        ringColor: colorId,
+        cara: selected.cara,
+      }
+    });
+    placeOverlordCards(uuid);
+  };
+  
+    
   const handleAddHeroEnemy = (enemyId) => {
     const selected = ENEMIES.find(e => e.id === enemyId);
     if (!selected) return;
@@ -168,7 +208,6 @@ const InitTracker = () => {
         cara: selected.cara,
       }
     });
-    //placeOverlordCards(uuid);// estos usan las cartas de comandante esto es una priba mientras
     placeCommanderCards(uuid);
   };
 
@@ -1043,6 +1082,7 @@ const InitTracker = () => {
               onSelectCommander={handleRandomCommander}
               onSelectBoss={handleSelectBoss}
               onAddHeroEnemy={handleAddHeroEnemy}
+              onAddOverlordEnemy={handleAddOverlordEnemy}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
