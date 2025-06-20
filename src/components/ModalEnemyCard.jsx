@@ -44,7 +44,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     gris: 'border-gris',
     negro: 'border-negro',
     comandante: 'border-dorado',
-    hero: 'border-morado',
+    hero: 'border-dorado',
     jefe: 'border-morado',
   };
 
@@ -53,8 +53,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     gris: 'bg-gray-500',
     negro: 'bg-black',
     comandante: 'bg-yellow-400',
-    hero: 'bg-purple-700',
-    jefe: 'bg-purple-700',
+    hero: 'bg-orange-400',
+    jefe: 'bg-purple-400',
   };
   
   const textBgColorMap = {
@@ -62,7 +62,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
     gris: 'bg-gray-500/70',
     negro: 'bg-black/70',
     comandante: 'bg-yellow-400/70',
-    hero: 'bg-purple-700/70',
+    hero: 'bg-orange-400/70',
     jefe: 'bg-purple-700/70',
   };
 
