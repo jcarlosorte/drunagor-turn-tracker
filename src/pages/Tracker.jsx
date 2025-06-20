@@ -25,10 +25,8 @@ const TrackerSelect = () => {
   const t = translations?.trackerSelect || {};
   const navigate = useNavigate();
   const heroesInSelectedExpansions = HEROES.filter(h => selectedExpansions.includes(h.expansionId));
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => 
-    selectedExpansions.includes(e.expansionId) &&
-    e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro"
-  );
+  //const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId) && e.color !== "jefe" && e.color !== "hero" && e.color !== "esbirro");
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId));
   
   useEffect(() => {
     const validEnemies = enemiesInSelectedExpansions.map(e => e.id);
@@ -103,9 +101,10 @@ const TrackerSelect = () => {
     }
   
     // (opcional) Refiltrar enemigos por si el estado no estaba 100% sincronizado
+    //return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
     const validEnemies = selectedEnemies.filter(id => {
       const enemy = ENEMIES.find(e => e.id === id);
-      //return enemy?.color !== "jefe" && enemy?.color !== "hero" && enemy?.color !== "esbirro";
+      
       return enemy;
     });
   
