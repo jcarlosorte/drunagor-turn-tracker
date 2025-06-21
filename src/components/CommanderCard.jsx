@@ -9,7 +9,7 @@ const CommanderCard = ({ carta }) => {
   const ta = translations.cartas_ataque || {};
 
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
-  
+  const nombreEnemy = carta.nombreEnemy;
   // 🎨 Clases visuales condicionales por tipo
   const ringClass =
     carta.sourceOverlordId
@@ -47,6 +47,7 @@ const CommanderCard = ({ carta }) => {
           style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
         >
           -{enemyClass}-
+          {nombreEnemy}
         </div>
       </div>
 
