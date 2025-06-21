@@ -359,7 +359,7 @@ const InitTracker = () => {
   const placeCommanderCards = (enemyId, commanderUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
-    
+    const nombreCommander = getEnemyName(enemyId);
     const nuevas = selected.map(carta => ({
       enemy: {
         uuid: uuidv4(),
@@ -371,10 +371,11 @@ const InitTracker = () => {
         position: runesColorMap[carta.rune],
         tipo: 'especial',
         sourceCommanderId: commanderUUID,
+        nombreEnemy: nombreCommander,
         highlight: true,
       },
     }));
-    const msgWar = ti.voragineWarning.replace('{name}', getEnemyName(enemyId));
+    const msgWar = ti.voragineWarning.replace('{name}', nombreCommander);
     if (isTurnActivation) {
       setWarningMessage(msgWar);
       setTimeout(() => setWarningMessage(null), 3000);
@@ -388,7 +389,7 @@ const InitTracker = () => {
   const placeOverlordCards = (enemyId, overlordUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
-    
+    const nombreOverlord = getEnemyName(enemyId);
     const nuevas = selected.map(carta => ({
       enemy: {
         uuid: uuidv4(),
@@ -400,13 +401,14 @@ const InitTracker = () => {
         position: runesColorMap[carta.rune],
         tipo: 'especial',
         sourceOverlordId: overlordUUID,
+        nombreEnemy: nombreOverlord,
         highlight: true,
       },
     }));
 
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
-    const msgWar = ti.voragineWarning.replace('{name}', getEnemyName(enemyId));
+    const msgWar = ti.voragineWarning.replace('{name}', nombreOverlord);
     if (isTurnActivation) {
       setWarningMessage(msgWar);
       setTimeout(() => setWarningMessage(null), 3000);
