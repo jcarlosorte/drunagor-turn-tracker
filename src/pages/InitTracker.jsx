@@ -374,8 +374,9 @@ const InitTracker = () => {
         highlight: true,
       },
     }));
+    const msgWar = ti.voragineWarning.replace('{name}', getEnemyName(enemyId));
     if (isTurnActivation) {
-      setWarningMessage(ti.voragineWarning);
+      setWarningMessage(msgWar);
       setTimeout(() => setWarningMessage(null), 3000);
     }
     setPlacedEnemies(prev => [...prev, ...nuevas]);
