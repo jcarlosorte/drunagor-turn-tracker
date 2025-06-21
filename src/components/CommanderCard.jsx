@@ -20,6 +20,15 @@ const CommanderCard = ({ carta }) => {
       ? 'ring-4 ring-purple-400 animate-pulse'
       : '';
 
+  const borderClass =
+    carta.sourceOverlordId
+      ? 'bg-grey border-orange-400'
+      : carta.sourceCommanderId
+      ? 'bg-grey border-yellow-400'
+      : carta.sourceBossId
+      ? 'bg-grey border-purple-400'
+      : 'bg-black border-gray-500';
+  
   const enemyClass =
     carta.sourceOverlordId
       ? ta.ataqueO
@@ -34,7 +43,7 @@ const CommanderCard = ({ carta }) => {
       <div
         onClick={() => setShowModal(true)}
         className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
-          ${carta.highlight ? ringClass : 'bg-black border-yellow-400'}`}
+          ${carta.highlight ? ringClass : borderClass}`}
       >
         <div
           className="text-sm text-yellow-300 text-center"
@@ -46,8 +55,8 @@ const CommanderCard = ({ carta }) => {
           className="text-[0.50rem] italic text-white-300 text-center"
           style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
         >
-          -{enemyClass}-
-          {nombreEnemy}
+          <br>-{enemyClass}-
+          <br>{nombreEnemy}
         </div>
       </div>
 
