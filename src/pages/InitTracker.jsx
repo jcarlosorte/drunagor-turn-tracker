@@ -1155,9 +1155,6 @@ const InitTracker = () => {
               onAddEnemy={openCategorySelector}
               onSelectCommander={handleRandomCommander}
               onSelectBoss={handleSelectBoss}
-              onAddHeroEnemy={handleAddHeroEnemy}
-              //onAddOverlordEnemy={handleAddOverlordEnemy}
-              onAddOverlordEnemy={openManualSelector}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
