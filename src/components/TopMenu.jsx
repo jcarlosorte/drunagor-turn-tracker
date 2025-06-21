@@ -92,10 +92,6 @@ const TopMenu = ({
   
     if (value === 'jefe') {
       onSelectBoss();
-    } else if (value === 'otros') {
-      onSelectOther();
-    } else if (value === 'hero') {
-      setShowHeroEnemyMenu(true); // 👉 mostramos menú de selección de héroes enemigos
     } else {
       onAddManual(value);
     }
