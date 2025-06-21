@@ -781,6 +781,13 @@ const InitTracker = () => {
                 ));
                 placeCommanderCards(current.uuid, true); // true = show highlight
               }
+
+            if (current.categoria === 'hero') {
+                setPlacedEnemies(prev => prev.filter(e =>
+                  !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
+                ));
+                placeCommanderCards(current.uuid, true); // true = show highlight
+              }
             }
           
             return;
