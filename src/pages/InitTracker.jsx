@@ -691,17 +691,17 @@ const InitTracker = () => {
                 setPlacedEnemies(prev => prev.filter(e =>
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)
                 ));
-                placeOverlordCards(current.uuid, true); // true = show highlight
+                placeOverlordCards(current.id, current.uuid, true); // true = show highlight
               } else if (current.categoria === 'comandante') {
                 setPlacedEnemies(prev => prev.filter(e =>
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
                 ));
-                placeCommanderCards(current.uuid, true); // true = show highlight
+                placeCommanderCards(current.id, current.uuid, true); // true = show highlight
               } else if (current.categoria === 'hero') {
                 setPlacedEnemies(prev => prev.filter(e =>
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
                 ));
-                placeCommanderCards(current.uuid, true); // true = show highlight
+                placeCommanderCards(current.id, current.uuid, true); // true = show highlight
               }
             }
           
