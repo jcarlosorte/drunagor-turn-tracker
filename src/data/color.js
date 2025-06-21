@@ -12,7 +12,4 @@ export const COLORS = [
   {
     id: 'comandante'
   },
-  {
-    id: 'jefe'
-  },
 ];
