@@ -126,7 +126,9 @@
       "bisoño": "Rookie",
       "esbirro": "Minion",
       "comandante": "Commander",
-      "jefe": "Boss"
+      "jefe": "Boss",
+      "hero": "Corrupted Hero",
+      "overlord": "Overlord"
     }
   },
   "roles": {
