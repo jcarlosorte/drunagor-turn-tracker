@@ -55,8 +55,8 @@ const CommanderCard = ({ carta }) => {
           className="text-[0.50rem] italic text-white-300 text-center"
           style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
         >
-          -{enemyClass}-<br />
-          {nombreEnemy}
+          <div>-{enemyClass}-</div>
+          <div>{nombreEnemy}</div>
         </div>
       </div>
 
