@@ -22,12 +22,12 @@ const CommanderCard = ({ carta }) => {
 
   const borderClass =
     carta.sourceOverlordId
-      ? 'bg-grey border-orange-400'
+      ? 'bg-gray-500 border-orange-400'
       : carta.sourceCommanderId
-      ? 'bg-grey border-yellow-400'
+      ? 'bg-gray-500 border-yellow-400'
       : carta.sourceBossId
-      ? 'bg-grey border-purple-400'
-      : 'bg-black border-gray-500';
+      ? 'bg-gray-500 border-purple-400'
+      : 'bg-gray-500 border-gray-500';
   
   const enemyClass =
     carta.sourceOverlordId
