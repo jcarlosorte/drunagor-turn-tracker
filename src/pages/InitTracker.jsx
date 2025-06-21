@@ -337,7 +337,6 @@ const InitTracker = () => {
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
         const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
-        const colorId = null;
         const enemy = {
           uuid: uuid,
           name: selected.nombre,
