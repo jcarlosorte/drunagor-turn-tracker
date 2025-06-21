@@ -213,7 +213,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards(uuid);
+        placeCommanderCards(selected.id, uuid);
       });
       return;
     } else if (selected.categoria === 'overlord') {
@@ -248,7 +248,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del señor supremo:
-        placeOverlordCards(uuid);
+        placeOverlordCards(selected.id, uuid);
         return;
     } else if (selected.categoria === 'hero') {
       
@@ -281,7 +281,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards(uuid);
+        placeCommanderCards(selected.id, uuid);
         return;
     }
     
@@ -352,11 +352,11 @@ const InitTracker = () => {
       showToast(enemy);
       placeEnemy({ enemy });
       // 👉 Añadir cartas de ataque del comandante:
-      placeCommanderCards(uuid);
+      placeCommanderCards(selected.id, uuid);
     });
   };
 
-  const placeCommanderCards = (commanderUUID, isTurnActivation = false) => {
+  const placeCommanderCards = (enemyId, commanderUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -375,7 +375,7 @@ const InitTracker = () => {
       },
     }));
     if (isTurnActivation) {
-      setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
+      setWarningMessage(ti.voragineWarning);
       setTimeout(() => setWarningMessage(null), 3000);
     }
     setPlacedEnemies(prev => [...prev, ...nuevas]);
@@ -384,7 +384,7 @@ const InitTracker = () => {
     });
   };
 
-  const placeOverlordCards = (overlordUUID, isTurnActivation = false) => {
+  const placeOverlordCards = (enemyId, overlordUUID, isTurnActivation = false) => {
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     
@@ -406,7 +406,7 @@ const InitTracker = () => {
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
     if (isTurnActivation) {
-      setWarningMessage(ti.voragineWarning || "⚠️ VORÁGINE activado");
+      setWarningMessage(ti.voragineWarning.replace('{name}', getEnemyName(enemyId)));
       setTimeout(() => setWarningMessage(null), 3000);
     }
     // 2. Añadir nuevas cartas
