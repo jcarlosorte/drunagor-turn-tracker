@@ -74,7 +74,7 @@ const InitTracker = () => {
   const [selectedColor, setSelectedColor] = useState('');
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
-  const specialCategories = ['comandante', 'jefe', 'overlord'];
+  const specialCategories = ['comandante', 'jefe', 'overlord', 'hero'];
   const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
