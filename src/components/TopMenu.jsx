@@ -212,9 +212,6 @@ const TopMenu = ({
                 ))}
               </div>
             </div>
-
-            
-
             
             <div className="flex justify-center gap-4 mt-2">
               <button
