@@ -405,8 +405,9 @@ const InitTracker = () => {
 
      // 1. Mostrar mensaje visual temporal
       // ✅ Mostrar mensaje SOLO si viene de un turno (reinvocación)
+    const msgWar = ti.voragineWarning.replace('{name}', getEnemyName(enemyId));
     if (isTurnActivation) {
-      setWarningMessage(ti.voragineWarning.replace('{name}', getEnemyName(enemyId)));
+      setWarningMessage(msgWar);
       setTimeout(() => setWarningMessage(null), 3000);
     }
     // 2. Añadir nuevas cartas
