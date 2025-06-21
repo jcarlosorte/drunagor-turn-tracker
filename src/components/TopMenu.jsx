@@ -38,8 +38,6 @@ const TopMenu = ({
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
-  const [showHeroEnemyMenu, setShowHeroEnemyMenu] = useState(false);
-  const [showOverlordEnemyMenu, setShowOverlordEnemyMenu] = useState(false);
   
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -209,75 +207,7 @@ const TopMenu = ({
                       <GiBullyMinion className={`text-2xl ${color}`} />
                       <span className="text-xs text-center">{label}</span>
                     </button>
-                
-                    {/* Mostrar selección de enemigos 'hero' debajo del botón */}
-                    {key === 'hero' && manualSelect === 'hero' && (
-                      <div className="col-span-full bg-gray-700 p-2 rounded-lg mt-2">
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                          {ENEMIES.filter(e => e.color === 'hero').map(enemy => (
-                            <button
-                              key={enemy.id}
-                              onClick={() => {
-                                onAddHeroEnemy(enemy.id);
-                                setManualSelect(''); // Cierra el submenú tras seleccionar
-                              }}
-                              className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
-                            >
-                              {enemy.nombre}
-                            </button>
-                          ))}
-                        </div>
-                
-                        <div className="flex justify-center mt-2">
-                          <button
-                            onClick={() => {
-                              const heroEnemies = ENEMIES.filter(e => e.color === 'hero');
-                              const random = heroEnemies[Math.floor(Math.random() * heroEnemies.length)];
-                              onAddHeroEnemy(random.id);
-                              setManualSelect('');
-                            }}
-                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full"
-                          >
-                            🎲 {t.random || 'Aleatorio'}
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {key === 'supremo' && manualSelect === 'supremo' && (
-                    <div className="col-span-full bg-gray-700 p-2 rounded-lg mt-2">
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        {ENEMIES.filter(e => e.color === 'overlord').map(enemy => (
-                          <button
-                            key={enemy.id}
-                            onClick={() => {
-                              onAddOverlordEnemy(enemy.id);
-                              setManualSelect('');
-                            }}
-                            className="bg-red-700 hover:bg-red-600 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {enemy.nombre}
-                          </button>
-                        ))}
-                      </div>
-                  
-                      <div className="flex justify-center mt-2">
-                        <button
-                          onClick={() => {
-                            const overlordEnemies = ENEMIES.filter(e => e.color === 'overlord');
-                            const random = overlordEnemies[Math.floor(Math.random() * overlordEnemies.length)];
-                            onAddOverlordEnemy(random.id);
-                            setManualSelect('');
-                          }}
-                          className="bg-gradient-to-r from-red-700 via-yellow-500 to-purple-700 text-white text-xs px-3 py-1 rounded-full"
-                        >
-                          🎲 {t.random || 'Aleatorio'}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                    
+    
                   </React.Fragment>
                 ))}
               </div>
