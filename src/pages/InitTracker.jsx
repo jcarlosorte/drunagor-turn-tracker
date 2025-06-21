@@ -458,7 +458,6 @@ const InitTracker = () => {
   };
 
   const handleSelectBoss = () => console.log("Seleccionar jefes");
-  const handleSelectOther = () => console.log("Seleccionar otros");
 
   const categoryGlowMap = {
     bisoño: 'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
@@ -692,16 +691,12 @@ const InitTracker = () => {
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)
                 ));
                 placeOverlordCards(current.uuid, true); // true = show highlight
-              }
-          
-              if (current.categoria === 'comandante') {
+              } else if (current.categoria === 'comandante') {
                 setPlacedEnemies(prev => prev.filter(e =>
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
                 ));
                 placeCommanderCards(current.uuid, true); // true = show highlight
-              }
-
-            if (current.categoria === 'hero') {
+              } else if (current.categoria === 'hero') {
                 setPlacedEnemies(prev => prev.filter(e =>
                   !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
                 ));
