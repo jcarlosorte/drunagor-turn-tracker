@@ -126,7 +126,9 @@
       "bisoño": "Bisoño",
       "esbirro": "Esbirro",
       "comandante": "Comandante",
-      "jefe": "Jefe"
+      "jefe": "Jefe",
+      "hero": "Corrupted Hero",
+      "overlord": "Overlord"
       }
   },
   "roles": {
