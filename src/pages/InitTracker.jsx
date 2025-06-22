@@ -564,8 +564,8 @@ const InitTracker = () => {
     if (turnIndex === 0) {
       setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
     }
-  }, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
-
+  //}, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
+  }, [turnIndex, placedRunes, groupIndex]);
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
