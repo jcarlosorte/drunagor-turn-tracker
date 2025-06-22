@@ -75,13 +75,16 @@ export const InitEnemiesProvider = ({ children }) => {
   
       const isCommander = target.enemy.categoria === 'comandante';
       const isOverlord = target.enemy.categoria === 'overlord';
-  
+      const isFallenHero= target.enemy.categoria === 'hero';
+      const isBoss= target.enemy.categoria === 'jefe';
       const updated = prev.filter(e => {
         const enemy = e.enemy;
         if (enemy.uuid === uuid) return false;
   
         if (isCommander && enemy.tipo === 'especial' && enemy.sourceCommanderId === uuid) return false;
         if (isOverlord && enemy.tipo === 'especial' && enemy.sourceOverlordId === uuid) return false;
+        if (isFallenHero && enemy.tipo === 'especial' && enemy.sourceCommanderId === uuid) return false;
+        if (isBoss && enemy.tipo === 'especial' && enemy.sourceBossdId === uuid) return false;
   
         return true;
       });
