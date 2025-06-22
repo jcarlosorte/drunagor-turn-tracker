@@ -674,37 +674,37 @@ const InitTracker = () => {
           setGroupTurnTracker({ group: [], index: 0 });
           return;
         }
-      }
-  
-      if (step.type === 'enemy') {
+      } else if (step.type === 'enemy') {
         const enemies = placedEnemies
           .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
           .map(e => e.enemy);
   
-        if (enemies.length > 0) {
+       if (enemies.length > 0) {
           const current = enemies[0];
-          const tieneVoragine = current?.capacidades?.includes('VORAGINE');
-  
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...current, type: 'enemy', group: enemies });
           setGroupTurnTracker({ group: enemies, index: 0 });
   
-          // ✅ Ejecutar vorágine solo si está en el turno 0 del grupo
+          // ⚡ Ejecutar VORAGINE si aplica
+          const voragineEnemy = enemies[0];
+          const tieneVoragine = Array.isArray(voragineEnemy?.capacidades) && voragineEnemy.capacidades.includes('VORAGINE');
           if (tieneVoragine) {
-            if (current.categoria === 'overlord') {
-              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
-              placeOverlordCards(current.id, current.uuid, true);
-            } else if (current.categoria === 'comandante' || current.categoria === 'hero') {
-              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
-              placeCommanderCards(current.id, current.uuid, true);
+            if (voragineEnemy.categoria === 'overlord') {
+              setPlacedEnemies(prev => prev.filter(e =>
+                !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === voragineEnemy.uuid)
+              ));
+              placeOverlordCards(voragineEnemy.id, voragineEnemy.uuid, true);
+            } else if (['comandante', 'hero'].includes(voragineEnemy.categoria)) {
+              setPlacedEnemies(prev => prev.filter(e =>
+                !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === voragineEnemy.uuid)
+              ));
+              placeCommanderCards(voragineEnemy.id, voragineEnemy.uuid, true);
             }
           }
   
           return;
         }
-      }
-  
-      if (step.type === 'rune') {
+      } else if (step.type === 'rune') {
         const runes = placedRunes
           .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
           .map(r => r.rune);
