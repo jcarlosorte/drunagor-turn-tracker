@@ -510,7 +510,7 @@ const InitTracker = () => {
     };
   }, []);
 
-  const [turnIndex, setTurnIndex] = useState(0);
+  const [turnIndex, setTurnIndex] = useState(-1);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
   const placedHeroes = trackerData.placedHeroes;
@@ -588,6 +588,10 @@ const InitTracker = () => {
   };
 
   const handleNextTurn = () => {
+    if (turnIndex === -1) {
+      setTurnIndex(0); // Comienza desde el primer turno válido
+      return;
+    }
     // 1. Si la entidad actual tiene cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
@@ -687,27 +691,27 @@ const InitTracker = () => {
           setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
           setGroupTurnTracker({ group: enemies, index: 0 });
 
-          const current = enemies[0];
-          const tieneVoragine = Array.isArray(current?.capacidades) && current.capacidades.includes('VORAGINE');
-          if (tieneVoragine) {
-              if (current.categoria === 'overlord') {
-                setPlacedEnemies(prev => prev.filter(e =>
-                  !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)
-                ));
-                placeOverlordCards(current.id, current.uuid, true); // true = show highlight
-              } else if (current.categoria === 'comandante') {
-                setPlacedEnemies(prev => prev.filter(e =>
-                  !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
-                ));
-                placeCommanderCards(current.id, current.uuid, true); // true = show highlight
-              } else if (current.categoria === 'hero') {
-                setPlacedEnemies(prev => prev.filter(e =>
-                  !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
-                ));
-                placeCommanderCards(current.id, current.uuid, true); // true = show highlight
+          enemies.forEach(current => {
+            const tieneVoragine = Array.isArray(current?.capacidades) && current.capacidades.includes('VORAGINE');
+            if (tieneVoragine) {
+                if (current.categoria === 'overlord') {
+                  setPlacedEnemies(prev => prev.filter(e =>
+                    !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)
+                  ));
+                  placeOverlordCards(current.id, current.uuid, true); // true = show highlight
+                } else if (current.categoria === 'comandante') {
+                  setPlacedEnemies(prev => prev.filter(e =>
+                    !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
+                  ));
+                  placeCommanderCards(current.id, current.uuid, true); // true = show highlight
+                } else if (current.categoria === 'hero') {
+                  setPlacedEnemies(prev => prev.filter(e =>
+                    !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)
+                  ));
+                  placeCommanderCards(current.id, current.uuid, true); // true = show highlight
+                }
               }
-            }
-          
+            });
             return;
           }
       } else if (step.type === 'rune') {
