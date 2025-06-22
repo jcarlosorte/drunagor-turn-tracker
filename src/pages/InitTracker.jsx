@@ -593,6 +593,7 @@ const InitTracker = () => {
       setTurnIndex(0); // Comienza desde el primer turno válido
       return;
     }
+    console.log(currentTurnEntity.type);
     // 1. Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
