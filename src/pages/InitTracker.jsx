@@ -521,28 +521,27 @@ const InitTracker = () => {
     const step = TURN_ORDER[turnIndex];
     console.log(step);
     if (step.type === 'enemy') {
-      const enemyEntry = placedEnemies.find(
-        e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position
-      );
+      const group = placedEnemies
+        .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+        .map(e => e.enemy);
   
-      if (enemyEntry) {
-        const enemy = enemyEntry.enemy;
-        setCurrentTurnEntity({ ...enemy, type: 'enemy' });
+      if (group.length > 0) {
+        const current = group[groupTurnTracker.index] || group[0];
+        setCurrentTurnEntity({ ...current, type: 'enemy', group });
   
-        // ⚡ VORÁGINE: mover aquí para que se evalúe al tocar el turno
-        if (Array.isArray(enemy.capacidades) && enemy.capacidades.includes('VORAGINE')) {
-          if (enemy.categoria === 'overlord') {
-            setPlacedEnemies(prev => prev.filter(e =>
-              !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemy.uuid)
-            ));
-            placeOverlordCards(enemy.id, enemy.uuid, true);
-          } else if (['comandante', 'hero'].includes(enemy.categoria)) {
-            setPlacedEnemies(prev => prev.filter(e =>
-              !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === enemy.uuid)
-            ));
-            placeCommanderCards(enemy.id, enemy.uuid, true);
+        setGroupTurnTracker({ group, index: groupTurnTracker.index });
+  
+        // ✅ VORÁGINE si tiene esa capacidad
+        if (Array.isArray(current.capacidades) && current.capacidades.includes('VORAGINE')) {
+          if (current.categoria === 'overlord') {
+            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
+            placeOverlordCards(current.id, current.uuid, true);
+          } else if (['comandante', 'hero'].includes(current.categoria)) {
+            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
+            placeCommanderCards(current.id, current.uuid, true);
           }
         }
+  
         return;
       }
     }
@@ -584,7 +583,7 @@ const InitTracker = () => {
       setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
     }
   //}, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
-  }, [turnIndex, placedRunes, groupIndex]);
+  }, [turnIndex, placedRunes, groupIndex, groupTurnTracker.index]);
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
