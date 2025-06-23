@@ -510,40 +510,63 @@ const InitTracker = () => {
     };
   }, []);
 
-  const placedHeroes = trackerData.placedHeroes;
   const [turnIndex, setTurnIndex] = useState(-1);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
+  const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
+  const placedHeroes = trackerData.placedHeroes;
+  const groupIndex = groupTurnTracker.index;
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
   
     if (step.type === 'enemy') {
-      const enemy = placedEnemies.find(
-        e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position
-      );
+      const enemies = placedEnemies
+        .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+        .map(e => e.enemy);
   
-      if (enemy) {
-        setCurrentTurnEntity({ ...enemy.enemy, type: 'enemy' });
+      if (enemies.length > 0) {
+        const currentEnemy = enemies[groupIndex] || enemies[0];
+        setCurrentTurnEntity({ ...currentEnemy, type: 'enemy', group: enemies });
+        setGroupTurnTracker({ group: enemies, index: groupIndex });
         return;
       }
     }
   
     if (step.type === 'rune') {
-      const rune = placedRunes.find(
-        r => r.rune.colorIndex === step.index && r.rune.posicion === step.position
-      );
+      const runes = placedRunes
+        .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
+        .map(r => r.rune);
   
-      if (rune) {
-        setCurrentTurnEntity({ ...rune.rune, type: 'rune' });
+      if (runes.length > 0) {
+        const currentRune = runes[0];
+        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
+        setGroupTurnTracker({ group: runes, index: 0 });
+
+        // 🔄 Nuevo: extraer fichas si tiene numRunas
+        if (currentRune.numRunas && currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
+          const tiles = drawMultipleTiles(currentRune.numRunas);
+          tiles?.forEach(tile => handleTileDraw(tile));
+          if (!tiles) {
+            setTileWarning(ti.aviso);
+          }
+          // ✅ Marca esta rune como ejecutada
+          setExecutedRunes(prev => [...prev, currentRune.uuid]);
+        }
+        
         return;
       }
     }
   
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
-    if (turnIndex === 0) setExecutedRunes([]);
-  }, [turnIndex, placedEnemies, placedRunes]);
+    setGroupTurnTracker({ group: [], index: 0 });
+    //if (turnIndex === 0) {
+    if (turnIndex === -1 || (turnIndex + 1) >= TURN_ORDER.length) {
+      setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
+    }
+  //}, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
+  }, [turnIndex, placedRunes, groupIndex]);
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
@@ -554,51 +577,53 @@ const InitTracker = () => {
         const hero = trackerData.placedHeroes?.find(h => h.role === step.role && h.position === step.index);
         if (hero) return { ...hero, type: 'hero' };
       } else if (step.type === 'enemy') {
-        const enemy = placedEnemies.find(
-          e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position
-        );
-        if (enemy) return { ...enemy.enemy, type: 'enemy' };
+        const enemies = placedEnemies
+          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position);
+        if (enemies.length > 0) return { ...enemies[0].enemy, type: 'enemy' };
       } else if (step.type === 'rune') {
-        const rune = placedRunes.find(
-          r => r.rune.position === step.position && r.rune.colorIndex === step.index
-        );
-        if (rune) return { ...rune.rune, type: 'rune' };
-      }
+        const runes = placedRunes
+          .filter(r => r.rune.position === step.position && r.rune.colorIndex === step.index);
+        if (runes.length > 0) return { ...runes[0].rune, type: 'rune' };
+      } // Puedes extender para companions
     }
     return null;
   };
-  
+
   const handleNextTurn = () => {
     if (turnIndex === -1) {
-      setTurnIndex(0);
+      setTurnIndex(0); // Comienza desde el primer turno válido
       return;
     }
-  
+    
+    // 1. Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
   
       if (currentTurnEntity.type === 'enemy') {
         const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
         if (nuevo) {
-          setPlacedEnemies(prev => prev.map(item => {
-            if (item.enemy.uuid === currentTurnEntity.uuid) {
-              const nuevasProps = {};
-              for (const key of PROPIEDADES_ACTUALIZABLES) {
-                if (nuevo[key] !== undefined) nuevasProps[key] = nuevo[key];
+          setPlacedEnemies(prev =>
+            prev.map(item => {
+              if (item.enemy.uuid === currentTurnEntity.uuid) {
+                const nuevasProps = {};
+                for (const key of PROPIEDADES_ACTUALIZABLES) {
+                  if (nuevo[key] !== undefined) nuevasProps[key] = nuevo[key];
+                }
+  
+                return {
+                  ...item,
+                  enemy: {
+                    ...item.enemy,
+                    ...nuevasProps,
+                    cara: nuevaCara,
+                    capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
+                    capacidadesOriginales: nuevo.capacidades,
+                  },
+                };
               }
-              return {
-                ...item,
-                enemy: {
-                  ...item.enemy,
-                  ...nuevasProps,
-                  cara: nuevaCara,
-                  capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
-                  capacidadesOriginales: nuevo.capacidades,
-                },
-              };
-            }
-            return item;
-          }));
+              return item;
+            })
+          );
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
@@ -609,11 +634,19 @@ const InitTracker = () => {
       if (currentTurnEntity.type === 'rune') {
         const nueva = RUNAS.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
         if (nueva) {
-          setPlacedRunes(prev => prev.map(item =>
-            item.rune.uuid === currentTurnEntity.uuid
-              ? { rune: { ...item.rune, ...nueva, cara: nuevaCara } }
-              : item
-          ));
+          setPlacedRunes(prev =>
+            prev.map(item =>
+              item.rune.uuid === currentTurnEntity.uuid
+                ? {
+                    rune: {
+                      ...item.rune,
+                      ...nueva,
+                      cara: nuevaCara,
+                    },
+                  }
+                : item
+            )
+          );
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
@@ -622,6 +655,15 @@ const InitTracker = () => {
       }
     }
   
+    // 2. Avanzar dentro del grupo si hay más de uno
+    if (currentTurnEntity?.group?.length > 1 && groupIndex < currentTurnEntity.group.length - 1) {
+      const nextEntity = currentTurnEntity.group[groupIndex + 1];
+      setGroupTurnTracker({ group: currentTurnEntity.group, index: groupIndex + 1 });
+      setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: currentTurnEntity.group });
+      return;
+    }
+  
+    // 3. Buscar siguiente entidad en el orden
     for (let i = 1; i <= TURN_ORDER.length; i++) {
       const idx = (turnIndex + i) % TURN_ORDER.length;
       const step = TURN_ORDER[idx];
@@ -631,38 +673,53 @@ const InitTracker = () => {
         if (hero) {
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...hero, type: 'hero' });
+          setGroupTurnTracker({ group: [], index: 0 });
           return;
         }
       } else if (step.type === 'enemy') {
-        const enemyEntry = placedEnemies.find(
-          e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position
-        );
+        const enemies = placedEnemies
+          .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
+          .map(e => e.enemy);
   
-        if (enemyEntry) {
-          const enemy = enemyEntry.enemy;
+       if (enemies.length > 0) {
+          const current = enemies[0];
           setTurnIndex(idx);
-          setCurrentTurnEntity({ ...enemy, type: 'enemy' });
+          setCurrentTurnEntity({ ...current, type: 'enemy', group: enemies });
+          setGroupTurnTracker({ group: enemies, index: 0 });
   
-          if (Array.isArray(enemy.capacidades) && enemy.capacidades.includes('VORAGINE')) {
-            if (enemy.categoria === 'overlord') {
-              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemy.uuid)));
-              placeOverlordCards(enemy.id, enemy.uuid, true);
-            } else if (['comandante', 'hero'].includes(enemy.categoria)) {
-              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === enemy.uuid)));
-              placeCommanderCards(enemy.id, enemy.uuid, true);
+          // ⚡ Ejecutar VORAGINE si aplica
+          const voragineEnemy = enemies[0];
+          const tieneVoragine = Array.isArray(voragineEnemy?.capacidades) && voragineEnemy.capacidades.includes('VORAGINE');
+          if (tieneVoragine) {
+            if (voragineEnemy.categoria === 'overlord') {
+              setPlacedEnemies(prev => prev.filter(e =>
+                !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === voragineEnemy.uuid)
+              ));
+              placeOverlordCards(voragineEnemy.id, voragineEnemy.uuid, true);
+            } else if (['comandante', 'hero'].includes(voragineEnemy.categoria)) {
+              setPlacedEnemies(prev => prev.filter(e =>
+                !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === voragineEnemy.uuid)
+              ));
+              placeCommanderCards(voragineEnemy.id, voragineEnemy.uuid, true);
             }
           }
+  
           return;
         }
       } else if (step.type === 'rune') {
-        const runeEntry = placedRunes.find(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position);
-        if (runeEntry) {
+        const runes = placedRunes
+          .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
+          .map(r => r.rune);
+  
+        if (runes.length > 0) {
           setTurnIndex(idx);
-          setCurrentTurnEntity({ ...runeEntry.rune, type: 'rune' });
+          setCurrentTurnEntity({ ...runes[0], type: 'rune' });
+          setGroupTurnTracker({ group: [], index: 0 });
           return;
         }
       }
     }
+  
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
 
