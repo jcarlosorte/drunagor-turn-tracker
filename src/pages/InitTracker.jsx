@@ -515,7 +515,6 @@ const InitTracker = () => {
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
   const [processedVoragine, setProcessedVoragine] = useState([]);
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null);
-  const [processedVoragine, setProcessedVoragine] = useState([]);
   const prevRealIndex = useRef(null); // para detectar bucle de vuelta
   
   const placedHeroes = trackerData.placedHeroes;
