@@ -209,6 +209,7 @@
       "health": "Vida",
       "movement": "Movimiento",
       "attack": "Ataque",
+      "runeBasedValue": "Basado en runas",
       "behavior": "Comportamiento",
       "category": "Categoría",
       "remove": "Eliminar",
