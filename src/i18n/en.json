@@ -208,6 +208,7 @@
     "health": "Health",
     "movement": "Movement",
     "attack": "Attack",
+    "runeBasedValue": "Rune Based Value",
     "behavior": "Behavior",
     "category": "Category",
     "remove": "Remove",
