@@ -1,6 +1,6 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
 import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
 import { MdScreenRotation } from "react-icons/md";
