@@ -516,10 +516,12 @@ const InitTracker = () => {
   //const [processedVoragine, setProcessedVoragine] = useState([]);
   const processedVoragineRef = useRef(new Set());
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null);
-  const prevRealIndex = useRef(null); // para detectar bucle de vuelta
   
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
+
+  const roundRef = useRef(0);
+  const previousIndexRef = useRef(null);
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -527,14 +529,18 @@ const InitTracker = () => {
   
     // 🔁 Detectar nueva ronda
     if (
-      prevRealIndex.current !== null &&
-      lastRealTurnIndex !== null &&
-      turnIndex === lastRealTurnIndex
+      previousIndexRef.current !== null &&
+      turnIndex !== -1 &&
+      turnIndex < previousIndexRef.current
     ) {
+      // Solo cuando damos la vuelta al ciclo completo
+      processedVoragineRef.current = new Set();
       setExecutedRunes([]);
-      //processedVoragineRef.current = new Set();
+      roundRef.current += 1;
+      console.log("🔁 Nueva ronda", roundRef.current);
     }
-    prevRealIndex.current = turnIndex;
+    
+    previousIndexRef.current = turnIndex;
   
     // 🔍 ENEMIES
     if (step.type === 'enemy') {
