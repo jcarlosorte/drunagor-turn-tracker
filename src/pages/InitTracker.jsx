@@ -600,10 +600,6 @@ const InitTracker = () => {
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
   
-    if (turnIndex === 0) {
-        setExecutedRunes([]);
-        setProcessedVoragine([]);
-    }
   }, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
 
   
