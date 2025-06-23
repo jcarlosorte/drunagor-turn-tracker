@@ -519,7 +519,7 @@ const InitTracker = () => {
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
-  
+    console.log(step);
     if (step.type === 'enemy') {
       const enemies = placedEnemies
         .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
