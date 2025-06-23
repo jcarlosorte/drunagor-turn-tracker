@@ -560,11 +560,13 @@ const InitTracker = () => {
     }
   
     const entity = getNextActiveEntity(turnIndex);
+    console.log("Entidad:");
     console.log(entity);
     setCurrentTurnEntity(entity);
+    console.log(turnIndex);
     setGroupTurnTracker({ group: [], index: 0 });
-    //if (turnIndex === 0) {
-    if (turnIndex === -1 || (turnIndex + 1) >= TURN_ORDER.length) {
+    if (turnIndex === 0) {
+    //if (turnIndex === -1 || (turnIndex + 1) >= TURN_ORDER.length) {
       console.log(turnIndex);
       setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
     }
