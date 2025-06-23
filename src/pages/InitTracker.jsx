@@ -521,15 +521,28 @@ const InitTracker = () => {
     const step = TURN_ORDER[turnIndex];
     console.log(step);
     if (step.type === 'enemy') {
-      const enemies = placedEnemies
-        .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
-        .map(e => e.enemy);
+      const enemyEntry = placedEnemies.find(
+        e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position
+      );
   
-      if (enemies.length > 0) {
-        const currentEnemy = enemies[groupIndex] || enemies[0];
-        console.log(currentEnemy);
-        setCurrentTurnEntity({ ...currentEnemy, type: 'enemy', group: enemies });
-        setGroupTurnTracker({ group: enemies, index: groupIndex });
+      if (enemyEntry) {
+        const enemy = enemyEntry.enemy;
+        setCurrentTurnEntity({ ...enemy, type: 'enemy' });
+  
+        // ⚡ VORÁGINE: mover aquí para que se evalúe al tocar el turno
+        if (Array.isArray(enemy.capacidades) && enemy.capacidades.includes('VORAGINE')) {
+          if (enemy.categoria === 'overlord') {
+            setPlacedEnemies(prev => prev.filter(e =>
+              !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === enemy.uuid)
+            ));
+            placeOverlordCards(enemy.id, enemy.uuid, true);
+          } else if (['comandante', 'hero'].includes(enemy.categoria)) {
+            setPlacedEnemies(prev => prev.filter(e =>
+              !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === enemy.uuid)
+            ));
+            placeCommanderCards(enemy.id, enemy.uuid, true);
+          }
+        }
         return;
       }
     }
@@ -691,23 +704,6 @@ const InitTracker = () => {
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...current, type: 'enemy', group: enemies });
           setGroupTurnTracker({ group: enemies, index: 0 });
-  
-          // ⚡ Ejecutar VORAGINE si aplica
-          const voragineEnemy = enemies[0];
-          const tieneVoragine = Array.isArray(voragineEnemy?.capacidades) && voragineEnemy.capacidades.includes('VORAGINE');
-          if (tieneVoragine) {
-            if (voragineEnemy.categoria === 'overlord') {
-              setPlacedEnemies(prev => prev.filter(e =>
-                !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === voragineEnemy.uuid)
-              ));
-              placeOverlordCards(voragineEnemy.id, voragineEnemy.uuid, true);
-            } else if (['comandante', 'hero'].includes(voragineEnemy.categoria)) {
-              setPlacedEnemies(prev => prev.filter(e =>
-                !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === voragineEnemy.uuid)
-              ));
-              placeCommanderCards(voragineEnemy.id, voragineEnemy.uuid, true);
-            }
-          }
   
           return;
         }
