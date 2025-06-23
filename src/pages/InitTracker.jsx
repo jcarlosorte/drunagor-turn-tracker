@@ -532,7 +532,7 @@ const InitTracker = () => {
       turnIndex === lastRealTurnIndex
     ) {
       setExecutedRunes([]);
-      processedVoragineRef.current = new Set();
+      //processedVoragineRef.current = new Set();
     }
     prevRealIndex.current = turnIndex;
   
