@@ -515,11 +515,50 @@ const InitTracker = () => {
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
+
+  useEffect(() => {
+    if (!currentTurnEntity) return;
   
+    // VORÁGINE se ejecuta aquí (no en el otro useEffect)
+    if (
+      currentTurnEntity.type === 'enemy' &&
+      Array.isArray(currentTurnEntity.capacidades) &&
+      currentTurnEntity.capacidades.includes('VORAGINE')
+    ) {
+      if (currentTurnEntity.categoria === 'overlord') {
+        setPlacedEnemies(prev =>
+          prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === currentTurnEntity.uuid))
+        );
+        placeOverlordCards(currentTurnEntity.id, currentTurnEntity.uuid, true);
+      } else if (['comandante', 'hero'].includes(currentTurnEntity.categoria)) {
+        setPlacedEnemies(prev =>
+          prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === currentTurnEntity.uuid))
+        );
+        placeCommanderCards(currentTurnEntity.id, currentTurnEntity.uuid, true);
+      }
+    }
+  
+    // Ejecutar numRunas si es una runa
+    if (
+      currentTurnEntity.type === 'rune' &&
+      currentTurnEntity.numRunas &&
+      currentTurnEntity.applyEffect !== false &&
+      !executedRunes.includes(currentTurnEntity.uuid)
+    ) {
+      const tiles = drawMultipleTiles(currentTurnEntity.numRunas);
+      tiles?.forEach(tile => handleTileDraw(tile));
+      if (!tiles) {
+        setTileWarning(ti.aviso);
+      }
+      setExecutedRunes(prev => [...prev, currentTurnEntity.uuid]);
+    }
+  
+  }, [currentTurnEntity]);
+
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
-    console.log(step);
+  
     if (step.type === 'enemy') {
       const group = placedEnemies
         .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
@@ -528,20 +567,7 @@ const InitTracker = () => {
       if (group.length > 0) {
         const current = group[groupTurnTracker.index] || group[0];
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
-  
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
-  
-        // ✅ VORÁGINE si tiene esa capacidad
-        if (Array.isArray(current.capacidades) && current.capacidades.includes('VORAGINE')) {
-          if (current.categoria === 'overlord') {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
-            placeOverlordCards(current.id, current.uuid, true);
-          } else if (['comandante', 'hero'].includes(current.categoria)) {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
-            placeCommanderCards(current.id, current.uuid, true);
-          }
-        }
-  
         return;
       }
     }
@@ -552,38 +578,21 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        const currentRune = runes[0];
-        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
+        setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: 0 });
-
-        // 🔄 Nuevo: extraer fichas si tiene numRunas
-        if (currentRune.numRunas && currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
-          const tiles = drawMultipleTiles(currentRune.numRunas);
-          tiles?.forEach(tile => handleTileDraw(tile));
-          if (!tiles) {
-            setTileWarning(ti.aviso);
-          }
-          // ✅ Marca esta rune como ejecutada
-          setExecutedRunes(prev => [...prev, currentRune.uuid]);
-        }
-        
         return;
       }
     }
   
     const entity = getNextActiveEntity(turnIndex);
-    console.log("Entidad:");
-    console.log(entity);
     setCurrentTurnEntity(entity);
-    console.log(turnIndex);
     setGroupTurnTracker({ group: [], index: 0 });
+  
     if (turnIndex === 0) {
-    //if (turnIndex === -1 || (turnIndex + 1) >= TURN_ORDER.length) {
-      console.log(turnIndex);
-      setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
+      setExecutedRunes([]); // resetear para nueva ronda
     }
-  //}, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
-  }, [turnIndex, placedRunes, groupIndex, groupTurnTracker.index]);
+  }, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
+
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
@@ -675,10 +684,8 @@ const InitTracker = () => {
     // 2. Avanzar dentro del grupo si hay más de uno
     if (currentTurnEntity?.group?.length > 1 && groupTurnTracker.index < currentTurnEntity.group.length - 1) {
       const nextIndex = groupTurnTracker.index + 1;
-      const nextEnemy = currentTurnEntity.group[nextIndex];
-      setGroupTurnTracker({ group: currentTurnEntity.group, index: nextIndex });
-      setCurrentTurnEntity({ ...nextEnemy, type: 'enemy', group: currentTurnEntity.group });
-      return;
+      setGroupTurnTracker(prev => ({ ...prev, index: nextIndex }));
+      return; // <-- No hace falta setCurrentTurnEntity, lo hace el useEffect
     }
   
     // 3. Buscar siguiente entidad en el orden
