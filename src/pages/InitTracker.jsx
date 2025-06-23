@@ -515,6 +515,7 @@ const InitTracker = () => {
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
   const [processedVoragine, setProcessedVoragine] = useState([]);
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null);
+  const [processedVoragine, setProcessedVoragine] = useState([]);
   const prevRealIndex = useRef(null); // para detectar bucle de vuelta
   
   const placedHeroes = trackerData.placedHeroes;
@@ -545,12 +546,13 @@ const InitTracker = () => {
         const current = group[groupTurnTracker.index] || group[0];
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
-  
-        // ✅ Ejecutar VORÁGINE si aún no se ha hecho
-        const yaProcesado = processedVoragine.includes(current.uuid);
-        if (!yaProcesado && Array.isArray(current.capacidades) && current.capacidades.includes('VORAGINE')) {
-          setProcessedVoragine(prev => [...prev, current.uuid]);
-  
+    
+        // ✅ Ejecutar VORÁGINE solo si no está ya procesado
+        if (
+          Array.isArray(current.capacidades) &&
+          current.capacidades.includes('VORAGINE') &&
+          !processedVoragine.includes(current.uuid)
+        ) {
           if (current.categoria === 'overlord') {
             setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
             placeOverlordCards(current.id, current.uuid, true);
@@ -558,8 +560,10 @@ const InitTracker = () => {
             setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
             placeCommanderCards(current.id, current.uuid, true);
           }
+    
+          setProcessedVoragine(prev => [...prev, current.uuid]); // 🧠 marcar como procesado
         }
-  
+    
         return;
       }
     }
