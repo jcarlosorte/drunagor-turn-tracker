@@ -552,14 +552,11 @@ const InitTracker = () => {
           Array.isArray(current.capacidades) &&
           current.capacidades.includes('VORAGINE') &&
           !processedVoragineRef.current.has(current.uuid)
-          console.log("IF");
-          console.log(processedVoragineRef.current.has(current.uuid));
         ) {
           // 🔁 Marcar como procesado
-          console.log("ELSE");
+          console.log("IF");
           console.log(processedVoragineRef.current.has(current.uuid));
           processedVoragineRef.current.add(current.uuid);
-          
           console.log(processedVoragineRef.current.has(current.uuid));
           if (current.categoria === 'overlord') {
             setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
