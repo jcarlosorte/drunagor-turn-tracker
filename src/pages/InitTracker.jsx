@@ -516,12 +516,15 @@ const InitTracker = () => {
   const [processedVoragine, setProcessedVoragine] = useState([]);
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
-
+  const prevTurnIndex = useRef(-1);
+  
   useEffect(() => {
-    if (turnIndex === 0) {
+    if (prevTurnIndex.current !== -1 && turnIndex === 0) {
+      // Hemos pasado de un índice mayor a 0 ⇒ nueva ronda
       setExecutedRunes([]);
       setProcessedVoragine([]);
     }
+    prevTurnIndex.current = turnIndex;
   }, [turnIndex]);
     
   useEffect(() => {
