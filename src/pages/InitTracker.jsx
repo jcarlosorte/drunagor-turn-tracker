@@ -519,12 +519,16 @@ const InitTracker = () => {
   useEffect(() => {
     if (!currentTurnEntity) return;
   
-    // VORÁGINE se ejecuta aquí (no en el otro useEffect)
+    // ✅ VORAGINE solo si no ha sido procesado antes
     if (
       currentTurnEntity.type === 'enemy' &&
       Array.isArray(currentTurnEntity.capacidades) &&
-      currentTurnEntity.capacidades.includes('VORAGINE')
+      currentTurnEntity.capacidades.includes('VORAGINE') &&
+      !processedVoragine.includes(currentTurnEntity.uuid)
     ) {
+      // Evitar bucle: registrar primero
+      setProcessedVoragine(prev => [...prev, currentTurnEntity.uuid]);
+  
       if (currentTurnEntity.categoria === 'overlord') {
         setPlacedEnemies(prev =>
           prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === currentTurnEntity.uuid))
@@ -538,7 +542,7 @@ const InitTracker = () => {
       }
     }
   
-    // Ejecutar numRunas si es una runa
+    // 🟣 Runas con efecto
     if (
       currentTurnEntity.type === 'rune' &&
       currentTurnEntity.numRunas &&
@@ -552,8 +556,8 @@ const InitTracker = () => {
       }
       setExecutedRunes(prev => [...prev, currentTurnEntity.uuid]);
     }
-  
   }, [currentTurnEntity]);
+
 
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -589,7 +593,8 @@ const InitTracker = () => {
     setGroupTurnTracker({ group: [], index: 0 });
   
     if (turnIndex === 0) {
-      setExecutedRunes([]); // resetear para nueva ronda
+        setExecutedRunes([]);
+        setProcessedVoragine([]);
     }
   }, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
 
