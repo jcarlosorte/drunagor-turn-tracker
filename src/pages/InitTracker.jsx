@@ -513,6 +513,7 @@ const InitTracker = () => {
   const [turnIndex, setTurnIndex] = useState(-1);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
+  const [processedVoragine, setProcessedVoragine] = useState([]);
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
 
