@@ -673,10 +673,11 @@ const InitTracker = () => {
     }
   
     // 2. Avanzar dentro del grupo si hay más de uno
-    if (currentTurnEntity?.group?.length > 1 && groupIndex < currentTurnEntity.group.length - 1) {
-      const nextEntity = currentTurnEntity.group[groupIndex + 1];
-      setGroupTurnTracker({ group: currentTurnEntity.group, index: groupIndex + 1 });
-      setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: currentTurnEntity.group });
+    if (currentTurnEntity?.group?.length > 1 && groupTurnTracker.index < currentTurnEntity.group.length - 1) {
+      const nextIndex = groupTurnTracker.index + 1;
+      const nextEnemy = currentTurnEntity.group[nextIndex];
+      setGroupTurnTracker({ group: currentTurnEntity.group, index: nextIndex });
+      setCurrentTurnEntity({ ...nextEnemy, type: 'enemy', group: currentTurnEntity.group });
       return;
     }
   
@@ -702,7 +703,7 @@ const InitTracker = () => {
           const current = enemies[0];
           setTurnIndex(idx);
           setCurrentTurnEntity({ ...current, type: 'enemy', group: enemies });
-          setGroupTurnTracker({ group: enemies, index: 0 });
+          setGroupTurnTracker({ group: [], index: 0 });
   
           return;
         }
