@@ -527,6 +527,7 @@ const InitTracker = () => {
   
       if (enemies.length > 0) {
         const currentEnemy = enemies[groupIndex] || enemies[0];
+        console.log(currentEnemy);
         setCurrentTurnEntity({ ...currentEnemy, type: 'enemy', group: enemies });
         setGroupTurnTracker({ group: enemies, index: groupIndex });
         return;
@@ -559,10 +560,12 @@ const InitTracker = () => {
     }
   
     const entity = getNextActiveEntity(turnIndex);
+    console.log(entity);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
     //if (turnIndex === 0) {
     if (turnIndex === -1 || (turnIndex + 1) >= TURN_ORDER.length) {
+      console.log(turnIndex);
       setExecutedRunes([]); // ✅ Limpiar al iniciar nueva ronda
     }
   //}, [turnIndex, placedEnemies, placedRunes, placedHeroes, groupIndex]);
