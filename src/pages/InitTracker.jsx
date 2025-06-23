@@ -518,6 +518,13 @@ const InitTracker = () => {
   const groupIndex = groupTurnTracker.index;
 
   useEffect(() => {
+    if (turnIndex === 0) {
+      setExecutedRunes([]);
+      setProcessedVoragine([]);
+    }
+  }, [turnIndex]);
+    
+  useEffect(() => {
     if (!currentTurnEntity) return;
   
     // ✅ VORAGINE solo si no ha sido procesado antes
