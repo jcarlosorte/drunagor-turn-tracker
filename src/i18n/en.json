@@ -187,6 +187,7 @@
     "addEnemy": "Add",
     "selectType": "Select Type",
     "manualTitle": "Manually select enemy",
+    "addMinionEnemies": "Minion",
     "addWhiteEnemies": "WM (White)",
     "addGrayEnemies": "GM (Grey)",
     "addBlackEnemies": "BM (Black)",
