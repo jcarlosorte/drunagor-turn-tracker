@@ -259,20 +259,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
                     title={typeof movimiento === "string" && movimiento.includes("X") ? `${ti.runeBasedValue}: ${valorMovimiento}` : ti.movement}
                      />
-                  {movimiento === "X" ? getRuneCount(rune) : movimiento}
+                  {valorMovimiento}
                 </span>
                 <span className="flex items-center gap-1">
                   <span
                     className={`w-7 h-7 flex items-center justify-center rounded-full border-2 border-white ${
                       tipoAtaqueCircleClass[tipo_ataque] || "bg-gray-500"
                     }`}
-                    title={ti.tipo_ataque?.label || ''}
+                    title={typeof ataque === "string" && ataque.includes("X") ? `${ti.runeBasedValue}: ${valorAtaque}` : ti.tipo_ataque?.label}
                   >
-                    {tipoAtaqueIconMap[tipo_ataque] || (
-                      <GiSwordClash className="text-white text-lg" />
-                    )}
+                    {tipoAtaqueIconMap[tipo_ataque] || <GiSwordClash className="text-white text-lg" />}
                   </span>
-                  {ataque === "X" ? getRuneCount(rune) : ataque}
+                  {valorAtaque}
                 </span>
               </div>
               <div className="flex items-start gap-2">
