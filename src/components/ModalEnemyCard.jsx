@@ -48,7 +48,10 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   
     if (typeof valor === "string" && valor.startsWith("X+")) {
       const extra = parseInt(valor.slice(2), 10); // ej: "X+3" → 3
-      // Según tu regla específica:
+      if (extra === 0) {
+        // X+0 → usar count con máximo de 4
+        return Math.min(count, 4);
+      }
       if (count <= 1) return extra;      // 0 o 1 runa → 3
       if (count === 2) return extra + 1; // 2 runas → 4
       return extra + 1;                  // 3 o más → 4
