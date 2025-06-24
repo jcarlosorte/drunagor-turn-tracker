@@ -256,7 +256,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
                   {vidaLocal} / {vidaMax}
                 </div>
                 <span className="flex items-center gap-1">
-                  <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help" title={movimiento === "X" ? `${ti.runeBasedValue || "Basado en runas"}: ${getRuneCount(rune)}` : ti.movement} />
+                  <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
+                    title={typeof movimiento === "string" && movimiento.includes("X") ? `${ti.runeBasedValue}: ${valorMovimiento}` : ti.movement}
+                     />
                   {movimiento === "X" ? getRuneCount(rune) : movimiento}
                 </span>
                 <span className="flex items-center gap-1">
