@@ -39,6 +39,27 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
   const capacidadesAjustadas = adjustCapabilitiesByRunes(capacidadesOriginales, rune, getRuneCount);
 
+  const interpretarValorRuna = (valor, runeColor, getRuneCount) => {
+    const count = getRuneCount(runeColor);
+  
+    if (valor === "X") {
+      return count;
+    }
+  
+    if (typeof valor === "string" && valor.startsWith("X+")) {
+      const extra = parseInt(valor.slice(2), 10); // ej: "X+3" → 3
+      // Según tu regla específica:
+      if (count <= 1) return extra;      // 0 o 1 runa → 3
+      if (count === 2) return extra + 1; // 2 runas → 4
+      return extra + 1;                  // 3 o más → 4
+    }
+  
+    return valor; // Si es un número directo o no aplicable
+  };
+
+  const valorMovimiento = interpretarValorRuna(movimiento, rune, getRuneCount);
+  const valorAtaque = interpretarValorRuna(ataque, rune, getRuneCount);
+
   const borderColorMap = {
     blanco: 'border-blanco',
     gris: 'border-gris',
