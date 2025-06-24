@@ -182,8 +182,9 @@ const TopMenu = ({
                 <MdAddCircleOutline className="text-purple-400 text-xl" />
                 <span className="font-semibold">{t.addManualEnemy || 'Enemigos manuales'}</span>
               </div>
-              <div className="grid grid-cols-3 sm:grid-cols-7 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-8 gap-2">
                 {[
+                  { key: 'esbirro', label: t.addMinionEnemies, color: 'text-cyan-300' },
                   { key: 'blanco', label: t.addWhiteEnemies, color: 'text-white' },
                   { key: 'gris', label: t.addGrayEnemies, color: 'text-gray-400' },
                   { key: 'negro', label: t.addBlackEnemies, color: 'text-black bg-white rounded' },
