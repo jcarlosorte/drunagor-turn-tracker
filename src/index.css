@@ -86,6 +86,10 @@ body {
   border-color: purple;
 }
 
+.border-cyan {
+  border-color: cyan;
+}
+
 .enemy-text {
   display: inline-block;
   max-width: 100%;
