@@ -48,7 +48,7 @@ const runesColorMap = {
   gris: 9
 };
 
-const allowedCategories = ['campeon', 'veterano', 'soldado', 'esbirro'];
+const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
 
