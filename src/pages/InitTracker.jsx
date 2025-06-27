@@ -118,7 +118,7 @@ const InitTracker = () => {
 
   const enemiesInSelectedExpansions = ENEMIES.filter(e => 
     selectedExpansions.includes(e.expansionId) &&
-    e.color !== "jefe" && e.color !== "esbirro"
+    e.color !== "jefe"
   );
 
   const clearCardHighlight = (uuid) => {
