@@ -479,6 +479,7 @@ const InitTracker = () => {
   };
 
   const borderColorMap = {
+    esbirro: 'border-cyan',
     blanco: 'border-blanco',
     gris: 'border-gris',
     negro: 'border-negro',
@@ -487,6 +488,7 @@ const InitTracker = () => {
   };
 
   const textBgColorMap = {
+    esbirro: 'bg-cyan-300',
     blanco: 'bg-white',
     gris: 'bg-gray-500',
     negro: 'bg-black',
