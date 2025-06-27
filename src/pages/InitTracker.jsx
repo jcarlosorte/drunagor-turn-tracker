@@ -48,7 +48,7 @@ const runesColorMap = {
   gris: 9
 };
 
-const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
+const allowedCategories = ['campeon', 'veterano', 'soldado', 'esbirro'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
 
@@ -74,7 +74,7 @@ const InitTracker = () => {
   const [selectedColor, setSelectedColor] = useState('');
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
-  const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'bisoño'];
+  const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro'];
   const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
