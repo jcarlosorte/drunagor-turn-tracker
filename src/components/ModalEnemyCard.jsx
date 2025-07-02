@@ -106,7 +106,17 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   };
 
   const handleVidaChange = (delta) => {
-    const nuevaVida = Math.min(vidaMax, Math.max(0, vidaLocal + delta));
+    const nuevaVidaTentativa = vidaLocal + delta;
+  
+    // Si supera la vida máxima, pedir confirmación
+    if (nuevaVidaTentativa > vidaMax) {
+      const confirmar = window.confirm(
+        `${nuevaVidaTentativa} ${ti?.vidaExcedida || 'supera la vida máxima. ¿Deseas continuar?'}`
+      );
+      if (!confirmar) return;
+    }
+  
+    const nuevaVida = Math.max(0, nuevaVidaTentativa);
     setVidaLocal(nuevaVida);
     if (onVidaChange) {
       onVidaChange(enemy.uuid, nuevaVida);
