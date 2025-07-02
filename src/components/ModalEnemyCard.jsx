@@ -10,6 +10,7 @@ import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} f
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
   const { language, translations } = useLanguage();
+  const [hasConfirmedOverheal, setHasConfirmedOverheal] = useState(false);
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const te = translations.enemies || {};
@@ -108,12 +109,15 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
   const handleVidaChange = (delta) => {
     const nuevaVidaTentativa = vidaLocal + delta;
   
-    // Si supera la vida máxima, pedir confirmación
+    // Si intentamos aumentar por encima del máximo
     if (nuevaVidaTentativa > vidaMax) {
-      const confirmar = window.confirm(
-        `${nuevaVidaTentativa} ${ti?.vidaExcedida || 'supera la vida máxima. ¿Deseas continuar?'}`
-      );
-      if (!confirmar) return;
+      if (!hasConfirmedOverheal) {
+        const confirmar = window.confirm(
+          `${nuevaVidaTentativa} ${ti?.vidaExcedida || 'supera la vida máxima. ¿Deseas continuar?'}`
+        );
+        if (!confirmar) return;
+        setHasConfirmedOverheal(true);
+      }
     }
   
     const nuevaVida = Math.max(0, nuevaVidaTentativa);
