@@ -178,6 +178,7 @@
     }
   },
   "trackerInit": {
+    "vidaExcedida": "exceeds maximum health. Do you wish to continue?",
     "movil1": "Please rotate your device to landscape orientation",
     "movil2": "to properly enjoy turn tracker control.",
     "noColorsAvailable": "No colors available to stands, but the enemies will be added anyway",
