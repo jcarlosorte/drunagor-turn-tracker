@@ -1257,6 +1257,8 @@ const InitTracker = () => {
             onClose={() => setSelectedEnemyUuid(null)}
             onDelete={onRemove}
             onVidaChange={updateEnemyVida}
+            overhealedEnemies={overhealedEnemies}
+            setOverhealedEnemies={setOverhealedEnemies}
           />
           )}
         {showPCModal && (
