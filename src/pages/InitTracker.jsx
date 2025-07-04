@@ -443,11 +443,11 @@ const InitTracker = () => {
     setSelectedEnemyUuid(uuid);
   };
 
-  const updateEnemyVida = (uuid, nuevaVida) => {
+  const updateEnemyVida = (uuid, nuevaVida, nuevoMax) => {
     setPlacedEnemies(prev =>
       prev.map(e =>
         e.enemy.uuid === uuid
-          ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
+          ? { ...e, enemy: { ...e.enemy, vida: nuevaVida, vidaMax: nuevoMax ?? e.enemy.vidaMax } }
           : e
       )
     );
