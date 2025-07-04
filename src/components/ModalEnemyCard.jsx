@@ -111,7 +111,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     const nuevaVidaTentativa = vidaLocal + delta;
     // 🚫 Límite inferior
     if (nuevaVidaTentativa < 0) return;
-
+    
+    // 🧠 Revisamos si ya fue confirmado
+    const hasConfirmedOverheal = overhealedEnemies.has(uuid);
 
      // ✅ Si supera el máximo y aún no fue confirmado
     if (nuevaVidaTentativa > enemy.vidaMax && !hasConfirmedOverheal) {
@@ -125,6 +127,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         nuevo.add(uuid);
         return nuevo;
       });
+
+       // 🆙 También aumentamos el vidaMax del enemigo
+      if (onVidaChange) {
+        onVidaChange(enemy.uuid, nuevaVidaTentativa, nuevaVidaTentativa); // nueva vida y nuevo vidaMax
+      }
+  
+      setVidaLocal(nuevaVidaTentativa);
+      return;
     }
 
     setVidaLocal(nuevaVidaTentativa);
