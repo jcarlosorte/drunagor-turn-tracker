@@ -24,6 +24,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   useEffect(() => {
     if (enemy) {
       setVidaLocal(enemy.vida);
+      setVidaMaxLocal(enemy.vidaMax);
     }
   }, [enemy]);
   
