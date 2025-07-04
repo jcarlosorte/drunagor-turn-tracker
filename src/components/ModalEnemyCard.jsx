@@ -9,6 +9,7 @@ import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} f
 
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
+  const [vidaMaxLocal, setVidaMaxLocal] = useState(enemy?.vidaMax || 0);
   const { language, translations } = useLanguage();
   const hasConfirmedOverheal = overhealedEnemies?.has(uuid) ?? false;
   
@@ -287,7 +288,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               <div className="flex items-center text-center gap-4">
                 <div className="flex items-center gap-2" >
                   <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
-                  {vidaLocal} / {vidaMax}
+                  {vidaLocal} / {vidaMaxLocal}
                 </div>
                 <span className="flex items-center gap-1">
                   <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
