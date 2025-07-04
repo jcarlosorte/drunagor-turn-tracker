@@ -445,13 +445,27 @@ const InitTracker = () => {
 
   const updateEnemyVida = (uuid, nuevaVida, nuevoMax) => {
     setPlacedEnemies(prev =>
-      prev.map(e =>
-        e.enemy.uuid === uuid
-          ? { ...e, enemy: { ...e.enemy, vida: nuevaVida, vidaMax: nuevoMax ?? e.enemy.vidaMax } }
-          : e
-      )
+      prev.map(e => {
+        if (e.enemy.uuid === uuid) {
+          const actualMax = e.enemy.vidaMax;
+          const nuevoVidaMax = nuevoMax !== undefined && nuevoMax !== null
+            ? nuevoMax
+            : Math.max(nuevaVida, actualMax); // 👈 si nueva vida > actualMax, lo eleva
+  
+          return {
+            ...e,
+            enemy: {
+              ...e.enemy,
+              vida: nuevaVida,
+              vidaMax: nuevoVidaMax
+            }
+          };
+        }
+        return e;
+      })
     );
   };
+
     
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
