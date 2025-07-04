@@ -7,10 +7,11 @@ import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteelt
 import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
 
-export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange }) => {
+export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
   const { language, translations } = useLanguage();
-  const [hasConfirmedOverheal, setHasConfirmedOverheal] = useState(false);
+  const hasConfirmedOverheal = overhealedEnemies?.has(uuid) ?? false;
+  
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const te = translations.enemies || {};
@@ -108,22 +109,27 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange })
 
   const handleVidaChange = (delta) => {
     const nuevaVidaTentativa = vidaLocal + delta;
-  
-    // Si intentamos aumentar por encima del máximo
-    if (nuevaVidaTentativa > vidaMax) {
-      if (!hasConfirmedOverheal) {
-        const confirmar = window.confirm(
+    // 🚫 Límite inferior
+    if (nuevaVidaTentativa < 0) return;
+
+
+     // ✅ Si supera el máximo y aún no fue confirmado
+    if (nuevaVidaTentativa > enemy.vidaMax && !hasConfirmedOverheal) {
+      const confirm = window.confirm(
           `${nuevaVidaTentativa} ${ti?.vidaExcedida || 'supera la vida máxima. ¿Deseas continuar?'}`
         );
-        if (!confirmar) return;
-        setHasConfirmedOverheal(true);
-      }
+      if (!confirm) return;
+
+      setOverhealedEnemies(prev => {
+        const nuevo = new Set(prev);
+        nuevo.add(uuid);
+        return nuevo;
+      });
     }
-  
-    const nuevaVida = Math.max(0, nuevaVidaTentativa);
-    setVidaLocal(nuevaVida);
+
+    setVidaLocal(nuevaVidaTentativa);
     if (onVidaChange) {
-      onVidaChange(enemy.uuid, nuevaVida);
+      onVidaChange(enemy.uuid, nuevaVidaTentativa);
     }
   };
 
