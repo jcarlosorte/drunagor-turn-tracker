@@ -288,10 +288,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               <div className="flex items-center text-center gap-4">
                 <div className="flex items-center gap-2" >
                   <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
-                  <div
-                    className="h-full rounded"
-                    style={{ width: `${(vidaLocal / vidaMaxLocal) * 100}%` }}
-                  />
+                  {vidaMaxLocal}
                 </div>
                 <span className="flex items-center gap-1">
                   <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
