@@ -425,7 +425,10 @@ const TopMenu = ({
       
               {/* Incursión */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="text-white font-semibold mb-1"><GiUprising className="text-white text-xl" />{t.incru1}</div>
+                <div className="text-white font-semibold mb-1">
+                  <GiUprising className="text-white text-xl" />
+                   <span className="font-semibold">{t.incru1}</span>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
