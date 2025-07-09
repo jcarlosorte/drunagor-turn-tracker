@@ -403,6 +403,34 @@ const TopMenu = ({
                 {t.close}
               </button>
             </div>
+
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex flex-row items-center gap-2 mb-2">
+                <GiRuneStone className="text-green-400 text-xl inline-block" />
+                <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => {
+                    const allAvailable = Object.entries(availableTiles)
+                      .flatMap(([color, tiles]) => tiles.map(tile => ({ ...tile, color })));
+            
+                    if (allAvailable.length === 0) {
+                      alert(t.noTilesToShow || "No hay fichas disponibles.");
+                      return;
+                    }
+            
+                    const randomTile = allAvailable[Math.floor(Math.random() * allAvailable.length)];
+                    showTileToast(randomTile, 'show'); // tipo 'show' para distinguir visualmente si quieres
+                  }}
+                  className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                >
+                  {t.manifestar || 'Manifestar'}
+                </button>
+              </div>
+            </div>
+
+            
           </motion.div>
         )}
       </AnimatePresence>
@@ -426,8 +454,8 @@ const TopMenu = ({
               {/* Incursión */}
               <div className="bg-gray-700 rounded p-2 mb-2">
                 <div className="flex text-orange font-semibold p-2 mb-2">
-                  <GiUprising className="text-white text-xl" />
-                   <span className="font-semibold">{t.incru1}</span>
+                  <GiUprising className="text-blue text-xl" />
+                   <span className="font-semibold"> {t.incru1}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -466,7 +494,7 @@ const TopMenu = ({
               <div className="bg-gray-700 rounded p-2 mb-2">
                 <div className="flex text-white font-semibold p-2 mb-2">
                   <GiStoneTower className="text-blue text-xl" />
-                   <span className="font-semibold">{t.defen1}</span>
+                   <span className="font-semibold"> {t.defen1}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
