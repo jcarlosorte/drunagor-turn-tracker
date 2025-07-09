@@ -291,7 +291,7 @@ const TopMenu = ({
                       onClick={() => onSelectRuneCard(card)}
                       className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                     >
-                      {t.rune} ({card.cara})
+                      {t.cara} ({card.cara})
                     </button>
                   ))}
                 </div>
@@ -425,7 +425,7 @@ const TopMenu = ({
       
               {/* Incursión */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="text-white font-semibold mb-1">🌪 Incursión de Monstruos</div>
+                <GiUprising className="text-white text-l" /><div className="text-white font-semibold mb-1">🌪 Incursión de Monstruos</div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
@@ -434,14 +434,14 @@ const TopMenu = ({
                     }}
                     className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                   >
-                    {t.addScenario} (A)
+                    {t.addScenario} ({t.caraA})
                   </button>
       
                   <button
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
                     className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                   >
-                    {t.addScenarioCara || 'Añadir cara específica'}
+                    {t.addScenarioCara}
                   </button>
                 </div>
                 {showScenarioFaceOptions.incursion && (
@@ -452,7 +452,7 @@ const TopMenu = ({
                         onClick={() => onSelectRuneCard(card)}
                         className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                       >
-                        ({card.cara})
+                       {t.cara} ({card.cara})
                       </button>
                     ))}
                   </div>
@@ -470,14 +470,14 @@ const TopMenu = ({
                     }}
                     className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                   >
-                    {t.addScenario} (A)
+                    {t.addScenario} ({t.caraA})
                   </button>
       
                   <button
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
                     className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                   >
-                    {t.addScenarioCara || 'Añadir cara específica'}
+                    {t.addScenarioCara}
                   </button>
                 </div>
                 {showScenarioFaceOptions.defensa && (
@@ -488,7 +488,7 @@ const TopMenu = ({
                         onClick={() => onSelectRuneCard(card)}
                         className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                       >
-                        ({card.cara})
+                        {t.cara} ({card.cara})
                       </button>
                     ))}
                   </div>
