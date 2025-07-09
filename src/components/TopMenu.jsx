@@ -7,6 +7,8 @@ import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
 import { ENEMIES } from '@/data/enemies';
+import { INCURSION } from '@/data/incrusion';
+import { DEFENSA } from '@/data/defensa';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
@@ -32,6 +34,8 @@ const TopMenu = ({
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
+  const [isScenarioOpen, setIsScenarioOpen] = useState(false);
+  const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
@@ -113,7 +117,7 @@ const TopMenu = ({
             <GiRuneStone size={24} />
           </button>
           <button
-            //onClick={() => setIsRunesOpen(prev => !prev)}
+            onClick={() => setIsScenarioOpen(prev => !prev)}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiVillage size={24} />
@@ -402,8 +406,108 @@ const TopMenu = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       
+      <AnimatePresence>
+        {isScenarioOpen && (
+          <motion.div
+            ref={menuRef}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
+          >
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiVillage className="text-yellow-300 text-xl" />
+                <span className="font-semibold">{t.escenario || 'Cartas de Escenario'}</span>
+              </div>
+      
+              {/* Incursión */}
+              <div className="bg-gray-700 rounded p-2 mb-2">
+                <div className="text-white font-semibold mb-1">🌪 Incursión de Monstruos</div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => {
+                      const carta = INCURSION.find(c => c.cara === 'A');
+                      if (carta) onSelectRuneCard(carta);
+                    }}
+                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addScenario} (A)
+                  </button>
+      
+                  <button
+                    onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
+                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addScenarioCara || 'Añadir cara específica'}
+                  </button>
+                </div>
+                {showScenarioFaceOptions.incursion && (
+                  <div className="flex gap-2 flex-wrap mt-2">
+                    {INCURSION.map((card, index) => (
+                      <button
+                        key={`${card.id}-${card.cara}-${index}`}
+                        onClick={() => onSelectRuneCard(card)}
+                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        ({card.cara})
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+      
+              {/* Defensa */}
+              <div className="bg-gray-700 rounded p-2 mb-2">
+                <div className="text-white font-semibold mb-1">🛡 Defensa de la Aldea</div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => {
+                      const carta = DEFENSA.find(c => c.cara === 'A');
+                      if (carta) onSelectRuneCard(carta);
+                    }}
+                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addScenario} (A)
+                  </button>
+      
+                  <button
+                    onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
+                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addScenarioCara || 'Añadir cara específica'}
+                  </button>
+                </div>
+                {showScenarioFaceOptions.defensa && (
+                  <div className="flex gap-2 flex-wrap mt-2">
+                    {DEFENSA.map((card, index) => (
+                      <button
+                        key={`${card.id}-${card.cara}-${index}`}
+                        onClick={() => onSelectRuneCard(card)}
+                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        ({card.cara})
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+      
+            <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={() => setIsScenarioOpen(false)}
+                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+              >
+                {t.close || 'Cerrar'}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
 
 
