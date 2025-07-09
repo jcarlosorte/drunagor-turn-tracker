@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising  } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
@@ -111,6 +111,12 @@ const TopMenu = ({
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiRuneStone size={24} />
+          </button>
+          <button
+            //onClick={() => setIsRunesOpen(prev => !prev)}
+            className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
+          >
+            <GiVillage size={24} />
           </button>
         </div>
 
