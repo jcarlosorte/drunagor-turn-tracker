@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising  } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
@@ -425,7 +425,7 @@ const TopMenu = ({
       
               {/* Incursión */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <GiUprising className="text-white text-l" /><div className="text-white font-semibold mb-1">🌪 Incursión de Monstruos</div>
+                <GiUprising className="text-white text-l" /><div className="text-white font-semibold mb-1">{t.incru1}</div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
@@ -461,7 +461,7 @@ const TopMenu = ({
       
               {/* Defensa */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="text-white font-semibold mb-1">🛡 Defensa de la Aldea</div>
+                <GiStoneTower className="text-white text-l" /><div className="text-white font-semibold mb-1">{t.defen1}</div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
