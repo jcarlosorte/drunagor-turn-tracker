@@ -8,5 +8,5 @@ export const ESTADOS_ALTERADOS = [
   {id: "LENTITUD_X", reduce:""},
   {id: "QUEMADURA_X", reduce:""},
   {id: "MARCA_DE_MONTARAZ", reduce:""},
-  {id: "ESCUDO_X", reduce:""},
+  {id: "ESCUDO_X", reduce:""}
 ];
