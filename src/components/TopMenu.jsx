@@ -7,7 +7,7 @@ import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
 import { ENEMIES } from '@/data/enemies';
-import { INCURSION } from '@/data/incrusion';
+import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
