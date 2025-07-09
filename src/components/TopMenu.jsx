@@ -425,7 +425,7 @@ const TopMenu = ({
       
               {/* Incursión */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="text-white font-semibold mb-1">
+                <div className="flex text-orange font-semibold p-2 mb-2">
                   <GiUprising className="text-white text-xl" />
                    <span className="font-semibold">{t.incru1}</span>
                 </div>
@@ -464,7 +464,10 @@ const TopMenu = ({
       
               {/* Defensa */}
               <div className="bg-gray-700 rounded p-2 mb-2">
-                <GiStoneTower className="text-white text-l" /><div className="text-white font-semibold mb-1">{t.defen1}</div>
+                <div className="flex text-white font-semibold p-2 mb-2">
+                  <GiStoneTower className="text-blue text-xl" />
+                   <span className="font-semibold">{t.defen1}</span>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
