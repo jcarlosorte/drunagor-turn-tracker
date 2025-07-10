@@ -393,13 +393,17 @@ const TopMenu = ({
                 <button
                   onClick={() => {
                     const allAvailable = Object.entries(availableTiles)
-                      .flatMap(([color, tiles]) => tiles.map(tile => ({ ...tile, color })));
-            
+                      .flatMap(([color, tiles]) =>
+                        Array.isArray(tiles)
+                          ? tiles.map(tile => ({ ...tile, color }))
+                          : []
+                      );
+                
                     if (allAvailable.length === 0) {
                       alert(t.noTilesToShow || "No hay fichas disponibles.");
                       return;
                     }
-            
+                
                     const randomTile = allAvailable[Math.floor(Math.random() * allAvailable.length)];
                     showTileToast(randomTile, 'show'); // tipo 'show' para distinguir visualmente si quieres
                   }}
