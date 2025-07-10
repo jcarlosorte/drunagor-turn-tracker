@@ -66,6 +66,12 @@ export const GameProvider = ({ children }) => {
     return random;
   };
 
+  const drawTilePreviewByColor = (color) => {
+    const candidates = availableTiles.filter(t => t.runa === color);
+    if (candidates.length === 0) return null;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  };
+  
   const drawMultipleTiles = (count) => {
     const available = [...availableTiles];
      if (available.length < count) {
@@ -107,6 +113,7 @@ export const GameProvider = ({ children }) => {
         availableTiles,
         usedTiles,
         drawTileByColor,
+        drawTilePreviewByColor,
         drawMultipleTiles,
         resetTiles,
         tileWarning, 
