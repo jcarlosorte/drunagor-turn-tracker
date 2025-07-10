@@ -397,7 +397,7 @@ const TopMenu = ({
                     const tile = drawTilePreviewByColor(randomColor);
                 
                     if (tile) {
-                      showTileToast(tile, 'show'); // ✅ usamos `tile` en lugar de `randomTile`
+                      showTileToast(tile, 'show');
                     } else {
                       alert(`${t.aviso2} ${t.colores[randomColor]}`);
                     }
@@ -428,7 +428,7 @@ const TopMenu = ({
                     }}
                     className="text-xs bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded"
                   >
-                    −1 {t.colores[color]}
+                    −1 {t.random}
                   </button>
                 ))}
                 <button
@@ -437,9 +437,9 @@ const TopMenu = ({
                     if (tile) showTileToast(tile, 'remove');
                     else alert(t.noTilesToRemove || "No hay fichas disponibles para eliminar.");
                   }}
-                  className="text-xs bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded"
+                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white px-2 py-1 rounded"
                 >
-                  −1 Aleatoria
+                  −1 {t.colores[color]}
                 </button>
               </div>
             
