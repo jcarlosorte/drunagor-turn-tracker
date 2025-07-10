@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw  } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS } from '@/data/runas';
@@ -412,7 +412,7 @@ const TopMenu = ({
             
             <div className="mt-4 border-t border-yellow-600 pt-2">
               <div className="flex items-center gap-2 mb-1">
-                <GiTrashCan className="text-red-400 text-xl" />
+                <GiCardDraw className="text-red-400 text-xl" />
                 <span className="font-semibold text-white">Eliminar Fichas</span>
               </div>
             
