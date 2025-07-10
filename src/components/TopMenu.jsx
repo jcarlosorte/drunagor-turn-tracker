@@ -36,7 +36,7 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
@@ -392,20 +392,15 @@ const TopMenu = ({
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => {
-                    const allAvailable = Object.entries(availableTiles)
-                      .flatMap(([color, tiles]) =>
-                        Array.isArray(tiles)
-                          ? tiles.map(tile => ({ ...tile, color }))
-                          : []
-                      );
+                    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                    const tile = drawTileByColor(randomColor);
                 
-                    if (allAvailable.length === 0) {
-                      alert(t.noTilesToShow || "No hay fichas disponibles.");
-                      return;
+                    if (tile) {
+                      showTileToast(tile, 'show'); // ✅ usamos `tile` en lugar de `randomTile`
+                    } else {
+                      alert(`${t.aviso2} ${t.colores[randomColor]}`);
                     }
-                
-                    const randomTile = allAvailable[Math.floor(Math.random() * allAvailable.length)];
-                    showTileToast(randomTile, 'show'); // tipo 'show' para distinguir visualmente si quieres
                   }}
                   className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
                 >
