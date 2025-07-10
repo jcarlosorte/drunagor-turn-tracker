@@ -178,26 +178,35 @@ export const GameProvider = ({ children }) => {
     return nueva;
   };
 
-  const removeTileFromPila = (pilaId, tileUuid) => {
-    setPilaDeRunas(prev =>
-      prev
-        .map(pila => {
-          if (pila.id !== pilaId) return pila;
-          const nuevaLista = pila.tiles.filter(t => t.uuid !== tileUuid);
-          return { ...pila, tiles: nuevaLista };
-        })
-        .filter(pila => pila.tiles.length > 0) // eliminar si está vacía
-    );
+  const removeTileFromPila = (pilaId) => {
+    setPilas(prevPilas => {
+      const nuevaLista = prevPilas.map(pila => {
+        if (pila.id !== pilaId) return pila;
   
-    const tile = pilaDeRunas
-      .find(p => p.id === pilaId)
-      ?.tiles.find(t => t.uuid === tileUuid);
+        const [firstTile, ...resto] = pila.tiles;
+        if (!firstTile) return null; // Nada que quitar
   
-    if (tile) {
-      restoreDiscardedTile(tile.runa, tile);
-      showTileToast(tile, 'add');
+        // Devolver ficha a la base
+        setAvailableTiles(prev => [...prev, firstTile]);
+  
+        return {
+          ...pila,
+          tiles: resto
+        };
+      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
+  
+      return nuevaLista;
+    });
+  
+    // Nota: devolver la ficha para el toast
+    const pila = pilas.find(p => p.id === pilaId);
+    if (pila && pila.tiles.length > 0) {
+      return pila.tiles[0]; // la ficha que vamos a mostrar
     }
+  
+    return null;
   };
+
 
   
   return (
