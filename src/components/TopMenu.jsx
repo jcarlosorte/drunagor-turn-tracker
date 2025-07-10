@@ -445,7 +445,7 @@ const TopMenu = ({
             
               {/* Pilas visuales */}
               <div className="grid grid-cols-5 gap-2">
-                {['rojo', 'azul', 'verde', 'naranja', 'gris'].map(color => (
+                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                   <div key={color} className="bg-gray-800 p-2 rounded-lg text-center">
                     <div className="text-xs text-white font-bold">{t.colores[color]}</div>
                     <div className="flex justify-center gap-1 mt-1">
