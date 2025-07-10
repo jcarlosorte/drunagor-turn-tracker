@@ -413,7 +413,7 @@ const TopMenu = ({
             <div className="mt-4 border-t border-yellow-600 pt-2">
               <div className="flex items-center gap-2 mb-1">
                 <GiCardDraw className="text-red-400 text-xl" />
-                <span className="font-semibold text-white">Eliminar Fichas</span>
+                <span className="font-semibold text-white">{t.gestionPilas || 'Gestión de Pilas de Runas'}</span>
               </div>
             
               {/* Botones eliminar */}
