@@ -418,7 +418,7 @@ const TopMenu = ({
             
               {/* Botones eliminar */}
               <div className="flex flex-wrap gap-2 mb-2">
-                {['rojo', 'azul', 'verde', 'naranja', 'gris'].map(color => (
+                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                   <button
                     key={color}
                     onClick={() => {
@@ -426,7 +426,7 @@ const TopMenu = ({
                       if (tile) showTileToast(tile, 'remove');
                       else alert(`No quedan fichas ${t.colores[color]}`);
                     }}
-                    className="text-xs bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded"
+                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                   >
                     −1 {t.colores[color]}
                   </button>
