@@ -18,6 +18,8 @@ const TileToast = ({ tile, tipo = 'add', onClose }) => {
   const ti = translations.trackerInit || {};
   const mensaje = tipo === 'remove'
     ? `−1 ${ti.rune}: ${ti.colores[tile.runa]}`
+    : tipo === 'show'
+    ? `🔮 ${ti.manifestar || 'Manifestar'}: ${ti.colores[tile.runa]}`
     : `+1 ${ti.rune}: ${ti.colores[tile.runa]}`;
  
   useEffect(() => {
