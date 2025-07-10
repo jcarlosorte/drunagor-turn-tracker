@@ -21,6 +21,7 @@ export const GameProvider = ({ children }) => {
     gris: []
   });
   const [pilaDeRunas, setPilaDeRunas] = useState([]);
+  const [pilas, setPilas] = useState([]);
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
@@ -216,6 +217,8 @@ export const GameProvider = ({ children }) => {
         discardTileByColor,
         discardTileRandom,
         restoreDiscardedTile,
+        pilas,
+        setPilas,
         addNewPila,
         removeTileFromPila,
         resetTiles,
