@@ -410,6 +410,78 @@ const TopMenu = ({
             </div>
 
             
+            <div className="mt-4 border-t border-yellow-600 pt-2">
+              <div className="flex items-center gap-2 mb-1">
+                <GiTrashCan className="text-red-400 text-xl" />
+                <span className="font-semibold text-white">Eliminar Fichas</span>
+              </div>
+            
+              {/* Botones eliminar */}
+              <div className="flex flex-wrap gap-2 mb-2">
+                {['rojo', 'azul', 'verde', 'naranja', 'gris'].map(color => (
+                  <button
+                    key={color}
+                    onClick={() => {
+                      const tile = discardTileByColor(color);
+                      if (tile) showTileToast(tile, 'remove');
+                      else alert(`No quedan fichas ${t.colores[color]}`);
+                    }}
+                    className="text-xs bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded"
+                  >
+                    −1 {t.colores[color]}
+                  </button>
+                ))}
+                <button
+                  onClick={() => {
+                    const tile = discardTileRandom();
+                    if (tile) showTileToast(tile, 'remove');
+                    else alert(t.noTilesToRemove || "No hay fichas disponibles para eliminar.");
+                  }}
+                  className="text-xs bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded"
+                >
+                  −1 Aleatoria
+                </button>
+              </div>
+            
+              {/* Pilas visuales */}
+              <div className="grid grid-cols-5 gap-2">
+                {['rojo', 'azul', 'verde', 'naranja', 'gris'].map(color => (
+                  <div key={color} className="bg-gray-800 p-2 rounded-lg text-center">
+                    <div className="text-xs text-white font-bold">{t.colores[color]}</div>
+                    <div className="flex justify-center gap-1 mt-1">
+                      {discardedTiles[color].map((tile, idx) => (
+                        <span key={tile.uuid || idx} className="text-white text-sm">🧱</span>
+                      ))}
+                    </div>
+                    <div className="flex justify-center gap-1 mt-1">
+                      <button
+                        className="bg-red-700 hover:bg-red-600 text-white px-1 text-sm rounded"
+                        onClick={() => {
+                          const tile = discardTileByColor(color);
+                          if (tile) showTileToast(tile, 'remove');
+                          else alert(`No quedan fichas ${t.colores[color]}`);
+                        }}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="bg-green-700 hover:bg-green-600 text-white px-1 text-sm rounded"
+                        onClick={() => {
+                          const tile = restoreDiscardedTile(color);
+                          if (tile) showTileToast(tile, 'add');
+                          else alert(`No hay fichas descartadas de ${t.colores[color]}`);
+                        }}
+                      >
+                        −
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            
+            
             <div className="flex justify-center gap-4 mt-2">
               <button
                 onClick={() => {
