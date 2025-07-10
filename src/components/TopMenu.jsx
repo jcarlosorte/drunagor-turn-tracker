@@ -386,7 +386,7 @@ const TopMenu = ({
 
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex flex-row items-center gap-2 mb-2">
-                <GiRuneStone className="text-green-400 text-xl inline-block" />
+                <GiRuneStone className="text-blue-400 text-xl inline-block" />
                 <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -403,7 +403,7 @@ const TopMenu = ({
                     const randomTile = allAvailable[Math.floor(Math.random() * allAvailable.length)];
                     showTileToast(randomTile, 'show'); // tipo 'show' para distinguir visualmente si quieres
                   }}
-                  className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
                 >
                   {t.manifestar || 'Manifestar'}
                 </button>
