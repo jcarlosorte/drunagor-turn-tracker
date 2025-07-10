@@ -13,6 +13,13 @@ export const GameProvider = ({ children }) => {
     naranja: 0,
     gris: 0
   });
+  const [discardedTiles, setDiscardedTiles] = useState({
+    rojo: [],
+    azul: [],
+    verde: [],
+    naranja: [],
+    gris: []
+  });
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
@@ -101,6 +108,44 @@ export const GameProvider = ({ children }) => {
     clearRunes();
   };
 
+  const discardTileByColor = (color) => {
+    const candidates = availableTiles.filter(t => t.runa === color);
+    if (candidates.length === 0) return null;
+  
+    const random = candidates[Math.floor(Math.random() * candidates.length)];
+    setAvailableTiles(prev => prev.filter(t => t.uuid !== random.uuid));
+    setDiscardedTiles(prev => ({
+      ...prev,
+      [color]: [...prev[color], random]
+    }));
+    return random;
+  };
+
+  const discardTileRandom = () => {
+    if (availableTiles.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * availableTiles.length);
+    const tile = availableTiles[randomIndex];
+  
+    setAvailableTiles(prev => prev.filter(t => t.uuid !== tile.uuid));
+    setDiscardedTiles(prev => ({
+      ...prev,
+      [tile.runa]: [...prev[tile.runa], tile]
+    }));
+    return tile;
+  };
+
+  const restoreDiscardedTile = (color) => {
+    const pile = discardedTiles[color];
+    if (pile.length === 0) return null;
+  
+    const restored = pile[pile.length - 1];
+    setDiscardedTiles(prev => ({
+      ...prev,
+      [color]: prev[color].slice(0, -1)
+    }));
+    setAvailableTiles(prev => [...prev, restored]);
+    return restored;
+  };
   
   return (
     <GameContext.Provider
@@ -115,6 +160,10 @@ export const GameProvider = ({ children }) => {
         drawTileByColor,
         drawTilePreviewByColor,
         drawMultipleTiles,
+        discardedTiles,
+        discardTileByColor,
+        discardTileRandom,
+        restoreDiscardedTile,
         resetTiles,
         tileWarning, 
         setTileWarning
