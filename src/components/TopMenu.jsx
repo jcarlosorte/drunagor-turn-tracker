@@ -383,26 +383,6 @@ const TopMenu = ({
                 </button>
               </div>
             </div>
-                        
-            <div className="flex justify-center gap-4 mt-2">
-              <button
-                onClick={() => {
-                  resetPlacedRunes(); // Borra las cartas de runa
-                  resetTiles();        // Borra las fichas de runa
-                  //console.log("Available:", availableTiles);
-                  //console.log("Used:", usedTiles);
-                }}
-                className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
-              >
-                {t.resetRunes || 'Resetear Runas'}
-              </button>
-              <button
-                onClick={() => setIsRunesOpen(false)}
-                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
-              >
-                {t.close}
-              </button>
-            </div>
 
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex flex-row items-center gap-2 mb-2">
@@ -428,6 +408,26 @@ const TopMenu = ({
                   {t.manifestar || 'Manifestar'}
                 </button>
               </div>
+            </div>
+
+            
+            <div className="flex justify-center gap-4 mt-2">
+              <button
+                onClick={() => {
+                  resetPlacedRunes(); // Borra las cartas de runa
+                  resetTiles();        // Borra las fichas de runa
+                }}
+                className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
+              >
+                {t.resetRunes || 'Resetear Runas'}
+              </button>
+              <button
+                onClick={() => setIsRunesOpen(false)}
+                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+              >
+                {t.close}
+              </button>                      
+              
             </div>
 
             
