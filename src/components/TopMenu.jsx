@@ -424,7 +424,7 @@ const TopMenu = ({
                 ➕ {t.addPila || 'Añadir pila'}
               </button>
             
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {pilas.map(pila => (
                   <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                     <div className="font-bold mb-1">
