@@ -105,6 +105,7 @@ export const GameProvider = ({ children }) => {
   const resetTiles = () => {
     setAvailableTiles(FICHAS.map(f => ({ ...f, uuid: uuidv4() })));
     setUsedTiles([]);
+    setDiscardedTiles({ rojo: [], azul: [], verde: [], naranja: [], gris: [] });
     clearRunes();
   };
 
