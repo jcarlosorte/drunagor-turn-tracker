@@ -428,7 +428,7 @@ const TopMenu = ({
                     }}
                     className="text-xs bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded"
                   >
-                    −1 {t.random}
+                    −1 {t.colores[color]}
                   </button>
                 ))}
                 <button
@@ -439,7 +439,7 @@ const TopMenu = ({
                   }}
                   className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white px-2 py-1 rounded"
                 >
-                  −1 {t.colores[color]}
+                  −1 {t.random}
                 </button>
               </div>
             
