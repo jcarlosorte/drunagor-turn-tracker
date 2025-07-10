@@ -394,7 +394,7 @@ const TopMenu = ({
                   onClick={() => {
                     const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
                     const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                    const tile = drawTileByColor(randomColor);
+                    const tile = drawTilePreviewByColor(randomColor);
                 
                     if (tile) {
                       showTileToast(tile, 'show'); // ✅ usamos `tile` en lugar de `randomTile`
