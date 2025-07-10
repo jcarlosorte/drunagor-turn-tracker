@@ -36,7 +36,7 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, resetTiles, tileWarning, setTileWarning} = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, addNewPila, removeTileFromPila, resetTiles, tileWarning, setTileWarning} = useGame();
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
@@ -412,73 +412,39 @@ const TopMenu = ({
             
             <div className="mt-4 border-t border-yellow-600 pt-2">
               <div className="flex items-center gap-2 mb-1">
-                <GiCardDraw className="text-red-400 text-xl" />
-                <span className="font-semibold text-white">{t.gestionPilas || 'Gestión de Pilas de Runas'}</span>
+                <GiCardDraw className="text-purple-400 text-xl" />
+                <span className="font-semibold text-white">{t.pilas || 'Pilas de runas'}</span>
               </div>
             
-              {/* Botones eliminar */}
-              <div className="flex flex-wrap gap-2 mb-2">
-                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
-                  <button
-                    key={color}
-                    onClick={() => {
-                      const tile = discardTileByColor(color);
-                      if (tile) showTileToast(tile, 'remove');
-                      else alert(`No quedan fichas ${t.colores[color]}`);
-                    }}
-                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
-                  >
-                    −1 {t.colores[color]}
-                  </button>
-                ))}
-                <button
-                  onClick={() => {
-                    const tile = discardTileRandom();
-                    if (tile) showTileToast(tile, 'remove');
-                    else alert(t.noTilesToRemove || "No hay fichas disponibles para eliminar.");
-                  }}
-                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white px-2 py-1 rounded"
-                >
-                  −1 {t.random}
-                </button>
-              </div>
+              <button
+                disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
+                onClick={addNewPila}
+                className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
+              >
+                ➕ {t.addPila || 'Añadir pila'}
+              </button>
             
-              {/* Pilas visuales */}
-              <div className="grid grid-cols-5 gap-2">
-                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
-                  <div key={color} className="bg-gray-800 p-2 rounded-lg text-center">
-                    <div className="text-xs text-white font-bold">{t.colores[color]}</div>
-                    <div className="flex justify-center gap-1 mt-1">
-                      {discardedTiles[color].map((tile, idx) => (
-                        <span key={tile.uuid || idx} className="text-white text-sm">🧱</span>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {pilaDeRunas.map(pila => (
+                  <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                    <div className="font-bold mb-1">{t.pila || 'Pila'} 🗃️</div>
+                    <div className="flex flex-wrap justify-center gap-1">
+                      {pila.tiles.map(tile => (
+                        <button
+                          key={tile.uuid}
+                          className={`text-lg rounded-full ${colorMap[tile.runa]} px-2 py-1`}
+                          onClick={() => removeTileFromPila(pila.id, tile.uuid)}
+                          title={`${t.devolver || 'Devolver'} ${t.colores[tile.runa]}`}
+                        >
+                          🧱 −
+                        </button>
                       ))}
-                    </div>
-                    <div className="flex justify-center gap-1 mt-1">
-                      <button
-                        className="bg-red-700 hover:bg-red-600 text-white px-1 text-sm rounded"
-                        onClick={() => {
-                          const tile = discardTileByColor(color);
-                          if (tile) showTileToast(tile, 'remove');
-                          else alert(`No quedan fichas ${t.colores[color]}`);
-                        }}
-                      >
-                        +
-                      </button>
-                      <button
-                        className="bg-green-700 hover:bg-green-600 text-white px-1 text-sm rounded"
-                        onClick={() => {
-                          const tile = restoreDiscardedTile(color);
-                          if (tile) showTileToast(tile, 'add');
-                          else alert(`No hay fichas descartadas de ${t.colores[color]}`);
-                        }}
-                      >
-                        −
-                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
 
             
             
