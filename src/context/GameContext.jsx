@@ -20,6 +20,7 @@ export const GameProvider = ({ children }) => {
     naranja: [],
     gris: []
   });
+  const [pilaDeRunas, setPilaDeRunas] = useState([]);
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
@@ -105,7 +106,14 @@ export const GameProvider = ({ children }) => {
   const resetTiles = () => {
     setAvailableTiles(FICHAS.map(f => ({ ...f, uuid: uuidv4() })));
     setUsedTiles([]);
-    setDiscardedTiles({ rojo: [], azul: [], verde: [], naranja: [], gris: [] });
+    setDiscardedTiles({
+      rojo: [],
+      azul: [],
+      verde: [],
+      naranja: [],
+      gris: [],
+    });
+    setPilas([]); // 🔁 Limpiar también las pilas
     clearRunes();
   };
 
@@ -147,6 +155,49 @@ export const GameProvider = ({ children }) => {
     setAvailableTiles(prev => [...prev, restored]);
     return restored;
   };
+
+  const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+
+  const addNewPila = () => {
+    const coloresAleatorios = shuffle(['rojo', 'azul', 'verde', 'naranja', 'gris']);
+    const nuevaPila = [];
+  
+    for (const color of coloresAleatorios) {
+      const tile = discardTileByColor(color); // usamos discard para mantener consistencia
+      if (!tile) return null; // abortar si falta alguna
+      nuevaPila.push(tile);
+    }
+  
+    const nueva = {
+      id: uuidv4(),
+      tiles: nuevaPila,
+    };
+  
+    setPilas(prev => [...prev, nueva]);
+    return nueva;
+  };
+
+  const removeTileFromPila = (pilaId, tileUuid) => {
+    setPilaDeRunas(prev =>
+      prev
+        .map(pila => {
+          if (pila.id !== pilaId) return pila;
+          const nuevaLista = pila.tiles.filter(t => t.uuid !== tileUuid);
+          return { ...pila, tiles: nuevaLista };
+        })
+        .filter(pila => pila.tiles.length > 0) // eliminar si está vacía
+    );
+  
+    const tile = pilaDeRunas
+      .find(p => p.id === pilaId)
+      ?.tiles.find(t => t.uuid === tileUuid);
+  
+    if (tile) {
+      restoreDiscardedTile(tile.runa, tile);
+      showTileToast(tile, 'add');
+    }
+  };
+
   
   return (
     <GameContext.Provider
@@ -165,6 +216,8 @@ export const GameProvider = ({ children }) => {
         discardTileByColor,
         discardTileRandom,
         restoreDiscardedTile,
+        addNewPila,
+        removeTileFromPila,
         resetTiles,
         tileWarning, 
         setTileWarning
