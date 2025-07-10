@@ -425,7 +425,7 @@ const TopMenu = ({
               </button>
             
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {pilaDeRunas.map(pila => (
+                {pilas.map(pila => (
                   <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                     <div className="font-bold mb-1">{t.pila || 'Pila'} 🗃️</div>
                     <div className="flex flex-wrap justify-center gap-1">
@@ -445,8 +445,6 @@ const TopMenu = ({
               </div>
             </div>
 
-
-            
             
             <div className="flex justify-center gap-4 mt-2">
               <button
