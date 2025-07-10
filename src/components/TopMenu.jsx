@@ -427,23 +427,32 @@ const TopMenu = ({
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {pilas.map(pila => (
                   <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                    <div className="font-bold mb-1">{t.pila || 'Pila'} 🗃️</div>
-                    <div className="flex flex-wrap justify-center gap-1">
-                      {pila.tiles.map(tile => (
-                        <button
-                          key={tile.uuid}
-                          className={`text-lg rounded-full ${colorMap[tile.runa]} px-2 py-1`}
-                          onClick={() => removeTileFromPila(pila.id, tile.uuid)}
-                          title={`${t.devolver || 'Devolver'} ${t.colores[tile.runa]}`}
-                        >
-                          🧱 −
-                        </button>
-                      ))}
+                    <div className="font-bold mb-1">
+                      {t.pila || 'Pila'} 🗃️
+                    </div>
+                    <div className="text-xs text-gray-300 mb-2">
+                      {t.fichas || 'Fichas'}: {pila.tiles.length}
+                    </div>
+                    <div className="flex justify-center">
+                      <button
+                        className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                        onClick={() => {
+                          const tile = removeTileFromPila(pila.id);
+                          if (tile) {
+                            showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
+                          } else {
+                            alert(t.emptyPila || "Pila vacía.");
+                          }
+                        }}
+                      >
+                        🧱 − {t.devolver || 'Devolver'}
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
 
             
             <div className="flex justify-center gap-4 mt-2">
