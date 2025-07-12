@@ -239,12 +239,14 @@
     "gestionPilas": "Pile of Runes Management",
 
     "estadoBolsa": "Rune Bag Status",
-    "extraidas": "drawn",
+    "extraidas": "Drawn",
     "addPila": "Add Pile of Runes",
     "tamano": "Stack Size",
     "pila": "Pile",
     "devolver": "Remove Rune",
     "emptyPila": "Empty Stack.",
+    "total": "Total",
+    "eliminarDirecto": "Remove Rune from the Bag",
     
     "cara": "Face",
     "caraA": "Face A",
