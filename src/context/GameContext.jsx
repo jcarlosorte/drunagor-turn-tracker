@@ -207,6 +207,23 @@ export const GameProvider = ({ children }) => {
     return null;
   };
 
+  const deleteAvailableTileByColor = (color) => {
+    const candidates = availableTiles.filter(t => t.runa === color);
+    if (candidates.length === 0) return null;
+  
+    const random = candidates[Math.floor(Math.random() * candidates.length)];
+    setAvailableTiles(prev => prev.filter(t => t.uuid !== random.uuid));
+    return random; // Por si quieres mostrar con toast o alert
+  };
+  
+  const deleteAvailableTileRandom = () => {
+    if (availableTiles.length === 0) return null;
+  
+    const randomIndex = Math.floor(Math.random() * availableTiles.length);
+    const random = availableTiles[randomIndex];
+    setAvailableTiles(prev => prev.filter((_, i) => i !== randomIndex));
+    return random;
+  };
 
   
   return (
@@ -232,7 +249,9 @@ export const GameProvider = ({ children }) => {
         removeTileFromPila,
         resetTiles,
         tileWarning, 
-        setTileWarning
+        setTileWarning,
+        deleteAvailableTileByColor,
+        deleteAvailableTileRandom 
       }}
     >
       {children}
