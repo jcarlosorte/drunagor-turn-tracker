@@ -240,12 +240,14 @@
       "gestionPilas": "Gestión de Pilas de Runas",
 
       "estadoBolsa": "Estado de la Bolsa de Runas",
-      "extraidas": "extraídas",
+      "extraidas": "Extraídas",
       "addPila": "Añadir Pila de Runas",
       "tamano": "Tamaño de la Pila",
       "pila": "Pila",
       "devolver": "Retirar Runa",
       "emptyPila": "Pila vacía.",
+      "total": "Total",
+      "eliminarDirecto": "Eliminar Runa de la Bolsa",
       
       "cara": "Cara",
       "caraA": "Cara A",
