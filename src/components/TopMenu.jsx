@@ -40,6 +40,7 @@ const TopMenu = ({
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
+  const [codigosPilas, setCodigosPilas] = useState({});
   
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
@@ -99,6 +100,13 @@ const TopMenu = ({
     setManualSelect(value);
   };
 
+  const handleCodigoChange = (pilaId, nuevoCodigo) => {
+    setCodigosPilas(prev => ({
+      ...prev,
+      [pilaId]: nuevoCodigo.slice(0, 5)
+    }));
+  };
+  
   return (
     <>
     <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
@@ -416,12 +424,12 @@ const TopMenu = ({
                 <div className="flex items-center gap-2 mb-1">
                   <GiSwapBag className="text-yellow-300 text-xl" />
                   <span className="font-semibold text-white">
-                    {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
+                    {t.estadoBolsa}
                   </span>
                 </div>
               
                 <div className="text-sm text-white ml-1">
-                  {`${usedTiles.length} / ${availableTiles.length + usedTiles.length} ${t.extraidas || 'extraídas'}`}
+                  {`${usedTiles.length} / ${availableTiles.length + usedTiles.length} ${t.extraidas}`}
                 </div>
               </div>
   
@@ -429,7 +437,7 @@ const TopMenu = ({
               <div className="mt-4 border-t border-yellow-600 pt-2">
                 <div className="flex items-center gap-2 mb-1">
                   <GiCardDraw className="text-purple-400 text-xl" />
-                  <span className="font-semibold text-white">{t.pilas || 'Pilas de runas'}</span>
+                  <span className="font-semibold text-white">{t.gestionPilas}</span>
                 </div>
               
                 <button
@@ -437,17 +445,26 @@ const TopMenu = ({
                   onClick={addNewPila}
                   className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
                 >
-                  ➕ {t.addPila || 'Añadir pila'}
+                  ➕ {t.addPila}
                 </button>
               
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {pilas.map(pila => (
                     <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                       <div className="font-bold mb-1">
-                        {t.pila || 'Pila'} 🗃️
+                          <span>{t.pila || 'Pila'} 🗃️</span>
+                          <input
+                            type="text"
+                            maxLength={5}
+                            value={codigosPilas[pila.id] || ''}
+                            onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                            className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                            placeholder="ABC12"
+                            title={t.codigoPila || "Código de loseta"}
+                          />
                       </div>
                       <div className="text-xs text-gray-300 mb-2">
-                        {t.fichas || 'Fichas'}: {pila.tiles.length}
+                        {t.tamano}: {pila.tiles.length}
                       </div>
                       <div className="flex justify-center">
                         <button
@@ -461,7 +478,7 @@ const TopMenu = ({
                             }
                           }}
                         >
-                          🧱 − {t.devolver || 'Devolver'}
+                          🧱 − {t.devolver}
                         </button>
                       </div>
                     </div>
