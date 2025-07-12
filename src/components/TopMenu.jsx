@@ -36,7 +36,7 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, setTileWarning} = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom } = useGame();
   const { resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
@@ -450,35 +450,23 @@ const TopMenu = ({
                       <button
                         key={color}
                         onClick={() => {
-                          const candidates = availableTiles.filter(t => t.runa === color);
-                          if (candidates.length === 0) {
-                            alert(`${t.noTilesToRemove} (${t.colores[color]})`);
-                            return;
-                          }
-              
-                          const random = candidates[Math.floor(Math.random() * candidates.length)];
-                          setAvailableTiles(prev => prev.filter(t => t.uuid !== random.uuid));
-                          alert(`${t.eliminada} ${t.colores[color]}`);
+                          const tile = deleteAvailableTileByColor(color);
+                          if (tile) showTileToast(tile, 'remove');
+                          else alert(`${t.noTilesToRemove} ${t.colores[color]}`);
                         }}
                         className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                       >
-                        −1 {t.colores[color]}
+                        {t.colores[color]}
                       </button>
                     ))}
               
-                    <button
+                     <button
                       onClick={() => {
-                        if (availableTiles.length === 0) {
-                          alert(t.noTilesToRemove || "No hay fichas para eliminar.");
-                          return;
-                        }
-              
-                        const randomIndex = Math.floor(Math.random() * availableTiles.length);
-                        const random = availableTiles[randomIndex];
-                        setAvailableTiles(prev => prev.filter((_, i) => i !== randomIndex));
-                        alert(`${t.eliminada} ${t.colores[random.runa]}`);
+                        const tile = deleteAvailableTileRandom();
+                        if (tile) showTileToast(tile, 'remove');
+                        else alert(t.noTilesToRemove || "No hay fichas para eliminar.");
                       }}
-                      className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
+                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
                     >
                       🎲 {t.removeRandom || 'Aleatoria'}
                     </button>
