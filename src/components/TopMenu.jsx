@@ -501,7 +501,7 @@ const TopMenu = ({
                             onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
                             className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
                             placeholder="ABC12"
-                            title={t.codigoPila || "Código de loseta"}
+                            title={t.codigoPila}
                           />
                       </div>
                       <div className="text-xs text-gray-300 mb-2">
@@ -515,7 +515,7 @@ const TopMenu = ({
                             if (tile) {
                               showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
                             } else {
-                              alert(t.emptyPila || "Pila vacía.");
+                              alert(t.emptyPila);
                             }
                           }}
                         >
@@ -537,7 +537,7 @@ const TopMenu = ({
                   }}
                   className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
                 >
-                  {t.resetRunes || 'Resetear Runas'}
+                  {t.resetRunes}
                 </button>
                 <button
                   onClick={() => setIsRunesOpen(false)}
