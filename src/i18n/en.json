@@ -237,6 +237,15 @@
     "addScenario": "Add Scenario Card",
     "addScenarioCara": "Scenario Card by Faces",
     "gestionPilas": "Pile of Runes Management",
+
+    "estadoBolsa": "Rune Bag Status",
+    "extraidas": "drawn",
+    "addPila": "Add Pile of Runes",
+    "tamano": "Stack Size",
+    "pila": "Pile",
+    "devolver": "Remove Rune",
+    "emptyPila": "Empty Stack.",
+    
     "cara": "Face",
     "caraA": "Face A",
     "caraB": "Face B",
