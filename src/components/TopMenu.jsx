@@ -252,46 +252,76 @@ const TopMenu = ({
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
             <div className="flex flex-col gap-4 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500">
-              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-                <div className="flex items-center gap-2 mb-2">
-                  <GiCardPlay className="text-indigo-400 text-xl" />
-                  <span className="font-semibold">{t.cartas}</span>
-                </div>
-        
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => {
-                      const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                      defaultRunes.forEach(r => onSelectRuneCard(r));
-                    }}
-                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                  >
-                    {t.addRunes} ({t.caraA})
-                  </button>
-        
-                  <button
-                    onClick={() => setShowRuneFaceOptions(prev => !prev)}
-                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                  >
-                    {t.addRunesCara}
-                  </button>
-                </div>
-        
-                {showRuneFaceOptions && (
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    {RUNAS.map((card, index) => (
-                      <button
-                        key={`${card.id}-${card.cara}-${index}`}
-                        onClick={() => onSelectRuneCard(card)}
-                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.cara} ({card.cara})
-                      </button>
-                    ))}
+             
+              <div className="flex flex-col md:flex-row gap-4">
+              {/* Añadir Cartas de Runa */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiCardPlay className="text-indigo-400 text-xl" />
+                    <span className="font-semibold">{t.cartas}</span>
                   </div>
-                )}
-              </div>
+          
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        const defaultRunes = RUNAS.filter(r => r.cara === 'A');
+                        defaultRunes.forEach(r => onSelectRuneCard(r));
+                      }}
+                      className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.addRunes} ({t.caraA})
+                    </button>
+          
+                    <button
+                      onClick={() => setShowRuneFaceOptions(prev => !prev)}
+                      className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.addRunesCara}
+                    </button>
+                  </div>
+          
+                  {showRuneFaceOptions && (
+                    <div className="flex gap-2 flex-wrap mt-2">
+                      {RUNAS.map((card, index) => (
+                        <button
+                          key={`${card.id}-${card.cara}-${index}`}
+                          onClick={() => onSelectRuneCard(card)}
+                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.cara} ({card.cara})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
+                {/* Manifestar Runa */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex flex-row items-center gap-2 mb-2">
+                    <GiRuneStone className="text-blue-400 text-xl inline-block" />
+                    <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                        const tile = drawTilePreviewByColor(randomColor);
+                    
+                        if (tile) {
+                          showTileToast(tile, 'show');
+                        } else {
+                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
+                        }
+                      }}
+                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.manifestar || 'Manifestar'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+                
               <div className="flex flex-col md:flex-row gap-4">
               {/* Añadir ficha */}
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
@@ -381,31 +411,8 @@ const TopMenu = ({
                   </div>
                 </div>
               </div>
-  
-              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-                <div className="flex flex-row items-center gap-2 mb-2">
-                  <GiRuneStone className="text-blue-400 text-xl inline-block" />
-                  <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => {
-                      const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                      const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                      const tile = drawTilePreviewByColor(randomColor);
-                  
-                      if (tile) {
-                        showTileToast(tile, 'show');
-                      } else {
-                        alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                      }
-                    }}
-                    className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
-                  >
-                    {t.manifestar || 'Manifestar'}
-                  </button>
-                </div>
-              </div>
+
+              
   
               
               <div className="mt-4 border-t border-yellow-600 pt-2">
