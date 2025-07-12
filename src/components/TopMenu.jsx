@@ -412,7 +412,18 @@ const TopMenu = ({
                 </div>
               </div>
 
+              <div className="mt-4 border-t border-yellow-600 pt-2">
+                <div className="flex items-center gap-2 mb-1">
+                  <GiCardPick className="text-yellow-300 text-xl" />
+                  <span className="font-semibold text-white">
+                    {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
+                  </span>
+                </div>
               
+                <div className="text-sm text-white ml-1">
+                  {`${usedTiles.length} / ${availableTiles.length + usedTiles.length} ${t.extraidas || 'extraídas'}`}
+                </div>
+              </div>
   
               
               <div className="mt-4 border-t border-yellow-600 pt-2">
