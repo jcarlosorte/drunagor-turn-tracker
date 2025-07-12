@@ -275,13 +275,6 @@ const TopMenu = ({
                   >
                     {t.addRunesCara}
                   </button>
-        
-                  <button
-                    onClick={() => alert('Funcionalidad de runas especiales próximamente')}
-                    className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
-                  >
-                    {t.addSpecial}
-                  </button>
                 </div>
         
                 {showRuneFaceOptions && (
@@ -298,90 +291,94 @@ const TopMenu = ({
                   </div>
                 )}
               </div>
-  
-              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-                <div className="flex items-center gap-2 mb-2">
-                  <GiBrickWall className="text-green-300 text-xl" />
-                  <span className="font-semibold">{t.fichas}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+
+              <div className="flex flex-col md:flex-row gap-4">
+              {/* Añadir ficha */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiBrickWall className="text-green-300 text-xl" />
+                    <span className="font-semibold">{t.fichas}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+                      <button
+                        key={color}
+                        onClick={() => {
+                          const tile = drawTileByColor(color);
+                          if (tile && onTileDraw) {
+                            //addRune(color); // del GameContext
+                            onTileDraw(tile);
+                          } else {
+                            alert(`${t.aviso2} ${t.colores[color]}`);
+                          }
+                        }}
+                        className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                      >
+                        {t.colores[color]}
+                      </button>
+                    ))}
+    
+                    {/* 🟣 Botón de ficha aleatoria */}
                     <button
-                      key={color}
                       onClick={() => {
-                        const tile = drawTileByColor(color);
+                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                        const tile = drawTileByColor(randomColor);
                         if (tile && onTileDraw) {
-                          //addRune(color); // del GameContext
                           onTileDraw(tile);
                         } else {
-                          alert(`${t.aviso2} ${t.colores[color]}`);
+                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
                         }
                       }}
-                      className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                      className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
                     >
-                      {t.colores[color]}
+                      🎲 {t.fichaAleatoria || 'Aleatoria'}
                     </button>
-                  ))}
-  
-                  {/* 🟣 Botón de ficha aleatoria */}
-                  <button
-                    onClick={() => {
-                      const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                      const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                      const tile = drawTileByColor(randomColor);
-                      if (tile && onTileDraw) {
-                        onTileDraw(tile);
-                      } else {
-                        alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                      }
-                    }}
-                    className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
-                  >
-                    🎲 {t.fichaAleatoria || 'Aleatoria'}
-                  </button>
+                  </div>
                 </div>
-              </div>
-  
-              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-                <div className="flex items-center gap-2 mb-2">
-                  <GiBrickWall className="text-red-400 text-xl" />
-                  <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+
+                {/* Eliminar ficha */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiBrickWall className="text-red-400 text-xl" />
+                    <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+                      <button
+                        key={color}
+                        onClick={() => {
+                            const removed = removeRune(color);
+                            if (removed) showTileToast(removed, 'remove');
+                            else alert(`${t.noTilesToRemove}`);
+                          }}
+                        className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                      >
+                        {t.colores[color]}
+                      </button>
+                    ))}
+                
+                    {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
                     <button
-                      key={color}
                       onClick={() => {
-                          const removed = removeRune(color);
-                          if (removed) showTileToast(removed, 'remove');
-                          else alert(`${t.noTilesToRemove}`);
-                        }}
-                      className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                        const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'].filter(c => runes[c] > 0);
+                        if (colors.length === 0) {
+                          alert(t.noTilesToRemove || "No hay fichas para eliminar.");
+                          return;
+                        }
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        const removed = removeRune(randomColor);
+                        if (removed && removed.runa) {
+                          showTileToast(removed, 'remove');
+                        }
+                        else {alert(t.noTilesToRemove);}
+                        //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
+                      }}
+                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
                     >
-                      {t.colores[color]}
+                      🎲 {t.removeRandom || 'Aleatoria'}
                     </button>
-                  ))}
-              
-                  {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
-                  <button
-                    onClick={() => {
-                      const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'].filter(c => runes[c] > 0);
-                      if (colors.length === 0) {
-                        alert(t.noTilesToRemove || "No hay fichas para eliminar.");
-                        return;
-                      }
-                      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                      const removed = removeRune(randomColor);
-                      if (removed && removed.runa) {
-                        showTileToast(removed, 'remove');
-                      }
-                      else {alert(t.noTilesToRemove);}
-                      //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
-                    }}
-                    className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
-                  >
-                    🎲 {t.removeRandom || 'Aleatoria'}
-                  </button>
+                  </div>
                 </div>
               </div>
   
