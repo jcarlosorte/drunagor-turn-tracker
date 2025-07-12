@@ -251,230 +251,231 @@ const TopMenu = ({
             transition={{ duration: 0.25 }}
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <GiCardPlay className="text-indigo-400 text-xl" />
-                <span className="font-semibold">{t.cartas}</span>
+            <div className="flex flex-col gap-4 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500">
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiCardPlay className="text-indigo-400 text-xl" />
+                  <span className="font-semibold">{t.cartas}</span>
+                </div>
+        
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => {
+                      const defaultRunes = RUNAS.filter(r => r.cara === 'A');
+                      defaultRunes.forEach(r => onSelectRuneCard(r));
+                    }}
+                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addRunes} ({t.caraA})
+                  </button>
+        
+                  <button
+                    onClick={() => setShowRuneFaceOptions(prev => !prev)}
+                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addRunesCara}
+                  </button>
+        
+                  <button
+                    onClick={() => alert('Funcionalidad de runas especiales próximamente')}
+                    className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.addSpecial}
+                  </button>
+                </div>
+        
+                {showRuneFaceOptions && (
+                  <div className="flex gap-2 flex-wrap mt-2">
+                    {RUNAS.map((card, index) => (
+                      <button
+                        key={`${card.id}-${card.cara}-${index}`}
+                        onClick={() => onSelectRuneCard(card)}
+                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.cara} ({card.cara})
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-      
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => {
-                    const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                    defaultRunes.forEach(r => onSelectRuneCard(r));
-                  }}
-                  className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                >
-                  {t.addRunes} ({t.caraA})
-                </button>
-      
-                <button
-                  onClick={() => setShowRuneFaceOptions(prev => !prev)}
-                  className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                >
-                  {t.addRunesCara}
-                </button>
-      
-                <button
-                  onClick={() => alert('Funcionalidad de runas especiales próximamente')}
-                  className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
-                >
-                  {t.addSpecial}
-                </button>
-              </div>
-      
-              {showRuneFaceOptions && (
-                <div className="flex gap-2 flex-wrap mt-2">
-                  {RUNAS.map((card, index) => (
+  
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiBrickWall className="text-green-300 text-xl" />
+                  <span className="font-semibold">{t.fichas}</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                     <button
-                      key={`${card.id}-${card.cara}-${index}`}
-                      onClick={() => onSelectRuneCard(card)}
-                      className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                      key={color}
+                      onClick={() => {
+                        const tile = drawTileByColor(color);
+                        if (tile && onTileDraw) {
+                          //addRune(color); // del GameContext
+                          onTileDraw(tile);
+                        } else {
+                          alert(`${t.aviso2} ${t.colores[color]}`);
+                        }
+                      }}
+                      className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
                     >
-                      {t.cara} ({card.cara})
+                      {t.colores[color]}
                     </button>
                   ))}
-                </div>
-              )}
-            </div>
-
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <GiBrickWall className="text-green-300 text-xl" />
-                <span className="font-semibold">{t.fichas}</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+  
+                  {/* 🟣 Botón de ficha aleatoria */}
                   <button
-                    key={color}
                     onClick={() => {
-                      const tile = drawTileByColor(color);
+                      const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                      const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                      const tile = drawTileByColor(randomColor);
                       if (tile && onTileDraw) {
-                        //addRune(color); // del GameContext
                         onTileDraw(tile);
                       } else {
-                        alert(`${t.aviso2} ${t.colores[color]}`);
+                        alert(`${t.aviso2} ${t.colores[randomColor]}`);
                       }
                     }}
-                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                    className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
                   >
-                    {t.colores[color]}
+                    🎲 {t.fichaAleatoria || 'Aleatoria'}
                   </button>
-                ))}
-
-                {/* 🟣 Botón de ficha aleatoria */}
-                <button
-                  onClick={() => {
-                    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                    const tile = drawTileByColor(randomColor);
-                    if (tile && onTileDraw) {
-                      onTileDraw(tile);
-                    } else {
-                      alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                    }
-                  }}
-                  className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
-                >
-                  🎲 {t.fichaAleatoria || 'Aleatoria'}
-                </button>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <GiBrickWall className="text-red-400 text-xl" />
-                <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
-                  <button
-                    key={color}
-                    onClick={() => {
-                        const removed = removeRune(color);
-                        if (removed) showTileToast(removed, 'remove');
-                        else alert(`${t.noTilesToRemove}`);
-                      }}
-                    className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
-                  >
-                    {t.colores[color]}
-                  </button>
-                ))}
-            
-                {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
-                <button
-                  onClick={() => {
-                    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'].filter(c => runes[c] > 0);
-                    if (colors.length === 0) {
-                      alert(t.noTilesToRemove || "No hay fichas para eliminar.");
-                      return;
-                    }
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    const removed = removeRune(randomColor);
-                    if (removed && removed.runa) {
-                      showTileToast(removed, 'remove');
-                    }
-                    else {alert(t.noTilesToRemove);}
-                    //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
-                  }}
-                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
-                >
-                  🎲 {t.removeRandom || 'Aleatoria'}
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <GiRuneStone className="text-blue-400 text-xl inline-block" />
-                <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => {
-                    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                    const tile = drawTilePreviewByColor(randomColor);
-                
-                    if (tile) {
-                      showTileToast(tile, 'show');
-                    } else {
-                      alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                    }
-                  }}
-                  className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
-                >
-                  {t.manifestar || 'Manifestar'}
-                </button>
-              </div>
-            </div>
-
-            
-            <div className="mt-4 border-t border-yellow-600 pt-2">
-              <div className="flex items-center gap-2 mb-1">
-                <GiCardDraw className="text-purple-400 text-xl" />
-                <span className="font-semibold text-white">{t.pilas || 'Pilas de runas'}</span>
-              </div>
-            
-              <button
-                disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
-                onClick={addNewPila}
-                className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
-              >
-                ➕ {t.addPila || 'Añadir pila'}
-              </button>
-            
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {pilas.map(pila => (
-                  <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                    <div className="font-bold mb-1">
-                      {t.pila || 'Pila'} 🗃️
-                    </div>
-                    <div className="text-xs text-gray-300 mb-2">
-                      {t.fichas || 'Fichas'}: {pila.tiles.length}
-                    </div>
-                    <div className="flex justify-center">
-                      <button
-                        className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                        onClick={() => {
-                          const tile = removeTileFromPila(pila.id);
-                          if (tile) {
-                            showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
-                          } else {
-                            alert(t.emptyPila || "Pila vacía.");
-                          }
+  
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiBrickWall className="text-red-400 text-xl" />
+                  <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+                    <button
+                      key={color}
+                      onClick={() => {
+                          const removed = removeRune(color);
+                          if (removed) showTileToast(removed, 'remove');
+                          else alert(`${t.noTilesToRemove}`);
                         }}
-                      >
-                        🧱 − {t.devolver || 'Devolver'}
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-
-            
-            <div className="flex justify-center gap-4 mt-2">
-              <button
-                onClick={() => {
-                  resetPlacedRunes(); // Borra las cartas de runa
-                  resetTiles();        // Borra las fichas de runa
-                }}
-                className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
-              >
-                {t.resetRunes || 'Resetear Runas'}
-              </button>
-              <button
-                onClick={() => setIsRunesOpen(false)}
-                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
-              >
-                {t.close}
-              </button>                      
+                      className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                    >
+                      {t.colores[color]}
+                    </button>
+                  ))}
               
-            </div>
+                  {/* ❌ Botón para eliminar una ficha de runa aleatoria */}
+                  <button
+                    onClick={() => {
+                      const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'].filter(c => runes[c] > 0);
+                      if (colors.length === 0) {
+                        alert(t.noTilesToRemove || "No hay fichas para eliminar.");
+                        return;
+                      }
+                      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                      const removed = removeRune(randomColor);
+                      if (removed && removed.runa) {
+                        showTileToast(removed, 'remove');
+                      }
+                      else {alert(t.noTilesToRemove);}
+                      //alert(`${t.removeOneRandom || "Eliminada una ficha de"} ${t.colores[randomColor]}`);
+                    }}
+                    className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded-full"
+                  >
+                    🎲 {t.removeRandom || 'Aleatoria'}
+                  </button>
+                </div>
+              </div>
+  
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex flex-row items-center gap-2 mb-2">
+                  <GiRuneStone className="text-blue-400 text-xl inline-block" />
+                  <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => {
+                      const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                      const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                      const tile = drawTilePreviewByColor(randomColor);
+                  
+                      if (tile) {
+                        showTileToast(tile, 'show');
+                      } else {
+                        alert(`${t.aviso2} ${t.colores[randomColor]}`);
+                      }
+                    }}
+                    className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
+                  >
+                    {t.manifestar || 'Manifestar'}
+                  </button>
+                </div>
+              </div>
+  
+              
+              <div className="mt-4 border-t border-yellow-600 pt-2">
+                <div className="flex items-center gap-2 mb-1">
+                  <GiCardDraw className="text-purple-400 text-xl" />
+                  <span className="font-semibold text-white">{t.pilas || 'Pilas de runas'}</span>
+                </div>
+              
+                <button
+                  disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
+                  onClick={addNewPila}
+                  className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
+                >
+                  ➕ {t.addPila || 'Añadir pila'}
+                </button>
+              
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {pilas.map(pila => (
+                    <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                      <div className="font-bold mb-1">
+                        {t.pila || 'Pila'} 🗃️
+                      </div>
+                      <div className="text-xs text-gray-300 mb-2">
+                        {t.fichas || 'Fichas'}: {pila.tiles.length}
+                      </div>
+                      <div className="flex justify-center">
+                        <button
+                          className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                          onClick={() => {
+                            const tile = removeTileFromPila(pila.id);
+                            if (tile) {
+                              showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
+                            } else {
+                              alert(t.emptyPila || "Pila vacía.");
+                            }
+                          }}
+                        >
+                          🧱 − {t.devolver || 'Devolver'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+  
+  
+              
+              <div className="flex justify-center gap-4 mt-2">
+                <button
+                  onClick={() => {
+                    resetPlacedRunes(); // Borra las cartas de runa
+                    resetTiles();        // Borra las fichas de runa
+                  }}
+                  className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
+                >
+                  {t.resetRunes || 'Resetear Runas'}
+                </button>
+                <button
+                  onClick={() => setIsRunesOpen(false)}
+                  className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+                >
+                  {t.close}
+                </button>                      
+                
+              </div>
 
-            
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
