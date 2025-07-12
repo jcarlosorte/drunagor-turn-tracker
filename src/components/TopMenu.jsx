@@ -420,19 +420,72 @@ const TopMenu = ({
                 </div>
               </div>
 
-              <div className="mt-4 border-t border-yellow-600 pt-2">
-                <div className="flex items-center gap-2 mb-1">
-                  <GiSwapBag className="text-yellow-300 text-xl" />
-                  <span className="font-semibold text-white">
-                    {t.estadoBolsa}
-                  </span>
+
+              <div className="flex flex-col md:flex-row gap-4 mt-4">
+                {/* 📦 Estado de la bolsa */}
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiSwapBag className="text-yellow-300 text-xl" />
+                    <span className="font-semibold text-white">
+                      {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
+                    </span>
+                  </div>
+                  <div className="text-sm text-white">
+                    {t.extraidas}: <b>{usedTiles.length}</b><br />
+                    {t.total}: <b>{availableTiles.length + usedTiles.length}</b>
+                  </div>
                 </div>
               
-                <div className="text-sm text-white ml-1">
-                  {`${usedTiles.length} / ${availableTiles.length + usedTiles.length} ${t.extraidas}`}
+                {/* ❌ Eliminación directa */}
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiTrashCan className="text-red-400 text-xl" />
+                    <span className="font-semibold text-white">
+                      {t.eliminarDirecto}
+                    </span>
+                  </div>
+              
+                  <div className="flex flex-wrap gap-2">
+                    {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
+                      <button
+                        key={color}
+                        onClick={() => {
+                          const candidates = availableTiles.filter(t => t.runa === color);
+                          if (candidates.length === 0) {
+                            alert(`${t.noTilesToRemove} (${t.colores[color]})`);
+                            return;
+                          }
+              
+                          const random = candidates[Math.floor(Math.random() * candidates.length)];
+                          setAvailableTiles(prev => prev.filter(t => t.uuid !== random.uuid));
+                          alert(`${t.eliminada} ${t.colores[color]}`);
+                        }}
+                        className={`${colorMap[color]} text-white text-xs px-2 py-1 rounded-full`}
+                      >
+                        −1 {t.colores[color]}
+                      </button>
+                    ))}
+              
+                    <button
+                      onClick={() => {
+                        if (availableTiles.length === 0) {
+                          alert(t.noTilesToRemove || "No hay fichas para eliminar.");
+                          return;
+                        }
+              
+                        const randomIndex = Math.floor(Math.random() * availableTiles.length);
+                        const random = availableTiles[randomIndex];
+                        setAvailableTiles(prev => prev.filter((_, i) => i !== randomIndex));
+                        alert(`${t.eliminada} ${t.colores[random.runa]}`);
+                      }}
+                      className="bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full"
+                    >
+                      🎲 {t.removeRandom || 'Aleatoria'}
+                    </button>
+                  </div>
                 </div>
               </div>
-  
+
               
               <div className="mt-4 border-t border-yellow-600 pt-2">
                 <div className="flex items-center gap-2 mb-1">
