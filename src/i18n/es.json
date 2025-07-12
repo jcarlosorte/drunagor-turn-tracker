@@ -238,6 +238,15 @@
       "addScenario": "Añadir Carta de Escenario",
       "addScenarioCara": "Carta de Escenario por Cara",
       "gestionPilas": "Gestión de Pilas de Runas",
+
+      "estadoBolsa": "Estado de la Bolsa de Runas",
+      "extraidas": "extraídas",
+      "addPila": "Añadir Pila de Runas",
+      "tamano": "Tamaño de la Pila",
+      "pila": "Pila",
+      "devolver": "Retirar Runa",
+      "emptyPila": "Pila vacía.",
+      
       "cara": "Cara",
       "caraA": "Cara A",
       "caraB": "Cara B",
