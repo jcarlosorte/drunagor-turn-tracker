@@ -563,6 +563,33 @@ const TopMenu = ({
             transition={{ duration: 0.25 }}
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
+
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2">
+                <GiDaemonSkull className="text-red-400 text-xl" />
+                <span className="font-semibold">{t.monstruoEscenario || 'Monstruo de Escenario'}</span>
+              </div>
+              
+              <div className="flex flex-wrap gap-2">
+                {ENEMIES.filter(e => e.categoria === "escenario").map(monstruo => (
+                  <button
+                    key={monstruo.id}
+                    className={`text-xs px-2 py-1 rounded ${scenarioMonster?.id === monstruo.id ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}`}
+                    onClick={() => setScenarioMonster(monstruo)}
+                  >
+                    {translations.enemies?.[monstruo.id] || monstruo.id}
+                  </button>
+                ))}
+              </div>
+            
+              {scenarioMonster && (
+                <div className="mt-2 text-xs text-gray-300">
+                  ✅ {t.monstruoSeleccionado || 'Seleccionado'}: <strong>{translations.enemies?.[scenarioMonster.id] || scenarioMonster.id}</strong>
+                </div>
+              )}
+            </div>
+
+            
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
                 <GiVillage className="text-yellow-300 text-xl" />
@@ -577,6 +604,7 @@ const TopMenu = ({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    disabled={!scenarioMonster}
                     onClick={() => {
                       const carta = INCURSION.find(c => c.cara === 'A');
                       if (carta) onSelectRuneCard(carta);
@@ -587,6 +615,7 @@ const TopMenu = ({
                   </button>
       
                   <button
+                    disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
                     className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                   >
@@ -616,6 +645,7 @@ const TopMenu = ({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    disabled={!scenarioMonster}
                     onClick={() => {
                       const carta = DEFENSA.find(c => c.cara === 'A');
                       if (carta) onSelectRuneCard(carta);
@@ -626,6 +656,7 @@ const TopMenu = ({
                   </button>
       
                   <button
+                    disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
                     className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                   >
