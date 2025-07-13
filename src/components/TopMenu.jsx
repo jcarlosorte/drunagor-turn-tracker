@@ -571,7 +571,7 @@ const TopMenu = ({
               </div>
               
               <div className="flex flex-wrap gap-2 justify-start">
-                {ENEMIES.filter(e => e.categoria === "escenario").map(monstruo => {
+                {ENEMIES.filter(e => e.color === "escenario").map(monstruo => {
                   const selected = scenarioMonster?.id === monstruo.id;
                   return (
                     <div
