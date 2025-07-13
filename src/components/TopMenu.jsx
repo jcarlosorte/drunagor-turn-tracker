@@ -570,16 +570,28 @@ const TopMenu = ({
                 <span className="font-semibold">{t.monstruoEscenario || 'Monstruo de Escenario'}</span>
               </div>
               
-              <div className="flex flex-wrap gap-2">
-                {ENEMIES.filter(e => e.categoria === "escenario").map(monstruo => (
-                  <button
-                    key={monstruo.id}
-                    className={`text-xs px-2 py-1 rounded ${scenarioMonster?.id === monstruo.id ? 'bg-green-600' : 'bg-gray-700 hover:bg-gray-600'}`}
-                    onClick={() => setScenarioMonster(monstruo)}
-                  >
-                    {translations.enemies?.[monstruo.id] || monstruo.id}
-                  </button>
-                ))}
+              <div className="flex flex-wrap gap-2 justify-start">
+                {ENEMIES.filter(e => e.categoria === "escenario").map(monstruo => {
+                  const selected = scenarioMonster?.id === monstruo.id;
+                  return (
+                    <div
+                      key={monstruo.id}
+                      onClick={() => setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo)}
+                      className={`relative w-24 h-24 rounded border-2 cursor-pointer transition-transform transform hover:scale-105
+                        ${selected ? 'border-green-500 ring-2 ring-green-300' : 'border-gray-600'}
+                      `}
+                    >
+                      <img
+                        src={monstruo.imagen}
+                        alt={monstruo.id}
+                        className="object-cover w-full h-full rounded"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-xs text-white text-center px-1 py-0.5">
+                        {translations.enemies?.[monstruo.id] || monstruo.id}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             
               {scenarioMonster && (
@@ -609,7 +621,9 @@ const TopMenu = ({
                       const carta = INCURSION.find(c => c.cara === 'A');
                       if (carta) onSelectRuneCard(carta);
                     }}
-                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                    `}
                   >
                     {t.addScenario} ({t.caraA})
                   </button>
@@ -617,7 +631,9 @@ const TopMenu = ({
                   <button
                     disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
-                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                    `}
                   >
                     {t.addScenarioCara}
                   </button>
@@ -650,7 +666,9 @@ const TopMenu = ({
                       const carta = DEFENSA.find(c => c.cara === 'A');
                       if (carta) onSelectRuneCard(carta);
                     }}
-                    className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                    `}
                   >
                     {t.addScenario} ({t.caraA})
                   </button>
@@ -658,7 +676,9 @@ const TopMenu = ({
                   <button
                     disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
-                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                    `}
                   >
                     {t.addScenarioCara}
                   </button>
