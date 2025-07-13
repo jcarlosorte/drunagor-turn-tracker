@@ -134,8 +134,13 @@
       "overlord": "Overlord"
     },
     "escenario": {
-      "dark_vampire": "Shadow Vampire Offspring",
-      "executioner": "Drifter Apparition",
+      "dark_vampire": "Shadow Vampire Spawn",
+      "dark_vampire_scenario": "Murderous Apparition",
+      "executioner_scenario": "Drifter Apparition",
+      "shadow_cultist_scenario": "Mournful Apparition",
+      "shadow_knight_scenario": "Manifestation of Wrath",
+      "abomination_scenario": "Torment of Envy",
+      "shadow_knight_scenario2": "Torment of Grief"
       }
   },
   "roles": {
