@@ -106,6 +106,14 @@ const TopMenu = ({
       [pilaId]: nuevoCodigo.slice(0, 5)
     }));
   };
+
+  const monstruosUnicos = Array.from(
+    new Map(
+      ENEMIES
+        .filter(e => e.categoria === "escenario")
+        .map(m => [m.id, m])
+    ).values()
+  );
   
   return (
     <>
@@ -571,7 +579,7 @@ const TopMenu = ({
               </div>
               
               <div className="flex flex-wrap gap-2 justify-start">
-                {ENEMIES.filter(e => e.color === "escenario").map(monstruo => {
+                {monstruosUnicos.map(monstruo => {
                   const selected = scenarioMonster?.id === monstruo.id;
                   return (
                     <div
