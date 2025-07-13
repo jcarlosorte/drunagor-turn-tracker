@@ -110,7 +110,7 @@ const TopMenu = ({
   const monstruosUnicos = Array.from(
     new Map(
       ENEMIES
-        .filter(e => e.categoria === "escenario")
+        .filter(e => e.scenario === "escenario")
         .map(m => [m.id, m])
     ).values()
   );
@@ -595,7 +595,7 @@ const TopMenu = ({
                         className="object-cover w-full h-full rounded"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-xs text-white text-center px-1 py-0.5">
-                        {translations.enemies?.[monstruo.id] || monstruo.id}
+                        {translations.enemies.escenario?.[monstruo.id] || monstruo.id}
                       </div>
                     </div>
                   );
