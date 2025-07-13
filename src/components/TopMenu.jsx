@@ -208,7 +208,7 @@ const TopMenu = ({
                 <MdAddCircleOutline className="text-purple-400 text-xl" />
                 <span className="font-semibold">{t.addManualEnemy || 'Enemigos manuales'}</span>
               </div>
-              <div className="grid grid-cols-3 sm:grid-cols-8 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-9 gap-2">
                 {[
                   { key: 'esbirro', label: t.addMinionEnemies, color: 'text-cyan-300' },
                   { key: 'blanco', label: t.addWhiteEnemies, color: 'text-white' },
@@ -218,6 +218,7 @@ const TopMenu = ({
                   { key: 'overlord', label: t.selectOverlord, color: 'text-red-400' },
                   { key: 'jefe', label: t.selectBosses, color: 'text-purple-400' },
                   { key: 'hero', label: t.selectHeroFall, color: 'text-orange-400' },
+                  { key: 'escenario', label: t.selectScenario, color: 'text-cyan-600' },
                 ].map(({ key, label, color }) => (
                   <React.Fragment key={key}>
                     <button
