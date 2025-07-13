@@ -132,7 +132,11 @@
       "jefe": "Boss",
       "hero": "Corrupted Hero",
       "overlord": "Overlord"
-    }
+    },
+    "escenario": {
+      "dark_vampire": "Shadow Vampire Offspring",
+      "executioner": "Wandering Apparition",
+      }
   },
   "roles": {
     "controlador": "Controller",
