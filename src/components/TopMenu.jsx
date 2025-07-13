@@ -631,7 +631,7 @@ const TopMenu = ({
                   <button
                     disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
-                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                    className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
                       ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
                     `}
                   >
@@ -676,7 +676,7 @@ const TopMenu = ({
                   <button
                     disabled={!scenarioMonster}
                     onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
-                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                    className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
                       ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
                     `}
                   >
