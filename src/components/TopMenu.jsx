@@ -575,7 +575,7 @@ const TopMenu = ({
             <div className="bg-gray-800 rounded-lg p-3 shadow-md">
               <div className="flex items-center gap-2 mb-2">
                 <GiDaemonSkull className="text-red-400 text-xl" />
-                <span className="font-semibold">{t.monstruoEscenario || 'Monstruo de Escenario'}</span>
+                <span className="font-semibold">{t.monstruoEscenario}</span>
               </div>
               
               <div className="flex flex-wrap gap-2 justify-start">
@@ -604,7 +604,7 @@ const TopMenu = ({
             
               {scenarioMonster && (
                 <div className="mt-2 text-xs text-gray-300">
-                  ✅ {t.monstruoSeleccionado || 'Seleccionado'}: <strong>{translations.enemies?.[scenarioMonster.id] || scenarioMonster.id}</strong>
+                  ✅ {t.monstruoSeleccionado}: <strong>{translations.enemies.escenario?.[scenarioMonster.id] || scenarioMonster.id}</strong>
                 </div>
               )}
             </div>
