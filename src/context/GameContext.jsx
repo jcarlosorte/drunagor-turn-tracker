@@ -29,6 +29,7 @@ export const GameProvider = ({ children }) => {
   );
   const [tileWarning, setTileWarning] = useState(null);
   const [usedTiles, setUsedTiles] = useState([]);
+  const [scenarioMonster, setScenarioMonster] = useState(null);
     
   const addRune = (color) => {
     
@@ -251,7 +252,9 @@ export const GameProvider = ({ children }) => {
         tileWarning, 
         setTileWarning,
         deleteAvailableTileByColor,
-        deleteAvailableTileRandom 
+        deleteAvailableTileRandom,
+        scenarioMonster,
+        setScenarioMonster
       }}
     >
       {children}
