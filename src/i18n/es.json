@@ -132,6 +132,10 @@
       "jefe": "Jefe",
       "hero": "Héroe Corrupto",
       "overlord": "Señor Supremo"
+      },
+    "escenario": {
+      "dark_vampire": "Vástago de Vampiro Sombrío",
+      "executioner": "Aparición Errante",
       }
   },
   "roles": {
