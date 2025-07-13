@@ -82,6 +82,8 @@ const InitTracker = () => {
   const { executedRunes, setExecutedRunes } = useInitRunes();
   const [warningMessage, setWarningMessage] = useState(null);
   const [overhealedEnemies, setOverhealedEnemies] = useState(new Set());
+  const [scenarioMonster, setScenarioMonster] = useState(null);
+  const scenarioEnemies = ENEMIES.filter(e => e.categoria === 'escenario');
 
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
