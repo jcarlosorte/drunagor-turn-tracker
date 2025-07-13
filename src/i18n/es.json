@@ -135,7 +135,12 @@
       },
     "escenario": {
       "dark_vampire": "Vástago de Vampiro Sombrío",
-      "executioner": "Aparición Errante",
+      "dark_vampire_scenario": "Aparición Asesina",
+      "executioner_scenario": "Aparición Errante",
+      "shadow_cultist_scenario": "Aparición Plañidera",
+      "shadow_knight_scenario": "Manifestación de la Ira",
+      "abomination_scenario": "Tormento de Envidia",
+      "shadow_knight_scenario2": "Tormento de Pena"
       }
   },
   "roles": {
