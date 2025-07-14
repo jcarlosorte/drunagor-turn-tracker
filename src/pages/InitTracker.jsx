@@ -1196,7 +1196,7 @@ const InitTracker = () => {
                       return (
                         <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
                           <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
-                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId, sampleEnemy.color)}</div>
+                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId, manualSelector.color)}</div>
                     
                           {Object.entries(categories).map(([categoria, variants]) => (
                             <div key={categoria} className="w-full mb-2">
