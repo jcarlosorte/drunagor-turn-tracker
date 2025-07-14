@@ -914,14 +914,14 @@ const InitTracker = () => {
   
                 {tipo === 'defensa' && (
                   <>
-                    <div className="text-xs text-white text-center font-bold">{accion} {rune.num}</div>
-                    <div className="text-xs text-white text-center">{cartas}</div>
+                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
+                    <div className="text-xs text-white text-center">{nombre}</div>
                   </>
                 )}
   
                 {tipo === 'incursion' && (
                   <>
-                    <div className="text-xs text-white text-center font-bold">{accion}</div>
+                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
                 )}
