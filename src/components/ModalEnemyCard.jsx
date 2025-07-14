@@ -233,7 +233,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   };
   
   const getEnemyName = () => {
-    if (categoria === 'escenario') {
+    if (color === 'escenario') {
       return translations.enemies?.escenario?.[id];
     }
     return translations.enemies?.[id];
