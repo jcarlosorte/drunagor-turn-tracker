@@ -13,6 +13,8 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
     green: 'bg-green-700 text-white',
     comandante: 'bg-yellow-600 text-black',
     purple: 'bg-purple-500 text-white',
+   escenario: 'bg-cyan-600 text-white',
+   esbirro: 'bg-cyan-300 text-white',
   };
 
   const iconColorClasses = {
@@ -24,12 +26,16 @@ export default function AnimatedEnemyToast({ enemyData, t }) {
     green: 'text-green-400',
     comandante: 'text-yellow-400',
     purple: 'text-purple-400',
+   escenario: 'text-cyan-600',
+   esbirro: 'text-cyan-300',
   };
 
   const bgClass = bgClasses[enemyData.color] || 'bg-black text-white';
   const iconClass = iconColorClasses[enemyData.color] || 'text-white';
 
-  const name = t?.enemies?.[enemyData.id] ;
+  const name = enemyData.color === 'escenario'
+   ? t?.enemies?.escenario?.[enemyData.id] || enemyData.id
+   : t?.enemies?.[enemyData.id] || enemyData.id;
   const life = enemyData.vida ;
   const category = t?.enemies?.categoria[enemyData.categoria] ;
   const com = t?.trackerSelect?.comportamientos[enemyData.comportamiento] ;
