@@ -890,14 +890,9 @@ const InitTracker = () => {
   
       const shouldShowIncursionContent = tipo === 'incursion' && (!caraB && totalEnemies > 0);
   
-      useEffect(() => {
-        if (caraB && tipo === 'incursion' && rune.accion === 'Manifiesta') {
-          manifestTile();
-        }
-      }, [caraB]);
   
       return (
-        <div className={`w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
+        <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             <div className="flex justify-center mb-1 text-white font-bold">
               {title}
@@ -907,8 +902,8 @@ const InitTracker = () => {
               <>
                 {tipo === 'runa' && (
                   <>
-                    <div className="text-xs text-white text-center font-bold">{ts[rune.accion]} {rune.numRunas || ''}</div>
-                    <div className="text-xs text-white text-center">{ts.rune}</div>
+                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
+                    <div className="text-xs text-white text-center">{nombre}</div>
                   </>
                 )}
   
