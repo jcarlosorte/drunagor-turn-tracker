@@ -249,7 +249,6 @@
       "addScenario": "Añadir Carta de Escenario",
       "addScenarioCara": "Carta de Escenario por Cara",
       "gestionPilas": "Gestión de Pilas de Runas",
-
       "estadoBolsa": "Estado de la Bolsa de Runas",
       "extraidas": "Extraídas",
       "addPila": "Añadir Pila de Runas",
@@ -262,11 +261,13 @@
       "codigoPila": "Pieza de tablero",
       "monstruoSeleccionado": "Seleccionado",
       "monstruoEscenario": "Monstruo de Escenario",
+
+      "Manifiesta": "Manifiesta",
       
       "cara": "Cara",
       "caraA": "Cara A",
       "caraB": "Cara B",
-      "Roba": "roba",
+      "Roba": "Roba",
       "applyEffect": "Aplicar efecto",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
