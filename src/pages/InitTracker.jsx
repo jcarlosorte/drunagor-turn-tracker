@@ -880,39 +880,78 @@ const InitTracker = () => {
       incursion: 'border-red-400'
     };
   
-    const renderSide = (caraB = false) => (
-      <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
-        <div className={`p-2 rounded-lg border-2 border-indigo-400 shadow-md ${caraB ? 'bg-indigo-900' : 'bg-indigo-700'}`}>
-          <div className="flex justify-center mb-1">
-            <GiAbstract065 className="text-yellow-300 text-xl" />{ts[rune.id]}
-          </div>
-          <div className="text-xs text-white text-center font-bold">{ti[rune.accion]} {rune.numRunas || ''}</div>
-          <div className="text-xs text-white text-center">{ti.rune}</div>
-          <div className="text-xs text-white text-center">{ts[rune.nombre]}</div>
-          <div className="flex justify-center mb-1">
-            {caraB ? <RiArrowTurnForwardLine className="text-white text-xl" /> : <RiArrowTurnBackLine className="text-white text-xl" />}
-          </div>
-          <div className="text-[0.6rem] italic text-indigo-100 text-center">{ti.cara} {rune.cara}</div>
+    const renderSide = (caraB = false) => {
+      const bgColor = bgColorMap[tipo] || 'bg-indigo-700';
+      const borderColor = borderColorMap[tipo] || 'border-indigo-400';
+      const title = ts[rune.id] || rune.id;
+      const accion = ts[rune.accion] || rune.accion;
+      const nombre = ts[rune.nombre]?.replace('{X}', replacementValue) || rune.nombre;
+      const cartas = ts[rune.cartas] || rune.cartas;
   
-          {/* Checkbox */}
-          <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
-            <input
-              type="checkbox"
-              checked={applyEffect}
-              onChange={() => toggleRuneEffect(rune.uuid)}
-              className="mr-1"
-            />
-            <label>{ti.applyEffect || 'Aplicar efecto'}</label>
+      const shouldShowIncursionContent = tipo === 'incursion' && (!caraB && totalEnemies > 0);
+  
+      useEffect(() => {
+        if (caraB && tipo === 'incursion' && rune.accion === 'Manifiesta') {
+          manifestTile();
+        }
+      }, [caraB]);
+  
+      return (
+        <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
+          <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
+            <div className="flex justify-center mb-1 text-white font-bold">
+              <GiAbstract065 className="text-yellow-300 text-xl mr-1" />{title}
+            </div>
+  
+            {shouldShowContent && !shouldShowIncursionContent && (
+              <>
+                {tipo === 'runa' && (
+                  <>
+                    <div className="text-xs text-white text-center font-bold">{ts[rune.accion]} {rune.numRunas || ''}</div>
+                    <div className="text-xs text-white text-center">{ts.rune}</div>
+                  </>
+                )}
+  
+                {tipo === 'defensa' && (
+                  <>
+                    <div className="text-xs text-white text-center font-bold">{accion} {rune.num}</div>
+                    <div className="text-xs text-white text-center">{cartas}</div>
+                  </>
+                )}
+  
+                {tipo === 'incursion' && (
+                  <>
+                    <div className="text-xs text-white text-center font-bold">{accion}</div>
+                    <div className="text-xs text-white text-center">{nombre}</div>
+                  </>
+                )}
+              </>
+            )}
+  
+            <div className="flex justify-center mb-1">
+              {caraB ? <RiArrowTurnForwardLine className="text-white text-xl" /> : <RiArrowTurnBackLine className="text-white text-xl" />}
+            </div>
+            <div className="text-[0.6rem] italic text-indigo-100 text-center">{ts.cara} {rune.cara}</div>
+  
+            <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
+              <input
+                type="checkbox"
+                checked={applyEffect}
+                onChange={() => toggleRuneEffect(rune.uuid)}
+                className="mr-1"
+              />
+              <label>{ts.applyEffect || 'Aplicar efecto'}</label>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    };
   
     return (
       <div className="relative w-full max-w-[140px] min-h-[50px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
-          {renderSide(false)}  {/* Cara A */}
-          {renderSide(true)}   {/* Cara B */}
+          {renderSide(false)}
+          {renderSide(true)}
         </div>
   
         <button
