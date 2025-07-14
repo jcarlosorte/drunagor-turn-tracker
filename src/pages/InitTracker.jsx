@@ -943,7 +943,7 @@ const InitTracker = () => {
     };
   
     return (
-      <div className="relative w-full max-w-[140px] min-h-[50px] perspective hover:scale-105">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[140px] perspective hover:scale-105">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
           {renderSide(false)}
           {renderSide(true)}
