@@ -892,7 +892,7 @@ const InitTracker = () => {
   
   
       return (
-        <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
+        <div className={`backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             <div className="flex justify-center mb-1 text-white font-bold">
               {title}
