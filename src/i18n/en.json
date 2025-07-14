@@ -291,10 +291,15 @@
     }
   },
   "scenarioCard": {
-    "runa1": "Oscuridad de Caza",
-    "defen1": "Defensa de la Aldea",
-    "incru1": "Incrusión de Monstruos",
-  },
+      "runa1": "Darkness Hunting",
+      "Runa": "Rune",
+      "defen1": "Settlement Defense",
+      "Defen_1": "Event Card <<Villager in Distress>> and Resolve it.",
+      "Defen_2": "Event Card <<Wandering Monsters>> and Resolve it.",
+      "incru1": "Monster Raid",
+      "Incru_1": "Rune and summon the {x} minions. Use the revealed Rune as a Spawning Point.",
+      "Incru_2": "Rune and summon the {x} minions. Use the revealed Rune as a Spawning Point."
+    },
   "condiciones_t": {
     "none": "",
     "ABSORCION": "ABSORPTION",
