@@ -64,6 +64,7 @@ const InitTracker = () => {
   const tc = translations.enemies?.categoria || {};
   const tb = translations.trackerSelect?.comportamientos || {};
   const ta = translations.cartas_ataque || {};
+  const ts = translations.scenarioCard || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -854,6 +855,7 @@ const InitTracker = () => {
     }
 
   const RuneCard = ({ rune, onRemove, flipped }) => {
+    const tipo = rune.tipo;
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
   
@@ -861,7 +863,7 @@ const InitTracker = () => {
       <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
         <div className={`p-2 rounded-lg border-2 border-indigo-400 shadow-md ${caraB ? 'bg-indigo-900' : 'bg-indigo-700'}`}>
           <div className="flex justify-center mb-1">
-            <GiAbstract065 className="text-yellow-300 text-xl" />
+            <GiAbstract065 className="text-yellow-300 text-xl" />{ts[rune.id]}
           </div>
           <div className="text-xs text-white text-center font-bold">{ti[rune.accion]} {rune.numRunas || ''}</div>
           <div className="text-xs text-white text-center">{ti.rune}</div>
