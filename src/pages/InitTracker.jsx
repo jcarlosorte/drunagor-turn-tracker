@@ -900,7 +900,7 @@ const InitTracker = () => {
         <div className={`w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             <div className="flex justify-center mb-1 text-white font-bold">
-              <GiAbstract065 className="text-yellow-300 text-xl mr-1" />{title}
+              {title}
             </div>
   
             {shouldShowContent && !shouldShowIncursionContent && (
