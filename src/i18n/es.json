@@ -293,8 +293,13 @@
     },
     "scenarioCard": {
       "runa1": "Oscuridad de Caza",
+      "Runa": "Runa",
       "defen1": "Defensa de la Aldea",
+      "Defen_1": "Carta de Evento <<Aldeano en Apuros>> y Resuélvela.",
+      "Defen_2": "Carta de Evento <<Monstruos Errantes>> y Resuélvela.",
       "incru1": "Incrusión de Monstruos",
+      "Incru_1": "Runa e invoca el {x} esbirros. Usa la Runa revelada como punto de aparición.",
+      "Incru_2": "Runa e invoca el {x} esbirros. Usa la Runa revelada como punto de aparición."
     },
     "condiciones_t": {
       "none": "",
