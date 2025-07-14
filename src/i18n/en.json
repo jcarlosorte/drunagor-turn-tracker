@@ -290,6 +290,11 @@
       "azul": "Blue"
     }
   },
+  "scenarioCard": {
+    "runa1": "Oscuridad de Caza",
+    "defen1": "Defensa de la Aldea",
+    "incru1": "Incrusión de Monstruos",
+  },
   "condiciones_t": {
     "none": "",
     "ABSORCION": "ABSORPTION",
