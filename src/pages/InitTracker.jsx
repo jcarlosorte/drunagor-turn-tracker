@@ -847,7 +847,7 @@ const InitTracker = () => {
 
   const maxCharactersInAnySlot = Math.max(...countsPerIndex);
 
-  let slotHeightClass = 'h-[22rem]'; // Base height (ej. 192px o 48rem)
+  let slotHeightClass = 'h-[34rem]'; // Base height (ej. 192px o 48rem)
     if (maxCharactersInAnySlot >= 5) {
         slotHeightClass = 'h-[40rem]'; // Taller height (ej. 256px o 64rem)
     } else if (maxCharactersInAnySlot >= 3) {
@@ -859,7 +859,26 @@ const InitTracker = () => {
   const RuneCard = ({ rune, onRemove, flipped }) => {
     const tipo = rune.tipo;
     const { toggleRuneEffect } = useInitRunes();
+    const { manifestTile } = useGame();
     const applyEffect = rune.applyEffect !== false;
+
+    const totalEnemies = placedEnemies.length;
+    const totalHeroes = trackerData.placedHeroes?.length || 0;
+
+    const shouldShowContent = tipo !== 'incursion' || totalEnemies === 0;
+    const replacementValue = totalHeroes <= 2 ? '2' : totalHeroes <= 4 ? '3' : '4';
+
+    const bgColorMap = {
+      runa: 'bg-indigo-700',
+      defensa: 'bg-green-700',
+      incursion: 'bg-red-700'
+    };
+
+    const borderColorMap = {
+      runa: 'border-indigo-400',
+      defensa: 'border-green-400',
+      incursion: 'border-red-400'
+    };
   
     const renderSide = (caraB = false) => (
       <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
@@ -869,6 +888,7 @@ const InitTracker = () => {
           </div>
           <div className="text-xs text-white text-center font-bold">{ti[rune.accion]} {rune.numRunas || ''}</div>
           <div className="text-xs text-white text-center">{ti.rune}</div>
+          <div className="text-xs text-white text-center">{ts[rune.nombre]}</div>
           <div className="flex justify-center mb-1">
             {caraB ? <RiArrowTurnForwardLine className="text-white text-xl" /> : <RiArrowTurnBackLine className="text-white text-xl" />}
           </div>
