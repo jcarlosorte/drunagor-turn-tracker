@@ -500,6 +500,7 @@ const InitTracker = () => {
     veterano: 'glow-veterano',
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
+    esbirro: 'glow-escenario',
     escenario: 'glow-escenario',
   };
 
