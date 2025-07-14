@@ -196,11 +196,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       acciones.push(actual);
     }
 
-    const getEnemyName = (ids, cat) => {
-      if (cat === 'escenario') {
-        return translations.enemies?.escenario?.[ids];
+    const getEnemyName = () => {
+      if (categoria === 'escenario') {
+        return translations.enemies?.escenario?.[id];
       }
-      return translations.enemies?.[ids];
+      return translations.enemies?.[id];
     };
     
     return (
@@ -266,7 +266,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Nombre como título */}
           <h2 className={`text-2xl font-bold text-center text-white px-1 py-0 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
-            {getEnemyName(id, categoria)}
+            {getEnemyName()}
           </h2>
 
           {/* Categoría y comportamiento */}
