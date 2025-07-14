@@ -195,7 +195,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     if (actual.length > 0) {
       acciones.push(actual);
     }
-  
+
+    const getEnemyName = (ids) => {
+      if (categoria === 'escenario') {
+        return translations.enemies?.escenario?.[ids];
+      }
+      return translations.enemies?.[ids];
+    };
+    
     return (
       <div className="flex items-start gap-2 mt-1">
         <GiRunningNinja className="text-green-700 mt-1 text-2xl cursor-help" title={ti.capacidades || ''} />
@@ -259,7 +266,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Nombre como título */}
           <h2 className={`text-2xl font-bold text-center text-white px-1 py-0 rounded ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
-            {te[id]}
+            {getEnemyName(id)}
           </h2>
 
           {/* Categoría y comportamiento */}
