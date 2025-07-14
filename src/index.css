@@ -46,6 +46,10 @@ body {
   margin: 2 !important;
 }
 
+.glow-escenario {
+  text-shadow: 0 0 2px #0000ff, 0 0 4px #0000ff, 0 0 6px #0000ff;
+}
+
 .glow-bisono {
   text-shadow: 0 0 2px #00ffff, 0 0 4px #00ffff, 0 0 6px #00ffff;
 }
@@ -88,6 +92,10 @@ body {
 
 .border-cyan {
   border-color: cyan;
+}
+
+.border-blue {
+  border-color: blue;
 }
 
 .enemy-text {
