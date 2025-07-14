@@ -1,4 +1,4 @@
 export const INCURSION = [
-  { id: "incru1", cara: "A", posicion: "arriba", nombre: "Incru_1", accion: "Roba", numRunas: 1  },
-  { id: "incru1", cara: "B", posicion: "arriba", nombre: "Incru_2", accion: "Roba", numRunas: 2  }
+  { id: "incru1", cara: "A", posicion: "arriba", nombre: "Incru_1", accion: "Manifiesta", numRunas: 1, tipo: "incrusion"  },
+  { id: "incru1", cara: "B", posicion: "arriba", nombre: "Incru_2", accion: "Manifiesta", numRunas: 2, tipo: "incrusion"  }
 ];
