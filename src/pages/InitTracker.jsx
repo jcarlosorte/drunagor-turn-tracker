@@ -1202,15 +1202,25 @@ const InitTracker = () => {
                             <div key={categoria} className="w-full mb-2">
                               {specialCategories.includes(categoria) ? (
                                 <div className="flex flex-wrap justify-center gap-1">
-                                  {variants.map(variant => (
-                                    <button
-                                      key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
-                                      className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
-                                      onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
-                                    >
-                                      {ti.addEnemy}
-                                    </button>
-                                  ))}
+                                  {variants
+                                    .filter((variant, index, self) =>
+                                      index === self.findIndex(v =>
+                                        v.id === variant.id &&
+                                        v.categoria === variant.categoria &&
+                                        v.comportamiento === variant.comportamiento &&
+                                        (v.cara === 'A' || !v.cara)
+                                      )
+                                    )
+                                    .filter(v => v.cara === 'A' || !v.cara)
+                                    .map(variant => (
+                                      <button
+                                        key={`${variant.id}-${variant.categoria}-${variant.comportamiento}`}
+                                        className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded"
+                                        onClick={() => handleManualEnemyAdd(variant.id, variant.comportamiento, variant.categoria)}
+                                      >
+                                        {ti.addEnemy}
+                                      </button>
+                                    ))}
                                 </div>
                               ) : (
                                 <>
