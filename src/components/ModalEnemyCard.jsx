@@ -74,15 +74,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     comandante: 'border-dorado',
     hero: 'border-dorado',
     jefe: 'border-morado',
+    escenario: 'border-blue',
   };
 
   const bgColorMap = {
+    esbirro: 'bg-cyan-300',
     blanco: 'bg-white',
     gris: 'bg-gray-500',
     negro: 'bg-black',
     comandante: 'bg-yellow-400',
     hero: 'bg-orange-400',
     jefe: 'bg-purple-400',
+    escenario: 'bg-cyan-600',
   };
   
   const textBgColorMap = {
@@ -92,6 +95,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     comandante: 'bg-yellow-400/70',
     hero: 'bg-orange-400/70',
     jefe: 'bg-purple-700/70',
+    escenario: 'bg-cyan-300/70',
   };
 
   const categoryGlowMap = {
@@ -107,6 +111,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     veterano: 'glow-veterano',
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
+    escenario: 'glow-escenario',
   };
 
   const handleVidaChange = (delta) => {
