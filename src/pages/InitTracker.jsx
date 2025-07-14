@@ -887,12 +887,18 @@ const InitTracker = () => {
       const accion = ts[rune.accion] || rune.accion;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
+      const posicion = rune.posicion;
   
       const shouldShowIncursionContent = tipo === 'incursion' && (!caraB && totalEnemies > 0);
   
   
       return (
-        <div className={`backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
+        <div
+          className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${
+            caraB ? 'rotate-y-180' : ''
+          }`}
+        >
+     
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             <div className="flex justify-center mb-1 text-white font-bold">
               {title}
