@@ -98,6 +98,10 @@ body {
   border-color: blue;
 }
 
+.border-cyan {
+  border-color: cyan;
+}
+
 .enemy-text {
   display: inline-block;
   max-width: 100%;
