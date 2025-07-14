@@ -885,7 +885,7 @@ const InitTracker = () => {
       const borderColor = borderColorMap[tipo] || 'border-indigo-400';
       const title = ts[rune.id] || rune.id;
       const accion = ts[rune.accion] || rune.accion;
-      const nombre = ts[rune.nombre]?.replace('{X}', replacementValue) || rune.nombre;
+      const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
   
       const shouldShowIncursionContent = tipo === 'incursion' && (!caraB && totalEnemies > 0);
