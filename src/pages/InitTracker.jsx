@@ -440,6 +440,8 @@ const InitTracker = () => {
       posicion: runeCard.posicion, // 'arriba' o 'abajo'
       accion: runeCard.accion,
       numRunas: runeCard.numRunas,
+      tipo: runeCard.tipo,
+      carta: runeCard.carta,
       colorIndex: 10
     };
     placeRune({ rune: newRune });
