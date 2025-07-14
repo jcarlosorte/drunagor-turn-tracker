@@ -500,10 +500,12 @@ const InitTracker = () => {
     veterano: 'glow-veterano',
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
+    escenario: 'glow-escenario',
   };
 
   const borderColorMap = {
     esbirro: 'border-cyan',
+    escenario: 'border-blue',
     blanco: 'border-blanco',
     gris: 'border-gris',
     negro: 'border-negro',
@@ -513,6 +515,7 @@ const InitTracker = () => {
 
   const textBgColorMap = {
     esbirro: 'bg-cyan-300',
+    escenario: 'bg-cyan-600',
     blanco: 'bg-white',
     gris: 'bg-gray-500',
     negro: 'bg-black',
