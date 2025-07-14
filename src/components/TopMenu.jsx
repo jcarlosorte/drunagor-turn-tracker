@@ -121,19 +121,31 @@ const TopMenu = ({
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
         <div className="flex items-center gap-2">
           <button
-            onClick={toggleMenu}
+            onClick={() => {
+              setIsOpen(prev => !prev);
+              setIsRunesOpen(false);
+              setIsScenarioOpen(false);
+            }}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiMinions size={24} />
           </button>
           <button
-            onClick={() => setIsRunesOpen(prev => !prev)}
+            onClick={() => {
+              setIsRunesOpen(prev => !prev);
+              setIsOpen(false);
+              setIsScenarioOpen(false);
+            }}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiRuneStone size={24} />
           </button>
           <button
-            onClick={() => setIsScenarioOpen(prev => !prev)}
+            onClick={() => {
+              setIsScenarioOpen(prev => !prev);
+              setIsOpen(false);
+              setIsRunesOpen(false);
+            }}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiVillage size={24} />
