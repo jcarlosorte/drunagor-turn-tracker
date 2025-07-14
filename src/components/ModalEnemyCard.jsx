@@ -74,6 +74,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     comandante: 'border-dorado',
     hero: 'border-dorado',
     jefe: 'border-morado',
+    esbirro: 'border-cyan',
     escenario: 'border-blue',
   };
 
@@ -95,7 +96,6 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     comandante: 'bg-yellow-400/70',
     hero: 'bg-orange-400/70',
     jefe: 'bg-purple-700/70',
-    escenario: 'bg-cyan-300/70',
   };
 
   const categoryGlowMap = {
@@ -111,6 +111,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     veterano: 'glow-veterano',
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
+    esbirro: 'glow-escenario',
     escenario: 'glow-escenario',
   };
 
