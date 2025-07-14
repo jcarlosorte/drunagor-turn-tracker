@@ -195,13 +195,6 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     if (actual.length > 0) {
       acciones.push(actual);
     }
-
-    const getEnemyName = () => {
-      if (categoria === 'escenario') {
-        return translations.enemies?.escenario?.[id];
-      }
-      return translations.enemies?.[id];
-    };
     
     return (
       <div className="flex items-start gap-2 mt-1">
@@ -237,6 +230,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         </div>
       </div>
     );
+  };
+  
+  const getEnemyName = () => {
+    if (categoria === 'escenario') {
+      return translations.enemies?.escenario?.[id];
+    }
+    return translations.enemies?.[id];
   };
   
   return (
