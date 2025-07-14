@@ -90,7 +90,12 @@ const InitTracker = () => {
   const [onPCConfirm, setOnPCConfirm] = useState(null);
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
-  const getEnemyName = (id) => translations.enemies?.[id] || id;
+  const getEnemyName = (id, color = null) => {
+    if (color === 'escenario') {
+      return translations.enemies?.escenario?.[id] || id;
+    }
+    return translations.enemies?.[id] || id;
+  };
 
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
@@ -214,7 +219,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards(selected.id, uuid);
+        placeCommanderCards(selected, uuid);
       });
       return;
     } else if (selected.categoria === 'overlord') {
@@ -249,7 +254,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del señor supremo:
-        placeOverlordCards(selected.id, uuid);
+        placeOverlordCards(selected, uuid);
         return;
     } else if (selected.categoria === 'hero') {
       
@@ -282,7 +287,7 @@ const InitTracker = () => {
         showToast(enemy);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
-        placeCommanderCards(selected.id, uuid);
+        placeCommanderCards(selected, uuid);
         return;
     }
     
@@ -353,14 +358,16 @@ const InitTracker = () => {
       showToast(enemy);
       placeEnemy({ enemy });
       // 👉 Añadir cartas de ataque del comandante:
-      placeCommanderCards(selected.id, uuid);
+      placeCommanderCards(selected, uuid);
     });
   };
 
-  const placeCommanderCards = (enemyId, commanderUUID, isTurnActivation = false) => {
+  const placeCommanderCards = (enemy, commanderUUID, isTurnActivation = false) => {
+    const enemyId = enemy.id;
+    const enemyColor = enemy.color;
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
-    const nombreCommander = getEnemyName(enemyId);
+    const nombreCommander = getEnemyName(enemyId, enemyColor);
     const nuevas = selected.map(carta => ({
       enemy: {
         uuid: uuidv4(),
@@ -387,10 +394,12 @@ const InitTracker = () => {
     });
   };
 
-  const placeOverlordCards = (enemyId, overlordUUID, isTurnActivation = false) => {
+  const placeOverlordCards = (enemy, overlordUUID, isTurnActivation = false) => {
+    const enemyId = enemy.id;
+    const enemyColor = enemy.color;
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
-    const nombreOverlord = getEnemyName(enemyId);
+    const nombreOverlord = getEnemyName(enemyId, enemyColor);
     const nuevas = selected.map(carta => ({
       enemy: {
         uuid: uuidv4(),
@@ -580,10 +589,10 @@ const InitTracker = () => {
           processedVoragineRef.current.add(current.uuid);
           if (current.categoria === 'overlord') {
             setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
-            placeOverlordCards(current.id, current.uuid, true);
+            placeOverlordCards(current, current.uuid, true);
           } else if (['comandante', 'hero'].includes(current.categoria)) {
             setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
-            placeCommanderCards(current.id, current.uuid, true);
+            placeCommanderCards(current, current.uuid, true);
           }
         }
     
@@ -1020,7 +1029,7 @@ const InitTracker = () => {
                 <EnemyCard
                   uuid={item.enemy.uuid}
                   id={item.enemy.id}
-                  name={getEnemyName(item.enemy.id)}
+                  name={getEnemyName(item.enemy.id, item.enemy.color)}
                   image={item.enemy.imagen}
                   comportamiento={item.enemy.comportamiento}
                   categoria={item.enemy.categoria}
@@ -1183,7 +1192,7 @@ const InitTracker = () => {
                       return (
                         <div key={enemyId} className="bg-gray-800 p-2 rounded-lg flex flex-col items-center">
                           <img src={sampleEnemy.imagen} alt={enemyId} className="w-20 h-20 object-cover mb-2 rounded" />
-                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId)}</div>
+                          <div className="text-sm text-white text-center mb-2">{getEnemyName(enemyId, sampleEnemy.color)}</div>
                     
                           {Object.entries(categories).map(([categoria, variants]) => (
                             <div key={categoria} className="w-full mb-2">
