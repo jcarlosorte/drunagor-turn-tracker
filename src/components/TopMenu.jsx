@@ -37,7 +37,7 @@ const TopMenu = ({
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, setScenarioMonster } = useGame();
-  const { resetPlacedRunes } = useInitRunes();
+  const { placedRunes, resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
@@ -114,7 +114,22 @@ const TopMenu = ({
         .map(m => [m.id, m])
     ).values()
   );
+
+  const handleSelectUniqueCard = (card) => {
+    const tipo = card.tipo;
   
+    // ✅ Comprobar si ya existe una carta de este tipo
+    const yaExiste = placedRunes.some(r => r.rune.tipo === tipo);
+  
+    if (yaExiste) {
+      alert(`Ya hay una carta de tipo ${tipo} en juego. Solo puede haber una.`);
+      return;
+    }
+  
+    // ✅ Si no existe, la añadimos
+    onSelectRuneCard(card);
+  };
+    
   return (
     <>
     <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
@@ -294,7 +309,7 @@ const TopMenu = ({
                     <button
                       onClick={() => {
                         const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                        defaultRunes.forEach(r => onSelectRuneCard(r));
+                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
                       }}
                       className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                     >
@@ -314,7 +329,7 @@ const TopMenu = ({
                       {RUNAS.map((card, index) => (
                         <button
                           key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => onSelectRuneCard(card)}
+                          onClick={() => handleSelectUniqueCard(card)}
                           className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                         >
                           {t.cara} ({card.cara})
@@ -640,7 +655,7 @@ const TopMenu = ({
                     disabled={!scenarioMonster}
                     onClick={() => {
                       const carta = INCURSION.find(c => c.cara === 'A');
-                      if (carta) onSelectRuneCard(carta);
+                      if (carta) handleSelectUniqueCard(carta);
                     }}
                     className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
                       ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
@@ -664,7 +679,7 @@ const TopMenu = ({
                     {INCURSION.map((card, index) => (
                       <button
                         key={`${card.id}-${card.cara}-${index}`}
-                        onClick={() => onSelectRuneCard(card)}
+                        onClick={() => handleSelectUniqueCard(card)}
                         className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                       >
                        {t.cara} ({card.cara})
@@ -685,7 +700,7 @@ const TopMenu = ({
                     disabled={!scenarioMonster}
                     onClick={() => {
                       const carta = DEFENSA.find(c => c.cara === 'A');
-                      if (carta) onSelectRuneCard(carta);
+                      if (carta) handleSelectUniqueCard(carta);
                     }}
                     className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
                       ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
@@ -709,7 +724,7 @@ const TopMenu = ({
                     {DEFENSA.map((card, index) => (
                       <button
                         key={`${card.id}-${card.cara}-${index}`}
-                        onClick={() => onSelectRuneCard(card)}
+                        onClick={() => handleSelectUniqueCard(card)}
                         className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                       >
                         {t.cara} ({card.cara})
