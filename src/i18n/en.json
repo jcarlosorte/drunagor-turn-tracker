@@ -248,7 +248,6 @@
     "addScenario": "Add Scenario Card",
     "addScenarioCara": "Scenario Card by Faces",
     "gestionPilas": "Pile of Runes Management",
-
     "estadoBolsa": "Rune Bag Status",
     "extraidas": "Drawn",
     "addPila": "Add Pile of Runes",
@@ -261,11 +260,13 @@
     "codigoPila": "Map Tile",
     "monstruoSeleccionado": "Selected",
     "monstruoEscenario": "Scenario Monster",
+
+    "Manifiesta": "Manifest",
     
     "cara": "Face",
     "caraA": "Face A",
     "caraB": "Face B",
-    "Roba": "draw",
+    "Roba": "Draw",
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
