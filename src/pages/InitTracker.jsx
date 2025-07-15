@@ -76,7 +76,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -647,7 +647,15 @@ const InitTracker = () => {
           } else if (currentRune.tipo === 'incursion') {
             // 🔹 Incursión → Manifiesta una runa (solo si aplica)
             console.log(`🔥 Incursión: manifestando runa`);
+            const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+            const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+            const tile = drawTilePreviewByColor(randomColor);
             manifestTile(); // llama a la función del GameContext
+            if (tile) {
+              showTileToast(tile, 'show');
+            } else {
+              alert(`${t.aviso2} ${t.colores[randomColor]}`);
+            }
           }
     
           // ✅ Marcar como ejecutada
