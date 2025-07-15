@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
 import { RUNAS } from '@/data/runas';
+import { INCURSION } from '@/data/incursion';
+import { DEFENSA } from '@/data/defensa';
 import { CARTAS_COMANDANTE, CARTAS_OVERLORD } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
