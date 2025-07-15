@@ -651,7 +651,7 @@ const InitTracker = () => {
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               console.log(`🔥 Incursión: manifestando runa`);
-              manifestTile();
+              const tile = manifestTile();
             } else {
               console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
             }
