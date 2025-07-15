@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { FICHAS } from '@/data/fichas';
 import { useLanguage } from '@/context/LanguageContext';
-import TileToast from '@/components/TileToast';
 import { v4 as uuidv4 } from 'uuid';
 
 const GameContext = createContext();
