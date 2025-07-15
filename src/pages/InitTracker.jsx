@@ -654,7 +654,7 @@ const InitTracker = () => {
             if (tile) {
               showTileToast(tile, 'show');
             } else {
-              alert(`${t.aviso2} ${t.colores[randomColor]}`);
+              alert(`${ti.aviso2} ${ti.colores[randomColor]}`);
             }
           }
     
