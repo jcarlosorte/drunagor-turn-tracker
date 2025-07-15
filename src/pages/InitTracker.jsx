@@ -755,7 +755,13 @@ const InitTracker = () => {
       }
   
       if (currentTurnEntity.type === 'rune') {
-        const nueva = RUNAS.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
+        // Detectamos la lista de origen según su tipo
+        let dataSource = RUNAS;
+        if (currentTurnEntity.tipo === 'defensa') dataSource = DEFENSA;
+        if (currentTurnEntity.tipo === 'incursion') dataSource = INCURSION;
+        // Buscar la misma carta pero en la cara opuesta
+        const nueva = dataSource.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
+        
         if (nueva) {
           setPlacedRunes(prev => prev.map(item =>
             item.rune.uuid === currentTurnEntity.uuid
