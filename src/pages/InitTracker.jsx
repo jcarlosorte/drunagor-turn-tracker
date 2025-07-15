@@ -901,19 +901,18 @@ const InitTracker = () => {
     const tipo = rune.tipo;
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
-
+  
     const totalEnemies = placedEnemies.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
-
-    const shouldShowContent = tipo !== 'incursion' || totalEnemies === 0;
+  
     const replacementValue = totalHeroes <= 2 ? '2' : totalHeroes <= 4 ? '3' : '4';
-
+  
     const bgColorMap = {
       runa: 'bg-indigo-700',
       defensa: 'bg-green-700',
       incursion: 'bg-red-700'
     };
-
+  
     const borderColorMap = {
       runa: 'border-indigo-400',
       defensa: 'border-green-400',
@@ -926,54 +925,57 @@ const InitTracker = () => {
       const title = ts[rune.id] || rune.id;
       const accion = ts[rune.accion] || rune.accion;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
-      const cartas = ts[rune.cartas] || rune.cartas;
-      const posicion = rune.posicion;
   
-      const shouldShowIncursionContent = tipo === 'incursion' && (!caraB && totalEnemies > 0);
-  
+      // ✅ Lógica especial para incursión
+      const isIncursion = tipo === 'incursion';
+      const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
   
       return (
-        <div
-          className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${
-            caraB ? 'rotate-y-180' : ''
-          }`}
-        >
-     
+        <div className={`absolute w-full h-full backface-hidden ${caraB ? 'rotate-y-180' : ''}`}>
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
-            <div className="flex justify-center mb-1 text-white font-bold">
-              {title}
-            </div>
+            {/* Título siempre visible */}
+            <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
   
-            {shouldShowContent && !shouldShowIncursionContent && (
+            {/* ✅ Contenido según tipo */}
+            {(!isIncursion || caraB || totalEnemies === 0) && (
               <>
-                {tipo === 'runa' && (
+                {/* Para runas y defensa, siempre se ve */}
+                {(tipo === 'runa' || tipo === 'defensa') && (
                   <>
-                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
+                    <div className="text-xs text-white text-center font-bold">
+                      {accion} {rune.numRunas || ''}
+                    </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
                 )}
   
-                {tipo === 'defensa' && (
+                {/* Para incursión solo se oculta en cara A cuando hay enemigos */}
+                {tipo === 'incursion' && !shouldHideContentIncursion && (
                   <>
-                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
-                    <div className="text-xs text-white text-center">{nombre}</div>
-                  </>
-                )}
-  
-                {tipo === 'incursion' && (
-                  <>
-                    <div className="text-xs text-white text-center font-bold">{accion} {rune.numRunas}</div>
+                    <div className="text-xs text-white text-center font-bold">
+                      {accion} {rune.numRunas || ''}
+                    </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
                 )}
               </>
             )}
   
-            <div className="flex justify-center mb-1">
-              {caraB ? <RiArrowTurnForwardLine className="text-white text-xl" /> : <RiArrowTurnBackLine className="text-white text-xl" />}
+            {/* Icono para girar */}
+            <div className="flex justify-center my-1">
+              {caraB ? (
+                <RiArrowTurnForwardLine className="text-white text-xl" />
+              ) : (
+                <RiArrowTurnBackLine className="text-white text-xl" />
+              )}
             </div>
-            <div className="text-[0.6rem] italic text-indigo-100 text-center">{ts.cara} {rune.cara}</div>
   
+            {/* Cara actual */}
+            <div className="text-[0.6rem] italic text-indigo-100 text-center">
+              {ts.cara} {rune.cara}
+            </div>
+  
+            {/* Checkbox efecto */}
             <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
               <input
                 type="checkbox"
@@ -990,7 +992,11 @@ const InitTracker = () => {
   
     return (
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] perspective z-50 hover:scale-105">
-        <div className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
+        <div
+          className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
+            flipped ? 'rotate-y-180' : ''
+          }`}
+        >
           {renderSide(false)}
           {renderSide(true)}
         </div>
@@ -1005,6 +1011,7 @@ const InitTracker = () => {
       </div>
     );
   };
+
 
  const CharacterCard = ({ name, image, position }) => (
     <div className="flex flex-col items-center mx-1">
