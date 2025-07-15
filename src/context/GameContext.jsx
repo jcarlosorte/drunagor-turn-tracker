@@ -30,6 +30,7 @@ export const GameProvider = ({ children }) => {
   const [tileWarning, setTileWarning] = useState(null);
   const [usedTiles, setUsedTiles] = useState([]);
   const [scenarioMonster, setScenarioMonster] = useState(null);
+  const [tileToasts, setTileToasts] = useState([]);
     
   const addRune = (color) => {
     
@@ -226,6 +227,23 @@ export const GameProvider = ({ children }) => {
     return random;
   };
 
+  const manifestTile = () => {
+    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+    const tile = drawTilePreviewByColor(randomColor);
+    if (tile) {
+      showTileToast(tile, 'show');
+    }
+  };
+
+  const showTileToast = (tile, tipo = 'remove') => {
+    const uuid = uuidv4();
+    const tileWithId = { ...tile, tipo, uuid };
+    setTileToasts(prev => [...prev, tileWithId]);
+    setTimeout(() => {
+      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
+    }, 3000);
+  };
   
   return (
     <GameContext.Provider
@@ -254,7 +272,8 @@ export const GameProvider = ({ children }) => {
         deleteAvailableTileByColor,
         deleteAvailableTileRandom,
         scenarioMonster,
-        setScenarioMonster
+        setScenarioMonster,
+        manifestTile
       }}
     >
       {children}
