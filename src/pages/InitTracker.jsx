@@ -650,7 +650,6 @@ const InitTracker = () => {
             const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
             const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
             const tile = drawTilePreviewByColor(randomColor);
-            manifestTile(); // llama a la función del GameContext
             if (tile) {
               showTileToast(tile, 'show');
             } else {
