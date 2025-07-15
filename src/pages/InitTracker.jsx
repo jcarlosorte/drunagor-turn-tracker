@@ -76,14 +76,13 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { manifestTile, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
   const { executedRunes, setExecutedRunes } = useInitRunes();
   const [warningMessage, setWarningMessage] = useState(null);
   const [overhealedEnemies, setOverhealedEnemies] = useState(new Set());
-
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
 
@@ -886,7 +885,6 @@ const InitTracker = () => {
   const RuneCard = ({ rune, onRemove, flipped }) => {
     const tipo = rune.tipo;
     const { toggleRuneEffect } = useInitRunes();
-    const { manifestTile } = useGame();
     const applyEffect = rune.applyEffect !== false;
 
     const totalEnemies = placedEnemies.length;
