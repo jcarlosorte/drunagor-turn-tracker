@@ -925,17 +925,14 @@ const InitTracker = () => {
       const title = ts[rune.id] || rune.id;
       const accion = ts[rune.accion] || rune.accion;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
-  
+      const cartas = ts[rune.cartas] || rune.cartas;
+      const posicion = rune.posicion;
       // ✅ Lógica especial para incursión
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
   
       return (
-        <div
-          className={${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${
-            caraB ? 'rotate-y-180' : ''
-          }}
-        >
+        <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             {/* Título siempre visible */}
             <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
