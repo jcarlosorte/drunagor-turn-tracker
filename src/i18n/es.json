@@ -238,7 +238,7 @@
       "aviso3": "No hay suficientes fichas de Runa disponibles:",
       "fichas": "Añadir Fichas de Runa",
       "cartas": "Añadir Cartas de Runa",
-      "incru1": "Incrusión de Monstruos",
+      "incru1": "Incursión de Monstruos",
       "defen1": "Defensa de la Aldea",
       "addRunes": "Oscuridad de Caza",
       "addRunesCara": "Oscuridad de Caza por Cara",
@@ -299,7 +299,7 @@
       "defen1": "Defensa de la Aldea",
       "Defen_1": "Carta de Evento <<Aldeano en Apuros>> y Resuélvela.",
       "Defen_2": "Carta de Evento <<Monstruos Errantes>> y Resuélvela.",
-      "incru1": "Incrusión de Monstruos",
+      "incru1": "Incursión de Monstruos",
       "Incru_1": "Runa e invoca {x} esbirros. Usa la Runa revelada como punto de aparición.",
       "Incru_2": "Runa e invoca {x} esbirros. Usa la Runa revelada como punto de aparición."
     },
