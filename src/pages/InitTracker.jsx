@@ -1418,14 +1418,9 @@ const InitTracker = () => {
         </div>
       )}
         {/* Contenedor de Toasts de Runas */}
-      <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
+      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
         {tileToasts.map(tile => (
-          <TileToast
-            key={tile.uuid}
-            tile={tile}
-            tipo={tile.tipo}
-            onClose={() => setTileToasts(prev => prev.filter(t => t.uuid !== tile.uuid))}
-          />
+          <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
         ))}
       </div>
       </PageTransition>
