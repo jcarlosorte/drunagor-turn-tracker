@@ -273,7 +273,9 @@ export const GameProvider = ({ children }) => {
         deleteAvailableTileRandom,
         scenarioMonster,
         setScenarioMonster,
-        manifestTile
+        manifestTile,
+        showTileToast,
+        tileToasts
       }}
     >
       {children}
