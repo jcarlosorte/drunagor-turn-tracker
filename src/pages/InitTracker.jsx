@@ -76,7 +76,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { manifestTile, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -645,15 +645,19 @@ const InitTracker = () => {
             }
     
           } else if (currentRune.tipo === 'incursion') {
-            // 🔹 Incursión → Manifiesta una runa (solo si aplica)
-            console.log(`🔥 Incursión: manifestando runa`);
-            const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-            const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-            const tile = drawTilePreviewByColor(randomColor);
-            if (tile) {
-              showTileToast(tile, 'show');
+            const isCaraB = currentRune.cara === 'B';
+            const noEnemies = placedEnemies.length === 0;
+          
+            // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
+            if (isCaraB || (!isCaraB && noEnemies)) {
+              console.log(`🔥 Incursión: manifestando runa`);
+              if (typeof manifestTile === 'function') {
+                manifestTile(); 
+              } else {
+                console.warn('⚠ manifestTile no está disponible en GameContext');
+              }
             } else {
-              alert(`${ti.aviso2} ${ti.colores[randomColor]}`);
+              console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
             }
           }
     
