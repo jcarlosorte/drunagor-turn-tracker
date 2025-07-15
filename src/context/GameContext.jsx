@@ -243,6 +243,7 @@ export const GameProvider = ({ children }) => {
     if (tile) {
       showTileToast(tile, 'show');
     }
+    return tile;
   };
 
 
