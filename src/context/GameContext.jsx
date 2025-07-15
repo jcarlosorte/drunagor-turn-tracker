@@ -227,6 +227,15 @@ export const GameProvider = ({ children }) => {
     return random;
   };
 
+  const showTileToast = (tile, tipo = 'remove') => {
+    const uuid = uuidv4();
+    const tileWithId = { ...tile, tipo, uuid };
+    setTileToasts(prev => [...prev, tileWithId]);
+    setTimeout(() => {
+      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
+    }, 3000);
+  };
+  
   const manifestTile = () => {
     const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
     const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
@@ -236,14 +245,7 @@ export const GameProvider = ({ children }) => {
     }
   };
 
-  const showTileToast = (tile, tipo = 'remove') => {
-    const uuid = uuidv4();
-    const tileWithId = { ...tile, tipo, uuid };
-    setTileToasts(prev => [...prev, tileWithId]);
-    setTimeout(() => {
-      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
-    }, 3000);
-  };
+
   
   return (
     <GameContext.Provider
