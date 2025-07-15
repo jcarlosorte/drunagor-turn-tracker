@@ -618,16 +618,43 @@ const InitTracker = () => {
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: 0 });
   
-        if (
-          currentRune.numRunas &&
-          currentRune.applyEffect !== false &&
-          !executedRunes.includes(currentRune.uuid)
-        ) {
-          const tiles = drawMultipleTiles(currentRune.numRunas);
-          tiles?.forEach(tile => handleTileDraw(tile));
-          if (!tiles) setTileWarning(ti.aviso);
+         // ✅ Evitar ejecución duplicada
+        if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
+    
+          if (currentRune.tipo === 'runa') {
+            // 🔹 Lógica clásica de runa: roba fichas de runa
+            if (currentRune.numRunas) {
+              const tiles = drawMultipleTiles(currentRune.numRunas);
+              tiles?.forEach(tile => handleTileDraw(tile));
+              if (!tiles) setTileWarning(ti.aviso);
+            }
+    
+          } else if (currentRune.tipo === 'defensa') {
+            // 🔹 Defensa → roba cartas de aldeano o errantes
+            const numCartas = currentRune.numRunas || 1;
+            const mazo = currentRune.cartas; // "aldeano" o "errantes"
+            console.log(`🛡 Defensa: Roba ${numCartas} carta(s) del mazo ${mazo}`);
+    
+            for (let i = 0; i < numCartas; i++) {
+              // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
+              const cartaRobada = drawCardFromDeck(mazo); 
+              if (cartaRobada) {
+                showCardToast(cartaRobada, mazo); 
+              } else {
+                console.warn(`⚠ No hay cartas en el mazo ${mazo}`);
+              }
+            }
+    
+          } else if (currentRune.tipo === 'incursion') {
+            // 🔹 Incursión → Manifiesta una runa (solo si aplica)
+            console.log(`🔥 Incursión: manifestando runa`);
+            manifestTile(); // llama a la función del GameContext
+          }
+    
+          // ✅ Marcar como ejecutada
           setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
+    
         return;
       }
     }
