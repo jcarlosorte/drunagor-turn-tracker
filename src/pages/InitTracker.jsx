@@ -76,7 +76,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -1417,6 +1417,17 @@ const InitTracker = () => {
           {warningMessage}
         </div>
       )}
+        {/* Contenedor de Toasts de Runas */}
+      <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
+        {tileToasts.map(tile => (
+          <TileToast
+            key={tile.uuid}
+            tile={tile}
+            tipo={tile.tipo}
+            onClose={() => setTileToasts(prev => prev.filter(t => t.uuid !== tile.uuid))}
+          />
+        ))}
+      </div>
       </PageTransition>
   );
 };
