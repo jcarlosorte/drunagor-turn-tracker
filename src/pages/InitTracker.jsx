@@ -671,7 +671,6 @@ const InitTracker = () => {
                 const damage = exceso * 3;
                 showToast(`${ts.excesoIncursion} ${damage} ${ts.daño}.`);
               }
-            }
             } else {
               console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
             }
