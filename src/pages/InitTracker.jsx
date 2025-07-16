@@ -880,10 +880,13 @@ const InitTracker = () => {
     );
   };
 
-  const ScenarioToast = ({ message }) => (
-    <div className="bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg mb-2 text-sm">
-      {message}
-    </div>
+  const showScenarioToast = ({ message }) => (
+    const id = uuidv4();
+    setScenarioToasts(prev => [...prev, { id, message }]);
+  
+    setTimeout(() => {
+      setScenarioToasts(prev => prev.filter(t => t.id !== id));
+    }, 3000);
   );
 
   if (!isLandscape) {
@@ -1462,11 +1465,18 @@ const InitTracker = () => {
           <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
         ))}
       </div>
-      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
-        {scenarioToasts.map(t => (
-          <ScenarioToast key={t.id} message={t.message} />
+        
+      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+        {scenarioToasts.map(toast => (
+          <div
+            key={toast.id}
+            className="bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm"
+          >
+            {toast.message}
+          </div>
         ))}
       </div>
+        
       </PageTransition>
   );
 };
