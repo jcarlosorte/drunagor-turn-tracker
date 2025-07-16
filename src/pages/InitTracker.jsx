@@ -880,14 +880,14 @@ const InitTracker = () => {
     );
   };
 
-  const showScenarioToast = ({ message }) => (
+  const showScenarioToast = (message) => {
     const id = uuidv4();
     setScenarioToasts(prev => [...prev, { id, message }]);
   
     setTimeout(() => {
       setScenarioToasts(prev => prev.filter(t => t.id !== id));
     }, 3000);
-  );
+  };
 
   if (!isLandscape) {
     return (
