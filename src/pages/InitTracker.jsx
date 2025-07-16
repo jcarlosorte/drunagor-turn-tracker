@@ -975,15 +975,14 @@ const InitTracker = () => {
             
             {tipo === 'incursion' && (
               <>
-                {/* Cara A de incursión → ocultar si hay enemigos */}
-                {!caraB && totalEnemies > 0 ? null : (
+                {caraB || totalEnemies === 0 ? (
                   <>
                     <div className="text-xs text-white text-center font-bold">
                       {accion} {rune.numRunas || ''}
                     </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
-                )}
+                ) : null}
               </>
             )}
 
@@ -999,7 +998,7 @@ const InitTracker = () => {
   
             {/* Cara actual */}
             <div className="text-[0.6rem] italic text-indigo-100 text-center">
-              {ts.cara} {rune.cara}
+              {ti.cara} {rune.cara}
             </div>
   
             {/* Checkbox efecto */}
