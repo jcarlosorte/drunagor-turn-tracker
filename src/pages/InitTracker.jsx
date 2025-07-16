@@ -662,7 +662,7 @@ const InitTracker = () => {
               if (faltan > 0 && scenarioMonster) {
               // Añadir los que faltan hasta el máximo
                 for (let i = 0; i < faltan; i++) {
-                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
+                  //handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
                 }
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile]}`);
               }
@@ -975,16 +975,28 @@ const InitTracker = () => {
             
             {tipo === 'incursion' && (
               <>
-                {caraB || totalEnemies === 0 ? (
+                {/* ✅ Si es cara B siempre se ve */}
+                {caraB ? (
                   <>
                     <div className="text-xs text-white text-center font-bold">
                       {accion} {rune.numRunas || ''}
                     </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
-                ) : null}
+                ) : (
+                  /* ✅ Cara A → solo mostramos si no hay enemigos */
+                  totalEnemies === 0 && (
+                    <>
+                      <div className="text-xs text-white text-center font-bold">
+                        {accion} {rune.numRunas || ''}
+                      </div>
+                      <div className="text-xs text-white text-center">{nombre}</div>
+                    </>
+                  )
+                )}
               </>
             )}
+
 
   
             {/* Icono para girar */}
