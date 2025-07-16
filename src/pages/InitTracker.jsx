@@ -87,7 +87,7 @@ const InitTracker = () => {
   const [overhealedEnemies, setOverhealedEnemies] = useState(new Set());
   const [rotatingUUIDs, setRotatingUUIDs] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
-
+  const [scenarioToasts, setScenarioToasts] = useState([]);
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
   
