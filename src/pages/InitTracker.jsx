@@ -649,11 +649,29 @@ const InitTracker = () => {
           } else if (currentRune.tipo === 'incursion') {
             const isCaraB = currentRune.cara === 'B';
             const noEnemies = placedEnemies.length === 0;
-          
+            const totalHeroes = trackerData.placedHeroes?.length || 0;
+            const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4;
+            const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id);
+            const alreadyPlaced = placedScenarioMonsters.length;
+            const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
+            const totalFinal = alreadyPlaced + faltan;
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               console.log(`🔥 Incursión: manifestando runa`);
               const tile = manifestTile();
+              if (faltan > 0 && scenarioMonster) {
+              // Añadir los que faltan hasta el máximo
+                for (let i = 0; i < faltan; i++) {
+                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
+                }
+                showToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile]}`);
+              }
+              if (totalFinal > 4) {
+                const exceso = totalFinal - 4;
+                const damage = exceso * 3;
+                showToast(`${ts.excesoIncursion} ${damage} ${ts.daño}.`);
+              }
+            }
             } else {
               console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
             }
