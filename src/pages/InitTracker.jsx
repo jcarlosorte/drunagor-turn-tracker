@@ -979,7 +979,7 @@ const InitTracker = () => {
                 {caraB && (
                   <>
                     <div className="text-xs text-white text-center font-bold">
-                      {accion} {rune.numRunas || ''}
+                      {accion} {rune.numRunas}
                     </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
@@ -988,7 +988,7 @@ const InitTracker = () => {
                 {!caraB && totalEnemies === 0 && (
                   <>
                     <div className="text-xs text-white text-center font-bold">
-                      {accion} {rune.numRunas || ''}
+                      {accion} {rune.numRunas}
                     </div>
                     <div className="text-xs text-white text-center">{nombre}</div>
                   </>
@@ -1020,7 +1020,7 @@ const InitTracker = () => {
                 onChange={() => toggleRuneEffect(rune.uuid)}
                 className="mr-1"
               />
-              <label>{ts.applyEffect || 'Aplicar efecto'}</label>
+              <label>{ti.applyEffect}</label>
             </div>
           </div>
         </div>
