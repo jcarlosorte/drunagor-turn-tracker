@@ -664,12 +664,12 @@ const InitTracker = () => {
                 for (let i = 0; i < faltan; i++) {
                   handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
                 }
-                showToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile]}`);
+                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile]}`);
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
                 const damage = exceso * 3;
-                showToast(`${ts.excesoIncursion} ${damage} ${ts.daño}.`);
+                showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
               }
             } else {
               console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
@@ -879,6 +879,12 @@ const InitTracker = () => {
       }
     );
   };
+
+  const ScenarioToast = ({ message }) => (
+    <div className="bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg mb-2 text-sm">
+      {message}
+    </div>
+  );
 
   if (!isLandscape) {
     return (
@@ -1454,6 +1460,11 @@ const InitTracker = () => {
       <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
         {tileToasts.map(tile => (
           <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
+        ))}
+      </div>
+      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
+        {scenarioToasts.map(t => (
+          <ScenarioToast key={t.id} message={t.message} />
         ))}
       </div>
       </PageTransition>
