@@ -955,20 +955,19 @@ const InitTracker = () => {
             <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
   
             {/* ✅ Contenido según tipo */}
-            {(!isIncursion || caraB || totalEnemies === 0) && (
+            {(tipo === 'runa' || tipo === 'defensa') && (
               <>
-                {/* Para runas y defensa, siempre se ve */}
-                {(tipo === 'runa' || tipo === 'defensa') && (
-                  <>
-                    <div className="text-xs text-white text-center font-bold">
-                      {accion} {rune.numRunas || ''}
-                    </div>
-                    <div className="text-xs text-white text-center">{nombre}</div>
-                  </>
-                )}
-  
-                {/* Para incursión solo se oculta en cara A cuando hay enemigos */}
-                {tipo === 'incursion' && !shouldHideContentIncursion && (
+                <div className="text-xs text-white text-center font-bold">
+                  {accion} {rune.numRunas || ''}
+                </div>
+                <div className="text-xs text-white text-center">{nombre}</div>
+              </>
+            )}
+            
+            {tipo === 'incursion' && (
+              <>
+                {/* Cara A de incursión → ocultar si hay enemigos */}
+                {!caraB && totalEnemies > 0 ? null : (
                   <>
                     <div className="text-xs text-white text-center font-bold">
                       {accion} {rune.numRunas || ''}
@@ -978,6 +977,7 @@ const InitTracker = () => {
                 )}
               </>
             )}
+
   
             {/* Icono para girar */}
             <div className="flex justify-center my-1">
