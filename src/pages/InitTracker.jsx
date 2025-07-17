@@ -1,5 +1,6 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
+import { flushSync } from "react-dom";
 import React, { useEffect, useState, useRef } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
 import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
@@ -574,17 +575,20 @@ const InitTracker = () => {
   
   const spawnScenarioEnemies = async (faltan, scenarioMonster) => {
     for (let i = 0; i < faltan; i++) {
-      handleManualEnemyAdd(
-        scenarioMonster.id,
-        scenarioMonster.comportamiento,
-        scenarioMonster.categoria,
-        'NoShow'
-      );
+      flushSync(() => {
+        handleManualEnemyAdd(
+          scenarioMonster.id,
+          scenarioMonster.comportamiento,
+          scenarioMonster.categoria,
+          'NoShow'
+        );
+      });
   
-      // 🔄 forzar re-render entre cada iteración
-      await new Promise(res => setTimeout(res, 0));
+      // Esperar al siguiente ciclo del event loop para permitir que React commitée
+      await new Promise((res) => setTimeout(res, 0));
     }
   };
+  
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
