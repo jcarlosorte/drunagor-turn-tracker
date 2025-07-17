@@ -683,7 +683,12 @@ const InitTracker = () => {
               console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
-                handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
+                if (faltan > 0){
+                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
+                };
+                if (faltan > 1){
+                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
+                };
                 (async () => {
                   await spawnEnemiesSequentially(faltan);
                   showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
