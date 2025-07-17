@@ -664,7 +664,7 @@ const InitTracker = () => {
             const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id);
             const alreadyPlaced = placedScenarioMonsters.length;
             const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
-            const totalFinal = alreadyPlaced + faltan;
+            const totalFinal = alreadyPlaced + maxMonstruos;
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               console.log(totalFinal);
