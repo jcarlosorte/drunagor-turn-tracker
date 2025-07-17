@@ -683,9 +683,10 @@ const InitTracker = () => {
               console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
-              // Añadir los que faltan hasta el máximo
-                await spawnEnemiesSequentially(faltan);
-                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
+                (async () => {
+                  await spawnEnemiesSequentially(faltan);
+                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
+                })();
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
