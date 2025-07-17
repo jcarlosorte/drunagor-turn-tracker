@@ -974,20 +974,26 @@ const InitTracker = () => {
             )}
             
             {tipo === 'incursion' && (
-              <>
-                <div className="text-xs text-white text-center font-bold">
-                  {accion} {rune.numRunas}
-                </div>
-                <div className="text-xs text-white text-center">{nombre}</div>
-              </>
-            {caraB && (
-              // ✅ Cara B SIEMPRE visible
-              <>
-                <div className="text-xs text-white text-center font-bold">
-                 {rune.numRunas || 'cara b'}
-                </div>
-              </>
-            )}
+             <>
+              {caraB ? (
+                <>
+                  <div className="text-xs text-white text-center font-bold">
+                     {'cara b'}
+                  </div>
+                 
+                </>
+              ) : (
+                // ✅ Cara A → solo mostrar si no hay enemigos
+
+                  <>
+                    <div className="text-xs text-white text-center font-bold">
+                      {'cara a'}
+                    </div>
+                  
+                  </>
+                
+              )}
+            </>
             )}
 
 
