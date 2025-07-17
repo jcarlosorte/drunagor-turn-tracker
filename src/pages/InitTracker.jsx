@@ -680,7 +680,7 @@ const InitTracker = () => {
                 );
             
                 // Esperar un pequeño delay para que no se ejecuten todos a la vez
-                await new Promise((resolve) => setTimeout(resolve, 500)); 
+                await new Promise(r => setTimeout(r, 0));
               }
             };
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
