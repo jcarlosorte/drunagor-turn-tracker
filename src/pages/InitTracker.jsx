@@ -180,7 +180,7 @@ const InitTracker = () => {
   };
 
   
-  const handleManualEnemyAdd = (enemyId, behaviorType, category) => {
+  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show') => {
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
@@ -218,7 +218,11 @@ const InitTracker = () => {
           ringColor: colorId,
           cara: selected.cara
         };
-        showToast(enemy);
+        
+        if (ver === 'show'){
+          showToast(enemy);
+        };
+        
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
@@ -662,7 +666,7 @@ const InitTracker = () => {
               if (faltan > 0 && scenarioMonster) {
               // Añadir los que faltan hasta el máximo
                 for (let i = 0; i < faltan; i++) {
-                  //handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
+                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
                 }
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
