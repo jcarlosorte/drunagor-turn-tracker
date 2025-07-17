@@ -257,7 +257,9 @@ const InitTracker = () => {
           ringColor: colorId,
           cara: selected.cara
         };
-        showToast(enemy);
+        if (ver === 'show'){
+          showToast(enemy);
+        };
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del señor supremo:
         placeOverlordCards(selected, uuid);
@@ -290,7 +292,9 @@ const InitTracker = () => {
           ringColor: colorId,
           cara: selected.cara
         };
-        showToast(enemy);
+        if (ver === 'show'){
+          showToast(enemy);
+        };
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
@@ -300,7 +304,9 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
-    showToast(selected);
+    if (ver === 'show'){
+        showToast(selected);
+    };
     placeEnemy({
       enemy: {
         uuid: uuid,
@@ -661,7 +667,7 @@ const InitTracker = () => {
             const totalFinal = alreadyPlaced + faltan;
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
-              console.log(`🔥 Incursión: manifestando runa`);
+              console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
               // Añadir los que faltan hasta el máximo
@@ -673,6 +679,7 @@ const InitTracker = () => {
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
                 const damage = exceso * 3;
+                console.log(damage);
                 showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
               }
             } else {
@@ -958,10 +965,8 @@ const InitTracker = () => {
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
       const posicion = rune.posicion;
-      // ✅ Lógica especial para incursión
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
-      console.log(caraB);
       return (
         <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
