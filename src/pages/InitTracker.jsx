@@ -186,7 +186,6 @@ const InitTracker = () => {
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
     );
     if (!selected) return;
-    //console.log('cap before adjust:', selected.capacidades);
     const uuid = uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig);
@@ -304,9 +303,7 @@ const InitTracker = () => {
     const runeIndex = runesColorMap[selected.rune];
     const runePosition = selected.runePosition;
     const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
-    if (ver === 'show'){
-        showToast(selected);
-    };
+    
     placeEnemy({
       enemy: {
         uuid: uuid,
@@ -331,6 +328,9 @@ const InitTracker = () => {
         cara: selected.cara
       }
     });
+    if (ver === 'show'){
+        showToast(selected);
+    };
   };
   
   const handleRandomCommander = () => {
@@ -665,15 +665,26 @@ const InitTracker = () => {
             const alreadyPlaced = placedScenarioMonsters.length;
             const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
             const totalFinal = alreadyPlaced + maxMonstruos;
+            const spawnEnemiesSequentially = async (count) => {
+              for (let i = 0; i < count; i++) {
+                handleManualEnemyAdd(
+                  scenarioMonster.id,
+                  scenarioMonster.comportamiento,
+                  scenarioMonster.categoria,
+                  'NoShow'
+                );
+            
+                // Esperar un pequeño delay para que no se ejecuten todos a la vez
+                await new Promise((resolve) => setTimeout(resolve, 50)); 
+              }
+            };
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
               // Añadir los que faltan hasta el máximo
-                for (let i = 0; i < faltan; i++) {
-                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
-                }
+                await spawnEnemiesSequentially(faltan);
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
