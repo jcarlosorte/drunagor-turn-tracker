@@ -978,7 +978,7 @@ const InitTracker = () => {
               {caraB ? (
                 <>
                   <div className="text-xs text-white text-center font-bold">
-                     {'cara b'}
+                   {caraB}  {'cara b'}
                   </div>
                  
                 </>
@@ -987,7 +987,7 @@ const InitTracker = () => {
 
                   <>
                     <div className="text-xs text-white text-center font-bold">
-                      {'cara a'}
+                       {caraB} {'cara a'}
                     </div>
                   
                   </>
