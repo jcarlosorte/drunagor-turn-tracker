@@ -672,12 +672,7 @@ const InitTracker = () => {
             const totalFinal = alreadyPlaced + maxMonstruos;
             const spawnEnemiesSequentially = async (count) => {
               for (let i = 0; i < count; i++) {
-                handleManualEnemyAdd(
-                  scenarioMonster.id,
-                  scenarioMonster.comportamiento,
-                  scenarioMonster.categoria,
-                  'NoShow'
-                );
+                //handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
             
                 // Esperar un pequeño delay para que no se ejecuten todos a la vez
                 await new Promise(r => setTimeout(r, 0));
@@ -688,6 +683,7 @@ const InitTracker = () => {
               console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
+                handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
                 (async () => {
                   await spawnEnemiesSequentially(faltan);
                   showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
