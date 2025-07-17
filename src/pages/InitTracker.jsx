@@ -664,7 +664,7 @@ const InitTracker = () => {
                 for (let i = 0; i < faltan; i++) {
                   //handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria);
                 }
-                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile]}`);
+                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
@@ -980,6 +980,14 @@ const InitTracker = () => {
                 </div>
                 <div className="text-xs text-white text-center">{nombre}</div>
               </>
+            {caraB && (
+              // ✅ Cara B SIEMPRE visible
+              <>
+                <div className="text-xs text-white text-center font-bold">
+                 {rune.numRunas || 'cara b'}
+                </div>
+              </>
+            )}
             )}
 
 
