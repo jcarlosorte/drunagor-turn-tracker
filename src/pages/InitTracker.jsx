@@ -189,6 +189,11 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig);
+    console.log(uuid);
+    console.log(enemyId);
+    console.log(behaviorType);
+    console.log(category);
+    console.log(colorId);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
