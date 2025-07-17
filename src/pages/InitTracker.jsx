@@ -976,7 +976,7 @@ const InitTracker = () => {
             
             {tipo === 'incursion' && (
              <>
-              {iscaraB ? (
+              {isCaraB ? (
                 <>
                   <div className="text-xs text-white text-center font-bold">
                    {caraB}  {'cara b'}
