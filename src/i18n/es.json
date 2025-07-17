@@ -278,7 +278,7 @@
       "noTilesToRemove": "No hay fichas para eliminar.",
       "Enemies": "Enemigos",
       "added": "Se han añadido",
-      "invocaran": "y se invocarán en",
+      "invocaran": "y se invocarán en el Punto de Aparición ",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
@@ -304,7 +304,7 @@
       "Defen_2": "Carta de Evento <<Monstruos Errantes>> y Resuélvela.",
       "incru1": "Incursión de Monstruos",
       "Incru_1": "Runa e invoca {x} esbirros. Usa la Runa revelada como punto de aparición.",
-      "Incru_2": "Runa e invoca {x} esbirros. Usa la Runa revelada como punto de aparición.lol"
+      "Incru_2": "Runa e invoca {x} esbirros. Usa la Runa revelada como punto de aparición."
     },
     "condiciones_t": {
       "none": "",
