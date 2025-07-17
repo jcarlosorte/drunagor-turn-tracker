@@ -946,6 +946,7 @@ const InitTracker = () => {
     };
   
     const renderSide = (caraB = false) => {
+      const isCaraB = rune.cara === 'B';
       const bgColor = bgColorMap[tipo] || 'bg-indigo-700';
       const borderColor = borderColorMap[tipo] || 'border-indigo-400';
       const title = ts[rune.id] || rune.id;
@@ -956,7 +957,7 @@ const InitTracker = () => {
       // ✅ Lógica especial para incursión
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
-  
+      console.log(caraB);
       return (
         <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
@@ -975,7 +976,7 @@ const InitTracker = () => {
             
             {tipo === 'incursion' && (
              <>
-              {caraB ? (
+              {iscaraB ? (
                 <>
                   <div className="text-xs text-white text-center font-bold">
                    {caraB}  {'cara b'}
