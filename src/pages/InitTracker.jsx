@@ -572,6 +572,19 @@ const InitTracker = () => {
   const roundRef = useRef(0);
   const previousIndexRef = useRef(null);
   
+  const spawnScenarioEnemies = async (faltan, scenarioMonster) => {
+    for (let i = 0; i < faltan; i++) {
+      handleManualEnemyAdd(
+        scenarioMonster.id,
+        scenarioMonster.comportamiento,
+        scenarioMonster.categoria,
+        'NoShow'
+      );
+  
+      // 🔄 forzar re-render entre cada iteración
+      await new Promise(res => setTimeout(res, 0));
+    }
+  };
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
@@ -670,34 +683,17 @@ const InitTracker = () => {
             const alreadyPlaced = placedScenarioMonsters.length;
             const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
             const totalFinal = alreadyPlaced + maxMonstruos;
-            const spawnEnemiesSequentially = async (count) => {
-              for (let i = 0; i < count; i++) {
-                //handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
-            
-                // Esperar un pequeño delay para que no se ejecuten todos a la vez
-                await new Promise(r => setTimeout(r, 0));
-              }
-            };
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
-              console.log(totalFinal);
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
-                if (faltan > 0){
-                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
-                };
-                if (faltan > 1){
-                  handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
-                };
-                (async () => {
-                  await spawnEnemiesSequentially(faltan);
+                spawnScenarioEnemies(faltan, scenarioMonster).then(() => {
                   showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
-                })();
+                });
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
                 const damage = exceso * 3;
-                console.log(damage);
                 showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
               }
             } else {
