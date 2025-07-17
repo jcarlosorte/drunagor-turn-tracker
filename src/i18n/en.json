@@ -277,7 +277,7 @@
     "noTilesToRemove": "No tiles to remove.",
     "Enemies": "Enemies",
     "added": "Have been added",
-    "invocaran": "and will be summoned in",
+    "invocaran": "and will be summoned in Spawning Point ",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
