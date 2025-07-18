@@ -182,3 +182,81 @@ export const CARTAS_HEROE_CAIDO = [
     capacidades: 'fallen_2'
   }
 ];
+
+export const ALDEANO = [
+  {
+    id: 'aldeano_1',
+    nombre: 'aldeano_1',
+    texto: 'aldeano_1'
+  },
+  {
+    id: 'aldeano_2',
+    nombre: 'aldeano_2',
+    texto: 'aldeano_2'
+  },
+  {
+    id: 'aldeano_3',
+    nombre: 'aldeano_3',
+    texto: 'aldeano_3'
+  },
+  {
+    id: 'aldeano_4',
+    nombre: 'aldeano_4',
+    texto: 'aldeano_4'
+  },
+  {
+    id: 'aldeano_5',
+    nombre: 'aldeano_5',
+    texto: 'aldeano_5'
+  },
+  {
+    id: 'aldeano_6',
+    nombre: 'aldeano_6',
+    texto: 'aldeano_6'
+  },
+];
+
+export const ERRANTES = [
+  {
+    id: 'errantes_1',
+    nombre: 'errantes_1',
+    texto: 'errantes_t1_1',
+    texto2: 'errantes_t1_2',
+    accion1: 'errantes_a1_1'
+  },
+  {
+    id: 'errantes_2',
+    nombre: 'errantes_2',
+    texto: 'errantes_t2_1',
+    texto2: 'errantes_t2_2',
+    accion1: 'errantes_a2_1'
+  },
+  {
+    id: 'errantes_3',
+    nombre: 'errantes_3',
+    texto: 'errantes_t3_1',
+    texto2: 'errantes_t3_2',
+    accion1: 'errantes_a3_1'
+  },
+  {
+    id: 'errantes_4',
+    nombre: 'errantes_4',
+    texto: 'errantes_t4_1',
+    texto2: 'errantes_t4_2',
+    accion1: 'errantes_a4_1'
+  },
+  {
+    id: 'errantes_5',
+    nombre: 'errantes_5',
+    texto: 'errantes_t5_1',
+    texto2: 'errantes_t5_2',
+    accion1: 'errantes_a5_1'
+  },
+  {
+    id: 'errantes_6',
+    nombre: 'errantes_6',
+    texto: 'errantes_t6_1',
+    texto2: 'errantes_t6_2',
+    accion1: 'errantes_a6_1'
+  },
+];
