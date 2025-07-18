@@ -710,8 +710,8 @@ const InitTracker = () => {
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
-                const damage = exceso * 3;
-                showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
+                const damage = 3;
+                showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
               }
             } else {
               console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
