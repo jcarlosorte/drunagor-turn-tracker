@@ -259,7 +259,7 @@ const InitTracker = () => {
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
     //const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig);
-    const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig, forcedColorId);
+    const colorId = assignColorToEnemy(uuid, isBig, forcedColorId);
     console.log(uuid);
     console.log(enemyId);
     console.log(behaviorType);
@@ -751,6 +751,9 @@ const InitTracker = () => {
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
+                console.log(totalFinal);
+                console.log(alreadyPlaced);
+                console.log(maxMonstruos);
                 const exceso = totalFinal - 4;
                 const damage = exceso * 3;
                 showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
