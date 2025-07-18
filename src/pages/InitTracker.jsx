@@ -168,18 +168,13 @@ const InitTracker = () => {
       // guardamos el color en la simulación
       if (isBig) simulatedUsedBig.push(nextColorId.id);
       else simulatedUsedSmall.push(nextColorId.id);
-      if (isBig) {
-        setUsedColorsBig(prev => [...prev, nextColorId.id]);
-      } else {
-        setUsedColors(prev => [...prev, nextColorId.id]);
-      }
       generatedColors.push(nextColorId.id);
       
     }
   
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
-    //setUsedColors([...simulatedUsedSmall]);
-    //setUsedColorsBig([...simulatedUsedBig]);
+    setUsedColors([...simulatedUsedSmall]);
+    setUsedColorsBig([...simulatedUsedBig]);
   
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
