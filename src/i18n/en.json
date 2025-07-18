@@ -279,6 +279,7 @@
     "Enemies": "Enemies",
     "added": "Have been added",
     "invocaran": "and will be summoned in Spawning Point ",
+    "spawnPoints": "Spawning Points",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
