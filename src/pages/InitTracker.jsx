@@ -91,6 +91,8 @@ const InitTracker = () => {
   const [scenarioToasts, setScenarioToasts] = useState([]);
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
+  const [usedColors, setUsedColors] = useState([]);
+  const [usedColorsBig, setUsedColorsBig] = useState([]); 
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id, color = null) => {
