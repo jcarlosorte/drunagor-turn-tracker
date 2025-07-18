@@ -1370,22 +1370,6 @@ const InitTracker = () => {
                   </div>
                 </div>
               )}
-              <div className="absolute top-10 left-1/2 -translate-x-1/2 flex gap-2 z-40">
-                {spawnPoints.map(point => (
-                  <div
-                    key={point.uuid}
-                    className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2 shadow-lg`}
-                  >
-                    <span>{ti.colores[point.runa]}</span>
-                    <button
-                      onClick={() => removeSpawnPoint(point.uuid)}
-                      className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
-              </div>
 
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
