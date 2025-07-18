@@ -1349,6 +1349,27 @@ const InitTracker = () => {
               onTileDraw={handleTileDraw}
             />
             {/* Puntos de aparición visibles encima del track */}
+            {spawnPoints.length > 0 && (
+                <div className="mt-3 p-2 bg-gray-800 rounded-lg">
+                  <div className="text-xs text-yellow-300 mb-2">{ti.spawnPoints || ''}</div>
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    {spawnPoints.map(point => (
+                      <div
+                        key={point.uuid}
+                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                      >
+                        <span>{ti.colores[point.runa]}</span>
+                        <button
+                          onClick={() => removeSpawnPoint(point.uuid)}
+                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="absolute top-10 left-1/2 -translate-x-1/2 flex gap-2 z-40">
                 {spawnPoints.map(point => (
                   <div
