@@ -16,7 +16,8 @@ export const InitEnemiesProvider = ({ children }) => {
   const getNextAvailableColor = (isBig = false) => {
     const used = new Set(isBig ? usedColorsBig : usedColors);
     const source = isBig ? ENEMY_RING_COLORS_BIG : ENEMY_RING_COLORS;
-    return source.find(c => !used.has(c.id));
+    const next = source.find(c => !used.has(c.id));
+    return next ? next.id : null;
   };
   
   // Función para asignar un color a un enemigo
@@ -30,13 +31,13 @@ export const InitEnemiesProvider = ({ children }) => {
     }
   
     if (isBig) {
-      setUsedColorsBig(prev => [...prev, available.id]);
+      setUsedColorsBig(prev => [...prev, available]);
     } else {
-      setUsedColors(prev => [...prev, available.id]);
+      setUsedColors(prev => [...prev, available]);
     }
     console.log(setUsedColors);
-    setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available.id }));
-    return available.id;
+    setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available }));
+    return available;
   };
   // Función para liberar el color
   const releaseColor = (enemyUUID) => {
