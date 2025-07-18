@@ -160,15 +160,15 @@ const InitTracker = () => {
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
       const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-      if (!nextColorId) {
+      if (!nextColorId.id) {
         alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
         return undefined; // paramos si ya no hay colores
       }
       // guardamos el color en la simulación
-      if (isBig) simulatedUsedBig.push(nextColorId);
-      else simulatedUsedSmall.push(nextColorId);
+      if (isBig) simulatedUsedBig.push(nextColorId.id);
+      else simulatedUsedSmall.push(nextColorId.id);
   
-      generatedColors.push(nextColorId);
+      generatedColors.push(nextColorId.id);
     }
   
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
