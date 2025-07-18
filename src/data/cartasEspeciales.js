@@ -213,7 +213,7 @@ export const ALDEANO = [
     id: 'aldeano_6',
     nombre: 'aldeano_6',
     texto: 'aldeano_6'
-  },
+  }
 ];
 
 export const ERRANTES = [
@@ -258,5 +258,32 @@ export const ERRANTES = [
     texto: 'errantes_t6_1',
     texto2: 'errantes_t6_2',
     accion1: 'errantes_a6_1'
+  }
+];
+export const SORPRESA = [
+  {
+    id: 'sorpresa_1',
+    nombre: 'sorpresa_1',
+    texto: 'sorpresa_1'
   },
+  {
+    id: 'sorpresa_2',
+    nombre: 'sorpresa_2',
+    texto: 'sorpresa_2'
+  },
+  {
+    id: 'sorpresa_3',
+    nombre: 'sorpresa_3',
+    texto: 'sorpresa_3'
+  },
+  {
+    id: 'sorpresa_4',
+    nombre: 'sorpresa_4',
+    texto: 'sorpresa_4'
+  },
+  {
+    id: 'sorpresa_5',
+    nombre: 'sorpresa_5',
+    texto: 'sorpresa_5'
+  }
 ];
