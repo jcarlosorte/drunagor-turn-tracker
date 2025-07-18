@@ -573,6 +573,13 @@ const InitTracker = () => {
     jefe: 'bg-purple-700',
   };
   
+  const colorMap = {
+    rojo: 'bg-red-700 hover:bg-red-600',
+    azul: 'bg-blue-700 hover:bg-blue-600',
+    verde: 'bg-green-700 hover:bg-green-600',
+    naranja: 'bg-orange-700 hover:bg-orange-600',
+    gris: 'bg-gray-700 hover:bg-gray-600',
+  };
   useEffect(() => {
     const initialHeroes = trackerData.heroes.map(id => {
       const role = trackerData.roles[id];
@@ -1348,7 +1355,7 @@ const InitTracker = () => {
                     key={point.uuid}
                     className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2 shadow-lg`}
                   >
-                    <span>{ts.colores[point.runa]}</span>
+                    <span>{ti.colores[point.runa]}</span>
                     <button
                       onClick={() => removeSpawnPoint(point.uuid)}
                       className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
