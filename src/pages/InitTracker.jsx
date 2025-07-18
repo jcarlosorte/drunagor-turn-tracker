@@ -714,7 +714,7 @@ const InitTracker = () => {
               if (!spawnExists) {
                 // ❌ No hay punto de aparición para ese color
                 showScenarioToast(
-                  `${ti.incursionFail || '❌ Incursión NO ejecutada: el punto de aparición'} ${ti.colores[tile.runa]} ${ti.noExiste || 'no existe.'}`
+                  `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
                 );
                 return; // No seguimos con la invocación
               }
