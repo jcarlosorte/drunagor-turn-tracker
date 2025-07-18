@@ -149,7 +149,7 @@ const InitTracker = () => {
     return source.find(c => !used.has(c.id)) || null;
   };
     
-  const spawnBatchEnemies = (count, scenarioMonster) => {
+  const spawnBatchEnemies2 = (count, scenarioMonster) => {
     if (!scenarioMonster) return;
   
     const isBig = scenarioMonster.size === 'grande';
@@ -185,7 +185,32 @@ const InitTracker = () => {
     });
   };
 
+  const spawnBatchEnemies = (count, scenarioMonster) => {
+    if (!scenarioMonster) return;
   
+    for (let i = 0; i < count; i++) {
+      // Dejamos que la lógica original de colores maneje todo
+      const uuid = uuidv4();
+      const isBig = scenarioMonster.size === 'grande';
+      const nextColor = assignColorToEnemy(uuid, isBig);
+  
+      if (!nextColor) {
+        alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+        return; // Paramamos si no hay más colores
+      }
+  
+      // 👉 Añadimos el enemigo normalmente, pero forzando este colorId
+      handleManualEnemyAdd(
+        scenarioMonster.id,
+        scenarioMonster.comportamiento,
+        scenarioMonster.categoria,
+        'NoShow',
+        nextColor,
+        uuid
+      );
+    }
+  };
+
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
