@@ -22,6 +22,8 @@ export const InitEnemiesProvider = ({ children }) => {
   // Función para asignar un color a un enemigo
   const assignColorToEnemy = (enemyUUID, isBig = false, forcedColor = false) => {
     const available = forcedColor || getNextAvailableColor(isBig);
+    console.log(forcedColor);
+    console.log(available);
     if (!available) {
       alert(ti.noColorsAvailable || 'No hay más colores disponibles');
       return undefined;
@@ -32,7 +34,7 @@ export const InitEnemiesProvider = ({ children }) => {
     } else {
       setUsedColors(prev => [...prev, available.id]);
     }
-  
+    console.log(setUsedColors);
     setEnemyColorMap(prev => ({ ...prev, [enemyUUID]: available.id }));
     return available.id;
   };
