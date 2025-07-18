@@ -180,7 +180,7 @@ const InitTracker = () => {
       //const uuid = uuidv4();
       //setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
       //assignColorToEnemy(uuid, isBig, forcedColor);
-      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor, uuid);
+      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor);
     });
   };
 
