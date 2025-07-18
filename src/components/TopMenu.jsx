@@ -690,7 +690,7 @@ const TopMenu = ({
                 )}
                 {spawnPoints.length > 0 && (
                 <div className="mt-3 p-2 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-yellow-300 mb-2">{t.spawnPoints || 'Puntos de Aparición'}</div>
+                  <div className="text-xs text-yellow-300 mb-2">{t.spawnPoints}</div>
                   <div className="flex gap-2 flex-wrap justify-center">
                     {spawnPoints.map(point => (
                       <div
