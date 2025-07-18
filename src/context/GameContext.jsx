@@ -311,7 +311,8 @@ export const GameProvider = ({ children }) => {
         showTileToast,
         tileToasts,
         spawnPoints,
-        setSpawnPoints
+        initializeSpawnPoints,
+        removeSpawnPoint,
       }}
     >
       {children}
