@@ -246,6 +246,37 @@ export const GameProvider = ({ children }) => {
     return tile;
   };
 
+  const initializeSpawnPoints = () => {
+    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const newPoints = [];
+  
+    colors.forEach(color => {
+      const tile = deleteAvailableTileByColor(color); // quita 1 ficha de la bolsa
+      if (tile) {
+        newPoints.push({
+          uuid: uuidv4(),
+          runa: color,
+          tile
+        });
+      } else {
+        alert(`No hay fichas ${ti.colores[color]} para crear punto de aparición`);
+      }
+    });
+  
+    setSpawnPoints(newPoints);
+  };
+  
+  const removeSpawnPoint = (uuid) => {
+    setSpawnPoints(prev => {
+      const point = prev.find(p => p.uuid === uuid);
+      if (point) {
+        // ✅ devolvemos la ficha a la bolsa
+        restoreTile(point.tile);
+      }
+      return prev.filter(p => p.uuid !== uuid);
+    });
+  };
+
 
   
   return (
