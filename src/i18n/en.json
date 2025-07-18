@@ -280,6 +280,8 @@
     "added": "Have been added",
     "invocaran": "and will be summoned in Spawning Point ",
     "spawnPoints": "Spawning Points",
+    "incursionFail": "❌ Raid NOT executed: Spawn Point",
+    "noExiste": "does NOT exist",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
