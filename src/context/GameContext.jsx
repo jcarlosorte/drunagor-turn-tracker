@@ -31,7 +31,7 @@ export const GameProvider = ({ children }) => {
   const [usedTiles, setUsedTiles] = useState([]);
   const [scenarioMonster, setScenarioMonster] = useState(null);
   const [tileToasts, setTileToasts] = useState([]);
-    
+  const [spawnPoints, setSpawnPoints] = useState([]);
   const addRune = (color) => {
     
     setRunes(prev => ({
@@ -278,7 +278,9 @@ export const GameProvider = ({ children }) => {
         setScenarioMonster,
         manifestTile,
         showTileToast,
-        tileToasts
+        tileToasts,
+        spawnPoints,
+        setSpawnPoints
       }}
     >
       {children}
