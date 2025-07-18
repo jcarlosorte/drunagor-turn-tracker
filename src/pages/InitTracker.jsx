@@ -225,13 +225,13 @@ const InitTracker = () => {
   };
 
   
-  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUuid = null ) => {
+  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUUID = null ) => {
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
     );
     if (!selected) return;
-    const uuid = forcedUuid ?? uuidv4();
+    const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig);
     console.log(uuid);
