@@ -140,7 +140,46 @@ const InitTracker = () => {
     );
   };
   
+  const getNextAvailableColorSimulated = (isBig, simulatedSmall, simulatedBig) => {
+    const used = new Set(isBig ? simulatedBig : simulatedSmall);
+    const source = isBig ? ENEMY_RING_COLORS_BIG : ENEMY_RING_COLORS;
+    return source.find(c => !used.has(c.id)) || null;
+  };
+    
+  const spawnBatchEnemies = (count, scenarioMonster) => {
+    if (!scenarioMonster) return;
+  
+    const isBig = scenarioMonster.size === 'grande';
+  
+    let simulatedUsedSmall = [...usedColors];
+    let simulatedUsedBig = [...usedColorsBig];
+    const generatedColors = [];
+  
+    for (let i = 0; i < count; i++) {
+      // obtenemos el siguiente color disponible
+      const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+      if (!nextColorId) {
+        alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+        return undefined; // paramos si ya no hay colores
+      }
+      // guardamos el color en la simulación
+      if (isBig) simulatedUsedBig.push(nextColorId);
+      else simulatedUsedSmall.push(nextColorId);
+  
+      generatedColors.push(nextColorId);
+    }
+  
+    // ✅ Sincronizamos los colores usados SOLO UNA VEZ
+    setUsedColors(simulatedUsedSmall);
+    setUsedColorsBig(simulatedUsedBig);
+  
+    // ✅ Ahora llamamos al add original, pasándole cada color preasignado
+    generatedColors.forEach((forcedColor) => {
+      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor);
+    });
+  };
 
+  
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
@@ -181,7 +220,7 @@ const InitTracker = () => {
   };
 
   
-  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show') => {
+  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null ) => {
     setManualSelector({ open: false, color: null });
     const selected = ENEMIES.find(
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
@@ -189,7 +228,7 @@ const InitTracker = () => {
     if (!selected) return;
     const uuid = uuidv4();
     const isBig = selected.size === 'grande';
-    const colorId = assignColorToEnemy(uuid, isBig);
+    const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig);
     console.log(uuid);
     console.log(enemyId);
     console.log(behaviorType);
@@ -573,22 +612,6 @@ const InitTracker = () => {
   const roundRef = useRef(0);
   const previousIndexRef = useRef(null);
   
-  const spawnScenarioEnemies = async (faltan, scenarioMonster) => {
-    for (let i = 0; i < faltan; i++) {
-      flushSync(() => {
-        handleManualEnemyAdd(
-          scenarioMonster.id,
-          scenarioMonster.comportamiento,
-          scenarioMonster.categoria,
-          'NoShow'
-        );
-      });
-  
-      // Esperar al siguiente ciclo del event loop para permitir que React commitée
-      await new Promise((res) => setTimeout(res, 0));
-    }
-  };
-  
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
@@ -691,9 +714,8 @@ const InitTracker = () => {
             if (isCaraB || (!isCaraB && noEnemies)) {
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
-                spawnScenarioEnemies(faltan, scenarioMonster).then(() => {
-                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
-                });
+                spawnBatchEnemies(faltan, scenarioMonster);
+                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
                 const exceso = totalFinal - 4;
