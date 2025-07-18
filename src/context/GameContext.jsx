@@ -271,7 +271,7 @@ export const GameProvider = ({ children }) => {
       const point = prev.find(p => p.uuid === uuid);
       if (point) {
         // ✅ devolvemos la ficha a la bolsa
-        restoreTile(point.tile);
+        //restoreTile(point.tile);
       }
       return prev.filter(p => p.uuid !== uuid);
     });
