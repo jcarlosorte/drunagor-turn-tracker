@@ -729,7 +729,7 @@ const InitTracker = () => {
                 showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
               }
             } else {
-              console.log(`⏭️ Incursión en cara A pero hay enemigos → no manifestamos`);
+              showScenarioToast(`${ti.noManifestamos}`);
             }
           }
     
