@@ -78,7 +78,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -1330,7 +1330,7 @@ const InitTracker = () => {
         <div className={isLandscape ? "" : "portrait-lock"}>
           <div className="p-4 text-gray-200 bg-gradient-to-b from-gray-900 to-black min-h-screen">
             <div className="no-header" />
-            <h1 className="text-3xl font-bold text-yellow-300 font-fantasy mb-6">- {ti.title || 'Inicio del Tracker'} -</h1>
+            
             
             <TopMenu
               onAddEnemy={openCategorySelector}
@@ -1341,7 +1341,24 @@ const InitTracker = () => {
               onSelectRuneCard={handleAddRuneCard}
               onTileDraw={handleTileDraw}
             />
-              
+            {/* Puntos de aparición visibles encima del track */}
+              <div className="absolute top-10 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+                {spawnPoints.map(point => (
+                  <div
+                    key={point.uuid}
+                    className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2 shadow-lg`}
+                  >
+                    <span>{ts.colores[point.runa]}</span>
+                    <button
+                      onClick={() => removeSpawnPoint(point.uuid)}
+                      className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
                 <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
