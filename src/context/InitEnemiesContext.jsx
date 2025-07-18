@@ -103,7 +103,7 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap }}>
       {children}
     </InitEnemiesContext.Provider>
   );
