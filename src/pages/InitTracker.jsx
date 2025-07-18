@@ -168,44 +168,11 @@ const InitTracker = () => {
       generatedColors.push(nextColorId.id);
       
     }
-  
-    // ✅ Sincronizamos los colores usados SOLO UNA VEZ
-    //setUsedColors([...simulatedUsedSmall]);
-    //setUsedColorsBig([...simulatedUsedBig]);
 
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
-      //const uuid = uuidv4();
-      //setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
-      //assignColorToEnemy(uuid, isBig, forcedColor);
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor);
     });
-  };
-
-  const spawnBatchEnemies2 = (count, scenarioMonster) => {
-    if (!scenarioMonster) return;
-  
-    for (let i = 0; i < count; i++) {
-      // Dejamos que la lógica original de colores maneje todo
-      const uuid = uuidv4();
-      const isBig = scenarioMonster.size === 'grande';
-      const nextColor = assignColorToEnemy(uuid, isBig);
-  
-      if (!nextColor) {
-        alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-        return; // Paramamos si no hay más colores
-      }
-  
-      // 👉 Añadimos el enemigo normalmente, pero forzando este colorId
-      handleManualEnemyAdd(
-        scenarioMonster.id,
-        scenarioMonster.comportamiento,
-        scenarioMonster.categoria,
-        'NoShow',
-        nextColor,
-        uuid
-      );
-    }
   };
 
   const handleCategorySelect = (categoryKey) => {
@@ -256,7 +223,6 @@ const InitTracker = () => {
     if (!selected) return;
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
-    //const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig);
     const colorId = assignColorToEnemy(uuid, isBig, forcedColorId);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
