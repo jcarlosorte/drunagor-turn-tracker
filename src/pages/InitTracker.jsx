@@ -58,7 +58,7 @@ const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmun
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, enemyColorMap, setEnemyColorMap } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -91,9 +91,6 @@ const InitTracker = () => {
   const [scenarioToasts, setScenarioToasts] = useState([]);
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
-  const [usedColors, setUsedColors] = useState([]);
-  const [usedColorsBig, setUsedColorsBig] = useState([]);
-  const [enemyColorMap, setEnemyColorMap] = useState({});
   
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id, color = null) => {
@@ -161,7 +158,6 @@ const InitTracker = () => {
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
       const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-      //const nextColor = assignColorToEnemy(uuid, isBig, nextColorId);
       
       if (!nextColorId.id) {
         alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
@@ -175,15 +171,15 @@ const InitTracker = () => {
     }
   
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
-    //setUsedColors([...simulatedUsedSmall]);
-    //setUsedColorsBig([...simulatedUsedBig]);
+    setUsedColors([...simulatedUsedSmall]);
+    setUsedColorsBig([...simulatedUsedBig]);
     console.log(simulatedUsedSmall);
     console.log(usedColors);
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
       const uuid = uuidv4();
-      //setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
-      assignColorToEnemy(uuid, isBig, forcedColor);
+      setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
+      //assignColorToEnemy(uuid, isBig, forcedColor);
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor, uuid);
     });
   };
