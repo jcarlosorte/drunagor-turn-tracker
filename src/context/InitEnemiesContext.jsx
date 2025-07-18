@@ -20,8 +20,8 @@ export const InitEnemiesProvider = ({ children }) => {
   };
   
   // Función para asignar un color a un enemigo
-  const assignColorToEnemy = (enemyUUID, isBig = false) => {
-    const available = getNextAvailableColor(isBig);
+  const assignColorToEnemy = (enemyUUID, isBig = false, forcedColor = false) => {
+    const available = forcedColor || getNextAvailableColor(isBig);
     if (!available) {
       alert(ti.noColorsAvailable || 'No hay más colores disponibles');
       return undefined;
@@ -103,7 +103,7 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig }}>
       {children}
     </InitEnemiesContext.Provider>
   );
