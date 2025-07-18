@@ -282,6 +282,7 @@
     "spawnPoints": "Spawning Points",
     "incursionFail": "❌ Raid NOT executed: Spawn Point",
     "noExiste": "does NOT exist",
+    "noManifestamos": "⏭️ Raid on side A but there are enemies → we do not demonstrate",
     "tipo_ataque": {
       "label": "Attack Type",
       "distancia": "Ranged",
