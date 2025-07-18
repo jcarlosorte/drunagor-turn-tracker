@@ -172,8 +172,8 @@ const InitTracker = () => {
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
     //setUsedColors([...simulatedUsedSmall]);
     //setUsedColorsBig([...simulatedUsedBig]);
-    //console.log(simulatedUsedSmall);
-    //console.log(usedColors);
+    console.log(simulatedUsedSmall);
+    console.log(usedColors);
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
       //const uuid = uuidv4();
@@ -747,6 +747,7 @@ const InitTracker = () => {
               const tile = manifestTile();
               if (faltan > 0 && scenarioMonster) {
                 spawnBatchEnemies(faltan, scenarioMonster);
+                console.log(faltan);
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
