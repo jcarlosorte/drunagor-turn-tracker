@@ -149,7 +149,7 @@ const InitTracker = () => {
     return source.find(c => !used.has(c.id)) || null;
   };
     
-  const spawnBatchEnemies2 = (count, scenarioMonster) => {
+  const spawnBatchEnemies = (count, scenarioMonster) => {
     if (!scenarioMonster) return;
   
     const isBig = scenarioMonster.size === 'grande';
@@ -161,6 +161,8 @@ const InitTracker = () => {
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
       const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+      //const nextColor = assignColorToEnemy(uuid, isBig, nextColorId);
+      
       if (!nextColorId.id) {
         alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
         return undefined; // paramos si ya no hay colores
@@ -173,19 +175,20 @@ const InitTracker = () => {
     }
   
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
-    setUsedColors([...simulatedUsedSmall]);
-    setUsedColorsBig([...simulatedUsedBig]);
+    //setUsedColors([...simulatedUsedSmall]);
+    //setUsedColorsBig([...simulatedUsedBig]);
     console.log(simulatedUsedSmall);
     console.log(usedColors);
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
       const uuid = uuidv4();
-      setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
+      //setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
+      assignColorToEnemy(uuid, isBig, forcedColor);
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor, uuid);
     });
   };
 
-  const spawnBatchEnemies = (count, scenarioMonster) => {
+  const spawnBatchEnemies2 = (count, scenarioMonster) => {
     if (!scenarioMonster) return;
   
     for (let i = 0; i < count; i++) {
