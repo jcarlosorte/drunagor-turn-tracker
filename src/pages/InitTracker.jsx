@@ -171,14 +171,14 @@ const InitTracker = () => {
     }
   
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
-    setUsedColors([...simulatedUsedSmall]);
-    setUsedColorsBig([...simulatedUsedBig]);
-    console.log(simulatedUsedSmall);
-    console.log(usedColors);
+    //setUsedColors([...simulatedUsedSmall]);
+    //setUsedColorsBig([...simulatedUsedBig]);
+    //console.log(simulatedUsedSmall);
+    //console.log(usedColors);
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
-      const uuid = uuidv4();
-      setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
+      //const uuid = uuidv4();
+      //setEnemyColorMap(prev => ({ ...prev, [uuid]: forcedColor }));
       //assignColorToEnemy(uuid, isBig, forcedColor);
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor, uuid);
     });
