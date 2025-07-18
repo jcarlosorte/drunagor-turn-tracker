@@ -78,7 +78,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -703,6 +703,14 @@ const InitTracker = () => {
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               const tile = manifestTile();
+              const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+              if (!spawnExists) {
+                // ❌ No hay punto de aparición para ese color
+                showScenarioToast(
+                  `${ti.incursionFail || '❌ Incursión NO ejecutada: el punto de aparición'} ${ti.colores[tile.runa]} ${ti.noExiste || 'no existe.'}`
+                );
+                return; // No seguimos con la invocación
+              }
               if (faltan > 0 && scenarioMonster) {
                 spawnBatchEnemies(faltan, scenarioMonster);
                 console.log(faltan);
