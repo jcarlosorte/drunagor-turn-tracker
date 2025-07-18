@@ -280,6 +280,7 @@
       "Enemies": "Enemigos",
       "added": "Se han añadido",
       "invocaran": "y se invocarán en el Punto de Aparición ",
+      "spawnPoints": "Puntos de Aparición",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
