@@ -283,6 +283,7 @@
       "spawnPoints": "Puntos de Aparición",
       "incursionFail": "❌ Incursión NO ejecutada: el punto de aparición",
       "noExiste": "NO exixte",
+      "noManifestamos": "⏭️ Incursión en cara A pero hay enemigos → no manifestamos",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
