@@ -709,9 +709,6 @@ const InitTracker = () => {
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
-                console.log(totalFinal);
-                console.log(alreadyPlaced);
-                console.log(maxMonstruos);
                 const exceso = totalFinal - 4;
                 const damage = exceso * 3;
                 showScenarioToast(`${ti.excesoIncursion} ${damage} ${ti.daño}.`);
@@ -928,10 +925,7 @@ const InitTracker = () => {
   const showScenarioToast = (message) => {
     const id = uuidv4();
     setScenarioToasts(prev => [...prev, { id, message }]);
-  
-    setTimeout(() => {
-      setScenarioToasts(prev => prev.filter(t => t.id !== id));
-    }, 3000);
+ 
   };
 
   if (!isLandscape) {
@@ -1524,12 +1518,25 @@ const InitTracker = () => {
         {scenarioToasts.map(toast => (
           <div
             key={toast.id}
-            className="bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm"
+            className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
           >
-            {toast.message}
+            {/* ✅ Mensaje del toast */}
+            <span>{toast.message}</span>
+      
+            {/* ✅ Botón para cerrar manualmente */}
+            <button
+              onClick={() => {
+                setScenarioToasts(prev => prev.filter(t => t.id !== toast.id));
+              }}
+              className="ml-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+              title="Cerrar"
+            >
+              ✕
+            </button>
           </div>
         ))}
       </div>
+
         
       </PageTransition>
   );
