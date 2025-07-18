@@ -231,6 +231,7 @@ const InitTracker = () => {
       e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
     );
     if (!selected) return;
+    console.log(forcedUUID);
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = forcedColorId ?? assignColorToEnemy(uuid, isBig);
@@ -238,6 +239,7 @@ const InitTracker = () => {
     console.log(enemyId);
     console.log(behaviorType);
     console.log(category);
+    console.log(forcedColorId);
     console.log(colorId);
     if (selected.categoria === 'comandante') {
       openCommanderPCModal((pcValue) => {
