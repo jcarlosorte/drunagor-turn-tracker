@@ -175,7 +175,8 @@ const InitTracker = () => {
     // ✅ Sincronizamos los colores usados SOLO UNA VEZ
     setUsedColors([...simulatedUsedSmall]);
     setUsedColorsBig([...simulatedUsedBig]);
-  
+    console.log(simulatedUsedSmall);
+    console.log(usedColors);
     // ✅ Ahora llamamos al add original, pasándole cada color preasignado
     generatedColors.forEach((forcedColor) => {
       const uuid = uuidv4();
