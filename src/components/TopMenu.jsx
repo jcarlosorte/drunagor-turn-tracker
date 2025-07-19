@@ -710,7 +710,7 @@ const TopMenu = ({
                     onClick={() => setSpawnPoints([])}
                     className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
                   >
-                    ✕ {t.removeAll}
+                    ✕ {t.removeSP}
                   </button>
                 </div>
               
