@@ -118,6 +118,7 @@ export const GameProvider = ({ children }) => {
     });
     setPilas([]); // 🔁 Limpiar también las pilas
     clearRunes();
+    setSpawnPoints([]);
   };
 
   const discardTileByColor = (color) => {
