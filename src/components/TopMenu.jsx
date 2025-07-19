@@ -656,7 +656,6 @@ const TopMenu = ({
                     onClick={() => {
                       const carta = INCURSION.find(c => c.cara === 'A');
                       if (carta) handleSelectUniqueCard(carta);
-                      initializeSpawnPoints(); 
                     }}
                     className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
                       ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
@@ -688,28 +687,57 @@ const TopMenu = ({
                     ))}
                   </div>
                 )}
-                {spawnPoints.length > 0 && (
-                <div className="mt-3 p-2 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-yellow-300 mb-2">{t.spawnPoints}</div>
-                  <div className="flex gap-2 flex-wrap justify-center">
-                    {spawnPoints.map(point => (
-                      <div
-                        key={point.uuid}
-                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                      >
-                        <span>{t.colores[point.runa]}</span>
-                        <button
-                          onClick={() => removeSpawnPoint(point.uuid)}
-                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
               </div>
+              
+              {/* Gestión manual de puntos de aparición */}
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md mt-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiRuneStone className="text-cyan-400 text-xl" />
+                  <span className="font-semibold">{t.spawnPoints || 'Puntos de Aparición'}</span>
+                </div>
+              
+                <div className="flex gap-2 flex-wrap">
+                  {/* Botón para generar todos los puntos */}
+                  <button
+                    onClick={() => initializeSpawnPoints()}
+                    className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                  >
+                    ➕ {t.addSpawnPoints || 'Añadir puntos de aparición'}
+                  </button>
+              
+                  {/* Botón para limpiar todos los puntos */}
+                  <button
+                    onClick={() => setSpawnPoints([])}
+                    className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                  >
+                    ✕ {t.removeAll || 'Eliminar todos'}
+                  </button>
+                </div>
+              
+                {/* Si hay puntos activos, mostrarlos */}
+                {spawnPoints.length > 0 && (
+                  <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                    <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints || 'Puntos activos'}</div>
+                    <div className="flex gap-2 flex-wrap justify-center">
+                      {spawnPoints.map(point => (
+                        <div
+                          key={point.uuid}
+                          className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                        >
+                          <span>{t.colores[point.runa]}</span>
+                          <button
+                            onClick={() => removeSpawnPoint(point.uuid)}
+                            className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
       
               {/* Defensa */}
               <div className="bg-gray-700 rounded p-2 mb-2">
