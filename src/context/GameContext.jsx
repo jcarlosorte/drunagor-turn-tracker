@@ -310,6 +310,7 @@ export const GameProvider = ({ children }) => {
         manifestTile,
         showTileToast,
         tileToasts,
+        setSpawnPoints,
         spawnPoints,
         initializeSpawnPoints,
         removeSpawnPoint,
