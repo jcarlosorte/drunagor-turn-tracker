@@ -186,32 +186,32 @@ export const CARTAS_HEROE_CAIDO = [
 export const ALDEANO = [
   {
     id: 'aldeano_1',
-    nombre: 'aldeano_1',
+    accion: 'aldeano_1',
     texto: 'aldeano_1'
   },
   {
     id: 'aldeano_2',
-    nombre: 'aldeano_2',
+    accion: 'aldeano_2',
     texto: 'aldeano_2'
   },
   {
     id: 'aldeano_3',
-    nombre: 'aldeano_3',
+    accion: 'aldeano_3',
     texto: 'aldeano_3'
   },
   {
     id: 'aldeano_4',
-    nombre: 'aldeano_4',
+    accion: 'aldeano_4',
     texto: 'aldeano_4'
   },
   {
     id: 'aldeano_5',
-    nombre: 'aldeano_5',
+    accion: 'aldeano_5',
     texto: 'aldeano_5'
   },
   {
     id: 'aldeano_6',
-    nombre: 'aldeano_6',
+    accion: 'aldeano_6',
     texto: 'aldeano_6'
   }
 ];
