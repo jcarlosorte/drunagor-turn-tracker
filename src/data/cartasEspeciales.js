@@ -277,10 +277,8 @@ export const ERRANTES = [
     accion: 'errantes_5',
     texto: {
       1: 'errantes_51',
-      2: 'errantes_52',
-      3: 'errantes_53',
-      4: 'errantes_54',
-      5: 'errantes_55'
+      3: 'errantes_52',
+      5: 'errantes_53'
     },
     textoPorRango: [
       { rango: [1, 2], texto: 'errantes_5_1' },
@@ -294,10 +292,8 @@ export const ERRANTES = [
     accion: 'errantes_6',
     texto: {
       1: 'errantes_61',
-      2: 'errantes_62',
-      3: 'errantes_63',
-      4: 'errantes_64',
-      5: 'errantes_65'
+      3: 'errantes_62',
+      5: 'errantes_63'
     },
     textoPorRango: [
       { rango: [1, 2], texto: 'errantes_6_1' },
