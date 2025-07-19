@@ -186,31 +186,37 @@ export const CARTAS_HEROE_CAIDO = [
 export const ALDEANO = [
   {
     id: 'aldeano_1',
+    nombre: 'aldeano_1',
     accion: 'aldeano_1',
     texto: 'aldeano_1'
   },
   {
     id: 'aldeano_2',
+    nombre: 'aldeano_2',
     accion: 'aldeano_2',
     texto: 'aldeano_2'
   },
   {
     id: 'aldeano_3',
+    nombre: 'aldeano_3',
     accion: 'aldeano_3',
     texto: 'aldeano_3'
   },
   {
     id: 'aldeano_4',
+    nombre: 'aldeano_4',
     accion: 'aldeano_4',
     texto: 'aldeano_4'
   },
   {
     id: 'aldeano_5',
+    nombre: 'aldeano_5',
     accion: 'aldeano_5',
     texto: 'aldeano_5'
   },
   {
     id: 'aldeano_6',
+    nombre: 'aldeano_6',
     accion: 'aldeano_6',
     texto: 'aldeano_6'
   }
@@ -220,44 +226,84 @@ export const ERRANTES = [
   {
     id: 'errantes_1',
     nombre: 'errantes_1',
-    texto: 'errantes_t1_1',
-    texto2: 'errantes_t1_2',
-    accion1: 'errantes_a1_1'
+    accion: 'errantes_1',
+    texto: {
+      1: 'errantes_11',
+      2: 'errantes_12',
+      3: 'errantes_13',
+      4: 'errantes_14',
+      5: 'errantes_15'
+    }
   },
   {
     id: 'errantes_2',
     nombre: 'errantes_2',
-    texto: 'errantes_t2_1',
-    texto2: 'errantes_t2_2',
-    accion1: 'errantes_a2_1'
+    accion: 'errantes_2',
+    texto: {
+      1: 'errantes_21',
+      2: 'errantes_22',
+      3: 'errantes_23',
+      4: 'errantes_24',
+      5: 'errantes_25'
+    }
   },
   {
     id: 'errantes_3',
     nombre: 'errantes_3',
-    texto: 'errantes_t3_1',
-    texto2: 'errantes_t3_2',
-    accion1: 'errantes_a3_1'
+    accion: 'errantes_3',
+    texto: {
+      1: 'errantes_31',
+      2: 'errantes_32',
+      3: 'errantes_33',
+      4: 'errantes_34',
+      5: 'errantes_35'
+    }
   },
   {
     id: 'errantes_4',
     nombre: 'errantes_4',
-    texto: 'errantes_t4_1',
-    texto2: 'errantes_t4_2',
-    accion1: 'errantes_a4_1'
+    accion: 'errantes_4',
+    texto: {
+      1: 'errantes_41',
+      2: 'errantes_42',
+      3: 'errantes_43',
+      4: 'errantes_44',
+      5: 'errantes_45'
+    }
   },
   {
     id: 'errantes_5',
     nombre: 'errantes_5',
-    texto: 'errantes_t5_1',
-    texto2: 'errantes_t5_2',
-    accion1: 'errantes_a5_1'
+    accion: 'errantes_5',
+    texto: {
+      1: 'errantes_51',
+      2: 'errantes_52',
+      3: 'errantes_53',
+      4: 'errantes_54',
+      5: 'errantes_55'
+    },
+    textoPorRango: [
+      { rango: [1, 2], texto: 'errantes_5_1' },
+      { rango: [3, 4], texto: 'errantes_5_2' },
+      { rango: [5, 5], texto: 'errantes_5_3' }
+    ]
   },
   {
     id: 'errantes_6',
     nombre: 'errantes_6',
-    texto: 'errantes_t6_1',
-    texto2: 'errantes_t6_2',
-    accion1: 'errantes_a6_1'
+    accion: 'errantes_6',
+    texto: {
+      1: 'errantes_61',
+      2: 'errantes_62',
+      3: 'errantes_63',
+      4: 'errantes_64',
+      5: 'errantes_65'
+    },
+    textoPorRango: [
+      { rango: [1, 2], texto: 'errantes_6_1' },
+      { rango: [3, 4], texto: 'errantes_6_1' },
+      { rango: [5, 5], texto: 'errantes_6_1' }
+    ]
   }
 ];
 export const SORPRESA = [
