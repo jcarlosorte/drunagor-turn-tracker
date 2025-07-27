@@ -492,7 +492,7 @@ const InitTracker = () => {
     };
     placeRune({ rune: newRune });
     if (newRune.tipo === 'defensa'){
-      initializeDeck();
+      initializeDecks();
     };
     
   };
