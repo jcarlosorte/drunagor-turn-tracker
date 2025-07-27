@@ -300,10 +300,18 @@ export const GameProvider = ({ children }) => {
     let sourceDB = null;
   
     if (deckType === 'aldeano') {
+      if (!aldeanoDeck) {
+        console.warn(`⚠ El mazo de aldeanos no está inicializado`);
+        return null;
+      }
       selectedDeck = [...aldeanoDeck];
       setDeckFn = setAldeanoDeck;
       sourceDB = ALDEANO;
     } else if (deckType === 'errantes') {
+      if (!errantesDeck) {
+        console.warn(`⚠ El mazo de errantes no está inicializado`);
+        return null;
+      }
       selectedDeck = [...errantesDeck];
       setDeckFn = setErrantesDeck;
       sourceDB = ERRANTES;
@@ -313,8 +321,7 @@ export const GameProvider = ({ children }) => {
     }
   
     if (selectedDeck.length === 0) {
-      console.warn(`⚠ El mazo ${deckType} está vacío. Reiniciando...`);
-      initializeDecks(); // ¿quieres reiniciar automático?
+      console.warn(`⚠ El mazo ${deckType} está agotado. No se puede robar más.`);
       return null;
     }
   
@@ -329,6 +336,7 @@ export const GameProvider = ({ children }) => {
   
     return fullCardData;
   };
+
 
   const showCardToast = (card, deckType) => {
     const id = uuidv4();
