@@ -491,6 +491,10 @@ const InitTracker = () => {
       colorIndex: 10
     };
     placeRune({ rune: newRune });
+    if (newRune.tipo === 'defensa'){
+      initializeDeck();
+    };
+    
   };
 
   const onRemove = (uuid) => {
