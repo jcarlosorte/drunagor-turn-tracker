@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { FICHAS } from '@/data/fichas';
 import { useLanguage } from '@/context/LanguageContext';
+import { ALDEANO, ERRANTES } from '@/data/cartasEspeciales';
 import { v4 as uuidv4 } from 'uuid';
 
 const GameContext = createContext();
@@ -32,6 +33,8 @@ export const GameProvider = ({ children }) => {
   const [scenarioMonster, setScenarioMonster] = useState(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [spawnPoints, setSpawnPoints] = useState([]);
+  const [aldeanoDeck, setAldeanoDeck] = useState([]);
+  const [errantesDeck, setErrantesDeck] = useState([]);
   const addRune = (color) => {
     
     setRunes(prev => ({
@@ -278,8 +281,67 @@ export const GameProvider = ({ children }) => {
     });
   };
 
+  // Función de shuffle genérica
+  const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
+  const initializeDecks = () => {
+    const aldeanoBase = ALDEANO.map(card => card.id);
+    const errantesBase = ERRANTES.map(card => card.id);
   
+    setAldeanoDeck(shuffleArray(aldeanoBase));
+    setErrantesDeck(shuffleArray(errantesBase));
+  
+    console.log("✅ Mazos inicializados y barajados");
+  };
+
+  const drawCardFromDeck = (deckType) => {
+    let selectedDeck = [];
+    let setDeckFn = null;
+    let sourceDB = null;
+  
+    if (deckType === 'aldeano') {
+      selectedDeck = [...aldeanoDeck];
+      setDeckFn = setAldeanoDeck;
+      sourceDB = ALDEANO;
+    } else if (deckType === 'errantes') {
+      selectedDeck = [...errantesDeck];
+      setDeckFn = setErrantesDeck;
+      sourceDB = ERRANTES;
+    } else {
+      console.warn(`❌ Mazo desconocido: ${deckType}`);
+      return null;
+    }
+  
+    if (selectedDeck.length === 0) {
+      console.warn(`⚠ El mazo ${deckType} está vacío. Reiniciando...`);
+      initializeDecks(); // ¿quieres reiniciar automático?
+      return null;
+    }
+  
+    const drawnCardId = selectedDeck.shift(); // Sacamos la primera carta
+    setDeckFn(selectedDeck); // Guardamos el mazo actualizado
+  
+    const fullCardData = sourceDB.find(c => c.id === drawnCardId);
+    if (!fullCardData) {
+      console.error(`❌ Carta con id ${drawnCardId} no encontrada en ${deckType}`);
+      return null;
+    }
+  
+    return fullCardData;
+  };
+
+  const showCardToast = (card, deckType) => {
+    const id = uuidv4();
+    setScenarioToasts(prev => [
+      ...prev,
+      {
+        id,
+        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${ts[`cartas_${deckType}`].nombre[card.id]}`,
+        extra: ts[`cartas_${deckType}`].texto[card.id]
+      }
+    ]);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -315,6 +377,9 @@ export const GameProvider = ({ children }) => {
         spawnPoints,
         initializeSpawnPoints,
         removeSpawnPoint,
+        initializeDecks,
+        drawCardFromDeck,
+        showCardToast
       }}
     >
       {children}
