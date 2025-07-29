@@ -68,6 +68,7 @@ const InitTracker = () => {
   const tb = translations.trackerSelect?.comportamientos || {};
   const ta = translations.cartas_ataque || {};
   const ts = translations.scenarioCard || {};
+  const td = translations.defensaCard || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
