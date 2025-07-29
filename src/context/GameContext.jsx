@@ -316,6 +316,8 @@ export const GameProvider = ({ children }) => {
       setDeckFn = setErrantesDeck;
       sourceDB = ERRANTES;
     } else {
+      console.log(aldeanoDeck);
+      console.log(errantesDeck);
       console.warn(`❌ Mazo desconocido: ${deckType}`);
       return null;
     }
