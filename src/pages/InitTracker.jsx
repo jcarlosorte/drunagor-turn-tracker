@@ -689,7 +689,7 @@ const InitTracker = () => {
           } else if (currentRune.tipo === 'defensa') {
             // 🔹 Defensa → roba cartas de aldeano o errantes
             const numCartas = currentRune.numRunas || 1;
-            const mazo = currentRune.cartas; // "aldeano" o "errantes"
+            const mazo = currentRune.carta; // "aldeano" o "errantes"
             console.log(`🛡 Defensa: Roba ${numCartas} carta(s) del mazo ${mazo}`);
     
             for (let i = 0; i < numCartas; i++) {
