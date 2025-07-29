@@ -78,7 +78,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint, initializeDecks, drawCardFromDeck, showCardToast } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint, initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -112,6 +112,18 @@ const InitTracker = () => {
   
   const handleCloseToast = (uuid) => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
+  };
+
+  const showCardToast = (card, deckType) => {
+    const id = uuidv4();
+    setScenarioToasts(prev => [
+      ...prev,
+      {
+        id,
+        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${ts[`cartas_${deckType}`].nombre[card.id]}`,
+        extra: ts[`cartas_${deckType}`].texto[card.id]
+      }
+    ]);
   };
   
   const openCommanderPCModal = (callback) => {
