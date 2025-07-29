@@ -339,19 +339,6 @@ export const GameProvider = ({ children }) => {
     return fullCardData;
   };
 
-
-  const showCardToast = (card, deckType) => {
-    const id = uuidv4();
-    setScenarioToasts(prev => [
-      ...prev,
-      {
-        id,
-        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${ts[`cartas_${deckType}`].nombre[card.id]}`,
-        extra: ts[`cartas_${deckType}`].texto[card.id]
-      }
-    ]);
-  };
-
   return (
     <GameContext.Provider
       value={{
