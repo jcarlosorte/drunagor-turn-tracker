@@ -388,8 +388,7 @@ export const GameProvider = ({ children }) => {
         initializeSpawnPoints,
         removeSpawnPoint,
         initializeDecks,
-        drawCardFromDeck,
-        showCardToast
+        drawCardFromDeck
       }}
     >
       {children}
