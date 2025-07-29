@@ -121,8 +121,8 @@ const InitTracker = () => {
       ...prev,
       {
         id,
-        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${ts[`cartas_${deckType}`].nombre[card.id]}`,
-        extra: ts[`cartas_${deckType}`].texto[card.id]
+        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${td[`cartas_${deckType}`].nombre[card.id]}`,
+        extra: td[`cartas_${deckType}`].texto[card.id]
       }
     ]);
   };
