@@ -115,17 +115,30 @@ const InitTracker = () => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
-  const showCardToast = (card, deckType) => {
+  const showScenarioToast = (card, deckType, numHeroes = 1) => {
     const id = uuidv4();
-    setScenarioToasts(prev => [
-      ...prev,
-      {
-        id,
-        message: `📜 Robaste una carta del mazo ${deckType.toUpperCase()}: ${td[`cartas_${deckType}`].nombre[card.id]}`,
-        extra: td[`cartas_${deckType}`].texto[card.id]
+    const td = translations[language];
+  
+    let message = td[`cartas_${deckType}`]?.accion?.[card.id] || '';
+    let extra = '';
+  
+    // Si es mazo de errantes → mostramos las líneas hasta ese número de héroes
+    if (deckType === 'errantes') {
+      const lines = [];
+      for (let i = 1; i <= numHeroes; i++) {
+        const key = `${card.id}${i}`;
+        const line = td[`cartas_${deckType}`]?.texto?.[key];
+        if (line) lines.push(line);
       }
-    ]);
+      extra = lines.join('\n');
+    } else {
+      // Para mazos normales como aldeano
+      extra = td[`cartas_${deckType}`]?.texto?.[card.id] || '';
+    }
+  
+    setScenarioToasts(prev => [...prev, { id, message, extra }]);
   };
+
   
   const openCommanderPCModal = (callback) => {
     setOnPCConfirm(() => callback);
@@ -1573,15 +1586,16 @@ const InitTracker = () => {
             key={toast.id}
             className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
           >
-            {/* ✅ Mensaje del toast */}
-            <div>{toast.message}</div>
-
-            {toast.extra && (
-              <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
-                {toast.extra}
-              </div>
-            )}
-            
+            <div className="flex flex-col">
+              {/* ✅ Mensaje del toast */}
+              <div>{toast.message}</div>
+  
+              {toast.extra && (
+                <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
+                  {toast.extra}
+                </div>
+              )}
+            </div>
             {/* ✅ Botón para cerrar manualmente */}
             <button
               onClick={() => {
