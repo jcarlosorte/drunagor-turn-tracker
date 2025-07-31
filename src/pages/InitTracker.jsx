@@ -954,10 +954,9 @@ const InitTracker = () => {
     );
   };
 
-  const showScenarioToast = (message) => {
+  const showScenarioToast = (message, extra = null) => {
     const id = uuidv4();
-    setScenarioToasts(prev => [...prev, { id, message }]);
- 
+    setScenarioToasts(prev => [...prev, { id, message, extra }]);
   };
 
   if (!isLandscape) {
@@ -1575,8 +1574,14 @@ const InitTracker = () => {
             className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
           >
             {/* ✅ Mensaje del toast */}
-            <span>{toast.message}</span>
-      
+            <div>{toast.message}</div>
+
+            {toast.extra && (
+              <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
+                {toast.extra}
+              </div>
+            )}
+            
             {/* ✅ Botón para cerrar manualmente */}
             <button
               onClick={() => {
