@@ -117,7 +117,6 @@ const InitTracker = () => {
 
   const showCardToast = (card, deckType, numHeroes = 1) => {
     const id = uuidv4();
-    const td = translations[language];
   
     let message = td[`cartas_${deckType}`]?.accion?.[card.id] || '';
     let extra = '';
