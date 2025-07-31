@@ -115,7 +115,7 @@ const InitTracker = () => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
-  const showScenarioToast = (card, deckType, numHeroes = 1) => {
+  const showCardToast = (card, deckType, numHeroes = 1) => {
     const id = uuidv4();
     const td = translations[language];
   
