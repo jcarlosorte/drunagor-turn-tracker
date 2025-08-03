@@ -135,7 +135,7 @@ const InitTracker = () => {
       extra = translationsDeck.texto?.[card.id] || '';
     }
   
-    setScenarioToasts(prev => [...prev, { id, `${message}\n${action}`, extra }]);
+    setScenarioToasts(prev => [...prev, { id, message: `${message}\n${action}`, extra }]);
   };
 
   
