@@ -119,8 +119,9 @@ const InitTracker = () => {
     const id = uuidv4();
     const translationsDeck = td[`cartas_${deckType}`];
     const message = translationsDeck.nombre?.[card.id] || card.id;
+    message = lines.join('\n');
     const action = translationsDeck.accion?.[card.id] || '';
-    let extra = '';
+    let extra = '\n';
   
     if (deckType === 'errantes') {
       const baseId = card.id; // e.g., "errantes_1"
@@ -135,7 +136,7 @@ const InitTracker = () => {
       extra = translationsDeck.texto?.[card.id] || '';
     }
   
-    setScenarioToasts(prev => [...prev, { id, message: `${message}\n${action}`, extra }]);
+    setScenarioToasts(prev => [...prev, { id, message: `${message}\n\n${action}\n`, extra }]);
   };
 
   
