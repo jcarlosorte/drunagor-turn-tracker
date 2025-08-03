@@ -117,25 +117,25 @@ const InitTracker = () => {
 
   const showCardToast = (card, deckType, numHeroes = 1) => {
     const id = uuidv4();
-  
-    let message = td[`cartas_${deckType}`]?.accion?.[card.id] || '';
+    const translationsDeck = td[`cartas_${deckType}`];
+    const message = translationsDeck.nombre?.[card.id] || card.id;
+    const action = translationsDeck.accion?.[card.id] || '';
     let extra = '';
   
-    // Si es mazo de errantes → mostramos las líneas hasta ese número de héroes
     if (deckType === 'errantes') {
+      const baseId = card.id; // e.g., "errantes_1"
+      // Recolectar todas las líneas desde 1 hasta numHeroes
       const lines = [];
       for (let i = 1; i <= numHeroes; i++) {
-        const key = `${card.id}${i}`;
-        const line = td[`cartas_${deckType}`]?.texto?.[key];
+        const line = translationsDeck.texto?.[`${baseId}${i}`];
         if (line) lines.push(line);
       }
-      extra = lines.join('\n');
+      extra = lines.join('\n'); // Para que se muestren en líneas separadas
     } else {
-      // Para mazos normales como aldeano
-      extra = td[`cartas_${deckType}`]?.texto?.[card.id] || '';
+      extra = translationsDeck.texto?.[card.id] || '';
     }
   
-    setScenarioToasts(prev => [...prev, { id, message, extra }]);
+    setScenarioToasts(prev => [...prev, { id, message: `${action}`, extra }]);
   };
 
   
