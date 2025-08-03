@@ -119,7 +119,6 @@ const InitTracker = () => {
     const id = uuidv4();
     const translationsDeck = td[`cartas_${deckType}`];
     const message = translationsDeck.nombre?.[card.id] || card.id;
-    message = lines.join('\n');
     const action = translationsDeck.accion?.[card.id] || '';
     let extra = '\n';
   
@@ -136,7 +135,7 @@ const InitTracker = () => {
       extra = translationsDeck.texto?.[card.id] || '';
     }
   
-    setScenarioToasts(prev => [...prev, { id, message: `${message}\n\n${action}\n`, extra }]);
+    setScenarioToasts(prev => [...prev, { id, message, action, extra }]);
   };
 
   
@@ -967,9 +966,9 @@ const InitTracker = () => {
     );
   };
 
-  const showScenarioToast = (message, extra = null) => {
+  const showScenarioToast = (message, action = null, extra = null) => {
     const id = uuidv4();
-    setScenarioToasts(prev => [...prev, { id, message, extra }]);
+    setScenarioToasts(prev => [...prev, { id, message, action, extra }]);
   };
 
   if (!isLandscape) {
@@ -1588,8 +1587,14 @@ const InitTracker = () => {
           >
             <div className="flex flex-col">
               {/* ✅ Mensaje del toast */}
-              <div>{toast.message}</div>
-  
+              {toast.message && (
+                <div className="font-semibold uppercase">{toast.message}</div> // nombre de la carta
+              )}
+
+              {toast.action && (
+                <div className="text-sm">{toast.action}</div> // acción principal
+              )}
+              
               {toast.extra && (
                 <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
                   {toast.extra}
