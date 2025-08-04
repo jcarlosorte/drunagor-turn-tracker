@@ -115,7 +115,7 @@ const InitTracker = () => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
-  const showCardToast = (card, deckType, numHeroes = 1) => {
+  const showCardToast = (card, deckType) => {
     const id = uuidv4();
     const translationsDeck = td[`cartas_${deckType}`];
     const message = translationsDeck.nombre?.[card.id] || card.id;
@@ -125,7 +125,6 @@ const InitTracker = () => {
     if (deckType === 'errantes') {
       for (let i = 1; i <= numHeroes; i++) {
         const line = translationsDeck.texto?.[`${card.id}${i}`];
-        console.log(line);
         if (line) extra += `${line}\n`;
       }
     } else {
