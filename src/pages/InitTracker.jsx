@@ -115,6 +115,23 @@ const InitTracker = () => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
+  const formatTextWithBraces = (text) => {
+    const parts = text.split(/(\{.*?\})/g); // divide entre bloques con llaves
+    return parts.map((part, idx) => {
+      const match = part.match(/^\{(.*?)\}$/);
+      if (match) {
+        const key = match[1];
+        const translated = td?.[key] || key;
+        return (
+          <span key={idx} className="text-blue-300 font-semibold">
+            {translated}
+          </span>
+        );
+      }
+      return <span key={idx}>{part}</span>;
+    });
+  };
+  
   const showCardToast = (card, deckType) => {
     const id = uuidv4();
     const translationsDeck = td[`cartas_${deckType}`];
@@ -130,7 +147,8 @@ const InitTracker = () => {
     } else {
       extra = translationsDeck.texto?.[card.id] || '';
     }
-  
+    
+    formatTextWithBraces(action);
     setScenarioToasts(prev => [...prev, { id, message, action, extra }]);
   };
 
