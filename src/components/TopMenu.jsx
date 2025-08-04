@@ -745,7 +745,6 @@ const TopMenu = ({
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <button
-                      disabled={!scenarioMonster}
                       onClick={() => {
                         const carta = DEFENSA.find(c => c.cara === 'A');
                         if (carta) handleSelectUniqueCard(carta);
