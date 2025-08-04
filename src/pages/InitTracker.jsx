@@ -123,14 +123,10 @@ const InitTracker = () => {
     let extra = '\n';
   
     if (deckType === 'errantes') {
-      const baseId = card.id; // e.g., "errantes_1"
-      // Recolectar todas las líneas desde 1 hasta numHeroes
-      const lines = [];
       for (let i = 1; i <= numHeroes; i++) {
-        const line = translationsDeck.texto?.[`${baseId}${i}`];
-        if (line) lines.push(line);
+        const line = translationsDeck.texto?.[`${card.id}${i}`];
+        if (line) extra += `${line}\n`;
       }
-      extra = lines.join('\n'); // Para que se muestren en líneas separadas
     } else {
       extra = translationsDeck.texto?.[card.id] || '';
     }
