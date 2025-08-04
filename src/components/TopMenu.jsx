@@ -562,8 +562,6 @@ const TopMenu = ({
                   ))}
                 </div>
               </div>
-  
-  
               
               <div className="flex justify-center gap-4 mt-2">
                 <button
@@ -599,199 +597,200 @@ const TopMenu = ({
             transition={{ duration: 0.25 }}
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
-
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <GiDaemonSkull className="text-red-400 text-xl" />
-                <span className="font-semibold">{t.monstruoEscenario}</span>
-              </div>
+            <div className="flex flex-col gap-4 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500">
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiDaemonSkull className="text-red-400 text-xl" />
+                  <span className="font-semibold">{t.monstruoEscenario}</span>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 justify-start">
+                  {monstruosUnicos.map(monstruo => {
+                    const selected = scenarioMonster?.id === monstruo.id;
+                    return (
+                      <div
+                        key={monstruo.id}
+                        onClick={() => setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo)}
+                        className={`relative w-24 h-24 rounded border-2 cursor-pointer transition-transform transform hover:scale-105
+                          ${selected ? 'border-green-500 ring-2 ring-green-300' : 'border-gray-600'}
+                        `}
+                      >
+                        <img
+                          src={monstruo.imagen}
+                          alt={monstruo.id}
+                          className="object-cover w-full h-full rounded"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-xs text-white text-center px-1 py-0.5">
+                          {translations.enemies.escenario?.[monstruo.id] || monstruo.id}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               
-              <div className="flex flex-wrap gap-2 justify-start">
-                {monstruosUnicos.map(monstruo => {
-                  const selected = scenarioMonster?.id === monstruo.id;
-                  return (
-                    <div
-                      key={monstruo.id}
-                      onClick={() => setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo)}
-                      className={`relative w-24 h-24 rounded border-2 cursor-pointer transition-transform transform hover:scale-105
-                        ${selected ? 'border-green-500 ring-2 ring-green-300' : 'border-gray-600'}
+                {scenarioMonster && (
+                  <div className="mt-2 text-xs text-gray-300">
+                    ✅ {t.monstruoSeleccionado}: <strong>{translations.enemies.escenario?.[scenarioMonster.id] || scenarioMonster.id}</strong>
+                  </div>
+                )}
+              </div>
+  
+              
+              <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <GiVillage className="text-yellow-300 text-xl" />
+                  <span className="font-semibold">{t.escenario || 'Cartas de Escenario'}</span>
+                </div>
+        
+                {/* Incursión */}
+                <div className="bg-gray-700 rounded p-2 mb-2">
+                  <div className="flex text-orange font-semibold p-2 mb-2">
+                    <GiUprising className="text-blue text-xl" />
+                     <span className="font-semibold"> {t.incru1}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      disabled={!scenarioMonster}
+                      onClick={() => {
+                        const carta = INCURSION.find(c => c.cara === 'A');
+                        if (carta) handleSelectUniqueCard(carta);
+                      }}
+                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
                       `}
                     >
-                      <img
-                        src={monstruo.imagen}
-                        alt={monstruo.id}
-                        className="object-cover w-full h-full rounded"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-xs text-white text-center px-1 py-0.5">
-                        {translations.enemies.escenario?.[monstruo.id] || monstruo.id}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            
-              {scenarioMonster && (
-                <div className="mt-2 text-xs text-gray-300">
-                  ✅ {t.monstruoSeleccionado}: <strong>{translations.enemies.escenario?.[scenarioMonster.id] || scenarioMonster.id}</strong>
-                </div>
-              )}
-            </div>
-
-            
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <GiVillage className="text-yellow-300 text-xl" />
-                <span className="font-semibold">{t.escenario || 'Cartas de Escenario'}</span>
-              </div>
-      
-              {/* Incursión */}
-              <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="flex text-orange font-semibold p-2 mb-2">
-                  <GiUprising className="text-blue text-xl" />
-                   <span className="font-semibold"> {t.incru1}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    disabled={!scenarioMonster}
-                    onClick={() => {
-                      const carta = INCURSION.find(c => c.cara === 'A');
-                      if (carta) handleSelectUniqueCard(carta);
-                    }}
-                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
-                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                    `}
-                  >
-                    {t.addScenario} ({t.caraA})
-                  </button>
-      
-                  <button
-                    disabled={!scenarioMonster}
-                    onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
-                    className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
-                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                    `}
-                  >
-                    {t.addScenarioCara}
-                  </button>
-                </div>
-                {showScenarioFaceOptions.incursion && (
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    {INCURSION.map((card, index) => (
-                      <button
-                        key={`${card.id}-${card.cara}-${index}`}
-                        onClick={() => handleSelectUniqueCard(card)}
-                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                       {t.cara} ({card.cara})
-                      </button>
-                    ))}
+                      {t.addScenario} ({t.caraA})
+                    </button>
+        
+                    <button
+                      disabled={!scenarioMonster}
+                      onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, incursion: !prev.incursion }))}
+                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
+                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                      `}
+                    >
+                      {t.addScenarioCara}
+                    </button>
                   </div>
-                )}
-              </div>
-              
-              {/* Gestión manual de puntos de aparición */}
-              <div className="bg-gray-800 rounded-lg p-3 shadow-md mt-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <GiRuneStone className="text-cyan-400 text-xl" />
-                  <span className="font-semibold">{t.spawnPoints}</span>
-                </div>
-              
-                <div className="flex gap-2 flex-wrap">
-                  {/* Botón para generar todos los puntos */}
-                  <button
-                    onClick={() => initializeSpawnPoints()}
-                    className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
-                  >
-                    ➕ {t.addSpawnPoints}
-                  </button>
-              
-                  {/* Botón para limpiar todos los puntos */}
-                  <button
-                    onClick={() => setSpawnPoints([])}
-                    className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-                  >
-                    ✕ {t.removeSP}
-                  </button>
-                </div>
-              
-                {/* Si hay puntos activos, mostrarlos */}
-                {spawnPoints.length > 0 && (
-                  <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                    <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
-                    <div className="flex gap-2 flex-wrap justify-center">
-                      {spawnPoints.map(point => (
-                        <div
-                          key={point.uuid}
-                          className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                  {showScenarioFaceOptions.incursion && (
+                    <div className="flex gap-2 flex-wrap mt-2">
+                      {INCURSION.map((card, index) => (
+                        <button
+                          key={`${card.id}-${card.cara}-${index}`}
+                          onClick={() => handleSelectUniqueCard(card)}
+                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                         >
-                          <span>{t.colores[point.runa]}</span>
-                          <button
-                            onClick={() => removeSpawnPoint(point.uuid)}
-                            className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                          >
-                            ✕
-                          </button>
-                        </div>
+                         {t.cara} ({card.cara})
+                        </button>
                       ))}
                     </div>
-                  </div>
-                )}
-              </div>
-
-      
-              {/* Defensa */}
-              <div className="bg-gray-700 rounded p-2 mb-2">
-                <div className="flex text-white font-semibold p-2 mb-2">
-                  <GiStoneTower className="text-blue text-xl" />
-                   <span className="font-semibold"> {t.defen1}</span>
+                  )}
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    disabled={!scenarioMonster}
-                    onClick={() => {
-                      const carta = DEFENSA.find(c => c.cara === 'A');
-                      if (carta) handleSelectUniqueCard(carta);
-                    }}
-                    className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
-                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                    `}
-                  >
-                    {t.addScenario} ({t.caraA})
-                  </button>
-      
-                  <button
-                    disabled={!scenarioMonster}
-                    onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
-                    className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
-                      ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                    `}
-                  >
-                    {t.addScenarioCara}
-                  </button>
-                </div>
-                {showScenarioFaceOptions.defensa && (
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    {DEFENSA.map((card, index) => (
-                      <button
-                        key={`${card.id}-${card.cara}-${index}`}
-                        onClick={() => handleSelectUniqueCard(card)}
-                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.cara} ({card.cara})
-                      </button>
-                    ))}
+                
+                {/* Gestión manual de puntos de aparición */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md mt-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiRuneStone className="text-cyan-400 text-xl" />
+                    <span className="font-semibold">{t.spawnPoints}</span>
                   </div>
-                )}
+                
+                  <div className="flex gap-2 flex-wrap">
+                    {/* Botón para generar todos los puntos */}
+                    <button
+                      onClick={() => initializeSpawnPoints()}
+                      className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                    >
+                      ➕ {t.addSpawnPoints}
+                    </button>
+                
+                    {/* Botón para limpiar todos los puntos */}
+                    <button
+                      onClick={() => setSpawnPoints([])}
+                      className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                    >
+                      ✕ {t.removeSP}
+                    </button>
+                  </div>
+                
+                  {/* Si hay puntos activos, mostrarlos */}
+                  {spawnPoints.length > 0 && (
+                    <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                      <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
+                      <div className="flex gap-2 flex-wrap justify-center">
+                        {spawnPoints.map(point => (
+                          <div
+                            key={point.uuid}
+                            className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                          >
+                            <span>{t.colores[point.runa]}</span>
+                            <button
+                              onClick={() => removeSpawnPoint(point.uuid)}
+                              className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+  
+        
+                {/* Defensa */}
+                <div className="bg-gray-700 rounded p-2 mb-2">
+                  <div className="flex text-white font-semibold p-2 mb-2">
+                    <GiStoneTower className="text-blue text-xl" />
+                     <span className="font-semibold"> {t.defen1}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      disabled={!scenarioMonster}
+                      onClick={() => {
+                        const carta = DEFENSA.find(c => c.cara === 'A');
+                        if (carta) handleSelectUniqueCard(carta);
+                      }}
+                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
+                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                      `}
+                    >
+                      {t.addScenario} ({t.caraA})
+                    </button>
+        
+                    <button
+                      disabled={!scenarioMonster}
+                      onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
+                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
+                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
+                      `}
+                    >
+                      {t.addScenarioCara}
+                    </button>
+                  </div>
+                  {showScenarioFaceOptions.defensa && (
+                    <div className="flex gap-2 flex-wrap mt-2">
+                      {DEFENSA.map((card, index) => (
+                        <button
+                          key={`${card.id}-${card.cara}-${index}`}
+                          onClick={() => handleSelectUniqueCard(card)}
+                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.cara} ({card.cara})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-      
-            <div className="flex justify-center gap-4 mt-2">
-              <button
-                onClick={() => setIsScenarioOpen(false)}
-                className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
-              >
-                {t.close || 'Cerrar'}
-              </button>
+        
+              <div className="flex justify-center gap-4 mt-2">
+                <button
+                  onClick={() => setIsScenarioOpen(false)}
+                  className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
+                >
+                  {t.close || 'Cerrar'}
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
