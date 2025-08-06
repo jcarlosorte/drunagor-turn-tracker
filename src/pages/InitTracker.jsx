@@ -119,7 +119,7 @@ const InitTracker = () => {
     const parts = text.split(/(\{.*?\})/g); // divide entre bloques con llaves
     return parts.map((part, idx) => {
       const match = part.match(/^\{(.*?)\}$/);
-      if (match === "MANIFESTAR"){
+      if (match && match[1] === "MANIFESTAR") {
         manifestTile();
       }
       if (match) {
