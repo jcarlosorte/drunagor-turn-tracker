@@ -749,19 +749,14 @@ const TopMenu = ({
                         const carta = DEFENSA.find(c => c.cara === 'A');
                         if (carta) handleSelectUniqueCard(carta);
                       }}
-                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded 
-                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                      `}
+                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded`}
                     >
                       {t.addScenario} ({t.caraA})
                     </button>
         
                     <button
-                      disabled={!scenarioMonster}
                       onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
-                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded 
-                        ${!scenarioMonster ? 'opacity-50 cursor-not-allowed' : ''}
-                      `}
+                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded`}
                     >
                       {t.addScenarioCara}
                     </button>
