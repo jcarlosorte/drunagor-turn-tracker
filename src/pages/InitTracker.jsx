@@ -121,7 +121,7 @@ const InitTracker = () => {
       const match = part.match(/^\{(.*?)\}$/);
       if (match) {
         const key = match[1];
-        if (key === "MANIFESTAR") {
+        if (key === "MANIFIESTA") {
           manifestTile();
         }
         const translated = td.cartas_trad?.[key] || key;
