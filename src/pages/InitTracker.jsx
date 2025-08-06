@@ -119,6 +119,9 @@ const InitTracker = () => {
     const parts = text.split(/(\{.*?\})/g); // divide entre bloques con llaves
     return parts.map((part, idx) => {
       const match = part.match(/^\{(.*?)\}$/);
+      if (match === "MANIFESTAR"){
+        manifestTile();
+      }
       if (match) {
         const key = match[1];
         const translated = td.cartas_trad?.[key] || key;
@@ -138,19 +141,20 @@ const InitTracker = () => {
     const message = translationsDeck.nombre?.[card.id] || card.id;
     const action_ori = translationsDeck.accion?.[card.id] || '';
     const action2_ori = translationsDeck.accion2?.[card.id] || '';
-    let extra = '\n';
+    let extra_ori = '\n';
   
     if (deckType === 'errantes') {
       for (let i = 1; i <= numHeroes; i++) {
         const line = translationsDeck.texto?.[`${card.id}${i}`];
-        if (line) extra += `${line}\n`;
+        if (line) extra_ori += `${line}\n`;
       }
     } else {
-      extra = translationsDeck.texto?.[card.id] || '';
+      extra_ori = translationsDeck.texto?.[card.id] || '';
     }
     
     const action = formatTextWithBraces(action_ori);
     const action2 = formatTextWithBraces(action2_ori);
+    const extra = formatTextWithBraces(extra_ori);
     setScenarioToasts(prev => [...prev, { id, message, action, action2, extra }]);
   };
 
@@ -1604,15 +1608,15 @@ const InitTracker = () => {
             <div className="flex flex-col">
               {/* ✅ Mensaje del toast */}
               {toast.message && (
-                <div className="font-semibold uppercase">{toast.message}</div> // nombre de la carta
+                <div className="font-semibold mt-1 uppercase text-yellow-300">{toast.message}</div> // nombre de la carta
               )}
 
               {toast.action && (
-                <div className="text-sm whitespace-pre-line">{toast.action}</div> // acción principal
+                <div className="text-sm mt-1 whitespace-pre-line">{toast.action}</div> // acción principal
               )}
 
                {toast.action2 && (
-                <div className="text-sm whitespace-pre-line">{toast.action2}</div> // acción principal
+                <div className="text-sm mt-1 whitespace-pre-line">{toast.action2}</div> // acción principal
               )}
               
               {toast.extra && (
