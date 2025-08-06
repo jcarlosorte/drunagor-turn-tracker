@@ -121,7 +121,7 @@ const InitTracker = () => {
       const match = part.match(/^\{(.*?)\}$/);
       if (match) {
         const key = match[1];
-        const translated = td?.[key] || key;
+        const translated = td.cartas_trad.[key] || key;
         return (
           <span key={idx} className="text-blue-300 font-semibold">
             {translated}
