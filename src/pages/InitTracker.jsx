@@ -116,37 +116,43 @@ const InitTracker = () => {
   };
 
   const formatTextWithBraces = (text) => {
-    const parts = text.split(/(\{.*?\})/g); // divide entre bloques con llaves
-    return parts.map((part, idx) => {
+    const parts = text.split(/(\{.*?\})/g);
+    let manifestedTile = null;
+  
+    const content = parts.map((part, idx) => {
       const match = part.match(/^\{(.*?)\}$/);
+  
       if (match) {
         const key = match[1];
         const translated = td.cartas_trad?.[key] || key;
-        
+  
         if (key === "MANIFIESTA") {
-          const tile = manifestTile();
-          const colorName = tile?.runa ? ti.colores[tile.runa] : null;
-          const label = ti.runaManifestada || "Runa manifestada";
-          return [
-            <span key={`brace-${idx}`} className="text-blue-400 font-semibold">
-              {translated}
-            </span>,
-            colorName && (
-              <span key={`extra-${idx}`} className="text-yellow-300 ml-1">
-                {label} {colorName}
-              </span>
-            )
-          ].filter(Boolean); // eliminamos posibles null
+          manifestedTile = manifestTile(); // ejecuta manifiesta
         }
-        
+  
         return (
-          <span key={idx} className="text-blue-400 font-semibold">
+          <span key={`brace-${idx}`} className="text-blue-400 font-semibold">
             {translated}
           </span>
         );
       }
-      return <span key={idx}>{part}</span>;
+  
+      return <span key={`text-${idx}`}>{part}</span>;
     });
+  
+    // Añadir al final si hubo MANIFIESTA y una runa válida
+    if (manifestedTile?.runa) {
+      const label = ti.runaManifestada || "Runa manifestada";
+      const colorName = ti.colores[manifestedTile.runa];
+  
+      content.push(
+        <span key="manifested-color" className="block text-blue-400 mt-2">
+          {label} {colorName}
+        </span>
+      );
+    }
+  
+    return content;
   };
   
   const showCardToast = (card, deckType) => {
