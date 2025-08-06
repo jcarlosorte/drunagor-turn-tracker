@@ -121,6 +121,7 @@ const InitTracker = () => {
       const match = part.match(/^\{(.*?)\}$/);
       if (match && match[1] === "MANIFESTAR") {
         manifestTile();
+        console.log(match[1]);
       }
       if (match) {
         const key = match[1];
