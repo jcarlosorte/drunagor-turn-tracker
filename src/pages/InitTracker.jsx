@@ -119,15 +119,11 @@ const InitTracker = () => {
     const parts = text.split(/(\{.*?\})/g); // divide entre bloques con llaves
     return parts.map((part, idx) => {
       const match = part.match(/^\{(.*?)\}$/);
-      if (match && match[1] === "MANIFESTAR") {
-        manifestTile();
-        console.log(match[1]);
-      }
-      //console.log(match);
-      
       if (match) {
         const key = match[1];
-        console.log(match[1]);
+        if (key === "MANIFESTAR") {
+          manifestTile();
+        }
         const translated = td.cartas_trad?.[key] || key;
         return (
           <span key={idx} className="text-blue-400 font-semibold">
