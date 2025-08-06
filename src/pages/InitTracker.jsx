@@ -148,7 +148,7 @@ const InitTracker = () => {
       extra = translationsDeck.texto?.[card.id] || '';
     }
     
-    formatTextWithBraces(action);
+    action = formatTextWithBraces(action);
     setScenarioToasts(prev => [...prev, { id, message, action, extra }]);
   };
 
