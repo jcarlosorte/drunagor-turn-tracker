@@ -121,10 +121,24 @@ const InitTracker = () => {
       const match = part.match(/^\{(.*?)\}$/);
       if (match) {
         const key = match[1];
-        if (key === "MANIFIESTA") {
-          manifestTile();
-        }
         const translated = td.cartas_trad?.[key] || key;
+        
+        if (key === "MANIFIESTA") {
+          const tile = manifestTile();
+          const colorName = tile?.runa ? ti.colores[tile.runa] : null;
+          const label = ti.runaManifestada || "Runa manifestada";
+          return [
+            <span key={`brace-${idx}`} className="text-blue-400 font-semibold">
+              {translated}
+            </span>,
+            colorName && (
+              <span key={`extra-${idx}`} className="text-yellow-300 ml-1">
+                {label} {colorName}
+              </span>
+            )
+          ].filter(Boolean); // eliminamos posibles null
+        }
+        
         return (
           <span key={idx} className="text-blue-400 font-semibold">
             {translated}
@@ -769,7 +783,7 @@ const InitTracker = () => {
               }
               if (faltan > 0 && scenarioMonster) {
                 spawnBatchEnemies(faltan, scenarioMonster);
-                console.log(faltan);
+                //console.log(faltan);
                 showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
               }
               if (totalFinal > 4) {
