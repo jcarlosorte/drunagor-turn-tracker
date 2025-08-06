@@ -1571,77 +1571,75 @@ const InitTracker = () => {
           />
           )}
         {showPCModal && (
-        <ModalCommanderPC
-            onConfirm={(pcValue) => {
-              onPCConfirm?.(pcValue);
-              closePCModal();
-            }}
-          />
+          <ModalCommanderPC
+              onConfirm={(pcValue) => {
+                onPCConfirm?.(pcValue);
+                closePCModal();
+              }}
+            />
         )}
       
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50 pointer-events-none">
-        {shownTiles.map(tile => (
-          <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
-        ))}
-      </div>
-        
-      <TileWarningModal
-        message={tileWarning}
-        onClose={() => setTileWarning(null)}
-      />
-        
-      {warningMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
-          {warningMessage}
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
+          {shownTiles.map(tile => (
+            <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
+          ))}
         </div>
-      )}
         
-        {/* Contenedor de Toasts de Runas */}
-      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
-        {tileToasts.map(tile => (
-          <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
-        ))}
-      </div>
+        <TileWarningModal
+          message={tileWarning}
+          onClose={() => setTileWarning(null)}
+        />
         
-      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none">
-        {scenarioToasts.map(toast => (
-          <div
-            key={toast.id}
-            className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
-          >
-            <div className="flex flex-col">
-              {/* ✅ Mensaje del toast */}
-              {toast.message && (
-                <div className="font-semibold mt-1 uppercase text-yellow-300">{toast.message}</div> // nombre de la carta
-              )}
-
-              {toast.action && (
-                <div className="text-sm mt-1 whitespace-pre-line">{toast.action}</div> // acción principal
-              )}
-
-               {toast.action2 && (
-                <div className="text-sm mt-1 whitespace-pre-line">{toast.action2}</div> // acción principal
-              )}
-              
-              {toast.extra && (
-                <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
-                  {toast.extra}
-                </div>
-              )}
-            </div>
-            {/* ✅ Botón para cerrar manualmente */}
-            <button
-              onClick={() => {
-                setScenarioToasts(prev => prev.filter(t => t.id !== toast.id));
-              }}
-              className="ml-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
-              title="Cerrar"
-            >
-              ✕
-            </button>
+        {warningMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
+            {warningMessage}
           </div>
-        ))}
-      </div>
+        )}
+
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+        {/* Contenedor de Toasts de Runas */}
+          {tileToasts.map(tile => (
+            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} />
+          ))}
+        {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
+          {scenarioToasts.map(toast => (
+            <div
+              key={toast.id}
+              className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
+            >
+              <div className="flex flex-col">
+                {/* ✅ Mensaje del toast */}
+                {toast.message && (
+                  <div className="font-semibold mt-1 uppercase text-yellow-300">{toast.message}</div> // nombre de la carta
+                )}
+  
+                {toast.action && (
+                  <div className="text-sm mt-1 whitespace-pre-line">{toast.action}</div> // acción principal
+                )}
+  
+                 {toast.action2 && (
+                  <div className="text-sm mt-1 whitespace-pre-line">{toast.action2}</div> // acción principal
+                )}
+                
+                {toast.extra && (
+                  <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
+                    {toast.extra}
+                  </div>
+                )}
+              </div>
+              {/* ✅ Botón para cerrar manualmente */}
+              <button
+                onClick={() => {
+                  setScenarioToasts(prev => prev.filter(t => t.id !== toast.id));
+                }}
+                className="ml-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                title="Cerrar"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
 
         
       </PageTransition>
