@@ -123,7 +123,7 @@ const InitTracker = () => {
         const key = match[1];
         const translated = td.cartas_trad.[key] || key;
         return (
-          <span key={idx} className="text-blue-300 font-semibold">
+          <span key={idx} className="text-blue-400 font-semibold">
             {translated}
           </span>
         );
