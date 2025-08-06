@@ -598,6 +598,7 @@ const TopMenu = ({
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
             <div className="flex flex-col gap-4 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500">
+              
               <div className="bg-gray-800 rounded-lg p-3 shadow-md">
                 <div className="flex items-center gap-2 mb-2">
                   <GiDaemonSkull className="text-red-400 text-xl" />
@@ -686,9 +687,50 @@ const TopMenu = ({
                     </div>
                   )}
                 </div>
-                
+  
+        
+                {/* Defensa */}
+                <div className="bg-gray-700 rounded p-2 mb-2">
+                  <div className="flex text-white font-semibold p-2 mb-2">
+                    <GiStoneTower className="text-blue text-xl" />
+                     <span className="font-semibold"> {t.defen1}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        const carta = DEFENSA.find(c => c.cara === 'A');
+                        if (carta) handleSelectUniqueCard(carta);
+                      }}
+                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded`}
+                    >
+                      {t.addScenario} ({t.caraA})
+                    </button>
+        
+                    <button
+                      onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
+                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded`}
+                    >
+                      {t.addScenarioCara}
+                    </button>
+                  </div>
+                  {showScenarioFaceOptions.defensa && (
+                    <div className="flex gap-2 flex-wrap mt-2">
+                      {DEFENSA.map((card, index) => (
+                        <button
+                          key={`${card.id}-${card.cara}-${index}`}
+                          onClick={() => handleSelectUniqueCard(card)}
+                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.cara} ({card.cara})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+
                 {/* Gestión manual de puntos de aparición */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md mt-3">
+                <div className="bg-gray-700 rounded-lg p-3 shadow-md mt-3">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.spawnPoints}</span>
@@ -735,48 +777,10 @@ const TopMenu = ({
                     </div>
                   )}
                 </div>
-  
-        
-                {/* Defensa */}
-                <div className="bg-gray-700 rounded p-2 mb-2">
-                  <div className="flex text-white font-semibold p-2 mb-2">
-                    <GiStoneTower className="text-blue text-xl" />
-                     <span className="font-semibold"> {t.defen1}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        const carta = DEFENSA.find(c => c.cara === 'A');
-                        if (carta) handleSelectUniqueCard(carta);
-                      }}
-                      className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded`}
-                    >
-                      {t.addScenario} ({t.caraA})
-                    </button>
-        
-                    <button
-                      onClick={() => setShowScenarioFaceOptions(prev => ({ ...prev, defensa: !prev.defensa }))}
-                      className={`bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded`}
-                    >
-                      {t.addScenarioCara}
-                    </button>
-                  </div>
-                  {showScenarioFaceOptions.defensa && (
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      {DEFENSA.map((card, index) => (
-                        <button
-                          key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => handleSelectUniqueCard(card)}
-                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.cara} ({card.cara})
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                
               </div>
-        
+
+              
               <div className="flex justify-center gap-4 mt-2">
                 <button
                   onClick={() => setIsScenarioOpen(false)}
@@ -785,7 +789,9 @@ const TopMenu = ({
                   {t.close || 'Cerrar'}
                 </button>
               </div>
+            
             </div>
+            
           </motion.div>
         )}
       </AnimatePresence>
