@@ -123,10 +123,11 @@ const InitTracker = () => {
         manifestTile();
         console.log(match[1]);
       }
-      console.log(match);
-      console.log(match[1]);
+      //console.log(match);
+      
       if (match) {
         const key = match[1];
+        console.log(match[1]);
         const translated = td.cartas_trad?.[key] || key;
         return (
           <span key={idx} className="text-blue-400 font-semibold">
