@@ -1572,26 +1572,30 @@ const InitTracker = () => {
           )}
         {showPCModal && (
         <ModalCommanderPC
-          onConfirm={(pcValue) => {
-            onPCConfirm?.(pcValue);
-            closePCModal();
-          }}
-        />
-      )}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-[999] pointer-events-none">
+            onConfirm={(pcValue) => {
+              onPCConfirm?.(pcValue);
+              closePCModal();
+            }}
+          />
+        )}
+      
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50 pointer-events-none">
         {shownTiles.map(tile => (
           <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
         ))}
       </div>
+        
       <TileWarningModal
         message={tileWarning}
         onClose={() => setTileWarning(null)}
       />
+        
       {warningMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
           {warningMessage}
         </div>
       )}
+        
         {/* Contenedor de Toasts de Runas */}
       <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-2 pointer-events-none">
         {tileToasts.map(tile => (
@@ -1599,7 +1603,7 @@ const InitTracker = () => {
         ))}
       </div>
         
-      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none">
         {scenarioToasts.map(toast => (
           <div
             key={toast.id}
