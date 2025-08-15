@@ -310,6 +310,8 @@ export const GameProvider = ({ children }) => {
         // ✅ Colocar la ficha en el track 
         addRune(point.runa);
         // ✅ Eliminar 2 de la bolsa del mismo color ++++ PENDIENTE +++
+        removeRune(point.runa);
+        removeRune(point.runa);
       }
       return prev.filter(p => p.uuid !== uuid);
     });
