@@ -533,58 +533,61 @@ const TopMenu = ({
                 </div>
               </div>
 
+              <div className="flex flex-col md:flex-row gap-4 mt-4">
+                {/* Gestión de Pila */}
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                  <div className="flex items-center gap-2 mb-1">
+                    <GiCardDraw className="text-purple-400 text-xl" />
+                    <span className="font-semibold text-white">{t.gestionPilas}</span>
+                  </div>
               
-              <div className="mt-4 border-t border-yellow-600 pt-2">
-                <div className="flex items-center gap-2 mb-1">
-                  <GiCardDraw className="text-purple-400 text-xl" />
-                  <span className="font-semibold text-white">{t.gestionPilas}</span>
+                  <button
+                    disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
+                    onClick={addNewPila}
+                    className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
+                  >
+                    ➕ {t.addPila}
+                  </button>
+                
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {pilas.map(pila => (
+                      <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                        <div className="font-bold mb-1">
+                            <span>{t.pila || 'Pila'} 🗃️</span>
+                            <input
+                              type="text"
+                              maxLength={5}
+                              value={codigosPilas[pila.id] || ''}
+                              onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                              className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                              placeholder="ABC12"
+                              title={t.codigoPila}
+                            />
+                        </div>
+                        <div className="text-xs text-gray-300 mb-2">
+                          {t.tamano}: {pila.tiles.length}
+                        </div>
+                        <div className="flex justify-center">
+                          <button
+                            className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                            onClick={() => {
+                              const tile = removeTileFromPila(pila.id);
+                              if (tile) {
+                                showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
+                              } else {
+                                alert(t.emptyPila);
+                              }
+                            }}
+                          >
+                            🧱 − {t.devolver}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              
-                <button
-                  disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
-                  onClick={addNewPila}
-                  className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
-                >
-                  ➕ {t.addPila}
-                </button>
-              
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {pilas.map(pila => (
-                    <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                      <div className="font-bold mb-1">
-                          <span>{t.pila || 'Pila'} 🗃️</span>
-                          <input
-                            type="text"
-                            maxLength={5}
-                            value={codigosPilas[pila.id] || ''}
-                            onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
-                            className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
-                            placeholder="ABC12"
-                            title={t.codigoPila}
-                          />
-                      </div>
-                      <div className="text-xs text-gray-300 mb-2">
-                        {t.tamano}: {pila.tiles.length}
-                      </div>
-                      <div className="flex justify-center">
-                        <button
-                          className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                          onClick={() => {
-                            const tile = removeTileFromPila(pila.id);
-                            if (tile) {
-                              showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
-                            } else {
-                              alert(t.emptyPila);
-                            }
-                          }}
-                        >
-                          🧱 − {t.devolver}
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
+              </div>  
               
               <div className="flex justify-center gap-4 mt-2">
                 <button
