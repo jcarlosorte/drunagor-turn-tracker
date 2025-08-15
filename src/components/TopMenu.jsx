@@ -36,7 +36,12 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, initializeDecks, drawCardFromDeck, showCardToast } = useGame();
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, 
+         drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, 
+         restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, 
+         setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
+         setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
+         initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
   const menuRef = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
@@ -597,7 +602,7 @@ const TopMenu = ({
                   <div className="flex gap-2 flex-wrap">
                     {/* Botón para generar todos los puntos */}
                     <button
-                      onClick={() => initializeSpawnPoints()}
+                      onClick={() => initializeControlPoints()}
                       className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
                     >
                       ➕ {t.addControlAreas}
@@ -605,7 +610,7 @@ const TopMenu = ({
                 
                     {/* Botón para limpiar todos los puntos */}
                     <button
-                      onClick={() => setSpawnPoints([])}
+                      onClick={() => setControlPoints([])}
                       className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
                     >
                       ✕ {t.removeCA}
@@ -624,7 +629,7 @@ const TopMenu = ({
                           >
                             <span>{t.colores[point.runa]}</span>
                             <button
-                              onClick={() => removeSpawnPoint(point.uuid)}
+                              onClick={() => removeControlPoint(point.uuid)}
                               className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
                             >
                               ✕
