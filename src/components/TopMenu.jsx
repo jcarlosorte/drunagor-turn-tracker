@@ -466,9 +466,32 @@ const TopMenu = ({
                       {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
                     </span>
                   </div>
+                  {/* Estado general */}
                   <div className="text-sm text-white">
                     {t.extraidas}: <b>{usedTiles.length}</b><br />
                     {t.total}: <b>{availableTiles.length + usedTiles.length}</b>
+                  </div>
+                  {/* Estado por colores en línea */}
+                  <div className="flex gap-2 text-xs">
+                    {[
+                      { id: 'naranja', color: '#ff8c00' },
+                      { id: 'verde', color: '#00aa00' },
+                      { id: 'azul', color: '#0077cc' },
+                      { id: 'rojo', color: '#cc0000' },
+                      { id: 'gris', color: '#999999' }
+                    ].map(({ id, color }) => {
+                      const usadasColor = usedTiles.filter(tile => tile.runa === id).length;
+                      const disponiblesColor = availableTiles.filter(tile => tile.runa === id).length;
+                      return (
+                        <div
+                          key={id}
+                          className="px-2 py-1 rounded font-semibold"
+                          style={{ backgroundColor: color, color: 'white' }}
+                        >
+                          {t.colores[id] || id}: {usadasColor}/{usadasColor + disponiblesColor}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               
