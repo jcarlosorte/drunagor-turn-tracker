@@ -618,11 +618,11 @@ const TopMenu = ({
                   </div>
                 
                   {/* Si hay puntos activos, mostrarlos */}
-                  {spawnPoints.length > 0 && (
+                  {controlPoints.length > 0 && (
                     <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                       <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
                       <div className="flex gap-2 flex-wrap justify-center">
-                        {spawnPoints.map(point => (
+                        {controlPoints.map(point => (
                           <div
                             key={point.uuid}
                             className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
