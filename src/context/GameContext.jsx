@@ -33,6 +33,7 @@ export const GameProvider = ({ children }) => {
   const [scenarioMonster, setScenarioMonster] = useState(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [spawnPoints, setSpawnPoints] = useState([]);
+  const [controlPoints, setControlPoints] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
   const addRune = (color) => {
@@ -122,6 +123,7 @@ export const GameProvider = ({ children }) => {
     setPilas([]); // 🔁 Limpiar también las pilas
     clearRunes();
     setSpawnPoints([]);
+    setControlPoints([]);
   };
 
   const discardTileByColor = (color) => {
@@ -281,6 +283,37 @@ export const GameProvider = ({ children }) => {
     });
   };
 
+  const initializeControlPoints = () => {
+    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const newPoints = [];
+  
+    colors.forEach(color => {
+      const tile = deleteAvailableTileByColor(color); // quita 1 ficha de la bolsa
+      if (tile) {
+        newPoints.push({
+          uuid: uuidv4(),
+          runa: color,
+          tile
+        });
+      } else {
+        alert(`No hay fichas ${ti.colores[color]} para crear una Barricada`);
+      }
+    });
+  
+    setControlPoints(newPoints);
+  };
+  
+  const removeControlPoint = (uuid) => {
+    setControlPoints(prev => {
+      const point = prev.find(p => p.uuid === uuid);
+      if (point) {
+        // ✅ Colocar la ficha en el track ++++PENDIENTE++++
+        //restoreTile(point.tile);
+      }
+      return prev.filter(p => p.uuid !== uuid);
+    });
+  };
+  
   // Función de shuffle genérica
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
@@ -374,6 +407,8 @@ export const GameProvider = ({ children }) => {
         spawnPoints,
         initializeSpawnPoints,
         removeSpawnPoint,
+        initializeControlPoints,
+        removeControlPoint,
         initializeDecks,
         drawCardFromDeck
       }}
