@@ -37,9 +37,10 @@ const TopMenu = ({
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, 
-         drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, 
-         restoreDiscardedTile, pilas, setPilas, addNewPila, removeTileFromPila, resetTiles, tileWarning, 
-         setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
+         drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
+         pilas, setPilas, addNewPila, removeTileFromPila, 
+         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, 
+         resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
@@ -600,15 +601,14 @@ const TopMenu = ({
                   </div>
               
                   <button
-                    disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
-                    onClick={addNewPila}
+                    onClick={addNewPilaConcentrada}
                     className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
                   >
                     ➕ {t.addPila}
                   </button>
                 
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {pilas.map(pila => (
+                    {pilasConcentrada.map(pila => (
                       <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                         <div className="font-bold mb-1">
                             <span>{t.pila || 'Pila'} 🗃️</span>
@@ -629,7 +629,7 @@ const TopMenu = ({
                           <button
                             className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                             onClick={() => {
-                              const tile = removeTileFromPila(pila.id);
+                              const tile = removeTileFromPilaConcentrada(pila.id);
                               if (tile) {
                                 showTileToast(tile, 'show'); // ✅ mostramos sin afectar la lógica del juego
                               } else {
@@ -645,7 +645,7 @@ const TopMenu = ({
                   </div>
                 </div>
                 
-              </div>  
+              </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Añadir Barricadas */}
