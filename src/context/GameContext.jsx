@@ -23,6 +23,7 @@ export const GameProvider = ({ children }) => {
   });
   const [pilaDeRunas, setPilaDeRunas] = useState([]);
   const [pilas, setPilas] = useState([]);
+  const [pilasConcentrada, setPilasConcentrada] = useState([]);
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
@@ -216,6 +217,64 @@ export const GameProvider = ({ children }) => {
     return null;
   };
 
+  const addNewPilaConcentrada = () => {
+    const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const tilesSeleccionadas = colores
+      .map(color => {
+        const tile = placedRunes.find(r => r.runa === color); // busca la primera de ese color
+        return tile || null;
+      })
+      .filter(Boolean); // quita nulls (colores que no había)
+    
+    if (tilesSeleccionadas.length === 0) {
+      alert(t.noRunasColocadas || 'No hay runas colocadas para formar la pila');
+      return;
+    }
+
+    // Quitarlas del medidor / tracker
+    tilesSeleccionadas.forEach(tile => {
+      removeRune(tile.runa); // función que quita la runa colocada
+    });
+    
+    // Crear la nueva pila
+    const nuevaPila = {
+      id: uuidv4(),
+      tiles: tilesSeleccionadas
+    };
+    
+    setPilasConcentrada(prev => [...prev, nuevaPila]);
+    return nuevaPila;
+  };
+
+  const removeTileFromPilaConcentrada = (pilaId) => {
+    setPilasConcentrada(prevPilas => {
+      const nuevaLista = prevPilas.map(pila => {
+        if (pila.id !== pilaId) return pila;
+  
+        const [firstTile, ...resto] = pila.tiles;
+        if (!firstTile) return null; // Nada que quitar
+  
+        // Devolver ficha a la base
+        setAvailableTiles(prev => [...prev, firstTile]);
+  
+        return {
+          ...pila,
+          tiles: resto
+        };
+      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
+  
+      return nuevaLista;
+    });
+  
+    // Nota: devolver la ficha para el toast
+    const pila = pilasConcentrada.find(p => p.id === pilaId);
+    if (pila && pila.tiles.length > 0) {
+      return pila.tiles[0]; // la ficha que vamos a mostrar
+    }
+  
+    return null;
+  };
+
   const deleteAvailableTileByColor = (color) => {
     const candidates = availableTiles.filter(t => t.runa === color);
     if (candidates.length === 0) return null;
@@ -397,6 +456,7 @@ export const GameProvider = ({ children }) => {
         setPilas,
         addNewPila,
         removeTileFromPila,
+        pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada,
         resetTiles,
         tileWarning, 
         setTileWarning,
