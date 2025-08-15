@@ -407,6 +407,8 @@ export const GameProvider = ({ children }) => {
         spawnPoints,
         initializeSpawnPoints,
         removeSpawnPoint,
+        controlPoints, 
+        setControlPoints,
         initializeControlPoints,
         removeControlPoint,
         initializeDecks,
