@@ -307,8 +307,9 @@ export const GameProvider = ({ children }) => {
     setControlPoints(prev => {
       const point = prev.find(p => p.uuid === uuid);
       if (point) {
-        // ✅ Colocar la ficha en el track ++++PENDIENTE++++
-        //restoreTile(point.tile);
+        // ✅ Colocar la ficha en el track 
+        addRune(point.runa);
+        // ✅ Eliminar 2 de la bolsa del mismo color ++++ PENDIENTE +++
       }
       return prev.filter(p => p.uuid !== uuid);
     });
