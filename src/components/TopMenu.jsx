@@ -554,7 +554,7 @@ const TopMenu = ({
                     ➕ {t.addPila}
                   </button>
                 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {pilas.map(pila => (
                       <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                         <div className="font-bold mb-1">
@@ -593,7 +593,7 @@ const TopMenu = ({
                 </div>
               
                 {/* Añadir puntos de área */}
-                <div className="bg-gray-700 rounded-lg p-3 shadow-md mt-3">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.controlAreas}</span>
