@@ -79,7 +79,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint, initializeDecks, drawCardFromDeck } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -1439,6 +1439,29 @@ const InitTracker = () => {
                 </div>
               )}
 
+            {/* Puntos de control de area visibles encima del track */}
+            {controlPoints.length > 0 && (
+                <div className="mt-3 p-2 bg-gray-800 rounded-lg">
+                  <div className="text-xs text-yellow-300 mb-2">{ti.controlAreas || ''}</div>
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    {controlPoints.map(point => (
+                      <div
+                        key={point.uuid}
+                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                      >
+                        <span>{ti.colores[point.runa]}</span>
+                        <button
+                          onClick={() => removeControlPoint(point.uuid)}
+                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
                 <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
