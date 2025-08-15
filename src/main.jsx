@@ -16,14 +16,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LanguageProvider>
       <ExpansionProvider>
-        <TrackerProvider> 
-          <GameProvider>
-            <InitRunesProvider>
+        <TrackerProvider>
+          <InitRunesProvider>
+            <GameProvider>
               <InitEnemiesProvider>
                 <AppWrapper /> {/* 👈 nuevo componente que controla el inicio */}
               </InitEnemiesProvider>
-            </InitRunesProvider>
-          </GameProvider>
+            </GameProvider>
+          </InitRunesProvider>
         </TrackerProvider>
       </ExpansionProvider>
     </LanguageProvider>
