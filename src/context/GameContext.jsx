@@ -36,6 +36,7 @@ export const GameProvider = ({ children }) => {
   const [controlPoints, setControlPoints] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
+  
   const addRune = (color) => {
     
     setRunes(prev => ({
