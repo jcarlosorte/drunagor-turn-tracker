@@ -123,6 +123,7 @@ export const GameProvider = ({ children }) => {
       gris: [],
     });
     setPilas([]); // 🔁 Limpiar también las pilas
+    setPilasConcentrada([]);
     clearRunes();
     setSpawnPoints([]);
     setControlPoints([]);
@@ -220,25 +221,22 @@ export const GameProvider = ({ children }) => {
   const addNewPilaConcentrada = () => {
     const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
     const tilesSeleccionadas = [];
+    let updatedRunes = { ...runes };
+    let updatedUsedTiles = [...usedTiles];
     
     colores.forEach(color => {
-      if (runes[color] > 0) {
-        // buscar una tile usada de ese color
-        const index = usedTiles.findIndex(t => t.runa === color);
+      if (updatedRunes[color] > 0) {
+        // buscar una tile de ese color en la copia
+        const index = updatedUsedTiles.findIndex(t => t.runa === color);
         if (index !== -1) {
-          const tile = usedTiles[index];
+          const tile = updatedUsedTiles[index];
           tilesSeleccionadas.push(tile);
   
-          // quitar esa tile de usedTiles
-          const nuevasUsed = [...usedTiles];
-          nuevasUsed.splice(index, 1);
-          setUsedTiles(nuevasUsed);
+          // quitar la tile de la copia
+          updatedUsedTiles.splice(index, 1);
   
-          // reducir contador de runas en el tracker
-          setRunes(prev => ({
-            ...prev,
-            [color]: prev[color] - 1
-          }));
+          // reducir contador en la copia
+          updatedRunes[color] = updatedRunes[color] - 1;
         }
       }
     });
@@ -247,6 +245,10 @@ export const GameProvider = ({ children }) => {
       alert(ti.noRunasColocadas || 'No hay runas colocadas para formar la pila');
       return;
     }
+
+    // aplicar cambios de una sola vez
+    setUsedTiles(updatedUsedTiles);
+    setRunes(updatedRunes);
     
     // Crear la nueva pila
     const nuevaPila = {
@@ -266,7 +268,7 @@ export const GameProvider = ({ children }) => {
         const [firstTile, ...resto] = pila.tiles;
         if (!firstTile) return null; // Nada que quitar
   
-        // Devolver ficha a la base
+        // Devolver ficha a la bolsa
         setAvailableTiles(prev => [...prev, firstTile]);
   
         return {
