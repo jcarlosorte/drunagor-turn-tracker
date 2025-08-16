@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { FICHAS } from '@/data/fichas';
 import { useLanguage } from '@/context/LanguageContext';
-import { useInitRunes } from "@/context/InitRunesContext";
 import { ALDEANO, ERRANTES } from '@/data/cartasEspeciales';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -38,7 +37,6 @@ export const GameProvider = ({ children }) => {
   const [controlPoints, setControlPoints] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
-  const { placedRunes } = useInitRunes();
   
   const addRune = (color) => {
     
@@ -221,23 +219,34 @@ export const GameProvider = ({ children }) => {
 
   const addNewPilaConcentrada = () => {
     const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-    const tilesSeleccionadas = colores
-      .map(color => {
-        const tile = placedRunes.find(r => r.runa === color); // busca la primera de ese color
-        console.log(tile);
-        return tile || null;
-      })
-      .filter(Boolean); // quita nulls (colores que no había)
+    const tilesSeleccionadas = [];
     
+    colores.forEach(color => {
+      if (runes[color] > 0) {
+        // buscar una tile usada de ese color
+        const index = usedTiles.findIndex(t => t.runa === color);
+        if (index !== -1) {
+          const tile = usedTiles[index];
+          tilesSeleccionadas.push(tile);
+  
+          // quitar esa tile de usedTiles
+          const nuevasUsed = [...usedTiles];
+          nuevasUsed.splice(index, 1);
+          setUsedTiles(nuevasUsed);
+  
+          // reducir contador de runas en el tracker
+          setRunes(prev => ({
+            ...prev,
+            [color]: prev[color] - 1
+          }));
+        }
+      }
+    });
+
     if (tilesSeleccionadas.length === 0) {
       alert(ti.noRunasColocadas || 'No hay runas colocadas para formar la pila');
       return;
     }
-
-    // Quitarlas del medidor / tracker
-    tilesSeleccionadas.forEach(tile => {
-      removeRune(tile.runa); // función que quita la runa colocada
-    });
     
     // Crear la nueva pila
     const nuevaPila = {
@@ -246,7 +255,7 @@ export const GameProvider = ({ children }) => {
     };
     
     setPilasConcentrada(prev => [...prev, nuevaPila]);
-    return nuevaPila;
+
   };
 
   const removeTileFromPilaConcentrada = (pilaId) => {
