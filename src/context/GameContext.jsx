@@ -213,37 +213,7 @@ export const GameProvider = ({ children }) => {
     return firstTile;
   };
     
-  const removeTileFromPila2 = (pilaId) => {
-    setPilas(prevPilas => {
-      const nuevaLista = prevPilas.map(pila => {
-        if (pila.id !== pilaId) return pila;
   
-        const [firstTile, ...resto] = pila.tiles;
-        if (!firstTile) return null; // Nada que quitar
-  
-        // Devolver ficha a la base
-        setAvailableTiles(prev => [...prev, firstTile]);
-        
-        return {
-          ...pila,
-          tiles: resto
-        };
-      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
-  
-      return nuevaLista;
-    });
-  
-    // Nota: devolver la ficha para el toast
-    const pila = pilas.find(p => p.id === pilaId);
-    if (pila && pila.tiles.length > 0) {
-      return pila.tiles[0]; // la ficha que vamos a mostrar
-    }
-  
-    return null;
-  };
-
-
-
   const addNewPilaConcentrada = () => {
     const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
     const tilesSeleccionadas = [];
@@ -287,33 +257,29 @@ export const GameProvider = ({ children }) => {
   };
   
   const removeTileFromPilaConcentrada = (pilaId) => {
-    setPilasConcentrada(prevPilas => {
-      const nuevaLista = prevPilas.map(pila => {
-        if (pila.id !== pilaId) return pila;
+    // 1) Buscar la pila actual y extraer ficha fuera del setState
+    const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
+    if (!pilaActual || pilaActual.tiles.length === 0) return null;
   
-        const [firstTile, ...resto] = pila.tiles;
-        if (!firstTile) return null; // Nada que quitar
+    const [firstTile, ...resto] = pilaActual.tiles;
   
-        // Devolver ficha a la bolsa
-        setAvailableTiles(prev => [...prev, firstTile]);
+    // 2) Devolver ficha a la bolsa
+    setAvailableTiles(prev => [...prev, firstTile]);
   
-        return {
-          ...pila,
-          tiles: resto
-        };
-      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
+    // 3) Actualizar pilas (eliminar pila si queda vacía)
+    setPilasConcentrada(prev =>
+      prev
+        .map(p => {
+          if (p.id !== pilaId) return p;
+          return resto.length === 0 ? null : { ...p, tiles: resto };
+        })
+        .filter(Boolean)
+    );
   
-      return nuevaLista;
-    });
-  
-    // Nota: devolver la ficha para el toast
-    const pila = pilasConcentrada.find(p => p.id === pilaId);
-    if (pila && pila.tiles.length > 0) {
-      return pila.tiles[0]; // la ficha que vamos a mostrar
-    }
-  
-    return null;
+    // 4) Devolver ficha eliminada para el toast
+    return firstTile;
   };
+
 
 
   const deleteAvailableTileByColor = (color) => {
