@@ -44,7 +44,9 @@ const TopMenu = ({
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
-  const menuRef = useRef(null);
+  const menuRefEnemies = useRef(null);
+  const menuRefRunes = useRef(null);
+  const menuRefScenario = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
   
@@ -69,12 +71,16 @@ const TopMenu = ({
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (menuRefEnemies.current && !menuRefEnemies.current.contains(event.target)) {
         setIsOpen(false);
+      }
+      if (menuRefRunes.current && !menuRefRunes.current.contains(event.target)) {
         setIsRunesOpen(false);
       }
+      if (menuRefScenario.current && !menuRefScenario.current.contains(event.target)) {
+        setIsScenarioOpen(false);
+      }
     };
-  
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -198,7 +204,7 @@ const TopMenu = ({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            ref={menuRef}
+            ref={menuRefEnemies}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -206,7 +212,7 @@ const TopMenu = ({
             className="px-4 pb-4 pt-2 flex flex-col gap-4 text-white"
           >
             {/* Aleatorios */}
-            <div className="bg-gray-800 rounded-lg p-3 shadow-md">
+            <div className="bg-gray-800 rounded-lg p-3 shadow-md justify-center">
               <div className="flex items-center gap-2 mb-2">
                 <GiSwordClash className="text-blue-400 text-xl" />
                 <span className="font-semibold">{t.addEnemies || 'Enemigos aleatorios'}</span>
@@ -294,7 +300,7 @@ const TopMenu = ({
       <AnimatePresence>
         {isRunesOpen && (
           <motion.div
-            ref={menuRef}
+            ref={menuRefRunes}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -776,7 +782,7 @@ const TopMenu = ({
       <AnimatePresence>
         {isScenarioOpen && (
           <motion.div
-            ref={menuRef}
+            ref={menuRefScenario}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
