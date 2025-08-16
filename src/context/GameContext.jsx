@@ -224,12 +224,13 @@ export const GameProvider = ({ children }) => {
     const tilesSeleccionadas = colores
       .map(color => {
         const tile = placedRunes.find(r => r.runa === color); // busca la primera de ese color
+        console.log(tile.runa);
         return tile || null;
       })
       .filter(Boolean); // quita nulls (colores que no había)
     
     if (tilesSeleccionadas.length === 0) {
-      alert(t.noRunasColocadas || 'No hay runas colocadas para formar la pila');
+      alert(ti.noRunasColocadas || 'No hay runas colocadas para formar la pila');
       return;
     }
 
