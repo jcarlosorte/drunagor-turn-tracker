@@ -191,31 +191,31 @@ export const GameProvider = ({ children }) => {
 
   const removeTileFromPila = (pilaId) => {
     let removedTile = null;
-  
     setPilas(prevPilas => {
-      const nuevaLista = prevPilas.flatMap(pila => {
-        if (pila.id !== pilaId) return [pila];
-  
-        if (pila.tiles.length === 0) return []; // ya estaba vacía
+      const nuevaLista = prevPilas.map(pila => {
+        if (pila.id !== pilaId) return pila;
   
         const [firstTile, ...resto] = pila.tiles;
+        if (!firstTile) return null; // Nada que quitar
+
         removedTile = firstTile;
-  
-        // devolver ficha a la base
+        
+        // Devolver ficha a la base
         setAvailableTiles(prev => [...prev, firstTile]);
-  
+
         if (resto.length === 0) {
-          return []; // eliminar pila vacía
+          return null; // pila vacía → eliminarla
         }
-  
-        return [{ ...pila, tiles: resto }];
-      });
+        
+        return {
+          ...pila,
+          tiles: resto
+        };
+      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
   
       return nuevaLista;
     });
   
-    // el truco: devolver removedTile en el mismo tick,
-    // no basándote en pilas ya actualizado
     return removedTile;
   };
 
@@ -264,32 +264,32 @@ export const GameProvider = ({ children }) => {
   };
   
   const removeTileFromPilaConcentrada = (pilaId) => {
-    let removedTile = null;
-  
     setPilasConcentrada(prevPilas => {
-      return prevPilas.flatMap(pila => {
-        if (pila.id !== pilaId) return [pila];
-  
-        if (pila.tiles.length === 0) {
-          // ya no quedaban fichas → no devolvemos nada
-          return [];
-        }
+      const nuevaLista = prevPilas.map(pila => {
+        if (pila.id !== pilaId) return pila;
   
         const [firstTile, ...resto] = pila.tiles;
-        removedTile = firstTile;
+        if (!firstTile) return null; // Nada que quitar
   
-        // devolver ficha a la bolsa
+        // Devolver ficha a la bolsa
         setAvailableTiles(prev => [...prev, firstTile]);
   
-        // si ya no quedan fichas después de quitar la primera → eliminar la pila
-        if (resto.length === 0) return [];
+        return {
+          ...pila,
+          tiles: resto
+        };
+      }).filter(Boolean); // Eliminar pilas que hayan quedado vacías
   
-        return [{ ...pila, tiles: resto }];
-      });
+      return nuevaLista;
     });
   
-    // aquí devolvemos el tile que realmente se quitó
-    return removedTile;
+    // Nota: devolver la ficha para el toast
+    const pila = pilasConcentrada.find(p => p.id === pilaId);
+    if (pila && pila.tiles.length > 0) {
+      return pila.tiles[0]; // la ficha que vamos a mostrar
+    }
+  
+    return null;
   };
 
 
