@@ -190,22 +190,39 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeTileFromPila = (pilaId) => {
-    let removedTile = null;
+    // 1) Leer estado actual y decidir qué quitar (fuera de setPilas)
+    const pilaActual = pilas.find(p => p.id === pilaId);
+    if (!pilaActual || pilaActual.tiles.length === 0) return null;
+  
+    const [firstTile, ...resto] = pilaActual.tiles;
+  
+    // 2) Devolver la ficha a la base
+    setAvailableTiles(prev => [...prev, firstTile]);
+  
+    // 3) Actualizar pilas (eliminar la pila si queda vacía)
+    setPilas(prev =>
+      prev
+        .map(p => {
+          if (p.id !== pilaId) return p;
+          return resto.length === 0 ? null : { ...p, tiles: resto };
+        })
+        .filter(Boolean)
+    );
+  
+    // 4) Devolver la ficha para el toast
+    return firstTile;
+  };
+    
+  const removeTileFromPila2 = (pilaId) => {
     setPilas(prevPilas => {
       const nuevaLista = prevPilas.map(pila => {
         if (pila.id !== pilaId) return pila;
   
         const [firstTile, ...resto] = pila.tiles;
         if (!firstTile) return null; // Nada que quitar
-
-        removedTile = firstTile;
-        
+  
         // Devolver ficha a la base
         setAvailableTiles(prev => [...prev, firstTile]);
-
-        if (resto.length === 0) {
-          return null; // pila vacía → eliminarla
-        }
         
         return {
           ...pila,
@@ -216,7 +233,13 @@ export const GameProvider = ({ children }) => {
       return nuevaLista;
     });
   
-    return removedTile;
+    // Nota: devolver la ficha para el toast
+    const pila = pilas.find(p => p.id === pilaId);
+    if (pila && pila.tiles.length > 0) {
+      return pila.tiles[0]; // la ficha que vamos a mostrar
+    }
+  
+    return null;
   };
 
 
