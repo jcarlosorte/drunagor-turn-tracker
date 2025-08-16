@@ -224,7 +224,7 @@ export const GameProvider = ({ children }) => {
     const tilesSeleccionadas = colores
       .map(color => {
         const tile = placedRunes.find(r => r.runa === color); // busca la primera de ese color
-        console.log(tile.runa);
+        console.log(tile);
         return tile || null;
       })
       .filter(Boolean); // quita nulls (colores que no había)
