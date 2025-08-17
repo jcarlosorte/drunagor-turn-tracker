@@ -338,7 +338,7 @@ const InitTracker = () => {
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig, forcedColorId);
     if (selected.categoria === 'comandante') {
-      openCommanderPCModal((pcValue) => {
+      const createAndPlaceCommander = (pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
@@ -364,16 +364,18 @@ const InitTracker = () => {
           capacidadesOriginales: selected.capacidades,
           ringColor: colorId,
           cara: selected.cara
-        };
-        
-        if (ver === 'show'){
-          showToast(enemy);
-        };
-        
+        };  
+        if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
-      });
+      };
+      // 👉 Si viene forzado, no abrimos modal
+      if (typeof forcedPcValue === 'number') {
+        createAndPlaceCommander(forcedPcValue);
+      } else {
+        openCommanderPCModal((pcValue) => createAndPlaceCommander(pcValue));
+      }
       return;
     } else if (selected.categoria === 'overlord') {
       
@@ -404,9 +406,7 @@ const InitTracker = () => {
           ringColor: colorId,
           cara: selected.cara
         };
-        if (ver === 'show'){
-          showToast(enemy);
-        };
+        if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del señor supremo:
         placeOverlordCards(selected, uuid);
@@ -439,9 +439,7 @@ const InitTracker = () => {
           ringColor: colorId,
           cara: selected.cara
         };
-        if (ver === 'show'){
-          showToast(enemy);
-        };
+        if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
@@ -476,9 +474,7 @@ const InitTracker = () => {
         cara: selected.cara
       }
     });
-    if (ver === 'show'){
-        showToast(selected);
-    };
+    if (ver === 'show') showToast(selected);
   };
   
   const handleRandomCommander = () => {
