@@ -467,7 +467,7 @@ const TopMenu = ({
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-purple-400 text-xl" />
-                    <span className="font-semibold">{t.oscuridadCascada || 'Añadir oscuridad en cascada'}</span>
+                    <span className="font-semibold">{t.oscuridadCascada}</span>
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {[1,2,3,4].map(num => (
