@@ -420,17 +420,13 @@ export const GameProvider = ({ children }) => {
     });
   };
   
-  // Función de shuffle genérica
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
   const initializeDecks = () => {
     const aldeanoBase = ALDEANO.map(card => card.id);
     const errantesBase = ERRANTES.map(card => card.id);
-  
     setAldeanoDeck(shuffleArray(aldeanoBase));
     setErrantesDeck(shuffleArray(errantesBase));
-  
-    console.log("✅ Mazos inicializados y barajados");
   };
 
   const drawCardFromDeck = (deckType) => {
@@ -455,8 +451,6 @@ export const GameProvider = ({ children }) => {
       setDeckFn = setErrantesDeck;
       sourceDB = ERRANTES;
     } else {
-      console.log(aldeanoDeck);
-      console.log(errantesDeck);
       console.warn(`❌ Mazo desconocido: ${deckType}`);
       return null;
     }
