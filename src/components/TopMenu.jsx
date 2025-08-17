@@ -297,13 +297,13 @@ const TopMenu = ({
              
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir Cartas de Runa */}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md ">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiCardPlay className="text-indigo-400 text-xl" />
                     <span className="font-semibold">{t.cartas}</span>
                   </div>
           
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <button
                       onClick={() => {
                         const defaultRunes = RUNAS.filter(r => r.cara === 'A');
@@ -340,14 +340,14 @@ const TopMenu = ({
 
                 {/* 📦 Estado de la bolsa */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiSwapBag className="text-yellow-300 text-xl" />
                     <span className="font-semibold text-white">
                       {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
                     </span>
                   </div>
                   {/* Estado general */}
-                  <div className="text-sm text-white">
+                  <div className="text-sm text-white justify-center">
                     {t.extraidas}: <b>{usedTiles.length}</b><br />
                     {t.total}: <b>{availableTiles.length + usedTiles.length}</b>
                   </div>
@@ -377,11 +377,11 @@ const TopMenu = ({
                 
                 {/* Manifestar Runa */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex flex-row items-center gap-2 mb-2">
+                  <div className="flex flex-row items-center gap-2 mb-2 justify-center">
                     <GiRuneStone className="text-blue-400 text-xl inline-block" />
                     <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <button
                       onClick={() => {
                         const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
@@ -407,11 +407,11 @@ const TopMenu = ({
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir ficha */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiBrickWall className="text-green-300 text-xl" />
                     <span className="font-semibold">{t.fichas}</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                       <button
                         key={color}
