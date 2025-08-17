@@ -152,7 +152,7 @@ const TopMenu = ({
             <GiMinions size={24} />
           </button>
           <button
-            onClick={() => toggleMenu('enemies')} aria-expanded={activeMenu === 'enemies'}
+            onClick={() => toggleMenu('runes')} aria-expanded={activeMenu === 'runes'}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiRuneStone size={24} />
