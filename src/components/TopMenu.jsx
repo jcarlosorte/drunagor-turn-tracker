@@ -297,7 +297,7 @@ const TopMenu = ({
              
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir Cartas de Runa */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiCardPlay className="text-indigo-400 text-xl" />
                     <span className="font-semibold">{t.cartas}</span>
@@ -339,7 +339,7 @@ const TopMenu = ({
 
 
                 {/* 📦 Estado de la bolsa */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiSwapBag className="text-yellow-300 text-xl" />
                     <span className="font-semibold text-white">
@@ -376,7 +376,7 @@ const TopMenu = ({
                 </div>
                 
                 {/* Manifestar Runa */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex flex-row items-center gap-2 mb-2">
                     <GiRuneStone className="text-blue-400 text-xl inline-block" />
                     <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
@@ -406,7 +406,7 @@ const TopMenu = ({
                 
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir ficha */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiBrickWall className="text-green-300 text-xl" />
                     <span className="font-semibold">{t.fichas}</span>
@@ -450,7 +450,7 @@ const TopMenu = ({
                 </div>
 
                 {/* Añadir oscuridad en cascada */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-purple-400 text-xl" />
                     <span className="font-semibold">{t.oscuridadCascada}</span>
@@ -470,7 +470,7 @@ const TopMenu = ({
         
                 
                 {/* Eliminar ficha */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiBrickWall className="text-red-400 text-xl" />
                     <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
@@ -514,7 +514,7 @@ const TopMenu = ({
                 </div>
 
                 {/* ❌ Eliminación directa */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiTrashCan className="text-red-400 text-xl" />
                     <span className="font-semibold text-white">
@@ -556,7 +556,7 @@ const TopMenu = ({
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Gestión de Pila Oscuridad Inquieta*/}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-1">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas}</span>
@@ -609,7 +609,7 @@ const TopMenu = ({
                 </div>
                 
                 {/* Gestión de Pila Oscuridad Concentrada*/}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-1">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas2}</span>
@@ -664,7 +664,7 @@ const TopMenu = ({
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Añadir Barricadas */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.controlAreas}</span>
@@ -713,7 +713,7 @@ const TopMenu = ({
                 </div>
 
                 {/* Gestión manual de puntos de aparición */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.spawnPoints}</span>
