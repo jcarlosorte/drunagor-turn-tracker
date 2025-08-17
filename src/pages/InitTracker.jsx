@@ -981,8 +981,6 @@ const InitTracker = () => {
     console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
 
-
-  
   const showToast = (enemyData) => {
     const translatedName = translations?.enemies?.[enemyData.id];
   
@@ -1049,10 +1047,8 @@ const InitTracker = () => {
     const tipo = rune.tipo;
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
-  
     const totalEnemies = placedEnemies.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
-  
     const replacementValue = totalHeroes <= 2 ? '2' : totalHeroes <= 4 ? '3' : '4';
   
     const bgColorMap = {
