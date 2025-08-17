@@ -57,7 +57,7 @@ const TopMenu = ({
     azul: 'bg-blue-700 hover:bg-blue-600',
     verde: 'bg-green-700 hover:bg-green-600',
     naranja: 'bg-orange-700 hover:bg-orange-600',
-    gris: 'bg-gray-700 hover:bg-gray-600',
+    gris: 'bg-gray-600 hover:bg-gray-500',
   };
 
   const toggleMenu = (name) => {
@@ -555,13 +555,18 @@ const TopMenu = ({
 
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
-                {/* Gestión de Pila Oscuridad Inquieta*/}
+                {/* Sub-bloque: Pilas */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md justify-center">
+                  <div className="flex items-center gap-2 mb-1 justify-center">
+                    <GiCardDraw className="text-purple-500 text-xl" />
+                    <span className="font-semibold text-white">{t.gestionPila}</span>
+                  </div>
+                  
+                  {/* Gestión de Pila Oscuridad Inquieta*/}
                   <div className="flex items-center gap-2 mb-1 justify-center">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas}</span>
                   </div>
-              
                   <button
                     disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
                     onClick={addNewPila}
@@ -606,10 +611,8 @@ const TopMenu = ({
                       </div>
                     ))}
                   </div>
-                </div>
-                
-                {/* Gestión de Pila Oscuridad Concentrada*/}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md justify-center">
+        
+                  {/* Gestión de Pila Oscuridad Concentrada*/}
                   <div className="flex items-center gap-2 mb-1 justify-center">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas2}</span>
