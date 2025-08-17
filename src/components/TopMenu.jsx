@@ -311,7 +311,7 @@ const TopMenu = ({
              
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir Cartas de Runa */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiCardPlay className="text-indigo-400 text-xl" />
                     <span className="font-semibold">{t.cartas}</span>
@@ -390,7 +390,7 @@ const TopMenu = ({
                 </div>
                 
                 {/* Manifestar Runa */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex flex-row items-center gap-2 mb-2">
                     <GiRuneStone className="text-blue-400 text-xl inline-block" />
                     <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
