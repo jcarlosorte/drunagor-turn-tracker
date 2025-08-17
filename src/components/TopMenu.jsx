@@ -414,11 +414,12 @@ const TopMenu = ({
                     </button>
                   </div>
                 </div>
-                
+
+              {/* FIN PRIMER BLOQUE */}
               </div>
                 
               <div className="flex flex-col md:flex-row gap-4">
-              {/* Añadir ficha */}
+                {/* Añadir ficha */}
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
                   <div className="flex items-center gap-2 mb-2">
                     <GiBrickWall className="text-green-300 text-xl" />
@@ -531,12 +532,7 @@ const TopMenu = ({
                     </button>
                   </div>
                 </div>
-              </div>
 
-
-              <div className="flex flex-col md:flex-row gap-4 mt-4">
-                
-              
                 {/* ❌ Eliminación directa */}
                 <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
@@ -573,6 +569,15 @@ const TopMenu = ({
                     </button>
                   </div>
                 </div>
+                
+              {/* FIN SEGUNDO BLOQUE */}
+              </div>
+
+
+              <div className="flex flex-col md:flex-row gap-4 mt-4">
+
+
+              {/* FIN TERCER BLOQUE */}
               </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
