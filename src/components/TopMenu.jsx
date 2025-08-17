@@ -38,7 +38,7 @@ const TopMenu = ({
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, 
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
-         pilas, setPilas, addNewPila, removeTileFromPila, 
+         pilas, setPilas, addNewPila, removeTileFromPila, addRunesCascade,
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, 
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
