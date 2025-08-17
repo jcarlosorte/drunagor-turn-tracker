@@ -167,6 +167,48 @@ const InitTracker = () => {
       for (let i = 1; i <= numHeroes; i++) {
         const line = translationsDeck.texto?.[`${card.id}${i}`];
         if (line) extra_ori += `${line}\n`;
+        const enemyData = translationsDeck.texto2?.[`${card.id}${i}`];
+        if (enemyData) {
+          const [count, color, category] = enemyData;
+          for (let j = 0; j < count; j++) {
+            // 1️⃣ Filtrar enemigos disponibles según expansiones, color y categoría
+            const candidates = ENEMIES.filter(
+              e =>
+                enemies.includes(e.id) &&   // está en expansiones activas
+                e.color === color &&
+                e.categoria === category &&
+                e.cara !== 'B'
+            );
+    
+            if (candidates.length === 0) {
+              console.warn(`❌ No hay enemigos disponibles para ${color} - ${category}`);
+              continue;
+            }
+    
+            // 2️⃣ Elegir uno aleatorio
+            const selectedEnemy = candidates[Math.floor(Math.random() * candidates.length)];
+    
+            // 3️⃣ Elegir comportamiento aleatorio de entre los que tenga definidos
+            let behaviorType = 'estandar';
+            if (Array.isArray(selectedEnemy.comportamientos)) {
+              behaviorType = selectedEnemy.comportamientos[
+                Math.floor(Math.random() * selectedEnemy.comportamientos.length)
+              ];
+            } else if (selectedEnemy.comportamiento) {
+              behaviorType = selectedEnemy.comportamiento;
+            }
+    
+            // 4️⃣ Llamar a handleManualEnemyAdd con el id y datos encontrados
+            handleManualEnemyAdd(
+              selectedEnemy.id,
+              behaviorType,
+              category,
+              'show',
+              color,
+              null
+            );
+          }
+        }
       }
     } else {
       extra_ori = translationsDeck.texto?.[card.id] || '';
@@ -759,7 +801,7 @@ const InitTracker = () => {
     
             for (let i = 0; i < numCartas; i++) {
               // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
-              const cartaRobada = drawCardFromDeck(mazo); 
+              const cartaRobada = drawCardFromDeck(mazo);
               if (cartaRobada) {
                 showCardToast(cartaRobada, mazo); 
               } else {
