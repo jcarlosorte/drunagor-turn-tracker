@@ -203,7 +203,7 @@ const InitTracker = () => {
               selectedEnemy.id,
               behaviorType,
               category,
-              'show',
+              'NoShow',
               color,
               null
             );
@@ -322,11 +322,16 @@ const InitTracker = () => {
   };
 
   
-  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUUID = null ) => {
+  const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUUID = null, forcedPcValue = null ) => {
     setManualSelector({ open: false, color: null });
-    const selected = ENEMIES.find(
-      e => e.id === enemyId && e.categoria === category && e.comportamiento === behaviorType && enemies.includes(e.id) && e.cara !=="B"
-    );
+    const selected = ENEMIES.find(e => {
+      if (e.id !== enemyId) return false;
+      if (e.categoria !== category) return false;
+      if (!enemies.includes(e.id)) return false;
+      if (e.cara === 'B') return false;
+      if (category === 'comandante') return true;          // ignoramos comportamiento
+      return e.comportamiento === behaviorType;            // para el resto sí exigimos match
+    });
     if (!selected) return;
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
