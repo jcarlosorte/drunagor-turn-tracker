@@ -675,7 +675,7 @@ const TopMenu = ({
                     <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
-                        <span className="font-semibold">{t.controlAreas}</span>
+                        <span className="font-semibold">{t.barricadas}</span>
                       </div>
                       
                       <div className="flex gap-2 flex-wrap justify-center">
@@ -763,109 +763,7 @@ const TopMenu = ({
 
                   </div>
                 </div>
-              </div>
-
-
-              <div className="flex flex-col md:flex-row gap-4 mt-4">
-                {/* Añadir Barricadas */}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2 justify-center">
-                    <GiRuneStone className="text-cyan-400 text-xl" />
-                    <span className="font-semibold">{t.controlAreas}</span>
-                  </div>
-                
-                  <div className="flex gap-2 flex-wrap justify-center">
-                    {/* Botón para generar todos los puntos */}
-                    <button
-                      onClick={() => initializeControlPoints()}
-                      className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ➕ {t.addControlAreas}
-                    </button>
-                
-                    {/* Botón para limpiar todos los puntos */}
-                    <button
-                      onClick={() => setControlPoints([])}
-                      className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ✕ {t.removeCA}
-                    </button>
-                  </div>
-                
-                  {/* Si hay puntos activos, mostrarlos */}
-                  {controlPoints.length > 0 && (
-                    <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                      <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
-                      <div className="flex gap-2 flex-wrap justify-center">
-                        {controlPoints.map(point => (
-                          <div
-                            key={point.uuid}
-                            className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                          >
-                            <span>{t.colores[point.runa]}</span>
-                            <button
-                              onClick={() => removeControlPoint(point.uuid)}
-                              className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Gestión manual de puntos de aparición */}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2 justify-center">
-                    <GiRuneStone className="text-cyan-400 text-xl" />
-                    <span className="font-semibold">{t.spawnPoints}</span>
-                  </div>
-                
-                  <div className="flex gap-2 flex-wrap justify-center">
-                    {/* Botón para generar todos los puntos */}
-                    <button
-                      onClick={() => initializeSpawnPoints()}
-                      className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ➕ {t.addSpawnPoints}
-                    </button>
-                
-                    {/* Botón para limpiar todos los puntos */}
-                    <button
-                      onClick={() => setSpawnPoints([])}
-                      className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ✕ {t.removeSP}
-                    </button>
-                  </div>
-                
-                  {/* Si hay puntos activos, mostrarlos */}
-                  {spawnPoints.length > 0 && (
-                    <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                      <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
-                      <div className="flex gap-2 flex-wrap justify-center">
-                        {spawnPoints.map(point => (
-                          <div
-                            key={point.uuid}
-                            className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                          >
-                            <span>{t.colores[point.runa]}</span>
-                            <button
-                              onClick={() => removeSpawnPoint(point.uuid)}
-                              className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                
+              {/* FIN BLOQUE */}
               </div>
               
               <div className="flex justify-center gap-4 mt-2">
