@@ -476,7 +476,7 @@ const TopMenu = ({
                         onClick={() => {
                           ['naranja', 'verde', 'azul', 'rojo', 'gris'].forEach(color => {
                             for (let i = 0; i < num; i++) {
-                              addRune(color);
+                              drawTileByColor(color);
                             }
                           });
                         }}
