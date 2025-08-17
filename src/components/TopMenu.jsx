@@ -389,7 +389,32 @@ const TopMenu = ({
                   </div>
                 </div>
                 
-               
+                {/* Manifestar Runa */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex flex-row items-center gap-2 mb-2">
+                    <GiRuneStone className="text-blue-400 text-xl inline-block" />
+                    <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                        const tile = drawTilePreviewByColor(randomColor);
+                    
+                        if (tile) {
+                          showTileToast(tile, 'show');
+                        } else {
+                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
+                        }
+                      }}
+                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.manifestar || 'Manifestar'}
+                    </button>
+                  </div>
+                </div>
+                
               </div>
                 
               <div className="flex flex-col md:flex-row gap-4">
@@ -461,33 +486,7 @@ const TopMenu = ({
                     ))}
                   </div>
                 </div>
-
-                                      
-                {/* Manifestar Runa */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
-                  <div className="flex flex-row items-center gap-2 mb-2">
-                    <GiRuneStone className="text-blue-400 text-xl inline-block" />
-                    <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                        const tile = drawTilePreviewByColor(randomColor);
-                    
-                        if (tile) {
-                          showTileToast(tile, 'show');
-                        } else {
-                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                        }
-                      }}
-                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.manifestar || 'Manifestar'}
-                    </button>
-                  </div>
-                </div>
+        
                 
                 {/* Eliminar ficha */}
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
