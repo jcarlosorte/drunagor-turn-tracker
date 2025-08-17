@@ -310,7 +310,7 @@ const TopMenu = ({
             <div className="flex flex-col gap-4 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500">
              
               <div className="flex flex-col md:flex-row gap-4">
-              {/* Añadir Cartas de Runa */}
+                {/* Añadir Cartas de Runa */}
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
                   <div className="flex items-center gap-2 mb-2">
                     <GiCardPlay className="text-indigo-400 text-xl" />
@@ -351,31 +351,45 @@ const TopMenu = ({
                   )}
                 </div>
 
-                {/* Manifestar Runa */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
-                  <div className="flex flex-row items-center gap-2 mb-2">
-                    <GiRuneStone className="text-blue-400 text-xl inline-block" />
-                    <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+
+                {/* 📦 Estado de la bolsa */}
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiSwapBag className="text-yellow-300 text-xl" />
+                    <span className="font-semibold text-white">
+                      {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
+                    </span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                        const tile = drawTilePreviewByColor(randomColor);
-                    
-                        if (tile) {
-                          showTileToast(tile, 'show');
-                        } else {
-                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                        }
-                      }}
-                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.manifestar || 'Manifestar'}
-                    </button>
+                  {/* Estado general */}
+                  <div className="text-sm text-white">
+                    {t.extraidas}: <b>{usedTiles.length}</b><br />
+                    {t.total}: <b>{availableTiles.length + usedTiles.length}</b>
+                  </div>
+                  {/* Estado por colores en línea */}
+                  <div className="flex items-center gap-2 text-xs justify-center">
+                    {[
+                      { id: 'naranja', color: '#ff8c00' },
+                      { id: 'verde', color: '#00aa00' },
+                      { id: 'azul', color: '#0077cc' },
+                      { id: 'rojo', color: '#cc0000' },
+                      { id: 'gris', color: '#999999' }
+                    ].map(({ id, color }) => {
+                      const usadasColor = usedTiles.filter(tile => tile.runa === id).length;
+                      const disponiblesColor = availableTiles.filter(tile => tile.runa === id).length;
+                      return (
+                        <div
+                          key={id}
+                          className="px-2 py-1 rounded font-semibold"
+                          style={{ backgroundColor: color, color: 'white' }}
+                        >
+                          {t.colores[id] || id}: {usadasColor}/{usadasColor + disponiblesColor}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
+                
+               
               </div>
                 
               <div className="flex flex-col md:flex-row gap-4">
@@ -423,6 +437,58 @@ const TopMenu = ({
                   </div>
                 </div>
 
+                {/* Añadir oscuridad en cascada */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <GiRuneStone className="text-purple-400 text-xl" />
+                    <span className="font-semibold">{t.oscuridadCascada || 'Añadir oscuridad en cascada'}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {[1,2,3,4].map(num => (
+                      <button
+                        key={num}
+                        onClick={() => {
+                          ['naranja', 'verde', 'azul', 'rojo', 'gris'].forEach(color => {
+                            for (let i = 0; i < num; i++) {
+                              addRune(color);
+                            }
+                          });
+                        }}
+                        className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded-full"
+                      >
+                        ➕ {num}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                                      
+                {/* Manifestar Runa */}
+                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                  <div className="flex flex-row items-center gap-2 mb-2">
+                    <GiRuneStone className="text-blue-400 text-xl inline-block" />
+                    <span className="font-semibold whitespace-nowrap">{t.manifestarTitulo || 'Manifestar Runa'}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+                        const tile = drawTilePreviewByColor(randomColor);
+                    
+                        if (tile) {
+                          showTileToast(tile, 'show');
+                        } else {
+                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
+                        }
+                      }}
+                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.manifestar || 'Manifestar'}
+                    </button>
+                  </div>
+                </div>
+                
                 {/* Eliminar ficha */}
                 <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
                   <div className="flex items-center gap-2 mb-2">
@@ -470,42 +536,7 @@ const TopMenu = ({
 
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
-                {/* 📦 Estado de la bolsa */}
-                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
-                    <GiSwapBag className="text-yellow-300 text-xl" />
-                    <span className="font-semibold text-white">
-                      {t.estadoBolsa || 'Estado de la Bolsa de Runas'}
-                    </span>
-                  </div>
-                  {/* Estado general */}
-                  <div className="text-sm text-white">
-                    {t.extraidas}: <b>{usedTiles.length}</b><br />
-                    {t.total}: <b>{availableTiles.length + usedTiles.length}</b>
-                  </div>
-                  {/* Estado por colores en línea */}
-                  <div className="flex items-center gap-2 text-xs">
-                    {[
-                      { id: 'naranja', color: '#ff8c00' },
-                      { id: 'verde', color: '#00aa00' },
-                      { id: 'azul', color: '#0077cc' },
-                      { id: 'rojo', color: '#cc0000' },
-                      { id: 'gris', color: '#999999' }
-                    ].map(({ id, color }) => {
-                      const usadasColor = usedTiles.filter(tile => tile.runa === id).length;
-                      const disponiblesColor = availableTiles.filter(tile => tile.runa === id).length;
-                      return (
-                        <div
-                          key={id}
-                          className="px-2 py-1 rounded font-semibold"
-                          style={{ backgroundColor: color, color: 'white' }}
-                        >
-                          {t.colores[id] || id}: {usadasColor}/{usadasColor + disponiblesColor}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+                
               
                 {/* ❌ Eliminación directa */}
                 <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
