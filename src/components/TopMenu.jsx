@@ -775,7 +775,7 @@ const TopMenu = ({
                   {t.resetRunes}
                 </button>
                 <button
-                  onClick={() => setIsRunesOpen(false)}
+                  onClick={toggleMenu}
                   className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
                 >
                   {t.close}
@@ -939,7 +939,7 @@ const TopMenu = ({
               
               <div className="flex justify-center gap-4 mt-2">
                 <button
-                  onClick={() => setIsScenarioOpen(false)}
+                  onClick={toggleMenu}
                   className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-full text-sm"
                 >
                   {t.close || 'Cerrar'}
