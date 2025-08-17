@@ -71,6 +71,42 @@ export const GameProvider = ({ children }) => {
     setRunes({ rojo: 0, azul: 0, verde: 0, naranja: 0, gris: 0 });
   };
 
+  const addRunesCascade = (n) => {
+    const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    let avail = [...availableTiles];
+    let used = [...usedTiles];
+    let runesCopy = { ...runes };
+    const drawnForToast = [];
+  
+    colores.forEach(color => {
+      for (let i = 0; i < n; i++) {
+        const candidates = avail.filter(t => t.runa === color);
+        if (candidates.length === 0) break;
+  
+        const random = candidates[Math.floor(Math.random() * candidates.length)];
+  
+        // quitar de avail y añadir a used
+        avail = avail.filter(t => t.uuid !== random.uuid);
+        used.push(random);
+  
+        // incrementar contador en el track
+        runesCopy[color] = (runesCopy[color] || 0) + 1;
+  
+        // si quieres feedback visual:
+        // drawnForToast.push(random);
+      }
+    });
+  
+    // Aplicamos cambios UNA vez
+    setAvailableTiles(avail);
+    setUsedTiles(used);
+    setRunes(runesCopy);
+  
+    // Opcional: mostrar toasts
+    // drawnForToast.forEach(tile => showTileToast(tile, 'show'));
+  };
+  
+    
   const drawTileByColor = (color) => {
     const candidates = availableTiles.filter(t => t.runa === color);
     if (candidates.length === 0) return null;
