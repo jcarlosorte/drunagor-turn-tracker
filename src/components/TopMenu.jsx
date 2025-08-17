@@ -44,6 +44,8 @@ const TopMenu = ({
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
+  const [activeMenu, setActiveMenu] = useState(null); // 'runes' | 'enemies' | 'scenario' | null
+  const containerRef = useRef(null);
   const menuRefEnemies = useRef(null);
   const menuRefRunes = useRef(null);
   const menuRefScenario = useRef(null);
@@ -58,7 +60,9 @@ const TopMenu = ({
     gris: 'bg-gray-700 hover:bg-gray-600',
   };
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = (name) => {
+    setActiveMenu(prev => (prev === name ? null : name));
+  };
 
   const showTileToast = (tile, tipo = 'remove') => {
     const uuid = uuidv4();
@@ -70,19 +74,13 @@ const TopMenu = ({
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRefEnemies.current && !menuRefEnemies.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-      if (menuRefRunes.current && !menuRefRunes.current.contains(event.target)) {
-        setIsRunesOpen(false);
-      }
-      if (menuRefScenario.current && !menuRefScenario.current.contains(event.target)) {
-        setIsScenarioOpen(false);
+    const handleOutside = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setActiveMenu(null);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
     
   const handleEnemySelect = (e) => {
@@ -144,35 +142,23 @@ const TopMenu = ({
     
   return (
     <>
-    <div className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
+    <div ref={containerRef} className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-xl shadow-lg">
       <div className="flex justify-between items-center px-4 py-2 max-w-screen-xl mx-auto">
         <div className="flex items-center gap-2">
           <button
-            onClick={() => {
-              setIsOpen(prev => !prev);
-              setIsRunesOpen(false);
-              setIsScenarioOpen(false);
-            }}
+            onClick={() => toggleMenu('enemies')} aria-expanded={activeMenu === 'enemies'}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiMinions size={24} />
           </button>
           <button
-            onClick={() => {
-              setIsRunesOpen(prev => !prev);
-              setIsOpen(false);
-              setIsScenarioOpen(false);
-            }}
+            onClick={() => toggleMenu('enemies')} aria-expanded={activeMenu === 'enemies'}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiRuneStone size={24} />
           </button>
           <button
-            onClick={() => {
-              setIsScenarioOpen(prev => !prev);
-              setIsOpen(false);
-              setIsRunesOpen(false);
-            }}
+            onClick={() => toggleMenu('scenario')} aria-expanded={activeMenu === 'scenario'}
             className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700"
           >
             <GiVillage size={24} />
@@ -202,7 +188,7 @@ const TopMenu = ({
       </div>
 
       <AnimatePresence>
-        {isOpen && (
+        {activeMenu === 'enemies' && (
           <motion.div
             ref={menuRefEnemies}
             initial={{ opacity: 0, y: -10 }}
@@ -298,7 +284,7 @@ const TopMenu = ({
       </AnimatePresence>
       
       <AnimatePresence>
-        {isRunesOpen && (
+        {activeMenu === 'runes' && (
           <motion.div
             ref={menuRefRunes}
             initial={{ opacity: 0, y: -10 }}
@@ -420,7 +406,7 @@ const TopMenu = ({
                 
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Añadir ficha */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiBrickWall className="text-green-300 text-xl" />
                     <span className="font-semibold">{t.fichas}</span>
@@ -464,7 +450,7 @@ const TopMenu = ({
                 </div>
 
                 {/* Añadir oscuridad en cascada */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiRuneStone className="text-purple-400 text-xl" />
                     <span className="font-semibold">{t.oscuridadCascada}</span>
@@ -473,13 +459,7 @@ const TopMenu = ({
                     {[1,2,3,4].map(num => (
                       <button
                         key={num}
-                        onClick={() => {
-                          ['naranja', 'verde', 'azul', 'rojo', 'gris'].forEach(color => {
-                            for (let i = 0; i < num; i++) {
-                              drawTileByColor(color);
-                            }
-                          });
-                        }}
+                        onClick={() => addRunesCascade(num)}
                         className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded-full"
                       >
                         ➕ {num}
@@ -490,7 +470,7 @@ const TopMenu = ({
         
                 
                 {/* Eliminar ficha */}
-                <div className="bg-gray-800 rounded-lg p-3 shadow-md w-full md:w-1/2">
+                <div className="flex-1 bg-gray-800 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2">
                     <GiBrickWall className="text-red-400 text-xl" />
                     <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
@@ -573,12 +553,6 @@ const TopMenu = ({
               {/* FIN SEGUNDO BLOQUE */}
               </div>
 
-
-              <div className="flex flex-col md:flex-row gap-4 mt-4">
-
-
-              {/* FIN TERCER BLOQUE */}
-              </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Gestión de Pila Oscuridad Inquieta*/}
@@ -815,7 +789,7 @@ const TopMenu = ({
       </AnimatePresence>
       
       <AnimatePresence>
-        {isScenarioOpen && (
+        {activeMenu === 'scenario' && (
           <motion.div
             ref={menuRefScenario}
             initial={{ opacity: 0, y: -10 }}
