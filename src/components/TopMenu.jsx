@@ -451,7 +451,7 @@ const TopMenu = ({
 
                 {/* Añadir oscuridad en cascada */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiRuneStone className="text-purple-400 text-xl" />
                     <span className="font-semibold">{t.oscuridadCascada}</span>
                   </div>
@@ -471,11 +471,11 @@ const TopMenu = ({
                 
                 {/* Eliminar ficha */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiBrickWall className="text-red-400 text-xl" />
                     <span className="font-semibold">{t.removeTiles || 'Eliminar fichas de runa'}</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                       <button
                         key={color}
@@ -515,14 +515,14 @@ const TopMenu = ({
 
                 {/* ❌ Eliminación directa */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiTrashCan className="text-red-400 text-xl" />
                     <span className="font-semibold text-white">
                       {t.eliminarDirecto}
                     </span>
                   </div>
               
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {['naranja', 'verde', 'azul', 'rojo', 'gris'].map(color => (
                       <button
                         key={color}
@@ -556,8 +556,8 @@ const TopMenu = ({
 
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Gestión de Pila Oscuridad Inquieta*/}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md justify-center">
+                  <div className="flex items-center gap-2 mb-1 justify-center">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas}</span>
                   </div>
@@ -570,7 +570,7 @@ const TopMenu = ({
                     ➕ {t.addPila}
                   </button>
                 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
                     {pilas.map(pila => (
                       <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                         <div className="font-bold mb-1">
@@ -609,8 +609,8 @@ const TopMenu = ({
                 </div>
                 
                 {/* Gestión de Pila Oscuridad Concentrada*/}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md justify-center">
+                  <div className="flex items-center gap-2 mb-1 justify-center">
                     <GiCardDraw className="text-purple-400 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPilas2}</span>
                   </div>
@@ -622,7 +622,7 @@ const TopMenu = ({
                     ➕ {t.addPila}
                   </button>
                 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
                     {pilasConcentrada.map(pila => (
                       <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                         <div className="font-bold mb-1">
@@ -665,12 +665,12 @@ const TopMenu = ({
               <div className="flex flex-col md:flex-row gap-4 mt-4">
                 {/* Añadir Barricadas */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.controlAreas}</span>
                   </div>
                 
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="flex gap-2 flex-wrap justify-center">
                     {/* Botón para generar todos los puntos */}
                     <button
                       onClick={() => initializeControlPoints()}
@@ -714,12 +714,12 @@ const TopMenu = ({
 
                 {/* Gestión manual de puntos de aparición */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
                     <GiRuneStone className="text-cyan-400 text-xl" />
                     <span className="font-semibold">{t.spawnPoints}</span>
                   </div>
                 
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="flex gap-2 flex-wrap justify-center">
                     {/* Botón para generar todos los puntos */}
                     <button
                       onClick={() => initializeSpawnPoints()}
