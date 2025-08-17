@@ -205,7 +205,8 @@ const InitTracker = () => {
               category,
               'NoShow',
               color,
-              null
+              null,
+              2
             );
           }
         }
