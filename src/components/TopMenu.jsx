@@ -558,189 +558,209 @@ const TopMenu = ({
                 {/* Sub-bloque: Pilas */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
                   <div className="flex items-center gap-2 mb-2 justify-center">
-                    <GiCardDraw className="text-purple-400 text-xl" />
+                    <GiCardDraw className="text-purple-500 text-xl" />
                     <span className="font-semibold text-white">{t.gestionPila}</span>
                   </div>
-              
-                  <button
-                    disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
-                    onClick={addNewPila}
-                    className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
-                  >
-                    ➕ {t.addPila}
-                  </button>
-              
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
-                    {pilas.map(pila => (
-                      <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                        <div className="font-bold mb-1">
-                          <span>{t.pila || 'Pila'} 🗃️</span>
-                          <input
-                            type="text"
-                            maxLength={5}
-                            value={codigosPilas[pila.id] || ''}
-                            onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
-                            className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
-                            placeholder="ABC12"
-                            title={t.codigoPila}
-                          />
-                        </div>
-                        <div className="text-xs text-gray-300 mb-2">
-                          {t.tamano}: {pila.tiles.length}
-                        </div>
-                        <div className="flex justify-center">
-                          <button
-                            className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                            onClick={() => {
-                              const tile = removeTileFromPila(pila.id);
-                              if (tile) showTileToast(tile, 'show');
-                              else alert(t.emptyPila);
-                            }}
-                          >
-                            🧱 − {t.devolver}
-                          </button>
-                        </div>
+
+                  <div className="flex flex-col md:flex-row gap-4 justify-center">
+                    {/* Sub-bloque: Pila Oscuridad Inquieta */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiCardDraw className="text-purple-400 text-xl" />
+                        <span className="font-semibold text-white">{t.gestionPilas}</span>
                       </div>
-                    ))}
-                  </div>
-              
-                  {/* Gestión de Pila Oscuridad Concentrada */}
-                  <div className="mt-4">
-                    <div className="flex items-center gap-2 mb-1 justify-center">
-                      <GiCardDraw className="text-purple-400 text-xl" />
-                      <span className="font-semibold text-white">{t.gestionPilas2}</span>
-                    </div>
-              
-                    <button
-                      onClick={addNewPilaConcentrada}
-                      className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
-                    >
-                      ➕ {t.addPila}
-                    </button>
-              
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
-                      {pilasConcentrada.map(pila => (
-                        <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                          <div className="font-bold mb-1">
-                            <span>{t.pila || 'Pila'} 🗃️</span>
-                            <input
-                              type="text"
-                              maxLength={5}
-                              value={codigosPilas[pila.id] || ''}
-                              onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
-                              className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
-                              placeholder="ABC12"
-                              title={t.codigoPila}
-                            />
-                          </div>
-                          <div className="text-xs text-gray-300 mb-2">
-                            {t.tamano}: {pila.tiles.length}
-                          </div>
-                          <div className="flex justify-center">
-                            <button
-                              className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                              onClick={() => {
-                                const tile = removeTileFromPilaConcentrada(pila.id);
-                                if (tile) showTileToast(tile, 'show');
-                                else alert(t.emptyPila);
-                              }}
-                            >
-                              🧱 − {t.devolver}
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              
-                {/* Sub-bloque: Control de áreas y spawn points */}
-                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
-                  <div className="flex items-center gap-2 mb-2 justify-center">
-                    <GiRuneStone className="text-cyan-400 text-xl" />
-                    <span className="font-semibold">{t.controlAreas}</span>
-                  </div>
-              
-                  <div className="flex gap-2 flex-wrap justify-center">
-                    <button
-                      onClick={() => initializeControlPoints()}
-                      className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ➕ {t.addControlAreas}
-                    </button>
-                    <button
-                      onClick={() => setControlPoints([])}
-                      className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-                    >
-                      ✕ {t.removeCA}
-                    </button>
-                  </div>
-              
-                  {controlPoints.length > 0 && (
-                    <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                      <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
-                      <div className="flex gap-2 flex-wrap justify-center">
-                        {controlPoints.map(point => (
-                          <div
-                            key={point.uuid}
-                            className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                          >
-                            <span>{t.colores[point.runa]}</span>
-                            <button
-                              onClick={() => removeControlPoint(point.uuid)}
-                              className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                            >
-                              ✕
-                            </button>
+        
+                      <button
+                        disabled={!['rojo', 'azul', 'verde', 'naranja', 'gris'].every(c => availableTiles.some(t => t.runa === c))}
+                        onClick={addNewPila}
+                        className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
+                      >
+                        ➕ {t.addPila}
+                      </button>
+                  
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
+                        {pilas.map(pila => (
+                          <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                            <div className="font-bold mb-1">
+                              <span>{t.pila || 'Pila'} 🗃️</span>
+                              <input
+                                type="text"
+                                maxLength={5}
+                                value={codigosPilas[pila.id] || ''}
+                                onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                                className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                                placeholder="ABC12"
+                                title={t.codigoPila}
+                              />
+                            </div>
+                            <div className="text-xs text-gray-300 mb-2">
+                              {t.tamano}: {pila.tiles.length}
+                            </div>
+                            <div className="flex justify-center">
+                              <button
+                                className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                                onClick={() => {
+                                  const tile = removeTileFromPila(pila.id);
+                                  if (tile) showTileToast(tile, 'show');
+                                  else alert(t.emptyPila);
+                                }}
+                              >
+                                🧱 − {t.devolver}
+                              </button>
+                            </div>
                           </div>
                         ))}
                       </div>
                     </div>
-                  )}
               
-                  {/* Aquí puedes añadir el bloque de puntos de aparición */}
-                  <div className="mt-4">
-                    <div className="flex items-center gap-2 mb-2 justify-center">
-                      <GiRuneStone className="text-cyan-400 text-xl" />
-                      <span className="font-semibold">{t.spawnPoints}</span>
-                    </div>
-              
-                    <div className="flex gap-2 flex-wrap justify-center">
+                    {/* Sub-bloque: Pila Oscuridad Concentrada */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiCardDraw className="text-purple-400 text-xl" />
+                        <span className="font-semibold text-white">{t.gestionPilas2}</span>
+                      </div>
+                
                       <button
-                        onClick={() => initializeSpawnPoints()}
-                        className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                        onClick={addNewPilaConcentrada}
+                        className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
                       >
-                        ➕ {t.addSpawnPoints}
+                        ➕ {t.addPila}
                       </button>
-                      <button
-                        onClick={() => setSpawnPoints([])}
-                        className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-                      >
-                        ✕ {t.removeSP}
-                      </button>
-                    </div>
-              
-                    {spawnPoints.length > 0 && (
-                      <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                        <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
-                        <div className="flex gap-2 flex-wrap justify-center">
-                          {spawnPoints.map(point => (
-                            <div
-                              key={point.uuid}
-                              className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                            >
-                              <span>{t.colores[point.runa]}</span>
+                
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
+                        {pilasConcentrada.map(pila => (
+                          <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                            <div className="font-bold mb-1">
+                              <span>{t.pila || 'Pila'} 🗃️</span>
+                              <input
+                                type="text"
+                                maxLength={5}
+                                value={codigosPilas[pila.id] || ''}
+                                onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                                className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                                placeholder="ABC12"
+                                title={t.codigoPila}
+                              />
+                            </div>
+                            <div className="text-xs text-gray-300 mb-2">
+                              {t.tamano}: {pila.tiles.length}
+                            </div>
+                            <div className="flex justify-center">
                               <button
-                                onClick={() => removeSpawnPoint(point.uuid)}
-                                className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                                onClick={() => {
+                                  const tile = removeTileFromPilaConcentrada(pila.id);
+                                  if (tile) showTileToast(tile, 'show');
+                                  else alert(t.emptyPila);
+                                }}
                               >
-                                ✕
+                                🧱 − {t.devolver}
                               </button>
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
-                    )}
+                    </div>
+                  </div>
+                </div>
+              
+                {/* Bloque 2: Control de áreas y puntos de aparición */}
+                <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                  <div className="flex items-center gap-2 mb-2 justify-center">
+                    <GiRuneStone className="text-cyan-500 text-xl" />
+                    <span className="font-semibold">{t.controlAreas}</span>
+                  </div>
+                  <div className="flex flex-col md:flex-row gap-4 justify-center">
+                    {/* Sub-bloque: Barricadas */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiRuneStone className="text-cyan-400 text-xl" />
+                        <span className="font-semibold">{t.controlAreas}</span>
+                      </div>
+                      
+                      <div className="flex gap-2 flex-wrap justify-center">
+                        <button
+                          onClick={() => initializeControlPoints()}
+                          className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ➕ {t.addControlAreas}
+                        </button>
+                        <button
+                          onClick={() => setControlPoints([])}
+                          className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ✕ {t.removeCA}
+                        </button>
+                      </div>
+                  
+                      {controlPoints.length > 0 && (
+                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                          <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
+                          <div className="flex gap-2 flex-wrap justify-center">
+                            {controlPoints.map(point => (
+                              <div
+                                key={point.uuid}
+                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                              >
+                                <span>{t.colores[point.runa]}</span>
+                                <button
+                                  onClick={() => removeControlPoint(point.uuid)}
+                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+              
+                    {/* Sub-bloque: Puntos de aparición */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiRuneStone className="text-cyan-400 text-xl" />
+                        <span className="font-semibold">{t.spawnPoints}</span>
+                      </div>
+                
+                      <div className="flex gap-2 flex-wrap justify-center">
+                        <button
+                          onClick={() => initializeSpawnPoints()}
+                          className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ➕ {t.addSpawnPoints}
+                        </button>
+                        <button
+                          onClick={() => setSpawnPoints([])}
+                          className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ✕ {t.removeSP}
+                        </button>
+                      </div>
+                
+                      {spawnPoints.length > 0 && (
+                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                          <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
+                          <div className="flex gap-2 flex-wrap justify-center">
+                            {spawnPoints.map(point => (
+                              <div
+                                key={point.uuid}
+                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                              >
+                                <span>{t.colores[point.runa]}</span>
+                                <button
+                                  onClick={() => removeSpawnPoint(point.uuid)}
+                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
                   </div>
                 </div>
               </div>
