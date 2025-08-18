@@ -35,6 +35,7 @@ export const GameProvider = ({ children }) => {
   const [tileToasts, setTileToasts] = useState([]);
   const [spawnPoints, setSpawnPoints] = useState([]);
   const [controlPoints, setControlPoints] = useState([]);
+  const [runeKeys, setRuneKeys] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
   
@@ -412,9 +413,40 @@ export const GameProvider = ({ children }) => {
       if (point) {
         // ✅ Colocar la ficha en el track 
         addRune(point.runa);
-        // ✅ Eliminar 2 de la bolsa del mismo color ++++ PENDIENTE +++
+        // ✅ Eliminar 2 de la bolsa del mismo color
         deleteAvailableTileByColor(point.runa);
         deleteAvailableTileByColor(point.runa);
+      }
+      return prev.filter(p => p.uuid !== uuid);
+    });
+  };
+
+  const initializeRuneKeys = () => {
+    const colors = ['naranja', 'verde', 'rojo', 'gris'];
+    const newPoints = [];
+  
+    colors.forEach(color => {
+      const tile = deleteAvailableTileByColor(color); // quita 1 ficha de la bolsa
+      if (tile) {
+        newPoints.push({
+          uuid: uuidv4(),
+          runa: color,
+          tile
+        });
+      } else {
+        alert(`No hay fichas ${ti.colores[color]} para crear punto de aparición`);
+      }
+    });
+  
+    setRuneKeys(newPoints);
+  };
+  
+  const removeRuneKey = (uuid) => {
+    setRuneKeys(prev => {
+      const point = prev.find(p => p.uuid === uuid);
+      if (point) {
+        // ✅ devolvemos la ficha a la bolsa
+        //restoreTile(point.tile);
       }
       return prev.filter(p => p.uuid !== uuid);
     });
@@ -512,6 +544,7 @@ export const GameProvider = ({ children }) => {
         setControlPoints,
         initializeControlPoints,
         removeControlPoint,
+        setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey,
         initializeDecks,
         drawCardFromDeck
       }}
