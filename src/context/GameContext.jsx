@@ -36,6 +36,7 @@ export const GameProvider = ({ children }) => {
   const [spawnPoints, setSpawnPoints] = useState([]);
   const [controlPoints, setControlPoints] = useState([]);
   const [runeKeys, setRuneKeys] = useState([]);
+  const [rescue, setRescue] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
   
@@ -451,6 +452,37 @@ export const GameProvider = ({ children }) => {
       return prev.filter(p => p.uuid !== uuid);
     });
   };
+
+  const initializeRescue = () => {
+    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const newPoints = [];
+  
+    colors.forEach(color => {
+      const tile = deleteAvailableTileByColor(color); // quita 1 ficha de la bolsa
+      if (tile) {
+        newPoints.push({
+          uuid: uuidv4(),
+          runa: color,
+          tile
+        });
+      } else {
+        alert(`No hay fichas ${ti.colores[color]} para crear punto de aparición del aldeano`);
+      }
+    });
+  
+    setRescue(newPoints);
+  };
+  
+  const removeRescue = (uuid) => {
+    setRescue(prev => {
+      const point = prev.find(p => p.uuid === uuid);
+      if (point) {
+        // ✅ devolvemos la ficha a la bolsa
+        //restoreTile(point.tile);
+      }
+      return prev.filter(p => p.uuid !== uuid);
+    });
+  };
   
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
@@ -545,6 +577,7 @@ export const GameProvider = ({ children }) => {
         initializeControlPoints,
         removeControlPoint,
         setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey,
+        setRescue, rescue, initializeRescue, removeRescue,
         initializeDecks,
         drawCardFromDeck
       }}
