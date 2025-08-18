@@ -1526,6 +1526,29 @@ const InitTracker = () => {
                   </div>
                 </div>
               )}
+
+            {/* Aldeanos visibles encima del track */}
+              {rescue.length > 0 && (
+                <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                  <div className="text-xs text-yellow-300 mb-2">{ti.activeRescue}</div>
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    {rescue.map(point => (
+                      <div
+                        key={point.uuid}
+                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                      >
+                        <span>{ti.colores[point.runa]}</span>
+                        <button
+                          onClick={() => removeRescue(point.uuid)}
+                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
