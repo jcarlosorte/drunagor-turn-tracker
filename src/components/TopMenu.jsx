@@ -42,7 +42,7 @@ const TopMenu = ({
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, 
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
-         setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey,
+         setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey, setRescue, rescue, initializeRescue, removeRescue,
          initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
   const [activeMenu, setActiveMenu] = useState(null); // 'runes' | 'enemies' | 'scenario' | null
@@ -743,8 +743,37 @@ const TopMenu = ({
                       </div>  
                     </div>
 
+                    {/* Sub-bloque: Recate de Aldeanos */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiRuneStone className="text-cyan-400 text-xl" />
+                        <span className="font-semibold">{t.rescue}</span>
+                      </div>
+                
+                      <div className="flex gap-2 flex-wrap justify-center">
+                        <button
+                          onClick={() => initializeRescue()}
+                          className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ➕ {t.addRescue}
+                        </button>
+                        <button
+                          onClick={() => setRescue([])}
+                          className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ✕ {t.removeRV}
+                        </button>
+                      </div>  
+                    </div>
+
+                    
+                    
+                  </div>
+
+
+                  {/* Sub-bloque: mostrar botones */}
                     <div className="flex items-center gap-2 mb-2 justify-center">
-                    {controlPoints.length > 0 && (
+                      {controlPoints.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
                           <div className="flex gap-2 flex-wrap justify-center">
@@ -765,7 +794,7 @@ const TopMenu = ({
                           </div>
                         </div>
                       )}
-                    {spawnPoints.length > 0 && (
+                      {spawnPoints.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
                           <div className="flex gap-2 flex-wrap justify-center">
@@ -807,9 +836,29 @@ const TopMenu = ({
                           </div>
                         </div>
                       )}
+                      {rescue.length > 0 && (
+                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                          <div className="text-xs text-yellow-300 mb-2">{t.activeRescue}</div>
+                          <div className="flex gap-2 flex-wrap justify-center">
+                            {rescue.map(point => (
+                              <div
+                                key={point.uuid}
+                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                              >
+                                <span>{t.colores[point.runa]}</span>
+                                <button
+                                  onClick={() => removeRescue(point.uuid)}
+                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    
-                  </div>
+                  
                 </div>
               {/* FIN BLOQUE */}
               </div>
