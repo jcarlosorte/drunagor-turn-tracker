@@ -605,7 +605,7 @@ const TopMenu = ({
                                   else alert(t.emptyPila);
                                 }}
                               >
-                                🧱 − {t.devolver}
+                                {t.devolver}
                               </button>
                             </div>
                           </div>
@@ -624,7 +624,7 @@ const TopMenu = ({
                         onClick={addNewPilaConcentrada}
                         className="mb-2 text-xs bg-purple-700 hover:bg-purple-600 text-white px-3 py-1 rounded disabled:opacity-50"
                       >
-                        ➕ {t.addPila}
+                        ➕ {t.addNodo}
                       </button>
                 
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
@@ -654,7 +654,7 @@ const TopMenu = ({
                                   else alert(t.emptyPila);
                                 }}
                               >
-                                🧱 − {t.devolver}
+                                {t.devolverNodo}
                               </button>
                             </div>
                           </div>
@@ -738,7 +738,10 @@ const TopMenu = ({
                         </button>
                       </div>
                 
-                      {spawnPoints.length > 0 && (
+                      
+                    </div>
+
+                    {spawnPoints.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
                           <div className="flex gap-2 flex-wrap justify-center">
@@ -759,8 +762,7 @@ const TopMenu = ({
                           </div>
                         </div>
                       )}
-                    </div>
-
+                    
                   </div>
                 </div>
               {/* FIN BLOQUE */}
