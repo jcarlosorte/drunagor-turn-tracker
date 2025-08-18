@@ -42,6 +42,7 @@ const TopMenu = ({
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, 
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
+         setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey,
          initializeDecks, drawCardFromDeck, showCardToast } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
   const [activeMenu, setActiveMenu] = useState(null); // 'runes' | 'enemies' | 'scenario' | null
@@ -693,27 +694,7 @@ const TopMenu = ({
                         </button>
                       </div>
                   
-                      {controlPoints.length > 0 && (
-                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
-                          <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
-                          <div className="flex gap-2 flex-wrap justify-center">
-                            {controlPoints.map(point => (
-                              <div
-                                key={point.uuid}
-                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                              >
-                                <span>{t.colores[point.runa]}</span>
-                                <button
-                                  onClick={() => removeControlPoint(point.uuid)}
-                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                                >
-                                  ✕
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                      
                     </div>
               
                     {/* Sub-bloque: Puntos de aparición */}
@@ -736,11 +717,54 @@ const TopMenu = ({
                         >
                           ✕ {t.removeSP}
                         </button>
-                      </div>
-                
-                      
+                      </div>  
                     </div>
 
+                    {/* Sub-bloque: LLaves Rúnicas */}
+                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                      <div className="flex items-center gap-2 mb-2 justify-center">
+                        <GiRuneStone className="text-cyan-400 text-xl" />
+                        <span className="font-semibold">{t.runeKey}</span>
+                      </div>
+                
+                      <div className="flex gap-2 flex-wrap justify-center">
+                        <button
+                          onClick={() => initializeRuneKeys()}
+                          className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ➕ {t.addRuneKeys}
+                        </button>
+                        <button
+                          onClick={() => setRuneKeys([])}
+                          className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ✕ {t.removeRK}
+                        </button>
+                      </div>  
+                    </div>
+
+                    <div className="flex items-center gap-2 mb-2 justify-center">
+                    {controlPoints.length > 0 && (
+                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                          <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
+                          <div className="flex gap-2 flex-wrap justify-center">
+                            {controlPoints.map(point => (
+                              <div
+                                key={point.uuid}
+                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                              >
+                                <span>{t.colores[point.runa]}</span>
+                                <button
+                                  onClick={() => removeControlPoint(point.uuid)}
+                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     {spawnPoints.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
@@ -762,6 +786,28 @@ const TopMenu = ({
                           </div>
                         </div>
                       )}
+                      {runeKeys.length > 0 && (
+                        <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                          <div className="text-xs text-yellow-300 mb-2">{t.activeRuneKeys}</div>
+                          <div className="flex gap-2 flex-wrap justify-center">
+                            {runeKeys.map(point => (
+                              <div
+                                key={point.uuid}
+                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                              >
+                                <span>{t.colores[point.runa]}</span>
+                                <button
+                                  onClick={() => removeRuneKey(point.uuid)}
+                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                     
                   </div>
                 </div>
