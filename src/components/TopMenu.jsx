@@ -671,9 +671,9 @@ const TopMenu = ({
                     <GiRuneStone className="text-cyan-500 text-xl" />
                     <span className="font-semibold">{t.controlAreas}</span>
                   </div>
-                  <div className="flex flex-col md:flex-row gap-4 justify-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Sub-bloque: Barricadas */}
-                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                    <div className="bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
                         <span className="font-semibold">{t.barricadas}</span>
@@ -693,12 +693,10 @@ const TopMenu = ({
                           ✕ {t.removeCA}
                         </button>
                       </div>
-                  
-                      
                     </div>
               
                     {/* Sub-bloque: Puntos de aparición */}
-                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                    <div className="bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
                         <span className="font-semibold">{t.spawnPoints}</span>
@@ -721,7 +719,7 @@ const TopMenu = ({
                     </div>
 
                     {/* Sub-bloque: LLaves Rúnicas */}
-                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                    <div className="bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
                         <span className="font-semibold">{t.runeKey}</span>
@@ -744,7 +742,7 @@ const TopMenu = ({
                     </div>
 
                     {/* Sub-bloque: Recate de Aldeanos */}
-                    <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+                    <div className="bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
                         <span className="font-semibold">{t.rescue}</span>
@@ -766,13 +764,9 @@ const TopMenu = ({
                       </div>  
                     </div>
 
-                    
-                    
-                  </div>
-
-
-                  {/* Sub-bloque: mostrar botones */}
-                    <div className="flex items-center gap-2 mb-2 justify-center">
+                    {/* Sub-bloque: mostrar botones */}
+                    <div className="bg-gray-700 rounded-lg p-3 shadow-md col-span-1 md:col-span-2">
+                    <div className="flex items-center gap-2 mb-2 justify-center flex-wrap">
                       {controlPoints.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeBarricade}</div>
@@ -858,7 +852,10 @@ const TopMenu = ({
                         </div>
                       )}
                     </div>
-                  
+                    </div>
+                    
+                  </div>
+
                 </div>
               {/* FIN BLOQUE */}
               </div>
