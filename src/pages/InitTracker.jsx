@@ -1506,7 +1506,7 @@ const InitTracker = () => {
             
               {/* LLaves rúnicas visibles encima del track */}
               {runeKeys.length > 0 && (
-                <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                <div className="mt-3 p-2 bg-gray-800 rounded-lg">
                   <div className="text-xs text-yellow-300 mb-2">{ti.activeRuneKeys}</div>
                   <div className="flex gap-2 flex-wrap justify-center">
                     {runeKeys.map(point => (
