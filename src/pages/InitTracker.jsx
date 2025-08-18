@@ -79,7 +79,9 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, initializeDecks, drawCardFromDeck } = useGame();
+  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
+         spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey,
+         initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
@@ -1459,7 +1461,7 @@ const InitTracker = () => {
             {/* Puntos de aparición visibles encima del track */}
             {spawnPoints.length > 0 && (
                 <div className="mt-3 p-2 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-yellow-300 mb-2">{ti.spawnPoints || ''}</div>
+                  <div className="text-xs text-yellow-300 mb-2">{ti.activeSpawnPoints || ''}</div>
                   <div className="flex gap-2 flex-wrap justify-center">
                     {spawnPoints.map(point => (
                       <div
@@ -1482,7 +1484,7 @@ const InitTracker = () => {
             {/* Puntos de control de area visibles encima del track */}
             {controlPoints.length > 0 && (
                 <div className="mt-3 p-2 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-yellow-300 mb-2cursor-help" title={ti.infoCA || ''}>{ti.controlAreas || ''}</div>
+                  <div className="text-xs text-yellow-300 mb-2cursor-help" title={ti.infoCA || ''}>{ti.activeBarricade || ''}</div>
                   <div className="flex gap-2 flex-wrap justify-center">
                     {controlPoints.map(point => (
                       <div
@@ -1492,6 +1494,29 @@ const InitTracker = () => {
                         <span>{ti.colores[point.runa]}</span>
                         <button
                           onClick={() => removeControlPoint(point.uuid)}
+                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            
+              {/* LLaves rúnicas visibles encima del track */}
+              {runeKeys.length > 0 && (
+                <div className="mt-3 p-2 bg-gray-700 rounded-lg">
+                  <div className="text-xs text-yellow-300 mb-2">{ti.activeRuneKeys}</div>
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    {runeKeys.map(point => (
+                      <div
+                        key={point.uuid}
+                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                      >
+                        <span>{ti.colores[point.runa]}</span>
+                        <button
+                          onClick={() => removeRuneKey(point.uuid)}
                           className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
                         >
                           ✕
