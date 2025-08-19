@@ -798,6 +798,7 @@ const InitTracker = () => {
             }
     
           } else if (currentRune.tipo === 'defensa') {
+            tickDefenseRune(currentRune.uuid);
             // 🔹 Defensa → roba cartas de aldeano o errantes
             const numCartas = currentRune.numRunas || 1;
             const mazo = currentRune.carta; // "aldeano" o "errantes"
