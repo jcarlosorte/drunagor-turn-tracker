@@ -799,6 +799,8 @@ const InitTracker = () => {
     
           } else if (currentRune.tipo === 'defensa') {
             tickDefenseRune(currentRune.uuid);
+            console.log("carta defensa y llamo a reducir contador");
+            console.log(currentRune.defenseCounter);
             // 🔹 Defensa → roba cartas de aldeano o errantes
             const numCartas = currentRune.numRunas || 1;
             const mazo = currentRune.carta; // "aldeano" o "errantes"
@@ -1119,7 +1121,6 @@ const InitTracker = () => {
       const accion = ts[rune.accion] || rune.accion;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
-      const contador = ti[rune.contador] || rune.contador;
       const posicion = rune.posicion;
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
@@ -1131,8 +1132,8 @@ const InitTracker = () => {
 
             {/* Badge de contador si es defensa */}
             {tipo === "defensa" && defenseCounter > 0 && (
-              <div className="absolute top-1 right-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
-                {contador} {defenseCounter}
+              <div className="absolute bottom-1 text-center bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                {ti.contador} {defenseCounter}
               </div>
             )}
             
