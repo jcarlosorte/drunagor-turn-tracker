@@ -862,7 +862,7 @@ const InitTracker = () => {
           setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
         
-        return;
+        //return;
       }
     }
   
