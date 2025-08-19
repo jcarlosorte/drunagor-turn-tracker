@@ -83,7 +83,7 @@ const InitTracker = () => {
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue,
          initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
-  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
+  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
   const [shownTiles, setShownTiles] = useState([]);
   const { executedRunes, setExecutedRunes } = useInitRunes();
   const [warningMessage, setWarningMessage] = useState(null);
@@ -1091,6 +1091,7 @@ const InitTracker = () => {
 
   const RuneCard = ({ rune, onRemove, flipped }) => {
     const tipo = rune.tipo;
+    const defenseCounter = rune.defenseCounter;
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
     const totalEnemies = placedEnemies.length;
@@ -1117,6 +1118,7 @@ const InitTracker = () => {
       const accion = ts[rune.accion] || rune.accion;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
+      const contador = ti[rune.contador] || rune.contador;
       const posicion = rune.posicion;
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
@@ -1125,7 +1127,14 @@ const InitTracker = () => {
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
             {/* Título siempre visible */}
             <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
-  
+
+            {/* Badge de contador si es defensa */}
+            {tipo === "defensa" && defenseCounter > 0 && (
+              <div className="absolute top-1 right-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                {contador} {defenseCounter}
+              </div>
+            )}
+            
             {/* ✅ Contenido según tipo */}
             {(tipo === 'runa' || tipo === 'defensa') && (
               <>
