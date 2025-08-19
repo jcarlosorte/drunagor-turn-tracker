@@ -823,7 +823,37 @@ const InitTracker = () => {
             }
     
           } else if (currentRune.tipo === 'incursion') {
-            // ... tu lógica de incursión
+            const isCaraB = currentRune.cara === 'B'; 
+            const noEnemies = placedEnemies.length === 0; 
+            const totalHeroes = trackerData.placedHeroes?.length || 0; 
+            const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4; 
+            const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id); 
+            const alreadyPlaced = placedScenarioMonsters.length; const faltan = Math.max(0, maxMonstruos - alreadyPlaced); 
+            const totalFinal = alreadyPlaced + maxMonstruos; 
+            // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos 
+            if (isCaraB || (!isCaraB && noEnemies)) { 
+              const tile = manifestTile(); 
+              const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa); 
+              if (!spawnExists) { 
+                // ❌ No hay punto de aparición para ese color 
+                showScenarioToast( ${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste} ); 
+                return; 
+                // No seguimos con la invocación } 
+                if (faltan > 0 && scenarioMonster) { 
+                  spawnBatchEnemies(faltan, scenarioMonster); 
+                  //console.log(faltan); 
+                  showScenarioToast(${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}); 
+                } 
+                if (totalFinal > 4) { 
+                  const exceso = totalFinal - 4; 
+                  const damage = 3; 
+                  showScenarioToast(${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.); 
+                } 
+              } else { 
+                showScenarioToast(${ti.noManifestamos}); 
+              } 
+            } 
+            // ✅ Marcar como ejecutada 
             setExecutedRunes(prev => [...prev, currentRune.uuid]);
           }
         }
