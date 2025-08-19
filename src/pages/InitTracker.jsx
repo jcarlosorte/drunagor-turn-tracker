@@ -719,6 +719,7 @@ const InitTracker = () => {
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
   //const [processedVoragine, setProcessedVoragine] = useState([]);
   const processedVoragineRef = useRef(new Set());
+  const processedDefenseTurnRef = useRef(new Set());
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null);
   
   const placedHeroes = trackerData.placedHeroes;
@@ -739,6 +740,7 @@ const InitTracker = () => {
     ) {
       // Solo cuando damos la vuelta al ciclo completo
       processedVoragineRef.current = new Set();
+      processedDefenseTurnRef.current = new Set(); 
       setExecutedRunes([]);
       roundRef.current += 1;
       console.log("🔁 Nueva ronda", roundRef.current);
@@ -790,11 +792,12 @@ const InitTracker = () => {
         setGroupTurnTracker({ group: runes, index: 0 });
 
         if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
-          tickDefenseRune(currentRune.uuid);
-          console.log("carta defensa y llamo a reducir contador");
-          console.log(currentRune.defenseCounter);
-          setExecutedRunes(prev => [...prev, currentRune.uuid]);
-          //return; // todavía no se activa, solo bajamos contador
+          if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
+            tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
+            processedDefenseTurnRef.current.add(currentRune.uuid);
+            console.log("🛡 Reducimos defensa en su turno:", currentRune.defenseCounter - 1);
+          }
+          return; // no ejecutamos el efecto todavía
         }
          // ✅ Evitar ejecución duplicada
         if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
@@ -862,7 +865,7 @@ const InitTracker = () => {
           setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
         
-        //return;
+        return;
       }
     }
   
