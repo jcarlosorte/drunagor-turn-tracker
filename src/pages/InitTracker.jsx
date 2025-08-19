@@ -836,21 +836,21 @@ const InitTracker = () => {
               const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa); 
               if (!spawnExists) { 
                 // ❌ No hay punto de aparición para ese color 
-                showScenarioToast( ${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste} ); 
+                showScenarioToast( `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}` ); 
                 return; 
                 // No seguimos con la invocación } 
                 if (faltan > 0 && scenarioMonster) { 
                   spawnBatchEnemies(faltan, scenarioMonster); 
                   //console.log(faltan); 
-                  showScenarioToast(${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}); 
+                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`); 
                 } 
                 if (totalFinal > 4) { 
                   const exceso = totalFinal - 4; 
                   const damage = 3; 
-                  showScenarioToast(${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.); 
+                  showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`); 
                 } 
               } else { 
-                showScenarioToast(${ti.noManifestamos}); 
+                showScenarioToast(`${ti.noManifestamos}`); 
               } 
             } 
             // ✅ Marcar como ejecutada 
