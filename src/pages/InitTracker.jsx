@@ -798,9 +798,6 @@ const InitTracker = () => {
             }
     
           } else if (currentRune.tipo === 'defensa') {
-            tickDefenseRune(currentRune.uuid);
-            console.log("carta defensa y llamo a reducir contador");
-            console.log(currentRune.defenseCounter);
             // 🔹 Defensa → roba cartas de aldeano o errantes
             const numCartas = currentRune.numRunas || 1;
             const mazo = currentRune.carta; // "aldeano" o "errantes"
@@ -854,7 +851,12 @@ const InitTracker = () => {
           // ✅ Marcar como ejecutada
           setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
-    
+        if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
+          tickDefenseRune(currentRune.uuid);
+          console.log("carta defensa y llamo a reducir contador");
+          console.log(currentRune.defenseCounter);
+          return; // todavía no se activa, solo bajamos contador
+        }
         return;
       }
     }
@@ -1130,12 +1132,6 @@ const InitTracker = () => {
             {/* Título siempre visible */}
             <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
 
-            {/* Badge de contador si es defensa */}
-            {tipo === "defensa" && defenseCounter > 0 && (
-              <div className="absolute bottom-1 text-center bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
-                {ti.contador} {defenseCounter}
-              </div>
-            )}
             
             {/* ✅ Contenido según tipo */}
             {(tipo === 'runa' || tipo === 'defensa') && (
@@ -1195,6 +1191,12 @@ const InitTracker = () => {
                 className="mr-1"
               />
               <label>{ti.applyEffect}</label>
+              {/* Badge de contador si es defensa */}
+              {tipo === "defensa" && defenseCounter > 0 && (
+                <div className="bottom-1 text-center bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                  {ti.contador} {defenseCounter}
+                </div>
+              )}
             </div>
           </div>
         </div>
