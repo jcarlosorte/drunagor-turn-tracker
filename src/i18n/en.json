@@ -613,6 +613,11 @@
       "boss_8": "",
       "boss_9": "",
       "boss_10": "",
+      "boss_w_1": "EARTHQUAKE",
+      "boss_w_2": "SANDSWIM",
+      "boss_w_3": "SHADOW SPAWN",
+      "boss_w_4": "SWALLOW",
+      "boss_w_5": "BOSS STATUS",
       "fallen_1": "GUARDIAN'S MISSION",
       "fallen_2": "MURDER"
     },
@@ -647,6 +652,11 @@
       "boss_8": "",
       "boss_9": "",
       "boss_10": "",
+      "boss_w_1": "EARTHQUAKE",
+      "boss_w_2": "SANDSWIM",
+      "boss_w_3": "SHADOW SPAWN",
+      "boss_w_4": "SWALLOW",
+      "boss_w_5": "BOSS STATUS",
       "fallen_1": "MANIFEST 1 RUNE: PLACE 1 TIME TOKEN ON EACH ATTACK CARD THAT MATCHES THAT RUNE'S COLOR (DO NOT PLACE IT ON THE MONSTER CARD OR THIS CARD). THE NEXT TIME THE INITIATIVE MARKER REACHES THIS CARD, REMOVE THE TIME TOKEN INSTEAD OF RESOLVING THAT CARD'S EFFECTS.",
       "fallen_2": "THE FALLEN HERO AMBUSHS THE WEAKER HERO. THEN, DEAL {X} DAMAGE. IF THAT HERO IS KNOCKED OUT BY THIS ATTACK, THE FALLEN HERO ALSO HEALS {2*X}."
     }
