@@ -664,6 +664,7 @@ const InitTracker = () => {
     veterano: 'glow-veterano',
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
+    overlord: 'glow-commander',
     esbirro: 'glow-escenario',
     escenario: 'glow-escenario',
   };
@@ -675,6 +676,7 @@ const InitTracker = () => {
     gris: 'border-gris',
     negro: 'border-negro',
     comandante: 'border-dorado',
+    overlord: 'border-morado',
     jefe: 'border-morado',
   };
 
@@ -685,6 +687,7 @@ const InitTracker = () => {
     gris: 'bg-gray-500',
     negro: 'bg-black',
     comandante: 'bg-orange-400 ',
+    overlord: 'bg-purple-500',
     jefe: 'bg-purple-700',
   };
   
