@@ -308,6 +308,7 @@
       "noExiste": "NO exixte",
       "noManifestamos": "⏭️ Incursión en cara A pero hay enemigos → no manifestamos",
       "noRunasColocadas": "❌ No hay runas colocadas para formar la pila",
+      "contador": "⚠️ Activación en: ",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
         "distancia": "A distancia",
