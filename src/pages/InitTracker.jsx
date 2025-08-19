@@ -1199,13 +1199,14 @@ const InitTracker = () => {
                 className="mr-1"
               />
               <label>{ti.applyEffect}</label>
-              {/* Badge de contador si es defensa */}
+              
+            </div>
+            {/* Badge de contador si es defensa */}
               {tipo === "defensa" && defenseCounter > 0 && (
                 <div className="bottom-1 text-center bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
                   {ti.contador} {defenseCounter}
                 </div>
               )}
-            </div>
           </div>
         </div>
       );
