@@ -783,81 +783,85 @@ const InitTracker = () => {
       const runes = placedRunes
         .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
         .map(r => r.rune);
-    
+  
       if (runes.length > 0) {
         const currentRune = runes[0];
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: 0 });
+
+        if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
+          tickDefenseRune(currentRune.uuid);
+          console.log("carta defensa y llamo a reducir contador");
+          console.log(currentRune.defenseCounter);
+          setExecutedRunes(prev => [...prev, currentRune.uuid]);
+          //return; // todavía no se activa, solo bajamos contador
+        }
+         // ✅ Evitar ejecución duplicada
+        if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
     
-        // ✅ Evitar ejecución duplicada
-        if (!executedRunes.includes(currentRune.uuid)) {
           if (currentRune.tipo === 'runa') {
-            // Lógica clásica
+            // 🔹 Lógica clásica de runa: roba fichas de runa
             if (currentRune.numRunas) {
               const tiles = drawMultipleTiles(currentRune.numRunas);
               tiles?.forEach(tile => handleTileDraw(tile));
               if (!tiles) setTileWarning(ti.aviso);
             }
-            setExecutedRunes(prev => [...prev, currentRune.uuid]);
     
           } else if (currentRune.tipo === 'defensa') {
-            // Si todavía tiene contador, lo bajamos
-            if (!currentRune.applyEffect) {
-              tickDefenseRune(currentRune.uuid);
-              console.log("🛡 Reducimos contador defensa:", currentRune.defenseCounter - 1);
-              // ❌ NO la marcamos como ejecutada todavía, volverá a salir en su próximo turno
-            } else {
-              // Ahora sí ejecutamos el efecto cuando applyEffect = true
-              const numCartas = currentRune.numRunas || 1;
-              const mazo = currentRune.carta;
-              console.log(`🛡 Defensa activada: Roba ${numCartas} carta(s) del mazo ${mazo}`);
-              for (let i = 0; i < numCartas; i++) {
-                const cartaRobada = drawCardFromDeck(mazo);
-                if (cartaRobada) {
-                  showCardToast(cartaRobada, mazo);
-                } else {
-                  console.warn(`⚠ No hay cartas en el mazo ${mazo}`);
-                }
+            // 🔹 Defensa → roba cartas de aldeano o errantes
+            const numCartas = currentRune.numRunas || 1;
+            const mazo = currentRune.carta; // "aldeano" o "errantes"
+            console.log(`🛡 Defensa: Roba ${numCartas} carta(s) del mazo ${mazo}`);
+    
+            for (let i = 0; i < numCartas; i++) {
+              // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
+              const cartaRobada = drawCardFromDeck(mazo);
+              if (cartaRobada) {
+                showCardToast(cartaRobada, mazo); 
+              } else {
+                console.warn(`⚠ No hay cartas en el mazo ${mazo}`);
               }
-              setExecutedRunes(prev => [...prev, currentRune.uuid]);
             }
     
           } else if (currentRune.tipo === 'incursion') {
-            const isCaraB = currentRune.cara === 'B'; 
-            const noEnemies = placedEnemies.length === 0; 
-            const totalHeroes = trackerData.placedHeroes?.length || 0; 
-            const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4; 
-            const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id); 
-            const alreadyPlaced = placedScenarioMonsters.length; const faltan = Math.max(0, maxMonstruos - alreadyPlaced); 
-            const totalFinal = alreadyPlaced + maxMonstruos; 
-            // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos 
-            if (isCaraB || (!isCaraB && noEnemies)) { 
-              const tile = manifestTile(); 
-              const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa); 
-              if (!spawnExists) { 
-                // ❌ No hay punto de aparición para ese color 
-                showScenarioToast( `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}` ); 
-                return; 
-                // No seguimos con la invocación } 
-                if (faltan > 0 && scenarioMonster) { 
-                  spawnBatchEnemies(faltan, scenarioMonster); 
-                  //console.log(faltan); 
-                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`); 
-                } 
-                if (totalFinal > 4) { 
-                  const exceso = totalFinal - 4; 
-                  const damage = 3; 
-                  showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`); 
-                } 
-              } else { 
-                showScenarioToast(`${ti.noManifestamos}`); 
-              } 
-            } 
-            // ✅ Marcar como ejecutada 
-            setExecutedRunes(prev => [...prev, currentRune.uuid]);
+            const isCaraB = currentRune.cara === 'B';
+            const noEnemies = placedEnemies.length === 0;
+            const totalHeroes = trackerData.placedHeroes?.length || 0;
+            const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4;
+            const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id);
+            const alreadyPlaced = placedScenarioMonsters.length;
+            const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
+            const totalFinal = alreadyPlaced + maxMonstruos;
+            // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
+            if (isCaraB || (!isCaraB && noEnemies)) {
+              const tile = manifestTile();
+              const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+              if (!spawnExists) {
+                // ❌ No hay punto de aparición para ese color
+                showScenarioToast(
+                  `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
+                );
+                return; // No seguimos con la invocación
+              }
+              if (faltan > 0 && scenarioMonster) {
+                spawnBatchEnemies(faltan, scenarioMonster);
+                //console.log(faltan);
+                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran} ${ti.colores[tile.runa]}`);
+              }
+              if (totalFinal > 4) {
+                const exceso = totalFinal - 4;
+                const damage = 3;
+                showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
+              }
+            } else {
+              showScenarioToast(`${ti.noManifestamos}`);
+            }
           }
-        }
     
+          // ✅ Marcar como ejecutada
+          setExecutedRunes(prev => [...prev, currentRune.uuid]);
+        }
+        
         return;
       }
     }
