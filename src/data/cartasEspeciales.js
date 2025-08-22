@@ -329,7 +329,7 @@ export const SORPRESA = [
     texto: 'sorpresa_5'
   }
 ];
-export const ASALTO_WIL = [
+export const CARTAS_GUSANO = [
   {
     id: 'boss_w_1',
     rune: 'naranja',
