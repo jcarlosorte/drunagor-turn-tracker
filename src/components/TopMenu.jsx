@@ -5,7 +5,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
-import { RUNAS } from '@/data/runas';
+import { RUNAS, ASALTO } from '@/data/runas';
 import { ENEMIES } from '@/data/enemies';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
@@ -14,6 +14,7 @@ import { languages as availableLanguages, languageNames } from "@/i18n/languageD
 import { useLanguage } from "@/context/LanguageContext";
 import { useGame } from '@/context/GameContext';
 import { useInitRunes } from "@/context/InitRunesContext";
+import { useExpansions } from '@/context/ExpansionContext';
 import TileToast from '@/components/TileToast';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -52,6 +53,7 @@ const TopMenu = ({
   const menuRefScenario = useRef(null);
   const [tileToasts, setTileToasts] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
+  const { selectedExpansions } = useExpansions();
   
   const colorMap = {
     rojo: 'bg-red-700 hover:bg-red-600',
