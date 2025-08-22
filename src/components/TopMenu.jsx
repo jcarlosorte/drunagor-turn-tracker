@@ -126,7 +126,7 @@ const TopMenu = ({
     ).values()
   );
 
-  const handleSelectUniqueCard = (card) => {
+  const handleSelectUniqueCard = (card, timeToken) => {
     const tipo = card.tipo;
   
     // ✅ Comprobar si ya existe una carta de este tipo
@@ -138,7 +138,7 @@ const TopMenu = ({
     }
   
     // ✅ Si no existe, la añadimos
-    onSelectRuneCard(card);
+    onSelectRuneCard(card, timeToken);
   };
     
   return (
@@ -308,11 +308,11 @@ const TopMenu = ({
                     <button
                       onClick={() => {
                         const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                        defaultRunes.forEach(r => handleSelectUniqueCard(r, true));
                       }}
                       className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                     >
-                      {t.addRunes} ({t.caraA})
+                      {t.addRunes} ({t.caraT})
                     </button>
           
                     <button
@@ -328,7 +328,7 @@ const TopMenu = ({
                       {RUNAS.map((card, index) => (
                         <button
                           key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => handleSelectUniqueCard(card)}
+                          onClick={() => handleSelectUniqueCard(card, false)}
                           className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                         >
                           {t.cara} ({card.cara})
