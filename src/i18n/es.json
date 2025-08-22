@@ -801,7 +801,7 @@
       "sorpresa_5": "SI SE ABRE ESTA PUERTA, COLOCA 2 COFRES USANDO LA RUNA DE ESTA ESTANCIA COMO PUNTO DE APARICIÓN (ELIGE CASILLAS ADYACENTES A ELLA PARA COLOCAR LOS COFRES)."
     }
   },
-  "cartas_asalto": {
+  "cartas_gusano": {
     "nombre":{
       "boss_w_1": "TERREMOTO",
       "boss_w_2": "BAÑO DE ARENA",
