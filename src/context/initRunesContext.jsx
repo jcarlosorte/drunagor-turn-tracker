@@ -18,7 +18,8 @@ export const InitRunesProvider = ({ children }) => {
       return;
     }
   
-    const isDefensa = rune.tipo === "defensa";
+    //const isDefensa = rune.tipo === "defensa";
+    const isDefensa = rune.counter;
     
     setPlacedRunes(prev => [
       ...prev,
