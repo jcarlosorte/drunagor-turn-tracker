@@ -307,11 +307,8 @@ const TopMenu = ({
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="text-center text-sm font-semibold text-indigo-300 mb-2">
-                      {t.addRunes} {/* Ej: "Cartas de Runas" */}
-                    </h4>
                     <div className="flex flex-wrap gap-2 justify-center">
-                      <GiRuneStone className="text-indigo-700 text-xl" />
+                      <GiRuneStone className="text-indigo-300 text-xl" />
                       <button
                         onClick={() => {
                           const defaultRunes = RUNAS.filter(r => r.cara === 'A');
@@ -345,44 +342,44 @@ const TopMenu = ({
                     )}
                   </div>
 
-                  <div>
-                    <h4 className="text-center text-sm font-semibold text-indigo-300 mb-2">
-                      {t.addRunes_w} {/* Ej: "Cartas de Asalto" */}
-                    </h4>
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      <GiLeechingWorm className="text-indigo-600 text-xl" />
-                      <button
-                        onClick={() => {
-                          const defaultRunes = ASALTO.filter(r => r.cara === 'A');
-                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                        }}
-                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunes_w}
-                      </button>
-            
-                      <button
-                        onClick={() => setshowAssaultFaceOptions(prev => !prev)}
-                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunesCara_w}
-                      </button>
-                    </div>
-            
-                    {showAssaultFaceOptions && (
-                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                        {ASALTO.map((card, index) => (
-                          <button
-                            key={`${card.id}-${card.cara}-${index}`}
-                            onClick={() => handleSelectUniqueCard(card)}
-                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.cara} ({card.cara})
-                          </button>
-                        ))}
+                  {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
+                  {selectedExpansions.includes("infernal_desert") && (
+                    <div>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <GiLeechingWorm className="text-indigo-300 text-xl" />
+                        <button
+                          onClick={() => {
+                            const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                          }}
+                          className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.addRunes_w}
+                        </button>
+              
+                        <button
+                          onClick={() => setshowAssaultFaceOptions(prev => !prev)}
+                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.addRunesCara_w}
+                        </button>
                       </div>
-                    )}
-                  </div>
+              
+                      {showAssaultFaceOptions && (
+                        <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                          {ASALTO.map((card, index) => (
+                            <button
+                              key={`${card.id}-${card.cara}-${index}`}
+                              onClick={() => handleSelectUniqueCard(card)}
+                              className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                            >
+                              {t.cara} ({card.cara})
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}  
                 </div>
 
                 {/* 📦 Estado de la bolsa */}
