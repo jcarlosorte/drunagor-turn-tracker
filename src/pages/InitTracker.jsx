@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HEROES } from '@/data/heroes';
 import { ENEMIES } from '@/data/enemies';
-import { RUNAS } from '@/data/runas';
+import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { CARTAS_COMANDANTE, CARTAS_OVERLORD, ALDEANO, ERRANTES, CARTAS_GUSANO } from '@/data/cartasEspeciales';
