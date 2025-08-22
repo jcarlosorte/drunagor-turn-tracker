@@ -800,7 +800,7 @@
       "sorpresa_5": "IF THIS DOOR IS OPENED, PLACE 2 CHESTS USING THE RUNE OF THIS ROOM AS THE SPAWN POINT (CHOOSE ADJACENT SPACES TO PLACE THE CHESTS)."
     }
   },
-  "cartas_asalto": {
+  "cartas_gusano": {
     "nombre":{
       "boss_w_1": "EARTHQUAKE",
       "boss_w_2": "SANDSWIM",
