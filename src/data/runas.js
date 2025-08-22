@@ -4,6 +4,6 @@ export const RUNAS = [
 ];
 
 export const ASALTO = [
-  { id: "asalto1", cara: "A", posicion: "abajo", nombre: "Asalto", accion: "Emerge", numRunas: 1, tipo: "runa"  },
-  { id: "asalto2", cara: "B", posicion: "abajo", nombre: "Asalto", accion: "Desciende", numRunas: 1, tipo: "runa"  }
+  { id: "asalto1", cara: "A", posicion: "abajo", nombre: "Asalto", accion: "Emerge", numRunas: 1, tipo: "asalto"  },
+  { id: "asalto2", cara: "B", posicion: "abajo", nombre: "Asalto", accion: "Desciende", numRunas: 1, tipo: "asalto"  }
 ];
