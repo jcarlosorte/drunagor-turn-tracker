@@ -127,13 +127,12 @@ const TopMenu = ({
   );
 
   const handleSelectUniqueCard = (card, timeToken) => {
-    const tipo = card.tipo;
   
     // ✅ Comprobar si ya existe una carta de este tipo
-    const yaExiste = placedRunes.some(r => r.rune.tipo === tipo);
+    const yaEx = placedRunes.some(r => r.rune.tipo === tipo);
   
-    if (yaExiste) {
-      alert(`Ya hay una carta de tipo ${tipo} en juego. Solo puede haber una.`);
+    if (yaEx) {
+      alert(t.yaExiste);
       return;
     }
   
