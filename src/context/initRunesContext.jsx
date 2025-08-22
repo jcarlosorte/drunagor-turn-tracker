@@ -46,7 +46,7 @@ export const InitRunesProvider = ({ children }) => {
       prev.map(item => {
         if (item.rune.uuid !== uuid) return item;
   
-        if (item.rune.defenseCounter > -1) {
+        if (item.rune.defenseCounter > 0) {
           // Reducir el contador
           return {
             ...item,
