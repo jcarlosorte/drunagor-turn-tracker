@@ -306,6 +306,7 @@ const TopMenu = ({
                   </div>
           
                   <div className="flex flex-wrap gap-2 justify-center">
+                    <GiRuneStone className="text-indigo-700 text-xl" />
                     <button
                       onClick={() => {
                         const defaultRunes = RUNAS.filter(r => r.cara === 'A');
@@ -313,7 +314,7 @@ const TopMenu = ({
                       }}
                       className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                     >
-                      {t.addRunes} ({t.caraA})
+                      {t.addRunes}
                     </button>
           
                     <button
@@ -327,6 +328,42 @@ const TopMenu = ({
                   {showRuneFaceOptions && (
                     <div className="flex gap-2 flex-wrap mt-2">
                       {RUNAS.map((card, index) => (
+                        <button
+                          key={`${card.id}-${card.cara}-${index}`}
+                          onClick={() => handleSelectUniqueCard(card)}
+                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.cara} ({card.cara})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+
+
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <GiRuneStone className="text-indigo-600 text-xl" />
+                    <button
+                      onClick={() => {
+                        const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                      }}
+                      className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.addRunes_w}
+                    </button>
+          
+                    <button
+                      onClick={() => setShowRuneFaceOptions(prev => !prev)}
+                      className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                    >
+                      {t.addRunesCara_w}
+                    </button>
+                  </div>
+          
+                  {showRuneFaceOptions && (
+                    <div className="flex gap-2 flex-wrap mt-2">
+                      {ASALTO.map((card, index) => (
                         <button
                           key={`${card.id}-${card.cara}-${index}`}
                           onClick={() => handleSelectUniqueCard(card)}
