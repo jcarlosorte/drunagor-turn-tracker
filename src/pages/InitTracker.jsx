@@ -811,11 +811,18 @@ const InitTracker = () => {
               if (!tiles) setTileWarning(ti.aviso);
             }
     
+          } else if (currentRune.tipo === 'asalto') {
+
+            if (currentRune.numRunas) {
+              const tiles = drawMultipleTiles(currentRune.numRunas);
+              tiles?.forEach(tile => handleTileDraw(tile));
+              if (!tiles) setTileWarning(ti.aviso);
+            }
+            
           } else if (currentRune.tipo === 'defensa') {
             // 🔹 Defensa → roba cartas de aldeano o errantes
             const numCartas = currentRune.numRunas || 1;
             const mazo = currentRune.carta; // "aldeano" o "errantes"
-            console.log(`🛡 Defensa: Roba ${numCartas} carta(s) del mazo ${mazo}`);
     
             for (let i = 0; i < numCartas; i++) {
               // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
@@ -964,6 +971,7 @@ const InitTracker = () => {
         let dataSource = RUNAS;
         if (currentTurnEntity.tipo === 'defensa') dataSource = DEFENSA;
         if (currentTurnEntity.tipo === 'incursion') dataSource = INCURSION;
+        if (currentTurnEntity.tipo === 'asalto') dataSource = ASALTO;
         // Buscar la misma carta pero en la cara opuesta
         const nueva = dataSource.find(r => r.id === currentTurnEntity.id && r.cara === nuevaCara);
         
@@ -1114,12 +1122,14 @@ const InitTracker = () => {
   
     const bgColorMap = {
       runa: 'bg-indigo-700',
+      asalto: 'bg-indigo-600',
       defensa: 'bg-green-700',
       incursion: 'bg-red-700'
     };
   
     const borderColorMap = {
       runa: 'border-indigo-400',
+      asalto: 'border-indigo-300',
       defensa: 'border-green-400',
       incursion: 'border-red-400'
     };
@@ -1130,6 +1140,8 @@ const InitTracker = () => {
       const borderColor = borderColorMap[tipo] || 'border-indigo-400';
       const title = ts[rune.id] || rune.id;
       const accion = ts[rune.accion] || rune.accion;
+      const accion2 = ts[rune.accion2] || null;
+      const y = ts.y;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
       const posicion = rune.posicion;
@@ -1151,7 +1163,29 @@ const InitTracker = () => {
                 <div className="text-xs text-white text-center">{nombre}</div>
               </>
             )}
-            
+            {(tipo === 'asalto') && (
+              <>
+                {isCaraB ? (
+                  <>
+                    <div className="text-xs text-white text-center font-bold">
+                      {accion2} {y}
+                    </div>
+                    <div className="text-xs text-white text-center font-bold">
+                      {accion}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-xs text-white text-center font-bold">
+                      {accion}
+                    </div>
+                    <div className="text-xs text-white text-center font-bold">
+                      {y} {accion2}
+                    </div>
+                  </>  
+                )}
+              </>
+            )}
             {tipo === 'incursion' && (
              <>
               {/* Cara B SIEMPRE visible */}
