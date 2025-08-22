@@ -14,13 +14,14 @@ export const InitRunesProvider = ({ children }) => {
     // Verificar si ya existe una carta con el mismo id
     const exists = placedRunes.some((r) => r.rune.id === rune.id);
     if (exists) {
-      alert(t.RuneRepeat || `Ya existe una carta de runa con ID ${rune.id}`);
+      alert(t.RuneRepeat);
       return;
     }
   
     //const isDefensa = rune.tipo === "defensa";
-    const isDefensa = rune.counter;
-    
+    const isDefensa = rune.counter === "true";
+    console.log(rune.counter);
+    console.log(isDefensa);
     setPlacedRunes(prev => [
       ...prev,
       {
