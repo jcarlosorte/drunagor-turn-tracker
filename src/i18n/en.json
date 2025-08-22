@@ -278,6 +278,7 @@
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
+    "yaExiste": "There's already one such card in play. There can only be one.",
     "fichaAleatoria": "Random",
     "removeTiles": "Remove Rune from Track",
     "oscuridadCascada": "Add Runes in Bulk",
