@@ -126,8 +126,8 @@ const TopMenu = ({
     ).values()
   );
 
-  const handleSelectUniqueCard = (card, timeToken) => {
-  
+  const handleSelectUniqueCard = (card, timeToken = false) => {
+    const tipo = card.tipo;
     // ✅ Comprobar si ya existe una carta de este tipo
     const yaEx = placedRunes.some(r => r.rune.tipo === tipo);
   
@@ -307,11 +307,11 @@ const TopMenu = ({
                     <button
                       onClick={() => {
                         const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                        defaultRunes.forEach(r => handleSelectUniqueCard(r, true));
+                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
                       }}
                       className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                     >
-                      {t.addRunes} ({t.caraT})
+                      {t.addRunes} ({t.caraA})
                     </button>
           
                     <button
@@ -327,7 +327,7 @@ const TopMenu = ({
                       {RUNAS.map((card, index) => (
                         <button
                           key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => handleSelectUniqueCard(card, false)}
+                          onClick={() => handleSelectUniqueCard(card)}
                           className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                         >
                           {t.cara} ({card.cara})
@@ -998,11 +998,11 @@ const TopMenu = ({
                       <button
                         onClick={() => {
                           const carta = DEFENSA.find(c => c.cara === 'A');
-                          if (carta) handleSelectUniqueCard(carta);
+                          if (carta) handleSelectUniqueCard(carta, true);
                         }}
                         className={`bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded`}
                       >
-                        {t.addScenario} ({t.caraA})
+                        {t.addScenario} ({t.caraT})
                       </button>
           
                       <button
