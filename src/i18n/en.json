@@ -617,11 +617,6 @@
       "boss_8": "",
       "boss_9": "",
       "boss_10": "",
-      "boss_w_1": "EARTHQUAKE",
-      "boss_w_2": "SANDSWIM",
-      "boss_w_3": "SHADOW SPAWN",
-      "boss_w_4": "SWALLOW",
-      "boss_w_5": "BOSS STATUS",
       "fallen_1": "GUARDIAN'S MISSION",
       "fallen_2": "MURDER"
     },
@@ -656,11 +651,6 @@
       "boss_8": "",
       "boss_9": "",
       "boss_10": "",
-      "boss_w_1": "Wermunggdir targets {X} hero(es) at any range (always starting with the strongest) and deals {2*X} damage to each enemy and {KNOCKDOWN}. If a hero prevents the damage, they also avoid knockdown.",
-      "boss_w_2": "Wermunggdir targets {X} area(s) at any range (first choose the areas with the highest number of heroes, then those with the strongest heroes) and deals {2*X} damage to each enemy within each Area.",
-      "boss_w_3": "{DRAW} 1 rune and generate its Darkness tile adjacent to Wermunggdir (the leader chooses the space). Then, {SUMMON} 2 Worm Spawn - Rookie with 3 HP (instead of 9) in spaces adjacent to Wermunggdir (chosen by the leader).",
-      "boss_w_4": "Wermunggdir causes a collapse in the Area of the farthest Hero and Swallows them. (The swallowed character is moved into Wermunggdir’s guts, suffers {FATIGUE 2}; {DAMAGE} {X} and {POISON} {X}).",
-      "boss_w_5": "When the initiative marker reaches this card, resolve all of Wermunggdir’s conditions. Then, advance the marker.",
       "fallen_1": "MANIFEST 1 RUNE: PLACE 1 TIME TOKEN ON EACH ATTACK CARD THAT MATCHES THAT RUNE'S COLOR (DO NOT PLACE IT ON THE MONSTER CARD OR THIS CARD). THE NEXT TIME THE INITIATIVE MARKER REACHES THIS CARD, REMOVE THE TIME TOKEN INSTEAD OF RESOLVING THAT CARD'S EFFECTS.",
       "fallen_2": "THE FALLEN HERO AMBUSHS THE WEAKER HERO. THEN, DEAL {X} DAMAGE. IF THAT HERO IS KNOCKED OUT BY THIS ATTACK, THE FALLEN HERO ALSO HEALS {2*X}."
     }
@@ -808,6 +798,22 @@
       "sorpresa_3": "UNTIL THE END OF THE ADVENTURE, THE RANGE OF ALL AGILITY, WISDOM, AND CONCENTRATION ABILITIES THAT ARE NOT WEAPON ATTACKS OR CONSUMABLE ITEMS IS REDUCED TO A MAXIMUM OF 1 AREA (1 BLUE SQUARE). THE SAME APPLIES TO MULTICOLOR ABILITIES ACTIVATED WITH AGILITY OR WISDOM CUBES.",
       "sorpresa_4": "SUMMON THE FOLLOWING MONSTERS USING THE RUNE OF THIS ROOM AS THE SPAWN POINT (CHOOSE ADJACENT SPACES TO PLACE THEM): 1-2 PLAYERS: 1 GM - SOLDIER. 3-4 PLAYERS: +1 WM - SOLDIER. 5 PLAYERS: +1 GM - SOLDIER.",
       "sorpresa_5": "IF THIS DOOR IS OPENED, PLACE 2 CHESTS USING THE RUNE OF THIS ROOM AS THE SPAWN POINT (CHOOSE ADJACENT SPACES TO PLACE THE CHESTS)."
+    }
+  },
+  "cartas_asalto": {
+    "nombre":{
+      "boss_w_1": "EARTHQUAKE",
+      "boss_w_2": "SANDSWIM",
+      "boss_w_3": "SHADOW SPAWN",
+      "boss_w_4": "SWALLOW",
+      "boss_w_5": "BOSS STATUS"
+    },
+    "texto":{
+      "boss_w_1": "Wermunggdir targets {X} hero(es) at any range (always starting with the strongest) and deals {2*X} damage to each enemy and {KNOCKDOWN}. If a hero prevents the damage, they also avoid knockdown.",
+      "boss_w_2": "Wermunggdir targets {X} area(s) at any range (first choose the areas with the highest number of heroes, then those with the strongest heroes) and deals {2*X} damage to each enemy within each Area.",
+      "boss_w_3": "{DRAW} 1 rune and generate its Darkness tile adjacent to Wermunggdir (the leader chooses the space). Then, {SUMMON} 2 Worm Spawn - Rookie with 3 HP (instead of 9) in spaces adjacent to Wermunggdir (chosen by the leader).",
+      "boss_w_4": "Wermunggdir causes a collapse in the Area of the farthest Hero and Swallows them. (The swallowed character is moved into Wermunggdir’s guts, suffers {FATIGUE 2}; {DAMAGE} {X} and {POISON} {X}).",
+      "boss_w_5": "When the initiative marker reaches this card, resolve all of Wermunggdir’s conditions. Then, advance the marker."      
     }
   }
 }
