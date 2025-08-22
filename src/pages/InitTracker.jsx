@@ -1136,12 +1136,13 @@ const InitTracker = () => {
   
     const renderSide = (caraB = false) => {
       const isCaraB = rune.cara === 'B';
+      const isCaraA = rune.cara === 'A';
       const bgColor = bgColorMap[tipo] || 'bg-indigo-700';
       const borderColor = borderColorMap[tipo] || 'border-indigo-400';
       const title = ts[rune.id] || rune.id;
       const accion = ts[rune.accion] || rune.accion;
       const accion2 = ts[rune.accion2] || null;
-      const y = ts.y;
+      const y = ts.Y;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
       const posicion = rune.posicion;
@@ -1165,22 +1166,22 @@ const InitTracker = () => {
             )}
             {(tipo === 'asalto') && (
               <>
-                {isCaraB ? (
+                {isCaraA ? (
                   <>
                     <div className="text-xs text-white text-center font-bold">
-                      {accion2} {y}
+                      {accion}
                     </div>
                     <div className="text-xs text-white text-center font-bold">
-                      {accion}
+                      {accion2} {y}
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="text-xs text-white text-center font-bold">
-                      {accion}
+                      {y} {accion2}
                     </div>
                     <div className="text-xs text-white text-center font-bold">
-                      {y} {accion2}
+                      {accion}
                     </div>
                   </>  
                 )}
