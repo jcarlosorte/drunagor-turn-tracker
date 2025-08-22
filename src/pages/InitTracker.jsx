@@ -588,7 +588,7 @@ const InitTracker = () => {
     });
   };
 
-  const handleAddRuneCard = (runeCard) => {
+  const handleAddRuneCard = (runeCard, timeToken) => {
     const newRune = {
       uuid: uuidv4(),
       id: runeCard.id,
@@ -599,6 +599,7 @@ const InitTracker = () => {
       numRunas: runeCard.numRunas,
       tipo: runeCard.tipo,
       carta: runeCard.carta,
+      counter: timeToken,
       colorIndex: 10
     };
     placeRune({ rune: newRune });
