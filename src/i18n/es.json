@@ -279,6 +279,7 @@
       "applyEffect": "Aplicar efecto",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
+      "yaExiste": "Ya hay una carta de este tipo en juego. Solo puede haber una.",
       "fichaAleatoria": "Aleatoria",
       "removeTiles": "Eliminar Runa del Medidor",
       "oscuridadCascada": "Añadir Runas en Masa",
