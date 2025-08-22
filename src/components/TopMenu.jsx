@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan } from 'react-icons/gi';
+import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS, ASALTO } from '@/data/runas';
@@ -34,6 +34,7 @@ const TopMenu = ({
   const [enemySelect, setEnemySelect] = useState('');
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
+  const [showAssaultFaceOptions, setshowAssaultFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
@@ -304,78 +305,85 @@ const TopMenu = ({
                     <GiCardPlay className="text-indigo-400 text-xl" />
                     <span className="font-semibold">{t.cartas}</span>
                   </div>
-          
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    <GiRuneStone className="text-indigo-700 text-xl" />
-                    <button
-                      onClick={() => {
-                        const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                      }}
-                      className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.addRunes}
-                    </button>
-          
-                    <button
-                      onClick={() => setShowRuneFaceOptions(prev => !prev)}
-                      className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.addRunesCara}
-                    </button>
-                  </div>
-          
-                  {showRuneFaceOptions && (
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      {RUNAS.map((card, index) => (
-                        <button
-                          key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => handleSelectUniqueCard(card)}
-                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.cara} ({card.cara})
-                        </button>
-                      ))}
+
+                  <div className="mb-4">
+                    <h4 className="text-center text-sm font-semibold text-indigo-300 mb-2">
+                      {t.addRunes} {/* Ej: "Cartas de Runas" */}
+                    </h4>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <GiRuneStone className="text-indigo-700 text-xl" />
+                      <button
+                        onClick={() => {
+                          const defaultRunes = RUNAS.filter(r => r.cara === 'A');
+                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                        }}
+                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunes}
+                      </button>
+            
+                      <button
+                        onClick={() => setShowRuneFaceOptions(prev => !prev)}
+                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunesCara}
+                      </button>
                     </div>
-                  )}
-
-
-
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    <GiRuneStone className="text-indigo-600 text-xl" />
-                    <button
-                      onClick={() => {
-                        const defaultRunes = ASALTO.filter(r => r.cara === 'A');
-                        defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                      }}
-                      className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.addRunes_w}
-                    </button>
-          
-                    <button
-                      onClick={() => setShowRuneFaceOptions(prev => !prev)}
-                      className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                    >
-                      {t.addRunesCara_w}
-                    </button>
+            
+                    {showRuneFaceOptions && (
+                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                        {RUNAS.map((card, index) => (
+                          <button
+                            key={`${card.id}-${card.cara}-${index}`}
+                            onClick={() => handleSelectUniqueCard(card)}
+                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.cara} ({card.cara})
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-          
-                  {showRuneFaceOptions && (
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      {ASALTO.map((card, index) => (
-                        <button
-                          key={`${card.id}-${card.cara}-${index}`}
-                          onClick={() => handleSelectUniqueCard(card)}
-                          className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.cara} ({card.cara})
-                        </button>
-                      ))}
+
+                  <div>
+                    <h4 className="text-center text-sm font-semibold text-indigo-300 mb-2">
+                      {t.addRunes_w} {/* Ej: "Cartas de Asalto" */}
+                    </h4>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <GiLeechingWorm className="text-indigo-600 text-xl" />
+                      <button
+                        onClick={() => {
+                          const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                        }}
+                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunes_w}
+                      </button>
+            
+                      <button
+                        onClick={() => setshowAssaultFaceOptions(prev => !prev)}
+                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunesCara_w}
+                      </button>
                     </div>
-                  )}
+            
+                    {showAssaultFaceOptions && (
+                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                        {ASALTO.map((card, index) => (
+                          <button
+                            key={`${card.id}-${card.cara}-${index}`}
+                            onClick={() => handleSelectUniqueCard(card)}
+                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.cara} ({card.cara})
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-
 
                 {/* 📦 Estado de la bolsa */}
                 <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
