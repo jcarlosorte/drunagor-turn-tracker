@@ -251,7 +251,12 @@ export const GameProvider = ({ children }) => {
     // 4) Devolver la ficha para el toast
     return firstTile;
   };
-    
+  
+  const activarPila = (id) => {
+    setPilas(prev => prev.map(pila => 
+      pila.id === id ? { ...pila, estado: 'activa' } : pila
+    ));
+  };
   
   const addNewPilaConcentrada = () => {
     const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
@@ -320,6 +325,11 @@ export const GameProvider = ({ children }) => {
     return firstTile;
   };
 
+  const activarPilaConcentrada = (id) => {
+    setPilasConcentrada(prev => prev.map(pila => 
+      pila.id === id ? { ...pila, estado: 'activa' } : pila
+    ));
+  };
 
 
   const deleteAvailableTileByColor = (color) => {
