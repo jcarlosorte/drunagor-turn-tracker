@@ -1,6 +1,7 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
 import { flushSync } from "react-dom";
+import { AnimatePresence } from 'framer-motion';
 import React, { useEffect, useState, useRef } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
 import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
@@ -1789,12 +1790,14 @@ const InitTracker = () => {
               }}
             />
         )}
-      
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
-          {shownTiles.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
-          ))}
-        </div>
+
+        <AnimatePresence>
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
+            {shownTiles.map(tile => (
+              <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
+            ))}
+          </div>
+        </AnimatePresence>
         
         <TileWarningModal
           message={tileWarning}
@@ -1807,6 +1810,7 @@ const InitTracker = () => {
           </div>
         )}
 
+        <AnimatePresence>
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
         {/* Contenedor de Toasts de Runas */}
           {tileToasts.map(tile => (
@@ -1851,6 +1855,7 @@ const InitTracker = () => {
             </div>
           ))}
         </div>
+        </AnimatePresence>
 
         
       </PageTransition>
