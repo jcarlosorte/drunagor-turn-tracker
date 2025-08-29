@@ -850,19 +850,35 @@ const InitTracker = () => {
               // ✅ Comprobar spawnPoints
               const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
               
-              // ✅ Comprobar pilas activas (inquietas y concentradas)
-              const pilaExists = [
+              // ✅ Buscar pilas activas con esa loseta
+              const pilasActivas = [
                 ...pilas.filter(p => p.estado === 'activa'),
                 ...pilasConcentrada.filter(p => p.estado === 'activa')
-              ].some(pila => pila.tiles.some(t => t.runa === tile.runa));
+              ];
               
-              if (!spawnExists && !pilaExists) {
+              const pilasQueContienen = pilasActivas.filter(pila =>
+                pila.tiles.some(t => t.runa === tile.runa)
+              );
+                            
+              if (!spawnExists && pilasQueContienen.length === 0) {
                 // ❌ No hay punto de aparición para ese color
                 showScenarioToast(
                   `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
                 );
                 return; // No seguimos con la invocación
               }
+
+              // ✅ Si hay pilas que la contienen → avisar
+              if (pilasQueContienen.length > 0) {
+                const nombresPilas = pilasQueContienen
+                  .map(p => codigosPilas[p.id] || `Pila ${p.id}`)
+                  .join(', ');
+              
+                showScenarioToast(
+                  `${ti.encontradaEn} ${ti.colores[tile.runa]} ${ti.enPilas}: ${nombresPilas}`
+                );
+              }
+              
               if (faltan > 0 && scenarioMonster) {
                 spawnBatchEnemies(faltan, scenarioMonster);
                 //console.log(faltan);
