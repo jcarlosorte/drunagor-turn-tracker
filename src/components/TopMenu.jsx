@@ -68,12 +68,6 @@ const TopMenu = ({
     setActiveMenu(prev => (prev === name ? null : name));
   };
 
-  const showTileToast = (tile, tipo = 'remove') => {
-    const uuid = uuidv4();
-    const tileWithId = { ...tile, tipo, uuid };
-    setTileToasts(prev => [...prev, tileWithId]);
-  };
-
   useEffect(() => {
     const handleOutside = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
