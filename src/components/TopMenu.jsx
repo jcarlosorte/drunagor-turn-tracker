@@ -40,7 +40,7 @@ const TopMenu = ({
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, 
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
-         pilas, setPilas, addNewPila, removeTileFromPila, addRunesCascade,
+         pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade,
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, 
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
@@ -617,33 +617,48 @@ const TopMenu = ({
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 justify-center">
                         {pilas.map(pila => (
                           <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                            <div className="font-bold mb-1">
-                              <span>{t.pila || 'Pila'} 🗃️</span>
-                              <input
-                                type="text"
-                                maxLength={5}
-                                value={codigosPilas[pila.id] || ''}
-                                onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
-                                className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
-                                placeholder="ABC12"
-                                title={t.codigoPila}
-                              />
-                            </div>
-                            <div className="text-xs text-gray-300 mb-2">
-                              {t.tamano}: {pila.tiles.length}
-                            </div>
-                            <div className="flex justify-center">
-                              <button
-                                className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                                onClick={() => {
-                                  const tile = removeTileFromPila(pila.id);
-                                  if (tile) showTileToast(tile, 'show');
-                                  else alert(t.emptyPila);
-                                }}
-                              >
-                                {t.devolver}
-                              </button>
-                            </div>
+                            
+                            {pila.estado === 'reserva' ? (
+                              <>
+                                <div className="font-bold mb-2">{t.pila} 🗃️</div>
+                                <button
+                                  className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                  onClick={() => activarPila(pila.id)}
+                                >
+                                  ✅ {t.activarPila || 'Activar Pila'}
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                <div className="font-bold mb-1">
+                                  <span>{t.pila} 🗃️</span>
+                                  <input
+                                    type="text"
+                                    maxLength={5}
+                                    value={codigosPilas[pila.id] || ''}
+                                    onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                                    className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                                    placeholder="ABC12"
+                                    title={t.codigoPila}
+                                  />
+                                </div>
+                                <div className="text-xs text-gray-300 mb-2">
+                                  {t.tamano}: {pila.tiles.length}
+                                </div>
+                                <div className="flex justify-center">
+                                  <button
+                                    className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                                    onClick={() => {
+                                      const tile = removeTileFromPila(pila.id);
+                                      if (tile) showTileToast(tile, 'show');
+                                      else alert(t.emptyPila);
+                                    }}
+                                  >
+                                    {t.devolver}
+                                  </button>
+                                </div>
+                              </>
+                            )}
                           </div>
                         ))}
                       </div>
