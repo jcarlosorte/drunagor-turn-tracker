@@ -688,7 +688,7 @@ const TopMenu = ({
                                   className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => activarPilaConcentrada(pila.id)}
                                 >
-                                  ✅ {t.activarNodo || 'Activar Nodo'}
+                                  ✅ {t.activaNodo || 'Activar Nodo'}
                                 </button>
                               </>
                             ) : (
