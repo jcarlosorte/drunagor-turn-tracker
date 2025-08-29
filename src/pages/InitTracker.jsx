@@ -1793,9 +1793,7 @@ const InitTracker = () => {
 
         <AnimatePresence>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
-            {shownTiles.map(tile => (
-              <TileToast key={tile.uuid} tile={tile} onClose={() => handleCloseToast(tile.uuid)} />
-            ))}
+            
           </div>
         </AnimatePresence>
         
@@ -1812,6 +1810,9 @@ const InitTracker = () => {
 
         <AnimatePresence>
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+          {shownTiles.map(tile => (
+            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile.uuid)} />
+          ))}
         {/* Contenedor de Toasts de Runas */}
           {tileToasts.map(tile => (
             <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile.uuid)} />
