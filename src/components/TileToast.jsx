@@ -1,6 +1,5 @@
 // src/components/TileToast.jsx
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import TetrisPiece from './TetrisPiece';
 import { IoClose } from 'react-icons/io5';
@@ -24,29 +23,20 @@ const TileToast = ({ tile, tipo = 'add', onClose }) => {
     ? `🔮 ${ti.manifestar || 'Manifestar'}: ${ti.colores[tile.runa]}`
     : `+1 ${ti.rune}: ${ti.colores[tile.runa]}`;
 
- return (
-    <AnimatePresence>
-      <motion.div
-        key={tile.uuid}
-        initial={{ opacity: 0, scale: 0.8, y: -20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.8, y: 20 }}
-        transition={{ duration: 0.3 }}
-        className={`relative flex flex-col items-center justify-center p-4 rounded-xl shadow-2xl text-white ${colorMap[tile.runa]} border-4 border-white animate-pulse`}
-
+return (
+    <div className={`relative flex flex-col items-center justify-center p-4 rounded-xl shadow-2xl text-white ${colorMap[tile.runa]} border-2 border-white`}>
+      {/* Botón cerrar */}
+      <button
+        onClick={() => onClose && onClose()}
+        className="absolute top-1 right-1 bg-black bg-opacity-40 rounded-full p-1 hover:bg-opacity-70"
+        aria-label="Cerrar"
       >
-        {/* Botón cerrar */}
-        <button
-          onClick={onClose}
-          className="absolute top-1 right-1 bg-black bg-opacity-50 rounded-full p-1 hover:bg-opacity-70"
-        >
-          <IoClose className="text-white text-lg" />
-        </button>
+        <IoClose className="text-white" />
+      </button>
 
-        <div className="text-xs font-bold mb-2">{mensaje}</div>
-        <TetrisPiece type={tile.dibujo} color="text-white" />
-      </motion.div>
-    </AnimatePresence>
+      <div className="text-xs font-bold mb-2">{mensaje}</div>
+      <TetrisPiece type={tile.dibujo} color="text-white" />
+    </div>
   );
 };
 
