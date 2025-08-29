@@ -263,6 +263,7 @@
       "tamano": "Tamaño",
       "pila": "Pila",
       "activaPila": "Activar Pila",
+      "activaNodo": "Activar Nodo",
       "devolver": "Retirar Runa",
       "devolverNodo": "Rompe Nodo",
       "emptyPila": "Pila vacía.",
