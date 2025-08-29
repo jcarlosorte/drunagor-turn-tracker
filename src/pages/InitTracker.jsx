@@ -80,7 +80,7 @@ const InitTracker = () => {
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
   const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
-         spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue,
+         spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada
          initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
@@ -846,8 +846,17 @@ const InitTracker = () => {
             // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
             if (isCaraB || (!isCaraB && noEnemies)) {
               const tile = manifestTile();
+             
+              // ✅ Comprobar spawnPoints
               const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
-              if (!spawnExists) {
+              
+              // ✅ Comprobar pilas activas (inquietas y concentradas)
+              const pilaExists = [
+                ...pilas.filter(p => p.estado === 'activa'),
+                ...pilasConcentrada.filter(p => p.estado === 'activa')
+              ].some(pila => pila.tiles.some(t => t.runa === tile.runa));
+              
+              if (!spawnExists && !pilaExists) {
                 // ❌ No hay punto de aparición para ese color
                 showScenarioToast(
                   `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
