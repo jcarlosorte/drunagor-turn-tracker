@@ -1845,17 +1845,26 @@ const InitTracker = () => {
                 />
               </motion.div>
             ))}
+            {shownTiles.map(tile => (
+              <motion.div
+                key={tile.uuid}
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                transition={{ duration: 0.22 }}
+              >
+                <TileToast
+                  tile={tile}
+                  tipo={tile.tipo}
+                  onClose={() => handleCloseToast(tile)}
+                />
+              </motion.div>
+            ))}
           </div>
         </AnimatePresence>
 
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
-          {shownTiles.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
-          ))}
-        {/* Contenedor de Toasts de Runas */}
-          {tileToasts.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
-          ))}
+
         {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
           {scenarioToasts.map(toast => (
             <div
