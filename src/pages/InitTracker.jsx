@@ -112,8 +112,12 @@ const InitTracker = () => {
   const handleTileDraw = (tile) => {
     setShownTiles(prev => [...prev, tile]);
   };
+
+  const handleCloseToast = (tile) => {
+    setShownTiles(prev => [...prev, tile]);
+  };
   
-  const handleCloseToast = (uuid) => {
+  const handleCloseToast2 = (uuid) => {
     setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
@@ -1811,11 +1815,11 @@ const InitTracker = () => {
         <AnimatePresence>
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
           {shownTiles.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile.uuid)} />
+            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
           ))}
         {/* Contenedor de Toasts de Runas */}
           {tileToasts.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile.uuid)} />
+            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
           ))}
         {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
           {scenarioToasts.map(toast => (
