@@ -314,6 +314,8 @@
       "activeRescue": "Aldeanos Activos",
       "incursionFail": "❌ Incursión NO ejecutada: el punto de aparición",
       "noExiste": "NO exixte",
+      "encontradaEn": "Encontrada en",
+      "enPilas": "Pilas",
       "noManifestamos": "⏭️ Incursión en cara A pero hay enemigos → no manifestamos",
       "noRunasColocadas": "❌ No hay runas colocadas para formar la pila",
       "contador": "⚠️ Activación en: ",
