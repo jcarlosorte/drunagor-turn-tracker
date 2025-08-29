@@ -262,7 +262,7 @@
       "addNodo": "Añadir Nodo de Niebla",
       "tamano": "Tamaño",
       "pila": "Pila",
-      "activarPila": "Activar Pila",
+      "activaPila": "Activar Pila",
       "devolver": "Retirar Runa",
       "devolverNodo": "Rompe Nodo",
       "emptyPila": "Pila vacía.",
