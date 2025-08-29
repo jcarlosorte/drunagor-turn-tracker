@@ -33,9 +33,7 @@ const TileToast = ({ tile, tipo = 'add', onClose }) => {
         exit={{ opacity: 0, scale: 0.8, y: 20 }}
         transition={{ duration: 0.3 }}
         className={`relative flex flex-col items-center justify-center p-4 rounded-xl shadow-2xl text-white ${colorMap[tile.runa]} border-4 border-white animate-pulse`}
-        style={{
-          background: `linear-gradient(45deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2))`,
-        }}
+
       >
         {/* Botón cerrar */}
         <button
