@@ -6,11 +6,11 @@ import TetrisPiece from './TetrisPiece';
 import { IoClose } from 'react-icons/io5';
 
 const colorMap = {
-  rojo: 'from-red-600 to-red-800',
-  azul: 'from-blue-600 to-blue-800',
-  verde: 'from-green-600 to-green-800',
-  naranja: 'from-orange-500 to-orange-700',
-  gris: 'from-gray-500 to-gray-700',
+  rojo: 'bg-red-600',
+  azul: 'bg-blue-600',
+  verde: 'bg-green-600',
+  naranja: 'bg-orange-500',
+  gris: 'bg-gray-500',
 };
 
 
