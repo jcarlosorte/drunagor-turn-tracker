@@ -348,8 +348,12 @@ export const GameProvider = ({ children }) => {
   };
   
   const manifestTile = () => {
-    const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-    const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+    if (availableTiles.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * availableTiles.length);
+    const randomColor = availableTiles[randomIndex].runa;
+    
+    //const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    //const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
     const tile = drawTilePreviewByColor(randomColor);
     if (tile) {
       showTileToast(tile, 'show');
