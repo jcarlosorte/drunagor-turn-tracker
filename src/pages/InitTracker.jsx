@@ -118,7 +118,7 @@ const InitTracker = () => {
     // pero lo ideal es usar solo showTileToast para centralizar
     if (!tile) return;
     // si showTileToast está disponible en useGame, úsalo:
-    showTileToast(tile, 'show');
+    //showTileToast(tile, 'show');
   
     // Mantener compatibilidad con cualquier código que lea shownTiles:
     setShownTiles(prev => {
