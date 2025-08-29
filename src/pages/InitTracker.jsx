@@ -109,14 +109,38 @@ const InitTracker = () => {
     return Object.entries(runesColorMap).find(([color, idx]) => idx === index)?.[0];
   };
 
-  const handleTileDraw = (tile) => {
+  const handleTileDraw_ori = (tile) => {
     setShownTiles(prev => [...prev, tile]);
-    
   };
+
+  const handleTileDraw = (tile) => {
+    // si quieres compatibilidad con shownTiles por ahora, añade a ambos
+    // pero lo ideal es usar solo showTileToast para centralizar
+    if (!tile) return;
+    // si showTileToast está disponible en useGame, úsalo:
+    showTileToast(tile, 'show');
   
-  const handleCloseToast = (tile) => {
+    // Mantener compatibilidad con cualquier código que lea shownTiles:
+    setShownTiles(prev => {
+      // aseguramos que el tile tenga uuid
+      const t = tile.uuid ? tile : { ...tile, uuid: uuidv4() };
+      return [...prev, t];
+    });
+  };
+    
+  const handleCloseToast_ori = (tile) => {
     setShownTiles(prev => prev.filter(t => t.uuid !== tile.uuid));
-    setShownTiles?.(prev => prev ? prev.filter(t => t.uuid !== tile.uuid) : prev);
+  };
+
+  const handleCloseToast = (tile) => {
+    // tile puede ser objeto o tener solo uuid
+    const uuid = tile?.uuid ?? tile;
+  
+    // 1) eliminar del contexto global de toasts
+    setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
+  
+    // 2) eliminar también del array local (compat)
+    setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
   const formatTextWithBraces = (text) => {
@@ -1805,7 +1829,7 @@ const InitTracker = () => {
         )}
 
         <AnimatePresence>
-          <div className="fixed bottom-4 right-4 flex flex-col gap-3 z-50">
+          <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
             {tileToasts.map(tile => (
               <motion.div
                 key={tile.uuid}
