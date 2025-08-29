@@ -1792,15 +1792,7 @@ const InitTracker = () => {
               }}
             />
         )}
-
        
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
-            {shownTiles.map(tile => (
-            <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
-          ))}
-          </div>
-        
-        
         <TileWarningModal
           message={tileWarning}
           onClose={() => setTileWarning(null)}
