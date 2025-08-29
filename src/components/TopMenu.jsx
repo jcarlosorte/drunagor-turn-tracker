@@ -45,7 +45,7 @@ const TopMenu = ({
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey, setRescue, rescue, initializeRescue, removeRescue,
-         initializeDecks, drawCardFromDeck, showCardToast } = useGame();
+         initializeDecks, drawCardFromDeck, showCardToast, manifestTile } = useGame();
   const { placedRunes, resetPlacedRunes } = useInitRunes();
   const [activeMenu, setActiveMenu] = useState(null); // 'runes' | 'enemies' | 'scenario' | null
   const containerRef = useRef(null);
