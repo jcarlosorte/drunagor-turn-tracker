@@ -110,11 +110,13 @@ const InitTracker = () => {
   };
 
   const handleTileDraw = (tile) => {
-    setShownTiles(prev => [...prev, tile]);
+    //setShownTiles(prev => [...prev, tile]);
+    setShownTiles(prev => prev.filter(t => t.uuid !== tile.uuid));
   };
 
   const handleCloseToast = (tile) => {
-    setShownTiles(prev => [...prev, tile]);
+    //setShownTiles(prev => [...prev, tile]);
+    setShownTiles(prev => prev.filter(t => t.uuid !== tile.uuid));
   };
   
   const handleCloseToast2 = (uuid) => {
