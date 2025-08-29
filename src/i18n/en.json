@@ -262,6 +262,7 @@
     "tamano": "Size",
     "pila": "Pile",
     "activaPila": "Activate Pile",
+    "activaNodo": "Activate Node",
     "devolver": "Remove Rune",
     "devolverNodo": "Tie Braeker",
     "emptyPila": "Empty Stack.",
