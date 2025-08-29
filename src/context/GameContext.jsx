@@ -95,9 +95,7 @@ export const GameProvider = ({ children }) => {
   
         // incrementar contador en el track
         runesCopy[color] = (runesCopy[color] || 0) + 1;
-  
-        // si quieres feedback visual:
-        // drawnForToast.push(random);
+
       }
     });
   
