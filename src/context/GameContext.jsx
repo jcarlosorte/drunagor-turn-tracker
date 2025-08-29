@@ -585,6 +585,7 @@ export const GameProvider = ({ children }) => {
         setScenarioMonster,
         manifestTile,
         showTileToast,
+        setTileToasts,
         tileToasts,
         setSpawnPoints,
         spawnPoints,
