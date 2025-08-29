@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import TetrisPiece from './TetrisPiece';
+import { IoClose } from 'react-icons/io5';
 
 const colorMap = {
   rojo: 'from-red-600 to-red-800',
