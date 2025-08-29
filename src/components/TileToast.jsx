@@ -22,25 +22,31 @@ const TileToast = ({ tile, tipo = 'add', onClose }) => {
     ? `🔮 ${ti.manifestar || 'Manifestar'}: ${ti.colores[tile.runa]}`
     : `+1 ${ti.rune}: ${ti.colores[tile.runa]}`;
 
-  return (
-    <div
-      className={`relative flex flex-col items-center justify-center p-4 rounded-lg shadow-xl text-white bg-gradient-to-r ${colorMap[tile.runa]} animate-pulse border-2 border-white`}
-    >
-      {/* Botón de cerrar */}
-      <button
-        onClick={onClose}
-        className="absolute top-1 right-1 text-white hover:text-gray-200"
-        title="Cerrar"
+ return (
+    <AnimatePresence>
+      <motion.div
+        key={tile.uuid}
+        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.8, y: 20 }}
+        transition={{ duration: 0.3 }}
+        className={`relative flex flex-col items-center justify-center p-4 rounded-xl shadow-2xl text-white ${colorMap[tile.runa]} border-4 border-white animate-pulse`}
+        style={{
+          background: `linear-gradient(45deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2))`,
+        }}
       >
-        <IoClose size={18} />
-      </button>
+        {/* Botón cerrar */}
+        <button
+          onClick={onClose}
+          className="absolute top-1 right-1 bg-black bg-opacity-50 rounded-full p-1 hover:bg-opacity-70"
+        >
+          <IoClose className="text-white text-lg" />
+        </button>
 
-      {/* Texto del mensaje */}
-      <div className="text-xs font-bold mb-1">{mensaje}</div>
-
-      {/* Pieza Tetris */}
-      <TetrisPiece type={tile.dibujo} color="text-white" />
-    </div>
+        <div className="text-xs font-bold mb-2">{mensaje}</div>
+        <TetrisPiece type={tile.dibujo} color="text-white" />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
