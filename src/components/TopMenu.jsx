@@ -428,15 +428,7 @@ const TopMenu = ({
                   <div className="flex flex-wrap gap-2 justify-center">
                     <button
                       onClick={() => {
-                        const allColors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
-                        const randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-                        const tile = drawTilePreviewByColor(randomColor);
-                    
-                        if (tile) {
-                          showTileToast(tile, 'show');
-                        } else {
-                          alert(`${t.aviso2} ${t.colores[randomColor]}`);
-                        }
+                        manifestTile();
                       }}
                       className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white text-xs px-2 py-1 rounded"
                     >
