@@ -1,6 +1,6 @@
 // src/components/TileToast.jsx
 import React, { useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import TetrisPiece from './TetrisPiece';
 
