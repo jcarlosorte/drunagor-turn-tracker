@@ -361,9 +361,6 @@ export const GameProvider = ({ children }) => {
     const uuid = uuidv4();
     const tileWithId = { ...tile, tipo, uuid };
     setTileToasts(prev => [...prev, tileWithId]);
-    setTimeout(() => {
-      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
-    }, 3000);
   };
   
   const manifestTile = () => {
