@@ -870,12 +870,9 @@ const InitTracker = () => {
               // ✅ Si hay pilas que la contienen → avisar
               if (pilasQueContienen.length > 0) {
                  const nombresPilas = pilasQueContienen
-                    .map(p => `Pila ${p.numPila}  `)
+                    .map(p => `Nº ${p.numPila}  `)
                     .join(', ');
-
-                 showScenarioToast(
-    `${ti.encontradaEn} ${ti.colores[tile.runa]} ${ti.enPilas}: ${nombresPilas}`
-                 );
+                 showScenarioToast(`${ti.encontradaEn} -> ${ti.colores[tile.runa]}. ${ti.enPilas}: ${nombresPilas}`);
               }
               
               if (faltan > 0 && scenarioMonster) {
