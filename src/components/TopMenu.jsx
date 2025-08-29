@@ -38,7 +38,7 @@ const TopMenu = ({
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
-  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, 
+  const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
          pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade,
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, 
@@ -52,7 +52,7 @@ const TopMenu = ({
   const menuRefEnemies = useRef(null);
   const menuRefRunes = useRef(null);
   const menuRefScenario = useRef(null);
-  const [tileToasts, setTileToasts] = useState([]);
+  //const [tileToasts, setTileToasts] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
   const { selectedExpansions } = useExpansions();
   
@@ -72,9 +72,6 @@ const TopMenu = ({
     const uuid = uuidv4();
     const tileWithId = { ...tile, tipo, uuid };
     setTileToasts(prev => [...prev, tileWithId]);
-    setTimeout(() => {
-      setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
-    }, 3000);
   };
 
   useEffect(() => {
