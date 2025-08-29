@@ -1,7 +1,7 @@
 // src/pages/InitTracker.jsx
 import { useNavigate } from 'react-router-dom';
 import { flushSync } from "react-dom";
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState, useRef } from 'react';
 import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
 import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
@@ -1805,6 +1805,25 @@ const InitTracker = () => {
         )}
 
         <AnimatePresence>
+          <div className="fixed bottom-4 right-4 flex flex-col gap-3 z-50">
+            {tileToasts.map(tile => (
+              <motion.div
+                key={tile.uuid}
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                transition={{ duration: 0.22 }}
+              >
+                <TileToast
+                  tile={tile}
+                  tipo={tile.tipo}
+                  onClose={() => handleCloseToast(tile)}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </AnimatePresence>
+
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
           {shownTiles.map(tile => (
             <TileToast key={tile.uuid} tile={tile} tipo={tile.tipo} onClose={() => handleCloseToast(tile)} />
@@ -1852,8 +1871,6 @@ const InitTracker = () => {
             </div>
           ))}
         </div>
-        </AnimatePresence>
-
         
       </PageTransition>
   );
