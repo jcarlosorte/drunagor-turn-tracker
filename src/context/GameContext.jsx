@@ -221,6 +221,7 @@ export const GameProvider = ({ children }) => {
     const nueva = {
       id: uuidv4(),
       tiles: nuevaPila,
+      estado: 'reserva',
     };
   
     setPilas(prev => [...prev, nueva]);
@@ -287,7 +288,8 @@ export const GameProvider = ({ children }) => {
     // Crear la nueva pila
     const nuevaPila = {
       id: uuidv4(),
-      tiles: tilesSeleccionadas
+      tiles: tilesSeleccionadas,
+      estado: 'reserva',
     };
     
     setPilasConcentrada(prev => [...prev, nuevaPila]);
