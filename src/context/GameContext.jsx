@@ -24,6 +24,8 @@ export const GameProvider = ({ children }) => {
   const [pilaDeRunas, setPilaDeRunas] = useState([]);
   const [pilas, setPilas] = useState([]);
   const [pilasConcentrada, setPilasConcentrada] = useState([]);
+  const [contadorPilas, setContadorPilas] = useState(1);
+  const [contadorPilasConcentradas, setContadorPilasConcentradas] = useState(1);
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
@@ -222,9 +224,11 @@ export const GameProvider = ({ children }) => {
       id: uuidv4(),
       tiles: nuevaPila,
       estado: 'reserva',
+      numPila: contadorPilas
     };
   
     setPilas(prev => [...prev, nueva]);
+    setContadorPilas(prev => prev + 1);
     return nueva;
   };
 
@@ -295,9 +299,12 @@ export const GameProvider = ({ children }) => {
       id: uuidv4(),
       tiles: tilesSeleccionadas,
       estado: 'reserva',
+      numPila: contadorPilasConcentradas
     };
     
     setPilasConcentrada(prev => [...prev, nuevaPila]);
+    setContadorPilasConcentradas(prev => prev + 1);
+    return nuevaPila;
 
   };
   
