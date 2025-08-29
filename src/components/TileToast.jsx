@@ -13,7 +13,7 @@ const colorMap = {
 };
 
 
-const TileToast = ({ tile, tipo = 'add', onClose }) => {
+const TileToast = ({ tile, tipo = 'add', onClose = () => {} }) => {
   if (!tile?.runa) return null;
   const { translations } = useLanguage();
   const ti = translations.trackerInit || {};
