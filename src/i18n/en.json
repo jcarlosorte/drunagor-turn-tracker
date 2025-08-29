@@ -261,6 +261,7 @@
     "addNodo": "Add Misty Node",
     "tamano": "Size",
     "pila": "Pile",
+    "activarPila": "Activate Pile",
     "devolver": "Remove Rune",
     "devolverNodo": "Tie Braeker",
     "emptyPila": "Empty Stack.",
