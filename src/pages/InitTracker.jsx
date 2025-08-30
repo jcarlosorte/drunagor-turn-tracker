@@ -757,7 +757,7 @@ const InitTracker = () => {
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
         if (!current) {
-          console.warn("Enemigo eliminado. Buscando siguiente entidad...");
+          //console.warn("Enemigo eliminado. Buscando siguiente entidad...");
           handleNextTurn();
           return;
         }
@@ -792,7 +792,12 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        const currentRune = runes[groupTurnTracker.index] || runes[0];
+        const currentRune = runes[groupTurnTracker.index];
+        if (!currentRune) {
+          //console.warn("Carta runa eliminada. Buscando siguiente entidad...");
+          handleNextTurn();
+          return;
+        }
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
 
