@@ -1020,7 +1020,7 @@ const InitTracker = () => {
       const nextIndex = groupTurnTracker.index + 1;
       const nextEntity = currentTurnEntity.group[nextIndex];
       setGroupTurnTracker({ group: currentTurnEntity.group, index: nextIndex });
-      setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: currentTurnEntity.group });
+      setCurrentTurnEntity({ ...nextEntity, type: currentTurnEntity.type, group: currentTurnEntity.group });
       return;
     }
   
@@ -1062,8 +1062,8 @@ const InitTracker = () => {
         if (runes.length > 0) {
           setTurnIndex(idx);
           setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...runes[0], type: 'rune' });
-          setGroupTurnTracker({ group: [], index: 0 });
+          setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
+          setGroupTurnTracker({ group: runes, index: 0 });
           return;
         }
       }
