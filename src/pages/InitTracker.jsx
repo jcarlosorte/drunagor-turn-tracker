@@ -1173,84 +1173,90 @@ const InitTracker = () => {
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
       return (
         <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
-          <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor}`}>
-            {/* Título siempre visible */}
-            <div className="flex justify-center mb-1 text-white font-bold">{title}</div>
-
-            
+          <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[220px]`} >
+            {/* Título */}
+            <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center truncate">
+              {title}
+            </div>
+        
             {/* ✅ Contenido según tipo */}
             {(tipo === 'runa' || tipo === 'defensa') && (
               <>
-                <div className="text-xs text-white text-center font-bold">
+                <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                   {accion} {rune.numRunas || ''}
                 </div>
-                <div className="text-xs text-white text-center">{nombre}</div>
+                <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                  {nombre}
+                </div>
               </>
             )}
-            {(tipo === 'asalto') && (
+        
+            {tipo === 'asalto' && (
               <>
                 {isCaraA ? (
                   <>
-                    <div className="text-xs text-white text-center font-bold">
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                       {accion}
                     </div>
-                    <div className="text-xs text-white text-center font-bold">
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                       {accion2} {y}
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="text-xs text-white text-center font-bold">
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                       {y} {accion2}
                     </div>
-                    <div className="text-xs text-white text-center font-bold">
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                       {accion}
                     </div>
-                  </>  
+                  </>
                 )}
               </>
             )}
+        
             {tipo === 'incursion' && (
-             <>
-              {/* Cara B SIEMPRE visible */}
-              {isCaraB ? (
-                <>
-                  <div className="text-xs text-white text-center font-bold">
-                    {accion} {rune.numRunas}
-                  </div>
-                  <div className="text-xs text-white text-center">{nombre}</div>
-                </>
-              ) : (
-                // Cara A → solo si NO hay enemigos
-                totalEnemies === 0 && (
+              <>
+                {isCaraB ? (
                   <>
-                    <div className="text-xs text-white text-center font-bold">
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
                       {accion} {rune.numRunas}
                     </div>
-                    <div className="text-xs text-white text-center">{nombre}</div>
+                    <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                      {nombre}
+                    </div>
                   </>
-                )
-              )}
-             </>
+                ) : (
+                  totalEnemies === 0 && (
+                    <>
+                      <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                        {accion} {rune.numRunas}
+                      </div>
+                      <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                        {nombre}
+                      </div>
+                    </>
+                  )
+                )}
+              </>
             )}
-
-
-            {/* Icono para girar */}
+        
+            {/* Icono girar */}
             <div className="flex justify-center my-1">
               {caraB ? (
-                <RiArrowTurnForwardLine className="text-white text-xl" />
+                <RiArrowTurnForwardLine className="text-white text-lg sm:text-xl" />
               ) : (
-                <RiArrowTurnBackLine className="text-white text-xl" />
+                <RiArrowTurnBackLine className="text-white text-lg sm:text-xl" />
               )}
             </div>
-  
-            {/* Cara actual */}
-            <div className="text-[0.6rem] italic text-indigo-100 text-center">
+        
+            {/* Cara */}
+            <div className="text-[0.55rem] sm:text-[0.65rem] italic text-indigo-100 text-center">
               {ti.cara} {rune.cara}
             </div>
-  
-            {/* Checkbox efecto */}
-            <div className="flex items-center justify-center mt-1 text-white text-[0.6rem]">
+        
+            {/* Checkbox */}
+            <div className="flex items-center justify-center mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
               <input
                 type="checkbox"
                 checked={applyEffect}
@@ -1258,16 +1264,16 @@ const InitTracker = () => {
                 className="mr-1"
               />
               <label>{ti.applyEffect}</label>
-              
             </div>
-            <div className="flex items-center justify-center">
-            {/* Badge de contador si es defensa */}
-              {tipo === "defensa" && defenseCounter > 0 && (
-                <div className="text-center bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+        
+            {/* Badge contador */}
+            {tipo === 'defensa' && defenseCounter > 0 && (
+              <div className="flex justify-center mt-1">
+                <div className="text-center bg-red-600 text-white text-[0.65rem] sm:text-xs font-bold px-2 py-1 rounded-full shadow">
                   {ti.contador} {defenseCounter}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       );
