@@ -1812,7 +1812,6 @@ const InitTracker = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 8 }}
                 transition={{ duration: 0.22 }}
-                className={`animate-pulse`}
               >
                 <TileToast
                   tile={tile}
