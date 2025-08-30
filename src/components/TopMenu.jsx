@@ -41,7 +41,7 @@ const TopMenu = ({
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
          pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade,
-         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, 
+         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey, setRescue, rescue, initializeRescue, removeRescue,
@@ -52,8 +52,6 @@ const TopMenu = ({
   const menuRefEnemies = useRef(null);
   const menuRefRunes = useRef(null);
   const menuRefScenario = useRef(null);
-  //const [tileToasts, setTileToasts] = useState([]);
-  const [codigosPilas, setCodigosPilas] = useState({});
   const { selectedExpansions } = useExpansions();
   
   const colorMap = {
@@ -103,13 +101,6 @@ const TopMenu = ({
     }
   
     setManualSelect(value);
-  };
-
-  const handleCodigoChange = (pilaId, nuevoCodigo) => {
-    setCodigosPilas(prev => ({
-      ...prev,
-      [pilaId]: nuevoCodigo.slice(0, 5)
-    }));
   };
 
   const monstruosUnicos = Array.from(
