@@ -579,7 +579,7 @@ export const GameProvider = ({ children }) => {
         discardTileByColor,
         discardTileRandom,
         restoreDiscardedTile,
-        pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange
+        pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
         removeTileFromPila, addRunesCascade,
         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada,
         resetTiles,
