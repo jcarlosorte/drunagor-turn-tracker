@@ -110,7 +110,7 @@ const InitTracker = () => {
 
   const handleTileDraw = (tile) => {
     if (!tile) return;
-    showTileToast(tile);
+    showTileToast(tile, 'add');
   };
 
   const handleCloseToast = (tile) => {
