@@ -22,7 +22,7 @@ const TileToast = ({ tile, tipo = 'add', onClose = () => {} }) => {
     : tipo === 'show'
     ? `🔮 ${ti.manifestar || 'Manifestar'}: ${ti.colores[tile.runa]}`
     : tipo === 'retira'
-    ? `X ${ti.retira || 'Retirada'}: ${ti.colores[tile.runa]}`
+    ? `❌ ${ti.retira || 'Retirada'}: ${ti.colores[tile.runa]}`
     : `+1 ${ti.rune}: ${ti.colores[tile.runa]}`;
 
 return (
