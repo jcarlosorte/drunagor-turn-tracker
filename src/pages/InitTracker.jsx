@@ -84,7 +84,6 @@ const InitTracker = () => {
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
-  const [shownTiles, setShownTiles] = useState([]);
   const { executedRunes, setExecutedRunes } = useInitRunes();
   const [warningMessage, setWarningMessage] = useState(null);
   const [overhealedEnemies, setOverhealedEnemies] = useState(new Set());
@@ -109,34 +108,14 @@ const InitTracker = () => {
     return Object.entries(runesColorMap).find(([color, idx]) => idx === index)?.[0];
   };
 
-  const handleTileDraw_ori = (tile) => {
-    setShownTiles(prev => [...prev, tile]);
-  };
-
   const handleTileDraw = (tile) => {
-    // si quieres compatibilidad con shownTiles por ahora, añade a ambos
-    // pero lo ideal es usar solo showTileToast para centralizar
     if (!tile) return;
-    // si showTileToast está disponible en useGame, úsalo:
     showTileToast(tile, 'show');
-  
-    // Mantener compatibilidad con cualquier código que lea shownTiles:
-    //setShownTiles(prev => { const t = tile.uuid ? tile : { ...tile, uuid: uuidv4() }; return [...prev, t]; });
-  };
-    
-  const handleCloseToast_ori = (tile) => {
-    setShownTiles(prev => prev.filter(t => t.uuid !== tile.uuid));
   };
 
   const handleCloseToast = (tile) => {
-    // tile puede ser objeto o tener solo uuid
     const uuid = tile?.uuid ?? tile;
-  
-    // 1) eliminar del contexto global de toasts
     setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
-  
-    // 2) eliminar también del array local (compat)
-    //setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
   const formatTextWithBraces = (text) => {
@@ -1827,22 +1806,6 @@ const InitTracker = () => {
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
             {tileToasts.map(tile => (
-              <motion.div
-                key={tile.uuid}
-                initial={{ opacity: 0, scale: 0.95, y: 8 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 8 }}
-                transition={{ duration: 0.22 }}
-                className={`animate-pulse`}
-              >
-                <TileToast
-                  tile={tile}
-                  tipo={tile.tipo}
-                  onClose={() => handleCloseToast(tile)}
-                />
-              </motion.div>
-            ))}
-            {shownTiles.map(tile => (
               <motion.div
                 key={tile.uuid}
                 initial={{ opacity: 0, scale: 0.95, y: 8 }}
