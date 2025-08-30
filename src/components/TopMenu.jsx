@@ -641,7 +641,7 @@ const TopMenu = ({
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
                                       const tile = removeTileFromPila(pila.id);
-                                      if (tile) showTileToast(tile, 'show');
+                                      if (tile) showTileToast(tile, 'retira');
                                       else alert(t.emptyPila);
                                     }}
                                   >
@@ -704,7 +704,7 @@ const TopMenu = ({
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
                                       const tile = removeTileFromPilaConcentrada(pila.id);
-                                      if (tile) showTileToast(tile, 'show');
+                                      if (tile) showTileToast(tile, 'retira');
                                       else alert(t.emptyPila);
                                     }}
                                   >
