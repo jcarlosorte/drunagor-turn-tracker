@@ -1232,7 +1232,7 @@ const InitTracker = () => {
                       <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                         {accion} {rune.numRunas}
                       </div>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center truncate">
+                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
                         {nombre}
                       </div>
                     </>
