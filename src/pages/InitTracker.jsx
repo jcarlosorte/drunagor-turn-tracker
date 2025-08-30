@@ -787,7 +787,7 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        const currentRune = runes[groupTurnTracker.index];
+        const currentRune = runes[groupTurnTracker.index] || runes[0];
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
 
