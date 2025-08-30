@@ -1550,18 +1550,18 @@ const InitTracker = () => {
                             
                             {pila.estado === 'reserva' ? (
                               <>
-                                <div className="font-bold mb-2">{t.pila} 🗃️</div>
+                                <div className="font-bold mb-2">{ti.pila} 🗃️</div>
                                 <button
                                   className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => activarPila(pila.id)}
                                 >
-                                  ✅ {t.activaPila || 'Activar Pila'}
+                                  ✅ {ti.activaPila || 'Activar Pila'}
                                 </button>
                               </>
                             ) : (
                               <>
                                 <div className="font-bold mb-1">
-                                  <span>{t.pila} 🗃️</span>
+                                  <span>{ti.pila} 🗃️</span>
                                   <input
                                     type="text"
                                     maxLength={5}
@@ -1569,11 +1569,11 @@ const InitTracker = () => {
                                     onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
                                     className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
                                     placeholder="ABC12"
-                                    title={t.codigoPila}
+                                    title={ti.codigoPila}
                                   />
                                 </div>
                                 <div className="text-xs text-gray-300 mb-2">
-                                  {t.tamano}: {pila.tiles.length}
+                                  {ti.tamano}: {pila.tiles.length}
                                 </div>
                                 <div className="flex justify-center">
                                   <button
@@ -1581,10 +1581,10 @@ const InitTracker = () => {
                                     onClick={() => {
                                       const tile = removeTileFromPila(pila.id);
                                       if (tile) showTileToast(tile, 'retira');
-                                      else alert(t.emptyPila);
+                                      else alert(ti.emptyPila);
                                     }}
                                   >
-                                    {t.devolver}
+                                    {ti.devolver}
                                   </button>
                                 </div>
                               </>
@@ -1602,18 +1602,18 @@ const InitTracker = () => {
                         <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
                           {pila.estado === 'reserva' ? (
                             <>
-                              <div className="font-bold mb-2">{t.nodo || 'Nodo'} 🗃️</div>
+                              <div className="font-bold mb-2">{ti.nodo || 'Nodo'} 🗃️</div>
                               <button
                                 className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
                                 onClick={() => activarPilaConcentrada(pila.id)}
                               >
-                                ✅ {t.activaNodo || 'Activar Nodo'}
+                                ✅ {ti.activaNodo || 'Activar Nodo'}
                               </button>
                             </>
                           ) : (
                             <>
                               <div className="font-bold mb-1">
-                                <span>{t.nodo || 'Nodo'} 🗃️</span>
+                                <span>{ti.nodo || 'Nodo'} 🗃️</span>
                                 <input
                                   type="text"
                                   maxLength={5}
@@ -1621,11 +1621,11 @@ const InitTracker = () => {
                                   onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
                                   className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
                                   placeholder="ABC12"
-                                  title={t.codigoPila}
+                                  title={ti.codigoPila}
                                 />
                               </div>
                               <div className="text-xs text-gray-300 mb-2">
-                                {t.tamano}: {pila.tiles.length}
+                                {ti.tamano}: {pila.tiles.length}
                               </div>
                               <div className="flex justify-center">
                                 <button
@@ -1633,10 +1633,10 @@ const InitTracker = () => {
                                   onClick={() => {
                                     const tile = removeTileFromPilaConcentrada(pila.id);
                                     if (tile) showTileToast(tile, 'retira');
-                                    else alert(t.emptyPila);
+                                    else alert(ti.emptyPila);
                                   }}
                                 >
-                                  {t.devolverNodo}
+                                  {ti.devolverNodo}
                                 </button>
                               </div>
                             </>
