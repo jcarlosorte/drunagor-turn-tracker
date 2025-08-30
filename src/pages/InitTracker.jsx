@@ -720,14 +720,11 @@ const InitTracker = () => {
   const [turnIndex, setTurnIndex] = useState(-1);
   const [currentTurnEntity, setCurrentTurnEntity] = useState(null);
   const [groupTurnTracker, setGroupTurnTracker] = useState({ group: [], index: 0 });
-  //const [processedVoragine, setProcessedVoragine] = useState([]);
   const processedVoragineRef = useRef(new Set());
   const processedDefenseTurnRef = useRef(new Set());
-  const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null);
-  
+  const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null); 
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
-
   const roundRef = useRef(0);
   const previousIndexRef = useRef(null);
   
@@ -798,7 +795,7 @@ const InitTracker = () => {
           if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
             tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
             processedDefenseTurnRef.current.add(currentRune.uuid);
-            console.log("🛡 Reducimos defensa en su turno:", currentRune.defenseCounter - 1);
+            //console.log("🛡 Reducimos defensa en su turno:", currentRune.defenseCounter - 1);
           }
           return; // no ejecutamos el efecto todavía
         }
@@ -904,7 +901,8 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
+  //}, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
+  }, [turnIndex, placedEnemies, placedRunes]);
 
 
   
