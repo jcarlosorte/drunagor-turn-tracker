@@ -1926,12 +1926,7 @@ const InitTracker = () => {
                 />
               </motion.div>
             ))}
-          </div>
-        </AnimatePresence>
-
-        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
-
-        {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
+            {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
           {scenarioToasts.map(toast => (
             <div
               key={toast.id}
@@ -1969,8 +1964,8 @@ const InitTracker = () => {
               </button>
             </div>
           ))}
-        </div>
-        
+          </div>
+        </AnimatePresence>
       </PageTransition>
   );
 };
