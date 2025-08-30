@@ -787,9 +787,9 @@ const InitTracker = () => {
         .map(r => r.rune);
   
       if (runes.length > 0) {
-        const currentRune = runes[0];
+        const currentRune = runes[groupTurnTracker.index];
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
-        setGroupTurnTracker({ group: runes, index: 0 });
+        setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
 
         if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
           if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
