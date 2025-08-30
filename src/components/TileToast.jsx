@@ -27,7 +27,7 @@ return (
     <div className={`relative flex flex-col items-center justify-center p-4 rounded-xl shadow-2xl text-white ${colorMap[tile.runa]} border-2 border-white`}>
       {/* Botón cerrar */}
       <button
-        onClick={() => onClose && onClose()}
+        onClick={onClose}
         className="absolute top-1 right-1 bg-black bg-opacity-40 rounded-full p-1 hover:bg-opacity-70"
         aria-label="Cerrar"
       >
