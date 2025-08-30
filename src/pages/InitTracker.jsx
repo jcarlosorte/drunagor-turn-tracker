@@ -140,7 +140,7 @@ const InitTracker = () => {
     setTileToasts(prev => prev.filter(t => t.uuid !== uuid));
   
     // 2) eliminar también del array local (compat)
-    setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
+    //setShownTiles(prev => prev.filter(t => t.uuid !== uuid));
   };
 
   const formatTextWithBraces = (text) => {
@@ -1830,7 +1830,22 @@ const InitTracker = () => {
 
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
-
+            {tileToasts.map(tile => (
+              <motion.div
+                key={tile.uuid}
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                transition={{ duration: 0.22 }}
+                className={`animate-pulse`}
+              >
+                <TileToast
+                  tile={tile}
+                  tipo={tile.tipo}
+                  onClose={() => handleCloseToast(tile)}
+                />
+              </motion.div>
+            ))}
             {shownTiles.map(tile => (
               <motion.div
                 key={tile.uuid}
