@@ -1175,17 +1175,17 @@ const InitTracker = () => {
         <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : ''} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[220px]`} >
             {/* Título */}
-            <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center truncate">
+            <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
               {title}
             </div>
         
             {/* ✅ Contenido según tipo */}
             {(tipo === 'runa' || tipo === 'defensa') && (
               <>
-                <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                   {accion} {rune.numRunas || ''}
                 </div>
-                <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
                   {nombre}
                 </div>
               </>
@@ -1195,19 +1195,19 @@ const InitTracker = () => {
               <>
                 {isCaraA ? (
                   <>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                       {accion}
                     </div>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                       {accion2} {y}
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                       {y} {accion2}
                     </div>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                       {accion}
                     </div>
                   </>
@@ -1219,20 +1219,20 @@ const InitTracker = () => {
               <>
                 {isCaraB ? (
                   <>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                       {accion} {rune.numRunas}
                     </div>
-                    <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
                       {nombre}
                     </div>
                   </>
                 ) : (
                   totalEnemies === 0 && (
                     <>
-                      <div className="text-[0.65rem] sm:text-xs text-white text-center font-bold">
+                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                         {accion} {rune.numRunas}
                       </div>
-                      <div className="text-[0.65rem] sm:text-xs text-white text-center truncate">
+                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center truncate">
                         {nombre}
                       </div>
                     </>
