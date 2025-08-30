@@ -80,7 +80,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
+  const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, initializeDecks, drawCardFromDeck } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
@@ -118,14 +118,10 @@ const InitTracker = () => {
     // pero lo ideal es usar solo showTileToast para centralizar
     if (!tile) return;
     // si showTileToast está disponible en useGame, úsalo:
-    //showTileToast(tile, 'show');
+    showTileToast(tile, 'show');
   
     // Mantener compatibilidad con cualquier código que lea shownTiles:
-    setShownTiles(prev => {
-      // aseguramos que el tile tenga uuid
-      const t = tile.uuid ? tile : { ...tile, uuid: uuidv4() };
-      return [...prev, t];
-    });
+    //setShownTiles(prev => { const t = tile.uuid ? tile : { ...tile, uuid: uuidv4() }; return [...prev, t]; });
   };
     
   const handleCloseToast_ori = (tile) => {
