@@ -82,7 +82,7 @@ const InitTracker = () => {
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
   const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange,
-         initializeDecks, drawCardFromDeck } = useGame();
+         initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
   const { executedRunes, setExecutedRunes } = useInitRunes();
