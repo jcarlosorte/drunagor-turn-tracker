@@ -755,7 +755,12 @@ const InitTracker = () => {
         .map(e => e.enemy);
   
       if (group.length > 0) {
-        const current = group[groupTurnTracker.index] || group[0];
+        const current = group[groupTurnTracker.index];
+        if (!current) {
+          console.warn("Enemigo eliminado. Buscando siguiente entidad...");
+          handleNextTurn();
+          return;
+        }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
     
