@@ -41,6 +41,14 @@ export const GameProvider = ({ children }) => {
   const [rescue, setRescue] = useState([]);
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
+  const [codigosPilas, setCodigosPilas] = useState({});
+
+  const handleCodigoChange = (pilaId, nuevoCodigo) => {
+    setCodigosPilas(prev => ({
+      ...prev,
+      [pilaId]: nuevoCodigo.slice(0, 5)
+    }));
+  };
   
   const addRune = (color) => {
     
@@ -571,7 +579,7 @@ export const GameProvider = ({ children }) => {
         discardTileByColor,
         discardTileRandom,
         restoreDiscardedTile,
-        pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada,
+        pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange
         removeTileFromPila, addRunesCascade,
         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada,
         resetTiles,
