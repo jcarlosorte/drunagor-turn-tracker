@@ -651,6 +651,15 @@ const InitTracker = () => {
     );
   };
 
+  const handleEstadoChange = (uuid, updatedStates) => {
+      setPlacedEnemies(prev =>
+        prev.map(enemy =>
+          enemy.uuid === uuid ? { ...enemy, estadosAlterados: updatedStates } : enemy
+        )
+      );
+    };
+
+
     
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
@@ -1910,6 +1919,7 @@ const InitTracker = () => {
             onVidaChange={updateEnemyVida}
             overhealedEnemies={overhealedEnemies}
             setOverhealedEnemies={setOverhealedEnemies}
+            onEstadoChange={handleEstadoChange}
           />
           )}
         {showPCModal && (
