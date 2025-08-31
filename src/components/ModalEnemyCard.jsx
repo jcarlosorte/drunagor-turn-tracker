@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiInfo } from "react-icons/fi";
 import { useLanguage } from '@/context/LanguageContext';
+import { ESTADOS_ALTERADOS } from '@/data/estadosAlterados';
 import { adjustCapabilitiesByRunes } from '@/components/adjustCapabilitiesByRunes';
 import { useGame } from '@/context/GameContext';
 import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteeltoeBoots, GiBloodySword, GiArcheryTarget, GiMoebiusTrefoil } from "react-icons/gi";
@@ -249,7 +250,21 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     }
     return translations.enemies?.[id];
   };
+
+  const handleEstadoChange = (estadoId, delta) => {
+    const updatedStates = enemy.estadosAlterados.map((estado) =>
+      estado.id === estadoId
+        ? { ...estado, count: Math.max(0, estado.count + delta) }
+        : estado
+    );
   
+    // Actualizar en el estado local del modal (si lo manejas) o en el contexto
+    if (onEstadoChange) {
+      onEstadoChange(enemy.uuid, updatedStates);
+    }
+  };
+  
+    
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
       <div className={`${bgColorMap[color] || ''} rounded-lg shadow-lg w-full max-w-xl relative border-4 ${borderColorMap[color] || ''}`}>
@@ -348,6 +363,57 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
             </div>
           </div>
 
+          {/* Submenú Estados Alterados */}
+          <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-wrap justify-center gap-4">
+            {enemy.estadosAlterados.map((estado) => {
+              const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+              if (!estadoConfig) return null;
+          
+              const maxCount = estadoConfig.max || 1;
+          
+              return (
+                <div key={estado.id} className="flex flex-col items-center w-16">
+                  {/* Botón + */}
+                  <button
+                    onClick={() => handleEstadoChange(estado.id, 1)}
+                    disabled={estado.count >= maxCount}
+                    className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
+                  >
+                    +
+                  </button>
+          
+                  {/* Icono con tooltip */}
+                  <div className="relative group">
+                    <img
+                      src={estadoConfig.imagen}
+                      alt={estadoConfig.texto}
+                      className="w-8 h-8"
+                    />
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full mb-1 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded p-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                      {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
+                    </div>
+                  </div>
+          
+                  {/* Contador si aplica */}
+                  {maxCount > 1 && (
+                    <div className="text-white font-bold">{estado.count}</div>
+                  )}
+          
+                  {/* Botón - */}
+                  <button
+                    onClick={() => handleEstadoChange(estado.id, -1)}
+                    disabled={estado.count <= 0}
+                    className="bg-red-600 text-white rounded px-1 mt-1 text-xs hover:bg-red-700 disabled:opacity-50"
+                  >
+                    −
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          
             {/* Barra de vida */}
             <div className="w-full relative h-5">
               <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
