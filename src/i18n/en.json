@@ -261,6 +261,7 @@
     "addNodo": "Add Misty Node",
     "tamano": "Size",
     "pila": "Pile",
+    "nodo": "Node",
     "activaPila": "Activate Pile",
     "activaNodo": "Activate Node",
     "devolver": "Remove Rune",
