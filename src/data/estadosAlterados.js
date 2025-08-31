@@ -1,3 +1,5 @@
+import hemorragia from "@/assets/assets_logo/hemorragia_1.png";
+
 export const ESTADOS_ALTERADOS = [
   {id: "HEMORRAGIA_X", reduce:""},
   {id: "DERRIBO_X", reduce:""},
