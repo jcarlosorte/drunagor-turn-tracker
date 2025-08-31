@@ -13,6 +13,7 @@ import { ENEMIES } from '@/data/enemies';
 import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
+import { ESTADOS_ALTERADOS } from '@/data/estadosAlterados';
 import { CARTAS_COMANDANTE, CARTAS_OVERLORD, ALDEANO, ERRANTES, CARTAS_GUSANO } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
