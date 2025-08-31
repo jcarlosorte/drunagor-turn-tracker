@@ -299,6 +299,7 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig);
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     showToast(selected);
     placeEnemy({
       enemy: {
@@ -321,7 +322,8 @@ const InitTracker = () => {
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
         ringColor: colorId,
-        cara: selected.cara
+        cara: selected.cara,
+        estadosAlterados: initialStates
       }
     });
   };
@@ -341,6 +343,7 @@ const InitTracker = () => {
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig, forcedColorId);
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     if (selected.categoria === 'comandante') {
       const createAndPlaceCommander = (pcValue) => {
         const totalVida = selected.vida * (pcValue + numHeroes);
@@ -367,7 +370,8 @@ const InitTracker = () => {
           capacidades: adjustedCaps,
           capacidadesOriginales: selected.capacidades,
           ringColor: colorId,
-          cara: selected.cara
+          cara: selected.cara,
+          estadosAlterados: initialStates
         };  
         if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
@@ -408,7 +412,8 @@ const InitTracker = () => {
           capacidades: adjustedCaps,
           capacidadesOriginales: selected.capacidades,
           ringColor: colorId,
-          cara: selected.cara
+          cara: selected.cara,
+          estadosAlterados: initialStates
         };
         if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
@@ -441,7 +446,8 @@ const InitTracker = () => {
           capacidades: adjustedCaps,
           capacidadesOriginales: selected.capacidades,
           ringColor: colorId,
-          cara: selected.cara
+          cara: selected.cara,
+          estadosAlterados: initialStates
         };
         if (ver === 'show') showToast(selected);
         placeEnemy({ enemy });
@@ -475,7 +481,8 @@ const InitTracker = () => {
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
         ringColor: colorId,
-        cara: selected.cara
+        cara: selected.cara,
+        estadosAlterados: initialStates
       }
     });
     if (ver === 'show') showToast(selected);
@@ -488,6 +495,7 @@ const InitTracker = () => {
     const uuid = uuidv4();
     const isBig = selected.size === 'grande';
     const colorId = assignColorToEnemy(uuid, isBig);
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     openCommanderPCModal((pcValue) => {
       const totalVida = selected.vida * (pcValue + numHeroes);
       const runeIndex = runesColorMap[selected.rune];
@@ -513,7 +521,8 @@ const InitTracker = () => {
         capacidades: adjustedCaps,
         capacidadesOriginales: selected.capacidades,
         ringColor: colorId,
-        cara: selected.cara
+        cara: selected.cara,
+        estadosAlterados: initialStates
       };
       showToast(enemy);
       placeEnemy({ enemy });
