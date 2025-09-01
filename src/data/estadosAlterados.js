@@ -3,11 +3,11 @@ import marca from "@/assets/assets_logo/montaraz.png";
 import sigilo from "@/assets/assets_logo/sigilo.png";
 import aturdimiento from "@/assets/assets_logo/aturdimiento.png";
 import lentitud from "@/assets/assets_logo/lentitud.png";
-import hemorragia from "@/assets/assets_logo/hemorragia_1.png";
-import veneno from "@/assets/assets_logo/veneno_1.png";
-import intimidar from "@/assets/assets_logo/intimidar_1.png";
-import quemadura from "@/assets/assets_logo/quemadura_1.png";
-import escudo from "@/assets/assets_logo/escudo_1.png";
+import hemorragia from "@/assets/assets_logo/hemorragia.png";
+import veneno from "@/assets/assets_logo/veneno.png";
+import intimidar from "@/assets/assets_logo/intimidar.png";
+import quemadura from "@/assets/assets_logo/quemadura.png";
+import escudo from "@/assets/assets_logo/escudo.png";
 
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
