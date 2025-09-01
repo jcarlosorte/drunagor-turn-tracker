@@ -254,19 +254,44 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     return translations.enemies?.[id];
   };
 
- const handleEstadoChangeLocal = (estadoId, delta) => {
-  const next = (estadosLocal || []).map(e =>
-      e.id === estadoId
-        ? { ...e, count: Math.max(0, (e.count || 0) + delta) }
-        : e
-    );
+   const handleEstadoChangeLocal = (estadoId, delta) => {
+    const updatedStates = estadosLocal.map((estado) => {
+      if (estado.id === estadoId) {
+        const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+        const maxCount = estadoConfig?.max || 1;
+        const currentCount = estado.count || 0;
+        const newCount = currentCount + delta;
   
-    setEstadosLocal(next); // refresco inmediato del modal
+        if (delta > 0 && newCount > maxCount) {
+          const confirm = window.confirm(
+            `Este estado alcanzó su límite (${maxCount}). ¿Deseas aumentar el máximo y continuar?`
+          );
+          if (!confirm) return estado;
+  
+          // ✅ Si acepta, actualizamos el "max" dinámico
+          return {
+            ...estado,
+            count: newCount,
+            max: newCount // 🔹 nuevo límite dinámico
+          };
+        }
+  
+        // ✅ Lógica normal (sin superar el límite)
+        return {
+          ...estado,
+          count: Math.max(0, newCount)
+        };
+      }
+      return estado;
+    });
+  
+    setEstadosLocal(updatedStates);
   
     if (onEstadoChange) {
-      onEstadoChange(enemy.uuid, next); // persistir en el padre
+      onEstadoChange(enemy.uuid, updatedStates);
     }
   };
+
     
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
