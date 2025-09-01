@@ -12,7 +12,7 @@ import escudo from "@/assets/assets_logo/escudo.png";
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
   { id: "DERRIBO_I", texto: "derribo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 1, imagen: derribo },
-  { id: "MARCA_DE_MONTARAZ", texto: "marca de montaraz", reduce: "no", numReduce: 0, turno: "", daño: 0, max: 1, imagen: marca },
+  { id: "MARCA_DE_MONTARAZ", texto: "marca", reduce: "no", numReduce: 0, turno: "", daño: 0, max: 1, imagen: marca },
   { id: "SIGILO_I", texto: "sigilo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 1, imagen: sigilo },
   { id: "ATURDIMIENTO_I", texto: "aturdimiento", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 1, imagen: aturdimiento },
   { id: "LENTITUD_I", texto: "lentitud", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 1, imagen: lentitud },
