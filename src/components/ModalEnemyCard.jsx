@@ -366,7 +366,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           </div>
 
           {/* Submenú Estados Alterados */}
-          <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap overflow-x-auto gap-4 justify-start items-center">
+          <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal.map((estado) => {
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
               if (!estadoConfig) return null;
@@ -383,8 +383,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   </button>
           
                   <div className="relative group cursor-help">
-                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className="w-8 h-8" />
-                    <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className="w-8 h-8 flex-shrink" />
+                    <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
                       {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
                     </div>
                   </div>
