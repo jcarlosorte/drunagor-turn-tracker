@@ -597,6 +597,18 @@
       "VENGATIVO": "Un Monstruo Vengativo elige como objetivo principal al Héroe mas corrupto (el que tenga más cubos de Maldición).",
       "VORAGINE": "Esta es una Capacidad de los Señores supremos. Al comienzo de su Activación, un Señor supremo debe añadir sus cartas de Ataque al mazo, barajarlo y robar una nueva «mano>>> (1 carta por cada Héroe en la Aventura). Por tanto, la combinación de Ataques del Señor supremo puede cambiar de una ronda a otra."
     },
+  "estadosAlterados": {
+      "aturdimiento": "ATURDIMIENTO",
+      "derribo": "DERRIBO",
+      "escudo": "ESCUDO",
+      "hemorragia": "HEMORRAGIA",
+      "intimidar": "INTIMIDAR",
+      "lentitud": "LENTITUD",
+      "marca": "MARCA DE MONTARAZ",
+      "quemadura": "QUEMADURA",
+      "sigilo": "SIGILO",
+      "veneno": "VENENO"
+    },
   "cartas_ataque": {
     "ataqueC": "Acción de Comandante",
     "ataqueO": "Acción de Señor Supremo",
