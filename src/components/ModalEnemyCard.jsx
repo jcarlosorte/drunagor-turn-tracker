@@ -8,7 +8,7 @@ import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteelt
 import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
 
-export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies }) => {
+export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies, onEstadoChange }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
   const [vidaMaxLocal, setVidaMaxLocal] = useState(enemy?.vidaMax || 0);
   const { language, translations } = useLanguage();
