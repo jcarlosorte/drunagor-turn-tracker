@@ -318,7 +318,7 @@
       "noExiste": "NO exixte",
       "encontradaEn": "Encontrada Runa",
       "enPilas": "Pila/s",
-      "noManifestamos": "⏭️ Incursión en cara A pero hay enemigos → no manifestamos",
+      "noManifestamos": "⚠️ Incursión en cara A pero hay enemigos → no manifestamos",
       "noRunasColocadas": "❌ No hay runas colocadas para formar la pila",
       "contador": "⚠️ Activación en: ",
       "tipo_ataque": {
