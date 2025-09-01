@@ -394,53 +394,56 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
-            {estadosLocal.map((estado) => {
-              const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
-              if (!estadoConfig) return null;
-              const maxCount = estadoConfig.max || 1;
-
-              // 🔹 Calcular tamaño dinámico
-              const totalEstados = estadosLocal.length;
-              let iconSize = "w-8 h-8";
-              if (totalEstados > 6 && totalEstados <= 10) iconSize = "w-6 h-6";
-              if (totalEstados > 10) iconSize = "w-5 h-5";
-      
-              return (
-                <div key={estado.id} className="flex flex-col items-center w-14">
-                  <button
-                    onClick={() => handleEstadoChangeLocal(estado.id, +1)}
-                    disabled={(estado.count || 0) >= maxCount}
-                    className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
-                  >
-                    +
-                  </button>
-          
-                  {/* Icono con tooltip */}
-                  <div className="relative group cursor-help flex items-center justify-center">
-                    <img
-                      src={estadoConfig.imagen}
-                      alt={estadoConfig.texto}
-                      className={`${iconSize} flex-shrink`}
-                    />
-                    <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                      {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
+            {estadosLocal
+              .filter((estado) => !inmunidad?.includes(estado.id))
+              .map((estado) => {
+                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                if (!estadoConfig) return null;
+                const maxCount = estadoConfig.max || 1;
+  
+                // 🔹 Calcular tamaño dinámico
+                const totalEstados = estadosLocal.length;
+                let iconSize = "w-8 h-8";
+                if (totalEstados > 6 && totalEstados <= 10) iconSize = "w-6 h-6";
+                if (totalEstados > 10) iconSize = "w-5 h-5";
+        
+                return (
+                  <div key={estado.id} className="flex flex-col items-center w-14">
+                    <button
+                      onClick={() => handleEstadoChangeLocal(estado.id, +1)}
+                      disabled={(estado.count || 0) >= maxCount}
+                      className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
+                    >
+                      +
+                    </button>
+            
+                    {/* Icono con tooltip */}
+                    <div className="relative group cursor-help flex items-center justify-center">
+                      <img
+                        src={estadoConfig.imagen}
+                        alt={estadoConfig.texto}
+                        className={`${iconSize} flex-shrink`}
+                      />
+                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                        {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
+                      </div>
                     </div>
+            
+                    {maxCount > 1 && (
+                      <div className="text-white text-sm font-bold">{estado.count || 0}</div>
+                    )}
+            
+                    <button
+                      onClick={() => handleEstadoChangeLocal(estado.id, -1)}
+                      disabled={(estado.count || 0) <= 0}
+                      className="bg-red-600 text-white rounded px-1 mt-1 text-xs hover:bg-red-700 disabled:opacity-50"
+                    >
+                      −
+                    </button>
                   </div>
-          
-                  {maxCount > 1 && (
-                    <div className="text-white text-sm font-bold">{estado.count || 0}</div>
-                  )}
-          
-                  <button
-                    onClick={() => handleEstadoChangeLocal(estado.id, -1)}
-                    disabled={(estado.count || 0) <= 0}
-                    className="bg-red-600 text-white rounded px-1 mt-1 text-xs hover:bg-red-700 disabled:opacity-50"
-                  >
-                    −
-                  </button>
-                </div>
-              );
-            })}
+                );
+              })
+            }
           </div>
 
           
