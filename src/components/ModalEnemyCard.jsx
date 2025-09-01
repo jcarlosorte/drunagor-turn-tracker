@@ -11,6 +11,7 @@ import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} f
 export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies, onEstadoChange }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
   const [vidaMaxLocal, setVidaMaxLocal] = useState(enemy?.vidaMax || 0);
+  const [estadosLocal, setEstadosLocal] = useState(enemy?.estadosAlterados || []);
   const { language, translations } = useLanguage();
   const hasConfirmedOverheal = overhealedEnemies?.has(uuid) ?? false;
   
@@ -27,6 +28,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     if (enemy) {
       setVidaLocal(enemy.vida);
       setVidaMaxLocal(enemy.vidaMax);
+      setEstadosLocal(enemy.estadosAlterados || []);
     }
   }, [enemy]);
 
@@ -251,20 +253,19 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     return translations.enemies?.[id];
   };
 
-  const handleEstadoChange = (estadoId, delta) => {
-    console.log(estadoId, delta);
-    const updatedStates = enemy.estadosAlterados.map((estado) =>
-      estado.id === estadoId
-        ? { ...estado, count: Math.max(0, estado.count + delta) }
-        : estado
+ const handleEstadoChangeLocal = (estadoId, delta) => {
+  const next = (estadosLocal || []).map(e =>
+      e.id === estadoId
+        ? { ...e, count: Math.max(0, (e.count || 0) + delta) }
+        : e
     );
   
-    // Actualizar en el estado local del modal (si lo manejas) o en el contexto
+    setEstadosLocal(next); // refresco inmediato del modal
+  
     if (onEstadoChange) {
-      onEstadoChange(enemy.uuid, updatedStates);
+      onEstadoChange(enemy.uuid, next); // persistir en el padre
     }
   };
-  
     
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
@@ -366,45 +367,35 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap overflow-x-auto gap-4 justify-start items-center">
-            {enemy.estadosAlterados.map((estado) => {
+            {estadosLocal.map((estado) => {
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
               if (!estadoConfig) return null;
-          
               const maxCount = estadoConfig.max || 1;
           
               return (
                 <div key={estado.id} className="flex flex-col items-center w-14">
-                  {/* Botón + */}
                   <button
-                    onClick={() => handleEstadoChange(estado.id, 1)}
-                    disabled={estado.count >= maxCount}
+                    onClick={() => handleEstadoChangeLocal(estado.id, +1)}
+                    disabled={(estado.count || 0) >= maxCount}
                     className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
                   >
                     +
                   </button>
           
-                  {/* Icono con tooltip */}
                   <div className="relative group cursor-help">
-                    <img
-                      src={estadoConfig.imagen}
-                      alt={estadoConfig.texto}
-                      className="w-8 h-8"
-                    />
-                    {/* Tooltip minimalista */}
-                    <div className="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className="w-8 h-8" />
+                    <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
                       {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
                     </div>
                   </div>
           
-                  {/* Contador si aplica */}
                   {maxCount > 1 && (
-                    <div className="text-white text-sm font-bold">{estado.count}</div>
+                    <div className="text-white text-sm font-bold">{estado.count || 0}</div>
                   )}
           
-                  {/* Botón - */}
                   <button
-                    onClick={() => handleEstadoChange(estado.id, -1)}
-                    disabled={estado.count <= 0}
+                    onClick={() => handleEstadoChangeLocal(estado.id, -1)}
+                    disabled={(estado.count || 0) <= 0}
                     className="bg-red-600 text-white rounded px-1 mt-1 text-xs hover:bg-red-700 disabled:opacity-50"
                   >
                     −
@@ -413,7 +404,6 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               );
             })}
           </div>
-
 
           
             {/* Barra de vida */}
