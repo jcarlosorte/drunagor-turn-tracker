@@ -317,7 +317,7 @@
     "noExiste": "does NOT exist",
     "encontradaEn": "Found Rune",
     "enPilas": "Stack/s",
-    "noManifestamos": "⏭️ Raid on side A but there are enemies → we do not demonstrate",
+    "noManifestamos": "⚠️ Raid on side A but there are enemies → we do not demonstrate",
     "noRunasColocadas": "❌ There are no runes placed to form the stack",
     "contador": "⚠️ Activation in: ",
     "tipo_ataque": {
