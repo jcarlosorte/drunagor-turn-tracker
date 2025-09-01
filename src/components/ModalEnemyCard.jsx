@@ -396,7 +396,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal
-              .filter((estado) => !inmunidad?.includes(estado.id))
+              .filter((estado) => {
+                const esInmuneNormal = inmunidad?.includes(estado.id);
+                const esInmunePorGrande =
+                  inmunidad?.includes("GRANDE") &&
+                  (estado.id === "DERRIBO_I" || estado.id === "ATURDIMIENTO_I");
+          
+                return !esInmuneNormal && !esInmunePorGrande;
+              })
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
