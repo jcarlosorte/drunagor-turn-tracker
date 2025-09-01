@@ -22,6 +22,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const tb = translations.trackerSelect?.comportamientos || {};
   const tt = translations.condiciones_t || {};
   const tte = translations.condiciones_d || {};
+  const tea = translations.estadosAlterados || {};
   const { getRuneCount } = useGame();
 
   useEffect(() => {
@@ -424,8 +425,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                         alt={estadoConfig.texto}
                         className={`${iconSize} flex-shrink`}
                       />
-                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                        {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
+                      <div className="absolute left-1 ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                        {tea.[estadoConfig.texto] || estadoConfig.texto}
                       </div>
                     </div>
             
