@@ -254,29 +254,28 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     return translations.enemies?.[id];
   };
 
-   const handleEstadoChangeLocal = (estadoId, delta) => {
+  const handleEstadoChangeLocal = (estadoId, delta) => {
     const updatedStates = estadosLocal.map((estado) => {
       if (estado.id === estadoId) {
         const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
-        const maxCount = estadoConfig?.max || 1;
+        const currentMax = estado.max || estadoConfig?.max || 1;
         const currentCount = estado.count || 0;
         const newCount = currentCount + delta;
   
-        if (delta > 0 && newCount > maxCount) {
+        if (delta > 0 && newCount > currentMax) {
           const confirm = window.confirm(
-            `Este estado alcanzó su límite (${maxCount}). ¿Deseas aumentar el máximo y continuar?`
+            `Este estado alcanzó su límite (${currentMax}). ¿Deseas aumentar el máximo y continuar?`
           );
           if (!confirm) return estado;
   
-          // ✅ Si acepta, actualizamos el "max" dinámico
+          // ✅ Aumentamos el límite dinámicamente
           return {
             ...estado,
             count: newCount,
-            max: newCount // 🔹 nuevo límite dinámico
+            max: newCount // Nuevo límite
           };
         }
   
-        // ✅ Lógica normal (sin superar el límite)
         return {
           ...estado,
           count: Math.max(0, newCount)
@@ -291,6 +290,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       onEstadoChange(enemy.uuid, updatedStates);
     }
   };
+
 
     
   return (
