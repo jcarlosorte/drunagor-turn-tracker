@@ -652,14 +652,16 @@ const InitTracker = () => {
     );
   };
 
-  const handleEstadoChange = (uuid, updatedStates) => {
-    console.log(updatedStates);
-      setPlacedEnemies(prev =>
-        prev.map(enemy =>
-          enemy.uuid === uuid ? { ...enemy, estadosAlterados: updatedStates } : enemy
-        )
-      );
-    };
+  const updateEnemyEstados = (uuid, updatedStates) => {
+    setPlacedEnemies(prev =>
+      prev.map(e =>
+        e.enemy?.uuid === uuid
+          ? { ...e, enemy: { ...e.enemy, estadosAlterados: updatedStates } }
+          : e
+      )
+    );
+  };
+
 
 
     
@@ -1921,7 +1923,7 @@ const InitTracker = () => {
             onVidaChange={updateEnemyVida}
             overhealedEnemies={overhealedEnemies}
             setOverhealedEnemies={setOverhealedEnemies}
-            onEstadoChange={handleEstadoChange}
+            onEstadoChange={updateEnemyEstados}
           />
           )}
         {showPCModal && (
