@@ -424,7 +424,7 @@
     "MALDICION_X": "CURSE {x}",
     "MANDO": "COMMAND",
     "MANIFESTAR": "SUMMON",
-    "MARCA_DE_MONTARAZ": "MARK",
+    "MARCA_DE_MONTARAZ": "RANGER’S MARK",
     "MASCOTA": "PET",
     "MATANZA": "SLAUGHTER",
     "GRANDE": "LARGE",
@@ -546,7 +546,7 @@
     "MALDICION_X": "The target gains {x} Curse Cubes. Unlike Curse Cubes received from Recalling, CURSE is an effect and as such, there are Abilities that can give you immunity to this specific effect, but that do not prevent you from receiving Curse Cubes in any other way.",
     "MANDO": "This Monster incites another to fight. When a Monster commands, the Strongest Monster that is not the Commanding Monster is immediately Activated (as if it were its turn).",
     "MANIFESTAR": "Summon is an effect that evokes the chaotic power of Darkness. To Summon, a player must randomly draw a Rune from the bag and reveal it to the other players. It is not considered to \"draw\" the Rune and thus does not generate a Darkness tile or trigger any Ability associated with drawing Runes. Once the Rune is revealed, whoever Summoned it activates a special effect based on that Rune's color. Then, the Summoned Rune is returned to the bag, without being placed on the Initiative tracker.",
-    "MARCA_DE_MONTARAZ": "When a character is marked with this effect, they receive a MARK token. All of the Ranger's Weapon and Spell Attacks against a character they have marked deal +1 DMG. As seen before, this damage is doubled if the character scores a Critical Hit.",
+    "MARCA_DE_MONTARAZ": "When a character is marked with this effect, they receive a RANGER’S MARK token. All of the Ranger's Weapon and Spell Attacks against a character they have marked deal +1 DMG. As seen before, this damage is doubled if the character scores a Critical Hit.",
     "MASCOTA": "Some Heroes have Pets, each with their own token and card with their attributes. You have more details about Pets on page 9.",
     "MATANZA": "A Monster with Slaughter chooses NPC tokens (not Companions) as its Primary Target.",
     "GRANDE": "This Monster is considered to be Large (even if their base size is Small). Large Monsters are immune to KNOCK DOWN, KNOCKBACK, STUN and TELEKINESIS.",
@@ -596,6 +596,18 @@
     "VENGATIVO": "A Vengeful Monster chooses the Most Corrupted Hero (the one with the most Curse Cubes) as its Primary Target.",
     "VORAGINE": "This is an Overlord Ability. At the start of their Activation, an Overlord must add their Attack cards to the deck, shuffle it, and draw a new \"hand\" (1 card per Hero in the Adventure). Thus, the Overlord's combination of Attacks can change from round to round."
   },
+  "estadosAlterados": {
+      "aturdimiento": "STUN",
+      "derribo": "KNOCK DOWN",
+      "escudo": "SHIELD",
+      "hemorragia": "BLEED",
+      "intimidar": "INTIMIDATE",
+      "lentitud": "SLOW",
+      "marca": "RANGER’S MARK",
+      "quemadura": "BURN",
+      "sigilo": "STEALTH",
+      "veneno": "POISON"
+    },
   "cartas_ataque": {
     "ataqueC": "Commander Action",
     "ataqueO": "Overlord Action",
