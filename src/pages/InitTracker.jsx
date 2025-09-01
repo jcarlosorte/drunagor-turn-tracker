@@ -663,9 +663,10 @@ const InitTracker = () => {
   };
 
   const aplicarEfectosEstados = (enemy, faseTurno) => {
-    if (!enemy.estadosAlterados || enemy.estadosAlterados.length === 0) return enemy;
+    if (!enemy.estadosAlterados || enemy.estadosAlterados.length === 0) return { enemy, logs: [] };
   
     let vidaRestante = enemy.vida;
+    const logs = [];
     const nuevosEstados = enemy.estadosAlterados.map(estado => {
       const config = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
       if (!config || estado.count <= 0) return estado;
@@ -674,18 +675,24 @@ const InitTracker = () => {
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
         
+        let logMsg = `${config.texto}`;
+  
         // 🔹 Daño
         if (config.daño > 0) {
           const daño = config.daño * estado.count;
           vidaRestante -= daño;
-          console.log(`💥 ${enemy.name} recibe ${daño} de ${config.texto}`);
+          logMsg += ` inflige ${daño} daño`;
         }
   
         // 🔹 Reducir cantidad si reduce = "si"
         let nuevoCount = estado.count;
         if (config.reduce === "si") {
-          nuevoCount = Math.max(0, estado.count - (config.numReduce || 1));
+          const reducir = config.numReduce || 1;
+          nuevoCount = Math.max(0, estado.count - reducir);
+          logMsg += ` (reduce ${reducir})`;
         }
+  
+        logs.push(logMsg);
   
         return { ...estado, count: nuevoCount };
       }
@@ -694,11 +701,15 @@ const InitTracker = () => {
     });
   
     return {
-      ...enemy,
-      vida: Math.max(0, vidaRestante),
-      estadosAlterados: nuevosEstados
+      enemy: {
+        ...enemy,
+        vida: Math.max(0, vidaRestante),
+        estadosAlterados: nuevosEstados
+      },
+      logs
     };
   };
+
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
@@ -830,9 +841,9 @@ const InitTracker = () => {
         if (actualizado.vida <= 0) {
           console.log(`☠ ${actualizado.name} muere por efectos de estado.`);
           // ¿Quieres eliminarlo automáticamente? Si sí:
-          setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
-          handleNextTurn();
-          return;
+          //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
+          //handleNextTurn();
+          //return;
         }
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
     
