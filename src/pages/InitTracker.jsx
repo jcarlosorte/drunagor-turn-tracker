@@ -830,19 +830,21 @@ const InitTracker = () => {
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
-        const actualizado = aplicarEfectosEstados(current, "inicio");
-        
-        // ✅ Actualizamos en placedEnemies
+        // ✅ Aplicar efectos al inicio
+        const { enemy: actualizado, logs } = aplicarEfectosEstados(current, "inicio");
+      
+        if (logs.length > 0) {
+          logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
+        }
+      
         setPlacedEnemies(prev => prev.map(e =>
           e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
         ));
-        
-        // ✅ Si la vida baja a 0 → log o eliminación
+      
         if (actualizado.vida <= 0) {
-          console.log(`☠ ${actualizado.name} muere por efectos de estado.`);
-          // ¿Quieres eliminarlo automáticamente? Si sí:
+          showScenarioToast(`☠ ${actualizado.name} muere por efectos al inicio`);
           //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
-          //handleNextTurn();
+          //handleNextTurn(); // pasa al siguiente automáticamente
           //return;
         }
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
@@ -1046,22 +1048,30 @@ const InitTracker = () => {
       }
       return;
     }
-  
+
+    if (currentTurnEntity?.type === "enemy") {
+      const { enemy: actualizado, logs } = aplicarEfectosEstados(currentTurnEntity, "fin");
+    
+      if (logs.length > 0) {
+        logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
+      }
+    
+      setPlacedEnemies(prev => prev.map(e =>
+        e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
+      ));
+    
+      if (actualizado.vida <= 0) {
+        showScenarioToast(`☠ ${actualizado.name} muere por efectos al final`);
+        setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
+      }
+    }
+    
+        
     // 🔄 Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
   
       if (currentTurnEntity.type === 'enemy') {
-          const actualizado = aplicarEfectosEstados(currentTurnEntity, "fin");
-          setPlacedEnemies(prev => prev.map(e =>
-            e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
-          ));
-        
-          if (actualizado.vida <= 0) {
-            console.log(`☠ ${actualizado.name} muere al final del turno por efectos.`);
-            // ¿Eliminarlo aquí también?
-            setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
-          }
         const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
         if (nuevo) {
           setPlacedEnemies(prev => prev.map(item => {
