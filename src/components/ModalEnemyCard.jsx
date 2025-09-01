@@ -371,7 +371,13 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
               if (!estadoConfig) return null;
               const maxCount = estadoConfig.max || 1;
-          
+
+              // 🔹 Calcular tamaño dinámico
+              const totalEstados = estadosLocal.length;
+              let iconSize = "w-8 h-8";
+              if (totalEstados > 6 && totalEstados <= 10) iconSize = "w-6 h-6";
+              if (totalEstados > 10) iconSize = "w-5 h-5";
+      
               return (
                 <div key={estado.id} className="flex flex-col items-center w-14">
                   <button
@@ -383,7 +389,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   </button>
           
                   <div className="relative group cursor-help">
-                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className="w-8 h-8 flex-shrink" />
+                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className={`${iconSize} flex-shrink`} />
                     <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
                       {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
                     </div>
