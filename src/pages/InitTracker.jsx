@@ -1386,7 +1386,7 @@ const InitTracker = () => {
             className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
           />
           {/* ✅ Estados Alterados sobre la imagen */}
-          <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
+          <div className="absolute top-1 left-1 grid grid-rows-3 grid-flow-col gap-1">
             {estadosAlterados
               .filter(estado => estado.count > 0)
               .map((estado) => {
