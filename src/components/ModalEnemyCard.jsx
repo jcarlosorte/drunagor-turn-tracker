@@ -421,30 +421,23 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal
-              .filter((estado) => {
-                const esInmuneNormal = inmunidad?.includes(estado.id);
-                const esInmunePorGrande =
-                  inmunidad?.includes("GRANDE") &&
-                  (estado.id === "DERRIBO_I" || estado.id === "ATURDIMIENTO_I");
-          
-                return !esInmuneNormal && !esInmunePorGrande;
-              })
+              .filter((estado) => !inmunidad?.includes(estado.id) && !(inmunidad?.includes("GRANDE") && ["DERRIBO_X", "ATURDIMIENTO_X"].includes(estado.id)))
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
-                const maxCount = estadoConfig.max || 1;
-  
-                // 🔹 Calcular tamaño dinámico
+                const maxCount = estado.max || estadoConfig.max || 1;
+            
+                // 🔹 Ajuste de tamaño dinámico
                 const totalEstados = estadosLocal.length;
                 let iconSize = "w-8 h-8";
                 if (totalEstados > 6 && totalEstados <= 10) iconSize = "w-6 h-6";
                 if (totalEstados > 10) iconSize = "w-5 h-5";
-        
+            
                 return (
                   <div key={estado.id} className="flex flex-col items-center w-14">
                     <button
                       onClick={() => handleEstadoChangeLocal(estado.id, +1)}
-                      disabled={(estado.count || 0) >= maxCount}
+                      disabled={(estado.count || 0) >= maxCount} // ✅ Ahora usa el max dinámico
                       className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
                     >
                       +
