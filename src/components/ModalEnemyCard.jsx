@@ -437,7 +437,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   <div key={estado.id} className="flex flex-col items-center w-14">
                     <button
                       onClick={() => handleEstadoChangeLocal(estado.id, +1)}
-                      disabled={(estado.count || 0) >= maxCount} // ✅ Ahora usa el max dinámico
+                      disabled={maxCount === 1 && (estado.count || 0) >= maxCount}
                       className="bg-green-600 text-white rounded px-1 mb-1 text-xs hover:bg-green-700 disabled:opacity-50"
                     >
                       +
