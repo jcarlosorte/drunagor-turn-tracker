@@ -313,34 +313,37 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Imagen y stats */}
           <div className="flex w-full items-center gap-1 mt-2">
-            <img
-              src={imagen}
-              alt={name}
-              className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
-            />
-            {/* Estados alterados sobre la imagen */}
-            <div className="absolute top-1 left-1 flex gap-1">
-              {estadosLocal
-                .filter(estado => estado.count > 0)
-                .map((estado, index) => {
-                  const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
-                  if (!estadoConfig) return null;
-                  return (
-                    <div key={estado.id} className="relative">
-                      <img
-                        src={estadoConfig.imagen}
-                        alt={estadoConfig.texto}
-                        className="w-6 h-6 border border-white rounded shadow-md"
-                      />
-                      {estado.count > 1 && (
-                        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
-                          {estado.count}
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
+            <div className="relative">
+              <img
+                src={imagen}
+                alt={name}
+                className={`w-32 h-32 object-cover rounded border-2 ${borderColorMap[color] || ''}`}
+              />
+              {/* Estados alterados sobre la imagen */}
+              <div className="absolute top-1 left-1 flex flex-col gap-1">
+                {estadosLocal
+                  .filter(estado => estado.count > 0)
+                  .map((estado, index) => {
+                    const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                    if (!estadoConfig) return null;
+                    return (
+                      <div key={estado.id} className="relative">
+                        <img
+                          src={estadoConfig.imagen}
+                          alt={estadoConfig.texto}
+                          className="w-6 h-6 border border-white rounded shadow-md"
+                        />
+                        {estado.count > 1 && (
+                          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
+                            {estado.count}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
+              
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
               {/* Vida + Movimiento + Ataque en la misma línea */}
               <div className="flex items-center text-center gap-4">
