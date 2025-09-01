@@ -252,6 +252,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   };
 
   const handleEstadoChange = (estadoId, delta) => {
+    console.log(estadoId, delta);
     const updatedStates = enemy.estadosAlterados.map((estado) =>
       estado.id === estadoId
         ? { ...estado, count: Math.max(0, estado.count + delta) }
