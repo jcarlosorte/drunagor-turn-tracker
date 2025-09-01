@@ -388,9 +388,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                     +
                   </button>
           
-                  <div className="relative group cursor-help">
-                    <img src={estadoConfig.imagen} alt={estadoConfig.texto} className={`${iconSize} flex-shrink`} />
-                    <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                  {/* Icono con tooltip */}
+                  <div className="relative group cursor-help flex items-center justify-center">
+                    <img
+                      src={estadoConfig.imagen}
+                      alt={estadoConfig.texto}
+                      className={`${iconSize} flex-shrink`}
+                    />
+                    <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
                       {translations.estadosAlterados?.[estadoConfig.texto] || estadoConfig.texto}
                     </div>
                   </div>
