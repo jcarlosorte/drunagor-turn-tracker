@@ -426,7 +426,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                         className={`${iconSize} flex-shrink`}
                       />
                       <div className="absolute left-1 ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                        {tea.[estadoConfig.texto] || estadoConfig.texto}
+                        {tea[estadoConfig.texto] || estadoConfig.texto}
                       </div>
                     </div>
             
