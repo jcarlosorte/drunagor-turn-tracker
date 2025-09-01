@@ -1352,7 +1352,7 @@ const InitTracker = () => {
     </div>
   );
   
-  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping }) => {
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping, estadosAlterados }) => {
     const [flipped, setFlipped] = useState(false);
     const ringClass =
       ENEMY_RING_COLORS.find(r => r.id === ringColor)?.className ||
@@ -1385,6 +1385,30 @@ const InitTracker = () => {
             alt={name}
             className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
           />
+          {/* ✅ Estados Alterados sobre la imagen */}
+          <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
+            {estadosAlterados
+              .filter(estado => estado.count > 0)
+              .map((estado) => {
+                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                if (!estadoConfig) return null;
+                return (
+                  <div key={estado.id} className="relative">
+                    <img
+                      src={estadoConfig.imagen}
+                      alt={estadoConfig.texto}
+                      className="w-5 h-5 border border-white rounded-full shadow-md"
+                    />
+                    {estado.count > 1 && (
+                      <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[0.6rem] font-bold px-1 rounded-full">
+                        {estado.count}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+            
           <div
             className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
               ${borderColorMap[color] || ''} 
@@ -1480,6 +1504,7 @@ const InitTracker = () => {
                   capacidades={item.enemy.capacidades}
                   ringColor={item.enemy.ringColor}
                   isFlipping={isEntityFlipping}
+                  estadosAlterados={item.enemy.estadosAlterados}
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
