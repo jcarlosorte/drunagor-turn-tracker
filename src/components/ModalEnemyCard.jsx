@@ -134,6 +134,67 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   };
 
   const handleVidaChange = (delta) => {
+    let vidaTentativa = vidaLocal + delta;
+  
+    if (delta < 0) {
+      // 🔍 Buscar ESCUDO
+      const estadoEscudo = enemy.estadosAlterados.find(e => e.id === "ESCUDO");
+      let escudosConsumidos = 0;
+  
+      if (estadoEscudo && estadoEscudo.count > 0) {
+        let damageToApply = Math.abs(delta); // daño positivo
+        let remainingShields = estadoEscudo.count;
+  
+        // Reducir daño con escudos
+        while (damageToApply > 0 && remainingShields > 0) {
+          remainingShields--;
+          damageToApply--;
+          escudosConsumidos++;
+        }
+  
+        // Actualizamos el array de estados en el enemigo
+        const nuevosEstados = enemy.estadosAlterados.map(e =>
+          e.id === "ESCUDO" ? { ...e, count: remainingShields } : e
+        );
+  
+        // Aviso visual
+        if (escudosConsumidos > 0) {
+          mostrarAviso(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
+        }
+  
+        // Si todavía queda daño, lo aplicamos a la vida
+        vidaTentativa = vidaLocal - damageToApply;
+  
+        // Actualizamos el enemigo con los nuevos estados
+        if (onUpdateEnemy) {
+          onUpdateEnemy(enemy.uuid, { estadosAlterados: nuevosEstados });
+        }
+      }
+    }
+  
+    // 🚫 Límite inferior
+    if (vidaTentativa < 0) vidaTentativa = 0;
+  
+    // ✅ Si supera el máximo y aún no fue confirmado
+    if (vidaTentativa > enemy.vidaMax && !overhealedEnemies.has(uuid)) {
+      const confirm = window.confirm(`${vidaTentativa} ${ti?.vidaExcedida}`);
+      if (!confirm) return;
+  
+      setOverhealedEnemies(prev => new Set(prev).add(uuid));
+  
+      if (onVidaChange) {
+        onVidaChange(enemy.uuid, vidaTentativa, vidaTentativa);
+      }
+    } else {
+      setVidaLocal(vidaTentativa);
+      if (onVidaChange) {
+        onVidaChange(enemy.uuid, vidaTentativa);
+      }
+    }
+  };
+  
+    
+  const handleVidaChange2 = (delta) => {
     if (delta === 0) return;
   
     let nuevaVidaTentativa = vidaLocal + delta;
@@ -557,12 +618,12 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         </div>
       </div>
 
-      {/* Avisos flotantes */}
-      <div className="absolute top-2 right-2 flex flex-col gap-2 z-50">
+      {/* Avisos flotantes centrados */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 z-50">
         {avisos.map((aviso, i) => (
           <div
             key={i}
-            className="bg-black/80 text-white text-xs px-2 py-1 rounded shadow-md animate-fade-in"
+            className="bg-black/90 text-white text-sm px-4 py-2 rounded shadow-lg animate-fade-in"
           >
             {aviso}
           </div>
