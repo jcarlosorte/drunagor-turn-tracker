@@ -193,6 +193,7 @@
     "estadoExcedido_1": "has reached its limit",
     "estadoExcedido_2": "Do you want to increase it and continue?",
     "muere_1": "dies from the effects of conditions at the start of his turn",
+    "muere_2": "dies from the effects of conditions at the end of their turn",
     "inflige": "deals",
     "daño_i": "damage",
     "reduce": "reduce by",
