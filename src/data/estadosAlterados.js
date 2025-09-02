@@ -8,6 +8,7 @@ import veneno from "@/assets/assets_logo/veneno.png";
 import intimidar from "@/assets/assets_logo/intimidar.png";
 import quemadura from "@/assets/assets_logo/quemadura.png";
 import escudo from "@/assets/assets_logo/escudo.png";
+import sanar from "@/assets/assets_logo/sanar.png";
 
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
@@ -29,4 +30,13 @@ export const ESTADOS_ALTERADOS = [
   //{id: "CONCENTRACION_X", reduce:"", max: 4},
   //{id: "KI", reduce:"", max: 4},
   { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "", daño: 0, max: 4, imagen: escudo }
+];
+
+
+export const CAPACIDADES_ACTIVADAS = [
+  { id: "REGENERACION", max: 0, imagen: sanar },
+  { id: "MANIFESTAR", max: 0, imagen: veneno },
+  { id: "HASTA", max: 0, imagen: sanar },
+  { id: "SANAR", max: 0, imagen: sanar },
+  { id: "ESCUDO", max: 4, imagen: escudo }
 ];
