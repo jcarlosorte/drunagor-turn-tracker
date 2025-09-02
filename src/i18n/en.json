@@ -197,6 +197,8 @@
     "inflige": "deals",
     "daño_i": "damage",
     "reduce": "reduce by",
+    "consumeEscudo": "consumes SHIELDS/S:",
+    "escudosConsumidos": "spent shields",
     "mazo_1": "⚠️ There are no cards in the deck:",
     "movil1": "Please rotate your device to landscape orientation",
     "movil2": "to properly enjoy turn tracker control.",
