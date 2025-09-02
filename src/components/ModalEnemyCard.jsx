@@ -556,18 +556,18 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           
         </div>
       </div>
-    </div>
 
-    {/* Avisos flotantes */}
-    <div className="absolute top-2 right-2 flex flex-col gap-2 z-50">
-      {avisos.map((aviso, i) => (
-        <div
-          key={i}
-          className="bg-black/80 text-white text-xs px-2 py-1 rounded shadow-md animate-fade-in"
-        >
-          {aviso}
-        </div>
-      ))}
+      {/* Avisos flotantes */}
+      <div className="absolute top-2 right-2 flex flex-col gap-2 z-50">
+        {avisos.map((aviso, i) => (
+          <div
+            key={i}
+            className="bg-black/80 text-white text-xs px-2 py-1 rounded shadow-md animate-fade-in"
+          >
+            {aviso}
+          </div>
+        ))}
+      </div>
     </div>
   
   );
