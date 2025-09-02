@@ -668,22 +668,46 @@ const InitTracker = () => {
     if (!enemy.estadosAlterados || enemy.estadosAlterados.length === 0) return { enemy, logs: [] };
   
     let vidaRestante = enemy.vida;
+    let estados = [...enemy.estadosAlterados];
     const logs = [];
-    const nuevosEstados = enemy.estadosAlterados.map(estado => {
+  
+    // ✅ Buscar ESCUDO antes de aplicar daño
+    const estadoEscudo = estados.find(e => e.id === "ESCUDO");
+    let escudosDisponibles = estadoEscudo ? estadoEscudo.count : 0;
+  
+    const nuevosEstados = estados.map(estado => {
       const config = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
       if (!config || estado.count <= 0) return estado;
   
       // ¿Debe ejecutarse en esta fase?
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
-        
+  
         let logMsg = `${tea[config.texto]}`;
   
         // 🔹 Daño
         if (config.daño > 0) {
-          const daño = config.daño * estado.count;
-          vidaRestante -= daño;
-          logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
+          let daño = config.daño * estado.count;
+  
+          if (daño > 0) {
+            // ✅ Restar primero a ESCUDO si hay
+            let escudosReducidos = 0;
+            if (escudosDisponibles > 0) {
+              const usados = Math.min(daño, escudosDisponibles);
+              escudosReducidos = usados;
+              escudosDisponibles -= usados;
+              daño -= usados;
+            }
+  
+            if (escudosReducidos > 0) {
+              logMsg += ` ${ti.consumeEscudo} ${escudosReducidos}`; // 🔹 Traducción: "consume escudos"
+            }
+  
+            if (daño > 0) {
+              vidaRestante -= daño;
+              logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
+            }
+          }
         }
   
         // 🔹 Reducir cantidad si reduce = "si"
@@ -691,8 +715,10 @@ const InitTracker = () => {
         if (config.reduce === "si") {
           const reducir = config.numReduce;
           nuevoCount = Math.max(0, estado.count - reducir);
-          const reducir_cal = nuevoCount + estado.count;
-          logMsg += ` (${ti.reduce} ${reducir_cal})`;
+          const reducir_cal = estado.count - nuevoCount;
+          if (reducir_cal > 0) {
+            logMsg += ` (${ti.reduce} ${reducir_cal})`;
+          }
         }
   
         logs.push(logMsg);
@@ -703,6 +729,17 @@ const InitTracker = () => {
       return estado;
     });
   
+    // ✅ Actualizar ESCUDO si se consumieron
+    if (estadoEscudo) {
+      const consumidos = estadoEscudo.count - escudosDisponibles;
+      if (consumidos > 0) {
+        logs.push(`${ti.escudosConsumidos}: ${consumidos}`);
+      }
+      nuevosEstados.forEach(e => {
+        if (e.id === "ESCUDO") e.count = escudosDisponibles;
+      });
+    }
+  
     return {
       enemy: {
         ...enemy,
@@ -712,6 +749,7 @@ const InitTracker = () => {
       logs
     };
   };
+
 
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
