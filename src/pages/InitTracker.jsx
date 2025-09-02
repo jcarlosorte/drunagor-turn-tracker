@@ -677,7 +677,7 @@ const InitTracker = () => {
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
         
-        let logMsg = `${tea.[config.texto]}`;
+        let logMsg = `${tea[config.texto]}`;
   
         // 🔹 Daño
         if (config.daño > 0) {
