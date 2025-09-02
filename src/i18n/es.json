@@ -191,6 +191,13 @@
     },
     "trackerInit": {
       "vidaExcedida": "supera la vida máxima. ¿Deseas continuar?",
+      "estadoExcedido_1": "alcanzó su límite",
+      "estadoExcedido_2": "¿Deseas aumentarlo y continuar?",
+      "muere_1: "muere por los efectos de las condiciones al inicio de su turno",
+      "inflige": "inflige",
+      "daño_i": "daño",
+      "reduce": "reduce en",
+      "mazo_1": "⚠️ No hay cartas en el mazo:",
       "movil1": "Por favor, gira tu dispositivo a orientación horizontal",
       "movil2": "para disfrutar correctamente del control de turnos",
       "noColorsAvailable": "No hay colores disponibles para las peanas, pero se añadirán igualmente los enemigos",
