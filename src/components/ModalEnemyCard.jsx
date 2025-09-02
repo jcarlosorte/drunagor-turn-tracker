@@ -14,7 +14,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const [estadosLocal, setEstadosLocal] = useState(enemy?.estadosAlterados || []);
   const { language, translations } = useLanguage();
   const hasConfirmedOverheal = overhealedEnemies?.has(uuid) ?? false;
-  
+  const [avisos, setAvisos] = useState([]);
+
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const te = translations.enemies || {};
@@ -48,6 +49,14 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
   const capacidadesAjustadas = adjustCapabilitiesByRunes(capacidadesOriginales, rune, getRuneCount);
 
+  // Función para mostrar aviso
+  const mostrarAviso = (mensaje) => {
+    setAvisos((prev) => [...prev, mensaje]);
+    setTimeout(() => {
+      setAvisos((prev) => prev.slice(1)); // Elimina el primer aviso después de 2s
+    }, 2000);
+  };
+  
   const interpretarValorRuna = (valor, runeColor, getRuneCount) => {
     const count = getRuneCount(runeColor);
   
@@ -168,9 +177,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   
         // 🔹 Mostrar aviso de consumo de escudos
         if (escudosConsumidos > 0) {
-          //alert(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`); 
+          mostrarAviso(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`); 
           // Si prefieres un toast:
-          showToast(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
+          //showToast(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
         }
   
         // ✅ Actualizamos los escudos en la lista
@@ -548,6 +557,19 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         </div>
       </div>
     </div>
+
+    {/* Avisos flotantes */}
+    <div className="absolute top-2 right-2 flex flex-col gap-2 z-50">
+      {avisos.map((aviso, i) => (
+        <div
+          key={i}
+          className="bg-black/80 text-white text-xs px-2 py-1 rounded shadow-md animate-fade-in"
+        >
+          {aviso}
+        </div>
+      ))}
+    </div>
+  
   );
 };
 
