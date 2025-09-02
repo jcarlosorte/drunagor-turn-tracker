@@ -168,7 +168,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   
         // 🔹 Mostrar aviso de consumo de escudos
         if (escudosConsumidos > 0) {
-          alert(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`); 
+          //alert(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`); 
           // Si prefieres un toast:
           showToast(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
         }
