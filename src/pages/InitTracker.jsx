@@ -700,7 +700,7 @@ const InitTracker = () => {
             }
   
             if (escudosReducidos > 0) {
-              logMsg += ` ${ti.consumeEscudo} ${escudosReducidos}`; // 🔹 Traducción: "consume escudos"
+              logMsg += ` ${ti.consumeEscudo} ${escudosReducidos}`;
             }
   
             if (daño > 0) {
