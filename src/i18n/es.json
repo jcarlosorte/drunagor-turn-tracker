@@ -193,7 +193,7 @@
       "vidaExcedida": "supera la vida máxima. ¿Deseas continuar?",
       "estadoExcedido_1": "alcanzó su límite",
       "estadoExcedido_2": "¿Deseas aumentarlo y continuar?",
-      "muere_1: "muere por los efectos de las condiciones al inicio de su turno",
+      "muere_1": "muere por los efectos de las condiciones al inicio de su turno",
       "inflige": "inflige",
       "daño_i": "daño",
       "reduce": "reduce en",
