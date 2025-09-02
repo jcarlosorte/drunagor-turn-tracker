@@ -67,10 +67,12 @@ const InitTracker = () => {
   const ti = translations.trackerInit || {};
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
+  const tee = translations.enemies || {};
   const tb = translations.trackerSelect?.comportamientos || {};
   const ta = translations.cartas_ataque || {};
   const ts = translations.scenarioCard || {};
   const td = translations.defensaCard || {};
+  const tea = translations.estadosAlterados || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -675,13 +677,13 @@ const InitTracker = () => {
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
         
-        let logMsg = `${config.texto}`;
+        let logMsg = `${tea.[config.texto]}`;
   
         // 🔹 Daño
         if (config.daño > 0) {
           const daño = config.daño * estado.count;
           vidaRestante -= daño;
-          logMsg += ` inflige ${daño} daño`;
+          logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
         }
   
         // 🔹 Reducir cantidad si reduce = "si"
@@ -689,7 +691,8 @@ const InitTracker = () => {
         if (config.reduce === "si") {
           const reducir = config.numReduce;
           nuevoCount = Math.max(0, estado.count - reducir);
-          logMsg += ` (reduce ${reducir})`;
+          const reducir_cal = nuevoCount + estado.count;
+          logMsg += ` (${ti.reduce} ${reducir_cal})`;
         }
   
         logs.push(logMsg);
@@ -840,7 +843,7 @@ const InitTracker = () => {
           const { enemy: actualizado, logs } = aplicarEfectosEstados(current, "inicio");
         
           if (logs.length > 0) {
-            logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
+            logs.forEach(log => showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`));
           }
         
           setPlacedEnemies(prev => prev.map(e =>
@@ -848,7 +851,7 @@ const InitTracker = () => {
           ));
         
           if (actualizado.vida <= 0) {
-            showScenarioToast(`☠ ${actualizado.name} muere por efectos al inicio`);
+            showScenarioToast(`☠ ${tee[actualizado.id]} ${tea.muere_1}`);
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
             handleNextTurn();
             return;
@@ -931,7 +934,7 @@ const InitTracker = () => {
               if (cartaRobada) {
                 showCardToast(cartaRobada, mazo); 
               } else {
-                console.warn(`⚠ No hay cartas en el mazo ${mazo}`);
+                console.warn(`${ti.mazo_1} ${mazo}`);
               }
             }
     
