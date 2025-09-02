@@ -135,7 +135,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
      // ✅ Si supera el máximo y aún no fue confirmado
     if (nuevaVidaTentativa > enemy.vidaMax && !hasConfirmedOverheal) {
       const confirm = window.confirm(
-          `${nuevaVidaTentativa} ${ti?.vidaExcedida || 'supera la vida máxima. ¿Deseas continuar?'}`
+          `${nuevaVidaTentativa} ${ti?.vidaExcedida}`
         );
       if (!confirm) return;
 
@@ -175,8 +175,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const traducirClaveConNumero = (clave, base, detalles) => {
     const match = clave.match(/^([A-Z_ ]+?)\s+(\d+)$/);
     if (match) {
-      const nombre = match[1].trim().replace(/\s+/g, '_');; // ej. "HEMORRAGIA"
-      const numero = match[2]; // ej. "2"
+      const nombre = match[1].trim().replace(/\s+/g, '_');
+      const numero = match[2];
       const claveGeneral = `${nombre}_X`;
       const texto = base[claveGeneral]?.replace('{x}', numero) || clave;
       const detalle = detalles[claveGeneral]?.replace('{x}', numero) || '';
@@ -264,7 +264,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   
         if (delta > 0 && newCount > currentMax) {
           const confirm = window.confirm(
-            `Este estado alcanzó su límite (${currentMax}). ¿Deseas aumentar el máximo y continuar?`
+            `${tea[estado.texto]} ${ti?.estadoExcedido_1} (${currentMax}). ${ti?.estadoExcedido_2}`
           );
           if (!confirm) return estado;
   
@@ -421,7 +421,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal
-              .filter((estado) => !inmunidad?.includes(estado.id) && !(inmunidad?.includes("GRANDE") && ["DERRIBO_X", "ATURDIMIENTO_X"].includes(estado.id)))
+              .filter((estado) => !inmunidad?.includes(estado.id) && !(inmunidad?.includes("GRANDE") && ["DERRIBO_I", "ATURDIMIENTO_I"].includes(estado.id)))
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
