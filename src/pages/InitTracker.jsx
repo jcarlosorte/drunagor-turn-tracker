@@ -851,7 +851,7 @@ const InitTracker = () => {
           ));
         
           if (actualizado.vida <= 0) {
-            showScenarioToast(`☠ ${tee[actualizado.id]} ${tea.muere_1}`);
+            showScenarioToast(`☠ ${tee[actualizado.id]} ${ti.muere_1}`);
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
             handleNextTurn();
             return;
@@ -1065,7 +1065,7 @@ const InitTracker = () => {
       const { enemy: actualizado, logs } = aplicarEfectosEstados(currentTurnEntity, "fin");
     
       if (logs.length > 0) {
-        logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
+        logs.forEach(log => showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`));
       }
     
       setPlacedEnemies(prev => prev.map(e =>
@@ -1073,7 +1073,7 @@ const InitTracker = () => {
       ));
     
       if (actualizado.vida <= 0) {
-        showScenarioToast(`☠ ${actualizado.name} muere por efectos al final`);
+        showScenarioToast(`☠ ${tee[actualizado.id]} ${ti.muere_2}`);
         setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
       }
     }
