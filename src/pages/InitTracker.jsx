@@ -687,7 +687,7 @@ const InitTracker = () => {
         // 🔹 Reducir cantidad si reduce = "si"
         let nuevoCount = estado.count;
         if (config.reduce === "si") {
-          const reducir = config.numReduce || 1;
+          const reducir = config.numReduce;
           nuevoCount = Math.max(0, estado.count - reducir);
           logMsg += ` (reduce ${reducir})`;
         }
@@ -795,6 +795,8 @@ const InitTracker = () => {
   const groupIndex = groupTurnTracker.index;
   const roundRef = useRef(0);
   const previousIndexRef = useRef(null);
+  const processedStartEffectsRef = useRef(new Set());
+  const processedEndEffectsRef = useRef(new Set());
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -808,7 +810,9 @@ const InitTracker = () => {
     ) {
       // Solo cuando damos la vuelta al ciclo completo
       processedVoragineRef.current = new Set();
-      processedDefenseTurnRef.current = new Set(); 
+      processedDefenseTurnRef.current = new Set();
+      processedStartEffectsRef.current.clear();
+      processedEndEffectsRef.current.clear();
       setExecutedRunes([]);
       roundRef.current += 1;
       console.log("🔁 Nueva ronda", roundRef.current);
@@ -831,21 +835,24 @@ const InitTracker = () => {
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
         // ✅ Aplicar efectos al inicio
-        const { enemy: actualizado, logs } = aplicarEfectosEstados(current, "inicio");
-      
-        if (logs.length > 0) {
-          logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
-        }
-      
-        setPlacedEnemies(prev => prev.map(e =>
-          e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
-        ));
-      
-        if (actualizado.vida <= 0) {
-          showScenarioToast(`☠ ${actualizado.name} muere por efectos al inicio`);
-          //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
-          //handleNextTurn(); // pasa al siguiente automáticamente
-          //return;
+        if (!processedStartEffectsRef.current.has(current.uuid)) {
+          processedStartEffectsRef.current.add(current.uuid);
+          const { enemy: actualizado, logs } = aplicarEfectosEstados(current, "inicio");
+        
+          if (logs.length > 0) {
+            logs.forEach(log => showScenarioToast(`🌀 ${actualizado.name}: ${log}`));
+          }
+        
+          setPlacedEnemies(prev => prev.map(e =>
+            e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
+          ));
+        
+          if (actualizado.vida <= 0) {
+            showScenarioToast(`☠ ${actualizado.name} muere por efectos al inicio`);
+            setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
+            handleNextTurn();
+            return;
+          }
         }
         setGroupTurnTracker({ group, index: groupTurnTracker.index });
     
@@ -1049,7 +1056,9 @@ const InitTracker = () => {
       return;
     }
 
-    if (currentTurnEntity?.type === "enemy") {
+    if (currentTurnEntity?.type === "enemy" && !processedEndEffectsRef.current.has(currentTurnEntity.uuid)) {
+      processedEndEffectsRef.current.add(currentTurnEntity.uuid);
+    
       const { enemy: actualizado, logs } = aplicarEfectosEstados(currentTurnEntity, "fin");
     
       if (logs.length > 0) {
@@ -1065,6 +1074,7 @@ const InitTracker = () => {
         setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
       }
     }
+
     
         
     // 🔄 Si hay carta con cara, rotarla
