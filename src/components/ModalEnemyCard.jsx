@@ -159,7 +159,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   
         // ✅ Aviso visual
         if (escudosConsumidos > 0) {
-          mostrarAviso(`${ti.consumeEscudo} ${escudosConsumidos}`);
+          mostrarAviso(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
         }
   
         // ✅ Aplicar nuevos estados usando la prop
