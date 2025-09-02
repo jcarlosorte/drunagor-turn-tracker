@@ -700,7 +700,7 @@ const InitTracker = () => {
             }
   
             if (escudosReducidos > 0) {
-              logMsg += ` ${ti.consumeEscudo} ${escudosReducidos}`;
+              logMsg += ` ${ti.consume} ${escudosReducidos} ${ti.escudos}`;
             }
   
             if (daño > 0) {
@@ -733,7 +733,7 @@ const InitTracker = () => {
     if (estadoEscudo) {
       const consumidos = estadoEscudo.count - escudosDisponibles;
       if (consumidos > 0) {
-        logs.push(`${ti.escudosConsumidos}: ${consumidos}`);
+        //logs.push(`${ti.escudosConsumidos} ${consumidos}`);
       }
       nuevosEstados.forEach(e => {
         if (e.id === "ESCUDO") e.count = escudosDisponibles;
