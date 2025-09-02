@@ -152,30 +152,29 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           escudosConsumidos++;
         }
   
-        // Actualizamos el array de estados en el enemigo
+        // Generamos nuevo array de estados
         const nuevosEstados = enemy.estadosAlterados.map(e =>
           e.id === "ESCUDO" ? { ...e, count: remainingShields } : e
         );
   
-        // Aviso visual
+        // ✅ Aviso visual
         if (escudosConsumidos > 0) {
-          mostrarAviso(`${ti.consume} ${escudosConsumidos} ${ti.escudos}`);
+          mostrarAviso(`${ti.consumeEscudo} ${escudosConsumidos}`);
         }
   
-        // Si todavía queda daño, lo aplicamos a la vida
+        // ✅ Aplicar nuevos estados usando la prop
+        if (onEstadoChange) {
+          onEstadoChange(enemy.uuid, nuevosEstados);
+        }
+  
+        // ✅ Si todavía queda daño, lo aplicamos a la vida
         vidaTentativa = vidaLocal - damageToApply;
-  
-        // Actualizamos el enemigo con los nuevos estados
-        if (onUpdateEnemy) {
-          onUpdateEnemy(enemy.uuid, { estadosAlterados: nuevosEstados });
-        }
       }
     }
   
-    // 🚫 Límite inferior
     if (vidaTentativa < 0) vidaTentativa = 0;
   
-    // ✅ Si supera el máximo y aún no fue confirmado
+    // ✅ Vida mayor que máximo (overheal)
     if (vidaTentativa > enemy.vidaMax && !overhealedEnemies.has(uuid)) {
       const confirm = window.confirm(`${vidaTentativa} ${ti?.vidaExcedida}`);
       if (!confirm) return;
@@ -192,8 +191,8 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       }
     }
   };
-  
-    
+
+
   const handleVidaChange2 = (delta) => {
     if (delta === 0) return;
   
