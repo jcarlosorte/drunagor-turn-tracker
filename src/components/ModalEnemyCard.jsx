@@ -125,27 +125,27 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   };
 
   const handleVidaChange = (delta) => {
-    const nuevaVidaTentativa = vidaLocal + delta;
+    if (delta === 0) return;
+  
+    let nuevaVidaTentativa = vidaLocal + delta;
+    
     // 🚫 Límite inferior
     if (nuevaVidaTentativa < 0) return;
-    
-    // 🧠 Revisamos si ya fue confirmado
+  
     const hasConfirmedOverheal = overhealedEnemies.has(uuid);
-
-     // ✅ Si supera el máximo y aún no fue confirmado
+  
+    // ✅ Si supera el máximo y aún no fue confirmado
     if (nuevaVidaTentativa > enemy.vidaMax && !hasConfirmedOverheal) {
-      const confirm = window.confirm(
-          `${nuevaVidaTentativa} ${ti?.vidaExcedida}`
-        );
+      const confirm = window.confirm(`${nuevaVidaTentativa} ${ti?.vidaExcedida}`);
       if (!confirm) return;
-
+  
       setOverhealedEnemies(prev => {
         const nuevo = new Set(prev);
         nuevo.add(uuid);
         return nuevo;
       });
-
-       // 🆙 También aumentamos el vidaMax del enemigo
+  
+      // 🆙 También aumentamos el vidaMax del enemigo
       if (onVidaChange) {
         onVidaChange(enemy.uuid, nuevaVidaTentativa, nuevaVidaTentativa); // nueva vida y nuevo vidaMax
       }
@@ -153,12 +153,55 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       setVidaLocal(nuevaVidaTentativa);
       return;
     }
-
+  
+    // ✅ Si estamos RESTANDO VIDA, primero comprobar ESCUDOS
+    if (delta < 0 && enemy.estadosAlterados) {
+      const estadoEscudo = enemy.estadosAlterados.find(e => e.id === "ESCUDO");
+      if (estadoEscudo && estadoEscudo.count > 0) {
+        let dañoPendiente = Math.abs(delta);
+        let escudosDisponibles = estadoEscudo.count;
+  
+        // Restamos escudos antes de aplicar daño a la vida
+        const escudosConsumidos = Math.min(dañoPendiente, escudosDisponibles);
+        dañoPendiente -= escudosConsumidos;
+        escudosDisponibles -= escudosConsumidos;
+  
+        // 🔹 Mostrar aviso de consumo de escudos
+        if (escudosConsumidos > 0) {
+          alert(`${ti.consumeEscudo} ${escudosConsumidos}`); 
+          // Si prefieres un toast:
+          // showToast(`${ti.consumeEscudo} ${escudosConsumidos}`);
+        }
+  
+        // ✅ Actualizamos los escudos en la lista
+        const nuevosEstados = enemy.estadosAlterados.map(e =>
+          e.id === "ESCUDO" ? { ...e, count: escudosDisponibles } : e
+        );
+  
+        // ✅ Actualizamos daño restante (si queda después de consumir escudos)
+        if (dañoPendiente > 0) {
+          nuevaVidaTentativa = Math.max(0, vidaLocal - dañoPendiente);
+        } else {
+          nuevaVidaTentativa = vidaLocal; // No baja vida, todo absorbido por escudos
+        }
+  
+        // ✅ Notificar cambio (vida + estados)
+        if (onVidaChange) {
+          onVidaChange(enemy.uuid, nuevaVidaTentativa, undefined, nuevosEstados);
+        }
+  
+        setVidaLocal(nuevaVidaTentativa);
+        return;
+      }
+    }
+  
+    // ✅ Si no hay escudos o delta es positivo
     setVidaLocal(nuevaVidaTentativa);
     if (onVidaChange) {
       onVidaChange(enemy.uuid, nuevaVidaTentativa);
     }
   };
+
 
   const tipoAtaqueIconMap = {
     "cuerpo": <GiBloodySword className="text-white text-2xl cursor-help" title={ti.tipo_ataque.cuerpo || ''} />,
