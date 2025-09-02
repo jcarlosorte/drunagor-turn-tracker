@@ -190,6 +190,13 @@
   },
   "trackerInit": {
     "vidaExcedida": "exceeds maximum health. Do you wish to continue?",
+    "estadoExcedido_1": "has reached its limit",
+    "estadoExcedido_2": "Do you want to increase it and continue?",
+    "muere_1: "dies from the effects of conditions at the start of his turn",
+    "inflige": "deals",
+    "daño_i": "damage",
+    "reduce": "reduce by",
+    "mazo_1": "⚠️ There are no cards in the deck:",
     "movil1": "Please rotate your device to landscape orientation",
     "movil2": "to properly enjoy turn tracker control.",
     "noColorsAvailable": "No colors available to stands, but the enemies will be added anyway",
