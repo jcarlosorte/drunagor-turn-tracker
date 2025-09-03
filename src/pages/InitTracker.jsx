@@ -803,7 +803,14 @@ const InitTracker = () => {
         }
       }
   
-      // ✅ MANIFESTAR (pendiente)
+      // ✅ MANIFESTAR
+      if (cap === "MANIFESTAR") {
+        // Ejecutamos manifestación
+        const tile = manifestTile();
+        if (tile) {
+          logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
+        }
+      }
       // ✅ HASTA + SANAR (pendiente)
     });
   
