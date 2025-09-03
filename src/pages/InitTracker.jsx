@@ -830,7 +830,7 @@ const InitTracker = () => {
             const todosEnemigos = placedEnemies
               .map(e => e.enemy)
               .filter(e => e.vida > 0);
-      
+           
             // Ordenamos por vida ascendente
             const ordenados = [...todosEnemigos].sort((a, b) => a.vida - b.vida);
       
@@ -847,7 +847,8 @@ const InitTracker = () => {
                 );
       
                 // ✅ Actualizamos vida del objetivo en placedEnemies
-                updateEnemyVida(objetivo.uuid, vidaNueva);
+            
+                updateEnemyVida(objetivo.uuid, vidaNueva - vidaAntes);
                 //setPlacedEnemies(prev =>
                   //prev.map(e =>
                     //e.enemy.uuid === objetivo.uuid
