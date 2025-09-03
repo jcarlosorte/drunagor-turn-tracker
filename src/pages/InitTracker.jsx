@@ -848,7 +848,7 @@ const InitTracker = () => {
       
                 // ✅ Actualizamos vida del objetivo en placedEnemies
             
-                updateEnemyVida(objetivo.uuid, vidaNueva - vidaAntes);
+                updateEnemyVida(objetivo.uuid, vidaNueva, objetivo.vidaMax);
                 //setPlacedEnemies(prev =>
                   //prev.map(e =>
                     //e.enemy.uuid === objetivo.uuid
