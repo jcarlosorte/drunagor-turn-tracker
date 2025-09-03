@@ -764,10 +764,15 @@ const InitTracker = () => {
       if (cap.startsWith("REGENERACION")) {
         const partes = cap.split(" ");
         const cantidad = parseInt(partes[1]) || 0;
+  
         if (cantidad > 0) {
           const vidaAntes = vida;
-          vida = Math.min(enemy.vidaMax, vida + cantidad);
-          logs.push(`${ti.regenera} ${vida - vidaAntes} ${ti.vida_i}`);
+          const vidaNueva = Math.min(enemy.vidaMax, vida + cantidad);
+  
+          if (vidaNueva > vidaAntes) {
+            vida = vidaNueva;
+            logs.push(`${ti.regenera} ${vidaNueva - vidaAntes} ${ti.vida_i}`);
+          }
         }
       }
   
@@ -775,15 +780,26 @@ const InitTracker = () => {
       if (cap.startsWith("ESCUDO")) {
         const partes = cap.split(" ");
         const cantidad = parseInt(partes[1]) || 0;
+  
         if (cantidad > 0) {
-          // buscamos estado ESCUDO
+          // buscamos el estado ESCUDO
           const idx = estados.findIndex(e => e.id === "ESCUDO");
+          const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
+          const maxEscudo = configEscudo?.max || Infinity;
+  
           if (idx >= 0) {
-            estados[idx] = { ...estados[idx], count: estados[idx].count + cantidad };
+            const actual = estados[idx].count;
+            const nuevo = Math.min(maxEscudo, actual + cantidad);
+  
+            if (nuevo > actual) {
+              estados[idx] = { ...estados[idx], count: nuevo };
+              logs.push(`${ti.gana} ${nuevo - actual} ${ti.escudos}`);
+            }
           } else {
-            estados.push({ id: "ESCUDO", count: cantidad });
+            const nuevo = Math.min(maxEscudo, cantidad);
+            estados.push({ id: "ESCUDO", count: nuevo });
+            if (nuevo > 0) logs.push(`${ti.gana} ${nuevo} ${ti.escudos}`);
           }
-          logs.push(`${ti.gana} ${cantidad} ${ti.escudos}`);
         }
       }
   
