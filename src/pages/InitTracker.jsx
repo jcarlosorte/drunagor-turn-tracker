@@ -1575,6 +1575,14 @@ const InitTracker = () => {
         >
           {renderSide(false)}
           {renderSide(true)}
+
+          <button
+            onClick={() => onRemove(rune.uuid)}
+            className="top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
+            title="Eliminar"
+          >
+            ✕
+        </button>
         </div>
   
         <button
@@ -1628,7 +1636,7 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-500",
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-700 transform-style preserve-3d",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
