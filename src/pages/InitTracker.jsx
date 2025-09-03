@@ -1552,15 +1552,6 @@ const InitTracker = () => {
               <label>{ti.applyEffect}</label>
             </div>
 
-            <div className="flex items-center justify-center mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
-              <button
-                onClick={() => onRemove(rune.uuid)}
-                className="top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
-                title="Eliminar"
-              >
-                ✕
-              </button>
-            </div>
             {/* Badge contador */}
             {tipo === 'defensa' && defenseCounter > 0 && (
               <div className="flex justify-center mt-1">
@@ -1569,6 +1560,15 @@ const InitTracker = () => {
                 </div>
               </div>
             )}
+            <div className="flex items-center justify-end mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
+              <button
+                onClick={() => onRemove(rune.uuid)}
+                className="top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
+                title="Eliminar"
+              >
+                ✕
+              </button>
+            </div>
           </div>
         </div>
       );
@@ -1586,14 +1586,6 @@ const InitTracker = () => {
           {renderSide(true)}
 
         </div>
-  
-        <button
-          onClick={() => onRemove(rune.uuid)}
-          className="absolute top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
-          title="Eliminar"
-        >
-          ✕
-        </button>
       </div>
     );
   };
