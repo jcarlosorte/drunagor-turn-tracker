@@ -811,7 +811,55 @@ const InitTracker = () => {
           logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
         }
       }
+      
       // ✅ HASTA + SANAR (pendiente)
+      if (cap.startsWith("HASTA")) {
+        const partes = cap.split(" ");
+        const cantidadObjetivos = parseInt(partes[1]) || 0;
+      
+        // 🔍 Buscamos la siguiente capacidad que empiece por SANAR
+        const idxCap = capacidades.indexOf(cap);
+        const capSanar = capacidades[idxCap + 1] || "";
+        if (capSanar.startsWith("SANAR")) {
+          const sanarPartes = capSanar.split(" ");
+          const cantidadSanar = parseInt(sanarPartes[1]) || 0;
+      
+          if (cantidadObjetivos > 0 && cantidadSanar > 0) {
+            // ✅ Localizamos TODOS los enemigos (incluyendo al actual)
+            const todosEnemigos = placedEnemies
+              .map(e => e.enemy)
+              .filter(e => e.vida > 0);
+      
+            // Ordenamos por vida ascendente
+            const ordenados = [...todosEnemigos].sort((a, b) => a.vida - b.vida);
+      
+            // Tomamos los N más débiles
+            const objetivos = ordenados.slice(0, cantidadObjetivos);
+      
+            objetivos.forEach(objetivo => {
+              const vidaAntes = objetivo.vida;
+              const vidaNueva = Math.min(objetivo.vidaMax, vidaAntes + cantidadSanar);
+      
+              if (vidaNueva > vidaAntes) {
+                logs.push(
+                  `${ti.sanaA} ${tee[objetivo.id]} ${vidaNueva - vidaAntes} ${ti.vida_i}`
+                );
+      
+                // ✅ Actualizamos vida del objetivo en placedEnemies
+                setPlacedEnemies(prev =>
+                  prev.map(e =>
+                    e.enemy.uuid === objetivo.uuid
+                      ? { ...e, enemy: { ...e.enemy, vida: vidaNueva } }
+                      : e
+                  )
+                );
+              }
+            });
+          }
+        }
+      }
+
+      
     });
   
     return { vida, estados, logs };
