@@ -1566,7 +1566,7 @@ const InitTracker = () => {
     };
   
     return (
-      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] perspective hover:scale-105`}>
+      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2'} w-[140px] perspective hover:scale-105`}>
         
         <div
           className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
