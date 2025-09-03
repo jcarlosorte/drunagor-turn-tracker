@@ -820,8 +820,8 @@ const InitTracker = () => {
       
         // 🔍 Buscamos la siguiente capacidad que empiece por SANAR
         const idxCap = capacidades.indexOf(cap);
-        const capSanar = capacidades[idxCap + 1] || "";
-        console.log(cap);
+        const capSanar = capacidades[idxCap + 2] || "";
+        console.log(capSanar);
         if (capSanar.startsWith("SANAR")) {
           console.log("Se sana");
           const sanarPartes = capSanar.split(" ");
