@@ -1575,7 +1575,7 @@ const InitTracker = () => {
     };
   
     return (
-      <div className={`w-full perspective hover:scale-105`}>
+      <div className={`relative w-full perspective hover:scale-105`}>
         
         <div
           className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
