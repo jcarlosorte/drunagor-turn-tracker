@@ -1554,8 +1554,8 @@ const InitTracker = () => {
 
             {/* Badge contador */}
             {tipo === 'defensa' && defenseCounter > 0 && (
-              <div className="flex justify-center mt-1">
-                <div className="text-center bg-red-600 text-white text-[0.65rem] sm:text-xs font-bold px-2 py-1 rounded-full shadow">
+              <div className="flex justify-center mt-1 ">
+                <div className="text-center bg-red-600 text-white text-[0.55rem] sm:text-[0.65rem] font-bold px-1 py-1 rounded-full shadow">
                   {ti.contador} {defenseCounter}
                 </div>
               </div>
