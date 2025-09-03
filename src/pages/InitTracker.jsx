@@ -849,7 +849,7 @@ const InitTracker = () => {
                 // ✅ Actualizamos vida del objetivo en placedEnemies
                 if (objetivo.uuid != enemy.uuid){
                   updateEnemyVida(objetivo.uuid, vidaNueva, objetivo.vidaMax);
-                } else if{
+                } else {
                   vida = vidaNueva;
                 }
 
