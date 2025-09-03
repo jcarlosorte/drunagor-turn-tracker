@@ -1530,10 +1530,14 @@ const InitTracker = () => {
         
             {/* Cara */}
             <div className="flex justify-center text-[0.55rem] sm:text-[0.65rem] italic text-indigo-100 text-center">
-               {ti.cara} {rune.cara} {caraB ? (
-                <RiArrowTurnForwardLine className="text-white text-lg sm:text-xl" />
+              {caraB ? (
+                <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
               ) : (
-                <RiArrowTurnBackLine className="text-white text-lg sm:text-xl" />
+                <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
+              )} {ti.cara} {rune.cara} {caraB ? (
+                <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
+              ) : (
+                <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
               )}
             </div>
         
@@ -1562,7 +1566,7 @@ const InitTracker = () => {
     };
   
     return (
-      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'top-0'} w-[140px] perspective hover:scale-105`}>
+      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] perspective hover:scale-105`}>
         
         <div
           className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
