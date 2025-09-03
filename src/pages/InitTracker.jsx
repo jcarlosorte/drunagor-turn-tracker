@@ -814,13 +814,14 @@ const InitTracker = () => {
       
       // ✅ HASTA + SANAR (pendiente)
       if (cap.startsWith("HASTA")) {
-        console.log("Se activa");
+        
         const partes = cap.split(" ");
         const cantidadObjetivos = parseInt(partes[1]) || 0;
       
         // 🔍 Buscamos la siguiente capacidad que empiece por SANAR
         const idxCap = capacidades.indexOf(cap);
         const capSanar = capacidades[idxCap + 1] || "";
+        console.log(cap);
         if (capSanar.startsWith("SANAR")) {
           console.log("Se sana");
           const sanarPartes = capSanar.split(" ");
