@@ -751,6 +751,77 @@ const InitTracker = () => {
   };
 
 
+  const aplicarCapacidadesActivadas = (enemy, placedEnemies) => {
+    const logs = [];
+    const capacidades = adjustCapabilitiesByRunes(enemy.capacidadesOriginales, enemy.rune, getRuneCount);
+    let vida = enemy.vida;
+    let estados = [...enemy.estadosAlterados];
+  
+    capacidades.forEach(cap => {
+      // 🔍 REGENERACIÓN
+      if (cap.startsWith("REGENERACION")) {
+        const amount = parseInt(cap.split(" ")[1]) || 0;
+        if (amount > 0) {
+          const nuevaVida = Math.min(enemy.vidaMax, vida + amount);
+          const healed = nuevaVida - vida;
+          vida = nuevaVida;
+          if (healed > 0) logs.push(`${enemy.nombre} ${ti.seCura} ${healed}`);
+        }
+      }
+  
+      // 🔍 MANIFESTAR
+      if (cap.includes("MANIFESTAR")) {
+        manifestTile();
+        logs.push(`${enemy.nombre} ${ti.manifiestaUnaRuna}`);
+      }
+  
+      // 🔍 ESCUDO
+      if (cap.startsWith("ESCUDO")) {
+        const amount = parseInt(cap.split(" ")[1]) || 0;
+        if (amount > 0) {
+          const existing = estados.find(e => e.id === "ESCUDO");
+          if (existing) {
+            existing.count += amount;
+          } else {
+            estados.push({ id: "ESCUDO", count: amount });
+          }
+          logs.push(`${enemy.nombre} ${ti.ganaEscudos} ${amount}`);
+        }
+      }
+  
+      // 🔍 HASTA X (SANAR Y)
+      if (cap.startsWith("HASTA")) {
+        const partes = cap.split(" ");
+        const numObjetivos = parseInt(partes[1]) || 0;
+  
+        // Buscar la capacidad SANAR (debe venir después)
+        const capSanar = capacidades.find(c => c.startsWith("SANAR"));
+        if (capSanar) {
+          const healAmount = parseInt(capSanar.split(" ")[1]) || 0;
+          if (healAmount > 0 && numObjetivos > 0) {
+            // Ordenamos enemigos por vida ascendente (excluyendo el actual)
+            const otrosEnemigos = placedEnemies
+              .map(e => e.enemy)
+              .filter(e => e.uuid !== enemy.uuid)
+              .sort((a, b) => a.vida - b.vida)
+              .slice(0, numObjetivos);
+  
+            otrosEnemigos.forEach(target => {
+              const nuevaVida = Math.min(target.vidaMax, target.vida + healAmount);
+              const healed = nuevaVida - target.vida;
+              if (healed > 0) {
+                updateEnemyLife(target.uuid, nuevaVida); // necesitas tener esta función global
+                logs.push(`${enemy.nombre} ${ti.sanaA} ${target.nombre} ${ti.en} ${healed}`);
+              }
+            });
+          }
+        }
+      }
+    });
+  
+    return { vida, estados, logs };
+  };
+
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
@@ -878,19 +949,31 @@ const InitTracker = () => {
         // ✅ Aplicar efectos al inicio
         if (!processedStartEffectsRef.current.has(current.uuid)) {
           processedStartEffectsRef.current.add(current.uuid);
-          const { enemy: actualizado, logs } = aplicarEfectosEstados(current, "inicio");
+          // 🔹 Efectos de estados (fase inicio)
+          const { enemy: actualizadoEstados, logsEstados } = aplicarEfectosEstados(current, "inicio");
+
+          // ✅ Aplicar efectos de capacidades activadas
+          const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
+          
+          // 🔹 Actualizamos enemigo con ambos cambios
+          const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
+    
+          // ✅ Mostrar logs (estados + capacidades)
+          [...logsEstados, ...logsCapacidades].forEach(log =>
+            showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
+          );
         
-          if (logs.length > 0) {
-            logs.forEach(log => showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`));
-          }
+          // 🔹 Guardar en placedEnemies
+          setPlacedEnemies(prev =>
+            prev.map(e =>
+              e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
+            )
+          );
         
-          setPlacedEnemies(prev => prev.map(e =>
-            e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
-          ));
-        
-          if (actualizado.vida <= 0) {
-            showScenarioToast(`☠ ${tee[actualizado.id]} ${ti.muere_1}`);
-            setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
+          // ❌ Si muere tras aplicar efectos → saltar turno
+          if (enemigoFinal.vida <= 0) {
+            showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+            setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
             handleNextTurn();
             return;
           }
