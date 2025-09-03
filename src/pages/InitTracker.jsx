@@ -1460,7 +1460,7 @@ const InitTracker = () => {
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
       return (
         <div className={`${posicion === 'abajo' ? 'absolute w-full h-full' : 'absolute w-full h-full'} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
-          <div className={`p-2 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[220px]`} >
+          <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[220px]`} >
             {/* Título */}
             <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
               {title}
@@ -1534,7 +1534,7 @@ const InitTracker = () => {
                 <RiArrowTurnForwardLine className="text-white text-lg sm:text-xl" />
               ) : (
                 <RiArrowTurnBackLine className="text-white text-lg sm:text-xl" />
-              )}
+              )} {ti.cara} {rune.cara}
             </div>
         
             {/* Cara */}
@@ -1567,7 +1567,7 @@ const InitTracker = () => {
     };
   
     return (
-      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'} w-[140px] perspective hover:scale-105`}>
+      <div className={`${rune.posicion === 'abajo' ? 'absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'bottom-0 left-1/2 transform -translate-x-1/2'} w-[140px] perspective hover:scale-105`}>
         
         <div
           className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
@@ -1580,7 +1580,7 @@ const InitTracker = () => {
   
         <button
           onClick={() => onRemove(rune.uuid)}
-          className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center z-10"
+          className="absolute top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
           title="Eliminar"
         >
           ✕
