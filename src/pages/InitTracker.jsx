@@ -752,6 +752,50 @@ const InitTracker = () => {
 
 
   const aplicarCapacidadesActivadas = (enemy, placedEnemies) => {
+    let vida = enemy.vida;
+    let estados = [...(enemy.estadosAlterados || [])];
+    const logs = [];
+  
+    // ⚡ Obtenemos las capacidades ajustadas
+    const capacidades = adjustCapabilitiesByRunes(enemy.capacidadesOriginales || [], enemy.rune, getRuneCount);
+  
+    capacidades.forEach(cap => {
+      // ✅ REGENERACIÓN X
+      if (cap.startsWith("REGENERACION")) {
+        const partes = cap.split(" ");
+        const cantidad = parseInt(partes[1]) || 0;
+        if (cantidad > 0) {
+          const vidaAntes = vida;
+          vida = Math.min(enemy.vidaMax, vida + cantidad);
+          logs.push(`${ti.regenera} ${vida - vidaAntes} ${ti.vida_i}`);
+        }
+      }
+  
+      // ✅ ESCUDO X
+      if (cap.startsWith("ESCUDO")) {
+        const partes = cap.split(" ");
+        const cantidad = parseInt(partes[1]) || 0;
+        if (cantidad > 0) {
+          // buscamos estado ESCUDO
+          const idx = estados.findIndex(e => e.id === "ESCUDO");
+          if (idx >= 0) {
+            estados[idx] = { ...estados[idx], count: estados[idx].count + cantidad };
+          } else {
+            estados.push({ id: "ESCUDO", count: cantidad });
+          }
+          logs.push(`${ti.gana} ${cantidad} ${ti.escudos}`);
+        }
+      }
+  
+      // ✅ MANIFESTAR (pendiente)
+      // ✅ HASTA + SANAR (pendiente)
+    });
+  
+    return { vida, estados, logs };
+  };
+  
+    
+  const aplicarCapacidadesActivadas2 = (enemy, placedEnemies) => {
     const logs = [];
     const capacidades = adjustCapabilitiesByRunes(enemy.capacidadesOriginales, enemy.rune, getRuneCount);
     let vida = enemy.vida;
