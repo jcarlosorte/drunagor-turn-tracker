@@ -821,9 +821,7 @@ const InitTracker = () => {
         // 🔍 Buscamos la siguiente capacidad que empiece por SANAR
         const idxCap = capacidades.indexOf(cap);
         const capSanar = capacidades[idxCap + 2] || "";
-        console.log(capSanar);
         if (capSanar.startsWith("SANAR")) {
-          console.log("Se sana");
           const sanarPartes = capSanar.split(" ");
           const cantidadSanar = parseInt(sanarPartes[1]) || 0;
       
@@ -849,13 +847,14 @@ const InitTracker = () => {
                 );
       
                 // ✅ Actualizamos vida del objetivo en placedEnemies
-                setPlacedEnemies(prev =>
-                  prev.map(e =>
-                    e.enemy.uuid === objetivo.uuid
-                      ? { ...e, enemy: { ...e.enemy, vida: vidaNueva } }
-                      : e
-                  )
-                );
+                updateEnemyVida(objetivo.uuid, vidaNueva);
+                //setPlacedEnemies(prev =>
+                  //prev.map(e =>
+                    //e.enemy.uuid === objetivo.uuid
+                      //? { ...e, enemy: { ...e.enemy, vida: vidaNueva } }
+                      //: e
+                  //)
+                //);
               }
             });
           }
