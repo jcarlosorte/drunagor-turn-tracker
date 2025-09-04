@@ -989,7 +989,7 @@ const InitTracker = () => {
         if (!current) {
           setTimeout(() => {
             handleNextTurn();
-          }, 900); 
+          }, 1500); 
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
@@ -1021,7 +1021,7 @@ const InitTracker = () => {
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
             setTimeout(() => {
               handleNextTurn();
-            }, 900); 
+            }, 1500); 
             return;
           }
         }
@@ -1060,7 +1060,7 @@ const InitTracker = () => {
           //console.warn("Carta runa eliminada. Buscando siguiente entidad...");
           setTimeout(() => {
               handleNextTurn();
-          }, 900); 
+          }, 1500); 
           return;
         }
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
@@ -1276,7 +1276,7 @@ const InitTracker = () => {
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-          }, 700);
+          }, 900);
         }
       }
   
@@ -1298,7 +1298,7 @@ const InitTracker = () => {
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-          }, 700);
+          }, 900);
         }
       }
     }
@@ -1374,7 +1374,7 @@ const InitTracker = () => {
       />,
       {
         position: "top-center",
-        autoClose: 10000,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
@@ -1463,7 +1463,7 @@ const InitTracker = () => {
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
       return (
-        <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
+        <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-360' : '' }`} >
           <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[140px]`} >
             {/* Título */}
             <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
@@ -1582,8 +1582,8 @@ const InitTracker = () => {
       <div className={`w-full perspective hover:scale-105`}>
         
         <div
-          className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
-            flipped ? 'rotate-y-180' : ''
+          className={`relative w-full h-full transition-transform duration-1000 transform-style preserve-3d ${
+            flipped ? 'rotate-y-360' : ''
           }`}
         >
           {renderSide(false)}
@@ -1625,7 +1625,7 @@ const InitTracker = () => {
     useEffect(() => {
       if (isFlipping) {
         setFlipped(true);
-        const timer = setTimeout(() => setFlipped(false), 900); // duración de flip
+        const timer = setTimeout(() => setFlipped(false), 1100); // duración de flip
         return () => clearTimeout(timer);
       }
     }, [isFlipping]);
@@ -1634,8 +1634,8 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-700 transform-style preserve-3d",
-          flipped ? "rotate-y-180" : ""
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000 transform-style preserve-3d",
+          flipped ? "rotate-y-360" : ""
         )}
         style={{ perspective: "1000px" }}
       >
@@ -1731,7 +1731,7 @@ const InitTracker = () => {
         );
         const isEntityFlipping = type === 'enemy' && flippedCards.includes(item.enemy.uuid);
         return (
-          <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className="absolute w-full transition-transform duration-300"
+          <div key={ type === 'enemy' ? item.enemy.uuid : type === 'rune' ? item.uuid : item.id } className="absolute w-full transition-transform duration-400"
               style={{
               ...style,
               zIndex: isCurrentTurn ? 40 : style.zIndex ?? 100,
