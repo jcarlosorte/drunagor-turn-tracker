@@ -1801,11 +1801,11 @@ const InitTracker = () => {
           <div className={classNames(
             'flex items-center justify-center font-fantasy',
             {
-              'w-16 h-16 rotate-45 border-4 gem-orange': index === 1,
-              'w-12 h-12 rotate-45 border-4 gem-green': index === 3,
-              'w-12 h-12 rotate-45 border-4 gem-blue': index === 5,
-              'w-12 h-12 rotate-45 border-4 gem-red': index === 7,
-              'w-12 h-12 rotate-45 border-4 gem-gray': index === 9,
+              'w-14 h-14 rotate-45 border-4 gem-orange': index === 1,
+              'w-14 h-14 rotate-45 border-4 gem-green': index === 3,
+              'w-14 h-14 rotate-45 border-4 gem-blue': index === 5,
+              'w-14 h-14 rotate-45 border-4 gem-red': index === 7,
+              'w-14 h-14 rotate-45 border-4 gem-gray': index === 9,
               'w-full h-10 bg-gray-300 text-black text-center shadow': index % 2 === 0
             })}>
             <span
@@ -1830,15 +1830,15 @@ const InitTracker = () => {
                     <img
                       src={runeData.imagenSin}
                       alt={runeColor}
-                      className="w-10 h-10 object-contain"
+                      className="w-12 h-12 object-contain"
                     />
                   ) : (
                     <GiAbstract065 className="text-white text-sm" />
                   );
                 })()}
-                <span className="text-white text-xs font-bold">
-                  {runes[runeColor] || 0}
-                </span>
+                <div className="text-white text-xs font-bold px-1 py-0.5 rounded border border-white">
+                   x {runes[runeColor] || 0}
+                </div>
               </div>
             )}
           </div>
