@@ -811,7 +811,7 @@ const InitTracker = () => {
         }
       }
       
-      // ✅ HASTA + SANAR (pendiente)
+      // ✅ HASTA + SANAR
       if (cap.startsWith("HASTA")) {
         
         const partes = cap.split(" ");
@@ -986,8 +986,9 @@ const InitTracker = () => {
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
         if (!current) {
-          //console.warn("Enemigo eliminado. Buscando siguiente entidad...");
-          handleNextTurn();
+          setTimeout(() => {
+            handleNextTurn();
+          }, 900); 
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
@@ -1004,7 +1005,7 @@ const InitTracker = () => {
           const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
     
           // ✅ Mostrar logs (estados + capacidades)
-          //[...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
+          [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
         
           // 🔹 Guardar en placedEnemies
           setPlacedEnemies(prev =>
@@ -1015,9 +1016,11 @@ const InitTracker = () => {
         
           // ❌ Si muere tras aplicar efectos → saltar turno
           if (enemigoFinal.vida <= 0) {
-            //showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+            showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
-            handleNextTurn();
+            setTimeout(() => {
+              handleNextTurn();
+            }, 900); 
             return;
           }
         }
@@ -1054,7 +1057,9 @@ const InitTracker = () => {
         const currentRune = runes[groupTurnTracker.index];
         if (!currentRune) {
           //console.warn("Carta runa eliminada. Buscando siguiente entidad...");
-          handleNextTurn();
+          setTimeout(() => {
+              handleNextTurn();
+          }, 900); 
           return;
         }
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
@@ -1170,10 +1175,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  //}, [turnIndex, placedEnemies, placedRunes, groupTurnTracker.index]);
   }, [turnIndex, placedEnemies, placedRunes]);
-
-
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
