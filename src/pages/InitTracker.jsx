@@ -739,7 +739,7 @@ const InitTracker = () => {
         if (e.id === "ESCUDO") e.count = escudosDisponibles;
       });
     }
-    
+    console.log(logs);
     return {
       enemy: {
         ...enemy,
@@ -860,7 +860,7 @@ const InitTracker = () => {
 
       
     });
-  
+    console.log(logs);
     return { vida, estados, logs };
   };
 
