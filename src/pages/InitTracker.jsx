@@ -1824,7 +1824,18 @@ const InitTracker = () => {
             {/* Icono y contador si es runa */}
             {isRune && (
               <div className="absolute rotate-[-45deg] flex items-center gap-1 z-20">
-                <GiAbstract065 className="text-white text-sm" />
+                {(() => {
+                  const runeData = COLOR_RUNAS.find(r => r.id === runeColor);
+                  return runeData ? (
+                    <img
+                      src={runeData.imagenSin}
+                      alt={runeColor}
+                      className="w-4 h-4 object-contain"
+                    />
+                  ) : (
+                    <GiAbstract065 className="text-white text-sm" />
+                  );
+                })()}
                 <span className="text-white text-xs font-bold">
                   {runes[runeColor] || 0}
                 </span>
