@@ -1837,8 +1837,8 @@ const InitTracker = () => {
                   );
                 })()}
                
-                <div className={classNames('text-white text-xs font-bold px-1 py-0.5 rounded border',
-                  {border-1 gem-orange': index === 1, border-1 gem-green': index === 3, 'border-1 gem-blue': index === 5, 'border-1 gem-red': index === 7, 'border-1 gem-gray': index === 9
+                <div className={classNames('text-white text-xs font-bold px-1 py-0.5',
+                  {'border-1 gem-orange': index === 1, 'border-1 gem-green': index === 3, 'border-1 gem-blue': index === 5, 'border-1 gem-red': index === 7, 'border-1 gem-gray': index === 9
                   })}>
                    x {runes[runeColor] || 0}
                 </div>
