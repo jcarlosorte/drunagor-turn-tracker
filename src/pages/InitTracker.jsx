@@ -18,6 +18,7 @@ import { CARTAS_COMANDANTE, CARTAS_OVERLORD, ALDEANO, ERRANTES, CARTAS_GUSANO } 
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
+import { COLOR_RUNAS } from '@/data/fichas';
 import { useTracker } from '@/context/TrackerContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInitEnemies } from '@/context/InitEnemiesContext';
