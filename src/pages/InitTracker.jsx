@@ -1837,7 +1837,7 @@ const InitTracker = () => {
                   );
                 })()}
                
-                <div className={classNames('text-white text-xs font-bold px-1 py-0.5 inline-flex items-center whitespace-nowrap',
+                <div className={classNames('text-white text-xs font-bold px-1 py-0.5 inline-flex items-center whitespace-nowrap border-l-0',
                   {'border-2 gem-orange': index === 1, 'border-2 gem-green': index === 3, 'border-2 gem-blue': index === 5, 'border-2 gem-red': index === 7, 'border-2 gem-gray': index === 9
                   })}>
                    x {runes[runeColor] || 0}
