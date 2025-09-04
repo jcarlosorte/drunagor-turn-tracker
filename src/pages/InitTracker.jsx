@@ -1463,7 +1463,7 @@ const InitTracker = () => {
       const isIncursion = tipo === 'incursion';
       const shouldHideContentIncursion = isIncursion && !caraB && totalEnemies > 0;
       return (
-        <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-360' : '' }`} >
+        <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[140px]`} >
             {/* Título */}
             <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
@@ -1583,7 +1583,7 @@ const InitTracker = () => {
         
         <div
           className={`relative w-full h-full transition-transform duration-1000 transform-style preserve-3d ${
-            flipped ? 'rotate-y-360' : ''
+            flipped ? 'rotate-y-180' : ''
           }`}
         >
           {renderSide(false)}
@@ -1634,8 +1634,8 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000 transform-style preserve-3d",
-          flipped ? "rotate-y-360" : ""
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000",
+          flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
       >
