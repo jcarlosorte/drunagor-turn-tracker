@@ -1635,7 +1635,7 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-600 transform-style preserve-3d",
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-700 transform-style preserve-3d",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
