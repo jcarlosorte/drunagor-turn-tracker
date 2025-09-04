@@ -746,7 +746,7 @@ const InitTracker = () => {
         vida: Math.max(0, vidaRestante),
         estadosAlterados: nuevosEstados
       },
-      logs
+      logs: logs.length > 0 ? logs : []
     };
   };
 
@@ -861,7 +861,11 @@ const InitTracker = () => {
       
     });
     console.log(logs);
-    return { vida, estados, logs };
+    return {
+      vida: enemy.vida,
+      estados: enemy.estadosAlterados || [],
+      logs: logs.length > 0 ? logs : []
+    };
   };
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
@@ -1002,7 +1006,7 @@ const InitTracker = () => {
           // ✅ Mostrar logs (estados + capacidades)
           console.log(logsEstados);
           console.log(logsCapacidades);
-          [...(logsEstados || []), ...(logsCapacidades || [])].forEach(log =>
+          [...logsEstados, ...logsCapacidades].forEach(log =>
             showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
           );
         
