@@ -1620,7 +1620,7 @@ const InitTracker = () => {
     useEffect(() => {
       if (isFlipping) {
         setFlipped(true);
-        const timer = setTimeout(() => setFlipped(false), 600); // duración de flip
+        const timer = setTimeout(() => setFlipped(false), 900); // duración de flip
         return () => clearTimeout(timer);
       }
     }, [isFlipping]);
@@ -1629,7 +1629,7 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-700 transform-style preserve-3d",
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-600",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
