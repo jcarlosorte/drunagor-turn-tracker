@@ -815,7 +815,7 @@ const InitTracker = () => {
       // ✅ HASTA + SANAR (pendiente)
       if (cap.startsWith("HASTA")) {
         
-        const partes = cap.split("_");
+        const partes = cap.split(" ");
         const cantidadObjetivos = parseInt(partes[1]) || 0;
       
         // 🔍 Buscamos la siguiente capacidad que empiece por SANAR
