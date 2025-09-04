@@ -1836,7 +1836,10 @@ const InitTracker = () => {
                     <GiAbstract065 className="text-white text-sm" />
                   );
                 })()}
-                <div className="text-white text-xs font-bold px-1 py-0.5 rounded border border-white">
+               
+                <div className={classNames('text-white text-xs font-bold px-1 py-0.5 rounded border',
+                  {border-1 gem-orange': index === 1, border-1 gem-green': index === 3, 'w-14 h-14 rotate-45 border-1 gem-blue': index === 5, 'w-14 h-14 rotate-45 border-1 gem-red': index === 7, 'w-14 h-14 rotate-45 border-1 gem-gray': index === 9
+                  })}>
                    x {runes[runeColor] || 0}
                 </div>
               </div>
