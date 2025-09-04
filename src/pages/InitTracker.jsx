@@ -1005,7 +1005,7 @@ const InitTracker = () => {
     
           // ✅ Mostrar logs (estados + capacidades)
           [...logsEstados, ...logsCapacidades].forEach(log =>
-            showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
+            //showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
           );
         
           // 🔹 Guardar en placedEnemies
