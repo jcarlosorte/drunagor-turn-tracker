@@ -739,7 +739,7 @@ const InitTracker = () => {
         if (e.id === "ESCUDO") e.count = escudosDisponibles;
       });
     }
-    console.log(logs);
+    
     return {
       enemy: {
         ...enemy,
@@ -1000,6 +1000,8 @@ const InitTracker = () => {
           const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
     
           // ✅ Mostrar logs (estados + capacidades)
+          console.log(logsEstados);
+          console.log(logsCapacidades);
           [...(logsEstados || []), ...(logsCapacidades || [])].forEach(log =>
             showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
           );
