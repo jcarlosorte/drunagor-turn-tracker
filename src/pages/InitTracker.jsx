@@ -995,7 +995,7 @@ const InitTracker = () => {
         if (!processedStartEffectsRef.current.has(current.uuid)) {
           processedStartEffectsRef.current.add(current.uuid);
           // 🔹 Efectos de estados (fase inicio)
-          const { enemy: actualizadoEstados, logsEstados } = aplicarEfectosEstados(current, "inicio");
+          const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(current, "inicio");
 
           // ✅ Aplicar efectos de capacidades activadas
           const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
