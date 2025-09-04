@@ -862,7 +862,7 @@ const InitTracker = () => {
     });
     console.log(logs);
     return {
-      vida: enemy.vida,
+      vida,
       estados: enemy.estadosAlterados || [],
       logs: logs.length > 0 ? logs : []
     };
