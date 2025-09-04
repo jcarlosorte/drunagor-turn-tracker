@@ -1634,13 +1634,13 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000",
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000 transform-style-preserve-3d",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
       >
         <div className={classNames(
-          "relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform transform-style-preserve-3d",
+          "relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
           ringClass  // 👈 Aquí aplicas el anillo de color
         )}>
           <img
