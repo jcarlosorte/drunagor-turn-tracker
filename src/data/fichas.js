@@ -1,4 +1,15 @@
 // src/data/fichas.js
+import gris from "@/assets/assets_logo/runa_gris.png";
+import gris_1 from "@/assets/assets_logo/runa_gris_1.png";
+import rojo from "@/assets/assets_logo/runa_rojo.png";
+import rojo_1 from "@/assets/assets_logo/runa_rojo_1.png";
+import verde from "@/assets/assets_logo/runa_verde.png";
+import verde_1 from "@/assets/assets_logo/runa_verde_1.png";
+import naranja from "@/assets/assets_logo/runa_naranja.png";
+import naranja_1 from "@/assets/assets_logo/runa_naranja_1.png";
+import azul from "@/assets/assets_logo/runa_azul.png";
+import azul_1 from "@/assets/assets_logo/runa_azul_1.png";
+
 
 export const FICHAS = [
   // Gris (7)
@@ -48,3 +59,10 @@ export const FICHAS = [
   { id: 'ficha_36', runa: 'azul', dibujo: 'L' },
 ];
 
+export const COLOR_RUNAS = [
+  { id: 'gris', imagen: gris, imagenSin: gris_1 },
+  { id: 'rojo', imagen: rojo, imagenSin: rojo_1 },
+  { id: 'verde', imagen: verde, imagenSin: verde_1 },
+  { id: 'naranja', imagen: naranja, imagenSin: naranja_1 },
+  { id: 'azul', imagen: azul, imagenSin: azul_1 },
+];
