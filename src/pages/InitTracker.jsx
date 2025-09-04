@@ -1015,7 +1015,7 @@ const InitTracker = () => {
         
           // ❌ Si muere tras aplicar efectos → saltar turno
           if (enemigoFinal.vida <= 0) {
-            showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+            //showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
             handleNextTurn();
             return;
