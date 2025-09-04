@@ -1801,7 +1801,7 @@ const InitTracker = () => {
           <div className={classNames(
             'flex items-center justify-center font-fantasy',
             {
-              'w-12 h-12 rotate-45 border-4 gem-orange': index === 1,
+              'w-16 h-16 rotate-45 border-4 gem-orange': index === 1,
               'w-12 h-12 rotate-45 border-4 gem-green': index === 3,
               'w-12 h-12 rotate-45 border-4 gem-blue': index === 5,
               'w-12 h-12 rotate-45 border-4 gem-red': index === 7,
@@ -1823,14 +1823,14 @@ const InitTracker = () => {
             </span>
             {/* Icono y contador si es runa */}
             {isRune && (
-              <div className="absolute rotate-[-45deg] flex items-center gap-1 z-20">
+              <div className="absolute rotate-[-45deg] flex items-center gap-0 z-20">
                 {(() => {
                   const runeData = COLOR_RUNAS.find(r => r.id === runeColor);
                   return runeData ? (
                     <img
                       src={runeData.imagenSin}
                       alt={runeColor}
-                      className="w-4 h-4 object-contain"
+                      className="w-10 h-10 object-contain"
                     />
                   ) : (
                     <GiAbstract065 className="text-white text-sm" />
