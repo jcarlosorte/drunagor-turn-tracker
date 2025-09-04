@@ -758,7 +758,7 @@ const InitTracker = () => {
   
     // ⚡ Obtenemos las capacidades ajustadas
     const capacidades = adjustCapabilitiesByRunes(enemy.capacidadesOriginales || [], enemy.rune, getRuneCount);
-  
+    console.log(capacidades);
     capacidades.forEach(cap => {
       // ✅ REGENERACIÓN X
       if (cap.startsWith("REGENERACION")) {
