@@ -42,10 +42,10 @@ const CommanderCardModal = ({ carta, onClose }) => {
   
         // Traducción desde ttr si existe, sino deja la original
         const traduccion = ttr[key] || key;
-        console.log(ttr[key]);
+        
         // Agregar el span con estilo especial
         partes.push(
-          <span key={start} className="text-blue-500 font-bold">
+          <span key={start} className="text-blue-400 font-bold">
             {traduccion}
           </span>
         );
@@ -59,8 +59,25 @@ const CommanderCardModal = ({ carta, onClose }) => {
       partes.push(capacidad.substring(lastIndex));
     }
   
-    // Ahora capacidad será un array de texto y spans
-    capacidad = partes.length > 0 ? partes : capacidad;
+    const finalPartes = [];
+    partes.forEach((parte, i) => {
+      if (typeof parte === 'string') {
+        const frases = parte.split('.');
+        frases.forEach((frase, idx) => {
+          if (frase.trim() !== '') {
+            finalPartes.push(frase.trim());
+          }
+          if (idx < frases.length - 1) {
+            finalPartes.push(<br key={`br-${i}-${idx}`} />);
+          }
+        });
+      } else {
+        // Si es un span, simplemente lo agregamos
+        finalPartes.push(parte);
+      }
+    });
+  
+    capacidad = finalPartes;
   }
 
 
