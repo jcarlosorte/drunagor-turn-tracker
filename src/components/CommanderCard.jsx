@@ -12,29 +12,29 @@ const CommanderCard = ({ carta }) => {
   const nombreEnemy = carta.nombreEnemy;
   // 🎨 Clases visuales condicionales por tipo
   const ringClass =
-    carta.categoria === "comandante"
+    carta.categoria === "overlord"
       ? 'ring-4 ring-orange-400 animate-pulse'
-      : carta.sourceCommanderId
+      : carta.categoria === "comandante"
       ? 'ring-4 ring-yellow-400 animate-pulse'
-      : carta.sourceBossId
+      : carta.categoria === "jefe"
       ? 'ring-4 ring-purple-400 animate-pulse'
       : '';
 
   const borderClass =
-    carta.categoria === "comandante"
+    carta.categoria === "overlord"
       ? 'bg-gray-500 border-orange-400'
-      : carta.sourceCommanderId
+      : carta.categoria === "comandante"
       ? 'bg-gray-500 border-yellow-400'
-      : carta.sourceBossId
+      : carta.categoria === "jefe"
       ? 'bg-gray-500 border-purple-400'
       : 'bg-gray-500 border-gray-500';
   
   const enemyClass =
-    carta.categoria === "comandante"
+    carta.categoria === "overlord"
       ? ta.ataqueO
-      : carta.sourceCommanderId
+      : carta.categoria === "comandante"
       ? ta.ataqueC
-      : carta.sourceBossId
+      : carta.categoria === "jefe"
       ? ta.ataqueB
       : '';
   
