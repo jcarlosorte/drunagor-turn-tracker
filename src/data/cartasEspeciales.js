@@ -61,7 +61,7 @@ export const CARTAS_COMANDANTE = [
     rune: 'verde',
     runePosition: 'abajo',
     capacidades: 'cmd_8',
-    lista_capacidad: ["SANA_2_X"]
+    lista_capacidad: ["SANA_2_X_SI"]
   },
    {
     id: 'cmd_9',
