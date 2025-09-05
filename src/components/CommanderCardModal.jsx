@@ -42,7 +42,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
   
         // Traducción desde ttr si existe, sino deja la original
         const traduccion = ttr[key] || key;
-  
+        console.log(ttr[key]);
         // Agregar el span con estilo especial
         partes.push(
           <span key={start} className="text-blue-500 font-bold">
@@ -76,10 +76,11 @@ const CommanderCardModal = ({ carta, onClose }) => {
         <div className="text-lg text-yellow-300 text-center mb-2">
           {nombre}
         </div>
-        <div className="text-sm whitespace-pre-line text-center leading-tight">
+        
+      </div>
+      <div className="text-sm whitespace-pre-line text-center leading-tight">
           {capacidad}
         </div>
-      </div>
     </div>,
     document.body
   );
