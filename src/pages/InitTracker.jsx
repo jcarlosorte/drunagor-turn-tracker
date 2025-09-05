@@ -1079,10 +1079,6 @@ const InitTracker = () => {
               showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
             );
       
-            setTimeout(() => {
-              handleNextTurn();
-            }, 1500);
-      
             return;
           }
         }
