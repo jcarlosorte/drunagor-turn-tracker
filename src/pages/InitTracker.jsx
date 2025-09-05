@@ -930,7 +930,7 @@ const InitTracker = () => {
             // ✅ Llamamos a la función centralizada
             updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
         
-            logs.push(`💚 ${enemigo.enemy.nombre || enemigo.enemy.id} ${translations.ti?.sana} ${curacion}`);
+            logs.push(`💚 ${enemigo.enemy.nombreEnemy} ${ti.sana} ${curacion}`);
           }
         }
       }
@@ -1026,6 +1026,7 @@ const InitTracker = () => {
   const previousIndexRef = useRef(null);
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
+  const processedCardsRef = useRef(new Set());
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -1042,6 +1043,7 @@ const InitTracker = () => {
       processedDefenseTurnRef.current = new Set();
       processedStartEffectsRef.current.clear();
       processedEndEffectsRef.current.clear();
+      processedCardsRef.current.clear();
       setExecutedRunes([]);
       roundRef.current += 1;
       console.log("🔁 Nueva ronda", roundRef.current);
@@ -1067,19 +1069,22 @@ const InitTracker = () => {
 
         // ✅ Si es carta especial → ejecutar lógica y salir
         if (current.tipo === 'especial') {
-          const { enemigos, logs } = aplicarCapacidadesCartaEspecial(current, placedEnemies);
-    
-          setPlacedEnemies(enemigos);
-    
-          logs.forEach(log =>
-            showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
-          );
-    
-          setTimeout(() => {
-            handleNextTurn();
-          }, 1500);
-    
-          return;
+          if (!processedCardsRef.current.has(current.uuid)) {
+            processedCardsRef.current.add(current.uuid);
+            const { enemigos, logs } = aplicarCapacidadesCartaEspecial(current, placedEnemies);
+      
+            setPlacedEnemies(enemigos);
+      
+            logs.forEach(log =>
+              showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
+            );
+      
+            setTimeout(() => {
+              handleNextTurn();
+            }, 1500);
+      
+            return;
+          }
         }
             
         // ✅ Aplicar efectos al inicio
