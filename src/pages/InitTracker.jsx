@@ -538,6 +538,7 @@ const InitTracker = () => {
   const placeCommanderCards = (enemy, commanderUUID, isTurnActivation = false) => {
     const enemyId = enemy.id;
     const enemyColor = enemy.color;
+    const enemyCat = enemy.categoria;
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     const nombreCommander = getEnemyName(enemyId, enemyColor);
@@ -549,6 +550,7 @@ const InitTracker = () => {
         capacidades: carta.capacidades,
         rune: carta.rune,
         runePosition: carta.runePosition,
+        categoria: enemyCat,
         position: runesColorMap[carta.rune],
         tipo: 'especial',
         sourceEnemyUUID: commanderUUID,
@@ -570,6 +572,7 @@ const InitTracker = () => {
   const placeOverlordCards = (enemy, overlordUUID, isTurnActivation = false) => {
     const enemyId = enemy.id;
     const enemyColor = enemy.color;
+    const enemyCat = enemy.categoria;
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, numHeroes);
     const nombreOverlord = getEnemyName(enemyId, enemyColor);
@@ -581,6 +584,7 @@ const InitTracker = () => {
         capacidades: carta.capacidades,
         rune: carta.rune,
         runePosition: carta.runePosition,
+        categoria: enemyCat,
         position: runesColorMap[carta.rune],
         tipo: 'especial',
         sourceEnemyUUID: overlordUUID,
