@@ -83,21 +83,23 @@ const CommanderCardModal = ({ carta, onClose }) => {
 
   return createPortal(
     <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
-      <div className="bg-orange-900 text-white p-6 rounded-lg max-w-sm border-2 border-yellow-400 shadow-xl relative" style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}>
+      <div className="bg-orange-900 text-white p-6 rounded-lg max-w-sm border-2 border-yellow-400 shadow-xl relative">
         <button
           onClick={onClose}
           className="absolute top-1 right-2 text-sm bg-red-500 hover:bg-red-600 px-2 rounded"
         >
           ✕
         </button>
-        <div className="text-lg text-yellow-300 text-center mb-2">
+        <div className="text-lg text-yellow-300 text-center mb-2" style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}>
           {nombre}
+        </div>
+
+        <div className="text-sm whitespace-pre-line text-center leading-tight">
+          {capacidad}
         </div>
         
       </div>
-      <div className="text-sm whitespace-pre-line text-center leading-tight">
-          {capacidad}
-        </div>
+
     </div>,
     document.body
   );
