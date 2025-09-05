@@ -551,7 +551,7 @@ const InitTracker = () => {
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
         tipo: 'especial',
-        sourceCommanderId: commanderUUID,
+        sourceEnemyUUID: commanderUUID,
         nombreEnemy: nombreCommander,
         highlight: true,
       },
@@ -583,7 +583,7 @@ const InitTracker = () => {
         runePosition: carta.runePosition,
         position: runesColorMap[carta.rune],
         tipo: 'especial',
-        sourceOverlordId: overlordUUID,
+        sourceEnemyUUID: overlordUUID,
         nombreEnemy: nombreOverlord,
         highlight: true,
       },
@@ -869,6 +869,66 @@ const InitTracker = () => {
     };
   };
 
+  const aplicarCapacidadesCartaEspecial = (cartaEspecial, placedEnemies) => {
+  const logs = [];
+  let enemigosActualizados = [...placedEnemies];
+
+  if (!cartaEspecial.lista_capacidad || cartaEspecial.lista_capacidad.length === 0) {
+    return { enemigos: enemigosActualizados, logs };
+  }
+
+  cartaEspecial.lista_capacidad.forEach(capacidad => {
+    // Normalizamos el texto (ej: "SANAR_3")
+    const [accion, valorRaw] = capacidad.split('_');
+    const valor = parseInt(valorRaw, 10) || 0;
+
+    switch (accion) {
+      case 'SANAR':
+        // Buscar el enemigo más débil
+        const objetivo = enemigosActualizados
+          .map(e => e.enemy)
+          .filter(e => e.tipo !== 'especial')
+          .sort((a, b) => a.vida - b.vida)[0];
+        
+        if (objetivo) {
+          const nuevaVida = Math.min(objetivo.vida + valor, objetivo.vidaMax);
+          enemigosActualizados = enemigosActualizados.map(e =>
+            e.enemy.uuid === objetivo.uuid
+              ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
+              : e
+          );
+          logs.push(`${ti.cartaEspecial}: ${tee[objetivo.id]} ${ti.sanado} +${valor}`);
+        }
+        break;
+
+      case 'DAÑO':
+        // Aplica daño al enemigo con más vida, por ejemplo
+        const objetivoDaño = enemigosActualizados
+          .map(e => e.enemy)
+          .filter(e => e.tipo !== 'especial')
+          .sort((a, b) => b.vida - a.vida)[0];
+
+        if (objetivoDaño) {
+          const nuevaVida = Math.max(objetivoDaño.vida - valor, 0);
+          enemigosActualizados = enemigosActualizados.map(e =>
+            e.enemy.uuid === objetivoDaño.uuid
+              ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
+              : e
+          );
+          logs.push(`${ti.cartaEspecial}: ${tee[objetivoDaño.id]} ${ti.recibeDaño} ${valor}`);
+        }
+        break;
+
+      default:
+        logs.push(`${ti.capacidadDesconocida}: ${capacidad}`);
+        break;
+    }
+  });
+
+  return { enemigos: enemigosActualizados, logs };
+};
+
+
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
     return ENEMIES.filter(e =>
@@ -993,6 +1053,24 @@ const InitTracker = () => {
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
+
+        // ✅ Si es carta especial → ejecutar lógica y salir
+        if (current.tipo === 'especial2') {
+          const { enemigos, logs } = aplicarCapacidadesCartaEspecial(current, placedEnemies);
+    
+          setPlacedEnemies(enemigos);
+    
+          logs.forEach(log =>
+            showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
+          );
+    
+          setTimeout(() => {
+            handleNextTurn();
+          }, 1500);
+    
+          return;
+        }
+            
         // ✅ Aplicar efectos al inicio
         if (!processedStartEffectsRef.current.has(current.uuid)) {
           processedStartEffectsRef.current.add(current.uuid);
@@ -1036,10 +1114,10 @@ const InitTracker = () => {
           // 🔁 Marcar como procesado
           processedVoragineRef.current.add(current.uuid);
           if (current.categoria === 'overlord') {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceOverlordId === current.uuid)));
+            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
             placeOverlordCards(current, current.uuid, true);
           } else if (['comandante', 'hero'].includes(current.categoria)) {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceCommanderId === current.uuid)));
+            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
             placeCommanderCards(current, current.uuid, true);
           }
         }
