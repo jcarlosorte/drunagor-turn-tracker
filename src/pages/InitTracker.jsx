@@ -548,6 +548,7 @@ const InitTracker = () => {
         id: carta.id,
         nombre: carta.nombre,
         capacidades: carta.capacidades,
+        lista_capacidad: carta.lista_capacidad,
         rune: carta.rune,
         runePosition: carta.runePosition,
         categoria: enemyCat,
@@ -582,6 +583,7 @@ const InitTracker = () => {
         id: carta.id,
         nombre: carta.nombre,
         capacidades: carta.capacidades,
+        lista_capacidad: carta.lista_capacidad,
         rune: carta.rune,
         runePosition: carta.runePosition,
         categoria: enemyCat,
@@ -874,63 +876,68 @@ const InitTracker = () => {
   };
 
   const aplicarCapacidadesCartaEspecial = (cartaEspecial, placedEnemies) => {
-  const logs = [];
-  let enemigosActualizados = [...placedEnemies];
-
-  if (!cartaEspecial.lista_capacidad || cartaEspecial.lista_capacidad.length === 0) {
-    return { enemigos: enemigosActualizados, logs };
-  }
-
-  cartaEspecial.lista_capacidad.forEach(capacidad => {
-    // Normalizamos el texto (ej: "SANAR_3")
-    const [accion, valorRaw] = capacidad.split('_');
-    const valor = parseInt(valorRaw, 10) || 0;
-
-    switch (accion) {
-      case 'SANAR':
-        // Buscar el enemigo más débil
-        const objetivo = enemigosActualizados
-          .map(e => e.enemy)
-          .filter(e => e.tipo !== 'especial')
-          .sort((a, b) => a.vida - b.vida)[0];
+    const logs = [];
+    let enemigosActualizados = [...placedEnemies];
+  
+    const capacidades = cartaEspecial.lista_capacidad || [];
+    const runeCount = getRuneCount(cartaEspecial.rune);
+  
+    capacidades.forEach(cap => {
+      if (cap.startsWith("SANA")) {
+        // 🔍 Extraer partes: SANA_2_X_? o SANA_X_SI
+        const partes = cap.split("_");
+  
+        // Ej: ["SANA", "2", "X", "?"]
+        const tieneCondicion = partes.includes("?");
+        const puedeSobrepasar = partes.includes("SI");
+  
+        // Multiplicador
+        let multiplicador = 1;
+        const idxNumero = partes.findIndex(p => !isNaN(p));
+        if (idxNumero !== -1) multiplicador = parseInt(partes[idxNumero], 10);
+  
+        // 🔹 Calcular curación
+        const curacion = multiplicador * runeCount;
+  
+        if (curacion <= 0) return; // No hacemos nada si es 0
+  
+        // ✅ Preguntar si tiene condición
+        if (tieneCondicion) {
+          const confirmar = window.confirm(`¿Aplicar efecto de SANA ${curacion}?`);
+          if (!confirmar) return;
+        }
+  
+        // ✅ Buscar enemigo por UUID y actualizar con updateEnemyVida
+        if (cartaEspecial.sourceEnemyUUID) {
+          let nuevaVida = null;
+          let nuevoMax = null;
         
-        if (objetivo) {
-          const nuevaVida = Math.min(objetivo.vida + valor, objetivo.vidaMax);
-          enemigosActualizados = enemigosActualizados.map(e =>
-            e.enemy.uuid === objetivo.uuid
-              ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
-              : e
-          );
-          logs.push(`${ti.cartaEspecial}: ${tee[objetivo.id]} ${ti.sanado} +${valor}`);
+          const enemigo = enemigosActualizados.find(e => e.enemy.uuid === cartaEspecial.sourceEnemyUUID);
+          if (enemigo) {
+            nuevaVida = enemigo.enemy.vida + curacion;
+            nuevoMax = enemigo.enemy.vidaMax;
+        
+            if (puedeSobrepasar) {
+              // Puede aumentar vida máxima
+              if (nuevaVida > enemigo.enemy.vidaMax) {
+                nuevoMax = nuevaVida;
+              }
+            } else {
+              // No puede superar máximo
+              nuevaVida = Math.min(nuevaVida, enemigo.enemy.vidaMax);
+            }
+        
+            // ✅ Llamamos a la función centralizada
+            updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
+        
+            logs.push(`💚 ${enemigo.enemy.nombre || enemigo.enemy.id} ${translations.ti?.sana} ${curacion}`);
+          }
         }
-        break;
-
-      case 'DAÑO':
-        // Aplica daño al enemigo con más vida, por ejemplo
-        const objetivoDaño = enemigosActualizados
-          .map(e => e.enemy)
-          .filter(e => e.tipo !== 'especial')
-          .sort((a, b) => b.vida - a.vida)[0];
-
-        if (objetivoDaño) {
-          const nuevaVida = Math.max(objetivoDaño.vida - valor, 0);
-          enemigosActualizados = enemigosActualizados.map(e =>
-            e.enemy.uuid === objetivoDaño.uuid
-              ? { ...e, enemy: { ...e.enemy, vida: nuevaVida } }
-              : e
-          );
-          logs.push(`${ti.cartaEspecial}: ${tee[objetivoDaño.id]} ${ti.recibeDaño} ${valor}`);
-        }
-        break;
-
-      default:
-        logs.push(`${ti.capacidadDesconocida}: ${capacidad}`);
-        break;
-    }
-  });
-
-  return { enemigos: enemigosActualizados, logs };
-};
+      }
+    });
+  
+    return { enemigos: enemigosActualizados, logs };
+  };
 
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
@@ -1059,7 +1066,7 @@ const InitTracker = () => {
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
 
         // ✅ Si es carta especial → ejecutar lógica y salir
-        if (current.tipo === 'especial2') {
+        if (current.tipo === 'especial') {
           const { enemigos, logs } = aplicarCapacidadesCartaEspecial(current, placedEnemies);
     
           setPlacedEnemies(enemigos);
