@@ -4,70 +4,80 @@ export const CARTAS_COMANDANTE = [
     nombre: 'cmd_1',
     rune: 'azul',
     runePosition: 'arriba',
-    capacidades: 'cmd_1'
+    capacidades: 'cmd_1',
+    lista_capacidad: ["ESCUDO_X", ";", "DAÑO_X"]
   },
   {
     id: 'cmd_2',
     nombre: 'cmd_2',
     rune: 'verde',
     runePosition: 'arriba',
-    capacidades: 'cmd_2'
+    capacidades: 'cmd_2',
+    lista_capacidad: ["DAÑO_X", ",", "NO_PREVENIBLE"]
   },
   {
     id: 'cmd_3',
     nombre: 'cmd_3',
     rune: 'gris',
     runePosition: 'arriba',
-    capacidades: 'cmd_3'
+    capacidades: 'cmd_3',
+    lista_capacidad: ["DAÑO_X"]
   },
    {
     id: 'cmd_4',
     nombre: 'cmd_4',
     rune: 'gris',
     runePosition: 'abajo',
-    capacidades: 'cmd_4'
+    capacidades: 'cmd_4',
+    lista_capacidad: ["DAÑO_BASICO_X"]
   },
    {
     id: 'cmd_5',
     nombre: 'cmd_5',
     rune: 'rojo',
     runePosition: 'abajo',
-    capacidades: 'cmd_5'
+    capacidades: 'cmd_5',
+    lista_capacidad: ["DAÑO_X", ",", "HEMORRAGIA_X"]
   },
    {
     id: 'cmd_6',
     nombre: 'cmd_6',
     rune: 'naranja',
     runePosition: 'arriba',
-    capacidades: 'cmd_6'
+    capacidades: 'cmd_6',
+    lista_capacidad: ["QUEMADURA_I", ";", "QUEMADURA_X", ",", "LENTITUD"]
   },
   {
     id: 'cmd_7',
     nombre: 'cmd_7',
     rune: 'azul',
     runePosition: 'abajo',
-    capacidades: 'cmd_7'
+    capacidades: 'cmd_7',
+    lista_capacidad: ["DAÑO_X", ",", "HEMORRAGIA_X"]
   },
    {
     id: 'cmd_8',
     nombre: 'cmd_8',
     rune: 'verde',
     runePosition: 'abajo',
-    capacidades: 'cmd_8'
+    capacidades: 'cmd_8',
+    lista_capacidad: ["SANA_2_X"]
   },
    {
     id: 'cmd_9',
     nombre: 'cmd_9',
     rune: 'naranja',
     runePosition: 'abajo',
-    capacidades: 'cmd_9'
+    capacidades: 'cmd_9',
+    lista_capacidad: ["ACTIVA_0", ";", "ACTIVA_5"]
   },
    {
     id: 'cmd_10',
     nombre: 'cmd_10',
     rune: 'rojo',
     runePosition: 'arriba',
-    capacidades: 'cmd_10'
+    capacidades: 'cmd_10',
+    lista_capacidad: ["DAÑO_2", ",", "INTIMIDAR_X", ",", "FATIGA_X"]
   }
 ];
 
@@ -77,70 +87,80 @@ export const CARTAS_OVERLORD = [
     nombre: 'over_1',
     rune: 'azul',
     runePosition: 'arriba',
-    capacidades: 'over_1'
+    capacidades: 'over_1',
+    lista_capacidad: ["DAÑO_X", ",", "ATURDIMIENTO_X"]
   },
   {
     id: 'over_2',
     nombre: 'over_2',
     rune: 'azul',
     runePosition: 'abajo',
-    capacidades: 'over_2'
+    capacidades: 'over_2',
+    lista_capacidad: ["ESCUDO_?", ";", "DAÑO_X"]
   },
   {
     id: 'over_3',
     nombre: 'over_3',
     rune: 'gris',
     runePosition: 'arriba',
-    capacidades: 'over_3'
+    capacidades: 'over_3',
+    lista_capacidad: ["DAÑO_2_X", ",", "ATURDIMIENTO_<_4"]
   },
    {
     id: 'over_4',
     nombre: 'over_4',
     rune: 'gris',
     runePosition: 'abajo',
-    capacidades: 'over_4'
+    capacidades: 'over_4',
+    lista_capacidad: ["RECUPERA_2_MALDICION", ";", "ACTIVA_10_PS"]
   },
    {
     id: 'over_5',
     nombre: 'over_5',
     rune: 'rojo',
     runePosition: 'arriba',
-    capacidades: 'over_5'
+    capacidades: 'over_5',
+    lista_capacidad: ["DAÑO_2", ",", "HEMORRAGIA_X", ";", "REPITE_5"]
   },
    {
     id: 'over_6',
     nombre: 'over_6',
     rune: 'rojo',
     runePosition: 'abajo',
-    capacidades: 'over_6'
+    capacidades: 'over_6',
+    lista_capacidad: ["DAÑO_X"]
   },
   {
     id: 'over_7',
     nombre: 'over_7',
     rune: 'verde',
     runePosition: 'arriba',
-    capacidades: 'over_7'
+    capacidades: 'over_7',
+    lista_capacidad: ["DAÑO_2_X", ",", "HEMORRAGIA_<>_VENENO"]
   },
    {
     id: 'over_8',
     nombre: 'over_8',
     rune: 'verde',
     runePosition: 'abajo',
-    capacidades: 'over_8'
+    capacidades: 'over_8',
+    lista_capacidad: ["VENENO_X", ",", "DERRIBO_>_5"]
   },
    {
     id: 'over_9',
     nombre: 'over_9',
     rune: 'naranja',
     runePosition: 'arriba',
-    capacidades: 'over_9'
+    capacidades: 'over_9',
+    lista_capacidad: ["QUEMADURA_X", ",", "DERRIBO_>_5"]
   },
    {
     id: 'over_10',
     nombre: 'over_10',
     rune: 'naranja',
     runePosition: 'abajo',
-    capacidades: 'over_10'
+    capacidades: 'over_10',
+    lista_capacidad: ["DAÑO_2_X", ",", "HEMORRAGIA_<>_QUEMADURA"]
   }
 ];
 
@@ -172,14 +192,16 @@ export const CARTAS_HEROE_CAIDO = [
     nombre: 'fallen_1',
     rune: 'naranja',
     runePosition: 'arriba',
-    capacidades: 'fallen_1'
+    capacidades: 'fallen_1',
+    lista_capacidad: ["MANIFIESTA", ",", "TIEMPO_1"]
   },
   {
     id: 'fallen_2',
     nombre: 'fallen_2',
     rune: 'naranja',
     runePosition: 'abajo',
-    capacidades: 'fallen_2'
+    capacidades: 'fallen_2',
+    lista_capacidad: ["DAÑO_X", ",", "SANA_2_X_?"]
   }
 ];
 
