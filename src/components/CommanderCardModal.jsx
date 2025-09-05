@@ -14,9 +14,6 @@ const CommanderCardModal = ({ carta, onClose }) => {
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
   
   let capacidad = ta.capacidad?.[carta.id] || carta.capacidad;
-
-  const estadoEscudo = capacidad && capacidad.includes("ESCUDO");
-  console.log(estadoEscudo);
   
   if (capacidad) {
     capacidad = capacidad
@@ -25,6 +22,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
       .replaceAll('{3*X}', numRunasColor * 3)
       .replaceAll('{4*X}', numRunasColor * 4)
       .replaceAll('{ESCUDO}', ttr.ESCUDO)
+      .replaceAll('{DAÑO}', ttr.DAÑO)
       .replaceAll('{SANA}', ttr.SANA);
   }
 
