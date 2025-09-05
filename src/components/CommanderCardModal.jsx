@@ -15,7 +15,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
   
   let capacidad = ta.capacidad?.[carta.id] || carta.capacidad;
 
-  const estadoEscudo = carta.capacidad.includes("ESCUDO");
+  const estadoEscudo = capacidad && capacidad.includes("ESCUDO");
   console.log(estadoEscudo);
   
   if (capacidad) {
