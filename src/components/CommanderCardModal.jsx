@@ -46,7 +46,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
         // Agregar el span con estilo especial
         partes.push(
           <span key={start} className="text-blue-400 font-bold">
-            {traduccion}
+            { traduccion }
           </span>
         );
   
@@ -64,7 +64,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
       if (typeof parte === 'string') {
         const frases = parte.split('.');
         frases.forEach((frase, idx) => {
-          if (frase.trim() !== '') {
+          if (frase.trim() !== '.') {
             finalPartes.push(frase.trim());
           }
           if (idx < frases.length - 1) {
