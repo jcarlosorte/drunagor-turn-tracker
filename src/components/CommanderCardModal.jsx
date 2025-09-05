@@ -46,7 +46,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
         // Agregar el span con estilo especial
         partes.push(
           <span key={start} className="text-blue-400 font-bold">
-            { traduccion }
+            {' '}{traduccion}{' '}
           </span>
         );
   
