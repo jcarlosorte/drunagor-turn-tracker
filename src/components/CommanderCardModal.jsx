@@ -8,17 +8,23 @@ const CommanderCardModal = ({ carta, onClose }) => {
   const { translations } = useLanguage();
   const { getRuneCount } = useGame();
   const ta = translations.cartas_ataque || {};
+  const ttr = translations.cartas_trad || {};
 
   const numRunasColor = getRuneCount(carta.rune);
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
 
+  const estadoEscudo = capacidad.find(e => e.id === "ESCUDO");
+  console.log(estadoEscudo.count);
+  
   let capacidad = ta.capacidad?.[carta.id] || carta.capacidad;
   if (capacidad) {
     capacidad = capacidad
       .replaceAll('{X}', numRunasColor)
       .replaceAll('{2*X}', numRunasColor * 2)
       .replaceAll('{3*X}', numRunasColor * 3)
-      .replaceAll('{4*X}', numRunasColor * 4);
+      .replaceAll('{4*X}', numRunasColor * 4)
+      .replaceAll('{ESCUDO}', ttr.ESCUDO)
+      .replaceAll('{SANA}', ttr.SANA);
   }
 
   return createPortal(
