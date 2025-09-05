@@ -65,10 +65,10 @@ const CommanderCardModal = ({ carta, onClose }) => {
         const frases = parte.split('.');
         frases.forEach((frase, idx) => {
           if (frase.trim() !== '') {
-            partes.push(frase.trim() + '.'); // ✅ Volvemos a añadir el punto
-            if (idx < frases.length - 1) {
-              partes.push(<br key={`br-${start}-${idx}`} />);
-            }
+            finalPartes.push(frase.trim() + '.');
+          }
+          if (idx < frases.length - 1) {
+            finalPartes.push(<br key={`br-${i}-${idx}`} />);
           }
         });
       } else {
