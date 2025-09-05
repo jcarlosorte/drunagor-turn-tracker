@@ -16,15 +16,53 @@ const CommanderCardModal = ({ carta, onClose }) => {
   let capacidad = ta.capacidad?.[carta.id] || carta.capacidad;
   
   if (capacidad) {
+    // 1. Sustituimos valores numéricos dinámicos
     capacidad = capacidad
       .replaceAll('{X}', numRunasColor)
       .replaceAll('{2*X}', numRunasColor * 2)
       .replaceAll('{3*X}', numRunasColor * 3)
-      .replaceAll('{4*X}', numRunasColor * 4)
-      .replaceAll('{ESCUDO}', ttr.ESCUDO)
-      .replaceAll('{DAÑO}', ttr.DAÑO)
-      .replaceAll('{SANA}', ttr.SANA);
+      .replaceAll('{4*X}', numRunasColor * 4);
+  
+    // 2. Buscamos todas las palabras entre {}
+    const regex = /\{([^}]+)\}/g;
+    const partes = [];
+    let lastIndex = 0;
+    let match;
+  
+    while ((match = regex.exec(capacidad)) !== null) {
+      const [fullMatch, key] = match;
+      const start = match.index;
+  
+      // Ignorar las que tienen X (ya procesadas antes)
+      if (!key.includes('X')) {
+        // Agregar texto antes de la llave
+        if (start > lastIndex) {
+          partes.push(capacidad.substring(lastIndex, start));
+        }
+  
+        // Traducción desde ttr si existe, sino deja la original
+        const traduccion = ttr[key] || key;
+  
+        // Agregar el span con estilo especial
+        partes.push(
+          <span key={start} className="text-blue-500 font-bold">
+            {traduccion}
+          </span>
+        );
+  
+        lastIndex = start + fullMatch.length;
+      }
+    }
+  
+    // Agregar el resto del texto después de la última llave
+    if (lastIndex < capacidad.length) {
+      partes.push(capacidad.substring(lastIndex));
+    }
+  
+    // Ahora capacidad será un array de texto y spans
+    capacidad = partes.length > 0 ? partes : capacidad;
   }
+
 
   return createPortal(
     <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
