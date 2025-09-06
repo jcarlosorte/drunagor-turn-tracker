@@ -1298,6 +1298,56 @@ const InitTracker = () => {
   };
 
 
+  const advanceToNextValidEntity = (startIndex) => {
+    for (let i = 1; i <= TURN_ORDER.length; i++) {
+      const idx = (startIndex + i) % TURN_ORDER.length;
+      const step = TURN_ORDER[idx];
+  
+      if (step.type === 'hero') {
+        const hero = trackerData.placedHeroes?.find(h =>
+          h.role === step.role && h.position === step.index);
+        if (hero) {
+          setTurnIndex(idx);
+          setLastRealTurnIndex(idx);
+          setCurrentTurnEntity({ ...hero, type: 'hero' });
+          setGroupTurnTracker({ group: [], index: 0 });
+          return true;
+        }
+      } else if (step.type === 'enemy') {
+        const enemies = placedEnemies
+          .filter(e =>
+            e.enemy.rune === step.rune &&
+            e.enemy.position === step.index &&
+            e.enemy.runePosition === step.position)
+          .map(e => e.enemy);
+  
+        if (enemies.length > 0) {
+          setTurnIndex(idx);
+          setLastRealTurnIndex(idx);
+          setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
+          setGroupTurnTracker({ group: enemies, index: 0 });
+          return true;
+        }
+      } else if (step.type === 'rune') {
+        const runes = placedRunes
+          .filter(r =>
+            r.rune.colorIndex === step.index && r.rune.posicion === step.position)
+          .map(r => r.rune);
+  
+        if (runes.length > 0) {
+          setTurnIndex(idx);
+          setLastRealTurnIndex(idx);
+          setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
+          setGroupTurnTracker({ group: runes, index: 0 });
+          return true;
+        }
+      }
+    }
+  
+    console.warn("No se encontró siguiente entidad disponible para el turno.");
+    return false;
+  };
+
   const handleNextTurn = () => {
     if (turnIndex === -1) {
       const next = getNextActiveEntity(0);
@@ -1394,63 +1444,18 @@ const InitTracker = () => {
     }
   
     // ➡️ Avanzar dentro del grupo si hay más
-    if (
-      currentTurnEntity?.group?.length > 1 &&
-      groupTurnTracker.index < currentTurnEntity.group.length - 1
-    ) {
+    if ( currentTurnEntity?.group?.length > 1 && groupTurnTracker.index < currentTurnEntity.group.length - 1 ) {
       const nextIndex = groupTurnTracker.index + 1;
       const nextEntity = currentTurnEntity.group[nextIndex];
       setGroupTurnTracker({ group: currentTurnEntity.group, index: nextIndex });
       setCurrentTurnEntity({ ...nextEntity, type: currentTurnEntity.type, group: currentTurnEntity.group });
       return;
     }
-  
-    // 🔁 Buscar siguiente entidad
-    for (let i = 1; i <= TURN_ORDER.length; i++) {
-      const idx = (turnIndex + i) % TURN_ORDER.length;
-      const step = TURN_ORDER[idx];
-  
-      if (step.type === 'hero') {
-        const hero = trackerData.placedHeroes?.find(h =>
-          h.role === step.role && h.position === step.index);
-        if (hero) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...hero, type: 'hero' });
-          setGroupTurnTracker({ group: [], index: 0 });
-          return;
-        }
-      } else if (step.type === 'enemy') {
-        const enemies = placedEnemies
-          .filter(e =>
-            e.enemy.rune === step.rune &&
-            e.enemy.position === step.index &&
-            e.enemy.runePosition === step.position)
-          .map(e => e.enemy);
-  
-        if (enemies.length > 0) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
-          setGroupTurnTracker({ group: enemies, index: 0 });
-          return;
-        }
-      } else if (step.type === 'rune') {
-        const runes = placedRunes
-          .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
-          .map(r => r.rune);
-  
-        if (runes.length > 0) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
-          setGroupTurnTracker({ group: runes, index: 0 });
-          return;
-        }
-      }
+
+    // ✅ Si no hay más en el grupo → buscar el siguiente válido
+    if (!advanceToNextValidEntity(turnIndex)) {
+      console.warn("No hay más entidades activas en el ciclo.");
     }
-  
-    console.warn("No se encontró siguiente entidad disponible para el turno.");
   };
 
   const showToast = (enemyData) => {
