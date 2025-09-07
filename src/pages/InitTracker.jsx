@@ -1033,8 +1033,8 @@ const InitTracker = () => {
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null); 
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
-  const roundRef = useRef(1);
-  const previousIndexRef = useRef(0);
+  const roundRef = useRef(0);
+  const previousIndexRef = useRef(null);
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
@@ -1043,7 +1043,13 @@ const InitTracker = () => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
     //console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
-          
+
+    // ✅ Mostrar toast inicial solo una vez
+    if (previousIndexRef.current === null && roundRef.current === 0) {
+      roundRef.current = 1;
+      showScenarioToast(`🔁 ${ti.rondaInicial}`);
+    }
+    
     // 🔁 Detectar nueva ronda
     if (
       previousIndexRef.current !== null &&
@@ -1059,7 +1065,7 @@ const InitTracker = () => {
       setExecutedRunes([]);
       roundRef.current += 1;
       showScenarioToast(`🔁 ${ti.ronda}: ${roundRef.current}`);
-    } else if (roundRef.current === 1 && previousIndexRef.current === null){showScenarioToast(`🔁 ${ti.rondaInicial}`);}
+    }
     
     previousIndexRef.current = turnIndex;
     
