@@ -1059,7 +1059,7 @@ const InitTracker = () => {
       setExecutedRunes([]);
       roundRef.current += 1;
       showScenarioToast(`🔁 ${ti.ronda}: ${roundRef.current}`);
-    } else if (roundRef.current === 1){showScenarioToast(`🔁 ${ti.rondaInicial}: ${roundRef.current}`);}
+    } else if (roundRef.current === 1 && previousIndexRef.current === null){showScenarioToast(`🔁 ${ti.rondaInicial}`);}
     
     previousIndexRef.current = turnIndex;
     
