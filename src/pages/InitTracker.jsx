@@ -647,7 +647,9 @@ const InitTracker = () => {
           const nuevoVidaMax = nuevoMax !== undefined && nuevoMax !== null
             ? nuevoMax
             : Math.max(nuevaVida, actualMax); // 👈 si nueva vida > actualMax, lo eleva
-  
+
+          console.log(nuevaVida);
+          console.log(actualMax);
           return {
             ...e,
             enemy: {
