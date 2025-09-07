@@ -1034,22 +1034,36 @@ const InitTracker = () => {
     const step = TURN_ORDER[turnIndex];
     console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
 
-    // ✅ Si el turno actual apunta a un grupo vacío → buscar siguiente inmediatamente
-    if (
-      currentTurnEntity &&
-      currentTurnEntity.group &&
-      currentTurnEntity.group.length > 0 &&
-      !currentTurnEntity.group.some(e =>
-        (currentTurnEntity.type === 'enemy' && placedEnemies.some(pe => pe.enemy.uuid === e.uuid)) ||
-        (currentTurnEntity.type === 'rune' && placedRunes.some(pr => pr.rune.uuid === e.uuid))
-      )
-    ) {
-      console.log("⚠ Grupo vacío tras eliminación, avanzamos turno automáticamente...");
+    let hasEntities = false;
+    if (step.type === "enemy") {
+      hasEntities = placedEnemies.some(
+        e =>
+          e.enemy.rune === step.rune &&
+          e.enemy.position === step.index &&
+          e.enemy.runePosition === step.position
+      );
+    } else if (step.type === "rune") {
+      hasEntities = placedRunes.some(
+        r =>
+          r.rune.colorIndex === step.index &&
+          r.rune.posicion === step.position
+      );
+    } else if (step.type === "hero") {
+      hasEntities = trackerData.placedHeroes?.some(
+        h => h.role === step.role && h.position === step.index
+      );
+    }
+    
+    if (!hasEntities) {
+      console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
-            handleNextTurn();
-          }, 1500); 
+        handleNextTurn();
+      }, 1500); 
       return;
     }
+
+      
+
       
     // 🔁 Detectar nueva ronda
     if (
