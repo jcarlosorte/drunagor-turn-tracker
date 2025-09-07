@@ -29,7 +29,7 @@ export const ESTADOS_ALTERADOS = [
   //{id: "FRUTO_DE_VIDA", reduce:"", max: 4},
   //{id: "CONCENTRACION_X", reduce:"", max: 4},
   //{id: "KI", reduce:"", max: 4},
-  { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "", daño: 0, max: 4, imagen: escudo }
+  { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "principio", daño: 0, max: 4, imagen: escudo }
 ];
 
 
