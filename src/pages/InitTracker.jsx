@@ -1033,8 +1033,8 @@ const InitTracker = () => {
   const [lastRealTurnIndex, setLastRealTurnIndex] = useState(null); 
   const placedHeroes = trackerData.placedHeroes;
   const groupIndex = groupTurnTracker.index;
-  const roundRef = useRef(0);
-  const previousIndexRef = useRef(null);
+  const roundRef = useRef(1);
+  const previousIndexRef = useRef(0);
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
@@ -2330,7 +2330,7 @@ const InitTracker = () => {
                 onClick={() => {
                   setTimeout(() => {
                     handleNextTurn();
-                  }, 1500);
+                  }, 500);
                 }}
                 className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
               >
