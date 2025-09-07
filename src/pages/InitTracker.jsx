@@ -940,7 +940,9 @@ const InitTracker = () => {
         
             // ✅ Llamamos a la función centralizada
             updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
-        
+            console.log(cartaEspecial.sourceEnemyUUID);
+            console.log(nuevaVida);
+            console.log(nuevoMax);
             logs.push(`💚 ${ta.nombre[cartaEspecial.id]} ${ti.sana} ${curacion}`); 
           }
         }
