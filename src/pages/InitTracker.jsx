@@ -646,11 +646,11 @@ const InitTracker = () => {
           setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: newGroup });
         } else {
           // ✅ Si no hay más en el grupo → avanzar turno
-          setTimeout(() => handleNextTurn(), 100);
+          setTimeout(() => handleNextTurn(), 1500);
         }
       } else {
         // ✅ Grupo vacío → avanzar turno
-        setTimeout(() => handleNextTurn(), 100);
+        setTimeout(() => handleNextTurn(), 1500);
       }
     }
   };
