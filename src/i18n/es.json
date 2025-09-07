@@ -216,6 +216,7 @@
       "sanaPreg": "¿Aplicar efecto de SANA",      
       "preg": "?",      
       "cuantosEscudos": "¿Cuántos escudos se añaden por este efecto?",      
+      "cuantosRecursos": "¿Cuántos recursos se añaden de",      
       "ronda": "Nueva Ronda", 
       "rondaInicial": "¡Primera Ronda!",  
       "mazo_1": "⚠️ No hay cartas en el mazo:",
