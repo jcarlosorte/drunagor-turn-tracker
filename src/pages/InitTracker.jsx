@@ -791,6 +791,7 @@ const InitTracker = () => {
         if (cantidad > 0) {
           // buscamos el estado ESCUDO
           let nuevosEstados = [...estados];
+          console.log(nuevosEstados);
           const idx = nuevosEstados.findIndex(e => e.id === "ESCUDO");
           const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
           const maxEscudo = configEscudo?.max || Infinity;
@@ -1034,7 +1035,7 @@ const InitTracker = () => {
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
-    console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
+    //console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
           
     // 🔁 Detectar nueva ronda
     if (
@@ -1129,7 +1130,8 @@ const InitTracker = () => {
           const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
     
           // ✅ Mostrar logs (estados + capacidades)
-          [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
+          [...logsEstados].forEach(log => showScenarioToast(`🌀 1 ${tee[enemigoFinal.id]}: ${log}`));
+          [...logsCapacidades].forEach(log => showScenarioToast(`🌀 2 ${tee[enemigoFinal.id]}: ${log}`));
         
           // 🔹 Guardar en placedEnemies
           setPlacedEnemies(prev =>
