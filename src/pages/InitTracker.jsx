@@ -1007,6 +1007,8 @@ const InitTracker = () => {
         // Recurso (ej: MALDICION)
         const recurso = partes.find(p => isNaN(p) && p !== "RECUPERA" && p !== "SI");
         if (!recurso) return; // No hay recurso válido
+        
+        recurso = Array.isArray(recurso) ? recurso : [recurso];
         console.log(ttr[recurso]);
         // Preguntar cantidad del recurso
         const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ?`), 10);
@@ -1027,9 +1029,10 @@ const InitTracker = () => {
             } else {
               nuevaVida = Math.min(nuevaVida, enemigo.enemy.vidaMax);
             }
-      
+           
+            const curacionReal = nuevoMax - nuevaVida;
             updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
-            logs.push(`💚 ${ta.nombre[cartaEspecial.id]} ${ti.regenera} ${curacion} ${ti.vida_i}`);
+            logs.push(`💚 ${ta.nombre[cartaEspecial.id]} ${ti.regenera} ${curacionReal} ${ti.vida_i}`);
           }
         }
       }
