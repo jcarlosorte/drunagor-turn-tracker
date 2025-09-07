@@ -1106,9 +1106,9 @@ const InitTracker = () => {
         if (current.tipo === 'especial') {
           if (!processedCardsRef.current.has(current.uuid)) {
             processedCardsRef.current.add(current.uuid);
-            const { enemigos, logs } = aplicarCapacidadesCartaEspecial(current, placedEnemies);
+            const { logs } = aplicarCapacidadesCartaEspecial(current);
       
-            setPlacedEnemies(enemigos);
+            //setPlacedEnemies(enemigos);
       
             logs.forEach(log =>
               showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
