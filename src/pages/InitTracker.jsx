@@ -991,7 +991,7 @@ const InitTracker = () => {
         updateEnemyEstados(targetUUID, estados);
   
         const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
-        logs.push(`🛡 ${nombreCarta} ${ti.gana || 'gana'} ${escudosAgregar} ${ti.escudos || 'escudos'}`);
+        logs.push(`🛡 ${nombreCarta} ${ti.gana} ${escudosAgregar} ${ti.escudos}`);
       }
       // ✅ --- RECUPERA ---
       if (cap.startsWith("RECUPERA")) {
@@ -1009,7 +1009,7 @@ const InitTracker = () => {
         if (!recurso) return; // No hay recurso válido
         console.log(recurso);
         // Preguntar cantidad del recurso
-        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ${ti.preg}`), 10);
+        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ?`), 10);
         if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
       
         // Calcular curación
