@@ -1171,8 +1171,6 @@ const InitTracker = () => {
             processedCardsRef.current.add(current.uuid);
             const { logs } = aplicarCapacidadesCartaEspecial(current);
       
-            //setPlacedEnemies(enemigos);
-      
             logs.forEach(log =>
               showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
             );
@@ -1209,7 +1207,7 @@ const InitTracker = () => {
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
             setTimeout(() => {
               //handleNextTurn();
-            }, 1500); 
+            }, 900); 
             return;
           }
         }
@@ -2433,14 +2431,13 @@ const InitTracker = () => {
           onClose={() => setTileWarning(null)}
         />
         
-        {warningMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
-            {warningMessage}
-          </div>
-        )}
-
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+            {warningMessage && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 items-center bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
+                {warningMessage}
+              </div>
+            )}
             {tileToasts.map(tile => (
               <motion.div
                 key={tile.uuid}
@@ -2457,43 +2454,43 @@ const InitTracker = () => {
               </motion.div>
             ))}
             {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
-          {scenarioToasts.map(toast => (
-            <div
-              key={toast.id}
-              className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
-            >
-              <div className="flex flex-col">
-                {/* ✅ Mensaje del toast */}
-                {toast.message && (
-                  <div className="font-semibold mt-1 uppercase text-yellow-300">{toast.message}</div> // nombre de la carta
-                )}
-  
-                {toast.action && (
-                  <div className="text-sm mt-1 whitespace-pre-line">{toast.action}</div> // acción principal
-                )}
-  
-                 {toast.action2 && (
-                  <div className="text-sm mt-1 whitespace-pre-line">{toast.action2}</div> // acción principal
-                )}
-                
-                {toast.extra && (
-                  <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
-                    {toast.extra}
-                  </div>
-                )}
-              </div>
-              {/* ✅ Botón para cerrar manualmente */}
-              <button
-                onClick={() => {
-                  setScenarioToasts(prev => prev.filter(t => t.id !== toast.id));
-                }}
-                className="ml-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                title="Cerrar"
+            {scenarioToasts.map(toast => (
+              <div
+                key={toast.id}
+                className="relative bg-purple-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-3"
               >
-                ✕
-              </button>
-            </div>
-          ))}
+                <div className="flex flex-col">
+                  {/* ✅ Mensaje del toast */}
+                  {toast.message && (
+                    <div className="font-semibold mt-1 uppercase text-yellow-300">{toast.message}</div> // nombre de la carta
+                  )}
+    
+                  {toast.action && (
+                    <div className="text-sm mt-1 whitespace-pre-line">{toast.action}</div> // acción principal
+                  )}
+    
+                   {toast.action2 && (
+                    <div className="text-sm mt-1 whitespace-pre-line">{toast.action2}</div> // acción principal
+                  )}
+                  
+                  {toast.extra && (
+                    <div className="text-xs mt-1 text-gray-300 whitespace-pre-line">
+                      {toast.extra}
+                    </div>
+                  )}
+                </div>
+                {/* ✅ Botón para cerrar manualmente */}
+                <button
+                  onClick={() => {
+                    setScenarioToasts(prev => prev.filter(t => t.id !== toast.id));
+                  }}
+                  className="ml-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                  title="Cerrar"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
         </AnimatePresence>
       </PageTransition>
