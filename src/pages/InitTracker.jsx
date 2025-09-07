@@ -631,16 +631,8 @@ const InitTracker = () => {
   };
 
   const onRemove = (uuid) => {
-    const isCurrent = currentTurnEntity?.uuid === uuid;
-  
     removeEnemyByUUID(uuid);
     releaseColor(uuid);
-  
-    if (isCurrent) {
-      setTimeout(() => {
-        //handleNextTurn(); // Salta al siguiente si hemos eliminado al que estaba actuando
-      }, 500);
-    }
   };
   
   const openEnemyModal = (uuid) => {
@@ -1041,6 +1033,24 @@ const InitTracker = () => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
     console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
+
+    // ✅ Si el turno actual apunta a un grupo vacío → buscar siguiente inmediatamente
+    if (
+      currentTurnEntity &&
+      currentTurnEntity.group &&
+      currentTurnEntity.group.length > 0 &&
+      !currentTurnEntity.group.some(e =>
+        (currentTurnEntity.type === 'enemy' && placedEnemies.some(pe => pe.enemy.uuid === e.uuid)) ||
+        (currentTurnEntity.type === 'rune' && placedRunes.some(pr => pr.rune.uuid === e.uuid))
+      )
+    ) {
+      console.log("⚠ Grupo vacío tras eliminación, avanzamos turno automáticamente...");
+      setTimeout(() => {
+            handleNextTurn();
+          }, 1500); 
+      return;
+    }
+      
     // 🔁 Detectar nueva ronda
     if (
       previousIndexRef.current !== null &&
@@ -1304,57 +1314,6 @@ const InitTracker = () => {
       }
     }
     return null;
-  };
-
-
-  const advanceToNextValidEntity = (startIndex) => {
-    for (let i = 1; i <= TURN_ORDER.length; i++) {
-      const idx = (startIndex + i) % TURN_ORDER.length;
-      const step = TURN_ORDER[idx];
-  
-      if (step.type === 'hero') {
-        const hero = trackerData.placedHeroes?.find(h =>
-          h.role === step.role && h.position === step.index);
-        if (hero) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...hero, type: 'hero' });
-          setGroupTurnTracker({ group: [], index: 0 });
-          return true;
-        }
-      } else if (step.type === 'enemy') {
-        const enemies = placedEnemies
-          .filter(e =>
-            e.enemy.rune === step.rune &&
-            e.enemy.position === step.index &&
-            e.enemy.runePosition === step.position)
-          .map(e => e.enemy);
-  
-        if (enemies.length > 0) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...enemies[0], type: 'enemy', group: enemies });
-          setGroupTurnTracker({ group: enemies, index: 0 });
-          return true;
-        }
-      } else if (step.type === 'rune') {
-        const runes = placedRunes
-          .filter(r =>
-            r.rune.colorIndex === step.index && r.rune.posicion === step.position)
-          .map(r => r.rune);
-  
-        if (runes.length > 0) {
-          setTurnIndex(idx);
-          setLastRealTurnIndex(idx);
-          setCurrentTurnEntity({ ...runes[0], type: 'rune', group: runes });
-          setGroupTurnTracker({ group: runes, index: 0 });
-          return true;
-        }
-      }
-    }
-  
-    console.warn("No se encontró siguiente entidad disponible para el turno.");
-    return false;
   };
 
   const handleNextTurn = () => {
