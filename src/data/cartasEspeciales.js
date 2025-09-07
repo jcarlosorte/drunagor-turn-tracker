@@ -112,7 +112,7 @@ export const CARTAS_OVERLORD = [
     rune: 'gris',
     runePosition: 'abajo',
     capacidades: 'over_4',
-    lista_capacidad: ["RECUPERA_2_MALDICION", ";", "ACTIVA_10_PS"]
+    lista_capacidad: ["RECUPERA_2_CUBOMALDICION", ";", "ACTIVA_10_PS"]
   },
    {
     id: 'over_5',
