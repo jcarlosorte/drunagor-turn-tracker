@@ -2327,7 +2327,11 @@ const InitTracker = () => {
             
             <div className="flex justify-center mt-6">
               <button
-                onClick={handleNextTurn}
+                onClick={() => {
+                  setTimeout(() => {
+                    handleNextTurn();
+                  }, 1500);
+                }}
                 className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
               >
                 {ti.nextTurn || 'Siguiente turno'}
