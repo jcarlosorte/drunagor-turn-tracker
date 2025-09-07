@@ -29,7 +29,7 @@ export const CARTAS_COMANDANTE = [
     rune: 'gris',
     runePosition: 'abajo',
     capacidades: 'cmd_4',
-    lista_capacidad: ["DAÑO_BASICO_X"]
+    lista_capacidad: ["PASIVA", ":", "DAÑO_BASICO_X"]
   },
    {
     id: 'cmd_5',
@@ -45,7 +45,7 @@ export const CARTAS_COMANDANTE = [
     rune: 'naranja',
     runePosition: 'arriba',
     capacidades: 'cmd_6',
-    lista_capacidad: ["QUEMADURA_I", ";", "QUEMADURA_X", ",", "LENTITUD"]
+    lista_capacidad: ["PASIVA", ":", "QUEMADURA_I", ";", "QUEMADURA_X", ",", "LENTITUD"]
   },
   {
     id: 'cmd_7',
