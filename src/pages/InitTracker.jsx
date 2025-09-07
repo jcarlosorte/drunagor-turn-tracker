@@ -1058,7 +1058,7 @@ const InitTracker = () => {
       processedCardsRef.current.clear();
       setExecutedRunes([]);
       roundRef.current += 1;
-      console.log("🔁 Nueva ronda", roundRef.current);
+      showScenarioToast(`🔁 ${ti.ronda}: ${roundRef.current}`);
     }
     
     previousIndexRef.current = turnIndex;
@@ -1084,7 +1084,7 @@ const InitTracker = () => {
     }
     
     if (!hasEntities) {
-      console.log("⚠ No hay entidades en el paso actual, avanzamos...");
+      //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
       }, 1500); 
@@ -1137,8 +1137,7 @@ const InitTracker = () => {
           const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
     
           // ✅ Mostrar logs (estados + capacidades)
-          [...logsEstados].forEach(log => showScenarioToast(`🌀 1 ${tee[enemigoFinal.id]}: ${log}`));
-          [...logsCapacidades].forEach(log => showScenarioToast(`🌀 2 ${tee[enemigoFinal.id]}: ${log}`));
+          [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
         
           // 🔹 Guardar en placedEnemies
           setPlacedEnemies(prev =>
