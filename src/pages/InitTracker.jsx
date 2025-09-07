@@ -1452,9 +1452,23 @@ const InitTracker = () => {
       return;
     }
 
-    // ✅ Si no hay más en el grupo → buscar el siguiente válido
-    if (!advanceToNextValidEntity(turnIndex)) {
-      console.warn("No hay más entidades activas en el ciclo.");
+     // ✅ Si no hay más en el grupo → buscar siguiente inmediatamente
+    const next = getNextActiveEntity(turnIndex + 1);
+    if (next) {
+      const idx = TURN_ORDER.findIndex(step =>
+        step.type === next.type &&
+        ((step.type === 'hero' && step.role === next.role && step.index === next.position) ||
+         (step.type === 'enemy' && step.rune === next.rune && step.index === next.position && step.position === next.runePosition) ||
+         (step.type === 'rune' && step.index === next.colorIndex && step.position === next.posicion))
+      );
+      if (idx !== -1) {
+        setTurnIndex(idx);
+        setLastRealTurnIndex(idx);
+        setCurrentTurnEntity(next);
+        setGroupTurnTracker({ group: next.group || [], index: 0 });
+      }
+    } else {
+      console.warn("No se encontró siguiente entidad disponible para el turno.");
     }
   };
 
