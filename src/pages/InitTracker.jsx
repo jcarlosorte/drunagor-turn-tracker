@@ -638,7 +638,7 @@ const InitTracker = () => {
   
     if (isCurrent) {
       setTimeout(() => {
-        handleNextTurn(); // Salta al siguiente si hemos eliminado al que estaba actuando
+        //handleNextTurn(); // Salta al siguiente si hemos eliminado al que estaba actuando
       }, 500);
     }
   };
