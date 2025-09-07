@@ -648,8 +648,6 @@ const InitTracker = () => {
             ? nuevoMax
             : Math.max(nuevaVida, actualMax); // 👈 si nueva vida > actualMax, lo eleva
 
-          console.log(nuevaVida);
-          console.log(actualMax);
           return {
             ...e,
             enemy: {
@@ -940,6 +938,59 @@ const InitTracker = () => {
         // log legible (usa nombre si existe)
         const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`💚 ${nombreCarta} ${ti.sana || 'sana'} ${curacion}`);
+      }
+      // ✅ --- ESCUDO ---
+      if (cap.startsWith("ESCUDO")) {
+        const partes = cap.split("_");
+        const tieneCondicion = partes.includes("?");
+        const puedeSobrepasar = partes.includes("SI");
+  
+        const targetUUID = cartaEspecial.sourceEnemyUUID;
+        if (!targetUUID) return;
+  
+        const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
+        if (!entry || !entry.enemy) return;
+  
+        const enemigo = entry.enemy;
+  
+        // Configuración ESCUDO en ESTADOS_ALTERADOS
+        const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
+        const maxEscudo = configEscudo?.max || Infinity;
+  
+        let escudosAgregar = 0;
+  
+        if (partes.includes("X")) {
+          escudosAgregar = runeCount;
+        } else if (tieneCondicion) {
+          const cantidad = parseInt(prompt("¿Cuántos escudos deseas añadir?"), 10);
+          if (!isNaN(cantidad) && cantidad > 0) escudosAgregar = cantidad;
+        }
+  
+        if (escudosAgregar <= 0) return;
+  
+        // Buscar estado ESCUDO en el enemigo
+        const estados = [...enemigo.estadosAlterados];
+        const idx = estados.findIndex(e => e.id === "ESCUDO");
+  
+        if (idx >= 0) {
+          let actual = estados[idx].count;
+          let nuevo = actual + escudosAgregar;
+  
+          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+  
+          estados[idx] = { ...estados[idx], count: nuevo };
+        } else {
+          let nuevo = escudosAgregar;
+          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+  
+          estados.push({ id: "ESCUDO", count: nuevo });
+        }
+  
+        // Actualizamos estados con la función central
+        updateEnemyEstados(targetUUID, estados);
+  
+        const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
+        logs.push(`🛡 ${nombreCarta} ${ti.gana || 'gana'} ${escudosAgregar} ${ti.escudos || 'escudos'}`);
       }
   
       // aquí puedes añadir más capacidades manejadas (ESCUDO, MANIFESTAR, ...)
