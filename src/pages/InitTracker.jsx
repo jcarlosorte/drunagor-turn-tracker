@@ -1059,7 +1059,7 @@ const InitTracker = () => {
       setExecutedRunes([]);
       roundRef.current += 1;
       showScenarioToast(`🔁 ${ti.ronda}: ${roundRef.current}`);
-    }
+    } else if (roundRef.current === 1){showScenarioToast(`🔁 ${ti.rondaInicial}: ${roundRef.current}`);}
     
     previousIndexRef.current = turnIndex;
     
@@ -2330,7 +2330,7 @@ const InitTracker = () => {
                 onClick={() => {
                   setTimeout(() => {
                     handleNextTurn();
-                  }, 500);
+                  }, 300);
                 }}
                 className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
               >
