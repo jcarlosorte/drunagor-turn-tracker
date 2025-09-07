@@ -686,56 +686,62 @@ const InitTracker = () => {
     const nuevosEstados = estados.map(estado => {
       const config = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
       if (!config || estado.count <= 0) return estado;
-  
+    
       // ¿Debe ejecutarse en esta fase?
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
-  
-        let logMsg = `${tea[config.texto]}`;
-  
+    
+        let logMsg = "";
+        let escudosReducidos = 0;
+        let reducir_cal = 0;
+    
         // 🔹 Daño
         if (config.daño > 0) {
           let daño = config.daño * estado.count;
-  
+    
           if (daño > 0) {
             // ✅ Restar primero a ESCUDO si hay
-            let escudosReducidos = 0;
             if (escudosDisponibles > 0) {
               const usados = Math.min(daño, escudosDisponibles);
               escudosReducidos = usados;
               escudosDisponibles -= usados;
               daño -= usados;
             }
-  
+    
             if (escudosReducidos > 0) {
               logMsg += ` ${ti.consume} ${escudosReducidos} ${ti.escudos}`;
             }
-  
+    
             if (daño > 0) {
               vidaRestante -= daño;
               logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
             }
           }
         }
-  
+    
         // 🔹 Reducir cantidad si reduce = "si"
         let nuevoCount = estado.count;
         if (config.reduce === "si") {
           const reducir = config.numReduce;
           nuevoCount = Math.max(0, estado.count - reducir);
-          const reducir_cal = estado.count - nuevoCount;
+          reducir_cal = estado.count - nuevoCount;
           if (reducir_cal > 0) {
             logMsg += ` (${ti.reduce} ${reducir_cal})`;
           }
         }
-  
-        logs.push(logMsg);
-  
+    
+        // ✅ Agregar log solo si hubo cambios
+        if (escudosReducidos > 0 || daño > 0 || reducir_cal > 0) {
+          logMsg = `${tea[config.texto]}${logMsg}`;
+          logs.push(logMsg);
+        }
+    
         return { ...estado, count: nuevoCount };
       }
-  
+    
       return estado;
     });
+
   
     // ✅ Actualizar ESCUDO si se consumieron
     if (estadoEscudo) {
