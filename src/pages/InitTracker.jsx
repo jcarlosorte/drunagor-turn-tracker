@@ -790,23 +790,25 @@ const InitTracker = () => {
   
         if (cantidad > 0) {
           // buscamos el estado ESCUDO
-          const idx = estados.findIndex(e => e.id === "ESCUDO");
+          let nuevosEstados = [...estados];
+          const idx = nuevosEstados.findIndex(e => e.id === "ESCUDO");
           const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
           const maxEscudo = configEscudo?.max || Infinity;
   
           if (idx >= 0) {
-            const actual = estados[idx].count;
+            const actual = nuevosEstados[idx].count;
             const nuevo = Math.min(maxEscudo, actual + cantidad);
   
             if (nuevo > actual) {
-              estados[idx] = { ...estados[idx], count: nuevo };
+              nuevosEstados[idx] = { ...nuevosEstados[idx], count: nuevo };
               logs.push(`${ti.gana} ${nuevo - actual} ${ti.escudos}`);
             }
           } else {
             const nuevo = Math.min(maxEscudo, cantidad);
-            estados.push({ id: "ESCUDO", count: nuevo });
+            nuevosEstados.push({ id: "ESCUDO", count: nuevo });
             if (nuevo > 0) logs.push(`${ti.gana} ${nuevo} ${ti.escudos}`);
           }
+          estados = nuevosEstados; // ✅ Actualizamos con la copia
         }
       }
   
@@ -871,7 +873,7 @@ const InitTracker = () => {
     
     return {
       vida,
-      estados: enemy.estadosAlterados || [],
+      estados: [...estados] || [],
       logs: logs.length > 0 ? logs : []
     };
   };
