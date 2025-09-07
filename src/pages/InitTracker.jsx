@@ -633,7 +633,28 @@ const InitTracker = () => {
   const onRemove = (uuid) => {
     removeEnemyByUUID(uuid);
     releaseColor(uuid);
+      // ✅ Si el eliminado está en turno
+    if (currentTurnEntity?.uuid === uuid) {
+      if (currentTurnEntity.group?.length > 1) {
+        // Hay más en el grupo → ir al siguiente
+        const nextIndex = groupTurnTracker.index + 1;
+        const newGroup = currentTurnEntity.group.filter(e => e.uuid !== uuid);
+  
+        if (nextIndex < newGroup.length) {
+          const nextEntity = newGroup[nextIndex];
+          setGroupTurnTracker({ group: newGroup, index: nextIndex });
+          setCurrentTurnEntity({ ...nextEntity, type: 'enemy', group: newGroup });
+        } else {
+          // ✅ Si no hay más en el grupo → avanzar turno
+          setTimeout(() => handleNextTurn(), 100);
+        }
+      } else {
+        // ✅ Grupo vacío → avanzar turno
+        setTimeout(() => handleNextTurn(), 100);
+      }
+    }
   };
+  
   const openEnemyModal = (uuid) => {
     setSelectedEnemyUuid(uuid);
   };
