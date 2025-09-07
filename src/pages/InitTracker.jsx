@@ -1033,7 +1033,26 @@ const InitTracker = () => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
     console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
-
+          
+    // 🔁 Detectar nueva ronda
+    if (
+      previousIndexRef.current !== null &&
+      turnIndex !== -1 &&
+      turnIndex < previousIndexRef.current
+    ) {
+      // Solo cuando damos la vuelta al ciclo completo
+      processedVoragineRef.current = new Set();
+      processedDefenseTurnRef.current = new Set();
+      processedStartEffectsRef.current.clear();
+      processedEndEffectsRef.current.clear();
+      processedCardsRef.current.clear();
+      setExecutedRunes([]);
+      roundRef.current += 1;
+      console.log("🔁 Nueva ronda", roundRef.current);
+    }
+    
+    previousIndexRef.current = turnIndex;
+    
     let hasEntities = false;
     if (step.type === "enemy") {
       hasEntities = placedEnemies.some(
@@ -1062,27 +1081,6 @@ const InitTracker = () => {
       return;
     }
 
-      
-
-      
-    // 🔁 Detectar nueva ronda
-    if (
-      previousIndexRef.current !== null &&
-      turnIndex !== -1 &&
-      turnIndex < previousIndexRef.current
-    ) {
-      // Solo cuando damos la vuelta al ciclo completo
-      processedVoragineRef.current = new Set();
-      processedDefenseTurnRef.current = new Set();
-      processedStartEffectsRef.current.clear();
-      processedEndEffectsRef.current.clear();
-      processedCardsRef.current.clear();
-      setExecutedRunes([]);
-      roundRef.current += 1;
-      console.log("🔁 Nueva ronda", roundRef.current);
-    }
-    
-    previousIndexRef.current = turnIndex;
   
     // 🔍 ENEMIES
     if (step.type === 'enemy') {
@@ -1143,7 +1141,7 @@ const InitTracker = () => {
             showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
             setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
             setTimeout(() => {
-              handleNextTurn();
+              //handleNextTurn();
             }, 1500); 
             return;
           }
