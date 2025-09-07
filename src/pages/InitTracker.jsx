@@ -2471,14 +2471,14 @@ const InitTracker = () => {
           message={tileWarning}
           onClose={() => setTileWarning(null)}
         />
-        
+        {warningMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 items-center bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
+            {warningMessage}
+          </div>
+        )}
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
-            {warningMessage && (
-              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 items-center bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50 animate-bounce">
-                {warningMessage}
-              </div>
-            )}
+
             {tileToasts.map(tile => (
               <motion.div
                 key={tile.uuid}
