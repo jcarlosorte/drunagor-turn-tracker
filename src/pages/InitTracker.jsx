@@ -908,7 +908,7 @@ const InitTracker = () => {
   
         // preguntar si contiene '?'
         if (tieneCondicion) {
-          const confirmar = window.confirm(`¿Aplicar efecto de SANA ${curacion}?`);
+          const confirmar = window.confirm(`${ti.sanaPreg} ${curacion} ${ti.preg}`);
           if (!confirmar) return;
         }
   
@@ -937,7 +937,7 @@ const InitTracker = () => {
   
         // log legible (usa nombre si existe)
         const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
-        logs.push(`💚 ${nombreCarta} ${ti.sana || 'sana'} ${curacion}`);
+        logs.push(`💚 ${nombreCarta} ${ti.sana} ${curacion}`);
       }
       // ✅ --- ESCUDO ---
       if (cap.startsWith("ESCUDO")) {
@@ -962,7 +962,7 @@ const InitTracker = () => {
         if (partes.includes("X")) {
           escudosAgregar = runeCount;
         } else if (tieneCondicion) {
-          const cantidad = parseInt(prompt("¿Cuántos escudos deseas añadir?"), 10);
+          const cantidad = parseInt(prompt(ti.cuantosEscudos), 10);
           if (!isNaN(cantidad) && cantidad > 0) escudosAgregar = cantidad;
         }
   
@@ -992,7 +992,47 @@ const InitTracker = () => {
         const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`🛡 ${nombreCarta} ${ti.gana || 'gana'} ${escudosAgregar} ${ti.escudos || 'escudos'}`);
       }
-  
+      // ✅ --- RECUPERA ---
+      if (cap.startsWith("RECUPERA")) {
+        const partes = cap.split("_"); // ["RECUPERA", "2", "MALDICION", "SI"]
+      
+        const puedeSobrepasar = partes.includes("SI");
+        
+        // Multiplicador
+        let multiplicador = 1;
+        const idxNumero = partes.findIndex(p => !isNaN(p));
+        if (idxNumero !== -1) multiplicador = parseInt(partes[idxNumero], 10);
+      
+        // Recurso (ej: MALDICION)
+        const recurso = partes.find(p => isNaN(p) && p !== "RECUPERA" && p !== "SI");
+        if (!recurso) return; // No hay recurso válido
+      
+        // Preguntar cantidad del recurso
+        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]}`), 10);
+        if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
+      
+        // Calcular curación
+        const curacion = cantidadRecurso * multiplicador;
+        if (curacion <= 0) return;
+      
+        if (cartaEspecial.sourceEnemyUUID) {
+          const enemigo = enemigosActualizados.find(e => e.enemy.uuid === cartaEspecial.sourceEnemyUUID);
+          if (enemigo) {
+            let nuevaVida = enemigo.enemy.vida + curacion;
+            let nuevoMax = enemigo.enemy.vidaMax;
+      
+            if (puedeSobrepasar && nuevaVida > enemigo.enemy.vidaMax) {
+              nuevoMax = nuevaVida;
+            } else {
+              nuevaVida = Math.min(nuevaVida, enemigo.enemy.vidaMax);
+            }
+      
+            updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
+            logs.push(`💚 ${ta.nombre[cartaEspecial.id]} ${ti.recupera} ${curacion} ${ttr[recurso]}`);
+          }
+        }
+      }
+
       // aquí puedes añadir más capacidades manejadas (ESCUDO, MANIFESTAR, ...)
     });
   
