@@ -673,6 +673,42 @@ const InitTracker = () => {
     );
   };
 
+  const getEnemyEffectiveStats = (enemyUUID) => {
+    const enemyData = placedEnemies.find(e => e.enemy.uuid === enemyUUID)?.enemy;
+    if (!enemyData) return null;
+  
+    let ataqueModificado = enemyData.ataque;
+    let inmunidadesExtra = [];
+  
+    // Buscar cartas especiales asociadas a este enemigo
+    const cartasEspeciales = placedEnemies
+      .filter(e => e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === enemyUUID)
+      .map(e => e.enemy);
+  
+    cartasEspeciales.forEach(carta => {
+      if (Array.isArray(carta.lista_capacidad) && carta.lista_capacidad.includes("PASIVA")) {
+        const idx = carta.lista_capacidad.indexOf("PASIVA");
+        const efecto = carta.lista_capacidad[idx + 2]; // Ej: "DAÑO_BASICO_X" o "CONDICION_I"
+  
+        if (efecto?.startsWith("DAÑO_BASICO")) {
+          const partes = efecto.split("_");
+          const multiplicador = partes[2] === "X" ? getRuneCount(carta.rune) : parseInt(partes[2], 10);
+          ataqueModificado += multiplicador;
+        } else if (efecto?.startsWith("CONDICION")) {
+          const condicion = efecto.replace("CONDICION_", ""); // Ej: "I"
+          inmunidadesExtra.push(condicion);
+        }
+      }
+    });
+  
+    return {
+      ...enemyData,
+      ataqueModificado,
+      inmunidades: [...(enemyData.inmunidad || []), ...inmunidadesExtra],
+    };
+  };
+
+  
   const aplicarEfectosEstados = (enemy, faseTurno) => {
     if (!enemy.estadosAlterados || enemy.estadosAlterados.length === 0) return { enemy, logs: [] };
   
@@ -2457,6 +2493,7 @@ const InitTracker = () => {
             overhealedEnemies={overhealedEnemies}
             setOverhealedEnemies={setOverhealedEnemies}
             onEstadoChange={updateEnemyEstados}
+            getEffectiveStats={getEnemyEffectiveStats}
           />
           )}
         {showPCModal && (
