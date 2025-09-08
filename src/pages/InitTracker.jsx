@@ -1007,11 +1007,12 @@ const InitTracker = () => {
         // Recurso (ej: MALDICION)
         const recurso = partes.find(p => isNaN(p) && p !== "RECUPERA" && p !== "SI");
         if (!recurso) return; // No hay recurso válido
-        console.log(typeof recurso, recurso)
-        const recursoArray = Array.isArray(recurso) ? recurso : [recurso];
-        console.log(ttr[recursoArray]);
+        console.log('Valor exacto de recurso:', JSON.stringify(recurso));
+        console.log('Existe en ttr?', recurso in ttr);
+        console.log(ttr[recurso.trim()]);
+        console.log(ttr.CUBOMALDICION);
         // Preguntar cantidad del recurso
-        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recursoArray]} ?`), 10);
+        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ?`), 10);
         if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
       
         // Calcular curación
