@@ -62,7 +62,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
     const finalPartes = [];
     partes.forEach((parte, i) => {
       if (typeof parte === 'string') {
-        const frases = parte.split('');
+        const frases = parte.split(' ');
         frases.forEach((frase, idx) => {
           if (frase.trim() !== '') {
             finalPartes.push(frase.trim() + '.');
