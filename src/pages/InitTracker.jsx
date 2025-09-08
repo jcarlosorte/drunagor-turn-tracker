@@ -687,6 +687,7 @@ const InitTracker = () => {
   
     cartasEspeciales.forEach(carta => {
       if (Array.isArray(carta.lista_capacidad) && carta.lista_capacidad.includes("PASIVA")) {
+        const id = carta.id;
         const idx = carta.lista_capacidad.indexOf("PASIVA");
         const efecto = carta.lista_capacidad[idx + 2]; // Ej: "DAÑO_BASICO_X" o "CONDICION_I"
         if (efecto?.startsWith("DAÑO_BASICO")) {
@@ -701,6 +702,7 @@ const InitTracker = () => {
   
     return {
       ...enemyData,
+      id,
       ataqueModificado,
       inmunidades: [...(enemyData.inmunidad || []), ...inmunidadesExtra],
     };
