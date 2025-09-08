@@ -61,7 +61,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     }, 2000);
   };
 
-  const traducirCapacidadTextoPlano = (capacidadOriginal, runeColor, getRuneCount) => {
+  const traducirCapacidad = (capacidadOriginal, runeColor, getRuneCount) => {
     const numRunasColor = getRuneCount(runeColor);
     let capacidad = tca.capacidad?.[capacidadOriginal];
   
