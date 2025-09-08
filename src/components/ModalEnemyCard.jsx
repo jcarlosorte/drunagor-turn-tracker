@@ -24,6 +24,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const tt = translations.condiciones_t || {};
   const tte = translations.condiciones_d || {};
   const tea = translations.estadosAlterados || {};
+  const tca = translations.cartas_ataque || {};
   const { getRuneCount } = useGame();
 
   useEffect(() => {
@@ -429,7 +430,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   </span>
                   {valorAtaque}
                   {effectiveStats.ataqueModificado !== valorAtaque && (
-                    <span className="text-blue-500 font-bold cursor-help" title={ti.fromPassiveCard}>/P:{effectiveStats.ataqueModificado}</span>
+                    /<span className="text-blue-500 font-bold cursor-help" title={tca.capacidad[effectiveStats.id]}>{effectiveStats.ataqueModificado}</span>
                   )}
                 </span>
               </div>
