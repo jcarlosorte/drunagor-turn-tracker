@@ -694,9 +694,8 @@ const InitTracker = () => {
           const partes = efecto.split("_");
           const multiplicador = partes[2] === "X" ? getRuneCount(carta.rune) : parseInt(partes[2], 10);
           ataqueModificado += multiplicador;
-        } else if (efecto?.startsWith("CONDICION")) {
-          const condicion = efecto.replace("CONDICION_", ""); // Ej: "I"
-          inmunidadesExtra.push(condicion);
+        } else if (partes[1] && partes[1].endsWith("_I")) {
+          inmunidadesExtra.push(partes[1]);
         }
       }
     });
