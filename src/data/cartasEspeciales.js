@@ -69,7 +69,7 @@ export const CARTAS_COMANDANTE = [
     rune: 'naranja',
     runePosition: 'abajo',
     capacidades: 'cmd_9',
-    lista_capacidad: ["ACTIVA_0", ";", "ACTIVA_5"]
+    lista_capacidad: ["ACTIVA_0", ";", "ACTIVA_5_RUNA"]
   },
    {
     id: 'cmd_10',
@@ -112,7 +112,7 @@ export const CARTAS_OVERLORD = [
     rune: 'gris',
     runePosition: 'abajo',
     capacidades: 'over_4',
-    lista_capacidad: ["RECUPERA_2_CUBOMALDICION", ";", "ACTIVA_10_PS"]
+    lista_capacidad: ["RECUPERA_2_CUBOMALDICION", ";", "ACTIVA_10_SANA"]
   },
    {
     id: 'over_5',
