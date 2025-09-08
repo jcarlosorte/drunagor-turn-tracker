@@ -8,7 +8,7 @@ import { GiHealthPotion, GiRunningNinja, GiSwordClash, GiShieldReflect, GiSteelt
 import { MdLooksOne,  MdLooksTwo,  MdLooks3,  MdLooks4,  MdLooks5,  MdLooks6,} from 'react-icons/md';
 
 
-export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies, onEstadoChange }) => {
+export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, overhealedEnemies, setOverhealedEnemies, onEstadoChange, getEffectiveStats }) => {
   const [vidaLocal, setVidaLocal] = useState(enemy?.vida || 0);
   const [vidaMaxLocal, setVidaMaxLocal] = useState(enemy?.vidaMax || 0);
   const [estadosLocal, setEstadosLocal] = useState(enemy?.estadosAlterados || []);
@@ -45,9 +45,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     //);
   }
 
-  const { id, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales, estadosAlterados } = enemy;
+  const { id, uuid, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales, estadosAlterados } = enemy;
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
   const capacidadesAjustadas = adjustCapabilitiesByRunes(capacidadesOriginales, rune, getRuneCount);
+  const effectiveStats = getEffectiveStats(uuid);
+  const todasInmunidades = Array.from(new Set([...(inmunidad || []), ...(effectiveStats.inmunidades || [])]));
 
   // Función para mostrar aviso
   const mostrarAviso = (mensaje) => {
@@ -426,13 +428,16 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                     {tipoAtaqueIconMap[tipo_ataque] || <GiSwordClash className="text-white text-lg" />}
                   </span>
                   {valorAtaque}
+                  {effectiveStats.ataqueModificado !== enemy.ataque && (
+                    <span className="text-blue-500 font-bold cursor-help" title={ti.fromPassiveCard}>/P:{effectiveStats.ataqueModificado}</span>
+                  )}
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <GiShieldReflect className="text-purple-700 mt-1 text-2xl cursor-help" title={ti.inmunidad || ''} />
                 <div className="flex flex-wrap gap-2">
-                  {Array.isArray(inmunidad) && inmunidad.length > 0
-                    ? inmunidad.map((clave, idx) => (
+                  {Array.isArray(todasInmunidades) && todasInmunidades.length > 0
+                    ? todasInmunidades.map((clave, idx) => (
                         <span key={clave} className="inline-flex items-center gap-1 mr-2">
                           {tt[clave] || clave}
                           <FiInfo
@@ -453,7 +458,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           {/* Submenú Estados Alterados */}
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal
-              .filter((estado) => !inmunidad?.includes(estado.id) && !(inmunidad?.includes("GRANDE") && ["DERRIBO_I", "ATURDIMIENTO_I"].includes(estado.id)))
+              .filter((estado) => !todasInmunidades?.includes(estado.id) && !(todasInmunidades?.includes("GRANDE") && ["DERRIBO_I", "ATURDIMIENTO_I"].includes(estado.id)))
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
