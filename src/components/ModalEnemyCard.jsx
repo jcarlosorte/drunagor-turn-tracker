@@ -64,7 +64,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const traducirCapacidad = (capacidadOriginal, runeColor, getRuneCount) => {
 
     const numRunasColor = getRuneCount(runeColor);
-    const capacidad = tca.capacidad?.[capacidadOriginal];
+    let capacidad = tca.capacidad?.[capacidadOriginal];
     
     if (capacidad) {
       // 1. Sustituimos valores numéricos dinámicos
