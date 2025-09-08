@@ -1009,8 +1009,7 @@ const InitTracker = () => {
         if (!recurso) return; // No hay recurso válido
         console.log('Valor exacto de recurso:', JSON.stringify(recurso));
         console.log('Existe en ttr?', recurso in ttr);
-        console.log(ttr[recurso.trim()]);
-        console.log(ttr.CUBOMALDICION);
+        console.log('ttr en este punto:', ttr);
         // Preguntar cantidad del recurso
         const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ?`), 10);
         if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
