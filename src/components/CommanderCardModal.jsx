@@ -62,13 +62,13 @@ const CommanderCardModal = ({ carta, onClose }) => {
     const finalPartes = [];
     partes.forEach((parte, i) => {
       if (typeof parte === 'string') {
-        const frases = parte.split('.');
-        frases.forEach((frase, idx) => {
-          if (frase.trim() !== '') {
-            finalPartes.push(frase.trim() + '.');
-          }
-          if (idx < frases.length - 1) {
-            finalPartes.push(<br key={`br-${i}-${idx}`} />);
+        const frases = parte.split(/(\.)/);
+        frases.forEach((token, idx) => {
+          if (token === ".") {
+            finalPartes.push(token); // Agregamos el punto original
+            finalPartes.push(<br key={`br-${i}-${idx}`} />); // Luego el salto
+          } else if (token.trim() !== "") {
+            finalPartes.push(token);
           }
         });
       } else {
