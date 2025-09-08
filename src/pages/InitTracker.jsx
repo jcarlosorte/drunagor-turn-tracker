@@ -74,7 +74,7 @@ const InitTracker = () => {
   const ts = translations.scenarioCard || {};
   const td = translations.defensaCard || {};
   const tea = translations.estadosAlterados || {};
-  const ttr = translations.cartas_trad || {};
+  const ttr = translations.defensaCard.cartas_trad || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -1007,11 +1007,9 @@ const InitTracker = () => {
         // Recurso (ej: MALDICION)
         const recurso = partes.find(p => isNaN(p) && p !== "RECUPERA" && p !== "SI");
         if (!recurso) return; // No hay recurso válido
-        console.log('Valor exacto de recurso:', JSON.stringify(recurso));
-        console.log('Existe en ttr?', recurso in ttr);
-        console.log('ttr en este punto:', ttr);
+
         // Preguntar cantidad del recurso
-        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ?`), 10);
+        const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ${ti.sonAb}?`), 10);
         if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
       
         // Calcular curación
