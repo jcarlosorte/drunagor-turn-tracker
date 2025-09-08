@@ -62,22 +62,22 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   };
 
   const traducirCapacidadTextoPlano = (capacidadOriginal, runeColor, getRuneCount) => {
-  const numRunasColor = getRuneCount(runeColor);
-  let capacidad = tca.capacidad?.[capacidadOriginal];
-
-  if (capacidad) {
-    capacidad = capacidad
-      .replaceAll('{X}', numRunasColor)
-      .replaceAll('{2*X}', numRunasColor * 2)
-      .replaceAll('{3*X}', numRunasColor * 3)
-      .replaceAll('{4*X}', numRunasColor * 4);
-
-    // Eliminamos las llaves y traducimos
-    return capacidad.replace(/\{([^}]+)\}/g, (_, key) => ttr[key] || key);
-  }
-
-  return '';
-};
+    const numRunasColor = getRuneCount(runeColor);
+    let capacidad = tca.capacidad?.[capacidadOriginal];
+  
+    if (capacidad) {
+      capacidad = capacidad
+        .replaceAll('{X}', numRunasColor)
+        .replaceAll('{2*X}', numRunasColor * 2)
+        .replaceAll('{3*X}', numRunasColor * 3)
+        .replaceAll('{4*X}', numRunasColor * 4);
+  
+      // Eliminamos las llaves y traducimos
+      return capacidad.replace(/\{([^}]+)\}/g, (_, key) => ttr[key] || key);
+    }
+  
+    return '';
+  };
   
   const interpretarValorRuna = (valor, runeColor, getRuneCount) => {
     const count = getRuneCount(runeColor);
