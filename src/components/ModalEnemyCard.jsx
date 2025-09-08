@@ -61,78 +61,23 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     }, 2000);
   };
 
-  const traducirCapacidad = (capacidadOriginal, runeColor, getRuneCount) => {
+  const traducirCapacidadTextoPlano = (capacidadOriginal, runeColor, getRuneCount) => {
+  const numRunasColor = getRuneCount(runeColor);
+  let capacidad = tca.capacidad?.[capacidadOriginal];
 
-    const numRunasColor = getRuneCount(runeColor);
-    let capacidad = tca.capacidad?.[capacidadOriginal];
-    
-    if (capacidad) {
-      // 1. Sustituimos valores numéricos dinámicos
-      capacidad = capacidad
-        .replaceAll('{X}', numRunasColor)
-        .replaceAll('{2*X}', numRunasColor * 2)
-        .replaceAll('{3*X}', numRunasColor * 3)
-        .replaceAll('{4*X}', numRunasColor * 4);
-    
-      // 2. Buscamos todas las palabras entre {}
-      const regex = /\{([^}]+)\}/g;
-      const partes = [];
-      let lastIndex = 0;
-      let match;
-    
-      while ((match = regex.exec(capacidad)) !== null) {
-        const [fullMatch, key] = match;
-        const start = match.index;
-    
-        // Ignorar las que tienen X (ya procesadas antes)
-        if (!key.includes('X')) {
-          // Agregar texto antes de la llave
-          if (start > lastIndex) {
-            partes.push(capacidad.substring(lastIndex, start));
-          }
-    
-          // Traducción desde ttr si existe, sino deja la original
-          const traduccion = ttr[key] || key;
-          console.log(key);
-          // Agregar el span con estilo especial
-          partes.push(
-          <span key={start} className="text-blue-400 font-bold">
-            {' '}{traduccion}{' '}
-          </span>
-          );
-    
-          lastIndex = start + fullMatch.length;
-        }
-      }
-    
-      // Agregar el resto del texto después de la última llave
-      if (lastIndex < capacidad.length) {
-        partes.push(capacidad.substring(lastIndex));
-      }
-    
-      const finalPartes = [];
-      partes.forEach((parte, i) => {
-        if (typeof parte === 'string') {
-          const frases = parte.split('.');
-          frases.forEach((frase, idx) => {
-            if (frase.trim() !== '') {
-              finalPartes.push(frase.trim() + '.');
-            }
-            if (idx < frases.length - 1) {
-              finalPartes.push(<br key={`br-${i}-${idx}`} />);
-            }
-          });
-        } else {
-          // Si es un span, simplemente lo agregamos
-          finalPartes.push(parte);
-        }
-      });
-    
-      capacidad = finalPartes;
-    }
+  if (capacidad) {
+    capacidad = capacidad
+      .replaceAll('{X}', numRunasColor)
+      .replaceAll('{2*X}', numRunasColor * 2)
+      .replaceAll('{3*X}', numRunasColor * 3)
+      .replaceAll('{4*X}', numRunasColor * 4);
 
-    return capacidad;
-  };
+    // Eliminamos las llaves y traducimos
+    return capacidad.replace(/\{([^}]+)\}/g, (_, key) => ttr[key] || key);
+  }
+
+  return '';
+};
   
   const interpretarValorRuna = (valor, runeColor, getRuneCount) => {
     const count = getRuneCount(runeColor);
