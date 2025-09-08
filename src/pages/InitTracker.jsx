@@ -1180,10 +1180,7 @@ const InitTracker = () => {
   const [extraTurnTotal, setExtraTurnTotal] = useState(0); // total actual
   
   useEffect(() => {
-    if (extraTurnsQueue.length === 0) {
-      setExtraTurnIndex(0);
-      setExtraTurnTotal(0);
-    }
+
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
     //console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
@@ -1455,7 +1452,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes, extraTurnsQueue]);
+  }, [turnIndex, placedEnemies, placedRunes]);
 
   const addExtraTurn = (enemyUUID) => {
     setExtraTurnsQueue(prev => {
@@ -1504,9 +1501,17 @@ const InitTracker = () => {
       if (enemyEntry) {
         showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
         setCurrentTurnEntity({ ...enemyEntry.enemy, type: 'enemy', group: [enemyEntry.enemy] });
-    
+
+        // Si la cola queda vacía, reiniciamos índices
+        if (rest.length === 0) {
+          setExtraTurnIndex(0);
+          setExtraTurnTotal(0);
+        }
         return;
       }
+    } else if (extraTurnsQueue.length === 0){
+        setExtraTurnIndex(0);
+        setExtraTurnTotal(0);
     }
 
     if (turnIndex === -1) {
