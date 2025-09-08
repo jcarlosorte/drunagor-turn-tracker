@@ -25,6 +25,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const tte = translations.condiciones_d || {};
   const tea = translations.estadosAlterados || {};
   const tca = translations.cartas_ataque || {};
+  const ttr = translations.defensaCard.cartas_trad || {};
   const { getRuneCount } = useGame();
 
   useEffect(() => {
@@ -59,6 +60,79 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       setAvisos((prev) => prev.slice(1)); // Elimina el primer aviso después de 2s
     }, 2000);
   };
+
+  const traducirCapacidad = (capacidadOriginal, runeColor, getRuneCount) => {
+
+    const numRunasColor = getRuneCount(runeColor);
+    const capacidad = tca.capacidad?.[capacidadOriginal];
+    
+    if (capacidad) {
+      // 1. Sustituimos valores numéricos dinámicos
+      capacidad = capacidad
+        .replaceAll('{X}', numRunasColor)
+        .replaceAll('{2*X}', numRunasColor * 2)
+        .replaceAll('{3*X}', numRunasColor * 3)
+        .replaceAll('{4*X}', numRunasColor * 4);
+    
+      // 2. Buscamos todas las palabras entre {}
+      const regex = /\{([^}]+)\}/g;
+      const partes = [];
+      let lastIndex = 0;
+      let match;
+    
+      while ((match = regex.exec(capacidad)) !== null) {
+        const [fullMatch, key] = match;
+        const start = match.index;
+    
+        // Ignorar las que tienen X (ya procesadas antes)
+        if (!key.includes('X')) {
+          // Agregar texto antes de la llave
+          if (start > lastIndex) {
+            partes.push(capacidad.substring(lastIndex, start));
+          }
+    
+          // Traducción desde ttr si existe, sino deja la original
+          const traduccion = ttr[key] || key;
+          
+          // Agregar el span con estilo especial
+          partes.push(
+            <span key={start} className="text-blue-400 font-bold">
+              {' '}{traduccion}{' '}
+            </span>
+          );
+    
+          lastIndex = start + fullMatch.length;
+        }
+      }
+    
+      // Agregar el resto del texto después de la última llave
+      if (lastIndex < capacidad.length) {
+        partes.push(capacidad.substring(lastIndex));
+      }
+    
+      const finalPartes = [];
+      partes.forEach((parte, i) => {
+        if (typeof parte === 'string') {
+          const frases = parte.split('.');
+          frases.forEach((frase, idx) => {
+            if (frase.trim() !== '') {
+              finalPartes.push(frase.trim() + '.');
+            }
+            if (idx < frases.length - 1) {
+              finalPartes.push(<br key={`br-${i}-${idx}`} />);
+            }
+          });
+        } else {
+          // Si es un span, simplemente lo agregamos
+          finalPartes.push(parte);
+        }
+      });
+    
+      capacidad = finalPartes;
+    }
+
+    return capacidad;
+  };
   
   const interpretarValorRuna = (valor, runeColor, getRuneCount) => {
     const count = getRuneCount(runeColor);
@@ -83,6 +157,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
   const valorMovimiento = interpretarValorRuna(movimiento, rune, getRuneCount);
   const valorAtaque = interpretarValorRuna(ataque, rune, getRuneCount);
+  
 
   const borderColorMap = {
     blanco: 'border-blanco',
@@ -432,7 +507,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   {effectiveStats.ataqueModificado !== valorAtaque && (
                     <span>
                       /
-                      <span className="text-blue-500 font-bold cursor-help" title={tca.capacidad[effectiveStats.idCartaEspecial]}>
+                      <span className="text-blue-500 font-bold cursor-help" title={traducirCapacidad(effectiveStats.idCartaEspecial, rune, getRuneCount)}>
                         {effectiveStats.ataqueModificado}
                       </span>
                     </span>
