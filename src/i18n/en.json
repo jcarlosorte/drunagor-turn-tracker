@@ -216,6 +216,7 @@
     "preg": "?",
     "cuantosEscudos": "How many shields are added by this effect?",
     "cuantosRecursos": "How many resources are added from",   
+    "sonAb": "are absorbed",  
     "ronda": "New Round",
     "rondaInicial": "First Round!", 
     "mazo_1": "⚠️ There are no cards in the deck:",
