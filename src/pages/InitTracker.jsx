@@ -931,7 +931,9 @@ const InitTracker = () => {
     const targetUUID = cartaEspecial.sourceEnemyUUID;
     const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
     const enemigo = entry?.enemy;
-  
+
+    let curacionTotal = 0;
+    
     if (!enemigo) return { logs }; // Nada que hacer si no hay enemigo vinculado
   
     capacidades.forEach(cap => {
@@ -964,7 +966,7 @@ const InitTracker = () => {
         }
   
         updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
-  
+        curacionTotal += curacion;
         const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`💚 ${nombreCarta} ${ti.sana} ${curacion}`);
       }
@@ -1039,7 +1041,7 @@ const InitTracker = () => {
   
         const curacionReal = nuevaVida - enemigo.vida;
         updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
-  
+        curacionTotal += curacion;
         const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`💚 ${nombreCarta} ${ti.regenera} ${curacionReal} ${ti.vida_i}`);
       }
@@ -1053,12 +1055,33 @@ const InitTracker = () => {
           handleTileDraw(tile);
         }
       }
-  
-      // ✅ --- PASIVA ---
-      else if (cap === "PASIVA") {
-        logs.push(`✨ ${ti.efectoPasivo}`);
-        // Aquí no hacemos nada directo, la lógica la maneja getEnemyEffectiveStats()
+
+      // ✅ --- ACTIVA ---
+      else if (cap.startsWith("ACTIVA")) {
+        const partes = cap.split("_"); // ["ACTIVA", "5", "RUNA"] o ["ACTIVA", "10", "SANA"]
+      
+        const numero = parseInt(partes[1], 10) || 0;
+        const condicion = partes[2] || null;
+      
+        let activar = false;
+      
+        if (numero === 0) {
+          activar = true; // ACTIVA_0
+        } else if (condicion === "RUNA") {
+          const totalRunas = getRuneCount(cartaEspecial.rune);
+          if (totalRunas >= numero) activar = true;
+        } else if (condicion === "SANA") {
+          if (curacionTotal >= numero) activar = true; // Necesitamos acumular curacionTotal
+        }
+      
+        if (activar && cartaEspecial.sourceEnemyUUID) {
+          addExtraTurn(cartaEspecial.sourceEnemyUUID);
+          const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
+          logs.push(`⚡ ${nombreCarta} ${ti.activaTurno}`);
+        }
       }
+
+ 
     });
   
     return { logs };
@@ -1152,6 +1175,7 @@ const InitTracker = () => {
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
+  const [extraTurnsQueue, setExtraTurnsQueue] = useState([]);
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -1426,6 +1450,10 @@ const InitTracker = () => {
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
   }, [turnIndex, placedEnemies, placedRunes]);
+
+  const addExtraTurn = (enemyUUID) => {
+    setExtraTurnsQueue(prev => [...prev, enemyUUID]);
+  };
   
   const getNextActiveEntity = (startIndex) => {
     for (let i = 0; i < TURN_ORDER.length; i++) {
@@ -1457,6 +1485,17 @@ const InitTracker = () => {
   };
 
   const handleNextTurn = () => {
+    if (extraTurnsQueue.length > 0) {
+      const [nextUUID, ...rest] = extraTurnsQueue;
+      setExtraTurnsQueue(rest);
+    
+      const enemyEntry = placedEnemies.find(e => e.enemy.uuid === nextUUID);
+      if (enemyEntry) {
+        setCurrentTurnEntity({ ...enemyEntry.enemy, type: 'enemy', group: [enemyEntry.enemy] });
+        return; // Ejecutamos inmediatamente ese turno sin cambiar turnIndex
+      }
+    }
+
     if (turnIndex === -1) {
       const next = getNextActiveEntity(0);
       if (next) {
