@@ -689,13 +689,13 @@ const InitTracker = () => {
       if (Array.isArray(carta.lista_capacidad) && carta.lista_capacidad.includes("PASIVA")) {
         const idx = carta.lista_capacidad.indexOf("PASIVA");
         const efecto = carta.lista_capacidad[idx + 2]; // Ej: "DAÑO_BASICO_X" o "CONDICION_I"
-  
+        console.log(efecto);
         if (efecto?.startsWith("DAÑO_BASICO")) {
           const partes = efecto.split("_");
           const multiplicador = partes[2] === "X" ? getRuneCount(carta.rune) : parseInt(partes[2], 10);
           ataqueModificado += multiplicador;
-        } else if (partes[1] && partes[1].endsWith("_I")) {
-          inmunidadesExtra.push(partes[1]);
+        } else if ((efecto?.endsWith("_I")) {
+          inmunidadesExtra.push(efecto);
         }
       }
     });
