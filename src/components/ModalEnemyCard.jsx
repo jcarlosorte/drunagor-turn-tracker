@@ -430,7 +430,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                   </span>
                   {valorAtaque}
                   {effectiveStats.ataqueModificado !== valorAtaque && (
-                    /<span className="text-blue-500 font-bold cursor-help" title={tca.capacidad[effectiveStats.id]}>{effectiveStats.ataqueModificado}</span>
+                    <span>/</span><span className="text-blue-500 font-bold cursor-help" title={tca.capacidad[effectiveStats.id]}>{effectiveStats.ataqueModificado}</span>
                   )}
                 </span>
               </div>
