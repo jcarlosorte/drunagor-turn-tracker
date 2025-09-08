@@ -1175,6 +1175,7 @@ const InitTracker = () => {
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
+  const [extraTurnsQueue, setExtraTurnsQueue] = useState([]);
   const [extraTurnIndex, setExtraTurnIndex] = useState(0); // índice actual
   const [extraTurnTotal, setExtraTurnTotal] = useState(0); // total actual
   
