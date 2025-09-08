@@ -221,6 +221,7 @@
       "fromPassiveCard": "Modificado por habilidad pasiva, puede tener condiciones",   
       "ronda": "Nueva Ronda", 
       "activaTurno": "¡Se activa el enemigo!",
+      "activandoTurnoAdicional": "Activando turno adicional",
       "rondaInicial": "¡Primera Ronda!",  
       "mazo_1": "⚠️ No hay cartas en el mazo:",
       "movil1": "Por favor, gira tu dispositivo a orientación horizontal",
