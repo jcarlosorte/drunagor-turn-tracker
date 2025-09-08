@@ -95,7 +95,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           const traduccion = ttr[key] || key;
           console.log(key);
           // Agregar el span con estilo especial
-          partes.push({' '}{traduccion}{' '});
+          partes.push(
+          <span key={start} className="text-blue-400 font-bold">
+            {' '}{traduccion}{' '}
+          </span>
+          );
     
           lastIndex = start + fullMatch.length;
         }
