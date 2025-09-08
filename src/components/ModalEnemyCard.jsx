@@ -45,7 +45,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     //);
   }
 
-  const { id, uuid, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales, estadosAlterados } = enemy;
+  const { id, name, rune, imagen, vida, vidaMax, movimiento, ataque, color, comportamiento, categoria, inmunidad, tipo_ataque, capacidades, capacidadesOriginales, estadosAlterados } = enemy;
   const numeroIconos = [    <MdLooksOne key="1" />,    <MdLooksTwo key="2" />,    <MdLooks3 key="3" />,    <MdLooks4 key="4" />,    <MdLooks5 key="5" />,    <MdLooks6 key="6" />,  ];
   const capacidadesAjustadas = adjustCapabilitiesByRunes(capacidadesOriginales, rune, getRuneCount);
   const effectiveStats = getEffectiveStats(uuid);
