@@ -694,6 +694,7 @@ const InitTracker = () => {
           const partes = efecto.split("_");
           const multiplicador = partes[2] === "X" ? getRuneCount(carta.rune) : parseInt(partes[2], 10);
           ataqueModificado += multiplicador;
+          console.log(ataqueModificado);
         } else if (efecto?.endsWith("_I")) {
           inmunidadesExtra.push(efecto);
         }
