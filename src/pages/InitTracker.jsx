@@ -928,69 +928,53 @@ const InitTracker = () => {
     const capacidades = cartaEspecial.lista_capacidad || [];
     const runeCount = getRuneCount(cartaEspecial.rune);
   
+    const targetUUID = cartaEspecial.sourceEnemyUUID;
+    const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
+    const enemigo = entry?.enemy;
+  
+    if (!enemigo) return { logs }; // Nada que hacer si no hay enemigo vinculado
+  
     capacidades.forEach(cap => {
+      // ✅ --- SANA ---
       if (cap.startsWith("SANA")) {
-        // formato: SANA_2_X_?  o SANA_X_SI etc.
         const partes = cap.split("_");
         const tieneCondicion = partes.includes("?");
         const puedeSobrepasar = partes.includes("SI");
   
-        // multiplicador: busca el primer token numérico
+        // Multiplicador
         let multiplicador = 1;
         const idxNumero = partes.findIndex(p => !isNaN(p));
         if (idxNumero !== -1) multiplicador = parseInt(partes[idxNumero], 10);
   
         const curacion = multiplicador * runeCount;
-        if (curacion <= 0) return; // nada que hacer
+        if (curacion <= 0) return;
   
-        // preguntar si contiene '?'
         if (tieneCondicion) {
           const confirmar = window.confirm(`${ti.sanaPreg} ${curacion} ${ti.preg}`);
           if (!confirmar) return;
         }
   
-        // necesita target definido
-        const targetUUID = cartaEspecial.sourceEnemyUUID;
-        if (!targetUUID) return;
-  
-        // buscar el enemigo actual en placedEnemies
-        const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
-        if (!entry || !entry.enemy) return;
-  
-        const enemigo = entry.enemy;
         let nuevaVida = enemigo.vida + curacion;
         let nuevoMax = enemigo.vidaMax;
   
-        if (puedeSobrepasar) {
-          // puede extender vidaMax si nuevaVida lo supera
-          if (nuevaVida > enemigo.vidaMax) nuevoMax = nuevaVida;
+        if (puedeSobrepasar && nuevaVida > enemigo.vidaMax) {
+          nuevoMax = nuevaVida;
         } else {
-          // no puede superar vidaMax
           nuevaVida = Math.min(nuevaVida, enemigo.vidaMax);
         }
   
-        // llamada correcta a la función centralizada
         updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
   
-        // log legible (usa nombre si existe)
-        const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
+        const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`💚 ${nombreCarta} ${ti.sana} ${curacion}`);
       }
+  
       // ✅ --- ESCUDO ---
-      if (cap.startsWith("ESCUDO")) {
+      else if (cap.startsWith("ESCUDO")) {
         const partes = cap.split("_");
         const tieneCondicion = partes.includes("?");
         const puedeSobrepasar = partes.includes("SI");
   
-        const targetUUID = cartaEspecial.sourceEnemyUUID;
-        if (!targetUUID) return;
-  
-        const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
-        if (!entry || !entry.enemy) return;
-  
-        const enemigo = entry.enemy;
-  
-        // Configuración ESCUDO en ESTADOS_ALTERADOS
         const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
         const maxEscudo = configEscudo?.max || Infinity;
   
@@ -1005,79 +989,80 @@ const InitTracker = () => {
   
         if (escudosAgregar <= 0) return;
   
-        // Buscar estado ESCUDO en el enemigo
         const estados = [...enemigo.estadosAlterados];
         const idx = estados.findIndex(e => e.id === "ESCUDO");
   
         if (idx >= 0) {
           let actual = estados[idx].count;
           let nuevo = actual + escudosAgregar;
-  
           if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
-  
           estados[idx] = { ...estados[idx], count: nuevo };
         } else {
           let nuevo = escudosAgregar;
           if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
-  
           estados.push({ id: "ESCUDO", count: nuevo });
         }
   
-        // Actualizamos estados con la función central
         updateEnemyEstados(targetUUID, estados);
   
-        const nombreCarta = (ta && ta.nombre && ta.nombre[cartaEspecial.id]) || cartaEspecial.nombre || cartaEspecial.id;
+        const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`🛡 ${nombreCarta} ${ti.gana} ${escudosAgregar} ${ti.escudos}`);
       }
+  
       // ✅ --- RECUPERA ---
-      if (cap.startsWith("RECUPERA")) {
+      else if (cap.startsWith("RECUPERA")) {
         const partes = cap.split("_"); // ["RECUPERA", "2", "MALDICION", "SI"]
-      
         const puedeSobrepasar = partes.includes("SI");
-        
+  
         // Multiplicador
         let multiplicador = 1;
         const idxNumero = partes.findIndex(p => !isNaN(p));
         if (idxNumero !== -1) multiplicador = parseInt(partes[idxNumero], 10);
-      
-        // Recurso (ej: MALDICION)
+  
         const recurso = partes.find(p => isNaN(p) && p !== "RECUPERA" && p !== "SI");
-        if (!recurso) return; // No hay recurso válido
-
-        // Preguntar cantidad del recurso
+        if (!recurso) return;
+  
         const cantidadRecurso = parseInt(prompt(`${ti.cuantosRecursos} ${ttr[recurso]} ${ti.sonAb}?`), 10);
         if (isNaN(cantidadRecurso) || cantidadRecurso <= 0) return;
-      
-        // Calcular curación
+  
         const curacion = cantidadRecurso * multiplicador;
         if (curacion <= 0) return;
-      
-        if (cartaEspecial.sourceEnemyUUID) {
-          const enemigo = placedEnemies.find(e => e.enemy.uuid === cartaEspecial.sourceEnemyUUID);
-          if (enemigo) {
-            let nuevaVida = enemigo.enemy.vida + curacion;
-            let nuevoMax = enemigo.enemy.vidaMax;
-      
-            if (puedeSobrepasar && nuevaVida > enemigo.enemy.vidaMax) {
-              nuevoMax = nuevaVida;
-            } else {
-              nuevaVida = Math.min(nuevaVida, enemigo.enemy.vidaMax);
-            }
-           
-            const curacionReal = nuevoMax - nuevaVida;
-            updateEnemyVida(cartaEspecial.sourceEnemyUUID, nuevaVida, nuevoMax);
-            logs.push(`💚 ${ta.nombre[cartaEspecial.id]} ${ti.regenera} ${curacionReal} ${ti.vida_i}`);
-          }
+  
+        let nuevaVida = enemigo.vida + curacion;
+        let nuevoMax = enemigo.vidaMax;
+  
+        if (puedeSobrepasar && nuevaVida > enemigo.vidaMax) {
+          nuevoMax = nuevaVida;
+        } else {
+          nuevaVida = Math.min(nuevaVida, enemigo.vidaMax);
+        }
+  
+        const curacionReal = nuevaVida - enemigo.vida;
+        updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
+  
+        const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
+        logs.push(`💚 ${nombreCarta} ${ti.regenera} ${curacionReal} ${ti.vida_i}`);
+      }
+  
+      // ✅ --- MANIFESTAR ---
+      else if (cap.startsWith("MANIFESTAR")) {
+        // Aquí invocaríamos manifestTile() o lógica similar
+        const tile = manifestTile();
+        if (tile) {
+          logs.push(`🔮 ${ti.runaManifestada}: ${ti.colores[tile.runa]}`);
+          handleTileDraw(tile);
         }
       }
-
-      // aquí puedes añadir más capacidades manejadas (ESCUDO, MANIFESTAR, ...)
+  
+      // ✅ --- PASIVA ---
+      else if (cap === "PASIVA") {
+        logs.push(`✨ ${ti.efectoPasivo}`);
+        // Aquí no hacemos nada directo, la lógica la maneja getEnemyEffectiveStats()
+      }
     });
   
     return { logs };
   };
-
-
 
 
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
