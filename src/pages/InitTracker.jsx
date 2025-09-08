@@ -1041,7 +1041,7 @@ const InitTracker = () => {
   
         const curacionReal = nuevaVida - enemigo.vida;
         updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
-        curacionTotal += curacion;
+        curacionTotal += curacionReal;
         const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         logs.push(`💚 ${nombreCarta} ${ti.regenera} ${curacionReal} ${ti.vida_i}`);
       }
@@ -1180,6 +1180,10 @@ const InitTracker = () => {
   const [extraTurnTotal, setExtraTurnTotal] = useState(0); // total actual
   
   useEffect(() => {
+    if (extraTurnsQueue.length === 0) {
+      setExtraTurnIndex(0);
+      setExtraTurnTotal(0);
+    }
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
     //console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
@@ -1451,7 +1455,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes]);
+  }, [turnIndex, placedEnemies, placedRunes, extraTurnsQueue]);
 
   const addExtraTurn = (enemyUUID) => {
     setExtraTurnsQueue(prev => {
@@ -1501,11 +1505,6 @@ const InitTracker = () => {
         showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
         setCurrentTurnEntity({ ...enemyEntry.enemy, type: 'enemy', group: [enemyEntry.enemy] });
     
-        // Si la cola queda vacía, reiniciamos índices
-        if (rest.length === 0) {
-          setExtraTurnIndex(0);
-          setExtraTurnTotal(0);
-        }
         return;
       }
     }
