@@ -1175,7 +1175,8 @@ const InitTracker = () => {
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
-  const [extraTurnsQueue, setExtraTurnsQueue] = useState([]);
+  const [extraTurnIndex, setExtraTurnIndex] = useState(0); // índice actual
+  const [extraTurnTotal, setExtraTurnTotal] = useState(0); // total actual
   
   useEffect(() => {
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
@@ -1452,7 +1453,11 @@ const InitTracker = () => {
   }, [turnIndex, placedEnemies, placedRunes]);
 
   const addExtraTurn = (enemyUUID) => {
-    setExtraTurnsQueue(prev => [...prev, enemyUUID]);
+    setExtraTurnsQueue(prev => {
+      const updated = [...prev, enemyUUID];
+      setExtraTurnTotal(updated.length);
+      return updated;
+    });
   };
   
   const getNextActiveEntity = (startIndex) => {
@@ -1488,11 +1493,19 @@ const InitTracker = () => {
     if (extraTurnsQueue.length > 0) {
       const [nextUUID, ...rest] = extraTurnsQueue;
       setExtraTurnsQueue(rest);
+      setExtraTurnIndex(extraTurnIndex + 1);
     
       const enemyEntry = placedEnemies.find(e => e.enemy.uuid === nextUUID);
       if (enemyEntry) {
+        showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
         setCurrentTurnEntity({ ...enemyEntry.enemy, type: 'enemy', group: [enemyEntry.enemy] });
-        return; // Ejecutamos inmediatamente ese turno sin cambiar turnIndex
+    
+        // Si la cola queda vacía, reiniciamos índices
+        if (rest.length === 0) {
+          setExtraTurnIndex(0);
+          setExtraTurnTotal(0);
+        }
+        return;
       }
     }
 
