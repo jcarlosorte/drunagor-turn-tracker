@@ -635,7 +635,7 @@ const InitTracker = () => {
             runePosition: carta.runePosition,
             categoria: enemyCat,
             position: runesColorMap[carta.rune],
-            tipo: 'especial',
+            tipo: 'fallenHero',
             sourceEnemyUUID: heroUUID,
             nombreEnemy: nombreHeroe,
             highlight: true,
