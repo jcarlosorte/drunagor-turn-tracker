@@ -50,7 +50,14 @@ const CommanderCard = ({ carta }) => {
   return (
     <div className="flex flex-col items-center mx-1">
       <div className="relative">
-        <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
+
+        <div
+          onClick={() => setShowModal(true)}
+          className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+            ${carta.highlight ? ringClass : borderClass}`}
+        >
+
+          <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
           {estadosLocal
             .filter(estado => estado.count > 0)
             .map((estado) => {
@@ -76,12 +83,7 @@ const CommanderCard = ({ carta }) => {
               );
             })}
         </div>
-
-        <div
-          onClick={() => setShowModal(true)}
-          className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
-            ${carta.highlight ? ringClass : borderClass}`}
-        >
+          
           <div
             className="text-sm text-yellow-300 text-center"
             style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
