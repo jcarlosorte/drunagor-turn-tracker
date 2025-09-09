@@ -32,8 +32,10 @@ const CommanderCard = ({ carta }) => {
   const enemyClass =
     carta.categoria === "overlord"
       ? ta.ataqueO
-      : carta.categoria === "comandante" || "hero"
+      : carta.categoria === "comandante"
       ? ta.ataqueC
+      : carta.categoria === "hero"
+      ? ta.ataqueF
       : carta.categoria === "jefe"
       ? ta.ataqueB
       : '';
