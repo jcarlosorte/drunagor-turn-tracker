@@ -664,8 +664,6 @@ const InitTracker = () => {
     }
   };
 
-  
-
   const handleAddRuneCard = (runeCard, timeToken) => {
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     const newRune = {
