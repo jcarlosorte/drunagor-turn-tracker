@@ -542,6 +542,7 @@ const InitTracker = () => {
     const enemyColor = enemy.color;
     const enemyCat = enemy.categoria;
     const shuffled = [...CARTAS_COMANDANTE].sort(() => 0.5 - Math.random());
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     const selected = shuffled.slice(0, numHeroes);
     const nombreCommander = getEnemyName(enemyId, enemyColor);
     const nuevas = selected.map(carta => ({
@@ -559,6 +560,7 @@ const InitTracker = () => {
         sourceEnemyUUID: commanderUUID,
         nombreEnemy: nombreCommander,
         highlight: true,
+        estadosAlterados: initialStates
       },
     }));
     const msgWar = ti.voragineWarning.replace('{name}', nombreCommander);
@@ -577,6 +579,7 @@ const InitTracker = () => {
     const enemyColor = enemy.color;
     const enemyCat = enemy.categoria;
     const shuffled = [...CARTAS_OVERLORD].sort(() => 0.5 - Math.random());
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     const selected = shuffled.slice(0, numHeroes);
     const nombreOverlord = getEnemyName(enemyId, enemyColor);
     const nuevas = selected.map(carta => ({
@@ -594,6 +597,7 @@ const InitTracker = () => {
         sourceEnemyUUID: overlordUUID,
         nombreEnemy: nombreOverlord,
         highlight: true,
+        estadosAlterados: initialStates
       },
     }));
 
@@ -616,7 +620,7 @@ const InitTracker = () => {
     const enemyColor = enemy.color;
     const enemyCat = enemy.categoria;
     const nombreHeroe = getEnemyName(enemyId, enemyColor);
-  
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     const nuevasCartas = [];
   
     CARTAS_HEROE_CAIDO.forEach(carta => {
@@ -639,6 +643,7 @@ const InitTracker = () => {
             sourceEnemyUUID: heroUUID,
             nombreEnemy: nombreHeroe,
             highlight: true,
+            estadosAlterados: initialStates
           },
         });
       }
@@ -662,6 +667,7 @@ const InitTracker = () => {
   
 
   const handleAddRuneCard = (runeCard, timeToken) => {
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     const newRune = {
       uuid: uuidv4(),
       id: runeCard.id,
@@ -673,7 +679,8 @@ const InitTracker = () => {
       tipo: runeCard.tipo,
       carta: runeCard.carta,
       counter: timeToken,
-      colorIndex: 10
+      colorIndex: 10,
+      estadosAlterados: initialStates
     };
     placeRune({ rune: newRune });
     if (newRune.tipo === 'defensa'){
