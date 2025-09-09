@@ -14,7 +14,7 @@ const CommanderCard = ({ carta }) => {
   const ringClass =
     carta.categoria === "overlord"
       ? 'ring-4 ring-orange-400 animate-pulse'
-      : carta.categoria === "comandante"
+      : carta.categoria === "comandante" || "hero"
       ? 'ring-4 ring-yellow-400 animate-pulse'
       : carta.categoria === "jefe"
       ? 'ring-4 ring-purple-400 animate-pulse'
@@ -23,7 +23,7 @@ const CommanderCard = ({ carta }) => {
   const borderClass =
     carta.categoria === "overlord"
       ? 'bg-gray-500 border-orange-400'
-      : carta.categoria === "comandante"
+      : carta.categoria === "comandante" || "hero"
       ? 'bg-gray-500 border-yellow-400'
       : carta.categoria === "jefe"
       ? 'bg-gray-500 border-purple-400'
@@ -32,7 +32,7 @@ const CommanderCard = ({ carta }) => {
   const enemyClass =
     carta.categoria === "overlord"
       ? ta.ataqueO
-      : carta.categoria === "comandante"
+      : carta.categoria === "comandante" || "hero"
       ? ta.ataqueC
       : carta.categoria === "jefe"
       ? ta.ataqueB
