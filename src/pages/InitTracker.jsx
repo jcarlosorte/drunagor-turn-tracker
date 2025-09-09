@@ -458,6 +458,7 @@ const InitTracker = () => {
         placeEnemy({ enemy });
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
+        placeFallenHeroCards(selected, uuid);
         return;
     }
     
@@ -609,6 +610,56 @@ const InitTracker = () => {
       setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
     });
   };
+
+  const placeFallenHeroCards = (enemy, heroUUID, isTurnActivation = false) => {
+    const enemyId = enemy.id;
+    const enemyColor = enemy.color;
+    const enemyCat = enemy.categoria;
+    const nombreHeroe = getEnemyName(enemyId, enemyColor);
+  
+    const nuevasCartas = [];
+  
+    CARTAS_HEROE_CAIDO.forEach(carta => {
+      const nombreTraducido = (ta && ta.nombre && ta.nombre[carta.id]) || carta.nombre || carta.id;
+      const confirmar = window.confirm(`${ti.cumpleCondiciones} ${nombreTraducido}?`);
+      
+      if (confirmar) {
+        nuevasCartas.push({
+          enemy: {
+            uuid: uuidv4(),
+            id: carta.id,
+            nombre: carta.nombre,
+            capacidades: carta.capacidades,
+            lista_capacidad: carta.lista_capacidad,
+            rune: carta.rune,
+            runePosition: carta.runePosition,
+            categoria: enemyCat,
+            position: runesColorMap[carta.rune],
+            tipo: 'especial',
+            sourceEnemyUUID: heroUUID,
+            nombreEnemy: nombreHeroe,
+            highlight: true,
+          },
+        });
+      }
+    });
+  
+    if (nuevasCartas.length > 0) {
+      const msg = ti.heroeCaidoWarning.replace('{name}', nombreHeroe);
+      if (isTurnActivation) {
+        setWarningMessage(msg);
+        setTimeout(() => setWarningMessage(null), 3000);
+      }
+  
+      setPlacedEnemies(prev => [...prev, ...nuevasCartas]);
+  
+      nuevasCartas.forEach(carta => {
+        setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
+      });
+    }
+  };
+
+  
 
   const handleAddRuneCard = (runeCard, timeToken) => {
     const newRune = {
