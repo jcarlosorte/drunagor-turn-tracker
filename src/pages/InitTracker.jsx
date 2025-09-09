@@ -991,7 +991,7 @@ const InitTracker = () => {
     const logs = [];
     const capacidades = cartaEspecial.lista_capacidad || [];
     const runeCount = getRuneCount(cartaEspecial.rune);
-    const tile = null;
+    let tile = null;
     const targetUUID = cartaEspecial.sourceEnemyUUID;
     const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
     const enemigo = entry?.enemy;
