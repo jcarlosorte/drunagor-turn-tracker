@@ -1130,9 +1130,10 @@ const InitTracker = () => {
         if (cantidad <= 0) return;
       
         // 🔍 Necesitamos tile del paso anterior (MANIFIESTA)
-        if (!lastManifestTileRef) return; 
-      
-        const runeColor = lastManifestTileRef.runa;
+        const tile = lastManifestTileRef.current;
+        if (!tile) return; 
+        
+        const runeColor = tile.runa;
       
         // Recorremos todos los enemigos en esa runa
         placedEnemies.forEach(e => {
