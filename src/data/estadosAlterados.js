@@ -9,6 +9,7 @@ import intimidar from "@/assets/assets_logo/intimidar.png";
 import quemadura from "@/assets/assets_logo/quemadura.png";
 import escudo from "@/assets/assets_logo/escudo.png";
 import sanar from "@/assets/assets_logo/sanar.png";
+import tiempo from "@/assets/assets_logo/tiempo.png";
 
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
@@ -29,7 +30,8 @@ export const ESTADOS_ALTERADOS = [
   //{id: "FRUTO_DE_VIDA", reduce:"", max: 4},
   //{id: "CONCENTRACION_X", reduce:"", max: 4},
   //{id: "KI", reduce:"", max: 4},
-  { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "principio", daño: 0, max: 4, imagen: escudo }
+  { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "principio", daño: 0, max: 4, imagen: escudo },
+  { id: "TIEMPO", texto: "tiempo", accion: "tiempo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 4, imagen: tiempo }
 ];
 
 
