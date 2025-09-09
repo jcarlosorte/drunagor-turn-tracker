@@ -991,7 +991,7 @@ const InitTracker = () => {
     const logs = [];
     const capacidades = cartaEspecial.lista_capacidad || [];
     const runeCount = getRuneCount(cartaEspecial.rune);
-    const lastManifestTileRef = null;
+    const tile = null;
     const targetUUID = cartaEspecial.sourceEnemyUUID;
     const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
     const enemigo = entry?.enemy;
@@ -1042,7 +1042,6 @@ const InitTracker = () => {
         const partes = cap.split("_");
         const tieneCondicion = partes.includes("?");
         const puedeSobrepasar = partes.includes("SI");
-        const tile = null;
         const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
         const maxEscudo = configEscudo?.max || Infinity;
   
@@ -1116,7 +1115,6 @@ const InitTracker = () => {
       else if (cap.startsWith("MANIFIESTA")) {
         // Aquí invocaríamos manifestTile() o lógica similar
         tile = manifestTile();
-        lastManifestTileRef = tile;
         if (tile) {
           logs.push(`🔮 ${ti.runaManifestada}: ${ti.colores[tile.runa]}`);
           handleTileDraw(tile);
