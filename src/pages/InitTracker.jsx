@@ -650,7 +650,7 @@ const InitTracker = () => {
     });
   
     if (nuevasCartas.length > 0) {
-      const msg = ti.heroeCaidoWarning.replace('{name}', nombreHeroe);
+      const msg = ti.voragineWarning.replace('{name}', nombreHeroe);
       if (isTurnActivation) {
         setWarningMessage(msg);
         setTimeout(() => setWarningMessage(null), 3000);
