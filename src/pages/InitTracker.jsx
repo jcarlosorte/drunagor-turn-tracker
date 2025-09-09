@@ -1122,6 +1122,45 @@ const InitTracker = () => {
         }
       }
 
+      // ✅ --- TIEMPO ---
+      if (cap.startsWith("TIEMPO")) {
+        const partes = cap.split("_");
+        const cantidad = parseInt(partes[1], 10) || 0;
+        if (cantidad <= 0) return;
+      
+        // 🔍 Necesitamos tile del paso anterior (MANIFIESTA)
+        if (!tile) return; 
+      
+        const runeColor = tile.runa;
+      
+        // Recorremos todos los enemigos en esa runa
+        placedEnemies.forEach(e => {
+          const enemigo = e.enemy;
+      
+          // Excluir la propia carta y el enemigo asociado
+          if (enemigo.uuid === cartaEspecial.uuid) return;
+          if (enemigo.uuid === cartaEspecial.sourceEnemyUUID) return;
+      
+          if (enemigo.rune === runeColor) {
+            const estados = [...(enemigo.estadosAlterados || [])];
+            const idx = estados.findIndex(est => est.id === "TIEMPO");
+      
+            if (idx >= 0) {
+              estados[idx] = { ...estados[idx], count: estados[idx].count + cantidad };
+            } else {
+              estados.push({ id: "TIEMPO", count: cantidad });
+            }
+      
+            // ✅ Actualizamos el enemigo con updateEnemyEstados
+            updateEnemyEstados(enemigo.uuid, estados);
+      
+            // Log
+            logs.push(`⏳ ${tee[enemigo.id] || ta.nombre[enemigo.id]} ${ti.gana} ${cantidad} ${ti.tiempo}`);
+          }
+        });
+      }
+
+        
       // ✅ --- ACTIVA ---
       else if (cap.startsWith("ACTIVA")) {
         const partes = cap.split("_"); // ["ACTIVA", "5", "RUNA"] o ["ACTIVA", "10", "SANA"]
