@@ -655,7 +655,8 @@ const InitTracker = () => {
         setWarningMessage(msg);
         setTimeout(() => setWarningMessage(null), 3000);
       }
-  
+
+      console.log(nuevasCartas);
       setPlacedEnemies(prev => [...prev, ...nuevasCartas]);
   
       nuevasCartas.forEach(carta => {
