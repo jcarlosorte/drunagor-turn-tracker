@@ -991,7 +991,7 @@ const InitTracker = () => {
     const logs = [];
     const capacidades = cartaEspecial.lista_capacidad || [];
     const runeCount = getRuneCount(cartaEspecial.rune);
-  
+    const lastManifestTileRef = useRef(null);
     const targetUUID = cartaEspecial.sourceEnemyUUID;
     const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
     const enemigo = entry?.enemy;
@@ -1042,7 +1042,7 @@ const InitTracker = () => {
         const partes = cap.split("_");
         const tieneCondicion = partes.includes("?");
         const puedeSobrepasar = partes.includes("SI");
-  
+        
         const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
         const maxEscudo = configEscudo?.max || Infinity;
   
@@ -1116,6 +1116,7 @@ const InitTracker = () => {
       else if (cap.startsWith("MANIFIESTA")) {
         // Aquí invocaríamos manifestTile() o lógica similar
         const tile = manifestTile();
+        lastManifestTileRef.current = tile;
         if (tile) {
           logs.push(`🔮 ${ti.runaManifestada}: ${ti.colores[tile.runa]}`);
           handleTileDraw(tile);
@@ -1129,9 +1130,9 @@ const InitTracker = () => {
         if (cantidad <= 0) return;
       
         // 🔍 Necesitamos tile del paso anterior (MANIFIESTA)
-        if (!tile) return; 
+        if (!lastManifestTileRef) return; 
       
-        const runeColor = tile.runa;
+        const runeColor = lastManifestTileRef.runa;
       
         // Recorremos todos los enemigos en esa runa
         placedEnemies.forEach(e => {
