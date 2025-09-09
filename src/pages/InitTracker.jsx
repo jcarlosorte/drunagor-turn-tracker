@@ -1015,11 +1015,6 @@ const InitTracker = () => {
         const curacion = multiplicador * runeCount;
         if (curacion <= 0) return;
   
-        if (tieneCondicion) {
-          const confirmar = window.confirm(`${ti.sanaPreg} ${curacion} ${ti.preg}`);
-          if (!confirmar) return;
-        }
-  
         let nuevaVida = enemigo.vida + curacion;
         let nuevoMax = enemigo.vidaMax;
   
@@ -1028,11 +1023,18 @@ const InitTracker = () => {
         } else {
           nuevaVida = Math.min(nuevaVida, enemigo.vidaMax);
         }
-  
+        
+        const curacionReal = nuevaVida - enemigo.vida
+        
+        if (tieneCondicion) {
+          const confirmar = window.confirm(`${ti.sanaPreg} ${curacionReal} ${ti.preg}`);
+          if (!confirmar) return;
+        }
+        
         updateEnemyVida(targetUUID, nuevaVida, nuevoMax);
-        curacionTotal += curacion;
+        curacionTotal += curacionReal;
         const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
-        logs.push(`💚 ${nombreCarta} ${ti.sana} ${curacion}`);
+        logs.push(`💚 ${nombreCarta} ${ti.sana} ${curacionReal}`);
       }
   
       // ✅ --- ESCUDO ---
@@ -1111,7 +1113,7 @@ const InitTracker = () => {
       }
   
       // ✅ --- MANIFESTAR ---
-      else if (cap.startsWith("MANIFESTAR")) {
+      else if (cap.startsWith("MANIFIESTA")) {
         // Aquí invocaríamos manifestTile() o lógica similar
         const tile = manifestTile();
         if (tile) {
