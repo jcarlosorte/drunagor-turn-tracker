@@ -14,7 +14,7 @@ import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { ESTADOS_ALTERADOS, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
-import { CARTAS_COMANDANTE, CARTAS_OVERLORD, ALDEANO, ERRANTES, CARTAS_GUSANO } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
