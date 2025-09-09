@@ -648,6 +648,7 @@
     "ataqueC": "Acción de Comandante",
     "ataqueO": "Acción de Señor Supremo",
     "ataqueB": "Acción de Jefe",
+    "ataqueF": "Acción de Héroe Caído",
     "nombre":{
       "cmd_1": "CAPARAZÓN SOBRENATURAL",
       "cmd_2": "AGUIJÓN ENVENENADO",
