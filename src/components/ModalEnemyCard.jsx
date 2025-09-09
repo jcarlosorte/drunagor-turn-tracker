@@ -490,7 +490,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                 return estadoConfig && estadoConfig.mostrar === "si";
               })
               .map((estado) => {
-                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id && e.mostrar === "no");
+                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
                 const maxCount = estado.max || estadoConfig.max || 1;
             
