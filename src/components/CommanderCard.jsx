@@ -17,7 +17,7 @@ const CommanderCard = ({ carta }) => {
   const ringClass =
     carta.categoria === "overlord"
       ? 'ring-4 ring-orange-400 animate-pulse'
-      : carta.categoria === "comandante" || "hero"
+      : carta.categoria === "comandante" || carta.categoria === "hero"
       ? 'ring-4 ring-yellow-400 animate-pulse'
       : carta.categoria === "jefe"
       ? 'ring-4 ring-purple-400 animate-pulse'
@@ -26,7 +26,7 @@ const CommanderCard = ({ carta }) => {
   const borderClass =
     carta.categoria === "overlord"
       ? 'bg-gray-500 border-orange-400'
-      : carta.categoria === "comandante" || "hero"
+      : carta.categoria === "comandante" || carta.categoria === "hero"
       ? 'bg-gray-500 border-yellow-400'
       : carta.categoria === "jefe"
       ? 'bg-gray-500 border-purple-400'
@@ -42,6 +42,10 @@ const CommanderCard = ({ carta }) => {
       : carta.categoria === "jefe"
       ? ta.ataqueB
       : '';
+
+  useEffect(() => {
+    setEstadosLocal(carta?.estadosAlterados || []);
+  }, [carta?.estadosAlterados]);
   
   return (
     <div className="flex flex-col items-center mx-1">
@@ -53,7 +57,7 @@ const CommanderCard = ({ carta }) => {
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
               if (!estadoConfig) return null;
               return (
-                <div key={estado.id} className="relative">
+                <div key={estado.id} className="relative group cursor-help">
                   <img
                     src={estadoConfig.imagen}
                     alt={estadoConfig.texto}
@@ -64,10 +68,15 @@ const CommanderCard = ({ carta }) => {
                       {estado.count}
                     </span>
                   )}
+                  {/* Tooltip */}
+                  <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                    {tea[estadoConfig.texto] || estadoConfig.texto}
+                  </div>
                 </div>
               );
             })}
         </div>
+
         <div
           onClick={() => setShowModal(true)}
           className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
