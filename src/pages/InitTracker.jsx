@@ -746,7 +746,7 @@ const InitTracker = () => {
     let cartaId = null;
     // Buscar cartas especiales asociadas a este enemigo
     const cartasEspeciales = placedEnemies
-      .filter(e => e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === enemyUUID)
+      .filter(e => (e.enemy.tipo === 'especial' || e.enemy.tipo === 'fallenHero' ) && e.enemy.sourceEnemyUUID === enemyUUID)
       .map(e => e.enemy);
   
     cartasEspeciales.forEach(carta => {
@@ -1320,7 +1320,7 @@ const InitTracker = () => {
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
 
         // ✅ Si es carta especial → ejecutar lógica y salir
-        if (current.tipo === 'especial') {
+        if (current.tipo === 'especial' || current.tipo === 'fallenHero') {
           if (!processedCardsRef.current.has(current.uuid)) {
             processedCardsRef.current.add(current.uuid);
             const { logs } = aplicarCapacidadesCartaEspecial(current);
@@ -2113,7 +2113,7 @@ const InitTracker = () => {
                   <GiWingedSword className="text-white animate-bounce" size={40} />
                 </div>
               )}
-              {type === 'enemy' && item.enemy.tipo === 'especial' ? (
+              {type === 'enemy' && (item.enemy.tipo === 'especial' || item.enemy.tipo === 'fallenHero') ? (
                 <CommanderCard carta={item.enemy} highlight={item.enemy.highlight} />
               ) : type === 'enemy' ? (
                 <EnemyCard
