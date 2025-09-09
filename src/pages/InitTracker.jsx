@@ -1117,7 +1117,7 @@ const InitTracker = () => {
         tile = manifestTile();
         if (tile) {
           logs.push(`🔮 ${ti.runaManifestada}: ${ti.colores[tile.runa]}`);
-          handleTileDraw(tile);
+          //handleTileDraw(tile);
         }
       }
 
