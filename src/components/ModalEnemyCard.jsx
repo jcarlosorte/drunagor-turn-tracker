@@ -485,8 +485,12 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           <div className="w-full bg-gray-800 rounded-lg p-2 mt-2 flex flex-row flex-nowrap gap-2 justify-around items-center">
             {estadosLocal
               .filter((estado) => !todasInmunidades?.includes(estado.id) && !(todasInmunidades?.includes("GRANDE") && ["DERRIBO_I", "ATURDIMIENTO_I"].includes(estado.id)))
-              .map((estado) => {
+              .filter((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                return estadoConfig && estadoConfig.mostrar === "si";
+              })
+              .map((estado) => {
+                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id && e.mostrar === "no");
                 if (!estadoConfig) return null;
                 const maxCount = estado.max || estadoConfig.max || 1;
             
