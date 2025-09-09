@@ -677,7 +677,14 @@ const InitTracker = () => {
     const enemyData = placedEnemies.find(e => e.enemy.uuid === enemyUUID)?.enemy;
     if (!enemyData) return null;
   
-    let ataqueModificado = enemyData.ataque;
+    let ataqueModificado = 0;
+
+    if (enemyData.ataque === "X") {
+      ataqueModificado = getRuneCount(enemyData.rune);
+    } else {
+      ataqueModificado = parseInt(enemyData.ataque, 10) || 0;
+    }
+    
     let inmunidadesExtra = [];
     let cartaId = null;
     // Buscar cartas especiales asociadas a este enemigo
