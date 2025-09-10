@@ -1240,8 +1240,8 @@ const InitTracker = () => {
     // Aviso en pantalla
     showScenarioToast(`⏳ ${tee[entity.id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
   
-    return
-  
+    return true; // indica que debe saltarse
+  };
       
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
