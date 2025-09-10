@@ -1192,7 +1192,7 @@ const InitTracker = () => {
   };
 
 
-  const checkTiempoSkip = (entity, setPlacedEnemies, setPlacedRunes, setPlacedHeroes) => {
+  const checkTiempoSkip = (entity) => {
     if (!entity?.estadosAlterados) return false;
   
     const estadoTiempo = entity.estadosAlterados.find(e => e.id === "TIEMPO" && e.count > 0);
@@ -1227,15 +1227,7 @@ const InitTracker = () => {
       );
     } 
     // 🔮 Futuro: habilitar héroes
-    else if (entity.type === "hero" && setPlacedHeroes) {
-      setPlacedHeroes(prev =>
-        prev.map(h =>
-          h.uuid === entity.uuid
-            ? { ...h, estadosAlterados: nuevosEstados }
-            : h
-        )
-      );
-    }
+
   
     // Aviso en pantalla
     showScenarioToast(`⏳ ${tee[entity.id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
@@ -1393,12 +1385,7 @@ const InitTracker = () => {
       return;
     }
     if (hasEntities) {
-      const skipped = checkTiempoSkip(
-        { ...hasEntities, type: step.type },
-        setPlacedEnemies,
-        setPlacedRunes,
-        setPlacedHeroes // opcional
-      );
+      const skipped = checkTiempoSkip( { ...hasEntities, type: step.type } );
       if (skipped) {
         previousIndexRef.current = turnIndex;
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
