@@ -1192,6 +1192,57 @@ const InitTracker = () => {
   };
 
 
+  const checkTiempoSkip = (entity, setPlacedEnemies, setPlacedRunes, setPlacedHeroes) => {
+    if (!entity?.estadosAlterados) return false;
+  
+    const estadoTiempo = entity.estadosAlterados.find(e => e.id === "TIEMPO" && e.count > 0);
+    if (!estadoTiempo) return false;
+  
+    const configTiempo = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
+    let nuevoCount = estadoTiempo.count;
+  
+    if (configTiempo?.reduce === "si") {
+      nuevoCount = Math.max(0, estadoTiempo.count - (configTiempo.numReduce || 1));
+    }
+  
+    const nuevosEstados = entity.estadosAlterados.map(e =>
+      e.id === "TIEMPO" ? { ...e, count: nuevoCount } : e
+    );
+  
+    if (entity.type === "enemy") {
+      setPlacedEnemies(prev =>
+        prev.map(e =>
+          e.enemy.uuid === entity.uuid
+            ? { ...e, enemy: { ...e.enemy, estadosAlterados: nuevosEstados } }
+            : e
+        )
+      );
+    } else if (entity.type === "rune") {
+      setPlacedRunes(prev =>
+        prev.map(r =>
+          r.rune.uuid === entity.uuid
+            ? { rune: { ...r.rune, estadosAlterados: nuevosEstados } }
+            : r
+        )
+      );
+    } 
+    // 🔮 Futuro: habilitar héroes
+    else if (entity.type === "hero" && setPlacedHeroes) {
+      setPlacedHeroes(prev =>
+        prev.map(h =>
+          h.uuid === entity.uuid
+            ? { ...h, estadosAlterados: nuevosEstados }
+            : h
+        )
+      );
+    }
+  
+    // Aviso en pantalla
+    showScenarioToast(`⏳ ${tee[entity.id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
+  
+    return
+  
+      
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
     return ENEMIES.filter(e =>
@@ -1338,8 +1389,21 @@ const InitTracker = () => {
       //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
-      }, 1500); 
+      }, 800); 
       return;
+    }
+    if (hasEntities) {
+      const skipped = checkTiempoSkip(
+        { ...hasEntities, type: step.type },
+        setPlacedEnemies,
+        setPlacedRunes,
+        setPlacedHeroes // opcional
+      );
+      if (skipped) {
+        previousIndexRef.current = turnIndex;
+        setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
+        return;
+      }
     }
 
   
