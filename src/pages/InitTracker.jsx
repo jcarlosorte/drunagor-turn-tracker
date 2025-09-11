@@ -1209,7 +1209,8 @@ const InitTracker = () => {
   
     const nuevosEstados = [...entity.estadosAlterados];
     nuevosEstados[idx] = { ...estado, count: nuevoCount };
-  
+    console.log(entity);
+    console.log(nuevosEstados);
     // Guardar cambios en la colección correcta
     if (entity.type === "enemy") {
       setPlacedEnemies(prev =>
@@ -1237,7 +1238,7 @@ const InitTracker = () => {
         )
       }));
     }
-  
+    console.log(nuevoCount);
     // 🔹 Si aún queda tiempo → saltamos turno
     return nuevoCount > 0;
   };
