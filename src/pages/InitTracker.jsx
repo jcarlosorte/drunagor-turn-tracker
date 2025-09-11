@@ -1200,15 +1200,18 @@ const InitTracker = () => {
     if (estado.count <= 0) return false;
   
     const config = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
-    const reduce = config?.reduce || 1;
-  
+    const reduce = config?.numReduce || 1;
+    let nuevoCount = estado.count;
+    
     // Reducimos contador
-    const nuevoCount = Math.max(0, estado.count - reduce);
-  
+    if (config?.reduce === "si") {
+      nuevoCount = Math.max(0, estado.count - reduce);
+    }
+
     const nuevosEstados = [...entity.estadosAlterados];
     nuevosEstados[idx] = { ...estado, count: nuevoCount };
-    console.log(entity);
-    console.log(nuevosEstados);
+    
+
     // Guardar cambios en la colección correcta
     if (entity.type === "enemy") {
       setPlacedEnemies(prev =>
@@ -1363,7 +1366,7 @@ const InitTracker = () => {
     
     previousIndexRef.current = turnIndex;
     
-    let hasEntities = null;
+    let hasEntities = false;
     if (step.type === "enemy") {
       hasEntities = placedEnemies.some(
         e =>
@@ -1380,7 +1383,7 @@ const InitTracker = () => {
     } else if (step.type === "hero") {
       hasEntities = trackerData.placedHeroes?.some(
         h => h.role === step.role && h.position === step.index
-      ) || null;
+      );
     }
     
     if (!hasEntities) {
@@ -1390,17 +1393,6 @@ const InitTracker = () => {
       }, 800); 
       return;
     }
-    console.log(hasEntities);
-    if (hasEntities.length > 0) {
-      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
-      console.log(skipped);
-      if (skipped) {
-        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.index].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
-        setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
-        return;
-      }
-    }
-
   
     // 🔍 ENEMIES
     if (step.type === 'enemy') {
