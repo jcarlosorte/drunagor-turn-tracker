@@ -1338,7 +1338,6 @@ const InitTracker = () => {
 
     if (turnIndex < 0 || turnIndex >= TURN_ORDER.length) return;
     const step = TURN_ORDER[turnIndex];
-    //console.log("▶ Ejecutando turno:", turnIndex, currentTurnEntity);
 
     // ✅ Mostrar toast inicial solo una vez
     if (previousIndexRef.current === null && roundRef.current === 0) {
@@ -1393,10 +1392,10 @@ const InitTracker = () => {
       return;
     }
     if (hasEntities) {
-      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
-  
+      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.current], type: step.type } );
+      console.log(skipped);
       if (skipped) {
-        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.index].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
+        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.current].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
         return;
       }
