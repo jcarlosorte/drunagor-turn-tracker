@@ -1239,9 +1239,9 @@ const InitTracker = () => {
         )
       }));
     }
-    console.log(nuevoCount);
+    console.log(entity);
     // 🔹 Si aún queda tiempo → saltamos turno
-    return nuevoCount > 0;
+    return true;
   };
 
       
