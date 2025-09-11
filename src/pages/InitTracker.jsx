@@ -1239,8 +1239,7 @@ const InitTracker = () => {
         )
       }));
     }
-    console.log(nuevosEstados);
-    console.log(entity);
+    
     // 🔹 Si aún queda tiempo → saltamos turno
     return true;
   };
@@ -1412,6 +1411,7 @@ const InitTracker = () => {
         }
         const skipped = checkTiempoSkip({ ...current, type: 'enemy' });
         if (skipped) {
+          console.log(current);
           showScenarioToast(`⏳ ${tee[current.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
@@ -1748,7 +1748,7 @@ const InitTracker = () => {
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-          }, 900);
+          }, 600);
         }
       }
   
@@ -1770,7 +1770,7 @@ const InitTracker = () => {
           setFlippedCards(prev => [...prev, currentTurnEntity.uuid]);
           setTimeout(() => {
             setFlippedCards(prev => prev.filter(id => id !== currentTurnEntity.uuid));
-          }, 900);
+          }, 600);
         }
       }
     }
