@@ -1195,20 +1195,22 @@ const InitTracker = () => {
   const checkTiempoSkip = (entity) => {
     if (!entity?.estadosAlterados) return false;
   
-    const estadoTiempo = entity.estadosAlterados.find(e => e.id === "TIEMPO" && e.count > 0);
-    if (!estadoTiempo) return false;
+    const idx = entity.estadosAlterados.findIndex(e => e.id === "TIEMPO");
+    if (idx === -1) return false;
   
-    const configTiempo = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
-    let nuevoCount = estadoTiempo.count;
+    const estado = entity.estadosAlterados[idx];
+    if (estado.count <= 0) return false;
   
-    if (configTiempo?.reduce === "si") {
-      nuevoCount = Math.max(0, estadoTiempo.count - (configTiempo.numReduce || 1));
-    }
+    const config = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
+    const reduce = config?.reduce || 1;
   
-    const nuevosEstados = entity.estadosAlterados.map(e =>
-      e.id === "TIEMPO" ? { ...e, count: nuevoCount } : e
-    );
+    // Reducimos contador
+    const nuevoCount = Math.max(0, estado.count - reduce);
   
+    const nuevosEstados = [...entity.estadosAlterados];
+    nuevosEstados[idx] = { ...estado, count: nuevoCount };
+  
+    // Guardar cambios en la colección correcta
     if (entity.type === "enemy") {
       setPlacedEnemies(prev =>
         prev.map(e =>
@@ -1218,23 +1220,28 @@ const InitTracker = () => {
         )
       );
     } else if (entity.type === "rune") {
-      console.log(nuevosEstados);
       setPlacedRunes(prev =>
         prev.map(r =>
           r.rune.uuid === entity.uuid
-            ? { rune: { ...r.rune, estadosAlterados: nuevosEstados } }
+            ? { ...r, rune: { ...r.rune, estadosAlterados: nuevosEstados } }
             : r
         )
       );
-    } 
-    // 🔮 Futuro: habilitar héroes
-
+    } else if (entity.type === "hero") {
+      setTrackerData(prev => ({
+        ...prev,
+        placedHeroes: prev.placedHeroes.map(h =>
+          h.uuid === entity.uuid
+            ? { ...h, estadosAlterados: nuevosEstados }
+            : h
+        )
+      }));
+    }
   
-    // Aviso en pantalla
-    showScenarioToast(`⏳ ${tee[entity.id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
-  
-    return true; // indica que debe saltarse
+    // 🔹 Si aún queda tiempo → saltamos turno
+    return nuevoCount > 0;
   };
+
       
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
@@ -1389,7 +1396,7 @@ const InitTracker = () => {
       const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
   
       if (skipped) {
-        //previousIndexRef.current = turnIndex;
+        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.index].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
         return;
       }
