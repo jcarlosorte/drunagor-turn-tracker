@@ -1392,11 +1392,12 @@ const InitTracker = () => {
       }, 800); 
       return;
     }
-    if (hasEntities) {
-      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.current], type: step.type } );
+    
+    if (hasEntities.length > 0) {
+      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
       console.log(skipped);
       if (skipped) {
-        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.current].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
+        showScenarioToast(`⏳ ${tee[hasEntities[groupTurnTracker.index].id] || entity.nombre} ${ti.saltaTurnoPorTiempo}`);
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
         return;
       }
@@ -1497,7 +1498,6 @@ const InitTracker = () => {
       if (runes.length > 0) {
         const currentRune = runes[groupTurnTracker.index];
         if (!currentRune) {
-          //console.warn("Carta runa eliminada. Buscando siguiente entidad...");
           setTimeout(() => {
               handleNextTurn();
           }, 1500); 
@@ -1510,7 +1510,6 @@ const InitTracker = () => {
           if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
             tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
             processedDefenseTurnRef.current.add(currentRune.uuid);
-            //console.log("🛡 Reducimos defensa en su turno:", currentRune.defenseCounter - 1);
           }
           return; // no ejecutamos el efecto todavía
         }
