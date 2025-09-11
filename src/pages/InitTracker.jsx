@@ -1358,7 +1358,7 @@ const InitTracker = () => {
     
     previousIndexRef.current = turnIndex;
     
-    let hasEntities = false;
+    let hasEntities = null;
     if (step.type === "enemy") {
       hasEntities = placedEnemies.some(
         e =>
@@ -1375,10 +1375,10 @@ const InitTracker = () => {
     } else if (step.type === "hero") {
       hasEntities = trackerData.placedHeroes?.some(
         h => h.role === step.role && h.position === step.index
-      );
+      ) || null;
     }
     
-    if (!hasEntities) {
+    if (!hasEntities || hasEntities.length === 0) {
       //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
@@ -1387,7 +1387,7 @@ const InitTracker = () => {
     }
     if (hasEntities) {
       const skipped = checkTiempoSkip( { ...hasEntities, type: step.type } );
-      console.log(skipped);
+  
       if (skipped) {
         //previousIndexRef.current = turnIndex;
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
