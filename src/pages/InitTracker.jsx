@@ -1410,7 +1410,7 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip(current);
+        const skipped = checkTiempoSkip({ ...current, type: 'enemy' });
         if (skipped) {
           showScenarioToast(`⏳ ${tee[current.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
@@ -1501,7 +1501,7 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip(currentRune);
+        const skipped = checkTiempoSkip({ ...currentRune, type: 'rune' });
         if (skipped) {
           showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
