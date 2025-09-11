@@ -203,6 +203,7 @@
       "muere_1": "muere por los efectos de las condiciones al inicio de su turno",
       "muere_2": "muere por los efectos de las condiciones al final de su turno",
       "cumpleCondiciones": "¿Cumple las condiciones para añadir la carta ",
+      "saltaTurnoPorTiempo": "Salta el turno por ficha de Tiempo",
       "inflige": "inflige",
       "daño_i": "daño",
       "tiempo": "Fichas de Tiempo",
