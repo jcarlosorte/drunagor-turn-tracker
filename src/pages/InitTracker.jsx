@@ -1116,7 +1116,7 @@ const InitTracker = () => {
         // Aquí invocaríamos manifestTile() o lógica similar
         tile = manifestTile();
         if (tile) {
-          logs.push(`🔮 ${ti.runaManifestada}: ${ti.colores[tile.runa]}`);
+          logs.push(`🔮 ${ti.runaManifestada} ${ti.colores[tile.runa]}`);
           //handleTileDraw(tile);
         }
       }
@@ -1218,6 +1218,7 @@ const InitTracker = () => {
         )
       );
     } else if (entity.type === "rune") {
+      console.log(nuevosEstados);
       setPlacedRunes(prev =>
         prev.map(r =>
           r.rune.uuid === entity.uuid
@@ -1386,8 +1387,9 @@ const InitTracker = () => {
     }
     if (hasEntities) {
       const skipped = checkTiempoSkip( { ...hasEntities, type: step.type } );
+      console.log(skipped);
       if (skipped) {
-        previousIndexRef.current = turnIndex;
+        //previousIndexRef.current = turnIndex;
         setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
         return;
       }
