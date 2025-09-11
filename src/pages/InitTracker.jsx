@@ -1239,6 +1239,7 @@ const InitTracker = () => {
         )
       }));
     }
+    console.log(nuevosEstados);
     console.log(entity);
     // 🔹 Si aún queda tiempo → saltamos turno
     return true;
@@ -1409,9 +1410,9 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip(group[groupTurnTracker.index]);
+        const skipped = checkTiempoSkip(current);
         if (skipped) {
-          showScenarioToast(`⏳ ${tee[group[groupTurnTracker.index].id]} ${ti.saltaTurnoPorTiempo}`);
+          showScenarioToast(`⏳ ${tee[current.id]]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
@@ -1500,9 +1501,9 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip(runes[groupTurnTracker.index]);
+        const skipped = checkTiempoSkip(currentRune);
         if (skipped) {
-          showScenarioToast(`⏳ ${tee[runes[groupTurnTracker.index].id]} ${ti.saltaTurnoPorTiempo}`);
+          showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
