@@ -1412,7 +1412,7 @@ const InitTracker = () => {
         }
         const skipped = checkTiempoSkip(current);
         if (skipped) {
-          showScenarioToast(`⏳ ${tee[current.id]]} ${ti.saltaTurnoPorTiempo}`);
+          showScenarioToast(`⏳ ${tee[current.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
