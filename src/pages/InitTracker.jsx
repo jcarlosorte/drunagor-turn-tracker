@@ -656,7 +656,6 @@ const InitTracker = () => {
         setTimeout(() => setWarningMessage(null), 3000);
       }
 
-      console.log(nuevasCartas);
       setPlacedEnemies(prev => [...prev, ...nuevasCartas]);
   
       nuevasCartas.forEach(carta => {
@@ -899,7 +898,6 @@ const InitTracker = () => {
         if (cantidad > 0) {
           // buscamos el estado ESCUDO
           let nuevosEstados = [...estados];
-          console.log(nuevosEstados);
           const idx = nuevosEstados.findIndex(e => e.id === "ESCUDO");
           const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
           const maxEscudo = configEscudo?.max || Infinity;
@@ -1392,7 +1390,7 @@ const InitTracker = () => {
       }, 800); 
       return;
     }
-    
+    console.log(hasEntities);
     if (hasEntities.length > 0) {
       const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
       console.log(skipped);
@@ -1412,10 +1410,17 @@ const InitTracker = () => {
   
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
+        
         if (!current) {
           setTimeout(() => {
             handleNextTurn();
           }, 1500); 
+          return;
+        }
+        const skipped = checkTiempoSkip(group[groupTurnTracker.index]);
+        if (skipped) {
+          showScenarioToast(`⏳ ${tee[group[groupTurnTracker.index].id]} ${ti.saltaTurnoPorTiempo}`);
+          setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
@@ -1501,6 +1506,12 @@ const InitTracker = () => {
           setTimeout(() => {
               handleNextTurn();
           }, 1500); 
+          return;
+        }
+        const skipped = checkTiempoSkip(runes[groupTurnTracker.index]);
+        if (skipped) {
+          showScenarioToast(`⏳ ${tee[runes[groupTurnTracker.index].id]} ${ti.saltaTurnoPorTiempo}`);
+          setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
