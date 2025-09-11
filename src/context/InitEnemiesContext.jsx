@@ -51,19 +51,19 @@ export const InitEnemiesProvider = ({ children }) => {
   };
   
   const placeEnemy = (enemyWithPosition) => {
-    console.log('Placing enemy:', enemyWithPosition);
+    //console.log('Placing enemy:', enemyWithPosition);
     setPlacedEnemies(prev => {
       const updated = [...prev, enemyWithPosition];
-      console.log('Updated placedEnemies:', updated);
+      //console.log('Updated placedEnemies:', updated);
       return updated;
     });
   };
 
   const removeEnemyAt = (position) => {
-    console.log('Removing enemy at position:', position);
+    //console.log('Removing enemy at position:', position);
     setPlacedEnemies(prev => {
       const updated = prev.filter(e => e.position !== position);
-      console.log('Updated placedEnemies after removal:', updated);
+      //console.log('Updated placedEnemies after removal:', updated);
       return updated;
     });
   };
@@ -83,7 +83,7 @@ export const InitEnemiesProvider = ({ children }) => {
   
         if (isCommander && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
         if (isOverlord && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
-        if (isFallenHero && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
+        if (isFallenHero && (enemy.tipo === 'especial' || enemy.tipo === 'fallenHero') && enemy.sourceEnemyUUID === uuid) return false;
         if (isBoss && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
   
         return true;
