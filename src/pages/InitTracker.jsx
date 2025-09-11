@@ -1378,7 +1378,7 @@ const InitTracker = () => {
       ) || null;
     }
     
-    if (!hasEntities || hasEntities.length === 0) {
+    if (!hasEntities) {
       //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
@@ -1386,7 +1386,7 @@ const InitTracker = () => {
       return;
     }
     if (hasEntities) {
-      const skipped = checkTiempoSkip( { ...hasEntities, type: step.type } );
+      const skipped = checkTiempoSkip( { ...hasEntities[groupTurnTracker.index], type: step.type } );
   
       if (skipped) {
         //previousIndexRef.current = turnIndex;
