@@ -1214,6 +1214,7 @@ const InitTracker = () => {
 
     // Guardar cambios en la colección correcta
     if (entity.type === "enemy") {
+      console.log(nuevosEstados);
       updateEnemyEstados(entity.uuid, nuevosEstados);
 
     } else if (entity.type === "rune") {
@@ -1404,7 +1405,8 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip({ ...current, type: 'enemy' });
+        console.log(current);
+        const skipped = checkTiempoSkip(current);
         
         if (skipped) {
           console.log(current);
