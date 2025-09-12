@@ -745,7 +745,15 @@ const InitTracker = () => {
     let cartaId = null;
     // Buscar cartas especiales asociadas a este enemigo
     const cartasEspeciales = placedEnemies
-      .filter(e => (e.enemy.tipo === 'especial' || e.enemy.tipo === 'fallenHero' ) && e.enemy.sourceEnemyUUID === enemyUUID)
+      //.filter(e => (e.enemy.tipo === 'especial' || e.enemy.tipo === 'fallenHero' ) && e.enemy.sourceEnemyUUID === enemyUUID)
+      .filter(e => 
+        (e.enemy.tipo === 'especial' || e.enemy.tipo === 'fallenHero') &&
+        e.enemy.sourceEnemyUUID === enemyUUID &&
+        !(
+          Array.isArray(e.enemy.estadosAlterados) &&
+          e.enemy.estadosAlterados.some(est => est.id === "TIEMPO" && est.count > 0)
+        )
+      )
       .map(e => e.enemy);
   
     cartasEspeciales.forEach(carta => {
@@ -1391,8 +1399,6 @@ const InitTracker = () => {
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
           const skippedData = checkTiempoSkip(current);
-          console.log("skip");
-          console.log(skippedData);
           if (skippedData?.skipped) {
             setPlacedEnemies(prev => {
               const updated = prev.map(e =>
@@ -1512,12 +1518,13 @@ const InitTracker = () => {
                     : e
                 );
                 return updated;
+            });
             showScenarioToast(`⏳ ${ti.saltaTurnoPorTiempo}`);
             //setTimeout(() => handleNextTurn(), 800);
             return;
           }
           
-
+         
           if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
             if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
               tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
