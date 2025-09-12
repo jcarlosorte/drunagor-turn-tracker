@@ -1035,7 +1035,7 @@ const InitTracker = () => {
         
         const curacionReal = nuevaVida - enemigo.vida
         
-        if (tieneCondicion) {
+        if (tieneCondicion && curacion > 0) {
           const confirmar = window.confirm(`${ti.sanaPreg} ${curacionReal} ${ti.preg}`);
           if (!confirmar) return;
         }
