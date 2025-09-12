@@ -1408,7 +1408,8 @@ const InitTracker = () => {
         
         if (skipped) {
           console.log(current);
-          showScenarioToast(`⏳ ${tee.nombre[current.id]} ${ti.saltaTurnoPorTiempo}`);
+          const nombreEnemy = if (current.tipo = ('especial' || 'fallenHero' ) { return ta.nombre[current.id]; } else { return tee[current.id]}
+          showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
