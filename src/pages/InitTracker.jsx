@@ -1237,7 +1237,7 @@ const InitTracker = () => {
     }
     
     // 🔹 Si aún queda tiempo → saltamos turno
-    return true;
+    return nuevoCount > 0;
   };
 
       
@@ -1405,10 +1405,12 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
+        console.log("1");
         console.log(current);
         const skipped = checkTiempoSkip(current, 'enemy');
-        
+        console.log(skipped)
         if (skipped) {
+          console.log("2");
           console.log(current);
           const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
