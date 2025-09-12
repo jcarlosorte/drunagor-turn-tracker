@@ -31,7 +31,7 @@ export const ESTADOS_ALTERADOS = [
   //{id: "CONCENTRACION_X", reduce:"", max: 4},
   //{id: "KI", reduce:"", max: 4},
   { id: "ESCUDO", texto: "escudo", accion: "escudo", reduce: "no", numReduce: 0, turno: "principio", daño: 0, max: 4, imagen: escudo, mostrar: "si" },
-  { id: "TIEMPO", texto: "tiempo", accion: "tiempo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 4, imagen: tiempo, mostrar: "si" }
+  { id: "TIEMPO", texto: "tiempo", accion: "tiempo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 4, imagen: tiempo, mostrar: "no" }
 ];
 
 
