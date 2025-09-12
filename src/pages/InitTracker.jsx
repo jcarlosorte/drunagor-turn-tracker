@@ -89,7 +89,7 @@ const InitTracker = () => {
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange,
          initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
-  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune } = useInitRunes();
+  const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const { executedRunes, setExecutedRunes } = useInitRunes();
   const [warningMessage, setWarningMessage] = useState(null);
   const [overhealedEnemies, setOverhealedEnemies] = useState(new Set());
@@ -1530,10 +1530,10 @@ const InitTracker = () => {
          
           if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
             if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
-              tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
+            // esto habra que borrarlo
               processedDefenseTurnRef.current.add(currentRune.uuid);
             }
-            return; // no ejecutamos el efecto todavía
+            //return; // no ejecutamos el efecto todavía
           }
            // ✅ Evitar ejecución duplicada
           if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
@@ -1918,7 +1918,7 @@ const InitTracker = () => {
 
   const RuneCard = ({ rune, onRemove, flipped }) => {
     const tipo = rune.tipo;
-    const defenseCounter = rune.defenseCounter;
+    
     const { toggleRuneEffect } = useInitRunes();
     const applyEffect = rune.applyEffect !== false;
     const totalEnemies = placedEnemies.length;
@@ -2047,14 +2047,6 @@ const InitTracker = () => {
               <label>{ti.applyEffect}</label>
             </div>
 
-            {/* Badge contador */}
-            {tipo === 'defensa' && defenseCounter > 0 && (
-              <div className="flex justify-center mt-1 ">
-                <div className="text-center bg-red-600 text-white text-[0.55rem] sm:text-[0.65rem] font-bold px-1 py-1 rounded-full shadow">
-                  {ti.contador} {defenseCounter}
-                </div>
-              </div>
-            )}
             <div className="flex items-center justify-end mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
               <button
                 onClick={() => onRemove(rune.uuid)}
