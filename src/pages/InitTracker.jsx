@@ -1516,8 +1516,8 @@ const InitTracker = () => {
           if (skippedData?.skipped) {
             setPlacedRunes(prev => {
                 const updated = prev.map(e =>
-                  e.enemy.uuid === currentRune.uuid
-                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+                  e.rune.uuid === currentRune.uuid
+                    ? { ...e, rune: { ...e.rune, estadosAlterados: skippedData.nuevosEstados } }
                     : e
                 );
                 return updated;
