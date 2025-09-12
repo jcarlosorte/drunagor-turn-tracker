@@ -1406,7 +1406,7 @@ const InitTracker = () => {
               ? ta.nombre?.[current.id] || current.nombre || current.id
               : tee?.[current.id] || current.nombre || current.id;
             showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
-            //setTimeout(() => handleNextTurn(), 1500);
+            setTimeout(() => handleNextTurn(), 0);
             return;
           }
 
