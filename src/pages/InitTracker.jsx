@@ -1494,6 +1494,8 @@ const InitTracker = () => {
           return;
         }
 
+        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
+        setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(currentRune.uuid)) {
           processedTiempoRef.current.add(currentRune.uuid);
