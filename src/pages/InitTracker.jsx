@@ -1191,54 +1191,27 @@ const InitTracker = () => {
 
 
   const checkTiempoSkip = (entity) => {
-    if (!entity?.estadosAlterados) return false;
-  
+    if (!entity?.estadosAlterados) return null;
     const idx = entity.estadosAlterados.findIndex(e => e.id === "TIEMPO");
-    if (idx === -1) return false;
+    if (idx === -1) return null;
   
     const estado = entity.estadosAlterados[idx];
-    if (estado.count <= 0) return false;
+    if (estado.count <= 0) return null;
   
     const config = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
     const reduce = config?.numReduce || 1;
     let nuevoCount = estado.count;
-    const countOri = estado.count;
-    // Reducimos contador
+  
     if (config?.reduce === "si") {
       nuevoCount = Math.max(0, estado.count - reduce);
     }
-
+  
     const nuevosEstados = [...entity.estadosAlterados];
     nuevosEstados[idx] = { ...estado, count: nuevoCount };
-    
-
-    // Guardar cambios en la colección correcta
-    if (entity.type === "enemy") {
-      console.log(nuevosEstados);
-      updateEnemyEstados(entity.uuid, nuevosEstados);
-
-    } else if (entity.type === "rune") {
-      setPlacedRunes(prev =>
-        prev.map(r =>
-          r.rune.uuid === entity.uuid
-            ? { ...r, rune: { ...r.rune, estadosAlterados: nuevosEstados } }
-            : r
-        )
-      );
-    } else if (entity.type === "hero") {
-      setTrackerData(prev => ({
-        ...prev,
-        placedHeroes: prev.placedHeroes.map(h =>
-          h.uuid === entity.uuid
-            ? { ...h, estadosAlterados: nuevosEstados }
-            : h
-        )
-      }));
-    }
-    
-    // 🔹 Si aún queda tiempo → saltamos turno
-    return countOri > 0;
+  
+    return { skipped: nuevoCount > 0, nuevosEstados };
   };
+
 
       
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
@@ -1411,9 +1384,10 @@ const InitTracker = () => {
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
-          const skipped = checkTiempoSkip({ ...current, type: step.type });
+          const skippedData = checkTiempoSkip({ ...current, type: step.type });
     
-          if (skipped) {
+          if (skippedData?.skipped) {
+            updateEnemyEstados(current.uuid, skippedData.nuevosEstados);
             const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
@@ -1509,12 +1483,21 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip({ ...current, type: step.type }, turnIndex);
-        if (skipped) {
-          showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
-          setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
-          return;
+
+        // ✅ Controlar TIEMPO solo si no está procesado este turno
+        if (!processedTiempoRef.current.has(currentRune.uuid)) {
+          processedTiempoRef.current.add(currentRune.uuid);
+          const skippedData = checkTiempoSkip({ ...currentRune, type: step.type });
+    
+          if (skippedData?.skipped) {
+            updateEnemyEstados(currentRune.uuid, skippedData.nuevosEstados);
+            
+            showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
+            setTimeout(() => handleNextTurn(), 800);
+            return;
+          }
         }
+
         setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
         setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
 
