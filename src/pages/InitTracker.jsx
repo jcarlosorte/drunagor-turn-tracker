@@ -1385,6 +1385,7 @@ const InitTracker = () => {
           return;
         }
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
+        setGroupTurnTracker({ group, index: groupTurnTracker.index });
         
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(current.uuid)) {
@@ -1406,7 +1407,7 @@ const InitTracker = () => {
               ? ta.nombre?.[current.id] || current.nombre || current.id
               : tee?.[current.id] || current.nombre || current.id;
             showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
-            setTimeout(() => handleNextTurn(), 2500);
+            setTimeout(() => handleNextTurn(), 1500);
             return;
           }
 
@@ -1456,7 +1457,7 @@ const InitTracker = () => {
               return;
             }
           }
-          setGroupTurnTracker({ group, index: groupTurnTracker.index });
+          
       
           // ✅ Ejecutar VORÁGINE solo si no está ya procesado
           if (
