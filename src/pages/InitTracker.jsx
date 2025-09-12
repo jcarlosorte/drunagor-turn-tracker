@@ -1408,7 +1408,11 @@ const InitTracker = () => {
         
         if (skipped) {
           console.log(current);
-          const nombreEnemy = if (current.tipo = ('especial' || 'fallenHero' ) { return ta.nombre[current.id]; } else { return tee[current.id]}
+          const nombreEnemy =
+            current.tipo === "especial" || current.tipo === "fallenHero"
+              ? ta.nombre?.[current.id] || current.nombre || current.id
+              : tee?.[current.id] || current.nombre || current.id;
+          
           showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
