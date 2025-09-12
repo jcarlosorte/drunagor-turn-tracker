@@ -1190,12 +1190,8 @@ const InitTracker = () => {
   };
 
 
-  const checkTiempoSkip = (entity, turnIndex) => {
+  const checkTiempoSkip = (entity) => {
     if (!entity?.estadosAlterados) return false;
-    // ✅ Evitar que se procese dos veces el mismo turno
-    if (processedTiempoRef.current.has(entity.uuid)) {
-      return entity.estadosAlterados.some(e => e.id === "TIEMPO" && e.count > 0);
-    }
   
     const idx = entity.estadosAlterados.findIndex(e => e.id === "TIEMPO");
     if (idx === -1) return false;
@@ -1240,7 +1236,6 @@ const InitTracker = () => {
       }));
     }
     
-    processedTiempoRef.current.add(entity.uuid);
     // 🔹 Si aún queda tiempo → saltamos turno
     return countOri > 0;
   };
@@ -1412,22 +1407,23 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        console.log("1");
-        console.log(current);
-        const skipped = checkTiempoSkip({ ...current, type: step.type }, turnIndex);
-        console.log(skipped)
-        if (skipped) {
-          console.log("2");
-          console.log(current);
-          const nombreEnemy =
+
+        // ✅ Controlar TIEMPO solo si no está procesado este turno
+        if (!processedTiempoRef.current.has(current.uuid)) {
+          processedTiempoRef.current.add(current.uuid);
+          const skipped = checkTiempoSkip({ ...current, type: step.type });
+    
+          if (skipped) {
+            const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
               : tee?.[current.id] || current.nombre || current.id;
-          
-          showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
-          setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
-          return;
+            showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
+            setTimeout(() => handleNextTurn(), 800);
+            return;
+          }
         }
+
         setCurrentTurnEntity({ ...current, type: 'enemy', group });
 
         // ✅ Si es carta especial → ejecutar lógica y salir
