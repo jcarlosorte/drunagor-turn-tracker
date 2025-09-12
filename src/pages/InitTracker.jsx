@@ -1381,7 +1381,8 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-
+        setCurrentTurnEntity({ ...current, type: 'enemy', group });
+        
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
@@ -1406,72 +1407,70 @@ const InitTracker = () => {
             setTimeout(() => handleNextTurn(), 1500);
             return;
           }
-        }
 
-        setCurrentTurnEntity({ ...current, type: 'enemy', group });
-
-        // ✅ Si es carta especial → ejecutar lógica y salir
-        if (current.tipo === 'especial' || current.tipo === 'fallenHero') {
-          if (!processedCardsRef.current.has(current.uuid)) {
-            processedCardsRef.current.add(current.uuid);
-            const { logs } = aplicarCapacidadesCartaEspecial(current);
-      
-            logs.forEach(log =>
-              showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
-            );
-      
-            return;
+          // ✅ Si es carta especial → ejecutar lógica y salir
+          if (current.tipo === 'especial' || current.tipo === 'fallenHero') {
+            if (!processedCardsRef.current.has(current.uuid)) {
+              processedCardsRef.current.add(current.uuid);
+              const { logs } = aplicarCapacidadesCartaEspecial(current);
+        
+              logs.forEach(log =>
+                showScenarioToast(`🃏 ${current.nombreEnemy || current.nombre}: ${log}`)
+              );
+        
+              return;
+            }
           }
-        }
+              
+          // ✅ Aplicar efectos al inicio
+          if (!processedStartEffectsRef.current.has(current.uuid)) {
+            processedStartEffectsRef.current.add(current.uuid);
+            // 🔹 Efectos de estados (fase inicio)
+            const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(current, "inicio");
+  
+            // ✅ Aplicar efectos de capacidades activadas
+            const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
             
-        // ✅ Aplicar efectos al inicio
-        if (!processedStartEffectsRef.current.has(current.uuid)) {
-          processedStartEffectsRef.current.add(current.uuid);
-          // 🔹 Efectos de estados (fase inicio)
-          const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(current, "inicio");
-
-          // ✅ Aplicar efectos de capacidades activadas
-          const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
+            // 🔹 Actualizamos enemigo con ambos cambios
+            const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
+      
+            // ✅ Mostrar logs (estados + capacidades)
+            [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
           
-          // 🔹 Actualizamos enemigo con ambos cambios
-          const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
-    
-          // ✅ Mostrar logs (estados + capacidades)
-          [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
-        
-          // 🔹 Guardar en placedEnemies
-          setPlacedEnemies(prev =>
-            prev.map(e =>
-              e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
-            )
-          );
-        
-          // ❌ Si muere tras aplicar efectos → saltar turno
-          if (enemigoFinal.vida <= 0) {
-            showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
-            setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
-            setTimeout(() => {
-              //handleNextTurn();
-            }, 900); 
-            return;
+            // 🔹 Guardar en placedEnemies
+            setPlacedEnemies(prev =>
+              prev.map(e =>
+                e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
+              )
+            );
+          
+            // ❌ Si muere tras aplicar efectos → saltar turno
+            if (enemigoFinal.vida <= 0) {
+              showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+              setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
+              setTimeout(() => {
+                //handleNextTurn();
+              }, 900); 
+              return;
+            }
           }
-        }
-        setGroupTurnTracker({ group, index: groupTurnTracker.index });
-    
-        // ✅ Ejecutar VORÁGINE solo si no está ya procesado
-        if (
-          Array.isArray(current.capacidades) &&
-          current.capacidades.includes('VORAGINE') &&
-          !processedVoragineRef.current.has(current.uuid)
-        ) {
-          // 🔁 Marcar como procesado
-          processedVoragineRef.current.add(current.uuid);
-          if (current.categoria === 'overlord') {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
-            placeOverlordCards(current, current.uuid, true);
-          } else if (['comandante', 'hero'].includes(current.categoria)) {
-            setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
-            placeCommanderCards(current, current.uuid, true);
+          setGroupTurnTracker({ group, index: groupTurnTracker.index });
+      
+          // ✅ Ejecutar VORÁGINE solo si no está ya procesado
+          if (
+            Array.isArray(current.capacidades) &&
+            current.capacidades.includes('VORAGINE') &&
+            !processedVoragineRef.current.has(current.uuid)
+          ) {
+            // 🔁 Marcar como procesado
+            processedVoragineRef.current.add(current.uuid);
+            if (current.categoria === 'overlord') {
+              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
+              placeOverlordCards(current, current.uuid, true);
+            } else if (['comandante', 'hero'].includes(current.categoria)) {
+              setPlacedEnemies(prev => prev.filter(e => !(e.enemy.tipo === 'especial' && e.enemy.sourceEnemyUUID === current.uuid)));
+              placeCommanderCards(current, current.uuid, true);
+            }
           }
         }
     
@@ -1494,8 +1493,6 @@ const InitTracker = () => {
           return;
         }
 
-        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
-        setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(currentRune.uuid)) {
           processedTiempoRef.current.add(currentRune.uuid);
