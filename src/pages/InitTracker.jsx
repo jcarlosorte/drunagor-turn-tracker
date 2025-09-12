@@ -786,7 +786,10 @@ const InitTracker = () => {
     const nuevosEstados = estados.map(estado => {
       const config = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
       if (!config || estado.count <= 0) return estado;
-    
+
+      // ⏳ Saltamos TIEMPO, se controla en checkTiempoSkip
+      if (estado.id === "TIEMPO") return estado;
+      
       // ¿Debe ejecutarse en esta fase?
       if ((faseTurno === "inicio" && config.turno === "principio") ||
           (faseTurno === "fin" && config.turno === "final")) {
