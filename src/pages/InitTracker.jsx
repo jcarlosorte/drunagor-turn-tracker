@@ -680,7 +680,6 @@ const InitTracker = () => {
       numRunas: runeCard.numRunas,
       tipo: runeCard.tipo,
       carta: runeCard.carta,
-      counter: timeToken,
       colorIndex: 10,
       estadosAlterados: initialStates
     };
