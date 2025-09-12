@@ -17,9 +17,6 @@ export const InitRunesProvider = ({ children }) => {
       alert(t.RuneRepeat);
       return;
     }
-  
-    //const isDefensa = rune.tipo === "defensa";
-    const isDefensa = rune.counter;
 
     setPlacedRunes(prev => [
       ...prev,
@@ -28,8 +25,7 @@ export const InitRunesProvider = ({ children }) => {
           uuid: uuidv4(),
           ...rune,
           colorIndex: 10, // siempre se colocan en índice 10
-          applyEffect: isDefensa ? false : true,
-          defenseCounter: isDefensa ? 2 : null, 
+          applyEffect: true,
         },
       },
     ]);
@@ -40,35 +36,6 @@ export const InitRunesProvider = ({ children }) => {
   const resetPlacedRunes = () => {
     setPlacedRunes([]);
     setExecutedRunes([]); // ✅ también resetear ejecuciones
-  };
-
-  const tickDefenseRune = (uuid) => {
-    setPlacedRunes(prev =>
-      prev.map(item => {
-        if (item.rune.uuid !== uuid) return item;
-  
-        if (item.rune.defenseCounter > 0) {
-          // Reducir el contador
-          return {
-            ...item,
-            rune: {
-              ...item.rune,
-              defenseCounter: item.rune.defenseCounter - 1,
-            }
-          };
-        } else {
-          // Si llega a 0 → activar applyEffect
-          return {
-            ...item,
-            rune: {
-              ...item.rune,
-              defenseCounter: 0,
-              applyEffect: true,
-            }
-          };
-        }
-      })
-    );
   };
 
   const toggleRuneEffect = (uuid) => {
@@ -88,7 +55,7 @@ export const InitRunesProvider = ({ children }) => {
   };
                                                     
 
-  return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, tickDefenseRune, toggleRuneEffect, executedRunes, setExecutedRunes }}> {children} </InitRunesContext.Provider> ); 
+  return ( <InitRunesContext.Provider value={{ placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes, toggleRuneEffect, executedRunes, setExecutedRunes }}> {children} </InitRunesContext.Provider> ); 
 
 };
 
