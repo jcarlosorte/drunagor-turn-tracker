@@ -1201,7 +1201,8 @@ const InitTracker = () => {
     const config = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
     const reduce = config?.numReduce || 1;
     let nuevoCount = estado.count;
-  
+    let countOri = estado.count;
+    
     if (config?.reduce === "si") {
       nuevoCount = Math.max(0, estado.count - reduce);
     }
@@ -1209,7 +1210,7 @@ const InitTracker = () => {
     const nuevosEstados = [...entity.estadosAlterados];
     nuevosEstados[idx] = { ...estado, count: nuevoCount };
   
-    return { skipped: nuevoCount > 0, nuevosEstados };
+    return { skipped: countOri > 0, nuevosEstados };
   };
 
 
@@ -1385,7 +1386,7 @@ const InitTracker = () => {
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
           const skippedData = checkTiempoSkip({ ...current, type: step.type });
-    
+          console.log(skippedData);
           if (skippedData?.skipped) {
             updateEnemyEstados(current.uuid, skippedData.nuevosEstados);
             const nombreEnemy =
