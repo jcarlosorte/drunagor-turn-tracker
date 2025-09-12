@@ -1386,19 +1386,18 @@ const InitTracker = () => {
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
-          const skippedData = checkTiempoSkip({ ...current, type: step.type });
+          const skippedData = checkTiempoSkip(current);
           console.log("skip");
           console.log(skippedData);
           if (skippedData?.skipped) {
-            setPlacedEnemies(prev => {
-              const updated = prev.map(e =>
-                  e.enemy.uuid === current.uuid
-                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: [...skippedData.nuevosEstados] } }
-                    : e
-                );
-                console.log("✅ updated placedEnemies:", updated);
-                return updated;
-              });
+            const enemigoFinal = { ...current, estadosAlterados: skippedData.nuevosEstados };
+            setPlacedEnemies(prev =>
+              prev.map(e =>
+                e.enemy.uuid === current.uuid
+                  ? { ...e, enemy: enemigoFinal }
+                  : e
+              )
+            );
             const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
@@ -1493,6 +1492,9 @@ const InitTracker = () => {
           return;
         }
 
+        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
+        setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
+        
         // ✅ Controlar TIEMPO solo si no está procesado este turno
         if (!processedTiempoRef.current.has(currentRune.uuid)) {
           processedTiempoRef.current.add(currentRune.uuid);
@@ -1505,110 +1507,108 @@ const InitTracker = () => {
             setTimeout(() => handleNextTurn(), 800);
             return;
           }
-        }
+        
 
-        setCurrentTurnEntity({ ...currentRune, type: 'rune', group: runes });
-        setGroupTurnTracker({ group: runes, index: groupTurnTracker.index });
-
-        if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
-          if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
-            tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
-            processedDefenseTurnRef.current.add(currentRune.uuid);
+          if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
+            if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
+              tickDefenseRune(currentRune.uuid); // 🔻 baja contador SOLO una vez por turno
+              processedDefenseTurnRef.current.add(currentRune.uuid);
+            }
+            return; // no ejecutamos el efecto todavía
           }
-          return; // no ejecutamos el efecto todavía
-        }
-         // ✅ Evitar ejecución duplicada
-        if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
-    
-          if (currentRune.tipo === 'runa') {
-            // 🔹 Lógica clásica de runa: roba fichas de runa
-            if (currentRune.numRunas) {
-              const tiles = drawMultipleTiles(currentRune.numRunas);
-              tiles?.forEach(tile => handleTileDraw(tile));
-              if (!tiles) setTileWarning(ti.aviso);
-            }
-    
-          } else if (currentRune.tipo === 'asalto') {
-
-            if (currentRune.numRunas) {
-              const tiles = drawMultipleTiles(currentRune.numRunas);
-              tiles?.forEach(tile => handleTileDraw(tile));
-              if (!tiles) setTileWarning(ti.aviso);
-            }
-            
-          } else if (currentRune.tipo === 'defensa') {
-            // 🔹 Defensa → roba cartas de aldeano o errantes
-            const numCartas = currentRune.numRunas || 1;
-            const mazo = currentRune.carta; // "aldeano" o "errantes"
-    
-            for (let i = 0; i < numCartas; i++) {
-              // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
-              const cartaRobada = drawCardFromDeck(mazo);
-              if (cartaRobada) {
-                showCardToast(cartaRobada, mazo); 
-              } else {
-                console.warn(`${ti.mazo_1} ${mazo}`);
+           // ✅ Evitar ejecución duplicada
+          if (currentRune.applyEffect !== false && !executedRunes.includes(currentRune.uuid)) {
+      
+            if (currentRune.tipo === 'runa') {
+              // 🔹 Lógica clásica de runa: roba fichas de runa
+              if (currentRune.numRunas) {
+                const tiles = drawMultipleTiles(currentRune.numRunas);
+                tiles?.forEach(tile => handleTileDraw(tile));
+                if (!tiles) setTileWarning(ti.aviso);
               }
-            }
-    
-          } else if (currentRune.tipo === 'incursion') {
-            const isCaraB = currentRune.cara === 'B';
-            const noEnemies = placedEnemies.length === 0;
-            const totalHeroes = trackerData.placedHeroes?.length || 0;
-            const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4;
-            const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id);
-            const alreadyPlaced = placedScenarioMonsters.length;
-            const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
-            const totalFinal = alreadyPlaced + maxMonstruos;
-            // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
-            if (isCaraB || (!isCaraB && noEnemies)) {
-              const tile = manifestTile();
-             
-              // ✅ Comprobar spawnPoints
-              const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+      
+            } else if (currentRune.tipo === 'asalto') {
+  
+              if (currentRune.numRunas) {
+                const tiles = drawMultipleTiles(currentRune.numRunas);
+                tiles?.forEach(tile => handleTileDraw(tile));
+                if (!tiles) setTileWarning(ti.aviso);
+              }
               
-              // ✅ Buscar pilas activas con esa loseta
-              const pilasActivas = [
-                ...pilas.filter(p => p.estado === 'activa'),
-                ...pilasConcentrada.filter(p => p.estado === 'activa')
-              ];
-              
-              const pilasQueContienen = pilasActivas.filter(pila =>
-                pila.tiles.some(t => t.runa === tile.runa)
-              );
-                            
-              if (!spawnExists && pilasQueContienen.length === 0) {
-                // ❌ No hay punto de aparición para ese color
-                showScenarioToast(
-                  `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
+            } else if (currentRune.tipo === 'defensa') {
+              // 🔹 Defensa → roba cartas de aldeano o errantes
+              const numCartas = currentRune.numRunas || 1;
+              const mazo = currentRune.carta; // "aldeano" o "errantes"
+      
+              for (let i = 0; i < numCartas; i++) {
+                // TODO: Lógica para robar del mazo correspondiente (cuando tengamos datos)
+                const cartaRobada = drawCardFromDeck(mazo);
+                if (cartaRobada) {
+                  showCardToast(cartaRobada, mazo); 
+                } else {
+                  console.warn(`${ti.mazo_1} ${mazo}`);
+                }
+              }
+      
+            } else if (currentRune.tipo === 'incursion') {
+              const isCaraB = currentRune.cara === 'B';
+              const noEnemies = placedEnemies.length === 0;
+              const totalHeroes = trackerData.placedHeroes?.length || 0;
+              const maxMonstruos = totalHeroes <= 2 ? 2 : totalHeroes <= 4 ? 3 : 4;
+              const placedScenarioMonsters = placedEnemies.filter(e => e.enemy.id === scenarioMonster?.id);
+              const alreadyPlaced = placedScenarioMonsters.length;
+              const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
+              const totalFinal = alreadyPlaced + maxMonstruos;
+              // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
+              if (isCaraB || (!isCaraB && noEnemies)) {
+                const tile = manifestTile();
+               
+                // ✅ Comprobar spawnPoints
+                const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+                
+                // ✅ Buscar pilas activas con esa loseta
+                const pilasActivas = [
+                  ...pilas.filter(p => p.estado === 'activa'),
+                  ...pilasConcentrada.filter(p => p.estado === 'activa')
+                ];
+                
+                const pilasQueContienen = pilasActivas.filter(pila =>
+                  pila.tiles.some(t => t.runa === tile.runa)
                 );
-                return; // No seguimos con la invocación
+                              
+                if (!spawnExists && pilasQueContienen.length === 0) {
+                  // ❌ No hay punto de aparición para ese color
+                  showScenarioToast(
+                    `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
+                  );
+                  return; // No seguimos con la invocación
+                }
+  
+                // ✅ Si hay pilas que la contienen → avisar
+                if (pilasQueContienen.length > 0) {
+                   const nombresPilas = pilasQueContienen
+                      .map(p => `Nº ${p.numPila}  `)
+                      .join(', ');
+                   showScenarioToast(`${ti.encontradaEn} -> ${ti.colores[tile.runa]}. ${ti.enPilas}: ${nombresPilas}`);
+                }
+                
+                if (faltan > 0 && scenarioMonster) {
+                  spawnBatchEnemies(faltan, scenarioMonster);
+                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
+                }
+                if (totalFinal > 4) {
+                  const exceso = totalFinal - 4;
+                  const damage = 3;
+                  showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
+                }
+              } else {
+                showScenarioToast(`${ti.noManifestamos}`);
               }
-
-              // ✅ Si hay pilas que la contienen → avisar
-              if (pilasQueContienen.length > 0) {
-                 const nombresPilas = pilasQueContienen
-                    .map(p => `Nº ${p.numPila}  `)
-                    .join(', ');
-                 showScenarioToast(`${ti.encontradaEn} -> ${ti.colores[tile.runa]}. ${ti.enPilas}: ${nombresPilas}`);
-              }
-              
-              if (faltan > 0 && scenarioMonster) {
-                spawnBatchEnemies(faltan, scenarioMonster);
-                showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
-              }
-              if (totalFinal > 4) {
-                const exceso = totalFinal - 4;
-                const damage = 3;
-                showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
-              }
-            } else {
-              showScenarioToast(`${ti.noManifestamos}`);
             }
+      
+            // ✅ Marcar como ejecutada
+            setExecutedRunes(prev => [...prev, currentRune.uuid]);
           }
-    
-          // ✅ Marcar como ejecutada
-          setExecutedRunes(prev => [...prev, currentRune.uuid]);
         }
         
         return;
