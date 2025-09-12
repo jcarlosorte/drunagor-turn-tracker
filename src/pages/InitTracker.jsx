@@ -1393,20 +1393,20 @@ const InitTracker = () => {
           console.log("skip");
           console.log(skippedData);
           if (skippedData?.skipped) {
-            const enemigoFinal = { ...current, estadosAlterados: skippedData.nuevosEstados };
-            setPlacedEnemies(prev =>
-              prev.map(e =>
+            setPlacedEnemies(prev => {
+              const updated = prev.map(e =>
                 e.enemy.uuid === current.uuid
-                  ? { ...e, enemy: enemigoFinal }
+                  ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
                   : e
-              )
-            );
+              );
+              return updated;
+            });
             const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
               : tee?.[current.id] || current.nombre || current.id;
             showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
-            setTimeout(() => handleNextTurn(), 0);
+            setTimeout(() => handleNextTurn(), 1500);
             return;
           }
 
