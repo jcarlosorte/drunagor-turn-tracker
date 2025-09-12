@@ -58,7 +58,7 @@ const CommanderCard = ({ carta }) => {
         >
 
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
-          {estadosLocal
+          {(carta.estadosAlterados || [])
             .filter(estado => estado.count > 0)
             .map((estado) => {
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
