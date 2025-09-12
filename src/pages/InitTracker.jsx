@@ -1214,13 +1214,8 @@ const InitTracker = () => {
 
     // Guardar cambios en la colección correcta
     if (entity.type === "enemy") {
-      setPlacedEnemies(prev =>
-        prev.map(e =>
-          e.enemy.uuid === entity.uuid
-            ? { ...e, enemy: { ...e.enemy, estadosAlterados: nuevosEstados } }
-            : e
-        )
-      );
+      updateEnemyEstados(entity.uuid, nuevosEstados);
+
     } else if (entity.type === "rune") {
       setPlacedRunes(prev =>
         prev.map(r =>
@@ -1410,9 +1405,10 @@ const InitTracker = () => {
           return;
         }
         const skipped = checkTiempoSkip({ ...current, type: 'enemy' });
+        
         if (skipped) {
           console.log(current);
-          showScenarioToast(`⏳ ${tee[current.id]} ${ti.saltaTurnoPorTiempo}`);
+          showScenarioToast(`⏳ ${tee.nombre[current.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
           return;
         }
