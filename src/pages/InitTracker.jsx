@@ -1407,7 +1407,7 @@ const InitTracker = () => {
               ? ta.nombre?.[current.id] || current.nombre || current.id
               : tee?.[current.id] || current.nombre || current.id;
             showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
-            setTimeout(() => handleNextTurn(), 1500);
+            //setTimeout(() => handleNextTurn(), 1500);
             return;
           }
 
@@ -1505,13 +1505,18 @@ const InitTracker = () => {
           const skippedData = checkTiempoSkip({ ...currentRune, type: step.type });
     
           if (skippedData?.skipped) {
-            updateEnemyEstados(currentRune.uuid, skippedData.nuevosEstados);
-            
-            showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
-            setTimeout(() => handleNextTurn(), 800);
+            setPlacedRunes(prev => {
+                const updated = prev.map(e =>
+                  e.enemy.uuid === currentRune.uuid
+                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+                    : e
+                );
+                return updated;
+            showScenarioToast(`⏳ ${ti.saltaTurnoPorTiempo}`);
+            //setTimeout(() => handleNextTurn(), 800);
             return;
           }
-        
+          
 
           if (currentRune.tipo === "defensa" && !currentRune.applyEffect) {
             if (!processedDefenseTurnRef.current.has(currentRune.uuid)) {
