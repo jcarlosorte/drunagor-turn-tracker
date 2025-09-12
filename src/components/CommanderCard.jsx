@@ -44,10 +44,8 @@ const CommanderCard = ({ carta }) => {
       : '';
 
   useEffect(() => {
-    if(carta){
-    setEstadosLocal(carta.estadosAlterados);
-    }
-  }, [carta]);
+    setEstadosLocal(carta?.estadosAlterados ? [...carta.estadosAlterados] : []);
+  }, [carta?.estadosAlterados]);
   
   return (
     <div className="flex flex-col items-center mx-1">
@@ -60,7 +58,7 @@ const CommanderCard = ({ carta }) => {
         >
 
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
-          {(carta.estadosAlterados || [])
+          {estadosLocal
             .filter(estado => estado.count > 0)
             .map((estado) => {
               const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
