@@ -1392,7 +1392,7 @@ const InitTracker = () => {
             setPlacedEnemies(prev => {
               const updated = prev.map(e =>
                   e.enemy.uuid === current.uuid
-                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: [...skippedData.nuevosEstados] } }
                     : e
                 );
                 console.log("✅ updated placedEnemies:", updated);
