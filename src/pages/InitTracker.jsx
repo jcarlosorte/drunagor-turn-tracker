@@ -666,6 +666,10 @@ const InitTracker = () => {
 
   const handleAddRuneCard = (runeCard, timeToken) => {
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
+    if (timeToken) {
+      const idxTiempo = initialStates.findIndex(e => e.id === "TIEMPO");
+      initialStates[idxTiempo].count = 2;
+    }
     const newRune = {
       uuid: uuidv4(),
       id: runeCard.id,
