@@ -1386,9 +1386,17 @@ const InitTracker = () => {
         if (!processedTiempoRef.current.has(current.uuid)) {
           processedTiempoRef.current.add(current.uuid);
           const skippedData = checkTiempoSkip({ ...current, type: step.type });
+          console.log("skip");
           console.log(skippedData);
           if (skippedData?.skipped) {
-            updateEnemyEstados(current.uuid, skippedData.nuevosEstados);
+            setPlacedEnemies(prev =>
+              prev.map(e =>
+                e.enemy.uuid === current.uuid
+                  ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+                  : e
+              )
+            );
+            console.log(current);
             const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
