@@ -44,8 +44,10 @@ const CommanderCard = ({ carta }) => {
       : '';
 
   useEffect(() => {
-    setEstadosLocal(carta?.estadosAlterados || []);
-  }, [carta?.estadosAlterados]);
+    if(carta){
+    setEstadosLocal(carta.estadosAlterados);
+    }
+  }, [carta]);
   
   return (
     <div className="flex flex-col items-center mx-1">
