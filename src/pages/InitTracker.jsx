@@ -1190,7 +1190,7 @@ const InitTracker = () => {
   };
 
 
-  const checkTiempoSkip = (entity , type) => {
+  const checkTiempoSkip = (entity) => {
     if (!entity?.estadosAlterados) return false;
   
     const idx = entity.estadosAlterados.findIndex(e => e.id === "TIEMPO");
@@ -1202,7 +1202,7 @@ const InitTracker = () => {
     const config = ESTADOS_ALTERADOS.find(e => e.id === "TIEMPO");
     const reduce = config?.numReduce || 1;
     let nuevoCount = estado.count;
-    
+    const countOri = estado.count;
     // Reducimos contador
     if (config?.reduce === "si") {
       nuevoCount = Math.max(0, estado.count - reduce);
@@ -1213,11 +1213,11 @@ const InitTracker = () => {
     
 
     // Guardar cambios en la colección correcta
-    if (type === "enemy") {
+    if (entity.type === "enemy") {
       console.log(nuevosEstados);
       updateEnemyEstados(entity.uuid, nuevosEstados);
 
-    } else if (type === "rune") {
+    } else if (entity.type === "rune") {
       setPlacedRunes(prev =>
         prev.map(r =>
           r.rune.uuid === entity.uuid
@@ -1225,7 +1225,7 @@ const InitTracker = () => {
             : r
         )
       );
-    } else if (type === "hero") {
+    } else if (entity.type === "hero") {
       setTrackerData(prev => ({
         ...prev,
         placedHeroes: prev.placedHeroes.map(h =>
@@ -1237,7 +1237,7 @@ const InitTracker = () => {
     }
     
     // 🔹 Si aún queda tiempo → saltamos turno
-    return nuevoCount > 0;
+    return countOri > 0;
   };
 
       
@@ -1407,7 +1407,7 @@ const InitTracker = () => {
         }
         console.log("1");
         console.log(current);
-        const skipped = checkTiempoSkip(current, 'enemy');
+        const skipped = checkTiempoSkip({ ...current, type: step.type });
         console.log(skipped)
         if (skipped) {
           console.log("2");
@@ -1506,7 +1506,7 @@ const InitTracker = () => {
           }, 1500); 
           return;
         }
-        const skipped = checkTiempoSkip(currentRune, 'rune');
+        const skipped = checkTiempoSkip({ ...current, type: step.type });
         if (skipped) {
           showScenarioToast(`⏳ ${ta[currentRune.id]} ${ti.saltaTurnoPorTiempo}`);
           setTimeout(() => handleNextTurn(), 800); // ⏩ pasa turno suavemente
