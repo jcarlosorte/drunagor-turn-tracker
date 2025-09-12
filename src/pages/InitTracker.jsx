@@ -1389,14 +1389,15 @@ const InitTracker = () => {
           console.log("skip");
           console.log(skippedData);
           if (skippedData?.skipped) {
-            setPlacedEnemies(prev =>
-              prev.map(e =>
-                e.enemy.uuid === current.uuid
-                  ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
-                  : e
-              )
-            );
-            console.log(current);
+            setPlacedEnemies(prev => {
+              const updated = prev.map(e =>
+                  e.enemy.uuid === current.uuid
+                    ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+                    : e
+                );
+                console.log("✅ updated placedEnemies:", updated);
+                return updated;
+              });
             const nombreEnemy =
             current.tipo === "especial" || current.tipo === "fallenHero"
               ? ta.nombre?.[current.id] || current.nombre || current.id
