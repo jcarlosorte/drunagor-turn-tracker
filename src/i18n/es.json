@@ -205,6 +205,7 @@
       "cumpleCondiciones": "¿Cumple las condiciones para añadir la carta ",
       "saltaTurnoPorTiempo": "Salta el turno por ficha de Tiempo",
       "inflige": "inflige",
+      "ignoraEscudos": "ignora escudos"
       "daño_i": "daño",
       "tiempo": "Fichas de Tiempo",
       "reduce": "la Condición se reduce en",
