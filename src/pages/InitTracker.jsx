@@ -809,10 +809,11 @@ const InitTracker = () => {
         let logMsg = "";
         let escudosReducidos = 0;
         let reducir_cal = 0;
-  
+        let daño = 0;
+        
         // 🔹 Daño
         if (config.daño > 0) {
-          let daño = config.daño * estado.count;
+          daño = config.daño * estado.count;
   
           if (daño > 0) {
             if (config.prevenir === "si" && escudosDisponibles > 0) {
