@@ -912,5 +912,21 @@
       "boss_w_4": "Wermunggdir provoca un derrumbe en el Área del Héroe más lejano y se lo Traga. (El personaje tragado se mueve a las tripas de Wermunggdir, sufre {FATIGA 2}; {DAÑO} {X} y {VENENO} {X}.",
       "boss_w_5": "Cuando el marcador de iniciativa llegue a esta carta, resuelve todas las condiciones de Wermunggdir. Luego, avanza el marcador."
     }
+  },
+  "asalto_gusano": {
+    "nombre":{
+      "boss_w_1": "EMPUJÓN CORPORAL",
+      "boss_w_2": "ESCUPITAJO ÁCIDO",
+      "boss_w_3": "CORROMPIDO POR LA OSCURIDAD",
+      "boss_w_4": "MORDISCO AFILADO",
+      "boss_w_5": "GENERACIÓN DE GUSANOS"
+    },
+    "texto":{
+      "boss_w_1": "{ATACA} 1 ÁREA ADYACENTE A WERMUNGGDIR E INFLIGE {2*X} A CADA HÉROE O MASCOTA EN ELLA.",
+      "boss_w_2": "TODOS LOS HÉROES SUFREN {VENENO} {X}.",
+      "boss_w_3": "{ROBA} 1 RUNA Y COLOCA 2 DE SUS RESPECTIVAS LOSETAS DE OSCURIDAD EN EL TABLERO. GENERA LA OSCURIDAD DESDE UNA CASILLA ADYACENTE A WERMUNGGDIR.",
+      "boss_w_4": "{ATACA} 2 ÁREAS ADYACENTES A WERMUNGGDIR E INFLIGE {DAÑO} {X} Y {HEMORRAGIA} {X} A CADA HÉROE O MASCOTA EN CADA UNA DE ELLAS.",
+      "boss_w_5": "{INVOCA} HASTA {X} CRIAS DE GUSANO - BISOÑO ADYACENTES A WERMUNGGDIR."
+    }
   }
 }
