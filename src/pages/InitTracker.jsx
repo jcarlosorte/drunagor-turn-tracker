@@ -2017,16 +2017,16 @@ const InitTracker = () => {
                   {isCaraA ? (
                     <>
                       <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion}
+                        {accion} {y}
                       </div>
                       <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion2} {y}
+                        {accion2} 
                       </div>
                     </>
                   ) : (
                     <>
                       <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {y} {accion2}
+                        {accion2} {y}
                       </div>
                       <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                         {accion}
