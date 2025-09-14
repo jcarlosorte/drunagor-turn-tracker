@@ -676,7 +676,7 @@
       "boss_w_2": "SANDSWIM",
       "boss_w_3": "SHADOW SPAWN",
       "boss_w_4": "SWALLOW",
-      "boss_w_5": "BOSS STATUS"
+      "boss_w_5": "BOSS STATUS",
       "boss_1": "",
       "boss_2": "",
       "boss_3": "",
@@ -715,7 +715,7 @@
       "boss_w_2": "Wermunggdir targets {X} area(s) at any range (first choose the areas with the highest number of heroes, then those with the strongest heroes) and deals {2*X} damage to each enemy within each Area.",
       "boss_w_3": "{DRAW} 1 rune and generate its Darkness tile adjacent to Wermunggdir (the leader chooses the space). Then, {SUMMON} 2 Worm Spawn - Rookie with 3 HP (instead of 9) in spaces adjacent to Wermunggdir (chosen by the leader).",
       "boss_w_4": "Wermunggdir causes a collapse in the Area of the farthest Hero and Swallows them. (The swallowed character is moved into Wermunggdir’s guts, suffers {FATIGUE 2}; {DAMAGE} {X} and {POISON} {X}).",
-      "boss_w_5": "When the initiative marker reaches this card, resolve all of Wermunggdir’s conditions. Then, advance the marker."  
+      "boss_w_5": "When the initiative marker reaches this card, resolve all of Wermunggdir’s conditions. Then, advance the marker.",
       "boss_1": "",
       "boss_2": "",
       "boss_3": "",
