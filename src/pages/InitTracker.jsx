@@ -802,34 +802,40 @@ const InitTracker = () => {
       if (estado.id === "TIEMPO") return estado;
       
       // ¿Debe ejecutarse en esta fase?
-      if ((faseTurno === "inicio" && config.turno === "principio") ||
-          (faseTurno === "fin" && config.turno === "final")) {
-    
+      if (
+        (faseTurno === "inicio" && config.turno === "principio") ||
+        (faseTurno === "fin" && config.turno === "final")
+      ) {
         let logMsg = "";
         let escudosReducidos = 0;
         let reducir_cal = 0;
-        let daño = 0;
-        
+  
         // 🔹 Daño
         if (config.daño > 0) {
           let daño = config.daño * estado.count;
-    
+  
           if (daño > 0) {
-            // ✅ Restar primero a ESCUDO si hay
-            if (escudosDisponibles > 0) {
+            if (config.prevenir === "si" && escudosDisponibles > 0) {
+              // ✅ Restar primero a ESCUDO
               const usados = Math.min(daño, escudosDisponibles);
               escudosReducidos = usados;
               escudosDisponibles -= usados;
               daño -= usados;
             }
-    
+  
             if (escudosReducidos > 0) {
               logMsg += ` ${ti.consume} ${escudosReducidos} ${ti.escudos}`;
             }
-    
+  
             if (daño > 0) {
               vidaRestante -= daño;
-              logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
+  
+              if (config.prevenir === "no") {
+                // 🔹 Log especial para daño no prevenible
+                logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i} (${ti.ignoraEscudos})`;
+              } else {
+                logMsg += ` ${ti.inflige} ${daño} ${ti.daño_i}`;
+              }
             }
           }
         }
