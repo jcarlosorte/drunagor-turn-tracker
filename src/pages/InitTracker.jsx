@@ -683,6 +683,12 @@ const InitTracker = () => {
       colorIndex: 10,
       estadosAlterados: initialStates
     };
+
+    // 👉 Solo añadimos accion2 si existe
+    if (runeCard.accion2) {
+      newRune.accion2 = runeCard.accion2;
+    }
+    
     placeRune({ rune: newRune });
     if (newRune.tipo === 'defensa'){
       initializeDecks();
