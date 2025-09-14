@@ -414,7 +414,7 @@ export const ASALTO_GUSANO = [
     rune: 'azul',
     nombre: 'asalto_w_3',
     texto: 'asalto_w_3',
-    lista_capacidad: []
+    lista_capacidad: ["ROBA_1"]
   },
   {
     id: 'asalto_w_4',
@@ -428,6 +428,6 @@ export const ASALTO_GUSANO = [
     rune: 'gris',
     nombre: 'asalto_w_5',
     texto: 'asalto_w_5',
-    lista_capacidad: []
+    lista_capacidad: ["INVOCA_X", "corrupted_worm", "bisoño"]
   }
 ];
