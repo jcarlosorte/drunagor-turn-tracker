@@ -1954,9 +1954,9 @@ const InitTracker = () => {
       const isCaraA = rune.cara === 'A';
       const bgColor = bgColorMap[tipo] || 'bg-indigo-700';
       const borderColor = borderColorMap[tipo] || 'border-indigo-400';
-      const title = ts[rune.id] || rune.id;
-      const accion = ts[rune.accion] || rune.accion;
-      const accion2 = ts[rune.accion2] || null;
+      const title = ts[rune.id];
+      const accion = ts[rune.accion];
+      const accion2 = ts[rune.accion2];
       const y = ts.Y;
       const nombre = ts[rune.nombre]?.replace('{x}', replacementValue) || rune.nombre;
       const cartas = ts[rune.cartas] || rune.cartas;
