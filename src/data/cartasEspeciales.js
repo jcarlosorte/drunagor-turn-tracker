@@ -393,3 +393,41 @@ export const CARTAS_GUSANO = [
     lista_capacidad: ["CONDICIONES"]
   }
 ];
+
+export const ASALTO_GUSANO = [
+  {
+    id: 'asalto_w_1',
+    rune: 'naranja',
+    nombre: 'asalto_w_1',
+    texto: 'asalto_w_1',
+    lista_capacidad: []
+  },
+  {
+    id: 'asalto_w_2',
+    rune: 'verde',
+    nombre: 'asalto_w_2',
+    texto: 'asalto_w_2',
+    lista_capacidad: []
+  },
+  {
+    id: 'asalto_w_3',
+    rune: 'azul',
+    nombre: 'asalto_w_3',
+    texto: 'asalto_w_3',
+    lista_capacidad: []
+  },
+  {
+    id: 'asalto_w_4',
+    rune: 'rojo',
+    nombre: 'asalto_w_4',
+    texto: 'asalto_w_4',
+    lista_capacidad: []
+  },
+  {
+    id: 'asalto_w_5',
+    rune: 'gris',
+    nombre: 'asalto_w_5',
+    texto: 'asalto_w_5',
+    lista_capacidad: []
+  }
+];
