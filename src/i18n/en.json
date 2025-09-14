@@ -911,5 +911,21 @@
       "boss_w_4": "Wermunggdir causes a collapse in the Area of the farthest Hero and Swallows them. (The swallowed character is moved into Wermunggdir’s guts, suffers {FATIGUE 2}; {DAMAGE} {X} and {POISON} {X}).",
       "boss_w_5": "When the initiative marker reaches this card, resolve all of Wermunggdir’s conditions. Then, advance the marker."      
     }
+  },
+  "asalto_gusano": {
+    "nombre":{
+      "boss_w_1": "BODY PUSH",
+      "boss_w_2": "ACID SPIT",
+      "boss_w_3": "CORRUPTED BY DARKNESS",
+      "boss_w_4": "SHARP BITE",
+      "boss_w_5": "SPAWN WURMS"
+    },
+    "texto":{
+      "boss_w_1": "{ATTACKS} 1 AREA ADJACENT TO WERMUNGGDIR AND DEALS {2*X} TO EACH HERO OR PET THERE.",
+      "boss_w_2": "ALL HEROES SUFFER {POISON} {X}.",
+      "boss_w_3": "{DRAW} 1 RUNE AND PLACE 2 OF ITS RESPECTIVE DARKNESS TILES ON THE BOARD. GENERATE DARKNESS FROM A SPACE ADJACENT TO WERMUNGGDIR.",
+      "boss_w_4": "{ATTACKS} 2 AREAS ADJACENT TO WERMUNGGDIR AND DEALS {DAMAGE} {X} AND {BLEED} {X} TO EACH HERO OR PET IN EACH OF THEM.",
+      "boss_w_5": "{SUMMON} {X} WERMUNGGDIR´S OFFSPRING - ROOKIE ADJACENT TO WERMUNGGDIR´S MINIATURE."
+    }
   }
 }
