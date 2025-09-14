@@ -673,6 +673,11 @@
       "over_8": "CAMBIO NOCIVO",
       "over_9": "CAMBIO ARDIENTE",
       "over_10": "HERVOR EN SANGRE",
+      "boss_w_1": "TERREMOTO",
+      "boss_w_2": "BAÑO DE ARENA",
+      "boss_w_3": "GENERACIÓN DE SOMBRAS",
+      "boss_w_4": "TRAGAR",
+      "boss_w_5": "ESTADO DEL JEFE"
       "boss_1": "",
       "boss_2": "",
       "boss_3": "",
@@ -707,6 +712,11 @@
       "over_8": "{INTERCAMBIA} A LOS 2 HÉROES MÁS DÉBILES (SI JUEGAS EN SOLITARIO OMITE ESTE PASO, PERO TRATA AL HÉROE COMO OBJETIVO EN CUALQUIER CASO).{ATAQUE}: LOS 2 HÉROES AFECTADOS SUFREN {VENENO} {X}, SI HAY 5 O MÁS RUNAS VERDES EN EL MEDIDOR DE INICIATIVA, TAMBIÉN SUFREN {DERRIBO}.",
       "over_9": "{INTERCAMBIA} A LOS 2 HÉROES MÁS DÉBILES (SI JUEGAS EN SOLITARIO OMITE ESTE PASO, PERO TRATA AL HÉROE COMO OBJETIVO EN CUALQUIER CASO).{ATAQUE}: LOS 2 HÉROES AFECTADOS SUFREN {QUEMADURA} {X}, SI HAY 5 O MÁS RUNAS NARANJAS EN EL MEDIDOR DE INICIATIVA, TAMBIÉN SUFREN {DERRIBO}.",
       "over_10": "SI HAY UN HÉROE ADYACETE AL SEÑOR SUPREMO, ESTE {ATAQUE} INFLINGE {DAÑO} {2*X} (DOBLE DE {X}) AL MÁS FUERTE ENTRE ELLOS. ADEMÁS, SI HAY HÉROES QUE ESTÉN A ALCANCE 1 DEL SEÑOR SUPREMO QUE SUFRAN {HEMORRAGIA}, ESTOS CAMBIAN DICHA CONDICIÓN POR {QUEMADURA}.",
+      "boss_w_1": "Wermunggdir tiene como objetivo a {X} héroe/s a cualquier alcance (empezando siempre por el más fuerte) e inflige {2*X} de daño a cada enemigo y {DERRIBO}. Si algún héroe previene el daño tampoco sufrirá derribo.",
+      "boss_w_2": "Wermunggdir tiene como objetivo a {X} área/s a cualquier alcance (primero elige las áreas con mayor número de héroes y después con la que tenga los héroes más fuertes) e inflige {2*X} de daño a cada enemigo dentro de cada Área.",
+      "boss_w_3": "{ROBA} 1 runa y genera su loseta de Oscuridad adyacente a Wermunggdir (El líder elige la casilla). Luego, {INVOCA} a 2 Crías de gusano - Bisoño con 3 PS (en lugar de 9) en casillas adyacentes a Wermunggdir (a elección del líder)",
+      "boss_w_4": "Wermunggdir provoca un derrumbe en el Área del Héroe más lejano y se lo Traga. (El personaje tragado se mueve a las tripas de Wermunggdir, sufre {FATIGA 2}; {DAÑO} {X} y {VENENO} {X}.",
+      "boss_w_5": "Cuando el marcador de iniciativa llegue a esta carta, resuelve todas las condiciones de Wermunggdir. Luego, avanza el marcador."
       "boss_1": "",
       "boss_2": "",
       "boss_3": "",
