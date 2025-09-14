@@ -357,34 +357,39 @@ export const CARTAS_GUSANO = [
     rune: 'naranja',
     runePosition: 'arriba',
     nombre: 'boss_w_1',
-    texto: 'boss_w_1'
+    texto: 'boss_w_1',
+    lista_capacidad: []
   },
   {
     id: 'boss_w_2',
     rune: 'azul',
     runePosition: 'arriba',
     nombre: 'boss_w_2',
-    texto: 'boss_w_2'
+    texto: 'boss_w_2',
+    lista_capacidad: []
   },
   {
     id: 'boss_w_3',
     rune: 'gris',
     runePosition: 'arriba',
     nombre: 'boss_w_3',
-    texto: 'boss_w_3'
+    texto: 'boss_w_3',
+    lista_capacidad: ["ROBA_1", "INVOCA_2", "corrupted_worm", "bisoño", "vida_3"]
   },
   {
     id: 'boss_w_4',
     rune: 'verde',
     runePosition: 'arriba',
     nombre: 'boss_w_4',
-    texto: 'boss_w_4'
+    texto: 'boss_w_4',
+    lista_capacidad: []
   },
   {
     id: 'boss_w_5',
     rune: 'rojo',
     runePosition: 'arriba',
     nombre: 'boss_w_5',
-    texto: 'boss_w_5'
+    texto: 'boss_w_5',
+    lista_capacidad: ["CONDICIONES"]
   }
 ];
