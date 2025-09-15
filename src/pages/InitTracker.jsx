@@ -1306,8 +1306,10 @@ const InitTracker = () => {
                   alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
                   nextColorId = undefined;
                   warnedNoColors = true;
+                }else {
+                  nextColorId = undefined;
                 }
-                continue;
+                //continue;
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId.id);
                 else simulatedUsedSmall.push(nextColorId.id);
