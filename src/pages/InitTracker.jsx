@@ -1290,7 +1290,7 @@ const InitTracker = () => {
         if (enemyId && categoria) {
           for (let i = 0; i < num; i++) {
             // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
-            const candidates = ENEMIES.filter(
+            const candidatos = ENEMIES.filter(
                           e =>
                             enemies.includes(e.id) &&
                             e.id === enemyId &&
