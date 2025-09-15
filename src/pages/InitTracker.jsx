@@ -276,7 +276,7 @@ const InitTracker = () => {
       // obtenemos el siguiente color disponible
       const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
       
-      if (!nextColorId.id) {
+      if (!nextColorId || !nextColorId.id) {
         alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
         return undefined; // paramos si ya no hay colores
       }
@@ -1299,9 +1299,9 @@ const InitTracker = () => {
               const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
               const isBig = elegido.size === 'grande';
               const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-              if (!nextColorId.id) {
+              if (!nextColorId || !nextColorId.id) {
                 alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                return undefined; // paramos si ya no hay colores
+                break; // paramos si ya no hay colores
               }
               if (isBig) simulatedUsedBig.push(nextColorId.id);
               else simulatedUsedSmall.push(nextColorId.id);
