@@ -1301,7 +1301,7 @@ const InitTracker = () => {
               const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
               if (!nextColorId || !nextColorId.id) {
                 alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                return undefined; // paramos si ya no hay colores
+                //return undefined; // paramos si ya no hay colores
               }
               if (isBig) simulatedUsedBig.push(nextColorId.id);
               else simulatedUsedSmall.push(nextColorId.id);
