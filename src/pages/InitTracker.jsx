@@ -1284,14 +1284,17 @@ const InitTracker = () => {
         
         const enemyId = capacidades[idxCap + 1];
         const categoria = capacidades[idxCap + 2];
-    
+        console.log(enemyId);
+        console.log(categoria);
+        console.log(num);
         if (enemyId && categoria) {
           for (let i = 0; i < num; i++) {
             // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
             const candidatos = enemies.filter(
               (e) => e.id === enemyId && e.categoria === categoria
             );
-    
+            console.log(enemies);
+            console.log(candidatos);
             if (candidatos.length > 0) {
               const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
     
