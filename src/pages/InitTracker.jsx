@@ -1290,7 +1290,7 @@ const InitTracker = () => {
     
               // ✅ Añadir enemigo manualmente
               handleManualEnemyAdd(elegido.id, elegido.behavior, elegido.categoria);
-              //showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
+              showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
           }
         }
@@ -1302,7 +1302,7 @@ const InitTracker = () => {
         const tiles = drawMultipleTiles(num);
         tiles?.forEach((tile) => handleTileDraw(tile));
         if (!tiles) setTileWarning(ti.aviso);
-        //showScenarioToast(`${ti.roba} ${num} ${ti.runa}`);
+        showScenarioToast(`${ti.roba} ${num} ${ti.runa}`);
         
       }
 
