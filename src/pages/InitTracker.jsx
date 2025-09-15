@@ -1143,7 +1143,7 @@ const InitTracker = () => {
         tile = manifestTile();
         if (tile) {
           logs.push(`🔮 ${ti.runaManifestada} ${ti.colores[tile.runa]}`);
-          //handleTileDraw(tile);
+          
         }
       }
 
@@ -1268,7 +1268,7 @@ const InitTracker = () => {
 
   const interpretarCapacidades = (capacidades, runeColor, traductor) => {
     if (!Array.isArray(capacidades) || capacidades.length === 0) return;
-  
+    
     capacidades.forEach(cap => {
       // 🔹 Caso: INVOCA_X
       if (cap.startsWith("INVOCA_")) {
@@ -1278,11 +1278,16 @@ const InitTracker = () => {
         // spawnEnemies(num, runeColor);  <-- si ya tienes función para invocar
       }
   
-      // 🔹 Caso: ROBA_1
-      else if (cap === "ROBA_1") {
-        // Aquí pones la lógica de robar carta/runas
-        showScenarioToast(`${traductor["ROBA"] || "Draw"} 1 ${traductor["carta"] || "card"}`);
-        // drawCard();  <-- si ya tienes función para robar
+      // 🔹 Caso: ROBA_X
+      else if (cap.startsWith("ROBA_")) {
+        const num = parseInt(cap.split("_")[1], 10) || 1;
+  
+        const tiles = drawMultipleTiles(num);
+        if (tiles && tiles.length > 0) {
+          tiles.forEach(tile => handleTileDraw(tile));
+        } else {
+          setTileWarning(ti.aviso);
+        }
       }
   
       // 🔹 Otros futuros casos...
@@ -1625,12 +1630,12 @@ const InitTracker = () => {
                     if (!gusanoData) return;
             
                     // 🔹 Traducciones
-                    const nombreTrad = tw[gusanoData.nombre] || gusanoData.nombre;
-                    let textoTrad = tw[gusanoData.texto] || gusanoData.texto;
+                    const nombreTrad = tw.nombre[gusanoData.nombre];
+                    let textoTrad = tw.texto[gusanoData.texto];
             
                     // 🔹 Interpretar texto (sustituciones dinámicas)
                     textoTrad = interpretarTexto(textoTrad, tile.runa, ttr);
-            
+                    
                     // ✅ Mostrar Toast
                     showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
             
