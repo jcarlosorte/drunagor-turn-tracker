@@ -1288,7 +1288,9 @@ const InitTracker = () => {
         
         const enemyId = capacidades[idxCap + 1];
         const categoria = capacidades[idxCap + 2];
-  
+
+        let warnedNoColors = false;
+        
         if (enemyId && categoria) {
           for (let i = 0; i < num; i++) {
             
@@ -1300,9 +1302,12 @@ const InitTracker = () => {
               const isBig = elegido.size === 'grande';
               let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
               if (!nextColorId || !nextColorId.id) {
-                alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                nextColorId = undefined;
-                //return undefined; // paramos si ya no hay colores
+                if (!warnedNoColors) {
+                  alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+                  nextColorId = undefined;
+                  warnedNoColors = true;
+                }
+                continue;
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId.id);
                 else simulatedUsedSmall.push(nextColorId.id);
