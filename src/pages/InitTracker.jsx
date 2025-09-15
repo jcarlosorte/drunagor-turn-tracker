@@ -1242,7 +1242,7 @@ const InitTracker = () => {
   };
 
   const interpretarTexto = (textoOriginal, runeColor, traductor) => {
-    const numRunasColor = getRuneCount(runeColor);
+    const numRunasColor = getRuneCount(runeColor) + 1;
     let texto = textoOriginal;
   
     if (texto) {
