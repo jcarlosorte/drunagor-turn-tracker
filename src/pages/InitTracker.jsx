@@ -1301,7 +1301,7 @@ const InitTracker = () => {
               let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
               if (!nextColorId || !nextColorId.id) {
                 alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                nextColorId.id = undefined;
+                nextColorId = undefined;
                 //return undefined; // paramos si ya no hay colores
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId.id);
@@ -1309,7 +1309,7 @@ const InitTracker = () => {
                 generatedColors.push(nextColorId.id);
               }
               // ✅ Añadir enemigo manualmente
-              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId.id);
+              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId.id || undefined);
               showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
     
