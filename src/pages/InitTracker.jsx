@@ -1302,7 +1302,7 @@ const InitTracker = () => {
         const tiles = drawMultipleTiles(num);
         tiles?.forEach((tile) => handleTileDraw(tile));
         if (!tiles) setTileWarning(ti.aviso);
-        showScenarioToast(`${ti.roba} ${num} ${ti.runa}`);
+        showScenarioToast(`${ti.Roba} ${num} ${ti.rune}`);
         
       }
 
