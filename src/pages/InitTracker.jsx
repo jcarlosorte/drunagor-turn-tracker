@@ -1273,8 +1273,15 @@ const InitTracker = () => {
       // 🔹 Caso: INVOCA_X
       if (cap.startsWith("INVOCA_")) {
         const idxCap = capacidades.indexOf(cap);
-        const num = parseInt(cap.split("_")[1], 10) || 1;
-    
+        let numRaw = cap.split("_")[1]; // puede ser "2" o "X"
+        let num = 1;
+
+        if (numRaw === "X") {
+          num = getRuneCount(runeColor) + 1; // usamos el color de la runa
+        } else {
+          num = parseInt(numRaw, 10) || 1;
+        }
+        
         const enemyId = capacidades[idxCap + 1];
         const categoria = capacidades[idxCap + 2];
     
