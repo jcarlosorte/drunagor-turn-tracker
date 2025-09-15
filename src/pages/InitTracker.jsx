@@ -1296,7 +1296,7 @@ const InitTracker = () => {
               const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
     
               // ✅ Añadir enemigo manualmente
-              handleManualEnemyAdd(elegido.id, elegido.behavior, elegido.categoria);
+              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow');
               showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
           }
