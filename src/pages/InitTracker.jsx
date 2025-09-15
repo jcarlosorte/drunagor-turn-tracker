@@ -14,7 +14,7 @@ import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { ESTADOS_ALTERADOS, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
-import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO, ASALTO_GUSANO  } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
@@ -75,6 +75,7 @@ const InitTracker = () => {
   const td = translations.defensaCard || {};
   const tea = translations.estadosAlterados || {};
   const ttr = translations.defensaCard.cartas_trad || {};
+  const tw = translations.asalto_gusano || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -1240,6 +1241,56 @@ const InitTracker = () => {
     return { skipped: countOri > 0, nuevosEstados };
   };
 
+  const interpretarTexto = (textoOriginal, runeColor, traductor) => {
+    const numRunasColor = getRuneCount(runeColor);
+    let texto = textoOriginal;
+  
+    if (texto) {
+      texto = texto
+        .replaceAll('{X}', numRunasColor)
+        .replaceAll('{2*X}', numRunasColor * 2)
+        .replaceAll('{3*X}', numRunasColor * 3)
+        .replaceAll('{4*X}', numRunasColor * 4);
+  
+      // 🔹 Reemplazar {clave} por traducción
+      texto = texto.replace(/\{([^}]+)\}/g, (_, key) => traductor[key] || key);
+  
+      // 🔹 Colorear palabras entre [corchetes]
+      texto = texto.replace(/\[([^\]]+)\]/g, (_, word) => {
+        return `<span style="color: #3B82F6; font-weight: bold;">${traductor[word] || word}</span>`;
+      });
+  
+      return texto;
+    }
+  
+    return '';
+  };
+
+  const interpretarCapacidades = (capacidades, runeColor, traductor) => {
+    if (!Array.isArray(capacidades) || capacidades.length === 0) return;
+  
+    capacidades.forEach(cap => {
+      // 🔹 Caso: INVOCA_X
+      if (cap.startsWith("INVOCA_")) {
+        const num = parseInt(cap.split("_")[1], 10) || 1;
+        // Aquí pones la lógica de invocar enemigos
+        showScenarioToast(`${traductor["INVOCA"] || "Summon"} ${num} ${traductor["enemigos"] || "enemies"}`);
+        // spawnEnemies(num, runeColor);  <-- si ya tienes función para invocar
+      }
+  
+      // 🔹 Caso: ROBA_1
+      else if (cap === "ROBA_1") {
+        // Aquí pones la lógica de robar carta/runas
+        showScenarioToast(`${traductor["ROBA"] || "Draw"} 1 ${traductor["carta"] || "card"}`);
+        // drawCard();  <-- si ya tienes función para robar
+      }
+  
+      // 🔹 Otros futuros casos...
+      else {
+        console.warn("⚠️ Capacidad no implementada:", cap);
+      }
+    });
+  };
 
       
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
@@ -1560,13 +1611,35 @@ const InitTracker = () => {
               }
       
             } else if (currentRune.tipo === 'asalto') {
-  
               if (currentRune.numRunas) {
                 const tiles = drawMultipleTiles(currentRune.numRunas);
-                tiles?.forEach(tile => handleTileDraw(tile));
-                if (!tiles) setTileWarning(ti.aviso);
+            
+                if (!tiles) {
+                  setTileWarning(ti.aviso);
+                } else {
+                  tiles.forEach(tile => {
+                    handleTileDraw(tile);
+            
+                    // 🎯 Buscar entrada en ASALTO_GUSANO según color de la runa
+                    const gusanoData = ASALTO_GUSANO.find(g => g.rune === tile.runa);
+                    if (!gusanoData) return;
+            
+                    // 🔹 Traducciones
+                    const nombreTrad = tw[gusanoData.nombre] || gusanoData.nombre;
+                    let textoTrad = tw[gusanoData.texto] || gusanoData.texto;
+            
+                    // 🔹 Interpretar texto (sustituciones dinámicas)
+                    textoTrad = interpretarTexto(textoTrad, tile.runa, ttr);
+            
+                    // ✅ Mostrar Toast
+                    showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
+            
+                    // 🔹 Procesar lista_capacidad
+                    interpretarCapacidades(gusanoData.lista_capacidad, tile.runa, tw);
+                    
+                  });
+                }
               }
-              
             } else if (currentRune.tipo === 'defensa') {
               // 🔹 Defensa → roba cartas de aldeano o errantes
               const numCartas = currentRune.numRunas || 1;
