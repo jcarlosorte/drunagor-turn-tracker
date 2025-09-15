@@ -1275,6 +1275,10 @@ const InitTracker = () => {
         const idxCap = capacidades.indexOf(cap);
         let numRaw = cap.split("_")[1]; // puede ser "2" o "X"
         let num = 1;
+        
+        let simulatedUsedSmall = [...usedColors];
+        let simulatedUsedBig = [...usedColorsBig];
+        const generatedColors = [];
 
         if (numRaw === "X") {
           num = getRuneCount(runeColor) + 1; // usamos el color de la runa
@@ -1284,28 +1288,31 @@ const InitTracker = () => {
         
         const enemyId = capacidades[idxCap + 1];
         const categoria = capacidades[idxCap + 2];
-        console.log(enemyId);
-        console.log(categoria);
-        console.log(num);
+  
         if (enemyId && categoria) {
           for (let i = 0; i < num; i++) {
-            // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
-            const candidatos = ENEMIES.filter(
-                          e =>
-                            enemies.includes(e.id) &&
-                            e.id === enemyId &&
-                            e.categoria === categoria
-                        );
             
-            console.log(enemies);
-            console.log(candidatos);
+            // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
+            const candidatos = ENEMIES.filter( e => enemies.includes(e.id) && e.id === enemyId && e.categoria === categoria );
+
             if (candidatos.length > 0) {
               const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
-    
+              const isBig = elegido.size === 'grande';
+              const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+              if (!nextColorId.id) {
+                alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+                return undefined; // paramos si ya no hay colores
+              }
+              if (isBig) simulatedUsedBig.push(nextColorId.id);
+              else simulatedUsedSmall.push(nextColorId.id);
+              generatedColors.push(nextColorId.id);
               // ✅ Añadir enemigo manualmente
-              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow');
+              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId.id);
               showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
+    
+
+
           }
         }
       }
