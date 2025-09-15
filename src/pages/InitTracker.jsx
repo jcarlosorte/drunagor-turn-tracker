@@ -1266,34 +1266,46 @@ const InitTracker = () => {
     return '';
   };
 
-  const interpretarCapacidades = (capacidades, runeColor, traductor) => {
+  const interpretarCapacidades = (capacidades, runeColor) => {
     if (!Array.isArray(capacidades) || capacidades.length === 0) return;
     
     capacidades.forEach(cap => {
       // 🔹 Caso: INVOCA_X
       if (cap.startsWith("INVOCA_")) {
+        const idxCap = capacidades.indexOf(cap);
         const num = parseInt(cap.split("_")[1], 10) || 1;
-        // Aquí pones la lógica de invocar enemigos
-        showScenarioToast(`${traductor["INVOCA"] || "Summon"} ${num} ${traductor["enemigos"] || "enemies"}`);
-        // spawnEnemies(num, runeColor);  <-- si ya tienes función para invocar
-      }
-  
-      // 🔹 Caso: ROBA_X
-      else if (cap.startsWith("ROBA_")) {
-        const num = parseInt(cap.split("_")[1], 10) || 1;
-  
-        const tiles = drawMultipleTiles(num);
-        if (tiles && tiles.length > 0) {
-          tiles.forEach(tile => handleTileDraw(tile));
-        } else {
-          setTileWarning(ti.aviso);
+    
+        const enemyId = capacidades[idxCap + 1];
+        const categoria = capacidades[idxCap + 2];
+    
+        if (enemyId && categoria) {
+          for (let i = 0; i < num; i++) {
+            // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
+            const candidatos = enemies.filter(
+              (e) => e.id === enemyId && e.categoria === categoria
+            );
+    
+            if (candidatos.length > 0) {
+              const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
+    
+              // ✅ Añadir enemigo manualmente
+              handleManualEnemyAdd(elegido.id, elegido.behavior, elegido.categoria);
+              showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
+            }
+          }
         }
       }
   
-      // 🔹 Otros futuros casos...
-      else {
-        console.warn("⚠️ Capacidad no implementada:", cap);
+      // 🔹 Caso: ROBA_X
+      if (cap.startsWith("ROBA_")) {
+        const num = parseInt(cap.split("_")[1], 10) || 1;
+        const tiles = drawMultipleTiles(num);
+        tiles?.forEach((tile) => handleTileDraw(tile));
+        if (!tiles) setTileWarning(ti.aviso);
+        showScenarioToast(`${ti.roba} ${num} ${ti.runa}`);
+        
       }
+
     });
   };
 
@@ -1640,7 +1652,7 @@ const InitTracker = () => {
                     showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
             
                     // 🔹 Procesar lista_capacidad
-                    interpretarCapacidades(gusanoData.lista_capacidad, tile.runa, tw);
+                    interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
                     
                   });
                 }
