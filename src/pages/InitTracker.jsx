@@ -273,17 +273,15 @@ const InitTracker = () => {
     let simulatedUsedBig = [...usedColorsBig];
     const generatedColors = [];
     let warnedNoColors = false;
+    
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
       let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
       
       if (!nextColorId) {
         if (!warnedNoColors){
-          alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-          warnedNoColors = true
-          //nextColorId = undefined;
-        } else {
-          //nextColorId = undefined;
+          alert(ti.noColorsAvailable);
+          warnedNoColors = true;
         }
       } else {
         // guardamos el color en la simulación
@@ -291,11 +289,9 @@ const InitTracker = () => {
         else simulatedUsedSmall.push(nextColorId);
         generatedColors.push(nextColorId);
       }
-      console.log(nextColorId);
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', nextColorId);
+      showScenarioToast(`${ti.invoca} ${tee[scenarioMonster.id]}`);
     }
-
-
   };
 
   const handleCategorySelect = (categoryKey) => {
@@ -1309,12 +1305,8 @@ const InitTracker = () => {
               if (!nextColorId) {
                 if (!warnedNoColors) {
                   alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                  nextColorId = undefined;
                   warnedNoColors = true;
-                } else {
-                  nextColorId = undefined;
                 }
-             
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId);
                 else simulatedUsedSmall.push(nextColorId);
