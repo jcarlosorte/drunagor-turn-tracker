@@ -1282,7 +1282,7 @@ const InitTracker = () => {
 
   const interpretarCapacidades = (capacidades, runeColor) => {
     if (!Array.isArray(capacidades) || capacidades.length === 0) return;
-    
+    let numRune = 0;
     capacidades.forEach(cap => {
       // 🔹 Caso: INVOCA_X
       if (cap.startsWith("INVOCA_")) {
@@ -1337,15 +1337,16 @@ const InitTracker = () => {
   
       // 🔹 Caso: ROBA_X
       if (cap.startsWith("ROBA_")) {
-        const num = parseInt(cap.split("_")[1], 10) || 1;
-        const tiles = drawMultipleTiles(num);
-        tiles?.forEach((tile) => handleTileDraw(tile));
-        if (!tiles) setTileWarning(ti.aviso);
-        showScenarioToast(`${ti.Roba} ${num} ${ti.rune}`);
+        numRune = parseInt(cap.split("_")[1], 10) || 1;
+        //const tiles = drawMultipleTiles(numRune);
+        //tiles?.forEach((tile) => handleTileDraw(tile));
+        //if (!tiles) setTileWarning(ti.aviso);
+        //showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
         
       }
 
     });
+    return numRune;
   };
 
       
@@ -1669,7 +1670,7 @@ const InitTracker = () => {
             } else if (currentRune.tipo === 'asalto') {
               if (currentRune.numRunas) {
                 const tiles = drawMultipleTiles(currentRune.numRunas);
-            
+                let numRune = 0;
                 if (!tiles) {
                   setTileWarning(ti.aviso);
                 } else {
@@ -1691,9 +1692,13 @@ const InitTracker = () => {
                     showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
             
                     // 🔹 Procesar lista_capacidad
-                    //interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
+                    numRune = interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
                     
                   });
+                  const tiles_O = drawMultipleTiles(numRune);
+                  tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
+                  if (!tiles_O) setTileWarning(ti.aviso);
+                  showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
                 }
               }
             } else if (currentRune.tipo === 'defensa') {
