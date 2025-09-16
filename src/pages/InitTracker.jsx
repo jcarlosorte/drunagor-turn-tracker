@@ -1787,13 +1787,13 @@ const InitTracker = () => {
         return;
       }
     }
-
+    console.log(numRune);
     if (numRune > 0){
-                      const tiles_O = drawMultipleTiles(numRune);
-                      tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
-                      if (!tiles_O) setTileWarning(ti.aviso);
-                      showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
-                    }
+        const tiles_O = drawMultipleTiles(numRune);
+        tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
+        if (!tiles_O) setTileWarning(ti.aviso);
+        showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
+      }
     // 🧩 Fallback
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
