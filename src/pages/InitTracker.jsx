@@ -164,6 +164,13 @@ const InitTracker = () => {
   
     return content;
   };
+
+  const getNextAvailableColorSimulated = (isBig, simulatedSmall, simulatedBig) => {
+    const used = new Set(isBig ? simulatedBig : simulatedSmall);
+    const source = isBig ? ENEMY_RING_COLORS_BIG : ENEMY_RING_COLORS;
+    const next = source.find(c => !used.has(c.id));
+    return next ? next.id : null;
+  };
   
   const showCardToast = (card, deckType) => {
     const id = uuidv4();
@@ -172,7 +179,11 @@ const InitTracker = () => {
     const action_ori = translationsDeck.accion?.[card.id] || '';
     const action2_ori = translationsDeck.accion2?.[card.id] || '';
     let extra_ori = '\n';
-  
+    let simulatedUsedSmall = [...usedColors];
+    let simulatedUsedBig = [...usedColorsBig];
+    const generatedColors = [];
+    let warnedNoColors = false;
+    
     if (deckType === 'errantes') {
       for (let i = 1; i <= numHeroes; i++) {
         const line = translationsDeck.texto?.[`${card.id}${i}`];
@@ -191,13 +202,15 @@ const InitTracker = () => {
             );
     
             if (candidates.length === 0) {
-              console.warn(`❌ No hay enemigos disponibles para ${color} - ${category}`);
+              console.warn(`${ti.noEnemyAvailableTo} ${color} - ${category}`);
               continue;
             }
     
             // 2️⃣ Elegir uno aleatorio
             const selectedEnemy = candidates[Math.floor(Math.random() * candidates.length)];
-    
+            const isBig = selectedEnemy.size === 'grande';
+            let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+            
             // 3️⃣ Elegir comportamiento aleatorio de entre los que tenga definidos
             let behaviorType = 'estandar';
             if (Array.isArray(selectedEnemy.comportamientos)) {
@@ -207,17 +220,21 @@ const InitTracker = () => {
             } else if (selectedEnemy.comportamiento) {
               behaviorType = selectedEnemy.comportamiento;
             }
-    
+
+            if (!nextColorId) {
+              if (!warnedNoColors){
+                alert(ti.noColorsAvailable);
+                warnedNoColors = true;    
+              }
+              nextColorId = 'noColor';
+            } else {
+              // guardamos el color en la simulación
+              if (isBig) simulatedUsedBig.push(nextColorId);
+              else simulatedUsedSmall.push(nextColorId);
+              generatedColors.push(nextColorId);    
+            }
             // 4️⃣ Llamar a handleManualEnemyAdd con el id y datos encontrados
-            handleManualEnemyAdd(
-              selectedEnemy.id,
-              behaviorType,
-              category,
-              'NoShow',
-              color,
-              null,
-              2
-            );
+            handleManualEnemyAdd(selectedEnemy.id, behaviorType, category, 'NoShow', nextColorId, null, 2);
           }
         }
       }
@@ -255,13 +272,6 @@ const InitTracker = () => {
           : item
       )
     );
-  };
-  
-  const getNextAvailableColorSimulated = (isBig, simulatedSmall, simulatedBig) => {
-    const used = new Set(isBig ? simulatedBig : simulatedSmall);
-    const source = isBig ? ENEMY_RING_COLORS_BIG : ENEMY_RING_COLORS;
-    const next = source.find(c => !used.has(c.id));
-    return next ? next.id : null;
   };
     
   const spawnBatchEnemies = (count, scenarioMonster) => {
