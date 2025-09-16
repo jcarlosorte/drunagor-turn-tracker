@@ -1714,44 +1714,47 @@ const InitTracker = () => {
               // ✅ Se ejecuta si es cara B o si es cara A y no hay enemigos
               if (isCaraB || (!isCaraB && noEnemies)) {
                 const tile = manifestTile();
-               
-                // ✅ Comprobar spawnPoints
-                const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
-                
-                // ✅ Buscar pilas activas con esa loseta
-                const pilasActivas = [
-                  ...pilas.filter(p => p.estado === 'activa'),
-                  ...pilasConcentrada.filter(p => p.estado === 'activa')
-                ];
-                
-                const pilasQueContienen = pilasActivas.filter(pila =>
-                  pila.tiles.some(t => t.runa === tile.runa)
-                );
-                              
-                if (!spawnExists && pilasQueContienen.length === 0) {
-                  // ❌ No hay punto de aparición para ese color
-                  showScenarioToast(
-                    `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
+                if (tile){
+                  // ✅ Comprobar spawnPoints
+                  const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+                  
+                  // ✅ Buscar pilas activas con esa loseta
+                  const pilasActivas = [
+                    ...pilas.filter(p => p.estado === 'activa'),
+                    ...pilasConcentrada.filter(p => p.estado === 'activa')
+                  ];
+                  
+                  const pilasQueContienen = pilasActivas.filter(pila =>
+                    pila.tiles.some(t => t.runa === tile.runa)
                   );
-                  return; // No seguimos con la invocación
-                }
-  
-                // ✅ Si hay pilas que la contienen → avisar
-                if (pilasQueContienen.length > 0) {
-                   const nombresPilas = pilasQueContienen
-                      .map(p => `Nº ${p.numPila}  `)
-                      .join(', ');
-                   showScenarioToast(`${ti.encontradaEn} -> ${ti.colores[tile.runa]}. ${ti.enPilas}: ${nombresPilas}`);
-                }
-                
-                if (faltan > 0 && scenarioMonster) {
-                  spawnBatchEnemies(faltan, scenarioMonster);
-                  showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
-                }
-                if (totalFinal > 4) {
-                  const exceso = totalFinal - 4;
-                  const damage = 3;
-                  showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
+                                
+                  if (!spawnExists && pilasQueContienen.length === 0) {
+                    // ❌ No hay punto de aparición para ese color
+                    showScenarioToast(
+                      `${ti.incursionFail} ${ti.colores[tile.runa]} ${ti.noExiste}`
+                    );
+                    return; // No seguimos con la invocación
+                  }
+    
+                  // ✅ Si hay pilas que la contienen → avisar
+                  if (pilasQueContienen.length > 0) {
+                     const nombresPilas = pilasQueContienen
+                        .map(p => `Nº ${p.numPila}  `)
+                        .join(', ');
+                     showScenarioToast(`${ti.encontradaEn} -> ${ti.colores[tile.runa]}. ${ti.enPilas}: ${nombresPilas}`);
+                  }
+                  
+                  if (faltan > 0 && scenarioMonster) {
+                    spawnBatchEnemies(faltan, scenarioMonster);
+                    showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
+                  }
+                  if (totalFinal > 4) {
+                    const exceso = totalFinal - 4;
+                    const damage = 3;
+                    showScenarioToast(`${ti.excesoIncursion} ${exceso} ${ti.attackes} ${damage} ${ti.daño}.`);
+                  }
+                } else {
+                  showScenarioToast(`${ti.aviso4}`);
                 }
               } else {
                 showScenarioToast(`${ti.noManifestamos}`);
