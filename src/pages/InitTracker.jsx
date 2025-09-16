@@ -271,26 +271,27 @@ const InitTracker = () => {
     let simulatedUsedSmall = [...usedColors];
     let simulatedUsedBig = [...usedColorsBig];
     const generatedColors = [];
-  
+    let noColorAva = false;
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
-      const nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+      let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
       
-      if (!nextColorId || !nextColorId.id) {
+      if ((!nextColorId || !nextColorId.id) && !noColorAva) {
         alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-        return undefined; // paramos si ya no hay colores
+        noColorAva = true
+        nextColorId = undefined;
+        //return undefined; // paramos si ya no hay colores
+      } else {
+        // guardamos el color en la simulación
+        if (isBig) simulatedUsedBig.push(nextColorId.id);
+        else simulatedUsedSmall.push(nextColorId.id);
+        generatedColors.push(nextColorId.id);
       }
-      // guardamos el color en la simulación
-      if (isBig) simulatedUsedBig.push(nextColorId.id);
-      else simulatedUsedSmall.push(nextColorId.id);
-      generatedColors.push(nextColorId.id);
-      
+
+      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', nextColorId?.id);
     }
 
-    // ✅ Ahora llamamos al add original, pasándole cada color preasignado
-    generatedColors.forEach((forcedColor) => {
-      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', forcedColor);
-    });
+
   };
 
   const handleCategorySelect = (categoryKey) => {
