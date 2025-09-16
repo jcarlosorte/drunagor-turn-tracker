@@ -86,7 +86,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
+  const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, discardTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange,
          initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
