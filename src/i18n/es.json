@@ -360,6 +360,7 @@
       "enPilas": "Pila/s",
       "noManifestamos": "⚠️ Incursión en cara A pero hay enemigos → no manifestamos",
       "noRunasColocadas": "❌ No hay runas colocadas para formar la pila",
+      "interpretaRuna": "⚠️ La Runa robada para el Asalto de Wn, se coloca después de resolver el efecto, por lo que no contará para el cálculo de X",
       "contador": "⚠️ Activación en: ",
       "tipo_ataque": {
         "label": "Tipo de Ataque",
