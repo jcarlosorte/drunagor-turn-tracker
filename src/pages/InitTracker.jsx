@@ -1256,7 +1256,7 @@ const InitTracker = () => {
   };
 
   const interpretarTexto = (textoOriginal, runeColor, traductor) => {
-    const numRunasColor = getRuneCount(runeColor) + 1;
+    const numRunasColor = getRuneCount(runeColor);
     let texto = textoOriginal;
   
     if (texto) {
@@ -1295,7 +1295,7 @@ const InitTracker = () => {
         const generatedColors = [];
 
         if (numRaw === "X") {
-          num = getRuneCount(runeColor) + 1; // usamos el color de la runa
+          num = getRuneCount(runeColor); // usamos el color de la runa
         } else {
           num = parseInt(numRaw, 10) || 1;
         }
@@ -1678,7 +1678,7 @@ const InitTracker = () => {
                 } else {
                   tiles.forEach(tile => {
                     handleTileDraw(tile);
-            
+                    showScenarioToast(`${ti.interpretaRuna}`);
                     // 🎯 Buscar entrada en ASALTO_GUSANO según color de la runa
                     const gusanoData = ASALTO_GUSANO.find(g => g.rune === tile.runa);
                     if (!gusanoData) return;
