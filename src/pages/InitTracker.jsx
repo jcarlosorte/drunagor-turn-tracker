@@ -1784,7 +1784,7 @@ const InitTracker = () => {
           }
         }
         
-        return;
+        //return;
       }
     }
     console.log(numRune);
