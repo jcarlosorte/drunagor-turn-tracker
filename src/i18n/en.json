@@ -230,6 +230,7 @@
     "movil1": "Please rotate your device to landscape orientation",
     "movil2": "to properly enjoy turn tracker control.",
     "noColorsAvailable": "No colors available to stands, but the enemies will be added anyway",
+    "noEnemyAvailableTo": "❌ There are no enemies available to",
     "voragineWarning": "⚠️ {name} unleashes MAELSTROM and replaces their attack cards!",
     "title": "Turn Tracker",
     "menu": "Menu",
