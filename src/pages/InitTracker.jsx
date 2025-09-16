@@ -281,20 +281,19 @@ const InitTracker = () => {
       if (!nextColorId) {
         if (!warnedNoColors){
           alert(ti.noColorsAvailable);
-          warnedNoColors = true;
+          warnedNoColors = true;    
         }
-        handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow');
-        nextColorId = null;
+
+        nextColorId = undefined;
       } else {
         // guardamos el color en la simulación
         if (isBig) simulatedUsedBig.push(nextColorId);
         else simulatedUsedSmall.push(nextColorId);
         generatedColors.push(nextColorId);
-        handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', nextColorId);
       }
       console.log(nextColorId);
       console.log(warnedNoColors);
-      
+      handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', nextColorId);
       showScenarioToast(`${ti.invoca} ${tee[scenarioMonster.id]}`);
     }
   };
@@ -354,7 +353,7 @@ const InitTracker = () => {
     if (!selected) return;
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
-    const colorId = assignColorToEnemy(uuid, isBig, forcedColorId);
+    const colorId = forcedColorId === undefined ? undefined : assignColorToEnemy(uuid, isBig, forcedColorId);
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     if (selected.categoria === 'comandante') {
       const createAndPlaceCommander = (pcValue) => {
