@@ -1322,7 +1322,7 @@ const InitTracker = () => {
                 generatedColors.push(nextColorId);
               }
               // ✅ Añadir enemigo manualmente
-              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId?);
+              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
               showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
     
