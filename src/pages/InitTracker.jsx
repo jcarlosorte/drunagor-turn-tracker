@@ -276,15 +276,14 @@ const InitTracker = () => {
     for (let i = 0; i < count; i++) {
       // obtenemos el siguiente color disponible
       let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-      console.log(nextColorId);
+      
       if (!nextColorId) {
         if (!warnedNoColors){
           alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
           warnedNoColors = true
-          nextColorId = undefined;
-          //return undefined; // paramos si ya no hay colores
+          //nextColorId = undefined;
         } else {
-          nextColorId = undefined;
+          //nextColorId = undefined;
         }
       } else {
         // guardamos el color en la simulación
