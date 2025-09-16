@@ -1282,7 +1282,7 @@ const InitTracker = () => {
 
   const interpretarCapacidades = (capacidades, runeColor) => {
     if (!Array.isArray(capacidades) || capacidades.length === 0) return;
-    let numRune = 0;
+   
     capacidades.forEach(cap => {
       // 🔹 Caso: INVOCA_X
       if (cap.startsWith("INVOCA_")) {
@@ -1337,16 +1337,17 @@ const InitTracker = () => {
   
       // 🔹 Caso: ROBA_X
       if (cap.startsWith("ROBA_")) {
-        numRune = parseInt(cap.split("_")[1], 10) || 1;
-        //const tiles = drawMultipleTiles(numRune);
-        //tiles?.forEach((tile) => handleTileDraw(tile));
-        //if (!tiles) setTileWarning(ti.aviso);
-        //showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
+        const numRune = parseInt(cap.split("_")[1], 10) || 1;
+        const tiles = drawMultipleTiles(numRune);
+        tiles?.forEach((tile) => handleTileDraw(tile));
+        if (!tiles) setTileWarning(ti.aviso);
+        showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
+        discardTileByColor(tile.runa);
         
       }
 
     });
-    return numRune;
+    
   };
 
       
@@ -1693,15 +1694,8 @@ const InitTracker = () => {
                     showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
             
                     // 🔹 Procesar lista_capacidad
-                    numRune = interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
-                    
-                    if (numRune > 0){
-                      const tiles_O = drawMultipleTiles(numRune);
-                      tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
-                      if (!tiles_O) setTileWarning(ti.aviso);
-                      showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
-                      discardTileByColor(tile.runa);
-                    }
+                    interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
+ 
                   });
                   
                 }
