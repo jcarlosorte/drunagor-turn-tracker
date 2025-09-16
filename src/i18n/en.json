@@ -359,6 +359,7 @@
     "enPilas": "Stack/s",
     "noManifestamos": "⚠️ Raid on side A but there are enemies → we do not demonstrate",
     "noRunasColocadas": "❌ There are no runes placed to form the stack",
+    "interpretaRuna": "⚠️ The Rune draws for Wermunggdir’s Assault is placed after the effect is resolved, so it will not count for the X calculation.",
     "contador": "⚠️ Activation in: ",
     "tipo_ataque": {
       "label": "Attack Type",
