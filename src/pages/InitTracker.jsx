@@ -283,18 +283,14 @@ const InitTracker = () => {
           alert(ti.noColorsAvailable);
           warnedNoColors = true;    
         }
-
         nextColorId = 'noColor';
       } else {
-        
         // guardamos el color en la simulación
         if (isBig) simulatedUsedBig.push(nextColorId);
         else simulatedUsedSmall.push(nextColorId);
-        generatedColors.push(nextColorId);
-      
+        generatedColors.push(nextColorId);    
       }
-      console.log(nextColorId);
-      console.log(warnedNoColors);
+     
       handleManualEnemyAdd(scenarioMonster.id, scenarioMonster.comportamiento, scenarioMonster.categoria, 'NoShow', nextColorId);
       showScenarioToast(`${ti.invoca} ${tee[scenarioMonster.id]}`);
     }
@@ -1314,15 +1310,14 @@ const InitTracker = () => {
                   alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
                   warnedNoColors = true;
                 }
-                nextColorId = null;
+                nextColorId = 'noColor';
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId);
                 else simulatedUsedSmall.push(nextColorId);
                 generatedColors.push(nextColorId);
               }
               // ✅ Añadir enemigo manualmente
-              console.log(nextColorId);
-              console.log(warnedNoColors);
+    
               handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
               showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
             }
