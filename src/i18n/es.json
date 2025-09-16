@@ -231,6 +231,7 @@
       "movil1": "Por favor, gira tu dispositivo a orientación horizontal",
       "movil2": "para disfrutar correctamente del control de turnos",
       "noColorsAvailable": "No hay colores disponibles para las peanas, pero se añadirán igualmente los enemigos",
+      "noEnemyAvailableTo": "❌ No hay enemigos disponibles para",
       "voragineWarning": "⚠️ ¡{name} ejecuta VORÁGINE y reemplaza sus cartas de ataque!",
       "title": "Control de Turnos",
       "menu": "Menú",
