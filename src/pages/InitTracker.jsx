@@ -1612,6 +1612,7 @@ const InitTracker = () => {
     }
   
     // 🔍 RUNES
+    let numRune = 0;
     if (step.type === 'rune') {
       const runes = placedRunes
         .filter(r => r.rune.colorIndex === step.index && r.rune.posicion === step.position)
@@ -1670,7 +1671,7 @@ const InitTracker = () => {
             } else if (currentRune.tipo === 'asalto') {
               if (currentRune.numRunas) {
                 const tiles = drawMultipleTiles(currentRune.numRunas);
-                let numRune = 0;
+                
                 if (!tiles) {
                   setTileWarning(ti.aviso);
                 } else {
@@ -1695,10 +1696,7 @@ const InitTracker = () => {
                     numRune = interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
                     
                   });
-                  const tiles_O = drawMultipleTiles(numRune);
-                  tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
-                  if (!tiles_O) setTileWarning(ti.aviso);
-                  showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
+                  
                 }
               }
             } else if (currentRune.tipo === 'defensa') {
@@ -1779,7 +1777,12 @@ const InitTracker = () => {
             setExecutedRunes(prev => [...prev, currentRune.uuid]);
           }
         }
-        
+        if (numRune > 0){
+          const tiles_O = drawMultipleTiles(numRune);
+          tiles_O?.forEach((tile_O) => handleTileDraw(tile_O));
+          if (!tiles_O) setTileWarning(ti.aviso);
+          showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
+        }
         return;
       }
     }
