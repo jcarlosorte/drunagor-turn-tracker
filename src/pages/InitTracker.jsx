@@ -1314,7 +1314,7 @@ const InitTracker = () => {
                 } else {
                   nextColorId = undefined;
                 }
-                //continue;
+             
               } else {
                 if (isBig) simulatedUsedBig.push(nextColorId);
                 else simulatedUsedSmall.push(nextColorId);
