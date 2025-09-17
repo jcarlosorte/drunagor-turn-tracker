@@ -9,9 +9,14 @@ export const InitEnemiesProvider = ({ children }) => {
   const { language, translations } = useLanguage();
   const ti = translations.trackerInit || {};
   const [placedEnemies, setPlacedEnemies] = useState([]);
+  const [huespedActivo, setHuespedActivo] = useState(false);
   const [usedColors, setUsedColors] = useState([]);
   const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
+
+  const activaHuesped = () => setHuespedActivo(true);
+  const desactivaHuesped = () => setHuespedActivo(false);
+  
   // Función para obtener un color libre
   const getNextAvailableColor = (isBig = false) => {
     const used = new Set(isBig ? usedColorsBig : usedColors);
@@ -103,7 +108,11 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   return (
-    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap }}>
+    <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, 
+                                         removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
+                                         assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
+                                         sedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
+                                         huespedActivo, activaHuesped, desactivaHuesped }}>
       {children}
     </InitEnemiesContext.Provider>
   );
