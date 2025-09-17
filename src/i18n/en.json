@@ -321,6 +321,8 @@
     "caraB": "Face B",
     "caraT": "With Time Token",
     "Roba": "Draw",
+    "activaHuesped": "Activate Host Monster",
+    "desactivaHuesped": "Disable Host Monster",
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
