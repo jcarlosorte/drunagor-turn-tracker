@@ -322,6 +322,8 @@
       "caraB": "Cara B",
       "caraT": "Con marcador de tiempo",
       "Roba": "Roba",
+      "activaHuesped": "Activa Monstruo Huesped",
+      "desactivaHuesped": "Desctiva Monstruo Huesped",
       "applyEffect": "Aplicar efecto",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
