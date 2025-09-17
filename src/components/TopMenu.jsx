@@ -366,7 +366,7 @@ const TopMenu = ({
 
                   {/* --- Bloque 3: MONSTRUO HUESPED (solo si expansión activa) --- */}
                   {selectedExpansions.includes("undead_dragon") && (
-                    <div> className="mb-2"
+                    <div className="mb-2"> 
                       <div className="flex flex-wrap gap-2 justify-center">
                         <GiSpikedDragonHead className="text-indigo-300 text-xl" />
                           <button
