@@ -111,7 +111,7 @@ export const InitEnemiesProvider = ({ children }) => {
     <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, 
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
-                                         sedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
+                                         usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
                                          huespedActivo, activaHuesped, desactivaHuesped }}>
       {children}
     </InitEnemiesContext.Provider>
