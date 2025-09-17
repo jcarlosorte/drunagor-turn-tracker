@@ -30,7 +30,7 @@ const TopMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
   const t = translations?.trackerInit || {};
-  const { resetPlacedEnemies } = useInitEnemies();
+  const { resetPlacedEnemies, activaHuesped, desactivaHuesped } = useInitEnemies();
   const [enemySelect, setEnemySelect] = useState('');
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
@@ -362,6 +362,31 @@ const TopMenu = ({
                       )}
                     </div>
                   )}  
+
+
+                  {/* --- Bloque 3: MONSTRUO HUESPED (solo si expansión activa) --- */}
+                  {selectedExpansions.includes("undead_dragon") && (
+                    <div>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <GiLeechingWorm className="text-indigo-300 text-xl" />
+                        <button
+                          onClick={activaHuesped}
+                          className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.activaHuesped}
+                        </button>
+              
+                        <button
+                          onClick={desactivaHuesped}
+                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.desactivaHuesped}
+                        </button>
+                      </div>
+              
+                    </div>
+                  )}  
+                  
                 </div>
 
                 {/* 📦 Estado de la bolsa */}
