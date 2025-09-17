@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm } from 'react-icons/gi';
+import { GiSwordClash, GiSpikedDragonHead, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS, ASALTO } from '@/data/runas';
@@ -368,18 +368,18 @@ const TopMenu = ({
                   {selectedExpansions.includes("undead_dragon") && (
                     <div>
                       <div className="flex flex-wrap gap-2 justify-center">
-                        <GiLeechingWorm className="text-indigo-300 text-xl" />
-                        <button
-                          onClick={activaHuesped}
-                          className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.activaHuesped}
-                        </button>
-              
-                        <button
-                          onClick={desactivaHuesped}
-                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                        >
+                        <GiSpikedDragonHead className="text-indigo-300 text-xl" />
+                          <button
+                            onClick={activaHuesped}
+                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.activaHuesped}
+                          </button>
+                
+                          <button
+                            onClick={desactivaHuesped}
+                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                          >
                           {t.desactivaHuesped}
                         </button>
                       </div>
