@@ -562,6 +562,11 @@ export const GameProvider = ({ children }) => {
     return fullCardData;
   };
 
+  const handleTileDraw = (tile) => {
+    if (!tile) return;
+    showTileToast(tile, 'add');
+  };
+  
   return (
     <GameContext.Provider
       value={{
@@ -590,6 +595,7 @@ export const GameProvider = ({ children }) => {
         scenarioMonster,
         setScenarioMonster,
         manifestTile,
+        handleTileDraw,
         showTileToast,
         setTileToasts,
         tileToasts,
