@@ -288,7 +288,7 @@ const TopMenu = ({
                     <span className="font-semibold">{t.cartas}</span>
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <div className="flex flex-wrap gap-2 justify-center">
                       <GiRuneStone className="text-indigo-300 text-xl" />
                       <button
@@ -326,7 +326,7 @@ const TopMenu = ({
 
                   {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
                   {selectedExpansions.includes("infernal_desert") && (
-                    <div>
+                    <div className="mb-2">
                       <div className="flex flex-wrap gap-2 justify-center">
                         <GiLeechingWorm className="text-indigo-300 text-xl" />
                         <button
@@ -361,12 +361,12 @@ const TopMenu = ({
                         </div>
                       )}
                     </div>
-                  )}  
+                  )}
 
 
                   {/* --- Bloque 3: MONSTRUO HUESPED (solo si expansión activa) --- */}
                   {selectedExpansions.includes("undead_dragon") && (
-                    <div>
+                    <div> className="mb-2"
                       <div className="flex flex-wrap gap-2 justify-center">
                         <GiSpikedDragonHead className="text-indigo-300 text-xl" />
                           <button
