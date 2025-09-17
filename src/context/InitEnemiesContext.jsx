@@ -15,11 +15,11 @@ export const InitEnemiesProvider = ({ children }) => {
   const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
 
-  const { tileToasts, setTileToasts, showTileToast, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
+  const { tileToasts, setTileToasts, showTileToast, handleTileDraw, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
 
   const activaHuesped = () => setHuespedActivo(true);
   const desactivaHuesped = () => setHuespedActivo(false);
-  
+
   // Función para obtener un color libre
   const getNextAvailableColor = (isBig = false) => {
     const used = new Set(isBig ? usedColorsBig : usedColors);
