@@ -112,7 +112,7 @@ export const InitEnemiesProvider = ({ children }) => {
         if (tiles && tiles.length > 0) {
           tiles.forEach(tile => handleTileDraw(tile));
         } else {
-          setTileWarning(ti.aviso);
+          mostrarAviso(ti.aviso);
         }
         //showScenarioToast(`🪱 ${ti.robaHuesped}`);
         console.log("Muere Huesped");
@@ -137,7 +137,7 @@ export const InitEnemiesProvider = ({ children }) => {
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-                                         huespedActivo, activaHuesped, desactivaHuesped }}>
+                                         huespedActivo, activaHuesped, desactivaHuesped, avisos, mostrarAviso }}>
       {children}
     </InitEnemiesContext.Provider>
   );
