@@ -806,11 +806,13 @@ const InitTracker = () => {
   
   const aplicarEfectosEstados = (enemy, faseTurno) => {
     if (!enemy.estadosAlterados || enemy.estadosAlterados.length === 0) return { enemy, logs: [] };
-  
+    
     let vidaRestante = enemy.vida;
     let estados = [...enemy.estadosAlterados];
     const logs = [];
-  
+
+    if (vidaRestante === 0) return;
+    
     // ✅ Buscar ESCUDO antes de aplicar daño
     const estadoEscudo = estados.find(e => e.id === "ESCUDO");
     let escudosDisponibles = estadoEscudo ? estadoEscudo.count : 0;
@@ -1559,6 +1561,17 @@ const InitTracker = () => {
           // ✅ Aplicar efectos al inicio
           if (!processedStartEffectsRef.current.has(current.uuid)) {
             processedStartEffectsRef.current.add(current.uuid);
+
+            if (current.vida <= 0) {
+              showScenarioToast(`☠ ${tee[current.id]} ${ti.muere_1}`);
+              //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== current.uuid));
+              removeEnemyByUUID(current.uuid);
+              setTimeout(() => {
+                //handleNextTurn();
+              }, 900); 
+              return;
+            }
+            
             // 🔹 Efectos de estados (fase inicio)
             const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(current, "inicio");
   
@@ -1568,15 +1581,7 @@ const InitTracker = () => {
             // 🔹 Actualizamos enemigo con ambos cambios
             const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
 
-            if (enemigoFinal.vida <= 0) {
-              showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
-              //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
-              removeEnemyByUUID(enemigoFinal.uuid);
-              setTimeout(() => {
-                //handleNextTurn();
-              }, 900); 
-              return;
-            }
+
             // ✅ Mostrar logs (estados + capacidades)
             [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
           
