@@ -61,7 +61,7 @@ const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmun
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos, removeAviso, huespedActivo } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos, removeAviso, huespedActivo, acechoActivo } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -2762,6 +2762,15 @@ const InitTracker = () => {
               <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
                 <div className="text-xs text-indigo-300 font-bold">
                   {ti.huespedActivo}
+                </div>
+              </div>
+            )}
+
+            {/* 🐉 Aviso de que la mecánica de Rey redivivo acecha */}
+            {acechoActivo && (
+              <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                <div className="text-xs text-indigo-300 font-bold">
+                  {ti.acechoActivo}
                 </div>
               </div>
             )}
