@@ -61,7 +61,7 @@ const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmun
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -2932,9 +2932,15 @@ const InitTracker = () => {
             {warningMessage}
           </div>
         )}
+        
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
 
+            {avisos.map((aviso, idx) => (
+              <div key={idx} className="bg-black/80 text-white px-3 py-2 rounded shadow">
+                {aviso}
+              </div>
+            ))}
             {tileToasts.map(tile => (
               <motion.div
                 key={tile.uuid}
