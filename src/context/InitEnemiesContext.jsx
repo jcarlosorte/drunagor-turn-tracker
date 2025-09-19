@@ -14,12 +14,21 @@ export const InitEnemiesProvider = ({ children }) => {
   const [usedColors, setUsedColors] = useState([]);
   const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
-
+  const [avisos, setAvisos] = useState([]);
+  
   const { tileToasts, setTileToasts, showTileToast, handleTileDraw, drawMultipleTiles, tileWarning, setTileWarning } = useGame();
 
   const activaHuesped = () => setHuespedActivo(true);
   const desactivaHuesped = () => setHuespedActivo(false);
-
+  
+ // Función para mostrar aviso
+  const mostrarAviso = (mensaje) => {
+    setAvisos((prev) => [...prev, mensaje]);
+    setTimeout(() => {
+      setAvisos((prev) => prev.slice(1)); // elimina el primer aviso tras 2s
+    }, 2000);
+  };
+  
   // Función para obtener un color libre
   const getNextAvailableColor = (isBig = false) => {
     const used = new Set(isBig ? usedColorsBig : usedColors);
@@ -107,6 +116,7 @@ export const InitEnemiesProvider = ({ children }) => {
         }
         //showScenarioToast(`🪱 ${ti.robaHuesped}`);
         console.log("Muere Huesped");
+       mostrarAviso(`🐉 ${ti.robaHuesped}`);
       }
      
       return updated;
