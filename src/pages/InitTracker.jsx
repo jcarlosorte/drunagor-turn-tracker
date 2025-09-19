@@ -1567,7 +1567,16 @@ const InitTracker = () => {
             
             // 🔹 Actualizamos enemigo con ambos cambios
             const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
-      
+
+            if (enemigoFinal.vida <= 0) {
+              showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+              //setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== enemigoFinal.uuid));
+              removeEnemyByUUID(enemigoFinal.uuid);
+              setTimeout(() => {
+                //handleNextTurn();
+              }, 900); 
+              return;
+            }
             // ✅ Mostrar logs (estados + capacidades)
             [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
           
