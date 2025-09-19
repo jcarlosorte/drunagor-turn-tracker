@@ -21,12 +21,14 @@ export const InitEnemiesProvider = ({ children }) => {
   const activaHuesped = () => setHuespedActivo(true);
   const desactivaHuesped = () => setHuespedActivo(false);
   
- // Función para mostrar aviso
+  // Función para mostrar aviso
   const mostrarAviso = (mensaje) => {
-    setAvisos((prev) => [...prev, mensaje]);
-    setTimeout(() => {
-      setAvisos((prev) => prev.slice(1)); // elimina el primer aviso tras 2s
-    }, 2000);
+    setAvisos((prev) => [...prev, { id: Date.now(), mensaje }]);
+  };
+  
+  // Función para cerrar aviso manualmente
+  const removeAviso = (id) => {
+    setAvisos((prev) => prev.filter((a) => a.id !== id));
   };
   
   // Función para obtener un color libre
@@ -114,9 +116,7 @@ export const InitEnemiesProvider = ({ children }) => {
         } else {
           mostrarAviso(ti.aviso);
         }
-        //showScenarioToast(`🪱 ${ti.robaHuesped}`);
-        console.log("Muere Huesped");
-       mostrarAviso(`🐉 ${ti.robaHuesped}`);
+        mostrarAviso(`🐉 ${ti.robaHuesped}`);
       }
      
       return updated;
@@ -137,7 +137,7 @@ export const InitEnemiesProvider = ({ children }) => {
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-                                         huespedActivo, activaHuesped, desactivaHuesped, avisos, mostrarAviso }}>
+                                         huespedActivo, activaHuesped, desactivaHuesped, avisos, mostrarAviso, removeAviso }}>
       {children}
     </InitEnemiesContext.Provider>
   );
