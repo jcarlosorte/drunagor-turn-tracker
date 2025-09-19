@@ -325,6 +325,8 @@
     "Roba": "Draw",
     "activaHuesped": "Activate Host Monster",
     "desactivaHuesped": "Disable Host Monster",
+    "activaAcecho": "Activate The Undead King Haunting",
+    "desactivaAcecho": "Disable The Undead King Haunting",
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
