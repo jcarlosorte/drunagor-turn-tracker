@@ -61,7 +61,7 @@ const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmun
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos, removeAviso, huespedActivo } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -2734,28 +2734,37 @@ const InitTracker = () => {
                 </div>
               )}
 
-            {/* Aldeanos visibles encima del track */}
-              {rescue.length > 0 && (
-                <div className="mt-3 p-2 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-yellow-300 mb-2">{ti.activeRescue}</div>
-                  <div className="flex gap-2 flex-wrap justify-center">
-                    {rescue.map(point => (
-                      <div
-                        key={point.uuid}
-                        className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                      >
-                        <span>{ti.colores[point.runa]}</span>
-                        <button
-                          onClick={() => removeRescue(point.uuid)}
-                          className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+            {/* 🐉 Aviso de que la mecánica de Huésped está activa */}
+            {huespedActivo && (
+              <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                <div className="text-xs text-indigo-300 font-bold">
+                  {ti.huespedActivo}
                 </div>
-              )}
+              </div>
+            )}
+
+          {/* Aldeanos visibles encima del track */}
+            {huespedActivo && (
+              <div className="mt-3 p-2 bg-gray-800 rounded-lg">
+                <div className="text-xs text-yellow-300 mb-2">{ti.activeRescue}</div>
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {rescue.map(point => (
+                    <div
+                      key={point.uuid}
+                      className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
+                    >
+                      <span>{ti.colores[point.runa]}</span>
+                      <button
+                        onClick={() => removeRescue(point.uuid)}
+                        className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
@@ -2936,11 +2945,7 @@ const InitTracker = () => {
         <AnimatePresence>
           <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2">
 
-            {avisos.map((aviso, idx) => (
-              <div key={idx} className="bg-black/80 text-white px-3 py-2 rounded shadow">
-                {aviso}
-              </div>
-            ))}
+            
             {tileToasts.map(tile => (
               <motion.div
                 key={tile.uuid}
@@ -2955,6 +2960,21 @@ const InitTracker = () => {
                   onClose={() => handleCloseToast(tile)}
                 />
               </motion.div>
+            ))}
+            
+            {avisos.map((aviso) => (
+              <div
+                key={aviso.id}
+                className="bg-black/80 text-white px-3 py-2 rounded shadow flex items-center gap-2"
+              >
+                <span>{aviso.mensaje}</span>
+                <button
+                  onClick={() => removeAviso(aviso.id)}
+                  className="ml-auto text-red-400 hover:text-red-600 font-bold"
+                >
+                  ✕
+                </button>
+              </div>
             ))}
             {/* Contenedor de Toasts de Cartas de Defensa de la Aldea */}
             {scenarioToasts.map(toast => (
