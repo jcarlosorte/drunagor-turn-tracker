@@ -11,6 +11,7 @@ export const InitEnemiesProvider = ({ children }) => {
   const ti = translations.trackerInit || {};
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [huespedActivo, setHuespedActivo] = useState(false);
+  const [acechoActivo, setAcechoActivo] = useState(false);
   const [usedColors, setUsedColors] = useState([]);
   const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
@@ -20,6 +21,9 @@ export const InitEnemiesProvider = ({ children }) => {
 
   const activaHuesped = () => setHuespedActivo(true);
   const desactivaHuesped = () => setHuespedActivo(false);
+
+  const activaAcecho = () => setAcechoActivo(true);
+  const desactivaAcecho = () => setAcechoActivo(false);
   
   // Función para mostrar aviso
   const mostrarAviso = (mensaje) => {
@@ -137,7 +141,8 @@ export const InitEnemiesProvider = ({ children }) => {
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-                                         huespedActivo, activaHuesped, desactivaHuesped, avisos, mostrarAviso, removeAviso }}>
+                                         huespedActivo, activaHuesped, desactivaHuesped, activaAcecho, desactivaAcecho,
+                                         avisos, mostrarAviso, removeAviso }}>
       {children}
     </InitEnemiesContext.Provider>
   );
