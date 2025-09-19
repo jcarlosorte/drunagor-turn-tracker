@@ -2734,17 +2734,8 @@ const InitTracker = () => {
                 </div>
               )}
 
-            {/* 🐉 Aviso de que la mecánica de Huésped está activa */}
-            {huespedActivo && (
-              <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
-                <div className="text-xs text-indigo-300 font-bold">
-                  {ti.huespedActivo}
-                </div>
-              </div>
-            )}
-
           {/* Aldeanos visibles encima del track */}
-            {huespedActivo && (
+            {rescue.length > 0  && (
               <div className="mt-3 p-2 bg-gray-800 rounded-lg">
                 <div className="text-xs text-yellow-300 mb-2">{ti.activeRescue}</div>
                 <div className="flex gap-2 flex-wrap justify-center">
@@ -2762,6 +2753,15 @@ const InitTracker = () => {
                       </button>
                     </div>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* 🐉 Aviso de que la mecánica de Huésped está activa */}
+            {huespedActivo && (
+              <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                <div className="text-xs text-indigo-300 font-bold">
+                  {ti.huespedActivo}
                 </div>
               </div>
             )}
