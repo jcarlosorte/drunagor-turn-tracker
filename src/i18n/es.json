@@ -234,6 +234,7 @@
       "noEnemyAvailableTo": "❌ No hay enemigos disponibles para",
       "voragineWarning": "⚠️ ¡{name} ejecuta VORÁGINE y reemplaza sus cartas de ataque!",
       "robaHuesped": "¡Enemigo Muere y la Oscuridad Huesped en su interior se manifiesta!",
+      "huespedActivo": "Mecánica Monstruo Huesped Activa",
       "title": "Control de Turnos",
       "menu": "Menú",
       "language": "Idioma",
