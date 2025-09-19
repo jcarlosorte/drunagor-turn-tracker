@@ -141,7 +141,7 @@ export const InitEnemiesProvider = ({ children }) => {
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-                                         huespedActivo, activaHuesped, desactivaHuesped, activaAcecho, desactivaAcecho,
+                                         huespedActivo, activaHuesped, desactivaHuesped, activaAcecho, desactivaAcecho, acechoActivo,
                                          avisos, mostrarAviso, removeAviso }}>
       {children}
     </InitEnemiesContext.Provider>
