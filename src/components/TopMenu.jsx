@@ -365,50 +365,52 @@ const TopMenu = ({
 
 
                   {/* --- Bloque 3: ACECHO --- */}
-                 
-                    <div className="mb-2"> 
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <GiCrownedSkull className="text-indigo-300 text-xl" />
+                  <div className="mb-2"> 
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <GiCrownedSkull className="text-indigo-300 text-xl" />
+                        {!acechoActivo ? (
                           <button
                             onClick={activaAcecho}
                             className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                           >
                             {t.activaAcecho}
                           </button>
-                
+                        ) : (
                           <button
                             onClick={desactivaAcecho}
                             className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                           >
-                          {t.desactivaAcecho}
-                        </button>
-                      </div>
-              
+                            {t.desactivaAcecho}
+                          </button>
+                        )}
                     </div>
+                  </div>
                   
                   
                   {/* --- Bloque 4: MONSTRUO HUESPED (solo si expansión activa) --- */}
-                  {selectedExpansions.includes("undead_dragon") && (
-                    <div className="mb-2"> 
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <GiSpikedDragonHead className="text-indigo-300 text-xl" />
-                          <button
-                            onClick={activaHuesped}
-                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.activaHuesped}
-                          </button>
-                
-                          <button
-                            onClick={desactivaHuesped}
-                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                          >
+                 {selectedExpansions.includes("undead_dragon") && (
+                  <div className="mb-2"> 
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <GiSpikedDragonHead className="text-indigo-300 text-xl" />
+                      
+                      {!huespedActivo ? (
+                        <button
+                          onClick={activaHuesped}
+                          className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.activaHuesped}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={desactivaHuesped}
+                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                        >
                           {t.desactivaHuesped}
                         </button>
-                      </div>
-              
+                      )}
                     </div>
-                  )}  
+                  </div>
+                )}
                   
                 </div>
 
