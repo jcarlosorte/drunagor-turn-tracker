@@ -475,6 +475,49 @@ const InitTracker = () => {
         placeCommanderCards(selected, uuid);
         placeFallenHeroCards(selected, uuid);
         return;
+    } else if (selected.categoria === 'jefe') {
+        
+        if (selected.rune === 'acecho'){
+          const totalVida = selected.vida;
+          const runeIndex = runesColorMap[selected.rune];
+          const runePosition = selected.runePosition;
+          const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
+          const enemy = {
+            uuid: uuid,
+            name: selected.nombre,
+            id: selected.id,
+            rune: selected.rune,
+            imagen: selected.imagen,
+            runePosition,
+            position: runeIndex,
+            categoria: category,
+            comportamiento: behaviorType,
+            vida: totalVida,
+            vidaMax: totalVida,
+            movimiento: selected.movimiento,
+            ataque: selected.ataque,
+            color: selected.color,
+            inmunidad: selected.inmunidad,
+            tipo_ataque: selected.tipo_ataque,
+            capacidades: adjustedCaps,
+            capacidadesOriginales: selected.capacidades,
+            ringColor: colorId,
+            cara: selected.cara,
+            estadosAlterados: initialStates
+          };
+          if (ver === 'show') showToast(selected);
+          placeEnemy({ enemy });
+          // 👉 Añadir cartas de ataque del jefe:
+          
+          return;
+          
+        } else if (selected.rune === 'jefe'){
+
+
+          
+          // 👉 Añadir cartas de ataque del jefe:
+        }
+   
     }
     
     const runeIndex = runesColorMap[selected.rune];
