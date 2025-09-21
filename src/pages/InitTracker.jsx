@@ -2815,6 +2815,24 @@ const InitTracker = () => {
                 </div>
               </div>
             )}
+
+            {/* Zona especial para Jefes */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-6 z-50">
+              {placedEnemies
+                .filter(e => e.enemy.categoria === 'jefe')
+                .map(({ enemy }) => (
+                  <div
+                    key={enemy.uuid}
+                    className="scale-125" // 👈 agranda la carta
+                  >
+                    <EnemyCard
+                      enemy={enemy}
+                      onRemove={() => onRemove(enemy.uuid)}
+                      onClick={() => openEnemyModal(enemy.uuid)}
+                    />
+                  </div>
+                ))}
+            </div>
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
