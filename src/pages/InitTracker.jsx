@@ -61,7 +61,9 @@ const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmun
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
-  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, avisos, removeAviso, huespedActivo, acechoActivo } = useInitEnemies();
+  const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, 
+         releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
+         avisos, removeAviso, huespedActivo, acechoActivo } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -503,6 +505,7 @@ const InitTracker = () => {
             estadosAlterados: initialStates
           };
           if (ver === 'show') showToast(selected);
+          console.log("Acecho");
           placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
           
