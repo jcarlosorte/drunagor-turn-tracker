@@ -350,7 +350,7 @@ const InitTracker = () => {
   
   const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUUID = null, forcedPcValue = null ) => {
     setManualSelector({ open: false, color: null });
-    console.log(category);
+    
     const selected = ENEMIES.find(e => {
       if (e.id !== enemyId) return false;
       if (e.categoria !== category) return false;
@@ -359,6 +359,8 @@ const InitTracker = () => {
       if (category === 'comandante' || category === 'jefe') return true;          // ignoramos comportamiento
       return e.comportamiento === behaviorType;            // para el resto sí exigimos match
     });
+    console.log(category);
+    console.log(selected);
     if (!selected) return;
     const uuid = forcedUUID || uuidv4();
     const isBig = selected.size === 'grande';
