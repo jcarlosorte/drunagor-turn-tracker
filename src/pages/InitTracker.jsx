@@ -1418,6 +1418,7 @@ const InitTracker = () => {
     campeon: 'glow-campeon',
     comandante: 'glow-commander',
     overlord: 'glow-commander',
+    jefe: 'glow-commander',
     esbirro: 'glow-escenario',
     escenario: 'glow-escenario',
   };
