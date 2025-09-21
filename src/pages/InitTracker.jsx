@@ -259,10 +259,7 @@ const InitTracker = () => {
     setOnPCConfirm(null);
   };
 
-  const enemiesInSelectedExpansions = ENEMIES.filter(e => 
-    selectedExpansions.includes(e.expansionId) &&
-    e.color !== "jefe"
-  );
+  const enemiesInSelectedExpansions = ENEMIES.filter(e => selectedExpansions.includes(e.expansionId) );
 
   const clearCardHighlight = (uuid) => {
     setPlacedEnemies(prev =>
