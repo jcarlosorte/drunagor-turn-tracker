@@ -94,7 +94,7 @@ const TopMenu = ({
     const value = e.target.value;
     if (!value) return;
   
-    if (value === 'jefe') {
+    if (value === '') {
       onSelectBoss();
     } else {
       onAddManual(value);
