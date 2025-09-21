@@ -21,7 +21,6 @@ import { v4 as uuidv4 } from 'uuid';
 const TopMenu = ({
   onAddEnemy,
   onSelectCommander,
-  onSelectBoss,
   onAddManual,
   behaviors,
   onSelectRuneCard,
@@ -93,13 +92,7 @@ const TopMenu = ({
   const handleManualSelect = (e) => {
     const value = e.target.value;
     if (!value) return;
-  
-    if (value === '') {
-      onSelectBoss();
-    } else {
-      onAddManual(value);
-    }
-  
+    onAddManual(value);
     setManualSelect(value);
   };
 
