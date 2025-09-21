@@ -350,6 +350,7 @@ const InitTracker = () => {
   
   const handleManualEnemyAdd = (enemyId, behaviorType, category, ver = 'show', forcedColorId = null, forcedUUID = null, forcedPcValue = null ) => {
     setManualSelector({ open: false, color: null });
+    console.log(category);
     const selected = ENEMIES.find(e => {
       if (e.id !== enemyId) return false;
       if (e.categoria !== category) return false;
@@ -2598,7 +2599,6 @@ const InitTracker = () => {
             <TopMenu
               onAddEnemy={openCategorySelector}
               onSelectCommander={handleRandomCommander}
-              onSelectBoss={handleSelectBoss}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
