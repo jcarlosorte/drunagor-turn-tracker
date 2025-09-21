@@ -2820,13 +2820,13 @@ const InitTracker = () => {
             )}
 
             {/* Zona especial para Jefes */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-6 z-50">
+            <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
               {placedEnemies
                 .filter(e => e.enemy.categoria === 'jefe')
                 .map(({ enemy }) => (
                   <div
                     key={enemy.uuid}
-                    className="scale-125" // 👈 agranda la carta
+                    className="scale-200" // 👈 agranda la carta
                   >
                     <EnemyCard
                       
