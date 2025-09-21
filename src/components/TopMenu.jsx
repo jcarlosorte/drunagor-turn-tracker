@@ -961,6 +961,8 @@ const TopMenu = ({
                   onClick={() => {
                     resetPlacedRunes(); // Borra las cartas de runa
                     resetTiles();        // Borra las fichas de runa
+                    desactivaAcecho();
+                    desactivaHuesped();
                   }}
                   className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
                 >
