@@ -110,7 +110,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     negro: 'border-negro',
     comandante: 'border-dorado',
     hero: 'border-dorado',
-    jefe: 'border-morado',
+    jefe: '',
     overlord: 'border-morado',
     esbirro: 'border-cyan',
     escenario: 'border-blue',
@@ -123,7 +123,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     negro: 'bg-black',
     comandante: 'bg-yellow-400',
     hero: 'bg-orange-400',
-    jefe: 'bg-purple-800',
+    jefe: 'bg-purple-500',
     overlord: 'bg-purple-800',
     escenario: 'bg-cyan-600',
   };
@@ -134,7 +134,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     negro: 'bg-black/70',
     comandante: 'bg-yellow-400/70',
     hero: 'bg-orange-400/70',
-    jefe: 'bg-purple-700/70',
+    jefe: 'bg-purple-500/70',
     overlord: 'bg-purple-700/70',
   };
 
@@ -154,6 +154,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     esbirro: 'glow-escenario',
     escenario: 'glow-escenario',
     overlord: 'glow-commander',
+    jefe: 'glow-commander',
   };
 
   const handleVidaChange = (delta) => {
