@@ -2829,9 +2829,28 @@ const InitTracker = () => {
                     className="scale-125" // 👈 agranda la carta
                   >
                     <EnemyCard
-                      enemy={enemy}
-                      onRemove={() => onRemove(enemy.uuid)}
-                      onClick={() => openEnemyModal(enemy.uuid)}
+                      
+                      uuid={enemy.uuid}
+                      id={enemy.id}
+                      name={getEnemyName(enemy.id, enemy.color)}
+                      image={enemy.imagen}
+                      comportamiento={enemy.comportamiento}
+                      categoria={enemy.categoria}
+                      position={enemy.runePosition}
+                      color={enemy.color}
+                      onRemove={onRemove}
+                      vida={enemy.vida}
+                      vidaMax={enemy.vidaMax}
+                      movimiento={enemy.movimiento}
+                      ataque={enemy.ataque}
+                      openEnemyModal={openEnemyModal}
+                      inmunidad={enemy.inmunidad}
+                      tipo_ataque={enemy.tipo_ataque}
+                      capacidades={enemy.capacidades}
+                      ringColor={enemy.ringColor}
+                      isFlipping={false}
+                      estadosAlterados={enemy.estadosAlterados}
+                   
                     />
                   </div>
                 ))}
