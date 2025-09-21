@@ -356,7 +356,7 @@ const InitTracker = () => {
       if (e.categoria !== category) return false;
       if (!enemies.includes(e.id)) return false;
       if (e.cara === 'B') return false;
-      if (category === 'comandante') return true;          // ignoramos comportamiento
+      if (category === 'comandante' || category === 'jefe') return true;          // ignoramos comportamiento
       return e.comportamiento === behaviorType;            // para el resto sí exigimos match
     });
     if (!selected) return;
