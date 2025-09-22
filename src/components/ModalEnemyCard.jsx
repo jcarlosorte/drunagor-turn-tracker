@@ -381,7 +381,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           {/* Categoría y comportamiento */}
           <div className="flex gap-1 text-sm">
-            {categoria && (
+            {categoria && categoria!="jefe" && (
               <span className={`${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
                 {tc[categoria] || categoria}:
               </span>
@@ -429,37 +429,40 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               
             <div className={`flex-1 grid grid-cols-1 gap-1 text-gray-800 font-semibold text-sm bg-gray-200 rounded-lg`}>
               {/* Vida + Movimiento + Ataque en la misma línea */}
-              <div className="flex items-center text-center gap-4">
-                <div className="flex items-center gap-2" >
-                  <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
-                  {vidaMaxLocal}
-                </div>
-                <span className="flex items-center gap-1">
-                  <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
-                    title={typeof movimiento === "string" && movimiento.includes("X") ? `${ti.runeBasedValue}: ${valorMovimiento}` : ti.movement}
-                     />
-                  {valorMovimiento}
-                </span>
-                <span className="flex items-center gap-1">
-                  <span
-                    className={`w-7 h-7 flex items-center justify-center rounded-full border-2 border-white ${
-                      tipoAtaqueCircleClass[tipo_ataque] || "bg-gray-500"
-                    }`}
-                    title={typeof ataque === "string" && ataque.includes("X") ? `${ti.runeBasedValue}: ${valorAtaque}` : ti.tipo_ataque?.label}
-                  >
-                    {tipoAtaqueIconMap[tipo_ataque] || <GiSwordClash className="text-white text-lg" />}
-                  </span>
-                  {valorAtaque}
-                  {effectiveStats.ataqueModificado !== valorAtaque && (
-                    <span>
-                      /
-                      <span className="text-blue-500 font-bold cursor-help" title={traducirCapacidad(effectiveStats.idCartaEspecial, rune, getRuneCount)}>
-                        {effectiveStats.ataqueModificado}
-                      </span>
+              {categoria !== "jefe" && (
+                <div className="flex items-center text-center gap-4">
+                  <div className="flex items-center gap-2" >
+                    <GiHealthPotion className="text-red-600 text-2xl cursor-help" title={ti.health || ''}/>
+                    {vidaMaxLocal}
+                  </div>
+                  
+                    <span className="flex items-center gap-1">
+                      <GiSteeltoeBoots className="text-blue-600 text-2xl cursor-help"
+                        title={typeof movimiento === "string" && movimiento.includes("X") ? `${ti.runeBasedValue}: ${valorMovimiento}` : ti.movement}
+                         />
+                      {valorMovimiento}
                     </span>
-                  )}
-                </span>
-              </div>
+                    <span className="flex items-center gap-1">
+                      <span
+                        className={`w-7 h-7 flex items-center justify-center rounded-full border-2 border-white ${
+                          tipoAtaqueCircleClass[tipo_ataque] || "bg-gray-500"
+                        }`}
+                        title={typeof ataque === "string" && ataque.includes("X") ? `${ti.runeBasedValue}: ${valorAtaque}` : ti.tipo_ataque?.label}
+                      >
+                        {tipoAtaqueIconMap[tipo_ataque] || <GiSwordClash className="text-white text-lg" />}
+                      </span>
+                      {valorAtaque}
+                      {effectiveStats.ataqueModificado !== valorAtaque && (
+                        <span>
+                          /
+                          <span className="text-blue-500 font-bold cursor-help" title={traducirCapacidad(effectiveStats.idCartaEspecial, rune, getRuneCount)}>
+                            {effectiveStats.ataqueModificado}
+                          </span>
+                        </span>
+                      )}
+                    </span>
+                </div>
+              )}
               <div className="flex items-start gap-2">
                 <GiShieldReflect className="text-purple-700 mt-1 text-2xl cursor-help" title={ti.inmunidad || ''} />
                 <div className="flex flex-wrap gap-2">
