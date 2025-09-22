@@ -2343,6 +2343,7 @@ const InitTracker = () => {
   
   const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping, estadosAlterados }) => {
     const [flipped, setFlipped] = useState(false);
+    const isBoss = categoria === "jefe";
     const ringClass =
       ENEMY_RING_COLORS.find(r => r.id === ringColor)?.className ||
       ENEMY_RING_COLORS_BIG.find(r => r.id === ringColor)?.className ||
@@ -2366,13 +2367,19 @@ const InitTracker = () => {
         style={{ perspective: "1000px" }}
       >
         <div className={classNames(
-          "relative w-full max-w-[140px] hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
-          ringClass  // 👈 Aquí aplicas el anillo de color
-        )}>
+           "relative w-full hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
+          !isBoss && ringClass, // 👈 solo anillo si no es jefe
+          isBoss ? "w-[30%] max-h-[200px]" : "max-w-[140px]"
+          )}>
           <img
             src={image}
             alt={name}
-            className={`w-full h-auto object-cover rounded-lg border-2 ${borderColorMap[color] || ''}`}
+            className={classNames(
+            "w-full h-full object-cover rounded-lg",
+            isBoss
+              ? "object-top max-h-[200px]" // 👈 recorte arriba si excede
+              : `border-2 ${borderColorMap[color] || ""}`
+            )}
           />
           {/* ✅ Estados Alterados sobre la imagen */}
           <div className="absolute top-1 left-1 grid grid-rows-3 grid-flow-col gap-1">
@@ -2407,7 +2414,7 @@ const InitTracker = () => {
           >
             <div className="flex flex-col w-full items-center leading-none" onClick={() => { openEnemyModal(uuid); }}>
               <span className="enemy-text leading-none">{name}</span>
-              {comportamiento && (
+              {!isBoss && comportamiento && (
                 <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
                   {tb?.[comportamiento] || comportamiento}
                 </span>
@@ -2820,41 +2827,40 @@ const InitTracker = () => {
             )}
 
             {/* Zona especial para Jefes */}
-            <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+            
               {placedEnemies
                 .filter(e => e.enemy.categoria === 'jefe')
                 .map(({ enemy }) => (
-                  <div
-                    key={enemy.uuid}
-                    className="scale-200" // 👈 agranda la carta
-                  >
-                    <EnemyCard
-                      
-                      uuid={enemy.uuid}
-                      id={enemy.id}
-                      name={getEnemyName(enemy.id, enemy.color)}
-                      image={enemy.imagen}
-                      comportamiento={enemy.comportamiento}
-                      categoria={enemy.categoria}
-                      position={enemy.runePosition}
-                      color={enemy.color}
-                      onRemove={onRemove}
-                      vida={enemy.vida}
-                      vidaMax={enemy.vidaMax}
-                      movimiento={enemy.movimiento}
-                      ataque={enemy.ataque}
-                      openEnemyModal={openEnemyModal}
-                      inmunidad={enemy.inmunidad}
-                      tipo_ataque={enemy.tipo_ataque}
-                      capacidades={enemy.capacidades}
-                      ringColor={enemy.ringColor}
-                      isFlipping={false}
-                      estadosAlterados={enemy.estadosAlterados}
-                   
-                    />
-                  </div>
+                  <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                    <div key={enemy.uuid} className="scale-200" >
+                      <EnemyCard
+                        
+                        uuid={enemy.uuid}
+                        id={enemy.id}
+                        name={getEnemyName(enemy.id, enemy.color)}
+                        image={enemy.imagen}
+                        comportamiento={enemy.comportamiento}
+                        categoria={enemy.categoria}
+                        position={enemy.runePosition}
+                        color={enemy.color}
+                        onRemove={onRemove}
+                        vida={enemy.vida}
+                        vidaMax={enemy.vidaMax}
+                        movimiento={enemy.movimiento}
+                        ataque={enemy.ataque}
+                        openEnemyModal={openEnemyModal}
+                        inmunidad={enemy.inmunidad}
+                        tipo_ataque={enemy.tipo_ataque}
+                        capacidades={enemy.capacidades}
+                        ringColor={enemy.ringColor}
+                        isFlipping={false}
+                        estadosAlterados={enemy.estadosAlterados}
+                     
+                      />
+                    </div>
+                  </div>  
                 ))}
-            </div>
+            
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
               {[...Array(11)].map((_, idx) => (
