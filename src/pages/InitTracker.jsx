@@ -2611,6 +2611,42 @@ const InitTracker = () => {
               onSelectRuneCard={handleAddRuneCard}
               onTileDraw={handleTileDraw}
             />
+
+            {/* Zona especial para Jefes */}
+            {placedEnemies
+              .filter(e => e.enemy.categoria === 'jefe')
+              .map(({ enemy }) => (
+                <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                  <div key={enemy.uuid} className="scale-200" >
+                    <EnemyCard
+                      
+                      uuid={enemy.uuid}
+                      id={enemy.id}
+                      name={getEnemyName(enemy.id, enemy.color)}
+                      image={enemy.imagen}
+                      comportamiento={enemy.comportamiento}
+                      categoria={enemy.categoria}
+                      position={enemy.runePosition}
+                      color={enemy.color}
+                      onRemove={onRemove}
+                      vida={enemy.vida}
+                      vidaMax={enemy.vidaMax}
+                      movimiento={enemy.movimiento}
+                      ataque={enemy.ataque}
+                      openEnemyModal={openEnemyModal}
+                      inmunidad={enemy.inmunidad}
+                      tipo_ataque={enemy.tipo_ataque}
+                      capacidades={enemy.capacidades}
+                      ringColor={enemy.ringColor}
+                      isFlipping={false}
+                      estadosAlterados={enemy.estadosAlterados}
+                   
+                    />
+                  </div>
+                </div>  
+            ))}
+
+            
             {/* Puntos de aparición visibles encima del track */}
             {pilas.length > 0 && (
                 <div className="mt-3 p-2 bg-gray-800 rounded-lg">
@@ -2826,40 +2862,7 @@ const InitTracker = () => {
               </div>
             )}
 
-            {/* Zona especial para Jefes */}
             
-              {placedEnemies
-                .filter(e => e.enemy.categoria === 'jefe')
-                .map(({ enemy }) => (
-                  <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
-                    <div key={enemy.uuid} className="scale-200" >
-                      <EnemyCard
-                        
-                        uuid={enemy.uuid}
-                        id={enemy.id}
-                        name={getEnemyName(enemy.id, enemy.color)}
-                        image={enemy.imagen}
-                        comportamiento={enemy.comportamiento}
-                        categoria={enemy.categoria}
-                        position={enemy.runePosition}
-                        color={enemy.color}
-                        onRemove={onRemove}
-                        vida={enemy.vida}
-                        vidaMax={enemy.vidaMax}
-                        movimiento={enemy.movimiento}
-                        ataque={enemy.ataque}
-                        openEnemyModal={openEnemyModal}
-                        inmunidad={enemy.inmunidad}
-                        tipo_ataque={enemy.tipo_ataque}
-                        capacidades={enemy.capacidades}
-                        ringColor={enemy.ringColor}
-                        isFlipping={false}
-                        estadosAlterados={enemy.estadosAlterados}
-                     
-                      />
-                    </div>
-                  </div>  
-                ))}
             
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
