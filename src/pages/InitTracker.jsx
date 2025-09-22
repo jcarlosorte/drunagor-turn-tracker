@@ -476,12 +476,12 @@ const InitTracker = () => {
         placeFallenHeroCards(selected, uuid);
         return;
     } else if (selected.categoria === 'jefe') {
-        
+        const runeIndex = runesColorMap[selected.rune];
+        const runePosition = selected.runePosition;
+        const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
         if (selected.rune === 'acecho'){
           const totalVida = selected.vida;
-          const runeIndex = runesColorMap[selected.rune];
-          const runePosition = selected.runePosition;
-          const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
+          
           const enemy = {
             uuid: uuid,
             name: selected.nombre,
@@ -494,18 +494,18 @@ const InitTracker = () => {
             comportamiento: behaviorType,
             vida: totalVida,
             vidaMax: totalVida,
-            movimiento: selected.movimiento,
+            movimiento: null,
             ataque: selected.ataque,
             color: selected.color,
             inmunidad: selected.inmunidad,
-            tipo_ataque: selected.tipo_ataque,
+            tipo_ataque: null,
             capacidades: adjustedCaps,
             capacidadesOriginales: selected.capacidades,
-            ringColor: colorId,
-            cara: selected.cara,
+            ringColor: null,
+            cara: null,
             estadosAlterados: initialStates
           };
-          if (ver === 'show') showToast(selected);
+          //if (ver === 'show') showToast(selected);
         
           placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
