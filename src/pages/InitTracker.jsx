@@ -2369,8 +2369,8 @@ const InitTracker = () => {
         <div className={classNames(
            "relative w-full hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
           !isBoss && ringClass, // 👈 solo anillo si no es jefe
-          isBoss ? "w-[30%] max-h-[200px]" : "max-w-[140px]"
-          )}>
+          isBoss ? "max-h-[200px]" : "max-w-[140px]"
+          )} style={isBoss ? { width: "30%" } : {}} >
           <img
             src={image}
             alt={name}
