@@ -386,7 +386,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                 {tc[categoria] || categoria}:
               </span>
             )}
-            {comportamiento && (
+            {comportamiento && categoria!="jefe" && (
               <span className={`italic ${textBgColorMap[color] || ''} ${categoryTextGlowMap[categoria] || ''}`}>
                 {tb[comportamiento] || comportamiento}
               </span>
