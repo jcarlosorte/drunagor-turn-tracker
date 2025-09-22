@@ -2369,15 +2369,15 @@ const InitTracker = () => {
         <div className={classNames(
            "relative w-full hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
           !isBoss && ringClass, // 👈 solo anillo si no es jefe
-          isBoss ? "max-h-[200px]" : "max-w-[140px]"
-          )} style={isBoss ? { width: "30%" } : {}} >
+          isBoss ? "max-h-[250px]" : "max-w-[140px]"
+          )} style={isBoss ? { width: "20%" } : {}} >
           <img
             src={image}
             alt={name}
             className={classNames(
             "w-full h-full object-cover rounded-lg",
             isBoss
-              ? "object-top max-h-[200px]" // 👈 recorte arriba si excede
+              ? "object-top max-h-[250px]" // 👈 recorte arriba si excede
               : `border-2 ${borderColorMap[color] || ""}`
             )}
           />
