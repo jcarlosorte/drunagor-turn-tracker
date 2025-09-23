@@ -13,7 +13,7 @@ import { ENEMIES } from '@/data/enemies';
 import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
-import { ESTADOS_ALTERADOS, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
+import { ESTADOS_ALTERADOS, INMUNIDADES, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
 import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO, ASALTO_GUSANO, ACECHO } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
@@ -79,6 +79,8 @@ const InitTracker = () => {
   const ttr = translations.defensaCard.cartas_trad || {};
   const tw = translations.asalto_gusano || {};
   const t_acecho = translations.acecho || {};
+  const t_con = translations.condiciones_t || {};
+  const t_con_d = translations.condiciones_d || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -2407,7 +2409,7 @@ const InitTracker = () => {
     </div>
   );
   
-  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping, estadosAlterados }) => {
+  const EnemyCard = ({ id, name, comportamiento, categoria, image, position, uuid, color, onRemove, vida, vidaMax, movimiento, ataque, openEnemyModal, ringColor, isFlipping, estadosAlterados, inmunidad }) => {
     const [flipped, setFlipped] = useState(false);
     const isBoss = categoria === "jefe";
     const ringClass =
@@ -2459,7 +2461,7 @@ const InitTracker = () => {
                     <img
                       src={estadoConfig.imagen}
                       alt={estadoConfig.texto}
-                      className="w-5 h-5 border border-white rounded-full shadow-md"
+                      className={`${isBoss ? "w-10 h-10" : "w-5 h-5"} border border-white rounded-full shadow-md`}          
                     />
                     {estado.count > 1 && (
                       <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[0.6rem] font-bold px-1 rounded-full">
@@ -2470,6 +2472,30 @@ const InitTracker = () => {
                 );
               })}
           </div>
+
+          {/* ✅ Inmunidades sobre la imagen */}
+          <div className="absolute top-1 right-1 grid grid-rows-3 grid-flow-col gap-1">
+            {inmunidad &&
+              inmunidad.map((clave) => {
+                const inmunConfig = INMUNIDADES.find((i) => i.id === clave);
+                if (!inmunConfig) return null;
+                return (
+                  <div key={clave} className="relative group">
+                    <img
+                      src={inmunConfig.imagen}
+                      alt={t_con[clave] || clave}
+                      className={`${isBoss ? "w-10 h-10" : "w-5 h-5"} border border-yellow-400 rounded-full shadow-md`}
+                    />
+                    {/* Tooltip */}
+                    <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap z-50">
+                      <strong>{t_con[clave] || clave}</strong>
+                      <div className="text-gray-300">{t_con_d[clave] || ""}</div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+
             
           <div
             className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 px-1 py-0.5 border-2 rounded-lg text-white text-xs
@@ -2567,6 +2593,7 @@ const InitTracker = () => {
                   ringColor={item.enemy.ringColor}
                   isFlipping={isEntityFlipping}
                   estadosAlterados={item.enemy.estadosAlterados}
+                  inmunidad={item.enemy.inmunidad}
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
@@ -2705,6 +2732,7 @@ const InitTracker = () => {
                       ringColor={enemy.ringColor}
                       isFlipping={false}
                       estadosAlterados={enemy.estadosAlterados}
+                      inmunidad={enemy.inmunidad}
                     />
                   </div>
                 </div>
