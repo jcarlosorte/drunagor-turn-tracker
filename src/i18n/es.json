@@ -945,5 +945,21 @@
       "asalto_w_4": "{ATACA} 2 ÁREAS ADYACENTES A WERMUNGGDIR E INFLIGE {DAÑO} {X} Y {HEMORRAGIA} {X} A CADA HÉROE O MASCOTA EN CADA UNA DE ELLAS.",
       "asalto_w_5": "{INVOCA} HASTA {X} CRIAS DE GUSANO - BISOÑO ADYACENTES A WERMUNGGDIR."
     }
+  },
+  "acecho": {
+    "nombre":{
+      "acecho_1": "",
+      "acecho_2": "",
+      "acecho_3": "",
+      "acecho_4": "",
+      "acecho_5": ""
+    },
+    "texto":{
+      "acecho_1": "TODOS LOS HÉROES SUFREN {QUEMADURA} {X}.",
+      "acecho_2": "TODOS LOS HÉROES SUFREN {VENENO} {X}.",
+      "acecho_3": "EL REY REDIVIVO GANA {ESCUDO} {X}.",
+      "acecho_4": "TODOS LOS HÉROES SUFREN {HEMORRAGIA} {X}.",
+      "acecho_5": "TODOS LOS HÉROES SUFREN {INTIMIDAR} {X}."
+    }
   }
 }
