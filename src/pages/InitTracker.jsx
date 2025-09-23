@@ -2456,8 +2456,9 @@ const InitTracker = () => {
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
+                const [hover, setHover] = React.useState(false);
                 return (
-                  <div key={estado.id} className="relative">
+                  <div key={estado.id} className="relative" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <img
                       src={estadoConfig.imagen}
                       alt={estadoConfig.texto}
@@ -2467,6 +2468,15 @@ const InitTracker = () => {
                       <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[0.6rem] font-bold px-1 rounded-full">
                         {estado.count}
                       </span>
+                    )}
+                    {/* Tooltip */}
+                    {hover && (
+                      <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
+                                      bg-black text-white text-[0.65rem] rounded px-2 py-1 
+                                      whitespace-normal break-words max-w-[200px] z-20">
+                        <strong>{ttr[estado] || estado}</strong>
+                        
+                      </div>
                     )}
                   </div>
                 );
@@ -2491,7 +2501,7 @@ const InitTracker = () => {
                     {hover && (
                       <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
                                       bg-black text-white text-[0.65rem] rounded px-2 py-1 
-                                      whitespace-nowrap z-50">
+                                      whitespace-normal break-words max-w-[200px] z-20">
                         <strong>{t_con[clave] || clave}</strong>
                         <div className="text-gray-300">{t_con_d[clave] || ""}</div>
                       </div>
