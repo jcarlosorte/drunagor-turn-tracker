@@ -496,6 +496,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               .map((estado) => {
                 const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
                 if (!estadoConfig) return null;
+                const [hover, setHover] = React.useState(false);
                 const maxCount = estado.max || estadoConfig.max || 1;
             
                 // 🔹 Ajuste de tamaño dinámico
@@ -515,17 +516,22 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                     </button>
             
                     {/* Icono con tooltip */}
-                    <div className="relative group cursor-help flex items-center justify-center">
+                    <div className="relative cursor-help flex items-center justify-center" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                       <img
                         src={estadoConfig.imagen}
                         alt={estadoConfig.texto}
                         className={`${iconSize} flex-shrink`}
                       />
-                      <div className="absolute left-1 ml-2 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                        {tea[estadoConfig.texto] || estadoConfig.texto}
-                      </div>
+                      {/* Tooltip */}
+                      {hover && (
+                        <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
+                                        bg-black text-white text-[0.65rem] rounded px-2 py-1 
+                                        whitespace-nowrap z-20">
+                          <strong>{tea[estadoConfig.texto]}</strong>
+                        </div>
+                      )}
                     </div>
-            
+                    
                     {maxCount > 1 && (
                       <div className="text-white text-sm font-bold">{estado.count || 0}</div>
                     )}
