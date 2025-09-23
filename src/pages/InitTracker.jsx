@@ -309,7 +309,7 @@ const InitTracker = () => {
 
   const handleAcechoEffect = (runa) => {
     if (!acechoActivo || !runa) return;
-    
+    console.log(runa);
     // Buscar carta ACECHO por color
     const cartaAcecho = ACECHO.find(a => a.rune === runa.runa || a.rune === runa.color);
     if (!cartaAcecho) return;
