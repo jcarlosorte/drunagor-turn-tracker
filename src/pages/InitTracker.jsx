@@ -324,7 +324,7 @@ const InitTracker = () => {
     let texto = t_acecho.texto[cartaAcecho.id];
     if (!texto) return;
 
-    if (texto) {texto = texto.replaceAll('{X}', runeCount);
+    texto = texto.replaceAll('{X}', runeCount);
         
     // Sustituir capacidades por traduccion
     texto = texto.replace(/\{([^}]+)\}/g, (match, id) => {return ttr[id];});
@@ -362,14 +362,10 @@ const InitTracker = () => {
           if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
           estados.push({ id: "ESCUDO", count: nuevo });
         }
-  
         updateEnemyEstados(targetUUID, estados);
-  
-    
       }
-
-      
     }
+                        
   };
   
   const handleCategorySelect = (categoryKey) => {
