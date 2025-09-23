@@ -2608,7 +2608,6 @@ const InitTracker = () => {
                   ringColor={item.enemy.ringColor}
                   isFlipping={isEntityFlipping}
                   estadosAlterados={item.enemy.estadosAlterados}
-                  inmunidad={item.enemy.inmunidad}
                 />
               ) : type === 'rune' ? (
                 <RuneCard rune={item} onRemove={removeRuneByUUID} flipped={flippedCards.includes(item.uuid)} />
@@ -2747,7 +2746,6 @@ const InitTracker = () => {
                       ringColor={enemy.ringColor}
                       isFlipping={false}
                       estadosAlterados={enemy.estadosAlterados}
-                      inmunidad={enemy.inmunidad}
                     />
                   </div>
                 </div>
