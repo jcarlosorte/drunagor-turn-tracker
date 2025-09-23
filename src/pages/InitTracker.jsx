@@ -318,7 +318,7 @@ const InitTracker = () => {
     const enemigo = entry?.enemy;
     if (!enemigo) return;
     const targetUUID = enemigo.uuid;
-    let runeCount = getRuneCount(runa.color);
+    let runeCount = getRuneCount(runa.runa);
     
     // Texto base traducido
     let texto = t_acecho.texto[cartaAcecho.id];
