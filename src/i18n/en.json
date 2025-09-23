@@ -450,6 +450,7 @@
     "DESCARTAR": "DISCARD",
     "ENEMIGO": "ENEMY",
     "ESCUDO_X": "SHIELD {x}",
+    "ESCUDO": "SHIELD",
     "ESTADO": "STATE",
     "EVOLUCION": "EVOLVE",
     "FATIGA_X": "FATIGUE {x}",
