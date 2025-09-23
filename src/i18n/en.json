@@ -944,5 +944,21 @@
       "asalto_w_4": "{ATACA} 2 AREAS ADJACENT TO WERMUNGGDIR AND DEALS {DAÑO} {X} AND {HEMORRAGIA} {X} TO EACH HERO OR PET IN EACH OF THEM.",
       "asalto_w_5": "{INVOCA} {X} WERMUNGGDIR´S OFFSPRING - ROOKIE ADJACENT TO WERMUNGGDIR´S MINIATURE."
     }
+  },
+  "acecho": {
+    "nombre":{
+      "acecho_1": "",
+      "acecho_2": "",
+      "acecho_3": "",
+      "acecho_4": "",
+      "acecho_5": ""
+    },
+    "texto":{
+      "acecho_1": "ALL HEROES SUFFER {QUEMADURA} {X}.",
+      "acecho_2": "ALL HEROES SUFFER {VENENO} {X}.",
+      "acecho_3": "THE UNDEAD KING GAINS {ESCUDO} {X}.",
+      "acecho_4": "ALL HEROES SUFFER {HEMORRAGIA} {X}.",
+      "acecho_5": "ALL HEROES SUFFER {INTIMIDAR} {X}."
+    }
   }
 }
