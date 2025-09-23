@@ -364,7 +364,7 @@ const InitTracker = () => {
         }
         updateEnemyEstados(targetUUID, estados);
       }
-    }
+    }); 
                         
   };
   
