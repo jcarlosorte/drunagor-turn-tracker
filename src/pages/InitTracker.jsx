@@ -14,7 +14,7 @@ import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { ESTADOS_ALTERADOS, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
-import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO, ASALTO_GUSANO } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, CARTAS_GUSANO, ASALTO_GUSANO, ACECHO } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
@@ -78,6 +78,7 @@ const InitTracker = () => {
   const tea = translations.estadosAlterados || {};
   const ttr = translations.defensaCard.cartas_trad || {};
   const tw = translations.asalto_gusano || {};
+  const t_acecho = translations.acecho || {};
   const behaviors = trackerData.behaviors;
   const enemies = trackerData.enemies;
   const selectedHeroes = trackerData.heroes;
@@ -306,6 +307,41 @@ const InitTracker = () => {
 
   };
 
+  const procesarTextoAcecho = (texto, traducirCapacidad) => {
+    if (!texto) return "";
+  
+    let procesado = texto;
+  
+    // Sustituir capacidades [ID_CAPACIDAD]
+    procesado = procesado.replace(/\[([A-Z_]+)\]/g, (match, id) => {
+      if (id === "X") return getRuneCount();
+      return ttr.id; // 👈 usa tu función de traducción de capacidades
+    });
+  
+    return procesado;
+  };
+
+
+  const handleAcechoEffect = (runa) => {
+    if (!acechoActivo || !runa) return;
+  
+    // Buscar carta ACECHO por color
+    const cartaAcecho = ACECHO.find(a => a.rune === runa.runa || a.rune === runa.color);
+    if (!cartaAcecho) return;
+  
+    // Texto base traducido
+    let texto = t_acecho.texto[cartaAcecho.id];
+    if (!texto) return;
+  
+    // Sustituir capacidades y X
+    texto = texto.replace(/\[([A-Z_]+)\]/g, (match, id) => {
+      if (id === "X") return getRuneCount();
+      return ttr.id;
+    });
+  
+    showScenarioToast(texto);
+  };
+  
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
     setCategorySelector({ open: false, color: null });
@@ -1389,7 +1425,7 @@ const InitTracker = () => {
         if (!tiles) setTileWarning(ti.aviso);
         showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
         discardTileByColor(runeColor);
-        
+        handleAcechoEffect(tiles[0]);
       }
 
     });
@@ -1727,6 +1763,7 @@ const InitTracker = () => {
                 const tiles = drawMultipleTiles(currentRune.numRunas);
                 tiles?.forEach(tile => handleTileDraw(tile));
                 if (!tiles) setTileWarning(ti.aviso);
+                handleAcechoEffect(tiles[0]);
               }
       
             } else if (currentRune.tipo === 'asalto') {
@@ -1755,10 +1792,13 @@ const InitTracker = () => {
             
                     // 🔹 Procesar lista_capacidad
                     interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
+
+                    
  
                   });
                   
                 }
+                handleAcechoEffect(tiles[0]);
               }
             } else if (currentRune.tipo === 'defensa') {
               // 🔹 Defensa → roba cartas de aldeano o errantes
