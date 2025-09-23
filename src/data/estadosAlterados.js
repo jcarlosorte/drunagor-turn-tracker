@@ -10,6 +10,7 @@ import quemadura from "@/assets/assets_logo/quemadura.png";
 import escudo from "@/assets/assets_logo/escudo.png";
 import sanar from "@/assets/assets_logo/sanar.png";
 import tiempo from "@/assets/assets_logo/tiempo.png";
+import grande from "@/assets/assets_logo/grande.png";
 
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
@@ -34,6 +35,18 @@ export const ESTADOS_ALTERADOS = [
   { id: "TIEMPO", texto: "tiempo", accion: "tiempo", reduce: "si", numReduce: 1, turno: "principio", daño: 0, max: 4, imagen: tiempo, mostrar: "no", prevenible: "si" }
 ];
 
+export const INMUNIDADES = [
+  // condiciones redundantes
+  { id: "DERRIBO_I", imagen: derribo },
+  { id: "SIGILO_I", imagen: sigilo },
+  { id: "ATURDIMIENTO_I", imagen: aturdimiento },
+  { id: "LENTITUD_I", imagen: lentitud },
+  { id: "HEMORRAGIA_I", imagen: hemorragia },
+  { id: "VENENO_I", texto: "veneno", imagen: veneno },
+  { id: "INTIMIDAR_I", imagen: intimidar },
+  { id: "QUEMADURA_I", imagen: quemadura },
+  { id: "GRANDE", imagen: grande }
+];
 
 export const CAPACIDADES_ACTIVADAS = [
   { id: "REGENERACION", max: 0, imagen: sanar },
