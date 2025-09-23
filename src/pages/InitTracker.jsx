@@ -2450,7 +2450,7 @@ const InitTracker = () => {
             )}
           />
           {/* ✅ Estados Alterados sobre la imagen */}
-          <div className={`absolute top-1 left-1 grid ${isBoss ? "grid-rows-4" : "grid-rows-3"} grid-flow-col gap-1`}>
+          <div className={`absolute top-1 left-1 grid ${isBoss ? "grid-rows-5" : "grid-rows-3"} grid-flow-col gap-1`}>
             {estadosAlterados
               .filter(estado => estado.count > 0)
               .map((estado) => {
@@ -2461,7 +2461,7 @@ const InitTracker = () => {
                     <img
                       src={estadoConfig.imagen}
                       alt={estadoConfig.texto}
-                      className={`${isBoss ? "w-10 h-10" : "w-5 h-5"} border border-white rounded-full shadow-md`}          
+                      className={`${isBoss ? "w-8 h-8" : "w-5 h-5"} border border-white rounded-full shadow-md`}          
                     />
                     {estado.count > 1 && (
                       <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[0.6rem] font-bold px-1 rounded-full">
@@ -2474,23 +2474,28 @@ const InitTracker = () => {
           </div>
 
           {/* ✅ Inmunidades sobre la imagen */}
-          <div className={`absolute top-1 right-1 grid ${isBoss ? "grid-rows-4" : "grid-rows-3"} grid-flow-col gap-1`}>
+          <div className={`absolute top-1 right-1 grid ${isBoss ? "grid-rows-5" : "grid-rows-3"} grid-flow-col gap-1`}>
             {inmunidad &&
               inmunidad.map((clave) => {
                 const inmunConfig = INMUNIDADES.find((i) => i.id === clave);
                 if (!inmunConfig) return null;
+                const [hover, setHover] = React.useState(false);
                 return (
-                  <div key={clave} className="relative">
+                  <div key={clave} className="relative" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <img
                       src={inmunConfig.imagen}
                       alt={t_con[clave] || clave}
-                      className={`${isBoss ? "w-10 h-10" : "w-5 h-5"} border border-white rounded-full shadow-md group`}  
+                      className={`${isBoss ? "w-8 h-8" : "w-5 h-5"} border border-white rounded-full shadow-md`}  
                     />
                     {/* Tooltip */}
-                    <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap z-50 pointer-events-none">
-                      <strong>{t_con[clave] || clave}</strong>
-                      <div className="text-gray-300">{t_con_d[clave] || ""}</div>
-                    </div>
+                    {hover && (
+                      <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
+                                      bg-black text-white text-[0.65rem] rounded px-2 py-1 
+                                      whitespace-nowrap z-50">
+                        <strong>{t_con[clave] || clave}</strong>
+                        <div className="text-gray-300">{t_con_d[clave] || ""}</div>
+                      </div>
+                    )}
                   </div>
                 );
               })}
