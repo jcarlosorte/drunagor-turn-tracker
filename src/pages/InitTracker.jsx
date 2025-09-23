@@ -2685,7 +2685,6 @@ const InitTracker = () => {
                 <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
                   <div key={enemy.uuid} className="scale-200" >
                     <EnemyCard
-                      
                       uuid={enemy.uuid}
                       id={enemy.id}
                       name={getEnemyName(enemy.id, enemy.color)}
@@ -2706,10 +2705,9 @@ const InitTracker = () => {
                       ringColor={enemy.ringColor}
                       isFlipping={false}
                       estadosAlterados={enemy.estadosAlterados}
-                   
                     />
                   </div>
-                </div>  
+                </div>
             ))}
 
             
@@ -2719,51 +2717,51 @@ const InitTracker = () => {
                   <div className="text-xs text-yellow-300 mb-2">{ti.gestionPilas || ''}</div>
                   <div className="flex gap-2 flex-wrap justify-center">
                     {pilas.map(pila => (
-                          <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
-                            
-                            {pila.estado === 'reserva' ? (
-                              <>
-                                <div className="font-bold mb-2">{ti.pila} 🗃️</div>
-                                <button
-                                  className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
-                                  onClick={() => activarPila(pila.id)}
-                                >
-                                  ✅ {ti.activaPila || 'Activar Pila'}
-                                </button>
-                              </>
-                            ) : (
-                              <>
-                                <div className="font-bold mb-1">
-                                  <span>{ti.pila} 🗃️</span>
-                                  <input
-                                    type="text"
-                                    maxLength={5}
-                                    value={codigosPilas[pila.id] || ''}
-                                    onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
-                                    className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
-                                    placeholder="ABC12"
-                                    title={ti.codigoPila}
-                                  />
-                                </div>
-                                <div className="text-xs text-gray-300 mb-2">
-                                  {ti.tamano}: {pila.tiles.length}
-                                </div>
-                                <div className="flex justify-center">
-                                  <button
-                                    className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                                    onClick={() => {
-                                      const tile = removeTileFromPila(pila.id);
-                                      if (tile) showTileToast(tile, 'retira');
-                                      else alert(ti.emptyPila);
-                                    }}
-                                  >
-                                    {ti.devolver}
-                                  </button>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        ))}
+                      <div key={pila.id} className="bg-gray-800 p-2 rounded text-center text-white border border-yellow-500">
+                        
+                        {pila.estado === 'reserva' ? (
+                          <>
+                            <div className="font-bold mb-2">{ti.pila} 🗃️</div>
+                            <button
+                              className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                              onClick={() => activarPila(pila.id)}
+                            >
+                              ✅ {ti.activaPila || 'Activar Pila'}
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <div className="font-bold mb-1">
+                              <span>{ti.pila} 🗃️</span>
+                              <input
+                                type="text"
+                                maxLength={5}
+                                value={codigosPilas[pila.id] || ''}
+                                onChange={(e) => handleCodigoChange(pila.id, e.target.value)}
+                                className="bg-gray-700 text-white text-xs px-2 py-1 rounded w-[70px] text-center"
+                                placeholder="ABC12"
+                                title={ti.codigoPila}
+                              />
+                            </div>
+                            <div className="text-xs text-gray-300 mb-2">
+                              {ti.tamano}: {pila.tiles.length}
+                            </div>
+                            <div className="flex justify-center">
+                              <button
+                                className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                                onClick={() => {
+                                  const tile = removeTileFromPila(pila.id);
+                                  if (tile) showTileToast(tile, 'retira');
+                                  else alert(ti.emptyPila);
+                                }}
+                              >
+                                {ti.devolver}
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
                 </div>
               </div>
             )}
