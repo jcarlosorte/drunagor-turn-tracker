@@ -307,39 +307,69 @@ const InitTracker = () => {
 
   };
 
-  const procesarTextoAcecho = (texto, traducirCapacidad) => {
-    if (!texto) return "";
-  
-    let procesado = texto;
-  
-    // Sustituir capacidades [ID_CAPACIDAD]
-    procesado = procesado.replace(/\[([A-Z_]+)\]/g, (match, id) => {
-      if (id === "X") return getRuneCount();
-      return ttr.id; // 👈 usa tu función de traducción de capacidades
-    });
-  
-    return procesado;
-  };
-
-
   const handleAcechoEffect = (runa) => {
     if (!acechoActivo || !runa) return;
-  
+    
     // Buscar carta ACECHO por color
     const cartaAcecho = ACECHO.find(a => a.rune === runa.runa || a.rune === runa.color);
     if (!cartaAcecho) return;
-  
+    const capacidades = cartaAcecho.lista_capacidad || [];
+    const entry = placedEnemies.find(e => e.enemy.categoria === "jefe");
+    const enemigo = entry?.enemy;
+    if (!enemigo) return;
+    const targetUUID = enemigo.uuid;
+    let runeCount = getRuneCount(runa.color);
+    
     // Texto base traducido
     let texto = t_acecho.texto[cartaAcecho.id];
     if (!texto) return;
-  
-    // Sustituir capacidades y X
-    texto = texto.replace(/\[([A-Z_]+)\]/g, (match, id) => {
-      if (id === "X") return getRuneCount();
-      return ttr.id;
-    });
+
+    if (texto) {texto = texto.replaceAll('{X}', runeCount);
+        
+    // Sustituir capacidades por traduccion
+    texto = texto.replace(/\{([^}]+)\}/g, (match, id) => {return ttr[id];});
   
     showScenarioToast(texto);
+
+    capacidades.forEach(cap => {
+
+      // ✅ --- ESCUDO ---
+      if (cap.startsWith("ESCUDO")) {
+        const partes = cap.split("_");
+        const tieneCondicion = partes.includes("?");
+        const puedeSobrepasar = partes.includes("SI");
+        const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
+        const maxEscudo = configEscudo?.max || Infinity;
+  
+        let escudosAgregar = 0;
+  
+        if (partes.includes("X")) {
+          escudosAgregar = runeCount;
+        }
+  
+        if (escudosAgregar <= 0) return;
+  
+        const estados = [...enemigo.estadosAlterados];
+        const idx = estados.findIndex(e => e.id === "ESCUDO");
+  
+        if (idx >= 0) {
+          let actual = estados[idx].count;
+          let nuevo = actual + escudosAgregar;
+          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+          estados[idx] = { ...estados[idx], count: nuevo };
+        } else {
+          let nuevo = escudosAgregar;
+          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+          estados.push({ id: "ESCUDO", count: nuevo });
+        }
+  
+        updateEnemyEstados(targetUUID, estados);
+  
+    
+      }
+
+      
+    }
   };
   
   const handleCategorySelect = (categoryKey) => {
