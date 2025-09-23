@@ -438,34 +438,34 @@ export const ACECHO = [
     rune: 'naranja',
     nombre: 'acecho_1',
     texto: 'acecho_1',
-    lista_capacidad: []
+    lista_capacidad: ["QUEMADURA_X"]
   },
   {
     id: 'acecho_2',
     rune: 'verde',
     nombre: 'acecho_2',
     texto: 'acecho_2',
-    lista_capacidad: []
+    lista_capacidad: ["VENENO_X"]
   },
   {
     id: 'acecho_3',
     rune: 'azul',
     nombre: 'acecho_3',
     texto: 'acecho_3',
-    lista_capacidad: []
+    lista_capacidad: ["ESCUDO_X"]
   },
   {
     id: 'acecho_4',
     rune: 'rojo',
     nombre: 'acecho_4',
     texto: 'acecho_4',
-    lista_capacidad: []
+    lista_capacidad: ["HEMORRAGIA_X"]
   },
   {
     id: 'acecho_5',
     rune: 'gris',
     nombre: 'acecho_5',
     texto: 'acecho_5',
-    lista_capacidad: []
+    lista_capacidad: ["INTIMIDAR_X"]
   }
 ];
