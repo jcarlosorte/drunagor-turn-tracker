@@ -431,3 +431,41 @@ export const ASALTO_GUSANO = [
     lista_capacidad: ["INVOCA_X", "corrupted_worm", "bisoño"]
   }
 ];
+
+export const ACECHO = [
+  {
+    id: 'acecho_1',
+    rune: 'naranja',
+    nombre: 'acecho_1',
+    texto: 'acecho_1',
+    lista_capacidad: []
+  },
+  {
+    id: 'acecho_2',
+    rune: 'verde',
+    nombre: 'acecho_2',
+    texto: 'acecho_2',
+    lista_capacidad: []
+  },
+  {
+    id: 'acecho_3',
+    rune: 'azul',
+    nombre: 'acecho_3',
+    texto: 'acecho_3',
+    lista_capacidad: []
+  },
+  {
+    id: 'acecho_4',
+    rune: 'rojo',
+    nombre: 'acecho_4',
+    texto: 'acecho_4',
+    lista_capacidad: []
+  },
+  {
+    id: 'acecho_5',
+    rune: 'gris',
+    nombre: 'acecho_5',
+    texto: 'acecho_5',
+    lista_capacidad: []
+  }
+];
