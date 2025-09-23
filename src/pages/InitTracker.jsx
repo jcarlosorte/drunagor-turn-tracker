@@ -2473,8 +2473,8 @@ const InitTracker = () => {
                     {hover && (
                       <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
                                       bg-black text-white text-[0.65rem] rounded px-2 py-1 
-                                      whitespace-normal break-words max-w-[400px] z-20">
-                        <strong>{ttr[estado.id] || ""}</strong>
+                                       w-max max-w-[200px] whitespace-normal break-words z-20">
+                        <strong>{t_con[estado.id] || ""}</strong>
                         
                       </div>
                     )}
@@ -2501,7 +2501,7 @@ const InitTracker = () => {
                     {hover && (
                       <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
                                       bg-black text-white text-[0.65rem] rounded px-2 py-1 
-                                      whitespace-normal break-words max-w-[400px] z-20">
+                                       w-max max-w-[200px] whitespace-normal break-words z-20">
                         <strong>{t_con[clave] || clave}</strong>
                         <div className="text-gray-300">{t_con_d[clave] || ""}</div>
                       </div>
