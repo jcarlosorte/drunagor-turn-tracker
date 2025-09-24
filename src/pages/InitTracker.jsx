@@ -309,10 +309,11 @@ const InitTracker = () => {
 
   };
 
-  const handleAcechoEffect = (runas) => {
+  const handleAcechoEffect = (runas) => {  
+    if (!acechoActivo || !runa || runas.length === 0) return;
     const runa = runas[0];
-    if (!acechoActivo || !runa) return;
-    
+    const numRunas = runas.filter(r => r.runa === runa.runa).length;
+
     // Buscar carta ACECHO por color
     const cartaAcecho = ACECHO.find(a => a.rune === runa.runa || a.rune === runa.color);
     if (!cartaAcecho) return;
@@ -321,7 +322,7 @@ const InitTracker = () => {
     const enemigo = entry?.enemy;
     if (!enemigo) return;
     const targetUUID = enemigo.uuid;
-    let runeCount = getRuneCount(runa.runa);
+    let runeCount = getRuneCount(runa.runa) + numRunas;
     
     // Texto base traducido
     let texto = t_acecho.texto[cartaAcecho.id];
