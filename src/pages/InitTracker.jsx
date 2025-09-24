@@ -309,7 +309,8 @@ const InitTracker = () => {
 
   };
 
-  const handleAcechoEffect = (runa) => {
+  const handleAcechoEffect = (runas) => {
+    const runa = runas[0];
     if (!acechoActivo || !runa) return;
     
     // Buscar carta ACECHO por color
@@ -1453,7 +1454,7 @@ const InitTracker = () => {
         if (!tiles) setTileWarning(ti.aviso);
         showScenarioToast(`${ti.Roba} ${numRune} ${ti.rune}`);
         discardTileByColor(runeColor);
-        handleAcechoEffect(tiles[0]);
+        handleAcechoEffect(tiles);
       }
 
     });
@@ -1791,7 +1792,7 @@ const InitTracker = () => {
                 const tiles = drawMultipleTiles(currentRune.numRunas);
                 tiles?.forEach(tile => handleTileDraw(tile));
                 if (!tiles) setTileWarning(ti.aviso);
-                handleAcechoEffect(tiles[0]);
+                handleAcechoEffect(tiles);
               }
       
             } else if (currentRune.tipo === 'asalto') {
@@ -1826,7 +1827,7 @@ const InitTracker = () => {
                   });
                   
                 }
-                handleAcechoEffect(tiles[0]);
+                handleAcechoEffect(tiles);
               }
             } else if (currentRune.tipo === 'defensa') {
               // 🔹 Defensa → roba cartas de aldeano o errantes
