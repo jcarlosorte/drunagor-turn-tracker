@@ -21,6 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 const TopMenu = ({
   onAddEnemy,
   onSelectCommander,
+  onSelectBoss,
   onAddManual,
   behaviors,
   onSelectRuneCard,
@@ -74,7 +75,8 @@ const TopMenu = ({
     document.addEventListener('mousedown', handleOutside);
     return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
-    
+
+  
   const handleEnemySelect = (e) => {
     const value = e.target.value;
     if (!value) return;
@@ -397,7 +399,7 @@ const TopMenu = ({
                           <button
                             onClick={() => {
                               activaAcecho();
-                              handleManualEnemyAdd("undead_king_boss_Acecho_1");
+                              onSelectBoss("undead_king_boss_Acecho_1");
                               setShowEmbrujoOptions(false);
                             }}
                             className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
@@ -408,7 +410,7 @@ const TopMenu = ({
                           <button
                             onClick={() => {
                               activaAcecho();
-                              handleManualEnemyAdd("undead_king_boss_Acecho_1");
+                              onSelectBoss("undead_king_boss_Acecho_1");
                               setShowEmbrujoOptions(false);
                             }}
                             className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
@@ -419,7 +421,7 @@ const TopMenu = ({
                           <button
                             onClick={() => {
                               activaAcecho();
-                              handleManualEnemyAdd("undead_king_boss_Acecho_2");
+                              onSelectBoss("undead_king_boss_Acecho_2");
                               setShowEmbrujoOptions(false);
                             }}
                             className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
