@@ -95,7 +95,6 @@ export const InitEnemiesProvider = ({ children }) => {
      setPlacedEnemies((prev = []) => {
         const target = prev.find(e => e.enemy.uuid === uuid);
         if (!target) return prev;
-    
         const isCommander = target.enemy.categoria === 'comandante';
         const isOverlord = target.enemy.categoria === 'overlord';
         const isFallenHero= target.enemy.categoria === 'hero';
@@ -103,15 +102,12 @@ export const InitEnemiesProvider = ({ children }) => {
         const updated = prev.filter(e => {
           const enemy = e.enemy;
           if (enemy.uuid === uuid) return false;
-    
           if (isCommander && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
           if (isOverlord && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
           if (isFallenHero && (enemy.tipo === 'especial' || enemy.tipo === 'fallenHero') && enemy.sourceEnemyUUID === uuid) return false;
           if (isBoss && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
-    
           return true;
         });
-       
 
        if (huespedActivo) {
           const cantidad = target.enemy.size === 'grande' ? 2 : 1;
@@ -123,8 +119,6 @@ export const InitEnemiesProvider = ({ children }) => {
           }
           mostrarAviso(`🐉 ${ti.robaHuesped}`);
         }
-
-        console.log(updated);
         return updated;
       });
   };
