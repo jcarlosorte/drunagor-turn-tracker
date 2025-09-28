@@ -370,17 +370,37 @@ const TopMenu = ({
 
                   {/* --- Bloque 3: ACECHO --- */}
                   <div className="mb-2"> 
-                    <div className="flex flex-wrap gap-2 justify-center items-center">
-                      <GiCrownedSkull className="text-indigo-300 text-xl" />
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="flex flex-wrap gap-2 justify-center items-center">
+                        <GiCrownedSkull className="text-indigo-300 text-xl" />
                   
-                      {!acechoActivo ? (
-                        <>
+                        {!acechoActivo ? (
+                          <button
+                            onClick={() => setShowEmbrujoOptions(prev => !prev)}
+                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.activaAcecho}
+                          </button>
+                        ) : (
+                          <button
+                            onClick={desactivaAcecho}
+                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.desactivaAcecho}
+                          </button>
+                        )}
+                      </div>
+                  
+                      {/* Opciones de embrujo */}
+                      {!acechoActivo && showEmbrujoOptions && (
+                        <div className="flex gap-2 flex-wrap justify-center">
                           <button
                             onClick={() => {
                               activaAcecho();
                               handleManualEnemyAdd("undead_king_boss_Acecho_1");
+                              setShowEmbrujoOptions(false);
                             }}
-                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                            className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
                           >
                             Embrujo I
                           </button>
@@ -389,8 +409,9 @@ const TopMenu = ({
                             onClick={() => {
                               activaAcecho();
                               handleManualEnemyAdd("undead_king_boss_Acecho_1");
+                              setShowEmbrujoOptions(false);
                             }}
-                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                            className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
                           >
                             Embrujo II
                           </button>
@@ -399,25 +420,18 @@ const TopMenu = ({
                             onClick={() => {
                               activaAcecho();
                               handleManualEnemyAdd("undead_king_boss_Acecho_2");
+                              setShowEmbrujoOptions(false);
                             }}
-                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                            className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
                           >
                             Embrujo III
                           </button>
-                        </>
-                      ) : (
-                        <button
-                          onClick={desactivaAcecho}
-                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.desactivaAcecho}
-                        </button>
+                        </div>
                       )}
                     </div>
                   </div>
 
-                  
-                  
+        
                   {/* --- Bloque 4: MONSTRUO HUESPED (solo si expansión activa) --- */}
                  {selectedExpansions.includes("undead_dragon") && (
                   <div className="mb-2"> 
