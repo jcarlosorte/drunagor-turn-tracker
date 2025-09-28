@@ -300,16 +300,6 @@ const TopMenu = ({
                       >
                         {t.addRunesCara}
                       </button>
-
-                      <button
-                        onClick={() => {
-                          const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
-                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                        }}
-                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunes2}
-                      </button>
                     </div>
             
                     {showRuneFaceOptions && (
@@ -323,6 +313,15 @@ const TopMenu = ({
                             {t.cara} ({card.cara})
                           </button>
                         ))}
+                        <button
+                        onClick={() => {
+                          const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
+                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                        }}
+                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunes2} ({card.cara})
+                      </button>
                       </div>
                     )}
 
