@@ -91,43 +91,41 @@ export const InitEnemiesProvider = ({ children }) => {
     });
   };
 
-  const removeEnemyByUUID = (uuid) => {
-    console.log(uuid);
-   setPlacedEnemies((prev) => {
-     console.log(prev);
-      const target = prev.find(e => e.enemy.uuid === uuid);
-      if (!target) return prev;
-  
-      const isCommander = target.enemy.categoria === 'comandante';
-      const isOverlord = target.enemy.categoria === 'overlord';
-      const isFallenHero= target.enemy.categoria === 'hero';
-      const isBoss= target.enemy.categoria === 'jefe';
-      const updated = prev.filter(e => {
-        const enemy = e.enemy;
-        if (enemy.uuid === uuid) return false;
-  
-        if (isCommander && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
-        if (isOverlord && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
-        if (isFallenHero && (enemy.tipo === 'especial' || enemy.tipo === 'fallenHero') && enemy.sourceEnemyUUID === uuid) return false;
-        if (isBoss && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
-  
-        return true;
-      });
+  const removeEnemyByUUID = (uuid) => { 
+     setPlacedEnemies((prev = []) => {
+        const target = prev.find(e => e.enemy.uuid === uuid);
+        if (!target) return prev;
+    
+        const isCommander = target.enemy.categoria === 'comandante';
+        const isOverlord = target.enemy.categoria === 'overlord';
+        const isFallenHero= target.enemy.categoria === 'hero';
+        const isBoss= target.enemy.categoria === 'jefe';
+        const updated = prev.filter(e => {
+          const enemy = e.enemy;
+          if (enemy.uuid === uuid) return false;
+    
+          if (isCommander && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
+          if (isOverlord && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
+          if (isFallenHero && (enemy.tipo === 'especial' || enemy.tipo === 'fallenHero') && enemy.sourceEnemyUUID === uuid) return false;
+          if (isBoss && enemy.tipo === 'especial' && enemy.sourceEnemyUUID === uuid) return false;
+    
+          return true;
+        });
+       console.log(updated);
 
-     if (huespedActivo) {
-        const cantidad = target.enemy.size === 'grande' ? 2 : 1;
-        const tiles = drawMultipleTiles(cantidad);
-        if (tiles && tiles.length > 0) {
-          tiles.forEach(tile => handleTileDraw(tile));
-        } else {
-          mostrarAviso(ti.aviso);
+       if (huespedActivo) {
+          const cantidad = target.enemy.size === 'grande' ? 2 : 1;
+          const tiles = drawMultipleTiles(cantidad);
+          if (tiles && tiles.length > 0) {
+            tiles.forEach(tile => handleTileDraw(tile));
+          } else {
+            mostrarAviso(ti.aviso);
+          }
+          mostrarAviso(`🐉 ${ti.robaHuesped}`);
         }
-        mostrarAviso(`🐉 ${ti.robaHuesped}`);
-      }
      
-      return updated;
-    });
-
+        return updated;
+      });
   };
   
   const resetPlacedEnemies = () => {
