@@ -111,7 +111,7 @@ export const InitEnemiesProvider = ({ children }) => {
     
           return true;
         });
-       console.log(updated);
+       
 
        if (huespedActivo) {
           const cantidad = target.enemy.size === 'grande' ? 2 : 1;
@@ -123,7 +123,8 @@ export const InitEnemiesProvider = ({ children }) => {
           }
           mostrarAviso(`🐉 ${ti.robaHuesped}`);
         }
-     
+
+        console.log(updated);
         return updated;
       });
   };
