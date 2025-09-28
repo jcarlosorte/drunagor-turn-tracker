@@ -115,6 +115,7 @@ const InitTracker = () => {
 
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
+  const openManualBoss = (id) => handleManualEnemyAdd(id, "jefe", "jefe");
 
   const getRuneColorFromIndex = (index) => {
     return Object.entries(runesColorMap).find(([color, idx]) => idx === index)?.[0];
@@ -2715,6 +2716,7 @@ const InitTracker = () => {
             <TopMenu
               onAddEnemy={openCategorySelector}
               onSelectCommander={handleRandomCommander}
+              onSelectBoss={openManualBoss}
               onAddManual={openManualSelector}
               behaviors={behaviors}
               onSelectRuneCard={handleAddRuneCard}
