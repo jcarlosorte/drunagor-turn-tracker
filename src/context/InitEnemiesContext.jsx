@@ -92,7 +92,9 @@ export const InitEnemiesProvider = ({ children }) => {
   };
 
   const removeEnemyByUUID = (uuid) => {
+    console.log(uuid);
    setPlacedEnemies((prev) => {
+     console.log(prev);
       const target = prev.find(e => e.enemy.uuid === uuid);
       if (!target) return prev;
   
