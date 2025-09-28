@@ -365,7 +365,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         {/* Botón eliminar */}
         {onDelete && (
           <button
-            onClick={() => onDelete(uuid)}
+            onClick={() => onDelete(uuid); onClose();}
             className="absolute top-2 left-2 text-white bg-red-600 hover:bg-red-700 rounded-full px-2 py-1 text-xs"
           >
             🗑 {ti.remove}
