@@ -37,6 +37,7 @@ const TopMenu = ({
   const [showAssaultFaceOptions, setshowAssaultFaceOptions] = useState(false);
   const [isRunesOpen, setIsRunesOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
+  const [showEmbrujoOptions, setShowEmbrujoOptions] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
