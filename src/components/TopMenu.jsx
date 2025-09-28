@@ -5,7 +5,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSwordClash, GiSpikedDragonHead, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
-import { RUNAS, ASALTO } from '@/data/runas';
+import { RUNAS, RUNAS_F, ASALTO } from '@/data/runas';
 import { ENEMIES } from '@/data/enemies';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
@@ -300,6 +300,16 @@ const TopMenu = ({
                       >
                         {t.addRunesCara}
                       </button>
+
+                      <button
+                        onClick={() => {
+                          const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
+                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                        }}
+                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.addRunes2}
+                      </button>
                     </div>
             
                     {showRuneFaceOptions && (
@@ -315,6 +325,8 @@ const TopMenu = ({
                         ))}
                       </div>
                     )}
+
+                    
                   </div>
 
                   {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
