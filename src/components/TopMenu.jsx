@@ -320,7 +320,7 @@ const TopMenu = ({
                         }}
                         className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                       >
-                        {t.addRunes2} ({card.cara})
+                        {t.addRunes2} (B)
                       </button>
                       </div>
                     )}
