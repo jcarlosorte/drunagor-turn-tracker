@@ -298,7 +298,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_15',
-    lista_capacidad: ["DAÑO_2_X"]
+    lista_capacidad: ["DAÑO_2_X", "DERRIBO"]
   },
   {
     id: 'boss_16',
