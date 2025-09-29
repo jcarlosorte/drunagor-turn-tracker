@@ -549,7 +549,6 @@ const InitTracker = () => {
         const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
         if (selected.rune === 'acecho'){
           const totalVida = selected.vida;
-          
           const enemy = {
             uuid: uuid,
             name: selected.nombre,
@@ -581,10 +580,42 @@ const InitTracker = () => {
           return;
           
         } else if (selected.rune === 'jefe'){
+          const cubosTrauma = window.confirm(`${ti.cubosTrauma}`);
+          const subTotalTrauma = cubosTrauma * selected.cubo_T;
+          const cubosMaldicion = window.confirm(`${ti.cubosMaldicion}`);
+          const subTotalMaldicion = cubosMaldicion * selected.cubo_M;
+          const subTotalVida = selected.vida * (numHeroes);
+          const totalVida = subTotalVida + subTotalTrauma + subTotalMaldicion;
 
-
-          
+          const enemy = {
+            uuid: uuid,
+            name: selected.nombre,
+            id: selected.id,
+            rune: selected.rune,
+            imagen: selected.imagen,
+            runePosition,
+            position: runeIndex,
+            categoria: category,
+            comportamiento: behaviorType,
+            vida: totalVida,
+            vidaMax: totalVida,
+            movimiento: null,
+            ataque: selected.ataque,
+            color: selected.color,
+            inmunidad: selected.inmunidad,
+            tipo_ataque: null,
+            capacidades: adjustedCaps,
+            capacidadesOriginales: selected.capacidades,
+            ringColor: null,
+            cara: null,
+            estadosAlterados: initialStates
+          };
+          //if (ver === 'show') showToast(selected);
+        
+          placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
+          
+          return;
         }
    
     }
