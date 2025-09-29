@@ -14,7 +14,7 @@ import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { ESTADOS_ALTERADOS, INMUNIDADES, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
-import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, ASALTO_GUSANO, ACECHO } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_JEFE, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, ASALTO_GUSANO, ACECHO } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
@@ -573,10 +573,15 @@ const InitTracker = () => {
             estadosAlterados: initialStates
           };
           //if (ver === 'show') showToast(selected);
-        
+          // 1- Eliminar cartas de Runa
+          // 2- Eliminar mosntruos
+          // 3- Jefe
           placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
-          
+          placeBossCards(selected, uuid);
+          // 4- Esbirros
+          // 5- Colocar Runas
+          // 6- Consecuencias
           return;
           
         } else if (selected.rune === 'jefe'){
@@ -821,6 +826,63 @@ const InitTracker = () => {
       });
     }
   };
+
+  const placeBossCard = (enemy, bossUUID, isTurnActivation = false) => {
+    const enemyId = enemy.id;
+    const enemyColor = enemy.color;
+    const enemyCat = enemy.categoria;
+  
+    // 🔍 Filtrar cartas de este jefe según su id
+    const cartasJefe = CARTAS_JEFE.filter(c => c.idJefe === enemyId);
+  
+    // Mezclar cartas para aleatoriedad
+    const selected = [...cartasJefe].sort(() => 0.5 - Math.random());
+  
+    // Estados iniciales
+    const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
+  
+    // Seleccionar número de cartas igual a numHeroes
+    //const selected = shuffled.slice(0, numHeroes);
+  
+    const nombreBoss = getEnemyName(enemyId, enemyColor);
+  
+    const nuevas = selected.map(carta => ({
+      enemy: {
+        uuid: uuidv4(),
+        id: carta.id,
+        nombre: carta.nombre,
+        capacidades: carta.capacidades,
+        lista_capacidad: carta.lista_capacidad,
+        rune: carta.rune,
+        runePosition: carta.runePosition,
+        categoria: enemyCat,
+        position: runesColorMap[carta.rune],
+        tipo: "especial",
+        sourceEnemyUUID: bossUUID, // 👈 enlace al jefe original
+        nombreEnemy: nombreBoss,
+        highlight: true,
+        estadosAlterados: initialStates,
+      },
+    }));
+  
+    // ⚠️ Mensaje especial (similar a comandante, puedes personalizar)
+    const msgBoss = ti.bossWarning
+      ? ti.bossWarning.replace("{name}", nombreBoss)
+      : `${nombreBoss} ha revelado sus cartas de jefe`;
+  
+    if (isTurnActivation) {
+      setWarningMessage(msgBoss);
+      setTimeout(() => setWarningMessage(null), 3000);
+    }
+  
+    setPlacedEnemies(prev => [...prev, ...nuevas]);
+  
+    // 🔦 Quitar highlight tras un rato
+    nuevas.forEach(carta => {
+      setTimeout(() => clearCardHighlight(carta.enemy.uuid), 1500);
+    });
+  };
+
 
   const handleAddRuneCard = (runeCard, timeToken) => {
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
