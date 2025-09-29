@@ -254,6 +254,96 @@ export const CARTAS_JEFE = [
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_10',
     lista_capacidad: ["PILA"]
+  },
+  {
+    id: 'boss_11',
+    nombre: 'boss_11',
+    rune: 'azul',
+    runePosition: 'abajo',
+    idJefe: 'wermunggdir',
+    capacidades: 'boss_11',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_12',
+    nombre: 'boss_12',
+    rune: 'gris',
+    runePosition: 'abajo',
+    idJefe: 'wermunggdir',
+    capacidades: 'boss_12',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_13',
+    nombre: 'boss_13',
+    rune: 'rojo',
+    runePosition: 'arriba',
+    idJefe: 'wermunggdir',
+    capacidades: 'boss_13',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_14',
+    nombre: 'boss_14',
+    rune: 'verde',
+    runePosition: 'arriba',
+    idJefe: 'wermunggdir',
+    capacidades: 'boss_14',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_15',
+    nombre: 'boss_15',
+    rune: 'naranja',
+    runePosition: 'abajo',
+    idJefe: 'wermunggdir',
+    capacidades: 'boss_15',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_16',
+    nombre: 'boss_16',
+    rune: 'azul',
+    runePosition: 'abajo',
+    idJefe: 'aralhezec',
+    capacidades: 'boss_16',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_17',
+    nombre: 'boss_17',
+    rune: 'gris',
+    runePosition: 'abajo',
+    idJefe: 'aralhezec',
+    capacidades: 'boss_17',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_18',
+    nombre: 'boss_18',
+    rune: 'rojo',
+    runePosition: 'arriba',
+    idJefe: 'aralhezec',
+    capacidades: 'boss_18',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_19',
+    nombre: 'boss_19',
+    rune: 'verde',
+    runePosition: 'arriba',
+    idJefe: 'aralhezec',
+    capacidades: 'boss_19',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_20',
+    nombre: 'boss_20',
+    rune: 'naranja',
+    runePosition: 'abajo',
+    idJefe: 'aralhezec',
+    capacidades: 'boss_20',
+    lista_capacidad: []
   }
 ];
 
