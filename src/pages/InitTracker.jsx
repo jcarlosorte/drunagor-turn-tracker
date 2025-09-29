@@ -572,16 +572,9 @@ const InitTracker = () => {
             cara: null,
             estadosAlterados: initialStates
           };
-          //if (ver === 'show') showToast(selected);
-          // 1- Eliminar cartas de Runa
-          // 2- Eliminar mosntruos
-          // 3- Jefe
+
           placeEnemy({ enemy });
-          // 👉 Añadir cartas de ataque del jefe:
-          placeBossCards(selected, uuid);
-          // 4- Esbirros
-          // 5- Colocar Runas
-          // 6- Consecuencias
+       
           return;
           
         } else if (selected.rune === 'jefe'){
@@ -616,10 +609,15 @@ const InitTracker = () => {
             estadosAlterados: initialStates
           };
           //if (ver === 'show') showToast(selected);
-        
+          // 1- Eliminar cartas de Runa
+          // 2- Eliminar mosntruos
+          // 3- Jefe
           placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
-          
+          placeBossCards(selected, uuid);
+          // 4- Esbirros
+          // 5- Colocar Runas
+          // 6- Consecuencias
           return;
         }
    
@@ -835,18 +833,12 @@ const InitTracker = () => {
     // 🔍 Filtrar cartas de este jefe según su id
     const cartasJefe = CARTAS_JEFE.filter(c => c.idJefe === enemyId);
   
-    // Mezclar cartas para aleatoriedad
-    const selected = [...cartasJefe].sort(() => 0.5 - Math.random());
-  
     // Estados iniciales
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
   
-    // Seleccionar número de cartas igual a numHeroes
-    //const selected = shuffled.slice(0, numHeroes);
-  
     const nombreBoss = getEnemyName(enemyId, enemyColor);
   
-    const nuevas = selected.map(carta => ({
+    const nuevas = cartasJefe.map(carta => ({
       enemy: {
         uuid: uuidv4(),
         id: carta.id,
@@ -864,7 +856,7 @@ const InitTracker = () => {
         estadosAlterados: initialStates,
       },
     }));
-  
+    console.log(cartasJefe);
     // ⚠️ Mensaje especial (similar a comandante, puedes personalizar)
     const msgBoss = ti.bossWarning
       ? ti.bossWarning.replace("{name}", nombreBoss)
