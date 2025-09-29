@@ -96,9 +96,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         if (count <= 1) return extra;      // 0 o 1 runa → 3
         if (count === 2) return extra + 1; // 2 runas → 4
         return extra + 1;                  // 3 o más → 4
-      }
-    } else {
+      } else {
       return extra + count;
+      } 
     }
   
     return valor; // Si es un número directo o no aplicable
