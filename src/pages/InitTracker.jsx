@@ -580,9 +580,9 @@ const InitTracker = () => {
           return;
           
         } else if (selected.rune === 'jefe'){
-          const cubosTrauma = window.confirm(`${ti.cubosTrauma}`);
+          const cubosTrauma = parseInt(window.prompt(`${ti.cubosTrauma}`, "0"), 10) || 0;
           const subTotalTrauma = cubosTrauma * selected.cubo_T;
-          const cubosMaldicion = window.confirm(`${ti.cubosMaldicion}`);
+          const cubosMaldicion = parseInt(window.prompt(`${ti.cubosMaldicion}`, "0"), 10) || 0;
           const subTotalMaldicion = cubosMaldicion * selected.cubo_M;
           const subTotalVida = selected.vida * (numHeroes);
           const totalVida = subTotalVida + subTotalTrauma + subTotalMaldicion;
