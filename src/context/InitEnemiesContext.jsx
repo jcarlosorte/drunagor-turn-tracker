@@ -110,16 +110,20 @@ export const InitEnemiesProvider = ({ children }) => {
         });
 
        if (huespedActivo) {
-          const cantidad = target.enemy.size === 'grande' ? 2 : 1;
-          const tiles = drawMultipleTiles(cantidad);
-          if (tiles && tiles.length > 0) {
-            tiles.forEach(tile => handleTileDraw(tile));
-          } else {
-            mostrarAviso(ti.aviso);
-          }
-          mostrarAviso(`🐉 ${ti.robaHuesped}`);
+        const cantidad = target.enemy.size === 'grande' ? 2 : 1;
+        const tiles = drawMultipleTiles(cantidad);
+        if (tiles && tiles.length > 0) {
+          tiles.forEach(tile => handleTileDraw(tile));
+        } else {
+          mostrarAviso(ti.aviso);
         }
-        return updated;
+        mostrarAviso(`🐉 ${ti.robaHuesped}`);
+      }
+      if (acechoActivo) {
+        desactivaAcecho();
+      }
+       
+      return updated;
       });
   };
   
