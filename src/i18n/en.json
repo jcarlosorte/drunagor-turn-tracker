@@ -754,6 +754,12 @@
       "boss_8": "If the Undead King is on 1 or more Darkness tiles (not board Darkness), remove the smallest of them. The Undead King regenerates an amount of health equal to the number of spaces the tile occupied multiplied by the number of Heroes. If he is not on a Darkness tile, this attack has no effect.",
       "boss_9": "{ROBA} 2 runes. Then, {INVOCA} {X} Skeleton Archer (Minion). (1 per player up to Max. 4)",
       "boss_10": "Replace the Event Token chosen by the Party Leader with a Pile of Runes off the board. Then, if it is the fourth time a Pile of Runes is placed on the board, remove this card from the Initiative Tracker.",
+      "boss_11": "Wermunggdir targets {X} area(s) at any range (first choose the areas with the highest number of heroes and then those with the strongest heroes) and deals {DAÑO} {2*X} to each enemy within each Area.",
+      "boss_12": "{ROBA} 1 rune and generate its Darkness tile adjacent to Wermunggdir (the leader chooses the space). Then, {INVOCA} 2 Worm Hatchlings – Rookie with 3 HP (instead of 9) in spaces adjacent to Wermunggdir (leader’s choice).",
+      "boss_13": "When the initiative marker reaches this card, resolve all conditions of Wermunggdir. Then, advance the marker.",
+      "boss_14": "Wermunggdir causes a collapse in the Area of the farthest Hero and Swallows them. (The swallowed character is moved into Wermunggdir’s guts, suffers {FATIGA 2}; {DAÑO} {X} and {VENENO} {X}).",
+      "boss_15": "Wermunggdir targets {X} hero(es) at any range (always starting with the strongest) and deals {2*X} damage to each enemy and {DERRIBO}. If any hero prevents the damage, they also avoid knockdown.",
+
       "fallen_1": "MANIFEST 1 RUNE: PLACE 1 TIME TOKEN ON EACH ATTACK CARD THAT MATCHES THAT RUNE'S COLOR (DO NOT PLACE IT ON THE MONSTER CARD OR THIS CARD). THE NEXT TIME THE INITIATIVE MARKER REACHES THIS CARD, REMOVE THE TIME TOKEN INSTEAD OF RESOLVING THAT CARD'S EFFECTS.",
       "fallen_2": "THE FALLEN HERO AMBUSHS THE WEAKER HERO. THEN, DEAL {X} {DAÑO}. IF THAT HERO IS KNOCKED OUT BY THIS ATTACK, THE FALLEN HERO ALSO HEALS {2*X}."
     }
