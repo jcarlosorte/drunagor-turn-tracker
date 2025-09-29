@@ -206,6 +206,8 @@
     "muere_1": "dies from the effects of conditions at the start of his turn",
     "muere_2": "dies from the effects of conditions at the end of their turn",
     "cumpleCondiciones": "Do you meet the requirements to add the card ",
+    "cubosTrauma": "How many Trauma Cubes have been removed from the Heroes?",
+    "cubosMaldicion": "How many Curse Cubes have been removed from the Heroes?",
     "saltaTurnoPorTiempo": "Skip the turn by Time token",
     "inflige": "deals",
     "ignoraEscudos": "ignores shields",
