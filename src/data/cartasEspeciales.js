@@ -167,23 +167,94 @@ export const CARTAS_OVERLORD = [
 export const CARTAS_JEFE = [
   {
     id: 'boss_1',
-    nombre: 'Ascenso del Terror',
-    rune: 'gris',
+    nombre: 'boss_1',
+    rune: 'azul',
     runePosition: 'arriba',
-    idJefe: 'undead_king_boss',
-    encuentro: 'fortaleza sombría',
-    capacidades: ['INMUNIDAD_DAÑO', 'GRITO_TERROR']
+    idJefe: 'undead_king_boss_1',
+    capacidades: 'boss_1',
+    lista_capacidad: ['CONDICIONES', 'DAÑO X']
   },
   {
     id: 'boss_2',
-    nombre: 'Domador de Sombras',
+    nombre: 'boss_2',
+    rune: 'gris',
+    runePosition: 'arriba',
+    idJefe: 'undead_king_boss_1',
+    capacidades: 'boss_2',
+    lista_capacidad: ['MALDICION 1', 'DAÑO X']
+  },
+  {
+    id: 'boss_3',
+    nombre: 'boss_3',
+    rune: 'rojo',
+    runePosition: 'abajo',
+    idJefe: 'undead_king_boss_1',
+    capacidades: 'boss_3',
+    lista_capacidad: ['ACTIVA_ESBIRROS']
+  },
+  {
+    id: 'boss_4',
+    nombre: 'boss_4',
+    rune: 'verde',
+    runePosition: 'abajo',
+    idJefe: 'undead_king_boss_1',
+    capacidades: 'boss_4',
+    lista_capacidad: []
+  },
+  {
+    id: 'boss_5',
+    nombre: 'boss_5',
+    rune: 'naranja',
+    runePosition: 'arriba',
+    idJefe: 'undead_king_boss_1',
+    capacidades: 'boss_5',
+    lista_capacidad: ["ROBA_2_noShow", "INVOCA", "skeleton_archer_esbirro2", "esbirro"]
+  },
+  {
+    id: 'boss_6',
+    nombre: 'boss_6',
+    rune: 'azul',
+    runePosition: 'abajo',
+    idJefe: 'undead_king_boss_2',
+    capacidades: 'boss_6',
+    lista_capacidad: ['CONDICIONES', 'DAÑO X', 'MALDICION 1']
+  },
+  {
+    id: 'boss_7',
+    nombre: 'boss_7',
+    rune: 'gris',
+    runePosition: 'abajo',
+    idJefe: 'undead_king_boss_2',
+    capacidades: 'boss_7',
+    lista_capacidad: ["ROBA_2", "INVOCA", "skeleton_archer_esbirro1", "esbirro"]
+  },
+  {
+    id: 'boss_8',
+    nombre: 'boss_8',
+    rune: 'rojo',
+    runePosition: 'arriba',
+    idJefe: 'undead_king_boss_2',
+    capacidades: 'boss_8',
+    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO X']
+  },
+  {
+    id: 'boss_9',
+    nombre: 'boss_9',
+    rune: 'verde',
+    runePosition: 'arriba',
+    idJefe: 'undead_king_boss_2',
+    capacidades: 'boss_9',
+    lista_capacidad: ["SANA_X_?"]
+  },
+  {
+    id: 'boss_10',
+    nombre: 'boss_10',
     rune: 'naranja',
     runePosition: 'abajo',
-    idJefe: 'shadow_knight',
-    encuentro: 'torre de los lamentos',
-    capacidades: ['SOMBRA_MÓVIL', 'FATIGA_3']
-  },
-  // ... hasta 10 cartas
+    idJefe: 'undead_king_boss_2',
+    capacidades: 'boss_10',
+    lista_capacidad: ["PILA"]
+  }
 ];
 
 export const CARTAS_HEROE_CAIDO = [
