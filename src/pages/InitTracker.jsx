@@ -827,7 +827,7 @@ const InitTracker = () => {
     }
   };
 
-  const placeBossCard = (enemy, bossUUID, isTurnActivation = false) => {
+  const placeBossCards = (enemy, bossUUID, isTurnActivation = false) => {
     const enemyId = enemy.id;
     const enemyColor = enemy.color;
     const enemyCat = enemy.categoria;
