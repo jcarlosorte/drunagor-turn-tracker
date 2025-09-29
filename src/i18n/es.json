@@ -207,6 +207,8 @@
       "muere_1": "muere por los efectos de las condiciones al inicio de su turno",
       "muere_2": "muere por los efectos de las condiciones al final de su turno",
       "cumpleCondiciones": "¿Cumple las condiciones para añadir la carta ",
+      "cubosTrauma": "¿Cuántos Cubos de Trauma se ha retirdo de los Héroes?",
+      "cubosMaldicion": "¿Cuántos Cubos de Maldición se ha retirdo de los Héroes?",
       "saltaTurnoPorTiempo": "Salta el turno por ficha de Tiempo",
       "inflige": "inflige",
       "ignoraEscudos": "ignora escudos",

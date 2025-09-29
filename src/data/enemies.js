@@ -28,6 +28,7 @@ import demon_lord from "@/assets/enemies/DemonLord.png";
 import undead_king_boss from "@/assets/enemies/Lich.png";
 import aralhezec from "@/assets/enemies/Dragon.png";
 import wermunggdir from "@/assets/enemies/Wurm.png";
+import wermunggdir2 from "@/assets/enemies/WurmV2.png";
 
 // Apocalipsis
 import skeleton_knight from "@/assets/enemies/skeleton_knight.png";
@@ -198,7 +199,7 @@ export const ENEMIES = [
   { id: "aralhezec", nombre: "Aral´hezec", vida: 25, cubo_T: 5, cubo_M: 1, ataque: 0, movimiento: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "undead_dragon", imagen: aralhezec, rune: "jefe", runePosition: "jefe", inmunidad: ["GRANDE", "INTIMIDAR_I", "SIGILO_I", "VENENO_I", "QUEMADURA_I"], tipo_ataque: "cuerpo", capacidades: "" },
 
   { id: "wermunggdir", nombre: "Wermunggdir", vida: 30, cubo_T: 10, cubo_M: 2, movimiento: 0, ataque: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "infernal_desert", imagen: wermunggdir, rune: "jefe", runePosition: "jefe", inmunidad: ["GRANDE", "HEMORRAGIA_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["PIEL GRUESA"] },
-  { id: "wermunggdir_Señor", nombre: "Wermunggdir", vida: 8, movimiento: 3, ataque: 5, color: "overlord", categoria: "overlord", tipo: "enemigo", expansionId: "infernal_desert", imagen: wermunggdir, rune: "naranja", runePosition: "arriba", inmunidad: ["GRANDE", "HEMORRAGIA_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["VORAGINE", ";", "ESCUDO X", ";", "EMBATE 1", ",", "ATURDIMIENTO"] },
+  { id: "wermunggdir_Señor", nombre: "Wermunggdir", vida: 8, movimiento: 3, ataque: 5, color: "overlord", categoria: "overlord", tipo: "enemigo", expansionId: "infernal_desert", imagen: wermunggdir2, rune: "naranja", runePosition: "arriba", inmunidad: ["GRANDE", "HEMORRAGIA_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["VORAGINE", ";", "ESCUDO X", ";", "EMBATE 1", ",", "ATURDIMIENTO"] },
   { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 7, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "infernal_desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo", inmunidad: ["DERRIBO_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["IMPLACABLE", ";", "HENDEDURA 2", ",", "QUEMADURA 2", ",", "INTIMIDAR 2"] },
   { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 18, movimiento: 6, ataque: 8, color: "gris", categoria: "campeon", tipo: "enemigo", expansionId: "infernal_desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "estandar", inmunidad: ["DERRIBO_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["ESCUDO 2", ";", "VENENO 2", "Y", "DERRIBO"] },
   { id: "corrupted_worm", nombre: "Corrupted Worm", vida: 15, movimiento: 6, ataque: 6, color: "gris", categoria: "veterano", tipo: "enemigo", expansionId: "infernal_desert", imagen: corrupted_worm, rune: "verde", runePosition: "arriba", comportamiento: "alternativo", inmunidad: ["DERRIBO_I", "SIGILO_I"], tipo_ataque: "cuerpo", capacidades: ["IMPLACABLE", ";", "HENDEDURA 2", ",", "QUEMADURA 2", ",", "INTIMIDAR 2"] },
