@@ -74,10 +74,10 @@ export const InitEnemiesProvider = ({ children }) => {
   };
   
   const placeEnemy = (enemyWithPosition) => {
-    console.log('Placing enemy:', enemyWithPosition);
+    //console.log('Placing enemy:', enemyWithPosition);
     setPlacedEnemies(prev => {
       const updated = [...prev, enemyWithPosition];
-      console.log('Updated placedEnemies:', updated);
+      //console.log('Updated placedEnemies:', updated);
       return updated;
     });
   };
