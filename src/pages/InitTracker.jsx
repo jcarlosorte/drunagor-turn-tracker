@@ -57,6 +57,7 @@ const runesColorMap = {
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
+const EnemiesNoShow = ['undead_king_boss_Acecho_1', 'undead_king_boss_Acecho_2'];
 
 
 const InitTracker = () => {
@@ -3017,6 +3018,7 @@ const InitTracker = () => {
                         return acc;
                       }, {})
                     ).map(([enemyId, categories]) => {
+                      if (EnemiesNoShow.includes(enemyId)) return null
                       const sampleEnemy = Object.values(categories)[0][0]; // Para imagen y nombre
                     
                       return (
