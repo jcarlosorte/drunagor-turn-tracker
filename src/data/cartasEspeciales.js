@@ -172,7 +172,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_1',
     capacidades: 'boss_1',
-    lista_capacidad: ['CONDICIONES', 'DAÑO X']
+    lista_capacidad: ['CONDICIONES', 'DAÑO_X']
   },
   {
     id: 'boss_2',
@@ -181,7 +181,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_1',
     capacidades: 'boss_2',
-    lista_capacidad: ['MALDICION 1', 'DAÑO X']
+    lista_capacidad: ['MALDICION_1', 'DAÑO_X']
   },
   {
     id: 'boss_3',
@@ -208,7 +208,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_1',
     capacidades: 'boss_5',
-    lista_capacidad: ["ROBA_2_noShow", "INVOCA", "skeleton_archer_esbirro1", "esbirro"]
+    lista_capacidad: ["ROBA_2_noShow", "INVOCA_4", "skeleton_archer_esbirro1", "esbirro"]
   },
   {
     id: 'boss_6',
@@ -217,7 +217,7 @@ export const CARTAS_JEFE = [
     runePosition: 'abajo',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_6',
-    lista_capacidad: ['CONDICIONES', 'DAÑO X', 'MALDICION 1']
+    lista_capacidad: ['CONDICIONES', 'DAÑO_X', 'MALDICION_1']
   },
   {
     id: 'boss_7',
@@ -226,7 +226,7 @@ export const CARTAS_JEFE = [
     runePosition: 'abajo',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_7',
-    lista_capacidad: ["ROBA_2", "INVOCA", "skeleton_archer_esbirro2", "esbirro"]
+    lista_capacidad: ["ROBA_2", "INVOCA_4", "skeleton_archer_esbirro2", "esbirro"]
   },
   {
     id: 'boss_8',
@@ -235,7 +235,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_8',
-    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO X']
+    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO_X']
   },
   {
     id: 'boss_9',
@@ -262,7 +262,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_11',
-    lista_capacidad: []
+    lista_capacidad: ["DAÑO_2_X"]
   },
   {
     id: 'boss_12',
@@ -271,7 +271,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_12',
-    lista_capacidad: []
+    lista_capacidad: ["ROBA_1", "INVOCA_2", "corrupted_worm", "bisoño", "vida_3"]
   },
   {
     id: 'boss_13',
@@ -280,7 +280,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_13',
-    lista_capacidad: []
+    lista_capacidad: ['CONDICIONES']
   },
   {
     id: 'boss_14',
@@ -289,7 +289,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_14',
-    lista_capacidad: []
+    lista_capacidad: ["FATIGA_2", "DAÑO_X", "VENENO_X"]
   },
   {
     id: 'boss_15',
@@ -298,7 +298,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_15',
-    lista_capacidad: []
+    lista_capacidad: ["DAÑO_2_X"]
   },
   {
     id: 'boss_16',
