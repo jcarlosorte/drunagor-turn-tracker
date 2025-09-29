@@ -259,7 +259,7 @@ export const CARTAS_JEFE = [
     id: 'boss_11',
     nombre: 'boss_11',
     rune: 'azul',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_11',
     lista_capacidad: []
@@ -268,7 +268,7 @@ export const CARTAS_JEFE = [
     id: 'boss_12',
     nombre: 'boss_12',
     rune: 'gris',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_12',
     lista_capacidad: []
@@ -295,7 +295,7 @@ export const CARTAS_JEFE = [
     id: 'boss_15',
     nombre: 'boss_15',
     rune: 'naranja',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_15',
     lista_capacidad: []
@@ -304,7 +304,7 @@ export const CARTAS_JEFE = [
     id: 'boss_16',
     nombre: 'boss_16',
     rune: 'azul',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'aralhezec',
     capacidades: 'boss_16',
     lista_capacidad: []
@@ -313,7 +313,7 @@ export const CARTAS_JEFE = [
     id: 'boss_17',
     nombre: 'boss_17',
     rune: 'gris',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'aralhezec',
     capacidades: 'boss_17',
     lista_capacidad: []
@@ -340,7 +340,7 @@ export const CARTAS_JEFE = [
     id: 'boss_20',
     nombre: 'boss_20',
     rune: 'naranja',
-    runePosition: 'abajo',
+    runePosition: 'arriba',
     idJefe: 'aralhezec',
     capacidades: 'boss_20',
     lista_capacidad: []
