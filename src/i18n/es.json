@@ -755,6 +755,16 @@
       "boss_8": "Si El Rey Redivivo está sobre 1 o más losetas de Oscuridad (No Oscuridad de tablero), retira la más pequeña de ellas. El Rey Redivivo Regenera una cantidad de salud igual al número de casillas que ocupaba la loseta multiplicado por el Número de Héroes. Si no está sobre una loseta de Oscuridad, este ataque no surte efecto.",
       "boss_9": "{ROBA} 2 runas. Luego, {INVOCA} {X} Arquero Esqueleto (Esbirro). (1 por jugador hasta Máx. 4) ",
       "boss_10": "Reemplaza la Ficha de Evento que elija el Líder del Grupo por una Pila de Runas fuera del tablero. Luego, si es la cuarta vez que se coloca una Pila de Runas en el tablero, retira esta carta del Medidor de Iniciativa.",
+      "boss_11": "Wermunggdir tiene como objetivo a {X} área/s a cualquier alcance (primero elige las áreas con mayor número de héroes y después con la que tenga los héroes más fuertes) e inflige {DAÑO} {2*X} a cada enemigo dentro de cada Área.",
+      "boss_12": "{ROBA} 1 runa y genera su loseta de Oscuridad adyacente a Wermunggdir (El líder elige la casilla). Luego, {INVOCA} a 2 Crías de gusano - Bisoño con 3 PS (en lugar de 9) en casillas adyacentes a Wermunggdir (a elección del líder)",
+      "boss_13": "Cuando el Marcador de Iniciativa llegue a esta carta, resuelve todas las condiciones de Wermunggdir. Luego, avanza el marcador.",
+      "boss_14": "Wermunggdir provoca un derrumbe en el Área del Héroe más lejano y se lo Traga. (El personaje tragado se mueve a las tripas de Wermunggdir, sufre {FATIGA 2}; {DAÑO} {X} y {VENENO} {X}.",
+      "boss_15": "Wermunggdir tiene como objetivo a {X} héroe/s a cualquier alcance (empezando siempre por el más fuerte) e inflige {2*X} de daño a cada enemigo y {DERRIBO}. Si algún héroe previene el daño tampoco sufrirá derribo.",
+      "boss_16": "Agarra al Héroe más Fuerte y lo suelta en el estanque de Oscuridad. Luego, ejecuta todos los ataques.",
+      "boss_17": "Agarra al Héroe más Débil y lo suelta en el estanque de Lava. Luego, ejecuta todos los ataques.",
+      "boss_18": "Pisotea al Héroe más Corrupto y lo Encara. Luego, ejecuta todos los ataques.",
+      "boss_19": "Cuando el Marcador de Iniciativa llegue a esta carta, resuelve todas las condiciones que afecten a Aral´hezec. Luego, avanza el marcador.",
+      "boss_20": "Pisotea al Héroe más Fuerte y lo Encara. Luego, ejecuta todos los ataques.",
       "fallen_1": "{MANIFIESTA} 1 RUNA: COLOCA 1 FICHA DE TIEMPO EN CADA CARTA DE ATAQUE QUE COINCIDA CON EL COLOR DE ESA RUNA (NO LO COLOQUES EN LA CARTA DEL MONSTRUO NI EN ESTA CARTA). LA PRÓXIMA VEZ QUE EL MARCADOR DE INICIATIVA LLEGUE A UNA CARTA CON ESTE MARCADOR, RETIRA LA FICHA DE TIEMPO EN LUGAR DE RESOLVER LOS EFECTOS DE ESA CARTA.",
       "fallen_2": "EL HÉROE CAÍDO EMBOSCA AL HÉROE MÁS DÉBIL. LUEGO, LE INFLINGE {DAÑO} {X}. SI ESE HÉROE ES NOQUEADO POR ESTE ATAQUE, EL HÉROE CAÍDO TAMBIÉN {SANA} {2*X}."
     }
