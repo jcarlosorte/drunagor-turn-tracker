@@ -320,7 +320,6 @@ const InitTracker = () => {
     const totalHeroes = trackerData.placedHeroes?.length || 0;
     const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
     const totalFinal = alreadyPlaced + maxMonstruos;
-
     
     const isBig = enemy.size === 'grande';
   
