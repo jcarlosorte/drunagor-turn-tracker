@@ -661,6 +661,7 @@ const InitTracker = () => {
           spawnBossEnemies(selected.numInvoca,selected.invoca);
           // 5- Colocar Runas
           // 6- Consecuencias
+          // 7- Iniciar turno
           return;
         }
    
