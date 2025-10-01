@@ -1273,6 +1273,7 @@ const InitTracker = () => {
     const logs = [];
     const capacidades = cartaEspecial.lista_capacidad || [];
     const runeCount = getRuneCount(cartaEspecial.rune);
+    const heroCount = numHeroes;
     let tile = null;
     const targetUUID = cartaEspecial.sourceEnemyUUID;
     const entry = placedEnemies.find(e => e.enemy.uuid === targetUUID);
@@ -1940,22 +1941,16 @@ const InitTracker = () => {
                     // 🎯 Buscar entrada en ASALTO_GUSANO según color de la runa
                     const gusanoData = ASALTO_GUSANO.find(g => g.rune === tile.runa);
                     if (!gusanoData) return;
-            
                     // 🔹 Traducciones
                     const nombreTrad = tw.nombre[gusanoData.nombre];
                     let textoTrad = tw.texto[gusanoData.texto];
-            
                     // 🔹 Interpretar texto (sustituciones dinámicas)
                     textoTrad = interpretarTexto(textoTrad, tile.runa, ttr);
-                    
                     // ✅ Mostrar Toast
                     showScenarioToast(`🪱 ${nombreTrad}: ${textoTrad}`);
-            
                     // 🔹 Procesar lista_capacidad
                     interpretarCapacidades(gusanoData.lista_capacidad, tile.runa);
 
-                    
- 
                   });
                   
                 }
