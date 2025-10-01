@@ -111,7 +111,7 @@ const InitTracker = () => {
     if (color === 'escenario') {
       return translations.enemies?.escenario?.[id] || id;
     }
-    return translations?.[id] || id;
+    return translations.enemies?.[id] || id;
   };
 
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
