@@ -311,6 +311,47 @@ const InitTracker = () => {
 
   };
 
+  const spawnBossEnemies = (maxMonstruos, enemiesId) => {
+    if (!enemiesId || maxMonstruos === 0) return;
+
+    const enemy = ENEMIES.filter(e => e.id === enemiesId?.id);
+    const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId?.id);
+    const alreadyPlaced = placedMonsters.length;
+    const totalHeroes = trackerData.placedHeroes?.length || 0;
+    const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
+    const totalFinal = alreadyPlaced + maxMonstruos;
+
+    
+    const isBig = enemy.size === 'grande';
+  
+    let simulatedUsedSmall = [...usedColors];
+    let simulatedUsedBig = [...usedColorsBig];
+    const generatedColors = [];
+    let warnedNoColors = false;
+    
+    for (let i = 0; i < faltan; i++) {
+      // obtenemos el siguiente color disponible
+      let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+      
+      if (!nextColorId) {
+        if (!warnedNoColors){
+          alert(ti.noColorsAvailable);
+          warnedNoColors = true;    
+        }
+        nextColorId = 'noColor';
+      } else {
+        // guardamos el color en la simulación
+        if (isBig) simulatedUsedBig.push(nextColorId);
+        else simulatedUsedSmall.push(nextColorId);
+        generatedColors.push(nextColorId);    
+      }
+     
+      handleManualEnemyAdd(enemy.id, enemy.comportamiento, enemy.categoria, 'NoShow', nextColorId);
+      showScenarioToast(`${ti.invoca} ${tee[enemy.id]}`);
+    }
+
+  };
+  
   const handleAcechoEffect = (runas) => {  
     if (!acechoActivo || !runa || runas.length === 0) return;
     const runa = runas[0];
@@ -618,6 +659,7 @@ const InitTracker = () => {
           // 👉 Añadir cartas de ataque del jefe:
           placeBossCards(selected, uuid);
           // 4- Esbirros
+          spawnBossEnemies(selected.numInvoca,selected.invoca);
           // 5- Colocar Runas
           // 6- Consecuencias
           return;
