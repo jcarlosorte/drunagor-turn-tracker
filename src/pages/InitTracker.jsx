@@ -610,8 +610,10 @@ const InitTracker = () => {
           };
           //if (ver === 'show') showToast(selected);
           // 1- Eliminar cartas de Runa
-          // 2- Eliminar mosntruos
-          // 3- Jefe
+          resetPlacedRunes();
+          // 2- Eliminar monstruos
+          resetPlacedEnemies();
+          // 3- Colocar carta de Jefe
           placeEnemy({ enemy });
           // 👉 Añadir cartas de ataque del jefe:
           placeBossCards(selected, uuid);
