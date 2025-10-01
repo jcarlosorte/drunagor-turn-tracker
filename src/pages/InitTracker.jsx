@@ -111,7 +111,7 @@ const InitTracker = () => {
     if (color === 'escenario') {
       return translations.enemies?.escenario?.[id] || id;
     }
-    return translations.enemies?.[id] || id;
+    return translations.?.[id] || id;
   };
 
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
@@ -314,7 +314,7 @@ const InitTracker = () => {
   const spawnBossEnemies = (maxMonstruos, enemiesId) => {
     if (!enemiesId || maxMonstruos === 0) return;
     
-    const enemy = (enemies.filter(e => e.id === enemiesId?.id))
+    const enemy = (ENEMIES.filter( e => enemies.includes(e.id) && e.id === enemiesId?.id ))
       .sort(() => 0.5 - Math.random())[0] || null;
     const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId?.id);
     const alreadyPlaced = placedMonsters.length;
