@@ -1404,8 +1404,18 @@ const InitTracker = () => {
         }
       }
 
+      // ✅ --- ROBA RUNA ---
+      else if (cap.startsWith("ROBA")) {
+        const partes = cap.split("_");
+        const cantidad = parseInt(partes[1], 10) || 0;
+        if (cantidad <= 0) return;
+        const tiles = drawMultipleTiles(cantidad);
+        tiles?.forEach(tile_0 => handleTileDraw(tile_0));
+      }
+
+      
       // ✅ --- TIEMPO ---
-      if (cap.startsWith("TIEMPO")) {
+      else if (cap.startsWith("TIEMPO")) {
         const partes = cap.split("_");
         const cantidad = parseInt(partes[1], 10) || 0;
         if (cantidad <= 0) return;
