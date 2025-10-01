@@ -239,6 +239,7 @@
       "noColorsAvailable": "No hay colores disponibles para las peanas, pero se añadirán igualmente los enemigos",
       "noEnemyAvailableTo": "❌ No hay enemigos disponibles para",
       "voragineWarning": "⚠️ ¡{name} ejecuta VORÁGINE y reemplaza sus cartas de ataque!",
+      "bossWarning": "⚠️ ¡{name} ha revelado sus cartas de ataque!",
       "robaHuesped": "¡Enemigo Muere y la Oscuridad Huesped en su interior se manifiesta!",
       "huespedActivo": "💀 Mecánica Monstruo Huesped Activa",
       "acechoActivo": "💀 El Rey Redivivo Acecha",
