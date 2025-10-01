@@ -314,17 +314,15 @@ const InitTracker = () => {
   const spawnBossEnemies = (maxMonstruos, enemiesId) => {
     if (!enemiesId || maxMonstruos === 0) return;
     
-    const enemy = ENEMIES.find( e => enemies.includes(e.id) && e.id === enemiesId?.id )
-    const enemy2 = ENEMIES.find( e => e.id === enemiesId?.id )
-    const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId?.id);
+    const enemy = ENEMIES.find( e => enemies.includes(e.id) && e.id === enemiesId )
+    const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId);
     const alreadyPlaced = placedMonsters.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
     const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
     const totalFinal = alreadyPlaced + maxMonstruos;
     console.log("enemies array:", enemies);
-    console.log("enemiesId?.id:", enemiesId?.id);
+    console.log("enemiesId?.id:", enemiesId);
     console.log(enemy);
-    console.log(enemy2);
     const isBig = enemy?.size === 'grande';
   
     let simulatedUsedSmall = [...usedColors];
