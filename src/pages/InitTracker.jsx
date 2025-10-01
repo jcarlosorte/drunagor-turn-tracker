@@ -313,8 +313,9 @@ const InitTracker = () => {
 
   const spawnBossEnemies = (maxMonstruos, enemiesId) => {
     if (!enemiesId || maxMonstruos === 0) return;
-
+    
     const enemy = ENEMIES.filter(e => e.id === enemiesId?.id);
+    console.log(enemy);
     const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId?.id);
     const alreadyPlaced = placedMonsters.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
