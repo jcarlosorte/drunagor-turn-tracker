@@ -2811,7 +2811,7 @@ const InitTracker = () => {
 
             {/* Zona especial para Jefes */}
             {placedEnemies
-              .filter(e => e.enemy.categoria === 'jefe')
+              .filter(e => e.enemy.categoria === 'jefe' && e.enemy.tipo != 'especial')
               .map(({ enemy }) => (
                 <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
                   <div key={enemy.uuid} className="scale-200" >
