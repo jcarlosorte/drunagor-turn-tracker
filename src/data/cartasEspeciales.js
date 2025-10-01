@@ -222,29 +222,29 @@ export const CARTAS_JEFE = [
   {
     id: 'boss_7',
     nombre: 'boss_7',
-    rune: 'gris',
-    runePosition: 'abajo',
+    rune: 'rojo',
+    runePosition: 'arriba',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_7',
-    lista_capacidad: ["ROBA_2", "INVOCA_4", "skeleton_archer_esbirro2", "esbirro"]
+    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO_X']
   },
   {
     id: 'boss_8',
     nombre: 'boss_8',
-    rune: 'rojo',
+    rune: 'verde',
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_8',
-    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO_X']
+    lista_capacidad: ["SANA_X_?"]
   },
   {
     id: 'boss_9',
     nombre: 'boss_9',
-    rune: 'verde',
-    runePosition: 'arriba',
+    rune: 'gris',
+    runePosition: 'abajo',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_9',
-    lista_capacidad: ["SANA_X_?"]
+    lista_capacidad: ["ROBA_2", "INVOCA_4", "skeleton_archer_esbirro2", "esbirro"]
   },
   {
     id: 'boss_10',
