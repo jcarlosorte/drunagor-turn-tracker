@@ -3,13 +3,16 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useGame } from '@/context/GameContext';
+import { useTracker } from '@/context/TrackerContext';
 
 const CommanderCardModal = ({ carta, onClose }) => {
   const { translations } = useLanguage();
   const { getRuneCount } = useGame();
+  const { trackerData } = useTracker();
   const ta = translations.cartas_ataque || {};
   const ttr = translations.defensaCard.cartas_trad || {};
-
+  const selectedHeroes = trackerData.heroes;
+  const numHeroes = Math.min(selectedHeroes.length, 4);
   const numRunasColor = getRuneCount(carta.rune);
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
   
@@ -18,6 +21,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
   if (capacidad) {
     // 1. Sustituimos valores numéricos dinámicos
     capacidad = capacidad
+      .replaceAll('{X_H}', numHeroes)
       .replaceAll('{X}', numRunasColor)
       .replaceAll('{2*X}', numRunasColor * 2)
       .replaceAll('{3*X}', numRunasColor * 3)
