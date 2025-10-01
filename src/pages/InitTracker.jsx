@@ -1447,7 +1447,7 @@ const InitTracker = () => {
         const partes = cap.split("_"); // ["ACTIVA", "5", "RUNA"] o ["ACTIVA", "10", "SANA"]
       
         //const numero = parseInt(partes[1], 10) || 0;
-        const numero = parseInt(partes[1], 10) || null;
+        const numero = partes[1] !== undefined ? parseInt(partes[1], 10) : null;
         const condicion = partes[2] || null;
       
         let activar = false;
