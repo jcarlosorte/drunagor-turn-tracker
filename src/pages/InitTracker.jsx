@@ -281,7 +281,7 @@ const InitTracker = () => {
   const spawnBatchEnemies = (count, scenarioMonster) => {
     if (!scenarioMonster) return;
   
-    const isBig = scenarioMonster.size === 'grande';
+    const isBig = scenarioMonster?.size === 'grande';
   
     let simulatedUsedSmall = [...usedColors];
     let simulatedUsedBig = [...usedColorsBig];
@@ -321,7 +321,7 @@ const InitTracker = () => {
     const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
     const totalFinal = alreadyPlaced + maxMonstruos;
     
-    const isBig = enemy.size === 'grande';
+    const isBig = enemy?.size === 'grande';
   
     let simulatedUsedSmall = [...usedColors];
     let simulatedUsedBig = [...usedColorsBig];
