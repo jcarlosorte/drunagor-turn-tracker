@@ -752,7 +752,7 @@
       "boss_w_3": "{ROBA} 1 runa y genera su loseta de Oscuridad adyacente a Wermunggdir (El líder elige la casilla). Luego, {INVOCA} a 2 Crías de gusano - Bisoño con 3 PS (en lugar de 9) en casillas adyacentes a Wermunggdir (a elección del líder)",
       "boss_w_4": "Wermunggdir provoca un derrumbe en el Área del Héroe más lejano y se lo Traga. (El personaje tragado se mueve a las tripas de Wermunggdir, sufre {FATIGA 2}; {DAÑO} {X} y {VENENO} {X}.",
       "boss_w_5": "Cuando el marcador de iniciativa llegue a esta carta, resuelve todas las condiciones de Wermunggdir. Luego, avanza el marcador.",
-      "boss_1": "Resuelve todas las condiciones de afectan al Rey Redivivo ahora. Luego, ataca a todos los enemigos a alcance 1 e inflige {DAÑO} {X} a cada uno.",
+      "boss_1": "Resuelve todas las condiciones que afectan al Rey Redivivo ahora. Luego, ataca a todos los enemigos a alcance 1 e inflige {DAÑO} {X} a cada uno.",
       "boss_2": "Cada Héroe sufre {MALDICION} 1. Luego, el Rey Redivivo ataca a cada Héroe (a cualquier alcance) e inflige {DAÑO} {X} a cada uno.",
       "boss_3": "{ACTIVA} todos los esbirros. (Las Runas Rojas aumentan la fuerza)",
       "boss_4": "El Rey Redivivo salta al área del Héroe más fuerte. Cada Personaje en esa área es lanzado al estanque de Oscuridad (Losetas de tablero E6-B y E88-B). Los Personajes son afectados por la Oscuridad cuando son lanzados a ella. Cada héroe elige a qué casilla es lanzado.",
