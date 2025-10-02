@@ -314,43 +314,46 @@ const InitTracker = () => {
   const spawnBossEnemies = (maxMonstruos, enemiesId, enemiesCat) => {
     if (!enemiesId || maxMonstruos === 0) return;
   
-    const enemy = [...ENEMIES.filter(e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat)].sort(() => 0.5 - Math.random())[0] || null;
+    const candidatos = ENEMIES.filter(
+      e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat
+    );
+    if (candidatos.length === 0) return;
+  
     const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId);
     const alreadyPlaced = placedMonsters.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
     const faltan = Math.max(0, maxMonstruos - alreadyPlaced);
-    const totalFinal = alreadyPlaced + maxMonstruos;
-
-    const isBig = enemy?.size === 'grande';
   
     let simulatedUsedSmall = [...usedColors];
     let simulatedUsedBig = [...usedColorsBig];
     const generatedColors = [];
     let warnedNoColors = false;
-    
+  
     for (let i = 0; i < faltan; i++) {
-      const enemy = [...ENEMIES.filter(e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat)].sort(() => 0.5 - Math.random())[0] || null;
+      // 👉 Elegir uno aleatorio en cada iteración
+      const enemy = candidatos[Math.floor(Math.random() * candidatos.length)];
+      const isBig = enemy.size === 'grande';
+  
       // obtenemos el siguiente color disponible
       let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-      
+  
       if (!nextColorId) {
-        if (!warnedNoColors){
+        if (!warnedNoColors) {
           alert(ti.noColorsAvailable);
-          warnedNoColors = true;    
+          warnedNoColors = true;
         }
         nextColorId = 'noColor';
       } else {
-        // guardamos el color en la simulación
         if (isBig) simulatedUsedBig.push(nextColorId);
         else simulatedUsedSmall.push(nextColorId);
-        generatedColors.push(nextColorId);    
+        generatedColors.push(nextColorId);
       }
-     
+  
       handleManualEnemyAdd(enemy.id, enemy.comportamiento, enemy.categoria, 'NoShow', nextColorId);
       showScenarioToast(`${ti.invoca} ${tee[enemy.id]}`);
     }
-
   };
+
   
   const handleAcechoEffect = (runas) => {  
     if (!acechoActivo || !runa || runas.length === 0) return;
