@@ -227,6 +227,7 @@
     "numCasillas1": "Is Tthe Undead King on one or more Darkness tiles (not tableboard Darkness)",      
     "numCasillas2": "Remove the smallest of them. How many spaces did the tile occupy?", 
     "preg": "?",
+    "noMasInvocar": "No more enemies can be summoned this turn", 
     "cuantosEscudos": "How many shields are added by this effect?",
     "cuantosRecursos": "How many resources of",   
     "sonAb": "are absorbed",
