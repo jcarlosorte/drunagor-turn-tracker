@@ -1290,13 +1290,28 @@ const InitTracker = () => {
         const partes = cap.split("_");
         const tieneCondicion = partes.includes("?");
         const puedeSobrepasar = partes.includes("SI");
-  
+        const condicionCasillas = partes.includes("CASILLAS");
+        
         // Multiplicador
         let multiplicador = 1;
         const idxNumero = partes.findIndex(p => !isNaN(p));
         if (idxNumero !== -1) multiplicador = parseInt(partes[idxNumero], 10);
-  
-        const curacion = multiplicador * runeCount;
+
+        // 🔹 Determinar valor base
+        let baseValor = runeCount;
+        if (condicionCasillas) {
+          const confirmarCasillas = window.confirm(`${ti.numCasillas1}`);
+          if (!confirmarCasillas) return;
+          
+          const input = parseInt(window.prompt(`${ti.numCasillas2}`, "0"), 10);
+          if (!isNaN(input) && input > 0) {
+            baseValor = input * heroCount;
+          } else {
+            baseValor = 0; // si meten algo inválido, no cura nada
+          }
+        }
+        
+        const curacion = multiplicador * baseValor;
         if (curacion <= 0) return;
   
         let nuevaVida = enemigo.vida + curacion;
@@ -1482,10 +1497,57 @@ const InitTracker = () => {
 
       // ✅ --- INVOCA ---
       else if (cap.startsWith("INVOCA")) {
-        const partes = cap.split("_");
-        const cantidad = parseInt(partes[1], 10) || 0;
-        if (cantidad <= 0) return;
-        // BUSCAR ENEMIGOS E INVOCAR
+        const idxCap = capacidades.indexOf(cap);
+        let numRaw = cap.split("_")[1];
+        let num = parseInt(numRaw, 10) || 1;
+      
+        let simulatedUsedSmall = [...usedColors];
+        let simulatedUsedBig = [...usedColorsBig];
+        const generatedColors = [];
+      
+        const enemyId = capacidades[idxCap + 1];
+        const categoria = capacidades[idxCap + 2];
+      
+        if (enemyId && categoria) {
+          // 🔍 Cuántos ya están en juego
+          const yaInvocados = placedEnemies.filter(e => e.enemy.id === enemyId).length;
+      
+          // 🔹 Calcular cuántos se pueden invocar realmente
+          const maxPermitido = num;
+          const huecoDisponible = Math.max(0, maxPermitido - yaInvocados);
+          const cantidadAInvocar = Math.min(heroCount, huecoDisponible);
+      
+          if (cantidadAInvocar <= 0) {
+            showScenarioToast(`${ti.noMasInvocar} ${tee[enemyId]}`);
+            return;
+          }
+      
+          for (let i = 0; i < cantidadAInvocar; i++) {
+            // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
+            const candidatos = ENEMIES.filter(
+              e => enemies.includes(e.id) && e.id === enemyId && e.categoria === categoria
+            );
+      
+            if (candidatos.length > 0) {
+              const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
+              const isBig = elegido.size === 'grande';
+              let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+      
+              if (!nextColorId) {
+                alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+                nextColorId = 'noColor';
+              } else {
+                if (isBig) simulatedUsedBig.push(nextColorId);
+                else simulatedUsedSmall.push(nextColorId);
+                generatedColors.push(nextColorId);
+              }
+      
+              // ✅ Añadir enemigo manualmente
+              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
+              showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
+            }
+          }
+        }
       }
 
  
