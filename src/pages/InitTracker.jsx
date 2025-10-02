@@ -315,9 +315,8 @@ const InitTracker = () => {
     if (!enemiesId || maxMonstruos === 0) return;
     
     const candidatos = ENEMIES.filter( e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat );
-    const enemy = candidatos.length > 0 
-      ? candidatos[Math.floor(Math.random() * candidatos.length)] 
-      : null;
+    console.log(candidatos);
+    const enemy = candidatos[Math.floor(Math.random() * candidatos.length)];
     
     const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId);
     const alreadyPlaced = placedMonsters.length;
