@@ -57,7 +57,7 @@ const runesColorMap = {
 const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
-const EnemiesNoShow = ['undead_king_boss_Acecho_1', 'undead_king_boss_Acecho_2'];
+const EnemiesNoShow = ['undead_king_boss_Acecho_1', 'undead_king_boss_Acecho_2', 'corrupted_worm_esbirro'];
 
 
 const InitTracker = () => {
@@ -311,7 +311,7 @@ const InitTracker = () => {
 
   };
 
-  const spawnBossEnemies = (maxMonstruos, enemiesId) => {
+  const spawnBossEnemies = (maxMonstruos, enemiesId, enemiesCat) => {
     if (!enemiesId || maxMonstruos === 0) return;
     
     const enemy = ENEMIES.find( e => enemies.includes(e.id) && e.id === enemiesId )
@@ -658,7 +658,7 @@ const InitTracker = () => {
           // 👉 Añadir cartas de ataque del jefe:
           placeBossCards(selected, uuid);
           // 4- Esbirros
-          spawnBossEnemies(selected.numInvoca,selected.invoca);
+          spawnBossEnemies(selected.numInvoca, selected.invoca, selected.catInvoca);
           // 5- Colocar Runas
           // 6- Consecuencias
           // 7- Iniciar turno
@@ -1478,6 +1478,14 @@ const InitTracker = () => {
           const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
           logs.push(`⚡ ${nombreCarta} ${ti.activaTurno}`);
         }
+      }
+
+      // ✅ --- INVOCA ---
+      else if (cap.startsWith("INVOCA")) {
+        const partes = cap.split("_");
+        const cantidad = parseInt(partes[1], 10) || 0;
+        if (cantidad <= 0) return;
+        // BUSCAR ENEMIGOS E INVOCAR
       }
 
  
