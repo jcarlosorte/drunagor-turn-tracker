@@ -329,6 +329,7 @@ const InitTracker = () => {
     let warnedNoColors = false;
     
     for (let i = 0; i < faltan; i++) {
+      const enemy = [...ENEMIES.filter(e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat)].sort(() => 0.5 - Math.random())[0] || null;
       // obtenemos el siguiente color disponible
       let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
       
