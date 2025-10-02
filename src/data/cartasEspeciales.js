@@ -208,7 +208,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_1',
     capacidades: 'boss_5',
-    lista_capacidad: ["ROBA_2_noShow", "INVOCA_4", "skeleton_archer_esbirro1", "esbirro"]
+    lista_capacidad: ["ROBA_2_noShow", "INVOCA_4_MAX_4", "skeleton_archer_esbirro1", "esbirro"]
   },
   {
     id: 'boss_6',
@@ -244,7 +244,7 @@ export const CARTAS_JEFE = [
     runePosition: 'abajo',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_9',
-    lista_capacidad: ["ROBA_2", "INVOCA_4", "skeleton_archer_esbirro2", "esbirro"]
+    lista_capacidad: ["ROBA_2", "INVOCA_4_MAX_4", "skeleton_archer_esbirro2", "esbirro"]
   },
   {
     id: 'boss_10',
@@ -271,7 +271,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'wermunggdir',
     capacidades: 'boss_12',
-    lista_capacidad: ["ROBA_1", "INVOCA_2", "corrupted_worm", "bisoño", "vida_3"]
+    lista_capacidad: ["ROBA_1", "INVOCA_2_MAX_NO", "corrupted_worm_esbirro", "bisoño"]
   },
   {
     id: 'boss_13',
