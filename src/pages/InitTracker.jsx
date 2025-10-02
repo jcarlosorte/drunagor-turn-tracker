@@ -314,7 +314,7 @@ const InitTracker = () => {
   const spawnBossEnemies = (maxMonstruos, enemiesId, enemiesCat) => {
     if (!enemiesId || maxMonstruos === 0) return;
     
-    const enemy = ENEMIES.find( e => enemies.includes(e.id) && e.id === enemiesId )
+    const enemy = ENEMIES.find( e => enemies.includes(e.id) && e.id === enemiesId && e.categoria === enemiesCat)
     const placedMonsters = placedEnemies.filter(e => e.enemy.id === enemiesId);
     const alreadyPlaced = placedMonsters.length;
     const totalHeroes = trackerData.placedHeroes?.length || 0;
@@ -1498,58 +1498,77 @@ const InitTracker = () => {
       // ✅ --- INVOCA ---
       else if (cap.startsWith("INVOCA")) {
         const idxCap = capacidades.indexOf(cap);
-        let numRaw = cap.split("_")[1];
-        let num = parseInt(numRaw, 10) || 1;
-      
-        let simulatedUsedSmall = [...usedColors];
-        let simulatedUsedBig = [...usedColorsBig];
-        const generatedColors = [];
-      
+        const partes = cap.split("_");
+        
+        let numRaw = partes[1];
+        let numInvocar = 1;
+        if (numRaw === "X") {
+          numInvocar = heroCount; // número de héroes
+        } else {
+          numInvocar = parseInt(numRaw, 10) || 1;
+        }
+
+        // --- Límite máximo ---
+        let maxRaw = partes[3]; // "4" o "NO"
+        let maxPermitido = Infinity;
+        if (maxRaw !== "NO") {
+          maxPermitido = parseInt(maxRaw, 10) || Infinity;
+        }
+
         const enemyId = capacidades[idxCap + 1];
         const categoria = capacidades[idxCap + 2];
-      
+
         if (enemyId && categoria) {
           // 🔍 Cuántos ya están en juego
-          const yaInvocados = placedEnemies.filter(e => e.enemy.id === enemyId).length;
+          const yaInvocados = placedEnemies.filter(e => e.enemy.id === enemyId && e.enemy.categoria === categoria).length;
       
-          // 🔹 Calcular cuántos se pueden invocar realmente
-          const maxPermitido = num;
-          const huecoDisponible = Math.max(0, maxPermitido - yaInvocados);
-          const cantidadAInvocar = Math.min(heroCount, huecoDisponible);
+          // 🔹 Hueco disponible
+          const huecoDisponible = maxPermitido === Infinity ? numInvocar : Math.max(0, maxPermitido - yaInvocados);
+      
+          // 🔹 Cantidad final a invocar
+          const cantidadAInvocar = Math.min(numInvocar, huecoDisponible);
       
           if (cantidadAInvocar <= 0) {
-            showScenarioToast(`${ti.noMasInvocar} ${tee[enemyId]}`);
+            showScenarioToast(`${ti.noMasInvocar}`);
             return;
           }
+        
+          let simulatedUsedSmall = [...usedColors];
+          let simulatedUsedBig = [...usedColorsBig];
+          const generatedColors = [];
+          let warnedNoColors = false;
       
-          for (let i = 0; i < cantidadAInvocar; i++) {
-            // 🔍 Filtramos enemigos disponibles que coincidan con ID y categoría
-            const candidatos = ENEMIES.filter(
-              e => enemies.includes(e.id) && e.id === enemyId && e.categoria === categoria
-            );
-      
-            if (candidatos.length > 0) {
-              const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
-              const isBig = elegido.size === 'grande';
-              let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
-      
-              if (!nextColorId) {
+         for (let i = 0; i < cantidadAInvocar; i++) {
+          // 🔍 Buscar candidatos
+          const candidatos = ENEMIES.filter(
+            e => enemies.includes(e.id) && e.id === enemyId && e.categoria === categoria
+          );
+    
+          if (candidatos.length > 0) {
+            const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
+            const isBig = elegido.size === 'grande';
+            let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+    
+            if (!nextColorId) {
+              if (!warnedNoColors) {
                 alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
-                nextColorId = 'noColor';
-              } else {
-                if (isBig) simulatedUsedBig.push(nextColorId);
-                else simulatedUsedSmall.push(nextColorId);
-                generatedColors.push(nextColorId);
+                warnedNoColors = true;
               }
-      
-              // ✅ Añadir enemigo manualmente
-              handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
-              showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
+              nextColorId = 'noColor';
+            } else {
+              if (isBig) simulatedUsedBig.push(nextColorId);
+              else simulatedUsedSmall.push(nextColorId);
+              generatedColors.push(nextColorId);
             }
+    
+            // ✅ Añadir enemigo manualmente
+            handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
+            showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
           }
         }
       }
-
+    }
+      
  
     });
   
