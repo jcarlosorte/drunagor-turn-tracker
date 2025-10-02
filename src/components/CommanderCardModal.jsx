@@ -22,6 +22,7 @@ const CommanderCardModal = ({ carta, onClose }) => {
     // 1. Sustituimos valores numéricos dinámicos
     capacidad = capacidad
       .replaceAll('{X_H}', numHeroes)
+      .replaceAll('{2+X}', numRunasColor + 2)
       .replaceAll('{X}', numRunasColor)
       .replaceAll('{2*X}', numRunasColor * 2)
       .replaceAll('{3*X}', numRunasColor * 3)
