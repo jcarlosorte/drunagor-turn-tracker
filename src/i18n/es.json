@@ -225,6 +225,8 @@
       "sanaA": "sana a",      
       "sana": "sana",      
       "sanaPreg": "¿Aplicar efecto de SANA",      
+      "numCasillas1": "¿El Rey Redivivo está sobre 1 o más losetas de Oscuridad (No Oscuridad de tablero)?",      
+      "numCasillas2": "Retira la más pequeña de ellas. ¿Cuántas casillas ocupaba la loseta?",      
       "preg": "?",      
       "cuantosEscudos": "¿Cuántos escudos se añaden por este efecto?",      
       "cuantosRecursos": "¿Cuántos recursos de",  
