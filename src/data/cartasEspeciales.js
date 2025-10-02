@@ -334,7 +334,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'aralhezec',
     capacidades: 'boss_19',
-    lista_capacidad: []
+    lista_capacidad: ['CONDICIONES']
   },
   {
     id: 'boss_20',
