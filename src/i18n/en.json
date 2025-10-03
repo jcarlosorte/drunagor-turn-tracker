@@ -234,8 +234,8 @@
     "fromPassiveCard": "Modified by passive ability, may have conditions", 
     "ronda": "New Round",
     "activaTurno": "The enemy is activated!",
-    "activaTurnoEsbirros": "The minions activate!"
-    "activaTurnoCarta": "Continues after the Minions' turn"
+    "activaTurnoEsbirros": "The minions activate!",
+    "activaTurnoCarta": "Continues after the Minions' turn",
     "activandoTurnoAdicional": "Activating additional turn",
     "rondaInicial": "First Round!", 
     "mazo_1": "⚠️ There are no cards in the deck:",
