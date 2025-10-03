@@ -673,28 +673,28 @@ const InitTracker = () => {
             let vidaReducida = 0;
           
             // Pregunta 1: Rompereliquias
-            const romperReliquias = window.confirm("¿Se activa la consecuencia 'Rompereliquias'?");
+            const romperReliquias = window.confirm(`${ti.activaRompe}`);
             if (romperReliquias) {
               vidaReducida += 15 * numHeroes;
             }
           
             // Pregunta 2: Amantes reunidos
-            const amantesReunidos = window.confirm("¿Se activa la consecuencia 'Amantes reunidos'?");
+            const amantesReunidos = window.confirm(`${ti.activaAmantes}`);
             if (amantesReunidos) {
               vidaReducida += 15 * numHeroes;
             }
           
             // Pregunta 3: Dúo Dinámico
-            const duoDinamico = window.confirm("¿Se activa la consecuencia 'Dúo Dinámico'?");
+            const duoDinamico = window.confirm(`${ti.activaDuo}`);
             if (duoDinamico) {
-              showScenarioToast("📖 Preparación especial: Pasar el testigo (Pág. 82)");
+              showScenarioToast(`${ti.textoDuo}`);
             }
           
             // Aplicar reducción de vida si corresponde
             if (vidaReducida > 0) {
               enemy.vida = Math.max(0, enemy.vida - vidaReducida);
-              enemy.vidaMax = Math.max(0, enemy.vidaMax - vidaReducida);
-              showScenarioToast(`⚡ Consecuencias: el jefe pierde ${vidaReducida} puntos de vida`);
+              //enemy.vidaMax = Math.max(0, enemy.vidaMax - vidaReducida);
+              showScenarioToast(`⚡ ${ti.consecuencias}: ${getEnemyName(selected.id)} ${ti.pierde} ${vidaReducida} ${ti.pH}`);
             }
           }
           // 7- Iniciar turno
