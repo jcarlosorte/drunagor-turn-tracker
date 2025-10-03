@@ -1862,7 +1862,7 @@ const InitTracker = () => {
     // 🔍 ENEMIES
     if (step.type === 'enemy') {
       const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
-      const group = placedEnemies
+      let group = placedEnemies
         .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
         .map(e => e.enemy);
 
