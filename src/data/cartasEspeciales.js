@@ -226,7 +226,7 @@ export const CARTAS_JEFE = [
     runePosition: 'arriba',
     idJefe: 'undead_king_boss_2',
     capacidades: 'boss_7',
-    lista_capacidad: ['ACTIVA_ESBIRROS', 'DAÑO_X']
+    lista_capacidad: ['ACTIVA_ESBIRROS', 'ACTIVA_CARTA', 'DAÑO_X']
   },
   {
     id: 'boss_8',
