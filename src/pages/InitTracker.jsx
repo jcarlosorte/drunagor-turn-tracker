@@ -1467,6 +1467,10 @@ const InitTracker = () => {
         tiles?.forEach(tile_0 => handleTileDraw(tile_0));
       }
 
+      // ✅ --- CONDICIONES ---
+      else if (cap.startsWith("CONDICIONES")) {
+        addExtraTurn(cartaEspecial.sourceEnemyUUID);
+      }
       
       // ✅ --- TIEMPO ---
       else if (cap.startsWith("TIEMPO")) {
