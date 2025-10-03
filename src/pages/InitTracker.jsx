@@ -1916,6 +1916,7 @@ const InitTracker = () => {
       if (boss && extraTurnsQueue.includes(boss.uuid)) {
         // 👉 Si el jefe está en la cola de turnos extra → su turno
         group = [boss];
+        console.log(group);
       } else {
         // ❌ Si hay jefe y el enemigo es esbirro sin turno extra → se filtra
         const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
