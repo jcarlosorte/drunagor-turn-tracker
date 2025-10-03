@@ -1912,7 +1912,8 @@ const InitTracker = () => {
     
       // 🔹 ¿Hay jefe colocado?
       const boss = placedEnemies.find(e => e.enemy.categoria === "jefe")?.enemy;
-    
+      console.log(boss.uuid);
+      console.log(extraTurnsQueue);
       if (boss && extraTurnsQueue.includes(boss.uuid)) {
         // 👉 Si el jefe está en la cola de turnos extra → su turno
         group = [boss];
