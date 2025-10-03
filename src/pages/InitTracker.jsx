@@ -1476,7 +1476,7 @@ const InitTracker = () => {
       // ✅ --- ACTIVA ---
       else if (cap.startsWith("ACTIVA")) {
         const partes = cap.split("_"); // ["ACTIVA", "5", "RUNA"] o ["ACTIVA", "10", "SANA"]
-      
+        let activaUUID = cartaEspecial.sourceEnemyUUID;
         //const numero = parseInt(partes[1], 10) || 0;
         const numero = partes[1] !== undefined ? parseInt(partes[1], 10) : null;
         const condicion = partes[2] || null;
@@ -1490,10 +1490,18 @@ const InitTracker = () => {
           if (totalRunas >= numero) activar = true;
         } else if (condicion === "SANA") {
           if (curacionTotal >= numero) activar = true; // Necesitamos acumular curacionTotal
+        } else if (condicion === "ESBIRROS") {
+          // AÑADIR TURNO DE ESBIRROS
+          // buscar a los esbirros y añadirlos
+          //  const esbirros = placedEnemies.filter(e => e.enemy.categoria === "esbirro")
+          // for (let i = 0; i < esbirros.length; i++) {}
+        } else if (condicion === "CARTA") {
+          // AÑADIR TURNO DE CARTA
+          // activaUUID = cartaEspecial.uuid;
         }
       
-        if (activar && cartaEspecial.sourceEnemyUUID) {
-          addExtraTurn(cartaEspecial.sourceEnemyUUID);
+        if (activar && activaUUID) {
+          addExtraTurn(activaUUID);
           const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
           logs.push(`⚡ ${nombreCarta} ${ti.activaTurno}`);
         }
@@ -1850,13 +1858,21 @@ const InitTracker = () => {
       }, 800); 
       return;
     }
-  
+    
     // 🔍 ENEMIES
     if (step.type === 'enemy') {
+      const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
       const group = placedEnemies
         .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
         .map(e => e.enemy);
-  
+
+      // ❌ si hay un jefe y el enemigo es esbirro y no tiene turno extra → lo quitamos
+      if (hayBoss) {
+        group = group.filter(enemy =>
+          !(enemy.categoria === "esbirro" && !extraTurnsQueue.includes(enemy.uuid))
+        );
+      }
+          
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
         
@@ -2158,6 +2174,7 @@ const InitTracker = () => {
   };
   
   const getNextActiveEntity = (startIndex) => {
+    
     for (let i = 0; i < TURN_ORDER.length; i++) {
       const idx = (startIndex + i) % TURN_ORDER.length;
       const step = TURN_ORDER[idx];
