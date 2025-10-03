@@ -1519,7 +1519,6 @@ const InitTracker = () => {
         //const numero = parseInt(partes[1], 10) || 0;
         const numero = partes[1] !== undefined ? parseInt(partes[1], 10) : null;
         const condicion = partes[2] || null;
-        console.log(condicion);
         let activar = false;
       
         if (numero === 0) {
@@ -1746,7 +1745,6 @@ const InitTracker = () => {
     
   };
 
-      
   const getEnemiesByColor = (trackerEnemies, color, behaviorType = null) => {
     const validEnemies = Array.from(new Set(trackerEnemies.map(e => e.id)));
     return ENEMIES.filter(e =>
@@ -1755,8 +1753,6 @@ const InitTracker = () => {
       (behaviorType ? e.comportamiento === behaviorType : true)
     );
   };
-
-  const handleSelectBoss = () => console.log("Seleccionar jefes");
 
   const categoryGlowMap = {
     bisoño: 'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
@@ -1892,7 +1888,7 @@ const InitTracker = () => {
     }
     
     if (!hasEntities) {
-      //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
+      console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
       }, 800); 
@@ -2218,7 +2214,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes]);
+  }, [turnIndex, placedEnemies, placedRunes, extraTurnsQueue]);
 
   const addExtraTurn = (enemyUUID) => {
     setExtraTurnsQueue(prev => {
@@ -2260,6 +2256,7 @@ const InitTracker = () => {
 
   const handleNextTurn = () => {
     if (extraTurnsQueue.length > 0) {
+      console.log(extraTurnsQueue);
       const [nextUUID, ...rest] = extraTurnsQueue;
       setExtraTurnsQueue(rest);
       setExtraTurnIndex(extraTurnIndex + 1);
