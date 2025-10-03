@@ -1480,9 +1480,6 @@ const InitTracker = () => {
         // 🔹 Actualizamos enemigo con ambos cambios
         const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
 
-        // ✅ Mostrar logs (estados + capacidades)
-        [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
-
         const { enemy: actualizado, logs } = aplicarEfectosEstados(enemigoFinal, "fin");
 
         // ✅ Mostrar logs (estados + capacidades)
