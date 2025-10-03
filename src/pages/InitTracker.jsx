@@ -1483,18 +1483,23 @@ const InitTracker = () => {
         // ✅ Mostrar logs (estados + capacidades)
         [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
 
-        // Si muere al aplicar las condiciones → eliminar
-        if (enemigoFinal.vida <= 0) {
-          showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
-          removeEnemyByUUID(enemigoFinal.uuid);
-        }
+        const { enemy: actualizado, logs } = aplicarEfectosEstados(enemigoFinal, "fin");
 
-        // Guardar cambios en placedEnemies
-        setPlacedEnemies(prev =>
-          prev.map(e =>
-            e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
-          )
-        );
+        // ✅ Mostrar logs (estados + capacidades)
+        [...logsEstados, ...logsCapacidades, ...logs].forEach(log => showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`));
+        
+        // Si muere al aplicar las condiciones → eliminar
+        if (actualizado.vida <= 0) {
+          showScenarioToast(`☠ ${tee[actualizado.id]} ${ti.muere_1}`);
+          removeEnemyByUUID(actualizado.uuid);
+        } else {
+          // Guardar cambios en placedEnemies
+          setPlacedEnemies(prev =>
+            prev.map(e =>
+              e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
+            )
+          );
+        }
       }
       
       // ✅ --- TIEMPO ---
