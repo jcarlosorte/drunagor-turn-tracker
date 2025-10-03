@@ -2198,7 +2198,7 @@ const InitTracker = () => {
     const entity = getNextActiveEntity(turnIndex);
     setCurrentTurnEntity(entity);
     setGroupTurnTracker({ group: [], index: 0 });
-  }, [turnIndex, placedEnemies, placedRunes, extraTurnsQueue]);
+  }, [turnIndex, placedEnemies, placedRunes]);
 
   const addExtraTurn = (enemyUUID) => {
     setExtraTurnsQueue(prev => {
