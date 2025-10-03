@@ -1906,8 +1906,17 @@ const InitTracker = () => {
         .filter(e => e.enemy.rune === step.rune && e.enemy.position === step.index && e.enemy.runePosition === step.position)
         .map(e => e.enemy);
 
+
       // ❌ si hay un jefe y el enemigo es esbirro y no tiene turno extra → lo quitamos
       if (hayBoss) {
+        // 🔹 Buscar al jefe en los colocados
+        const boss = placedEnemies.find(e => e.enemy.categoria === "jefe")?.enemy;
+    
+        if (boss) {
+          // 👉 Si hay jefe, él sustituye al grupo completo
+          group = [boss];
+        }
+
         group = group.filter(enemy =>
           !(enemy.categoria === "esbirro" && !extraTurnsQueue.includes(enemy.uuid))
         );
@@ -2388,13 +2397,27 @@ const InitTracker = () => {
           return;
         }
       } else if (step.type === 'enemy') {
-        const enemies = placedEnemies
+        const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
+        let enemies = placedEnemies
           .filter(e =>
             e.enemy.rune === step.rune &&
             e.enemy.position === step.index &&
             e.enemy.runePosition === step.position)
           .map(e => e.enemy);
-  
+
+        if (hayBoss) {
+          // 🔹 Buscar al jefe en los colocados
+          const boss = placedEnemies.find(e => e.enemy.categoria === "jefe")?.enemy;
+          if (boss) {
+            enemies = [boss];
+          }
+      
+          // ❌ Si había esbirros, solo respetamos los de turnos extra
+          enemies = enemies.filter(enemy =>
+            !(enemy.categoria === "esbirro" && !extraTurnsQueue.includes(enemy.uuid))
+          );
+        }
+        
         if (enemies.length > 0) {
           setTurnIndex(idx);
           setLastRealTurnIndex(idx);
