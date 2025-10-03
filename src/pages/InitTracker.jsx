@@ -1469,7 +1469,32 @@ const InitTracker = () => {
 
       // ✅ --- CONDICIONES ---
       else if (cap.startsWith("CONDICIONES")) {
-        addExtraTurn(cartaEspecial.sourceEnemyUUID);
+        
+        const boss = placedEnemies.find(e => e.enemy.uuid === cartaEspecial.sourceEnemyUUID)?.enemy;
+        // 🔹 Efectos de estados (fase inicio)
+        const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(boss, "inicio");
+
+        // ✅ Aplicar efectos de capacidades activadas
+        const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
+        
+        // 🔹 Actualizamos enemigo con ambos cambios
+        const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
+
+        // ✅ Mostrar logs (estados + capacidades)
+        [...logsEstados, ...logsCapacidades].forEach(log => showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`));
+
+        // Si muere al aplicar las condiciones → eliminar
+        if (enemigoFinal.vida <= 0) {
+          showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+          removeEnemyByUUID(enemigoFinal.uuid);
+        }
+
+        // Guardar cambios en placedEnemies
+        setPlacedEnemies(prev =>
+          prev.map(e =>
+            e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
+          )
+        );
       }
       
       // ✅ --- TIEMPO ---
@@ -2297,8 +2322,6 @@ const InitTracker = () => {
         setPlacedEnemies(prev => prev.filter(e => e.enemy.uuid !== actualizado.uuid));
       }
     }
-
-    
         
     // 🔄 Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
