@@ -666,6 +666,7 @@ const InitTracker = () => {
           // 5- Colocar Runas
           // 6- Consecuencias
           // 7- Iniciar turno
+          restartTurnOrder();
           return;
         }
    
@@ -1481,7 +1482,7 @@ const InitTracker = () => {
         //const numero = parseInt(partes[1], 10) || 0;
         const numero = partes[1] !== undefined ? parseInt(partes[1], 10) : null;
         const condicion = partes[2] || null;
-      
+        console.log(condicion);
         let activar = false;
       
         if (numero === 0) {
@@ -2380,6 +2381,23 @@ const InitTracker = () => {
     }
   
     console.warn("No se encontró siguiente entidad disponible para el turno.");
+  };
+
+  const restartTurnOrder = () => {
+    setTurnIndex(0);                // empezamos desde el primer paso
+    previousIndexRef.current = null;
+    roundRef.current = 1;
+    setCurrentTurnEntity(null);
+    setGroupTurnTracker({ group: [], index: 0 });
+    setExecutedRunes([]);
+    processedVoragineRef.current = new Set();
+    processedDefenseTurnRef.current = new Set();
+    processedStartEffectsRef.current.clear();
+    processedEndEffectsRef.current.clear();
+    processedCardsRef.current.clear();
+    processedTiempoRef.current = new Set();
+  
+    showScenarioToast(`🔁 ${ti.rondaInicial}`);
   };
   
   const showToast = (enemyData) => {
