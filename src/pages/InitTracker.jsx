@@ -669,6 +669,34 @@ const InitTracker = () => {
           }
           
           // 6- Consecuencias
+          if (selected.consecuencias === "SI") {
+            let vidaReducida = 0;
+          
+            // Pregunta 1: Rompereliquias
+            const romperReliquias = window.confirm("¿Se activa la consecuencia 'Rompereliquias'?");
+            if (romperReliquias) {
+              vidaReducida += 15 * numHeroes;
+            }
+          
+            // Pregunta 2: Amantes reunidos
+            const amantesReunidos = window.confirm("¿Se activa la consecuencia 'Amantes reunidos'?");
+            if (amantesReunidos) {
+              vidaReducida += 15 * numHeroes;
+            }
+          
+            // Pregunta 3: Dúo Dinámico
+            const duoDinamico = window.confirm("¿Se activa la consecuencia 'Dúo Dinámico'?");
+            if (duoDinamico) {
+              showScenarioToast("📖 Preparación especial: Pasar el testigo (Pág. 82)");
+            }
+          
+            // Aplicar reducción de vida si corresponde
+            if (vidaReducida > 0) {
+              enemy.vida = Math.max(0, enemy.vida - vidaReducida);
+              enemy.vidaMax = Math.max(0, enemy.vidaMax - vidaReducida);
+              showScenarioToast(`⚡ Consecuencias: el jefe pierde ${vidaReducida} puntos de vida`);
+            }
+          }
           // 7- Iniciar turno
           restartTurnOrder();
           return;
