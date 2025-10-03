@@ -1906,21 +1906,7 @@ const InitTracker = () => {
         )
         .map(e => e.enemy);
     
-      // 🔹 ¿Hay jefe colocado?
-      const boss = placedEnemies.find(e => e.enemy.categoria === "jefe")?.enemy;
-      if (boss && extraTurnsQueue.includes(boss.uuid)) {
-        // 👉 Si el jefe está en la cola de turnos extra → su turno
-        group = [boss];
-      
-      } else {
-        // ❌ Si hay jefe y el enemigo es esbirro sin turno extra → se filtra
-        const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
-        if (hayBoss) {
-          group = group.filter(enemy =>
-            !(enemy.categoria === "esbirro" && !extraTurnsQueue.includes(enemy.uuid))
-          );
-        }
-      }
+    
           
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
@@ -2406,19 +2392,6 @@ const InitTracker = () => {
           )
           .map(e => e.enemy);
       
-        // 🔹 Solo si está en cola de turnos extra entra el jefe
-        const boss = placedEnemies.find(e => e.enemy.categoria === "jefe")?.enemy;
-        if (boss && extraTurnsQueue.includes(boss.uuid)) {
-          enemies = [boss];
-        } else {
-          // ❌ Esbirros fuera si hay jefe colocado, salvo si tienen turno extra
-          const hayBoss = placedEnemies.some(e => e.enemy.categoria === "jefe");
-          if (hayBoss) {
-            enemies = enemies.filter(enemy =>
-              !(enemy.categoria === "esbirro" && !extraTurnsQueue.includes(enemy.uuid))
-            );
-          }
-        }
         
         if (enemies.length > 0) {
           setTurnIndex(idx);
