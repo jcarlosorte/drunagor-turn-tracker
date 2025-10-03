@@ -1477,6 +1477,7 @@ const InitTracker = () => {
       else if (cap.startsWith("ACTIVA")) {
         const partes = cap.split("_"); // ["ACTIVA", "5", "RUNA"] o ["ACTIVA", "10", "SANA"]
         let activaUUID = cartaEspecial.sourceEnemyUUID;
+        const nombreCarta = ta?.nombre?.[cartaEspecial.id] || cartaEspecial.nombre || cartaEspecial.id;
         //const numero = parseInt(partes[1], 10) || 0;
         const numero = partes[1] !== undefined ? parseInt(partes[1], 10) : null;
         const condicion = partes[2] || null;
@@ -1492,12 +1493,13 @@ const InitTracker = () => {
           if (curacionTotal >= numero) activar = true; // Necesitamos acumular curacionTotal
         } else if (condicion === "ESBIRROS") {
           // AÑADIR TURNO DE ESBIRROS
-          // buscar a los esbirros y añadirlos
-          //  const esbirros = placedEnemies.filter(e => e.enemy.categoria === "esbirro")
-          // for (let i = 0; i < esbirros.length; i++) {}
+          const esbirros = placedEnemies.filter(e => e.enemy.categoria === "esbirro")
+          esbirros.forEach(e => addExtraTurn(e.enemy.uuid));
+          logs.push(`⚡ ${nombreCarta} ${ti.activaTurnoEsbirros}`);
         } else if (condicion === "CARTA") {
           // AÑADIR TURNO DE CARTA
-          // activaUUID = cartaEspecial.uuid;
+          addExtraTurn(cartaEspecial.uuid);
+          logs.push(`⚡ ${nombreCarta} ${ti.activaTurnoCarta}`);
         }
       
         if (activar && activaUUID) {
