@@ -666,6 +666,7 @@ const InitTracker = () => {
           // 5- Colocar Runas
           if (selected.robaRunas > 0){
             drawMultipleTiles(selected.robaRunas);
+            showScenarioToast(`⚡ ${ti.consecuencias}: ${getEnemyName(selected.id)} ${ti.Roba} ${selected.robaRunas} ${ti.runes}`);
           }
           
           // 6- Consecuencias
