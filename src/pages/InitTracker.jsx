@@ -1479,7 +1479,7 @@ const InitTracker = () => {
         
         // 🔹 Actualizamos enemigo con ambos cambios
         const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
-
+        console.log(enemigoFinal);
         const { enemy: actualizado, logs } = aplicarEfectosEstados(enemigoFinal, "fin");
 
         // ✅ Mostrar logs (estados + capacidades)
