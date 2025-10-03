@@ -904,7 +904,7 @@ const InitTracker = () => {
         estadosAlterados: initialStates,
       },
     }));
-    console.log(cartasJefe);
+    
     // ⚠️ Mensaje especial (similar a comandante, puedes personalizar)
     const msgBoss = ti.bossWarning
       ? ti.bossWarning.replace("{name}", nombreBoss)
