@@ -235,8 +235,8 @@
       "fromPassiveCard": "Modificado por habilidad pasiva, puede tener condiciones",   
       "ronda": "Nueva Ronda", 
       "activaTurno": "¡Se activa el enemigo!",
-      "activaTurnoEsbirros": "¡Los esbirros se activan!"
-      "activaTurnoCarta": "Continúa despues del turno de los Esbirros"
+      "activaTurnoEsbirros": "¡Los esbirros se activan!",
+      "activaTurnoCarta": "Continúa despues del turno de los Esbirros",
       "activandoTurnoAdicional": "Activando turno adicional",
       "rondaInicial": "¡Primera Ronda!",  
       "mazo_1": "⚠️ No hay cartas en el mazo:",
