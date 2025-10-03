@@ -664,6 +664,10 @@ const InitTracker = () => {
           // 4- Esbirros
           spawnBossEnemies(selected.numInvoca, selected.invoca, selected.catInvoca);
           // 5- Colocar Runas
+          if (selected.robaRunas > 0){
+            drawMultipleTiles(selected.robaRunas);
+          }
+          
           // 6- Consecuencias
           // 7- Iniciar turno
           restartTurnOrder();
