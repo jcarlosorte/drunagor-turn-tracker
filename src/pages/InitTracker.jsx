@@ -1915,7 +1915,7 @@ const InitTracker = () => {
     }
     
     if (!hasEntities) {
-      console.log("⚠ No hay entidades en el paso actual, avanzamos...");
+      //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
       }, 800); 
@@ -1937,7 +1937,6 @@ const InitTracker = () => {
           
       if (group.length > 0) {
         const current = group[groupTurnTracker.index];
-        console.log(current);
         if (!current) {
           setTimeout(() => {
             handleNextTurn();
@@ -2267,7 +2266,6 @@ const InitTracker = () => {
 
   const handleNextTurn = () => {
     if (extraTurnsQueue.length > 0) {
-      console.log(extraTurnsQueue);
       const [nextUUID, ...rest] = extraTurnsQueue;
       setExtraTurnsQueue(rest);
       setExtraTurnIndex(extraTurnIndex + 1);
