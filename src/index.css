@@ -196,3 +196,15 @@ body {
   background-size: 200% 200%;
   animation: gradient-move 4s ease infinite;
 }
+
+/* === Cursor personalizado === */
+.cursor-custom {
+  cursor: url('/src/assets/assets_logo/Lupa.png') 12 12, pointer;
+}
+
+/* En pantallas pequeñas (<500px), usar un hotspot más pequeño */
+@media (max-width: 500px) {
+  .cursor-custom {
+    cursor: url('/src/assets/assets_logo/Lupa.png') 8 8, pointer;
+  }
+}
