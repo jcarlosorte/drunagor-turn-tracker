@@ -2917,7 +2917,7 @@ const InitTracker = () => {
               ${categoryTextGlowMap[categoria] || ''} 
               enemy-text-wrapper`}
           >
-            <div className="flex flex-col w-full items-center leading-none" onClick={() => { openEnemyModal(uuid); }}>
+            <div className="cursor-custom flex flex-col w-full items-center leading-none" onClick={() => { openEnemyModal(uuid); }}>
               <span className="enemy-text leading-none">{name}</span>
               {!isBoss && comportamiento && (
                 <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">
