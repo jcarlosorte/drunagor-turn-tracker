@@ -2338,6 +2338,7 @@ const InitTracker = () => {
       const enemyEntry = placedEnemies.find(e => e.enemy.uuid === nextUUID);
       if (enemyEntry) {
         showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
+        console.log(enemyEntry.enemy);
         const ok = procesarInicioTurnoEnemy(enemyEntry.enemy);
         if (!ok) {
           setTimeout(() => handleNextTurn(), 800);
