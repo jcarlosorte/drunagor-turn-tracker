@@ -208,3 +208,15 @@ body {
     cursor: url('/src/assets/assets_logo/Lupa-24.png') 6 6, pointer;
   }
 }
+
+@keyframes fireGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.fire-bg {
+  background: linear-gradient(45deg, #ff4500, #ff8c00, #ffa500, #ff4500);
+  background-size: 400% 400%;
+  animation: fireGradient 3s ease infinite;
+}
