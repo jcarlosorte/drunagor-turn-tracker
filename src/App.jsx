@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import AnimatedRoutes from "@/components/AnimatedRoutes";
+import LupaCursor from "@/assets/assets_logo/Lupa.png";
 
 function Header() {
   const { translations } = useLanguage();
