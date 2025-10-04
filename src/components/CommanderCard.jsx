@@ -25,12 +25,12 @@ const CommanderCard = ({ carta }) => {
 
   const borderClass =
     carta.categoria === "overlord"
-      ? 'bg-gray-500 border-orange-400'
+      ? 'fire-bg border-orange-400'
       : carta.categoria === "comandante" || carta.categoria === "hero"
-      ? 'bg-gray-500 border-yellow-400'
+      ? 'fire-bg border-yellow-400'
       : carta.categoria === "jefe"
-      ? 'bg-gray-500 border-purple-400'
-      : 'bg-gray-500 border-gray-500';
+      ? 'fire-bg border-purple-400'
+      : 'fire-bg border-gray-500';
   
   const enemyClass =
     carta.categoria === "overlord"
