@@ -1,5 +1,6 @@
 // src/components/CommanderCard.jsx
 import React, { useState, useEffect } from 'react';
+import LupaCursor from "@/assets/assets_logo/Lupa.png";
 import { useLanguage } from '@/context/LanguageContext';
 import { ESTADOS_ALTERADOS } from '@/data/estadosAlterados';
 import CommanderCardModal from '@/components/CommanderCardModal';
@@ -53,8 +54,9 @@ const CommanderCard = ({ carta }) => {
 
         <div
           onClick={() => setShowModal(true)}
-          className={`cursor-context-menu relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          className={`relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
+          style={{ cursor: `url(${LupaCursor}), pointer` }}
         >
           
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
