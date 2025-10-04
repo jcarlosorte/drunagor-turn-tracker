@@ -53,7 +53,7 @@ const CommanderCard = ({ carta }) => {
 
         <div
           onClick={() => setShowModal(true)}
-          className={`cursor-pointer relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          className={`cursor-context-menu relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
         >
           
