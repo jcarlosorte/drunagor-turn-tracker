@@ -557,34 +557,38 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
           </div>
 
           
-            {/* Barra de vida */}
-            <div className="w-full relative h-5">
-              <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
-                {vidaLocal} / {vidaMax}
-              </div>
-              <div className="w-full h-full bg-red-900 rounded">
-                <div
-                  className="h-full bg-red-500 rounded"
-                  style={{ width: `${(vidaLocal / vidaMax) * 100}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Vida botones + / - */}
-            <div className="flex items-center gap-6 mt-1">
+            {/* Barra de vida con botones a los lados */}
+            <div className="flex items-center w-full h-5 mt-2">
+              {/* Botón − */}
               <button
                 onClick={() => handleVidaChange(-1)}
-                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                className="w-6 h-6 flex items-center justify-center bg-red-600 text-white rounded-l hover:bg-red-700"
               >
                 −
               </button>
+            
+              {/* Barra de vida */}
+              <div className="flex-1 relative h-full">
+                <div className="absolute inset-0 flex items-center justify-center text-white text-[0.65rem] font-bold z-10">
+                  {vidaLocal} / {vidaMax}
+                </div>
+                <div className="w-full h-full bg-red-900 rounded">
+                  <div
+                    className="h-full bg-red-500 rounded"
+                    style={{ width: `${(vidaLocal / vidaMax) * 100}%` }}
+                  />
+                </div>
+              </div>
+            
+              {/* Botón + */}
               <button
                 onClick={() => handleVidaChange(1)}
-                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                className="w-6 h-6 flex items-center justify-center bg-green-600 text-white rounded-r hover:bg-green-700"
               >
                 +
               </button>
             </div>
+
           
         </div>
       </div>
