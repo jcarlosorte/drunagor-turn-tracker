@@ -1480,7 +1480,6 @@ const InitTracker = () => {
       
         // 🔹 Actualizamos enemigo con ambos cambios
         const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
-        console.log(enemigoFinal);
       
         // ☠️ Si ya está muerto aquí → eliminar y cortar
         if (enemigoFinal.vida <= 0) {
@@ -2338,7 +2337,7 @@ const InitTracker = () => {
       const enemyEntry = placedEnemies.find(e => e.enemy.uuid === nextUUID);
       if (enemyEntry) {
         showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
-        console.log(enemyEntry.enemy);
+        
         const ok = procesarInicioTurnoEnemy(enemyEntry.enemy);
         if (!ok) {
           setTimeout(() => handleNextTurn(), 800);
