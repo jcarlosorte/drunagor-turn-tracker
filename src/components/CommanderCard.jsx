@@ -53,7 +53,7 @@ const CommanderCard = ({ carta }) => {
 
         <div
           onClick={() => setShowModal(true)}
-          className={`cursor-pointer relative w-full max-w-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          className={`cursor-pointer relative w-full max-w-[140px] min-w-[128px] min-h-[128px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
         >
 
