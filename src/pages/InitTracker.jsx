@@ -1787,6 +1787,65 @@ const InitTracker = () => {
     );
   };
 
+  const procesarInicioTurnoEnemy = (enemy) => {
+    // ✅ Control de TIEMPO
+    if (!processedTiempoRef.current.has(enemy.uuid)) {
+      processedTiempoRef.current.add(enemy.uuid);
+      const skippedData = checkTiempoSkip(enemy);
+      if (skippedData?.skipped) {
+        setPlacedEnemies(prev =>
+          prev.map(e =>
+            e.enemy.uuid === enemy.uuid
+              ? { ...e, enemy: { ...e.enemy, estadosAlterados: skippedData.nuevosEstados } }
+              : e
+          )
+        );
+        const nombreEnemy = tee?.[enemy.id] || enemy.nombre || enemy.id;
+        showScenarioToast(`⏳ ${nombreEnemy} ${ti.saltaTurnoPorTiempo}`);
+        return false; // turno saltado
+      }
+    }
+  
+    // ✅ Inicio de turno normal
+    if (!processedStartEffectsRef.current.has(enemy.uuid)) {
+      processedStartEffectsRef.current.add(enemy.uuid);
+  
+      if (enemy.vida <= 0) {
+        showScenarioToast(`☠ ${tee[enemy.id]} ${ti.muere_1}`);
+        removeEnemyByUUID(enemy.uuid);
+        return false;
+      }
+  
+      // Estados (fase inicio)
+      const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(enemy, "inicio");
+  
+      // Capacidades
+      const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
+  
+      const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
+  
+      [...logsEstados, ...logsCapacidades].forEach(log =>
+        showScenarioToast(`🌀 ${tee[enemigoFinal.id]}: ${log}`)
+      );
+  
+      // Guardar
+      setPlacedEnemies(prev =>
+        prev.map(e =>
+          e.enemy.uuid === enemigoFinal.uuid ? { ...e, enemy: enemigoFinal } : e
+        )
+      );
+  
+      if (enemigoFinal.vida <= 0) {
+        showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+        removeEnemyByUUID(enemigoFinal.uuid);
+        return false;
+      }
+    }
+  
+    return true; // turno válido
+  };
+  
+    
   const categoryGlowMap = {
     bisoño: 'drop-shadow-[0_0_6px_rgba(59,130,246,1)]',    // azul
     soldado: 'drop-shadow-[0_0_6px_rgba(234,179,8,1)]',     // amarillo
@@ -2279,6 +2338,12 @@ const InitTracker = () => {
       const enemyEntry = placedEnemies.find(e => e.enemy.uuid === nextUUID);
       if (enemyEntry) {
         showScenarioToast(`${ti.activandoTurnoAdicional} ${extraTurnIndex + 1}/${extraTurnTotal}`);
+        const ok = procesarInicioTurnoEnemy(enemyEntry.enemy);
+        if (!ok) {
+          setTimeout(() => handleNextTurn(), 800);
+          return;
+        }
+        
         setCurrentTurnEntity({ ...enemyEntry.enemy, type: 'enemy', group: [enemyEntry.enemy] });
 
         // Si la cola queda vacía, reiniciamos índices
