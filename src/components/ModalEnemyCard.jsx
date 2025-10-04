@@ -558,11 +558,11 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
 
           
             {/* Barra de vida con botones a los lados */}
-            <div className="flex items-center w-full h-5 mt-2">
+            <div className="flex items-center w-full h-5 mt-2 gap-2">
               {/* Botón − */}
               <button
                 onClick={() => handleVidaChange(-1)}
-                className="w-6 h-6 flex items-center justify-center bg-red-600 text-white rounded-l hover:bg-red-700"
+                className="w-5 h-5 flex items-center justify-center bg-red-600 text-white rounded-full hover:bg-red-700"
               >
                 −
               </button>
@@ -583,7 +583,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
               {/* Botón + */}
               <button
                 onClick={() => handleVidaChange(1)}
-                className="w-6 h-6 flex items-center justify-center bg-green-600 text-white rounded-r hover:bg-green-700"
+                className="w-5 h-5 flex items-center justify-center bg-green-600 text-white rounded-full hover:bg-green-700"
               >
                 +
               </button>
