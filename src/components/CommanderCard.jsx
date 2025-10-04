@@ -54,9 +54,8 @@ const CommanderCard = ({ carta }) => {
 
         <div
           onClick={() => setShowModal(true)}
-          className={`relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          className={`cursor-custom relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
-          style={{ cursor: `url(${LupaCursor}), pointer` }}
         >
           
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
