@@ -199,12 +199,12 @@ body {
 
 /* === Cursor personalizado === */
 .cursor-custom {
-  cursor: url('/src/assets/assets_logo/Lupa.png') 10 10, auto;
+  cursor: url('/src/assets/assets_logo/Lupa-24.png.png') 10 10, auto;
 }
 
 /* En pantallas pequeñas (<500px), usar un hotspot más pequeño */
 @media (max-width: 500px) {
   .cursor-custom {
-    cursor: url('/src/assets/assets_logo/Lupa.png') 6 6, auto;
+    cursor: url('/src/assets/assets_logo/Lupa-16.png.png') 6 6, auto;
   }
 }
