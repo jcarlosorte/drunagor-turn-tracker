@@ -49,15 +49,14 @@ const CommanderCard = ({ carta }) => {
   
   return (
     <div className="flex flex-col items-center mx-1">
-      <div className="relative">
+      <div className="relative w-full max-w-[140px]">
 
         <div
           onClick={() => setShowModal(true)}
-          className={`cursor-pointer relative w-full max-w-[140px] max-h-[140px] p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
+          className={`cursor-pointer relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
         >
-          {/* Div fantasma para forzar altura */}
-          <div className="w-full aspect-square"></div>
+          
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
           {estadosLocal
             .filter(estado => estado.count > 0)
