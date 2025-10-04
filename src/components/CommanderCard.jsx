@@ -1,6 +1,5 @@
 // src/components/CommanderCard.jsx
 import React, { useState, useEffect } from 'react';
-import LupaCursor from "@/assets/assets_logo/Lupa.png";
 import { useLanguage } from '@/context/LanguageContext';
 import { ESTADOS_ALTERADOS } from '@/data/estadosAlterados';
 import CommanderCardModal from '@/components/CommanderCardModal';
