@@ -1469,34 +1469,40 @@ const InitTracker = () => {
 
       // ✅ --- CONDICIONES ---
       else if (cap.startsWith("CONDICIONES")) {
-        
         const boss = placedEnemies.find(e => e.enemy.uuid === cartaEspecial.sourceEnemyUUID)?.enemy;
+        if (!boss) return;
+      
         // 🔹 Efectos de estados (fase inicio)
         const { enemy: actualizadoEstados, logs: logsEstados } = aplicarEfectosEstados(boss, "inicio");
-
+      
         // ✅ Aplicar efectos de capacidades activadas
         const { vida, estados, logs: logsCapacidades } = aplicarCapacidadesActivadas(actualizadoEstados, placedEnemies);
-        
+      
         // 🔹 Actualizamos enemigo con ambos cambios
         const enemigoFinal = { ...actualizadoEstados, vida, estadosAlterados: estados };
         console.log(enemigoFinal);
-        const { enemy: actualizado, logs } = aplicarEfectosEstados(enemigoFinal, "fin");
-
-        // ✅ Mostrar logs (estados + capacidades)
-        [...logsEstados, ...logsCapacidades, ...logs].forEach(log => showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`));
-        
-        // Si muere al aplicar las condiciones → eliminar
-        if (actualizado.vida <= 0) {
-          showScenarioToast(`☠ ${tee[actualizado.id]} ${ti.muere_1}`);
-          removeEnemyByUUID(actualizado.uuid);
-        } else {
-          // Guardar cambios en placedEnemies
-          setPlacedEnemies(prev =>
-            prev.map(e =>
-              e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
-            )
-          );
+      
+        // ☠️ Si ya está muerto aquí → eliminar y cortar
+        if (enemigoFinal.vida <= 0) {
+          showScenarioToast(`☠ ${tee[enemigoFinal.id]} ${ti.muere_1}`);
+          removeEnemyByUUID(enemigoFinal.uuid);
+          return;
         }
+      
+        // 🔹 Efectos de estados (fase fin)
+        const { enemy: actualizado, logs } = aplicarEfectosEstados(enemigoFinal, "fin");
+      
+        // ✅ Mostrar logs (estados + capacidades)
+        [...logsEstados, ...logsCapacidades, ...logs].forEach(log =>
+          showScenarioToast(`🌀 ${tee[actualizado.id]}: ${log}`)
+        );
+      
+        // Guardar cambios en placedEnemies
+        setPlacedEnemies(prev =>
+          prev.map(e =>
+            e.enemy.uuid === actualizado.uuid ? { ...e, enemy: actualizado } : e
+          )
+        );
       }
       
       // ✅ --- TIEMPO ---
