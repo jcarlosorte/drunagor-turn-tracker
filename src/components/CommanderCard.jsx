@@ -61,6 +61,10 @@ const CommanderCard = ({ carta }) => {
           <div className="fire-bg-inner"></div>
           {/* Chispas */}
           <div className="fire-sparks">
+            <span key={1}></span>
+            <span key={2}></span>
+            <span key={3}></span>
+            <span key={4}></span>
             {Array.from({ length: 20 }).map((_, i) => (
               <span key={i}></span>
             ))}
