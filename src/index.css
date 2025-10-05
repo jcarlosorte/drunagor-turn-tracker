@@ -228,19 +228,18 @@ body {
   overflow: hidden;
 }
 
-/* 🌟 Animaciones de subida */
-@keyframes rise-left-medium {
-  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.9; }
-  100% { transform: translateY(-80px) translateX(-20px) scale(0.5); opacity: 0; }
-}
-@keyframes rise-center-short {
-  0%   { transform: translateY(0) scale(1); opacity: 0.9; }
-  100% { transform: translateY(-80%) scale(0.4); opacity: 0; }
-}
-@keyframes rise-right-tall {
-  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.9; }
-  100% { transform: translateY(-150%) translateX(20px) scale(0.6); opacity: 0; }
-}
+/* === Chispas con alturas en píxeles === */
+@keyframes rise-left-short   { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(-30px,-80px) scale(0.5);opacity:0;} }
+@keyframes rise-left-medium  { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(-30px,-120px) scale(0.5);opacity:0;} }
+@keyframes rise-left-tall    { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(-30px,-160px) scale(0.5);opacity:0;} }
+
+@keyframes rise-center-short { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(0,-80px) scale(0.5);opacity:0;} }
+@keyframes rise-center-medium{ 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(0,-120px) scale(0.5);opacity:0;} }
+@keyframes rise-center-tall  { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(0,-160px) scale(0.5);opacity:0;} }
+
+@keyframes rise-right-short  { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(30px,-80px) scale(0.5);opacity:0;} }
+@keyframes rise-right-medium { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(30px,-120px) scale(0.5);opacity:0;} }
+@keyframes rise-right-tall   { 0% {transform: translate(0,0) scale(1);opacity:0.9;} 100% {transform: translate(30px,-160px) scale(0.5);opacity:0;} }
 
 /* 🔥 Contenedor de partículas */
 .fire-sparks {
@@ -255,87 +254,35 @@ body {
 .fire-sparks span {
   position: absolute;
   bottom: 0;
-  width: 4px;
-  height: 4px;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffd700, transparent 70%);
-  animation: sparks linear infinite;
+  opacity: 0.9;
 }
 
-/* Colores + animaciones */
-.fire-sparks span:nth-child(3n) {
-  background: #dc2626; /* rojo */
-  width: 6px;
-  height: 6px;
-  animation: rise-left-medium 3s linear infinite;
-}
-.fire-sparks span:nth-child(3n+1) {
-  background: #f97316; /* naranja */
-  width: 5px;
-  height: 5px;
-  animation: rise-left-medium 3s linear infinite;
-}
-.fire-sparks span:nth-child(3n+2) {
-  background: #facc15; /* amarillo */
-  width: 4px;
-  height: 4px;
-  animation: rise-left-medium 3s linear infinite;
-}
+/* Colores + tamaños */
+.fire-sparks span:nth-child(3n)   { background: #dc2626; width: 6px; height: 6px; }
+.fire-sparks span:nth-child(3n+1) { background: #f97316; width: 5px; height: 5px; }
+.fire-sparks span:nth-child(3n+2) { background: #facc15; width: 4px; height: 4px; }
 
-/* 🌟 Posiciones + duraciones + delays */
-.fire-sparks span:nth-child(1)  { left: 5%;  animation-duration: 2.5s; animation-delay: 0s; }
-.fire-sparks span:nth-child(2)  { left: 15%; animation-duration: 3s;   animation-delay: 0.5s; }
-.fire-sparks span:nth-child(3)  { left: 25%; animation-duration: 2.2s; animation-delay: 1s; }
-.fire-sparks span:nth-child(4)  { left: 35%; animation-duration: 3.5s; animation-delay: 0.3s; }
-.fire-sparks span:nth-child(5)  { left: 45%; animation-duration: 2.8s; animation-delay: 1.2s; }
-.fire-sparks span:nth-child(6)  { left: 55%; animation-duration: 3.1s; animation-delay: 0.7s; }
-.fire-sparks span:nth-child(7)  { left: 65%; animation-duration: 2.4s; animation-delay: 1.5s; }
-.fire-sparks span:nth-child(8)  { left: 75%; animation-duration: 3.3s; animation-delay: 0.4s; }
-.fire-sparks span:nth-child(9)  { left: 85%; animation-duration: 2.7s; animation-delay: 1.3s; }
-.fire-sparks span:nth-child(10) { left: 95%; animation-duration: 3.6s; animation-delay: 0.8s; }
+/* 🌟 Posiciones + duraciones + delays + animaciones */
+.fire-sparks span:nth-child(1)  { left: 5%;  animation: rise-left-medium 2.5s linear infinite 0s; }
+.fire-sparks span:nth-child(2)  { left: 15%; animation: rise-center-tall 3s linear infinite 0.5s; }
+.fire-sparks span:nth-child(3)  { left: 25%; animation: rise-right-short 2.2s linear infinite 1s; }
+.fire-sparks span:nth-child(4)  { left: 35%; animation: rise-left-tall 3.5s linear infinite 0.3s; }
+.fire-sparks span:nth-child(5)  { left: 45%; animation: rise-center-medium 2.8s linear infinite 1.2s; }
+.fire-sparks span:nth-child(6)  { left: 55%; animation: rise-right-tall 3.1s linear infinite 0.7s; }
+.fire-sparks span:nth-child(7)  { left: 65%; animation: rise-left-short 2.4s linear infinite 1.5s; }
+.fire-sparks span:nth-child(8)  { left: 75%; animation: rise-center-tall 3.3s linear infinite 0.4s; }
+.fire-sparks span:nth-child(9)  { left: 85%; animation: rise-right-medium 2.7s linear infinite 1.3s; }
+.fire-sparks span:nth-child(10) { left: 95%; animation: rise-left-tall 3.6s linear infinite 0.8s; }
 
-.fire-sparks span:nth-child(11) { left: 8%;  animation-duration: 2.9s; animation-delay: 1.7s; }
-.fire-sparks span:nth-child(12) { left: 18%; animation-duration: 3.4s; animation-delay: 0.6s; }
-.fire-sparks span:nth-child(13) { left: 28%; animation-duration: 2.6s; animation-delay: 1.4s; }
-.fire-sparks span:nth-child(14) { left: 38%; animation-duration: 3.2s; animation-delay: 0.2s; }
-.fire-sparks span:nth-child(15) { left: 48%; animation-duration: 2.3s; animation-delay: 1s; }
-.fire-sparks span:nth-child(16) { left: 58%; animation-duration: 3.7s; animation-delay: 0.9s; }
-.fire-sparks span:nth-child(17) { left: 68%; animation-duration: 2.5s; animation-delay: 1.6s; }
-.fire-sparks span:nth-child(18) { left: 78%; animation-duration: 3s;   animation-delay: 0.1s; }
-.fire-sparks span:nth-child(19) { left: 88%; animation-duration: 2.7s; animation-delay: 1.1s; }
-.fire-sparks span:nth-child(20) { left: 98%; animation-duration: 3.8s; animation-delay: 0.5s; }
+.fire-sparks span:nth-child(11) { left: 8%;  animation: rise-center-medium 2.9s linear infinite 1.7s; }
+.fire-sparks span:nth-child(12) { left: 18%; animation: rise-right-short 3.4s linear infinite 0.6s; }
+.fire-sparks span:nth-child(13) { left: 28%; animation: rise-left-medium 2.6s linear infinite 1.4s; }
+.fire-sparks span:nth-child(14) { left: 38%; animation: rise-center-tall 3.2s linear infinite 0.2s; }
+.fire-sparks span:nth-child(15) { left: 48%; animation: rise-right-medium 2.3s linear infinite 1s; }
+.fire-sparks span:nth-child(16) { left: 58%; animation: rise-left-tall 3.7s linear infinite 0.9s; }
+.fire-sparks span:nth-child(17) { left: 68%; animation: rise-center-short 2.5s linear infinite 1.6s; }
+.fire-sparks span:nth-child(18) { left: 78%; animation: rise-right-tall 3s linear infinite 0.1s; }
+.fire-sparks span:nth-child(19) { left: 88%; animation: rise-left-short 2.7s linear infinite 1.1s; }
+.fire-sparks span:nth-child(20) { left: 98%; animation: rise-center-medium 3.8s linear infinite 0.5s; }
 
-/* Animación de chispas */
-@keyframes sparks_2 {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
-}
-
-/* Contenedor de partículas */
-.fire-sparks_2 {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 1; /* por encima del fondo, debajo del texto */
-  pointer-events: none;
-}
-
-/* Cada partícula */
-.fire-sparks_2 span {
-  position: absolute;
-  bottom: 0;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffd700, transparent 70%);
-  animation: sparks_2 linear infinite;
-}
-
-/* Distintas variaciones para que parezcan aleatorias */
-.fire-sparks_2 span:nth-child(1) { left: 20%; animation-duration: 2s; }
-.fire-sparks_2 span:nth-child(2) { left: 40%; animation-duration: 1.5s; animation-delay: 0.3s; }
-.fire-sparks_2 span:nth-child(3) { left: 60%; animation-duration: 2.2s; animation-delay: 0.6s; }
-.fire-sparks_2 span:nth-child(4) { left: 80%; animation-duration: 1.8s; animation-delay: 0.9s; }
-.fire-sparks_2 span:nth-child(5) { left: 30%; animation-duration: 2.5s; animation-delay: 1.2s; }
-.fire-sparks_2 span:nth-child(6) { left: 70%; animation-duration: 2s; animation-delay: 1.5s; }
