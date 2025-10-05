@@ -354,6 +354,7 @@ body {
   z-index: 1;
   animation: waveFlow 6s ease-in-out infinite;
   opacity: 0.3;
+  filter: blur(3px)
 }
 
 @keyframes waveFlow {
@@ -367,3 +368,31 @@ body {
     transform: translateX(0);
   }
 }
+
+.river-waves2 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 100px;
+  z-index: 1;
+  animation: verticalFlow 6s ease-in-out infinite;
+  filter: blur(3px)
+}
+
+@keyframes verticalFlow {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(-50%) translateY(-20px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.4;
+  }
+}
+
