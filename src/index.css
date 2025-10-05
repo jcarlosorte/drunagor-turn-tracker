@@ -306,11 +306,9 @@ body {
     rgba(0, 255, 150, 0.05) 30%,
     transparent 60%
   );
-  mix-blend-mode: screen;
-  opacity: 0.6;
-
-  animation: mistFloat 20s ease-in-out infinite;
-  will-change: transform;
+   background-size: 300% 300%;
+  mix-blend-mode: lighten;
+  animation: mistFloat 20s linear infinite;
 }
 
 .river-bg::after {
