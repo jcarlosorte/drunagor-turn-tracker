@@ -247,18 +247,19 @@ body {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  z-index: 1; /* encima del fondo, debajo del texto */
+  z-index: 1; /* por encima del fondo, debajo del texto */
   pointer-events: none;
 }
 
 /* Partículas base */
 .fire-sparks span {
   position: absolute;
-  bottom: -10%;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  opacity: 0.8;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  background: radial-gradient(circle, #ffd700, transparent 70%);
+  animation: sparks linear infinite;
 }
 
 /* Colores + animaciones */
