@@ -267,19 +267,19 @@ body {
   background: #dc2626; /* rojo */
   width: 6px;
   height: 6px;
-  animation: rise-left-medium 3s linear infinite;
+  animation: sparks_2 3s linear infinite;
 }
 .fire-sparks span:nth-child(3n+1) {
   background: #f97316; /* naranja */
   width: 5px;
   height: 5px;
-  animation: rise-center-short 3s linear infinite;
+  animation: sparks_2 3s linear infinite;
 }
 .fire-sparks span:nth-child(3n+2) {
   background: #facc15; /* amarillo */
   width: 4px;
   height: 4px;
-  animation: rise-right-tall 3s linear infinite;
+  animation: sparks_2 3s linear infinite;
 }
 
 /* 🌟 Posiciones + duraciones + delays */
