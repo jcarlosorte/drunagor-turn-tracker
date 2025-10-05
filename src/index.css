@@ -286,3 +286,44 @@ body {
 .fire-sparks span:nth-child(19) { left: 88%; animation: rise-left-short 2.7s linear infinite 1.1s; }
 .fire-sparks span:nth-child(20) { left: 98%; animation: rise-center-medium 3.8s linear infinite 0.5s; }
 
+.river-bg {
+  position: absolute;
+  inset: 0;
+  background: black;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Capas fantasmales */
+.river-bg::before,
+.river-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(
+    circle at 30% 70%,
+    rgba(0, 200, 80, 0.15) 0%,
+    rgba(0, 200, 80, 0.05) 25%,
+    transparent 50%
+  );
+  background-size: 300% 300%;
+  mix-blend-mode: lighten;
+  animation: mistFlow 20s linear infinite;
+}
+
+.river-bg::after {
+  background: repeating-radial-gradient(
+    circle at 70% 40%,
+    rgba(0, 255, 100, 0.12) 0%,
+    rgba(0, 255, 100, 0.05) 20%,
+    transparent 40%
+  );
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+@keyframes mistFlow {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
