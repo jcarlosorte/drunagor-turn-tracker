@@ -229,7 +229,7 @@ body {
   border-radius: 0.5rem;
   background: linear-gradient(90deg, #3a0e00, #6e1a00, #993000, #c75a00);
   background-size: 200% 200%;
-  animation: fireGradient 3s ease infinite;
+  animation: fireGradient 3s infinite ease-in-out alternate;
   box-shadow: 0 0 15px rgba(255,140,0,0.5), 0 0 25px rgba(255,69,0,0.4);
   z-index: 0;
   overflow: hidden;
@@ -247,19 +247,37 @@ body {
 /* Cada partícula */
 .fire-sparks span {
   position: absolute;
-  bottom: 0;
+  bottom: -10%;
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffd700, transparent 70%);
-  animation: sparks linear infinite;
+  opacity: 0.8;
+  animation: rise 3s linear infinite;
+}
+.fire-sparks span:nth-child(3n) {
+  background: #dc2626; /* rojo */
+  width: 6px;
+  height: 6px;
+}
+.fire-sparks span:nth-child(3n+1) {
+  background: #f97316; /* naranja */
+}
+.fire-sparks span:nth-child(3n+2) {
+  background: #facc15; /* amarillo */
 }
 
-/* Distintas variaciones para que parezcan aleatorias */
-.fire-sparks span:nth-child(1) { left: 20%; animation-duration: 2s; }
-.fire-sparks span:nth-child(2) { left: 40%; animation-duration: 1.5s; animation-delay: 0.3s; }
-.fire-sparks span:nth-child(3) { left: 60%; animation-duration: 2.2s; animation-delay: 0.6s; }
-.fire-sparks span:nth-child(4) { left: 80%; animation-duration: 1.8s; animation-delay: 0.9s; }
-.fire-sparks span:nth-child(5) { left: 30%; animation-duration: 2.5s; animation-delay: 1.2s; }
-.fire-sparks span:nth-child(6) { left: 70%; animation-duration: 2s; animation-delay: 1.5s; }
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+    left: calc(10% + 80% * var(--rand-x, 0.5));
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120%) scale(0.5);
+    opacity: 0;
+  }
+}
 
