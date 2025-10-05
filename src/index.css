@@ -218,18 +218,9 @@ body {
 
 /* Animación de chispas */
 @keyframes rise {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.9;
-    left: calc(10% + 80% * var(--rand-x, 0.5));
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-120%) scale(0.5);
-    opacity: 0;
-  }
+  0%   { transform: translateY(0) scale(1); opacity: 0.9; }
+  50%  { opacity: 0.6; }
+  100% { transform: translateY(-120%) scale(0.5); opacity: 0; }
 }
 
 .fire-bg-inner {
@@ -244,14 +235,21 @@ body {
   overflow: hidden;
 }
 
+/* 🔥 Contenedor de partículas */
+.fire-sparks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1; /* encima del fondo, debajo del texto */
+  pointer-events: none;
+}
+
 .fire-sparks span {
   position: absolute;
   bottom: -10%;
-  width: 4px;
-  height: 4px;
   border-radius: 50%;
   opacity: 0.8;
-  animation: rise 3s linear infinite;
+  animation: rise linear infinite;
 }
 
 /* Colores */
