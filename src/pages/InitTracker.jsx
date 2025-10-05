@@ -2635,7 +2635,15 @@ const InitTracker = () => {
         <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className="relative">
             {/* 🌊 Fondo del río */}
-            <div className="river-bg"></div>
+            <div class="river-bg">
+              <svg class="river-waves" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path
+                  d="M0,160 C360,240 1080,80 1440,160 L1440,320 L0,320 Z"
+                  fill="rgba(0, 255, 150, 0.2)"
+                />
+              </svg>
+            </div>
+
 
             <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
               {estadosLocal
