@@ -209,43 +209,57 @@ body {
   }
 }
 
-/* Animación principal del gradiente de fuego */
+/* Fondo animado de fuego */
 @keyframes fireGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animación de partículas flotantes */
+/* Animación de chispas */
 @keyframes sparks {
-  0% { transform: translateY(0) translateX(0); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-50px) translateX(10px); opacity: 0; }
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
 }
 
-/* Fondo animado */
 .fire-bg-inner {
   position: absolute;
   inset: 0;
   border-radius: 0.5rem;
-  background: linear-gradient(90deg, #4b1200, #7f1f00, #a63900, #c75a00);
+  background: linear-gradient(90deg, #3a0e00, #6e1a00, #993000, #c75a00);
   background-size: 200% 200%;
-  animation: fireGradient 2s ease infinite;
-  box-shadow: 0 0 10px rgba(255,140,0,0.5), 0 0 20px rgba(255,69,0,0.4);
+  animation: fireGradient 3s ease infinite;
+  box-shadow: 0 0 15px rgba(255,140,0,0.5), 0 0 25px rgba(255,69,0,0.4);
   z-index: 0;
   overflow: hidden;
 }
 
-/* Partículas de chispas */
-.fire-bg-inner::after {
-  content: '';
+/* Contenedor de partículas */
+.fire-sparks {
   position: absolute;
-  top: 100%;
-  left: 50%;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1; /* por encima del fondo, debajo del texto */
+  pointer-events: none;
+}
+
+/* Cada partícula */
+.fire-sparks span {
+  position: absolute;
+  bottom: 0;
   width: 4px;
   height: 4px;
   border-radius: 50%;
   background: radial-gradient(circle, #ffd700, transparent 70%);
-  animation: sparks 1.5s linear infinite;
-  pointer-events: none;
+  animation: sparks linear infinite;
 }
+
+/* Distintas variaciones para que parezcan aleatorias */
+.fire-sparks span:nth-child(1) { left: 20%; animation-duration: 2s; }
+.fire-sparks span:nth-child(2) { left: 40%; animation-duration: 1.5s; animation-delay: 0.3s; }
+.fire-sparks span:nth-child(3) { left: 60%; animation-duration: 2.2s; animation-delay: 0.6s; }
+.fire-sparks span:nth-child(4) { left: 80%; animation-duration: 1.8s; animation-delay: 0.9s; }
+.fire-sparks span:nth-child(5) { left: 30%; animation-duration: 2.5s; animation-delay: 1.2s; }
+.fire-sparks span:nth-child(6) { left: 70%; animation-duration: 2s; animation-delay: 1.5s; }
+
