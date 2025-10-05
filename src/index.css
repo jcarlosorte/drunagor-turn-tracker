@@ -320,21 +320,15 @@ body {
   );
   animation-delay: 10s;
   animation-duration: 30s;
-  transform: scale(1.2);
+  animation-direction: reverse;
  
 }
 
 /* Animación con transform */
 @keyframes mistFloat {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-20px, 10px) scale(1.05);
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
 
