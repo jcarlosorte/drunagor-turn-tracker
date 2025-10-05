@@ -299,13 +299,13 @@ body {
 .river-bg::after {
   content: "";
   position: absolute;
-  top: -20%;
-  left: -20%;
+  
+  left: -20px;
   width: 140%;
   height: 140%;
   inset: 0;
   background: repeating-radial-gradient(
-    circle at 30% 70%,
+    circle at 10% 70%,
     rgba(0, 200, 80, 0.15) 0%,
     rgba(0, 200, 80, 0.05) 25%,
     transparent 50%
@@ -313,7 +313,7 @@ body {
   background-size: 200% 200%;
   mix-blend-mode: screen;
   animation: mistFloat 20s ease-in-out infinite;
-  filter: blur(4px);
+  filter: blur(3px);
 }
 
 .river-bg::after {
@@ -325,7 +325,7 @@ body {
   );
   animation-duration: 30s;
   animation-direction: reverse;
-  filter: blur(4px);
+  filter: blur(3px);
 }
 
 /* Animación con transform */
