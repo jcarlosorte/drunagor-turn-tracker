@@ -59,46 +59,59 @@ const CommanderCard = ({ carta }) => {
 
           {/* Fondo animado separado */}
           <div className="fire-bg-inner"></div>
-          
-          <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
-          {estadosLocal
-            .filter(estado => estado.count > 0)
-            .map((estado) => {
-              const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
-              if (!estadoConfig) return null;
-              return (
-                <div key={estado.id} className="relative group cursor-help">
-                  <img
-                    src={estadoConfig.imagen}
-                    alt={estadoConfig.texto}
-                    className="w-6 h-6 border border-white rounded-full shadow-md"
-                  />
-                  {estado.count > 1 && (
-                    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
-                      {estado.count}
-                    </span>
-                  )}
-                  {/* Tooltip */}
-                  <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                    {tea[estadoConfig.texto] || estadoConfig.texto}
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-          
-          <div
-            className="text-sm text-yellow-300 text-center"
-            style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
-          >
-            {nombre}
+          {/* Chispas */}
+          <div className="fire-sparks">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
-          <div
-            className="text-[0.50rem] italic text-white-300 text-center"
-            style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
-          >
-            <div>-{enemyClass}-</div>
-            <div>{nombreEnemy}</div>
+
+          {/* Contenido de la carta (siempre por encima) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-between z-20 p-2">
+    
+            <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
+            {estadosLocal
+              .filter(estado => estado.count > 0)
+              .map((estado) => {
+                const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                if (!estadoConfig) return null;
+                return (
+                  <div key={estado.id} className="relative group cursor-help">
+                    <img
+                      src={estadoConfig.imagen}
+                      alt={estadoConfig.texto}
+                      className="w-6 h-6 border border-white rounded-full shadow-md"
+                    />
+                    {estado.count > 1 && (
+                      <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
+                        {estado.count}
+                      </span>
+                    )}
+                    {/* Tooltip */}
+                    <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                      {tea[estadoConfig.texto] || estadoConfig.texto}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          
+            <div
+              className="text-sm text-yellow-300 text-center"
+              style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
+            >
+              {nombre}
+            </div>
+            <div
+              className="text-[0.50rem] italic text-white-300 text-center"
+              style={{ fontFamily: 'Impact, Charcoal, sans-serif' }}
+            >
+              <div>-{enemyClass}-</div>
+              <div>{nombreEnemy}</div>
+            </div>
           </div>
         </div>
       </div>
