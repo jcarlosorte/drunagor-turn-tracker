@@ -209,6 +209,10 @@ body {
   }
 }
 
+.text-yellow-300 {
+  text-shadow: 0 0 2px #ffc107, 0 0 4px #ffb300;
+}
+
 /* Animación principal del gradiente de fuego */
 @keyframes fireGradient {
   0% { background-position: 0% 50%; }
