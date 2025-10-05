@@ -209,19 +209,18 @@ body {
   }
 }
 
-/* Animación del gradiente de fuego */
+/* Animación principal del gradiente de fuego */
 @keyframes fireGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animación de flicker solo para el fondo */
-@keyframes fireFlicker {
-  0%, 100% { opacity: 1; }
-  25% { opacity: 0.85; }
-  50% { opacity: 0.9; }
-  75% { opacity: 0.95; }
+/* Animación de partículas flotantes */
+@keyframes sparks {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-50px) translateX(10px); opacity: 0; }
 }
 
 /* Fondo animado */
@@ -231,9 +230,22 @@ body {
   border-radius: 0.5rem;
   background: linear-gradient(90deg, #4b1200, #7f1f00, #a63900, #c75a00);
   background-size: 200% 200%;
-  animation: fireGradient 2s ease infinite, fireFlicker 0.3s infinite;
-  z-index: 0; /* debajo del contenido */
+  animation: fireGradient 2s ease infinite;
   box-shadow: 0 0 10px rgba(255,140,0,0.5), 0 0 20px rgba(255,69,0,0.4);
+  z-index: 0;
+  overflow: hidden;
 }
 
-
+/* Partículas de chispas */
+.fire-bg-inner::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd700, transparent 70%);
+  animation: sparks 1.5s linear infinite;
+  pointer-events: none;
+}
