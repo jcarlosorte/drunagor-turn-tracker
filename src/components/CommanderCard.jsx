@@ -25,12 +25,12 @@ const CommanderCard = ({ carta }) => {
 
   const borderClass =
     carta.categoria === "overlord"
-      ? 'fire-bg border-orange-400'
+      ? 'border-orange-400'
       : carta.categoria === "comandante" || carta.categoria === "hero"
-      ? 'fire-bg border-yellow-400'
+      ? 'border-yellow-400'
       : carta.categoria === "jefe"
-      ? 'fire-bg border-purple-400'
-      : 'fire-bg border-gray-500';
+      ? 'border-purple-400'
+      : 'border-gray-500';
   
   const enemyClass =
     carta.categoria === "overlord"
@@ -56,6 +56,9 @@ const CommanderCard = ({ carta }) => {
           className={`cursor-custom relative w-full aspect-square p-2 rounded-lg border-2 shadow-md hover:scale-105 transition
             ${carta.highlight ? ringClass : borderClass}`}
         >
+
+          {/* Fondo animado separado */}
+          <div className="fire-bg-inner"></div>
           
           <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
           {estadosLocal
