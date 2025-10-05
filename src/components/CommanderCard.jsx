@@ -60,11 +60,15 @@ const CommanderCard = ({ carta }) => {
           {/* Fondo animado separado */}
           <div className="fire-bg-inner"></div>
           {/* Chispas */}
+          <div className="fire-sparks_2">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div className="fire-sparks">
-            <span key={1}></span>
-            <span key={2}></span>
-            <span key={3}></span>
-            <span key={4}></span>
             {Array.from({ length: 20 }).map((_, i) => (
               <span key={i}></span>
             ))}
