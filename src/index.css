@@ -291,39 +291,38 @@ body {
   inset: 0;
   background: black;
   overflow: hidden;
-  z-index: 0;
+
 }
 
-/* Capas fantasmales */
+/* Capa de ondas verdes suaves */
 .river-bg::before,
 .river-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-radial-gradient(
-    circle at 30% 70%,
-    rgba(0, 200, 80, 0.15) 0%,
-    rgba(0, 200, 80, 0.05) 25%,
-    transparent 50%
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(0, 150, 80, 0.15) 0deg 15deg,
+    rgba(0, 255, 120, 0.05) 15deg 30deg
   );
-  background-size: 300% 300%;
-  mix-blend-mode: lighten;
-  animation: mistFlow 20s linear infinite;
+  background-size: 200% 200%;
+  animation: waveFlow 12s linear infinite;
+  mix-blend-mode: screen;
 }
 
 .river-bg::after {
-  background: repeating-radial-gradient(
-    circle at 70% 40%,
-    rgba(0, 255, 100, 0.12) 0%,
-    rgba(0, 255, 100, 0.05) 20%,
-    transparent 40%
+  background: repeating-conic-gradient(
+    from 90deg,
+    rgba(0, 200, 100, 0.12) 0deg 10deg,
+    rgba(0, 255, 150, 0.05) 10deg 25deg
   );
-  animation-duration: 30s;
+  animation-duration: 18s;
   animation-direction: reverse;
 }
 
-@keyframes mistFlow {
+@keyframes waveFlow {
   0% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
   100% { background-position: 0% 0%; }
 }
+
