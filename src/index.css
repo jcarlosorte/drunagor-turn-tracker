@@ -289,7 +289,7 @@ body {
 .river-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, #001f0f 0%, #000000 100%);
+  background: black;
   overflow: hidden;
   z-index: 0;
 }
@@ -348,6 +348,7 @@ body {
   height: 100px;
   z-index: 1;
   animation: waveFlow 10s ease-in-out infinite;
+  opacity: 0.6;
 }
 
 @keyframes waveFlow {
