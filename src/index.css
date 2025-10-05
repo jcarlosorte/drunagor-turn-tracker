@@ -216,7 +216,8 @@ body {
 }
 
 .fire-bg {
-  background: linear-gradient(45deg, #ff4500, #ff8c00, #ffa500, #ff4500);
-  background-size: 400% 400%;
-  animation: fireGradient 3s ease infinite;
+  background: linear-gradient(45deg, #7f1f00, #a63900, #c75a00, #7f1f00);
+  background-size: 200% 200%; /* MÁS PEQUEÑO para notar mejor el movimiento */
+  animation: fireGradient 2s ease infinite; /* más rápido para que se note */
+  box-shadow: 0 0 10px rgba(255,140,0,0.5), 0 0 20px rgba(255,69,0,0.4)
 }
