@@ -217,55 +217,6 @@ body {
 }
 
 /* Animación de chispas */
-@keyframes sparks {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
-}
-
-.fire-bg-inner {
-  position: absolute;
-  inset: 0;
-  border-radius: 0.5rem;
-  background: linear-gradient(90deg, #3a0e00, #6e1a00, #993000, #c75a00);
-  background-size: 200% 200%;
-  animation: fireGradient 3s infinite ease-in-out alternate;
-  box-shadow: 0 0 15px rgba(255,140,0,0.5), 0 0 25px rgba(255,69,0,0.4);
-  z-index: 0;
-  overflow: hidden;
-}
-
-/* Contenedor de partículas */
-.fire-sparks {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 1; /* por encima del fondo, debajo del texto */
-  pointer-events: none;
-}
-
-/* Cada partícula */
-.fire-sparks span {
-  position: absolute;
-  bottom: -10%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: rise 3s linear infinite;
-}
-.fire-sparks span:nth-child(3n) {
-  background: #dc2626; /* rojo */
-  width: 6px;
-  height: 6px;
-}
-.fire-sparks span:nth-child(3n+1) {
-  background: #f97316; /* naranja */
-}
-.fire-sparks span:nth-child(3n+2) {
-  background: #facc15; /* amarillo */
-}
-
 @keyframes rise {
   0% {
     transform: translateY(0) scale(1);
@@ -280,4 +231,50 @@ body {
     opacity: 0;
   }
 }
+
+.fire-bg-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #3a0e00, #6e1a00, #993000, #c75a00);
+  background-size: 200% 200%;
+  animation: fireGradient 3s infinite ease-in-out alternate;
+  box-shadow: 0 0 15px rgba(255,140,0,0.5), 0 0 25px rgba(255,69,0,0.4);
+  z-index: 0;
+  overflow: hidden;
+}
+
+.fire-sparks span {
+  position: absolute;
+  bottom: -10%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: rise 3s linear infinite;
+}
+
+/* Colores */
+.fire-sparks span:nth-child(3n) {
+  background: #dc2626; /* rojo */
+  width: 6px;
+  height: 6px;
+}
+.fire-sparks span:nth-child(3n+1) {
+  background: #f97316; /* naranja */
+}
+.fire-sparks span:nth-child(3n+2) {
+  background: #facc15; /* amarillo */
+}
+
+/* Posiciones horizontales distintas */
+.fire-sparks span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 2.5s; }
+.fire-sparks span:nth-child(2) { left: 25%; animation-delay: 1s; animation-duration: 3s; }
+.fire-sparks span:nth-child(3) { left: 40%; animation-delay: 0.5s; animation-duration: 2s; }
+.fire-sparks span:nth-child(4) { left: 55%; animation-delay: 1.5s; animation-duration: 3.5s; }
+.fire-sparks span:nth-child(5) { left: 70%; animation-delay: 0.2s; animation-duration: 2.8s; }
+.fire-sparks span:nth-child(6) { left: 85%; animation-delay: 1.2s; animation-duration: 3.2s; }
+/* … puedes seguir añadiendo más spans y variaciones */
+
+
 
