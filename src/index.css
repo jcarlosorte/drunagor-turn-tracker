@@ -216,11 +216,44 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Animación de chispas */
-@keyframes rise {
-  0%   { transform: translateY(0) scale(1); opacity: 0.9; }
-  50%  { opacity: 0.6; }
-  100% { transform: translateY(-120%) scale(0.5); opacity: 0; }
+/* 🔥 Animaciones de chispas con alturas variables */
+@keyframes rise-left-short {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(-30px,-80%) scale(0.5); opacity:0; }
+}
+@keyframes rise-left-medium {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(-30px,-120%) scale(0.5); opacity:0; }
+}
+@keyframes rise-left-tall {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(-30px,-160%) scale(0.5); opacity:0; }
+}
+
+@keyframes rise-center-short {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(0,-80%) scale(0.5); opacity:0; }
+}
+@keyframes rise-center-medium {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(0,-120%) scale(0.5); opacity:0; }
+}
+@keyframes rise-center-tall {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(0,-160%) scale(0.5); opacity:0; }
+}
+
+@keyframes rise-right-short {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(30px,-80%) scale(0.5); opacity:0; }
+}
+@keyframes rise-right-medium {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(30px,-120%) scale(0.5); opacity:0; }
+}
+@keyframes rise-right-tall {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(30px,-160%) scale(0.5); opacity:0; }
 }
 
 .fire-bg-inner {
@@ -235,12 +268,12 @@ body {
   overflow: hidden;
 }
 
-/* 🔥 Contenedor de partículas */
+/* Contenedor */
 .fire-sparks {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  z-index: 1; /* encima del fondo, debajo del texto */
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -249,10 +282,8 @@ body {
   bottom: -10%;
   border-radius: 50%;
   opacity: 0.8;
-  animation-name: rise;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-duration: 3s;
 }
 
 /* Colores */
@@ -263,10 +294,19 @@ body {
 }
 .fire-sparks span:nth-child(3n+1) {
   background: #f97316; /* naranja */
+  width: 5px;
+  height: 5px;
 }
 .fire-sparks span:nth-child(3n+2) {
   background: #facc15; /* amarillo */
+  width: 4px;
+  height: 4px;
 }
+
+/* 🔥 Asignar trayectorias y alturas */
+.fire-sparks span:nth-child(3n)   { animation-name: rise-left-medium; }
+.fire-sparks span:nth-child(3n+1) { animation-name: rise-center-short; }
+.fire-sparks span:nth-child(3n+2) { animation-name: rise-right-tall; }
 
 /* 🔥 20 partículas configuradas */
 .fire-sparks span:nth-child(1)  { left: 5%;  animation-duration: 2.5s; animation-delay: 0s; }
@@ -290,6 +330,5 @@ body {
 .fire-sparks span:nth-child(18) { left: 78%; animation-duration: 3s;   animation-delay: 0.1s; }
 .fire-sparks span:nth-child(19) { left: 88%; animation-duration: 2.7s; animation-delay: 1.1s; }
 .fire-sparks span:nth-child(20) { left: 98%; animation-duration: 3.8s; animation-delay: 0.5s; }
-
 
 
