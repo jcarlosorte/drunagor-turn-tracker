@@ -249,7 +249,10 @@ body {
   bottom: -10%;
   border-radius: 50%;
   opacity: 0.8;
-  animation: rise linear infinite;
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 3s;
 }
 
 /* Colores */
