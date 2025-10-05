@@ -209,15 +209,40 @@ body {
   }
 }
 
+/* Animación principal del gradiente de fuego */
 @keyframes fireGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-.fire-bg {
-  background: linear-gradient(45deg, #7f1f00, #a63900, #c75a00, #7f1f00);
-  background-size: 200% 200%; /* MÁS PEQUEÑO para notar mejor el movimiento */
-  animation: fireGradient 2s ease infinite; /* más rápido para que se note */
-  box-shadow: 0 0 10px rgba(255,140,0,0.5), 0 0 20px rgba(255,69,0,0.4)
+/* Flicker para simular llama que vibra */
+@keyframes fireFlicker {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  25% { opacity: 0.85; transform: translateY(-1px); }
+  50% { opacity: 0.9; transform: translateY(1px); }
+  75% { opacity: 0.95; transform: translateY(-0.5px); }
 }
+
+.fire-bg {
+  position: relative;
+  background: linear-gradient(90deg, #4b1200, #7f1f00, #a63900, #c75a00);
+  background-size: 200% 200%; /* gradiente estrecho para notar más el movimiento */
+  border-radius: 0.5rem;
+  animation: fireGradient 2s ease infinite;
+  box-shadow: 0 0 10px rgba(255,140,0,0.5), 0 0 20px rgba(255,69,0,0.4);
+  overflow: hidden;
+}
+
+/* Capa de “flicker” */
+.fire-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(8px);
+  opacity: 0.7;
+  animation: fireFlicker 0.3s infinite;
+  pointer-events: none;
+}
+
