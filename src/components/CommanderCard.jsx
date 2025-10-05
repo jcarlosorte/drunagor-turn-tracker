@@ -67,7 +67,7 @@ const CommanderCard = ({ carta }) => {
           </div>
 
           {/* Contenido de la carta (siempre por encima) */}
-          <div className="absolute inset-0 flex flex-col items-center justify-between z-20 p-2">
+          <div className="absolute inset-0 flex flex-col items-center justify-between z-10 p-2">
     
             <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
             {estadosLocal
