@@ -308,7 +308,7 @@ body {
   );
   mix-blend-mode: screen;
   opacity: 0.6;
-  filter: blur(8px);
+
   animation: mistFloat 20s ease-in-out infinite;
   will-change: transform;
 }
@@ -323,7 +323,7 @@ body {
   animation-delay: 10s;
   animation-duration: 30s;
   transform: scale(1.2);
-  filter: blur(12px);
+ 
 }
 
 /* Animación con transform */
@@ -344,7 +344,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 120%;
   height: 100px;
   z-index: 1;
   animation: waveFlow 10s ease-in-out infinite;
