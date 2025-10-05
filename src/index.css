@@ -300,32 +300,30 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background: repeating-radial-gradient(
     circle at 30% 70%,
-    rgba(0, 255, 150, 0.1) 0%,
-    rgba(0, 255, 150, 0.05) 30%,
-    transparent 60%
+    rgba(0, 200, 80, 0.15) 0%,
+    rgba(0, 200, 80, 0.05) 25%,
+    transparent 50%
   );
-   background-size: 300% 300%;
+  background-size: 300% 300%;
   mix-blend-mode: lighten;
-  animation: mistFloat 20s linear infinite;
+  animation: mistFlow 20s linear infinite;
 }
 
 .river-bg::after {
-  background: radial-gradient(
+  background: repeating-radial-gradient(
     circle at 70% 40%,
-    rgba(0, 200, 255, 0.1) 0%,
-    rgba(0, 200, 255, 0.05) 30%,
-    transparent 60%
+    rgba(0, 255, 100, 0.12) 0%,
+    rgba(0, 255, 100, 0.05) 20%,
+    transparent 40%
   );
-  animation-delay: 10s;
   animation-duration: 30s;
   animation-direction: reverse;
- 
 }
 
 /* Animación con transform */
-@keyframes mistFloat {
+@keyframes mistFlow {
   0% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
   100% { background-position: 0% 0%; }
@@ -336,11 +334,11 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 120%;
-  height: 100px;
+  width: 130%;
+  height: 80px;
   z-index: 1;
-  animation: waveFlow 10s ease-in-out infinite;
-  opacity: 0.6;
+  animation: waveFlow 6s ease-in-out infinite;
+  opacity: 0.3;
 }
 
 @keyframes waveFlow {
@@ -348,7 +346,7 @@ body {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(-20px);
+    transform: translateX(-40px);
   }
   100% {
     transform: translateX(0);
