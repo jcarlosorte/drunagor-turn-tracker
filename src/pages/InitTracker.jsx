@@ -3407,9 +3407,7 @@ const InitTracker = () => {
             )}
 
             
-            
-            
-            <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700">
+            <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700 p-2">
               {[...Array(11)].map((_, idx) => (
                 <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
                   {renderSlot(idx)}
