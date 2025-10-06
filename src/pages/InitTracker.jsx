@@ -2666,90 +2666,81 @@ const InitTracker = () => {
               </svg>
             </div>
 
+            <div className="relative z-10">
 
-            <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
-              {estadosLocal
-                .filter(estado => estado.count > 0)
-                .map((estado) => {
-                  const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
-                  if (!estadoConfig) return null;
-                  return (
-                    <div key={estado.id} className="relative group cursor-help">
-                      <img
-                        src={estadoConfig.imagen}
-                        alt={estadoConfig.texto}
-                        className="w-6 h-6 border border-white rounded-full shadow-md"
-                      />
-                      {estado.count > 1 && (
-                        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
-                          {estado.count}
-                        </span>
-                      )}
-                      {/* Tooltip */}
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
-                        {tea[estadoConfig.texto] || estadoConfig.texto}
+              <div className="absolute top-1 left-1 grid grid-rows-4 grid-flow-col gap-1">
+                {estadosLocal
+                  .filter(estado => estado.count > 0)
+                  .map((estado) => {
+                    const estadoConfig = ESTADOS_ALTERADOS.find(e => e.id === estado.id);
+                    if (!estadoConfig) return null;
+                    return (
+                      <div key={estado.id} className="relative group cursor-help">
+                        <img
+                          src={estadoConfig.imagen}
+                          alt={estadoConfig.texto}
+                          className="w-6 h-6 border border-white rounded-full shadow-md"
+                        />
+                        {estado.count > 1 && (
+                          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1 rounded-full">
+                            {estado.count}
+                          </span>
+                        )}
+                        {/* Tooltip */}
+                        <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 z-50 whitespace-nowrap">
+                          {tea[estadoConfig.texto] || estadoConfig.texto}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-            </div>
+                    );
+                  })}
+              </div>
 
             
-            <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[140px]`} >
-              {/* Título */}
-              <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
-                {title}
-              </div>
-          
-              {/* ✅ Contenido según tipo */}
-              {(tipo === 'runa' || tipo === 'defensa') && (
-                <>
-                  <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                    {accion} {rune.numRunas || ''}
-                  </div>
-                  <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
-                    {nombre}
-                  </div>
-                </>
-              )}
-          
-              {tipo === 'asalto' && (
-                <>
-                  {!isCaraB ? (
-                    <>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion} {y}
-                      </div>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion2} 
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion2} {y}
-                      </div>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion}
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
-          
-              {tipo === 'incursion' && (
-                <>
-                  {isCaraB ? (
-                    <>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
-                        {accion} {rune.numRunas}
-                      </div>
-                      <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
-                        {nombre}
-                      </div>
-                    </>
-                  ) : (
-                    totalEnemies === 0 && (
+              <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[140px]`} >
+                {/* Título */}
+                <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
+                  {title}
+                </div>
+            
+                {/* ✅ Contenido según tipo */}
+                {(tipo === 'runa' || tipo === 'defensa') && (
+                  <>
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                      {accion} {rune.numRunas || ''}
+                    </div>
+                    <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
+                      {nombre}
+                    </div>
+                  </>
+                )}
+            
+                {tipo === 'asalto' && (
+                  <>
+                    {!isCaraB ? (
+                      <>
+                        <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                          {accion} {y}
+                        </div>
+                        <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                          {accion2} 
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                          {accion2} {y}
+                        </div>
+                        <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                          {accion}
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+            
+                {tipo === 'incursion' && (
+                  <>
+                    {isCaraB ? (
                       <>
                         <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
                           {accion} {rune.numRunas}
@@ -2758,43 +2749,54 @@ const InitTracker = () => {
                           {nombre}
                         </div>
                       </>
-                    )
-                  )}
-                </>
-              )}
-          
-              {/* Cara */}
-              <div className="flex justify-center text-[0.55rem] sm:text-[0.65rem] italic text-indigo-100 text-center font-bold">
-                {caraB ? (
-                  <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
-                ) : (
-                  <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
-                )} {ti.cara} {rune.cara} {caraB ? (
-                  <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
-                ) : (
-                  <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
+                    ) : (
+                      totalEnemies === 0 && (
+                        <>
+                          <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center font-bold">
+                            {accion} {rune.numRunas}
+                          </div>
+                          <div className="text-[0.55rem] sm:text-[0.65rem] text-white text-center">
+                            {nombre}
+                          </div>
+                        </>
+                      )
+                    )}
+                  </>
                 )}
-              </div>
-          
-              {/* Checkbox */}
-              <div className="flex items-center justify-center mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
-                <input
-                  type="checkbox"
-                  checked={applyEffect}
-                  onChange={() => toggleRuneEffect(rune.uuid)}
-                  className="mr-1"
-                />
-                <label>{ti.applyEffect}</label>
-              </div>
-  
-              <div className="flex items-center justify-end mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
-                <button
-                  onClick={() => onRemove(rune.uuid)}
-                  className="top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
-                  title="Eliminar"
-                >
-                  ✕
-                </button>
+            
+                {/* Cara */}
+                <div className="flex justify-center text-[0.55rem] sm:text-[0.65rem] italic text-indigo-100 text-center font-bold">
+                  {caraB ? (
+                    <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
+                  ) : (
+                    <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
+                  )} {ti.cara} {rune.cara} {caraB ? (
+                    <RiArrowTurnForwardLine className="text-white text-xs sm:text-xs" />
+                  ) : (
+                    <RiArrowTurnBackLine className="text-white text-xs sm:text-xs" />
+                  )}
+                </div>
+            
+                {/* Checkbox */}
+                <div className="flex items-center justify-center mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
+                  <input
+                    type="checkbox"
+                    checked={applyEffect}
+                    onChange={() => toggleRuneEffect(rune.uuid)}
+                    className="mr-1"
+                  />
+                  <label>{ti.applyEffect}</label>
+                </div>
+    
+                <div className="flex items-center justify-end mt-1 text-white text-[0.55rem] sm:text-[0.65rem]">
+                  <button
+                    onClick={() => onRemove(rune.uuid)}
+                    className="top-1 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center z-10"
+                    title="Eliminar"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
             </div>
           </div>
