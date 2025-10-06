@@ -2834,13 +2834,13 @@ const InitTracker = () => {
           className="w-full h-auto object-cover rounded-lg border-2 border-[#800020]/70"
         />
         <div
-          className="absolute w-full bottom-0 left-1/2 transform -translate-x-1/2 px-1 rounded-lg text-white text-xs text-center bg-[#800020]/70 leading-tight mt-2"
+          className="absolute w-full bottom-0 left-1/2 transform -translate-x-1/2 px-1 rounded-lg text-white text-xs text-center bg-[#800020] leading-tight mt-2"
           style={{
             textShadow: '0 0 4px #b87333aa',
           }}
         >
           <span className="block">{name}</span>
-          <span className="block text-[0.50rem] italic leading-none opacity-90 mt-2">{prof}</span>
+          <span className="block text-[0.50rem] italic opacity-90">{prof}</span>
         </div>
       </div>
     </div>
