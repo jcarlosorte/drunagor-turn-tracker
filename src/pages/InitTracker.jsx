@@ -3529,30 +3529,30 @@ const InitTracker = () => {
               </div>
             )}
 
-            <div className="relative h-full">
-              <div className="absolute top-0 flex justify-center mt-6">
-                <button
-                  onClick={() => {
-                    setTimeout(() => {
-                      handleNextTurn();
-                    }, 300);
-                  }}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
-                >
-                  {ti.nextTurn || 'Siguiente turno'}
-                </button>
-              </div>
-            
-              <div className="absolute bottom-0 mt-8 flex justify-center gap-4">
-                <button onClick={() => navigate('/')} className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow">
-                  {ti.goHome || 'Ir al inicio'}
-                </button>
-                <button onClick={() => navigate('/tracker')} className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow">
-                  {ti.backToConfig || 'Volver a configuración'}
-                </button>
-              </div>
-              
+        
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => {
+                  setTimeout(() => {
+                    handleNextTurn();
+                  }, 300);
+                }}
+                className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full shadow-lg"
+              >
+                {ti.nextTurn || 'Siguiente turno'}
+              </button>
             </div>
+          
+            <div className="mt-8 flex justify-center gap-4">
+              <button onClick={() => navigate('/')} className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded shadow">
+                {ti.goHome || 'Ir al inicio'}
+              </button>
+              <button onClick={() => navigate('/tracker')} className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow">
+                {ti.backToConfig || 'Volver a configuración'}
+              </button>
+            </div>
+              
+            
           </div>
         </div>
         <ToastContainer toastClassName="toast-expand" bodyClassName="" />
