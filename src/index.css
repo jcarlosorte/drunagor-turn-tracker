@@ -353,7 +353,7 @@ body {
   height: 80px;
   z-index: 1;
   animation: waveFlow 6s ease-in-out infinite;
-  opacity: 0.3;
+  opacity: 0.4;
   filter: blur(3px)
 }
 
@@ -378,7 +378,7 @@ body {
   width: 600px;
   z-index: 1;
   animation: verticalFlow 6s ease-in-out infinite;
-  opacity: 0.2;
+  opacity: 0.4;
   filter: blur(3px);
 }
 
@@ -391,7 +391,7 @@ body {
   width: 600px;
   z-index: 1;
   animation: verticalFlow 6s ease-in-out infinite;
-  opacity: 0.2;
+  opacity: 0.4;
   filter: blur(3px);
   animation-delay: 2s;
 }
@@ -399,15 +399,15 @@ body {
 @keyframes verticalFlow {
   0% {
     transform: translateX(-50%) translateY(0);
-    opacity: 0.2;
+    opacity: 0.3;
   }
   50% {
     transform: translateX(-50%) translateY(-30px);
-    opacity: 0.3;
+    opacity: 0.4;
   }
   100% {
     transform: translateX(-50%) translateY(0);
-    opacity: 0.1;
+    opacity: 0.3;
   }
 }
 
