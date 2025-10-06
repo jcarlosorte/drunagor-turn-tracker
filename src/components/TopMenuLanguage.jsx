@@ -1,5 +1,6 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
+import { FaLanguage } from 'react-icons/fa';
 
 export default function TopMenuLanguage() {
   const { language, setLanguage, translations } = useLanguage();
