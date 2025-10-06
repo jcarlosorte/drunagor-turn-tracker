@@ -2866,13 +2866,13 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000 transform-style-preserve-3d",
+          "flex flex-col items-center mx-1 relative transition-transform duration-1000 transform-style-preserve-3d",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
       >
         <div className={classNames(
-           "relative z-10 w-full hover:scale-110 hover:z-50 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
+           "relative w-full hover:scale-110 hover:z-50 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
           !isBoss && ringClass, // 👈 solo anillo si no es jefe
           isBoss ? "max-h-[250px]" : "max-w-[140px]"
           )} style={isBoss ? { width: "20%" } : {}} >
