@@ -9,7 +9,7 @@ export default function HomeMenu() {
 
   return (
     <PageTransition>
-      <div className="flex justify-center mt-10 bg-gradient-to-b from-green-950 via-green-900 to-black">
+      <div className="flex justify-center bg-green-950/80">
         <div className="flex gap-4 p-4 rounded-lg shadow-lg ">
           <button
             onClick={() => navigate("/tracker")}
