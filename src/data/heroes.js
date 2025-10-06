@@ -70,6 +70,6 @@ export const HEROES = [
   { id: "lorien", expansionId: "apocalypse_lorien", baseLife: 10, baseMove: 2, type: "hero", profession: "Maga", image: lorien },
   { id: "vacrem", expansionId: "apocalypse_awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Adalid", image: vacrem },
   { id: "andreas", expansionId: "apocalypse_awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Necromante", image: andreas },
-  { id: "nyx", expansionId: "apocalypse_awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago Espadachín", image: nyx },
+  { id: "nyx", expansionId: "apocalypse_awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Mago_Espadachin", image: nyx },
   { id: "catharina", expansionId: "apocalypse_awakenings", baseLife: 10, baseMove: 2, type: "hero", profession: "Chamana", image: catharina },
 ];
