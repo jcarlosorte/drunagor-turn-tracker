@@ -2839,8 +2839,8 @@ const InitTracker = () => {
             textShadow: '0 0 4px #b87333aa',
           }}
         >
-          <span>{name}</span>
-          <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">{prof}</span>
+          <span className="block">{name}</span>
+          <span className="block text-[0.50rem] italic leading-none mt-0.5 opacity-90">{prof}</span>
         </div>
       </div>
     </div>
