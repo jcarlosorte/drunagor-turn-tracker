@@ -2840,7 +2840,7 @@ const InitTracker = () => {
           }}
         >
           <span className="block">{name}</span>
-          <span className="block text-[0.50rem] italic opacity-90">{prof}</span>
+          <span className="block text-[0.50rem] italic opacity-90 mb-1">{prof}</span>
         </div>
       </div>
     </div>
