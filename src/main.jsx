@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './i18n';
 
 import { LanguageProvider } from './context/LanguageContext';
 import { ExpansionProvider } from './context/ExpansionContext';
