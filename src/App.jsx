@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import AnimatedRoutes from "@/components/AnimatedRoutes";
-import fondoDrunagor from "@/assets/PlPhfsK0-1-smaller.png;
+import fondoDrunagor from "@/assets/PlPhfsK0-1-smaller.png";
 
 function Header() {
   const { translations } = useLanguage();
