@@ -372,28 +372,42 @@ body {
 .river-waves2 {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 5%;
   transform: translateX(-50%);
   height: 200%;
   width: 600px;
   z-index: 1;
   animation: verticalFlow 6s ease-in-out infinite;
   opacity: 0.2;
-  filter: blur(3px)
+  filter: blur(3px);
+}
+
+.river-waves3 {
+  position: absolute;
+  top: 0;
+  left: 95%;
+  transform: translateX(-50%);
+  height: 200%;
+  width: 600px;
+  z-index: 1;
+  animation: verticalFlow 6s ease-in-out infinite;
+  opacity: 0.2;
+  filter: blur(3px);
+  animation-delay: 2s;
 }
 
 @keyframes verticalFlow {
   0% {
     transform: translateX(-50%) translateY(0);
-    opacity: 0.4;
+    opacity: 0.2;
   }
   50% {
     transform: translateX(-50%) translateY(-30px);
-    opacity: 0.6;
+    opacity: 0.3;
   }
   100% {
     transform: translateX(-50%) translateY(0);
-    opacity: 0.4;
+    opacity: 0.1;
   }
 }
 
