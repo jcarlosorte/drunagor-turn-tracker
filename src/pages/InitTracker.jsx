@@ -3162,7 +3162,8 @@ const InitTracker = () => {
             {placedEnemies
               .filter(e => e.enemy.categoria === 'jefe' && e.enemy.tipo != 'especial')
               .map(({ enemy }) => (
-                <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                //<div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                <div className="mt-3 p-2 rounded-lg river-bg">
                   <div key={enemy.uuid} className="scale-200" >
                     <EnemyCard
                       uuid={enemy.uuid}
