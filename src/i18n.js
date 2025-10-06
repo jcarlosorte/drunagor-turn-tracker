@@ -1,1 +1,0 @@
-// src/i18n.js ya no se usa
