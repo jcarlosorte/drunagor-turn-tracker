@@ -3405,7 +3405,38 @@ const InitTracker = () => {
             
             
             
-            <div className="grid grid-cols-11 gap-0 auto-rows-auto river-bg">
+            <div className="grid grid-cols-11 gap-0 auto-rows-auto">
+              {/* 🌊 Fondo del río */}
+              <div class="river-bg rounded-lg">
+              <svg class="river-waves" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path
+                  d="M0,160 C360,240 1080,80 1440,160 L1440,320 L0,320 Z"
+                  fill="rgba(0, 255, 150, 0.2)"
+                />
+              </svg>
+              <svg class="river-waves2" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path
+                  d="M50,0 
+                     C60,100 40,200 50,300 
+                     C60,400 40,500 50,600 
+                     C60,700 40,800 50,900"
+                  fill="none"
+                  stroke="rgba(0, 255, 150, 0.2)"
+                  stroke-width="10"
+                />
+              </svg>
+              <svg class="river-waves3" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path
+                  d="M50,0 
+                     C60,100 40,200 50,300 
+                     C60,400 40,500 50,600 
+                     C60,700 40,800 50,900"
+                  fill="none"
+                  stroke="rgba(0, 255, 150, 0.2)"
+                  stroke-width="10"
+                />
+              </svg>
+            </div>
               {[...Array(11)].map((_, idx) => (
                 <React.Fragment key={`${idx}-${currentTurnEntity?.uuid || currentTurnEntity?.id || 'none'}`}>
                   {renderSlot(idx)}
