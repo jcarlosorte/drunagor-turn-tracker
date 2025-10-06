@@ -9,8 +9,8 @@ export default function HomeMenu() {
 
   return (
     <PageTransition>
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-green-950 via-green-900 to-black">
-        <div className="flex gap-6">
+      <div className="flex justify-center mt-10 bg-gradient-to-b from-green-950 via-green-900 to-black">
+        <div className="flex gap-4 p-4 rounded-lg shadow-lg ">
           <button
             onClick={() => navigate("/tracker")}
             className="py-2 px-5 rounded-md font-bold text-sm text-white 
