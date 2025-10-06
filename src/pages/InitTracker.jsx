@@ -2872,7 +2872,7 @@ const InitTracker = () => {
         style={{ perspective: "1000px" }}
       >
         <div className={classNames(
-           "relative w-full hover:scale-105 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
+           "relative w-full hover:scale-115 hover:z-50 rounded-lg shadow-[0_6px_12px_rgba(0,0,0,0.5)] transition-transform",
           !isBoss && ringClass, // 👈 solo anillo si no es jefe
           isBoss ? "max-h-[250px]" : "max-w-[140px]"
           )} style={isBoss ? { width: "20%" } : {}} >
