@@ -2635,7 +2635,7 @@ const InitTracker = () => {
         <div className={`${posicion === 'abajo' ? 'absolute top-0 left-0 right-0' : 'absolute bottom-0 left-0 right-0'} backface-hidden ${ caraB ? 'rotate-y-180' : '' }`} >
           <div className="relative">
             {/* 🌊 Fondo del río */}
-            <div class="river-bg">
+            <div class="river-bg rounded-lg">
               <svg class="river-waves" viewBox="0 0 1440 320" preserveAspectRatio="none">
                 <path
                   d="M0,160 C360,240 1080,80 1440,160 L1440,320 L0,320 Z"
@@ -2696,7 +2696,7 @@ const InitTracker = () => {
               </div>
 
             
-              <div className={`p-0 rounded-lg border-2 shadow-md ${bgColor} ${borderColor} max-w-[90%] mx-auto sm:max-w-[140px]`} >
+              <div className={`p-0 rounded-lg border-2 shadow-md ${borderColor} max-w-[95%] mx-auto sm:max-w-[140px]`} >
                 {/* Título */}
                 <div className="flex justify-center mb-1 text-white font-bold text-xs sm:text-sm text-center">
                   {title}
