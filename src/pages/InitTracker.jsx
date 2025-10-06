@@ -2866,7 +2866,7 @@ const InitTracker = () => {
       <div
         key={uuid}
         className={classNames(
-          "flex flex-col items-center mx-1 relative z-10 hover:z-50 transition-transform duration-1000 transform-style-preserve-3d",
+          "flex flex-col items-center mx-1 relative z-10 transition-transform duration-1000 transform-style-preserve-3d",
           flipped ? "rotate-y-180" : ""
         )}
         style={{ perspective: "1000px" }}
