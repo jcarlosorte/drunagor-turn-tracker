@@ -2821,7 +2821,7 @@ const InitTracker = () => {
   };
 
 
- const CharacterCard = ({ name, image, position }) => (
+ const CharacterCard = ({ name, image, prof, position }) => (
     <div className="flex flex-col items-center mx-1">
       <div className="relative w-full max-w-[140px] hover:scale-105">
         <img
@@ -2835,7 +2835,8 @@ const InitTracker = () => {
             textShadow: '0 0 4px #b87333aa',
           }}
         >
-          {name}
+          <span>{name}</span>
+          <span className="text-[0.50rem] italic leading-none mt-0.5 opacity-90">{prof}</span>
         </div>
       </div>
     </div>
@@ -3047,6 +3048,7 @@ const InitTracker = () => {
                 <CharacterCard
                   name={getHeroName(item.id)}
                   image={item.image}
+                  prof={item.profession}
                   position={isTop ? "top" : "bottom"}
                 />
               )}
