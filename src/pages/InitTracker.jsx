@@ -114,6 +114,10 @@ const InitTracker = () => {
     return translations.enemies?.[id] || id;
   };
 
+  const getHeroProf = (id) => {
+    const heroe = HEROES.find(e => e.id === id);
+    return translations.heroes.profession?.[heroe.profession] || heroe.profession;
+  };
   const openCategorySelector = (color) => setCategorySelector({ open: true, color });
   const openManualSelector = (color) => setManualSelector({ open: true, color });
   const openManualBoss = (id) => handleManualEnemyAdd(id, "jefe", "jefe");
@@ -3048,7 +3052,7 @@ const InitTracker = () => {
                 <CharacterCard
                   name={getHeroName(item.id)}
                   image={item.image}
-                  prof={item.profession}
+                  prof={getHeroProf(item.id)}
                   position={isTop ? "top" : "bottom"}
                 />
               )}
