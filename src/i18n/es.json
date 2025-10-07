@@ -361,6 +361,8 @@
       "activaNodo": "Activar Nodo",
       "devolver": "Retirar Runa",
       "devolverNodo": "Rompe Nodo",
+      "combateEstrecho": "Eliminar Nodo",
+      "helperCombateEstrecho": "Las Fichas de Runa sobrantes irán al Medidor de Iniciativa",
       "emptyPila": "Pila vacía.",
       "total": "Total",
       "eliminarDirecto": "Eliminar Runa de la Bolsa",
