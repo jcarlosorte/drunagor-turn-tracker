@@ -3302,7 +3302,7 @@ const InitTracker = () => {
                                     // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
                                   }}
                                 >
-                                  ⚔️ {t.combateEstrecho || "Combate estrecho"}
+                                  ⚔️ {ti.combateEstrecho || "Combate estrecho"}
                                 </button>
                               </div>
                             </>
