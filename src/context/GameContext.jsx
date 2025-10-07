@@ -269,7 +269,7 @@ export const GameProvider = ({ children }) => {
   };
   
   const addNewPilaConcentrada = () => {
-    const colores = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+    const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
     const tilesSeleccionadas = [];
     let updatedRunes = { ...runes };
     let updatedUsedTiles = [...usedTiles];
@@ -485,6 +485,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const initializeRuneKeys = () => {
+    // Solo tiene los 4 colores esta mecánica
     const colors = ['naranja', 'verde', 'rojo', 'gris'];
     const newPoints = [];
   
