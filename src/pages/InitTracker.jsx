@@ -94,7 +94,7 @@ const InitTracker = () => {
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
   const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, discardTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange,
-         initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada } = useGame();
+         initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const { executedRunes, setExecutedRunes } = useInitRunes();
@@ -3288,6 +3288,21 @@ const InitTracker = () => {
                                   }}
                                 >
                                   {ti.devolverNodo}
+                                </button>
+                               {/* Botón combate estrecho */}
+                                <button
+                                  className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
+                                  onClick={() => {
+                                    const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
+                                    if (!tiles || tiles.length === 0) {
+                                      alert(t.emptyPila);
+                                      return;
+                                    }
+                                    // opcional: feedback genérico
+                                    // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
+                                  }}
+                                >
+                                  ⚔️ {t.combateEstrecho || "Combate estrecho"}
                                 </button>
                               </div>
                             </>
