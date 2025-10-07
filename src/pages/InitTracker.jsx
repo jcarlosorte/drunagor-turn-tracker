@@ -14,7 +14,7 @@ import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
 import { ESTADOS_ALTERADOS, INMUNIDADES, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
-import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_JEFE, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, ASALTO_GUSANO, ACECHO } from '@/data/cartasEspeciales';
+import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_JEFE, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, ASALTO_GUSANO, ACECHO, IRA } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
 import { ENEMY_RING_COLORS_BIG } from '@/data/enemyRingsBig';
@@ -80,6 +80,7 @@ const InitTracker = () => {
   const ttr = translations.defensaCard.cartas_trad || {};
   const tw = translations.asalto_gusano || {};
   const t_acecho = translations.acecho || {};
+  const t_ira = translations.ira || {};
   const t_con = translations.condiciones_t || {};
   const t_con_d = translations.condiciones_d || {};
   const behaviors = trackerData.behaviors;
@@ -358,8 +359,8 @@ const InitTracker = () => {
     }
   };
 
-  
-  const handleAcechoEffect = (runas) => {  
+  const handleAcechoEffect = (runas) => {
+    console.log(runas);
     if (!acechoActivo || !runa || runas.length === 0) return;
     const runa = runas[0];
     const numRunas = runas.filter(r => r.runa === runa.runa).length;
