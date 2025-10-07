@@ -801,7 +801,7 @@ const TopMenu = ({
                                   </button>
                                   {/* Botón combate estrecho */}
                                   <button
-                                    className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
+                                    className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs relative group"
                                     onClick={() => {
                                       const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
                                       if (!tiles || tiles.length === 0) {
@@ -813,6 +813,10 @@ const TopMenu = ({
                                     }}
                                   >
                                     ⚔️ {t.combateEstrecho || "Combate estrecho"}
+                                    {/* Helper */}
+                                    <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
+                                      {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
+                                    </span>
                                   </button>
                                 </div>
                               </>
