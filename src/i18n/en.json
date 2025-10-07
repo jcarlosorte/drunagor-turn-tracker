@@ -359,6 +359,8 @@
     "activaNodo": "Activate Node",
     "devolver": "Remove Rune",
     "devolverNodo": "Tie Braeker",
+    "combateEstrecho": "Remove Node",
+    "helperCombateEstrecho": "Any remaining Rune Tokens will go to the Initiative Track",
     "emptyPila": "Empty Stack.",
     "total": "Total",
     "eliminarDirecto": "Remove Rune from the Bag",
