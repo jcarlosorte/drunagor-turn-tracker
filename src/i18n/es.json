@@ -1032,5 +1032,21 @@
       "acecho_4": "TODOS LOS HÉROES SUFREN {HEMORRAGIA} {X}.",
       "acecho_5": "TODOS LOS HÉROES SUFREN {INTIMIDAR} {X}."
     }
+  },
+  "ira": {
+    "nombre":{
+      "ira_1": "",
+      "ira_2": "",
+      "ira_3": "",
+      "ira_4": "",
+      "ira_5": ""
+    },
+    "texto":{
+      "ira_1": "TODOS LOS HÉROES A ALCANCE 1 DE ESTE MONSTRUO SUFREN {QUEMADURA} {X}.",
+      "ira_2": "TODOS LOS HÉROES A ALCANCE 1 DE ESTE MONSTRUO SUFREN {VENENO} {X}.",
+      "ira_3": "ESTE MONSTRUO GANA {ESCUDO} {X}.",
+      "ira_4": "TODOS LOS HÉROES A ALCANCE 1 DE ESTE MONSTRUO SUFREN {HEMORRAGIA} {X}.",
+      "ira_5": "TODOS LOS HÉROES A ALCANCE 1 DE ESTE MONSTRUO SUFREN {INTIMIDAR} {X}."
+    }
   }
 }
