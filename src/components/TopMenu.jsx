@@ -42,7 +42,7 @@ const TopMenu = ({
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
          pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade,
-         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
+         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack, codigosPilas, setCodigosPilas, handleCodigoChange,
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey, setRescue, rescue, initializeRescue, removeRescue,
@@ -798,6 +798,21 @@ const TopMenu = ({
                                     }}
                                   >
                                     {t.devolverNodo}
+                                  </button>
+                                  {/* Botón combate estrecho */}
+                                  <button
+                                    className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
+                                    onClick={() => {
+                                      const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
+                                      if (!tiles || tiles.length === 0) {
+                                        alert(t.emptyPila);
+                                        return;
+                                      }
+                                      // opcional: feedback genérico
+                                      // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
+                                    }}
+                                  >
+                                    ⚔️ {t.combateEstrecho || "Combate estrecho"}
                                   </button>
                                 </div>
                               </>
