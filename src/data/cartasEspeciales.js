@@ -630,3 +630,41 @@ export const ACECHO = [
     lista_capacidad: ["INTIMIDAR_X"]
   }
 ];
+
+export const IRA = [
+  {
+    id: 'ira_1',
+    rune: 'naranja',
+    nombre: 'ira_1',
+    texto: 'ira_1',
+    lista_capacidad: ["QUEMADURA_X"]
+  },
+  {
+    id: 'ira_2',
+    rune: 'verde',
+    nombre: 'ira_2',
+    texto: 'ira_2',
+    lista_capacidad: ["VENENO_X"]
+  },
+  {
+    id: 'ira_3',
+    rune: 'azul',
+    nombre: 'ira_3',
+    texto: 'ira_3',
+    lista_capacidad: ["ESCUDO_X"]
+  },
+  {
+    id: 'ira_4',
+    rune: 'rojo',
+    nombre: 'ira_4',
+    texto: 'ira_4',
+    lista_capacidad: ["HEMORRAGIA_X"]
+  },
+  {
+    id: 'ira_5',
+    rune: 'gris',
+    nombre: 'ira_5',
+    texto: 'ira_5',
+    lista_capacidad: ["INTIMIDAR_X"]
+  }
+];
