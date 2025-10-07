@@ -3278,7 +3278,7 @@ const InitTracker = () => {
                               <div className="text-xs text-gray-300 mb-2">
                                 {ti.tamano}: {pila.tiles.length}
                               </div>
-                              <div className="flex justify-center">
+                              <div className="flex flex-col items-center gap-1">
                                 <button
                                   className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => {
