@@ -164,6 +164,9 @@
     "shadow_knight_scenario": "Manifestación de la Ira",
     "abomination_scenario": "Tormento de Envidia",
     "shadow_knight_scenario2": "Tormento de Pena",
+    "shadow_knight_special": "El Guardián",
+    "abomination_com": "Comandante Atroz",
+    "shadow_cultist_com": "Comandante Arconte",
     "categoria": {
       "campeon": "Campeón",
       "veterano": "Veterano",
