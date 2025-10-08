@@ -57,7 +57,7 @@ import jaheen from "@/assets/heroes/Jaheen.png";
 import maya from "@/assets/heroes/Maya.png";
 import vorn from "@/assets/heroes/Vorn.png";
 //Especiales
-import corrupted_archer from "@/assets/heroes/corrupted_archer.png";
+import corrupted_archer from "@/assets/enemies/corrupted_archer.png";
 
 export const ENEMIES = [
   { id: "undead_king_boss_1", nombre: "Undead King Boss", invoca: "skeleton_archer_esbirro1", numInvoca: 4, catInvoca: "esbirro", robaRunas: 0, vida: 30, cubo_T: 5, cubo_M: 2, movimiento: 0, color: "jefe", categoria: "jefe", tipo: "enemigo", expansionId: "base", imagen: undead_king_boss, rune: "jefe", runePosition: "jefe", comportamiento: "jefe", inmunidad: ["GRANDE", "INTIMIDAR_I", "SIGILO_I", "VENENO_I"], tipo_ataque: "", capacidades: []  },
