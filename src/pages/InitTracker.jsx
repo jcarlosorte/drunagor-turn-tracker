@@ -362,7 +362,7 @@ const InitTracker = () => {
   const handleAcechoEffect = (runas) => {
     if (!acechoActivo || runas.length === 0) return;
     const runa = runas[0];
-    if (!runa0) return;
+    if (!runa) return;
     const numRunas = runas.filter(r => r.runa === runa.runa).length;
 
     // Buscar carta ACECHO por color
