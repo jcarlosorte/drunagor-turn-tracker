@@ -3317,7 +3317,7 @@ const InitTracker = () => {
                                 <button
                                   className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => {
-                                    const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
+                                    const tiles = placeTilesFromPilaToTrack(pila.id);
                                     if (!tiles || tiles.length === 0) {
                                       alert(t.emptyPila);
                                       return;
