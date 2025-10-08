@@ -460,8 +460,6 @@ const InitTracker = () => {
       // ✅ --- ESCUDO ---
       if (cap.startsWith("ESCUDO")) {
         const partes = cap.split("_");
-        const tieneCondicion = partes.includes("?");
-        const puedeSobrepasar = partes.includes("SI");
         const configEscudo = ESTADOS_ALTERADOS.find(e => e.id === "ESCUDO");
         const maxEscudo = configEscudo?.max || Infinity;
   
@@ -479,17 +477,17 @@ const InitTracker = () => {
         if (idx >= 0) {
           let actual = estados[idx].count;
           let nuevo = actual + escudosAgregar;
-          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+          nuevo = Math.min(nuevo, maxEscudo);
           estados[idx] = { ...estados[idx], count: nuevo };
         } else {
           let nuevo = escudosAgregar;
-          if (!puedeSobrepasar) nuevo = Math.min(nuevo, maxEscudo);
+          nuevo = Math.min(nuevo, maxEscudo);
           estados.push({ id: "ESCUDO", count: nuevo });
         }
         updateEnemyEstados(targetUUID, estados);
       }
     }); 
-                        
+   return texto;
   };
   
   const handleCategorySelect = (categoryKey) => {
@@ -1320,13 +1318,11 @@ const InitTracker = () => {
       if (cap === "MANIFESTAR") {
         const tile = manifestTile();
         if (tile) {
-          logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
-      
           // ✅ IRA
-          if (capacidades.includes("IRA")) {
-            logs.push(`${tee[enemy.id]} (${ti.colores[tile.runa]})`);
+          if (capacidades.includes("IRA")) { 
             handleIraEffect([tile], enemy.uuid);
-            logs.push(`${tee[enemy.id]} (${ti.colores[tile.runa]})`);
+          } else {
+            logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
           }
         }
       }
