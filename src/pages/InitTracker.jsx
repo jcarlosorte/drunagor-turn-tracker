@@ -3302,7 +3302,7 @@ const InitTracker = () => {
                             <div className="text-xs text-gray-300 mb-2">
                               {ti.tamano}: {pila.tiles.length}
                             </div>
-                            <div className="flex justify-center">
+                            <div className="flex flex-col items-center gap-1">
                               <button
                                 className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                 onClick={() => {
@@ -3313,6 +3313,21 @@ const InitTracker = () => {
                               >
                                 {ti.devolver}
                               </button>
+                              {/* Botón combate estrecho */}
+                                <button
+                                  className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
+                                  onClick={() => {
+                                    const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
+                                    if (!tiles || tiles.length === 0) {
+                                      alert(t.emptyPila);
+                                      return;
+                                    }
+                                    // opcional: feedback genérico
+                                    // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
+                                  }}
+                                >
+                                  ⚔️ {ti.combateEstrecho || "Combate estrecho"}
+                                </button>
                             </div>
                           </>
                         )}
