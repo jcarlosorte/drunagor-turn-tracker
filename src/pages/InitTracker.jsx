@@ -374,9 +374,11 @@ const InitTracker = () => {
     if (!enemigo) return;
     const targetUUID = enemigo.uuid;
     let runeCount = getRuneCount(runa.runa) + numRunas;
-    
+    let nombreEnemy = tee?.[enemigo.id] || enemigo.nombre || enemigo.id;
     // Texto base traducido
-    let texto = t_acecho.texto[cartaAcecho.id];
+    let textoBase = t_acecho.texto[cartaAcecho.id];
+    
+    let texto = `${nombreEnemy}: ${textoBase}`;
     if (!texto) return;
 
     texto = texto.replaceAll('{X}', runeCount);
