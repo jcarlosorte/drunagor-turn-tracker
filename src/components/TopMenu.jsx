@@ -725,7 +725,7 @@ const TopMenu = ({
                                 <div className="text-xs text-gray-300 mb-2">
                                   {t.tamano}: {pila.tiles.length}
                                 </div>
-                                <div className="flex justify-center">
+                                <div className="flex flex-col items-center gap-1">
                                   <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
@@ -735,6 +735,25 @@ const TopMenu = ({
                                     }}
                                   >
                                     {t.devolver}
+                                  </button>
+                                  {/* Botón combate estrecho */}
+                                  <button
+                                    className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs relative group"
+                                    onClick={() => {
+                                      const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
+                                      if (!tiles || tiles.length === 0) {
+                                        alert(t.emptyPila);
+                                        return;
+                                      }
+                                      // opcional: feedback genérico
+                                      // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
+                                    }}
+                                  >
+                                    ⚔️ {t.combateEstrecho || "Combate estrecho"}
+                                    {/* Helper */}
+                                    <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
+                                      {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
+                                    </span>
                                   </button>
                                 </div>
                               </>
