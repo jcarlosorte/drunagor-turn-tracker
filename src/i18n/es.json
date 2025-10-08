@@ -186,7 +186,8 @@
       "shadow_cultist_scenario": "Aparición Plañidera",
       "shadow_knight_scenario": "Manifestación de la Ira",
       "abomination_scenario": "Tormento de Envidia",
-      "shadow_knight_scenario2": "Tormento de Pena"
+      "shadow_knight_scenario2": "Tormento de Pena",
+      "shadow_knight_special": "El Guardián"
       }
   },
   "roles": {
