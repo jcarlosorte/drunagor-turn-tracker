@@ -454,8 +454,6 @@ const InitTracker = () => {
     texto = texto.replace(/\{([^}]+)\}/g, (match, id) => {return ttr[id];});
   
     showScenarioToast(texto);
-    console.log(enemigo);
-    console.log(capacidades);
     capacidades.forEach(cap => {
 
       // ✅ --- ESCUDO ---
@@ -486,10 +484,16 @@ const InitTracker = () => {
           estados.push({ id: "ESCUDO", count: nuevo });
         }
         console.log(estados);
-        updateEnemyEstados(targetUUID, estados);
+        //updateEnemyEstados(targetUUID, estados);
+        setPlacedEnemies(prev =>
+          prev.map(e =>
+            e.enemy?.uuid === targetUUID
+              ? { ...e, enemy: { ...e.enemy, estadosAlterados: estados } }
+              : e
+          )
+        );
       }
-    }); 
-   return texto;
+    });
   };
   
   const handleCategorySelect = (categoryKey) => {
