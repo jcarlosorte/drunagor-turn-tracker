@@ -186,8 +186,9 @@
       "shadow_cultist_scenario": "Mournful Apparition",
       "shadow_knight_scenario": "Manifestation of Wrath",
       "abomination_scenario": "Torment of Envy",
-      "shadow_knight_scenario2": "Torment of Grief"
-      }
+      "shadow_knight_scenario2": "Torment of Grief",
+      "shadow_knight_special": "The Guardian"
+    }
   },
   "roles": {
     "controlador": "Controller",
