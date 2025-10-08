@@ -1257,6 +1257,11 @@ const InitTracker = () => {
           logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
         }
       }
+
+      // ✅ IRA
+      if (cap === "IRA") {
+        console.log("implementar ira");
+      }
       
       // ✅ HASTA + SANAR
       if (cap.startsWith("HASTA")) {
