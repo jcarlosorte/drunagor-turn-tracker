@@ -261,6 +261,41 @@ export const GameProvider = ({ children }) => {
     // 4) Devolver la ficha para el toast
     return firstTile;
   };
+
+  const placeTilesFromPilaToTrack = (pilaId) => {
+    const pilaActual = pilas.find(p => p.id === pilaId);
+    if (!pilaActual || !Array.isArray(pilaActual.tiles) || pilaActual.tiles.length === 0) return [];
+
+    // Copia de las tiles que vamos a colocar
+    const tilesRestantes = [...pilaActual.tiles];
+
+    // 1) Añadirlas a usedTiles (las ponemos en el track)
+    setUsedTiles(prev => [...prev, ...tilesRestantes]);
+
+    // 2) Actualizar contadores de runas de forma global (sumar por color)
+    const increments = tilesRestantes.reduce((acc, t) => {
+      acc[t.runa] = (acc[t.runa] || 0) + 1;
+      return acc;
+    }, {});
+    if (Object.keys(increments).length > 0) {
+      setRunes(prev => {
+        const next = { ...prev };
+        Object.entries(increments).forEach(([color, amount]) => {
+          next[color] = (next[color] || 0) + amount;
+        });
+        return next;
+      });
+    }
+
+    // 3) Mostrar toast/feedback por cada ficha colocada
+    tilesRestantes.forEach(tile => showTileToast(tile, 'add')); // tipo 'add' (igual que draw)
+
+    // 4) Eliminar la pila entera
+    setPilas(prev => prev.filter(p => p.id !== pilaId));
+
+    // 5) Devolver las tiles por si hace falta manejar algo desde el caller
+    return tilesRestantes;
+  };
   
   const activarPila = (id) => {
     setPilas(prev => prev.map(pila => 
@@ -339,39 +374,39 @@ export const GameProvider = ({ children }) => {
   };
 
   const placeTilesFromPilaConcentradaToTrack = (pilaId) => {
-      const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
-      if (!pilaActual || !Array.isArray(pilaActual.tiles) || pilaActual.tiles.length === 0) return [];
-  
-      // Copia de las tiles que vamos a colocar
-      const tilesRestantes = [...pilaActual.tiles];
-  
-      // 1) Añadirlas a usedTiles (las ponemos en el track)
-      setUsedTiles(prev => [...prev, ...tilesRestantes]);
-  
-      // 2) Actualizar contadores de runas de forma global (sumar por color)
-      const increments = tilesRestantes.reduce((acc, t) => {
-        acc[t.runa] = (acc[t.runa] || 0) + 1;
-        return acc;
-      }, {});
-      if (Object.keys(increments).length > 0) {
-        setRunes(prev => {
-          const next = { ...prev };
-          Object.entries(increments).forEach(([color, amount]) => {
-            next[color] = (next[color] || 0) + amount;
-          });
-          return next;
+    const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
+    if (!pilaActual || !Array.isArray(pilaActual.tiles) || pilaActual.tiles.length === 0) return [];
+
+    // Copia de las tiles que vamos a colocar
+    const tilesRestantes = [...pilaActual.tiles];
+
+    // 1) Añadirlas a usedTiles (las ponemos en el track)
+    setUsedTiles(prev => [...prev, ...tilesRestantes]);
+
+    // 2) Actualizar contadores de runas de forma global (sumar por color)
+    const increments = tilesRestantes.reduce((acc, t) => {
+      acc[t.runa] = (acc[t.runa] || 0) + 1;
+      return acc;
+    }, {});
+    if (Object.keys(increments).length > 0) {
+      setRunes(prev => {
+        const next = { ...prev };
+        Object.entries(increments).forEach(([color, amount]) => {
+          next[color] = (next[color] || 0) + amount;
         });
-      }
-  
-      // 3) Mostrar toast/feedback por cada ficha colocada
-      tilesRestantes.forEach(tile => showTileToast(tile, 'add')); // tipo 'add' (igual que draw)
-  
-      // 4) Eliminar la pila entera
-      setPilasConcentrada(prev => prev.filter(p => p.id !== pilaId));
-  
-      // 5) Devolver las tiles por si hace falta manejar algo desde el caller
-      return tilesRestantes;
-    };
+        return next;
+      });
+    }
+
+    // 3) Mostrar toast/feedback por cada ficha colocada
+    tilesRestantes.forEach(tile => showTileToast(tile, 'add')); // tipo 'add' (igual que draw)
+
+    // 4) Eliminar la pila entera
+    setPilasConcentrada(prev => prev.filter(p => p.id !== pilaId));
+
+    // 5) Devolver las tiles por si hace falta manejar algo desde el caller
+    return tilesRestantes;
+  };
   
 
   const activarPilaConcentrada = (id) => {
