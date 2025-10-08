@@ -1251,17 +1251,18 @@ const InitTracker = () => {
   
       // ✅ MANIFESTAR
       if (cap === "MANIFESTAR") {
-        // Ejecutamos manifestación
         const tile = manifestTile();
         if (tile) {
           logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
+      
+          // 🔎 Si también tiene "IRA" → activar efecto de acecho con esa runa
+          if (capacidades.includes("IRA")) {
+            handleAcechoEffect([tile]); // 👈 le pasamos la runa manifestada en un array
+            logs.push(`${ti.ira} (${ti.colores[tile.runa]})`);
+          }
         }
       }
 
-      // ✅ IRA
-      if (cap === "IRA") {
-        console.log("implementar ira");
-      }
       
       // ✅ HASTA + SANAR
       if (cap.startsWith("HASTA")) {
