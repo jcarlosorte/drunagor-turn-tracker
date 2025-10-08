@@ -426,6 +426,7 @@ const InitTracker = () => {
   };
 
   const handleIraEffect = (runas, uuid) => {
+    console.log(uuid);
     if (!acechoActivo || runas.length === 0) return;
     const runa = runas[0];
     if (!runa) return;
@@ -1324,6 +1325,7 @@ const InitTracker = () => {
       
           // ✅ IRA
           if (capacidades.includes("IRA")) {
+            logs.push(`${tee[enemy.id]} (${ti.colores[tile.runa]})`);
             handleIraEffect([tile], enemy.uuid);
             //logs.push(`${ti.ira} (${ti.colores[tile.runa]})`);
           }
