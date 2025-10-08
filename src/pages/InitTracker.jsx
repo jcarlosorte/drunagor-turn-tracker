@@ -482,14 +482,12 @@ const InitTracker = () => {
           nuevo = Math.min(nuevo, maxEscudo);
           estados.push({ id: "ESCUDO", count: nuevo });
         }
-        console.log(uuid);
-        console.log(enemigo);
         
         //updateEnemyEstados(targetUUID, estados);
         setPlacedEnemies(prev =>
           prev.map(e =>
             e.enemy?.uuid === uuid
-              ? { ...e, enemy: { ...e.enemy, estadosAlterados: estados } }
+              ? { ...e, enemy: { ...e.enemy, estadosAlterados: [...estados] } }
               : e
           )
         );
