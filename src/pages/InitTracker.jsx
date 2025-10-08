@@ -425,7 +425,7 @@ const InitTracker = () => {
                         
   };
 
-  const handleIraEffect = (runas, uuid) => {
+  const handleIraEffect = (runas, enemy) => {
     if (runas.length === 0) return;
     const runa = runas[0];
     if (!runa) return;
@@ -435,12 +435,9 @@ const InitTracker = () => {
 
     if (!cartaIRA) return;
     const capacidades = cartaIRA.lista_capacidad || [];
-    
-    const entry = placedEnemies.find(e => e.enemy.uuid === uuid);
-    const enemigo = entry?.enemy;
-    if (!enemigo) return;
     let runeCount = getRuneCount(runa.runa);
-    let nombreEnemy = tee?.[enemigo.id] || enemigo.nombre || enemigo.id;
+    
+    const nombreEnemy = tee?.[enemy.id] || enemy.nombre || enemy.id;
     // Texto base traducido
     let textoBase = t_ira.texto[cartaIRA.id];
     
@@ -448,11 +445,12 @@ const InitTracker = () => {
     if (!texto) return;
 
     texto = texto.replaceAll('{X}', runeCount);
-        
-    // Sustituir capacidades por traduccion
     texto = texto.replace(/\{([^}]+)\}/g, (match, id) => {return ttr[id];});
-  
-    showScenarioToast(texto);
+
+    const logs = [texto];
+    let estados = [...(enemy.estadosAlterados || [])];
+    
+    //showScenarioToast(texto);
     capacidades.forEach(cap => {
 
       // ✅ --- ESCUDO ---
@@ -469,7 +467,6 @@ const InitTracker = () => {
   
         if (escudosAgregar <= 0) return;
   
-        const estados = [...enemigo.estadosAlterados];
         const idx = estados.findIndex(e => e.id === "ESCUDO");
   
         if (idx >= 0) {
@@ -484,15 +481,10 @@ const InitTracker = () => {
         }
         
         //updateEnemyEstados(targetUUID, estados);
-        setPlacedEnemies(prev =>
-          prev.map(e =>
-            e.enemy?.uuid === uuid
-              ? { ...e, enemy: { ...e.enemy, estadosAlterados: [...estados] } }
-              : e
-          )
-        );
+      
       }
     });
+    return { estados, logs };
   };
   
   const handleCategorySelect = (categoryKey) => {
@@ -1325,7 +1317,13 @@ const InitTracker = () => {
         if (tile) {
           // ✅ IRA
           if (capacidades.includes("IRA")) { 
-            handleIraEffect([tile], enemy.uuid);
+            const iraResult = handleIraEffect([tile], enemy);
+            if (iraResult?.estados) {
+              estados = iraResult.estados;
+            }
+            if (iraResult?.logs) {
+              logs.push(...iraResult.logs);
+            }
           } else {
             logs.push(`${ti.Manifiesta} ${ti.colores[tile.runa]}`);
           }
