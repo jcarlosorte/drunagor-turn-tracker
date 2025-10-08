@@ -426,14 +426,17 @@ const InitTracker = () => {
   };
 
   const handleIraEffect = (runas, uuid) => {
-    console.log(uuid);
+    console.log(runas);
     if (!acechoActivo || runas.length === 0) return;
     const runa = runas[0];
     if (!runa) return;
-    const numRunas = runas.filter(r => r.runa === runa.runa).length;
-
+   
+    
     // Buscar carta ACECHO por color
     const cartaIRA = IRA.find(a => a.rune === runa.runa || a.rune === runa.color);
+    console.log(runa);
+
+    console.log(cartaIRA);
     if (!cartaIRA) return;
     const capacidades = cartaIRA.lista_capacidad || [];
     
@@ -441,7 +444,7 @@ const InitTracker = () => {
     const enemigo = entry?.enemy;
     if (!enemigo) return;
     const targetUUID = enemigo.uuid;
-    let runeCount = getRuneCount(runa.runa) + numRunas;
+    let runeCount = getRuneCount(runa.runa);
     let nombreEnemy = tee?.[enemigo.id] || enemigo.nombre || enemigo.id;
     // Texto base traducido
     let textoBase = t_ira.texto[cartaIRA.id];
@@ -1327,7 +1330,7 @@ const InitTracker = () => {
           if (capacidades.includes("IRA")) {
             logs.push(`${tee[enemy.id]} (${ti.colores[tile.runa]})`);
             handleIraEffect([tile], enemy.uuid);
-            //logs.push(`${ti.ira} (${ti.colores[tile.runa]})`);
+            logs.push(`${tee[enemy.id]} (${ti.colores[tile.runa]})`);
           }
         }
       }
