@@ -439,7 +439,6 @@ const InitTracker = () => {
     const entry = placedEnemies.find(e => e.enemy.uuid === uuid);
     const enemigo = entry?.enemy;
     if (!enemigo) return;
-    const targetUUID = enemigo.uuid;
     let runeCount = getRuneCount(runa.runa);
     let nombreEnemy = tee?.[enemigo.id] || enemigo.nombre || enemigo.id;
     // Texto base traducido
@@ -483,11 +482,13 @@ const InitTracker = () => {
           nuevo = Math.min(nuevo, maxEscudo);
           estados.push({ id: "ESCUDO", count: nuevo });
         }
-        console.log(estados);
+        console.log(uuid);
+        console.log(enemigo);
+        
         //updateEnemyEstados(targetUUID, estados);
         setPlacedEnemies(prev =>
           prev.map(e =>
-            e.enemy?.uuid === targetUUID
+            e.enemy?.uuid === uuid
               ? { ...e, enemy: { ...e.enemy, estadosAlterados: estados } }
               : e
           )
