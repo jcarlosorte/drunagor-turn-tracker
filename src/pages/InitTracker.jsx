@@ -454,7 +454,8 @@ const InitTracker = () => {
     texto = texto.replace(/\{([^}]+)\}/g, (match, id) => {return ttr[id];});
   
     showScenarioToast(texto);
-
+    console.log(enemigo);
+    console.log(capacidades);
     capacidades.forEach(cap => {
 
       // ✅ --- ESCUDO ---
@@ -484,6 +485,7 @@ const InitTracker = () => {
           nuevo = Math.min(nuevo, maxEscudo);
           estados.push({ id: "ESCUDO", count: nuevo });
         }
+        console.log(estados);
         updateEnemyEstados(targetUUID, estados);
       }
     }); 
