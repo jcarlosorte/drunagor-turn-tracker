@@ -426,17 +426,13 @@ const InitTracker = () => {
   };
 
   const handleIraEffect = (runas, uuid) => {
-    console.log(runas);
-    if (!acechoActivo || runas.length === 0) return;
+    if (runas.length === 0) return;
     const runa = runas[0];
     if (!runa) return;
    
-    
     // Buscar carta ACECHO por color
     const cartaIRA = IRA.find(a => a.rune === runa.runa || a.rune === runa.color);
-    console.log(runa);
 
-    console.log(cartaIRA);
     if (!cartaIRA) return;
     const capacidades = cartaIRA.lista_capacidad || [];
     
