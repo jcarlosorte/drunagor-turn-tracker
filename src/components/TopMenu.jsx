@@ -886,7 +886,13 @@ const TopMenu = ({
                 
                       <div className="flex gap-2 flex-wrap justify-center">
                         <button
-                          onClick={() => initializeSpawnPoints()}
+                          onClick={() => {
+                            const choice = window.prompt(`${t.spawnQuestion || "¿Quieres añadir puntos de aparición por 'Runa' o se gestionará por ficha de 'Evento'?"}`, "runa");
+                            if (choice) {
+                              const respuesta = choice.toLowerCase().includes("evento") ? "evento" : "runa";
+                              initializeSpawnPoints(respuesta);
+                            }
+                          }}
                           className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
                         >
                           ➕ {t.addSpawnPoints}
