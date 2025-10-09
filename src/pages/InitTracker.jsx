@@ -13,7 +13,7 @@ import { ENEMIES } from '@/data/enemies';
 import { RUNAS, ASALTO } from '@/data/runas';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
-import { ESTADOS_ALTERADOS, INMUNIDADES, CAPACIDADES_ACTIVADAS } from '@/data/estadosAlterados';
+import { ESTADOS_ALTERADOS, INMUNIDADES, CAPACIDADES_ACTIVADAS, OTROS } from '@/data/estadosAlterados';
 import { CARTAS_COMANDANTE, CARTAS_OVERLORD, CARTAS_JEFE, CARTAS_HEROE_CAIDO, ALDEANO, ERRANTES, ASALTO_GUSANO, ACECHO, IRA } from '@/data/cartasEspeciales';
 import { TURN_ORDER } from '@/data/turnOrder';
 import { ENEMY_RING_COLORS } from '@/data/enemyRings';
