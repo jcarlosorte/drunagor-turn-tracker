@@ -909,7 +909,6 @@ const TopMenu = ({
                         >
                           ✕ {t.removeSP}
                         </button>
-                        </button>
                       </div>  
                     </div>
 
