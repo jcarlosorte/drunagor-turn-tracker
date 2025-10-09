@@ -9,6 +9,7 @@ import { RUNAS, RUNAS_F, ASALTO } from '@/data/runas';
 import { ENEMIES } from '@/data/enemies';
 import { INCURSION } from '@/data/incursion';
 import { DEFENSA } from '@/data/defensa';
+import { OTROS } from '@/data/estadosAlterados';
 import { useInitEnemies } from "@/context/InitEnemiesContext";
 import { languages as availableLanguages, languageNames } from "@/i18n/languageData";
 import { useLanguage } from "@/context/LanguageContext";
