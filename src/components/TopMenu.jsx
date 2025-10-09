@@ -987,23 +987,53 @@ const TopMenu = ({
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeSpawnPoints}</div>
                           <div className="flex gap-2 flex-wrap justify-center">
-                            {spawnPoints.map(point => (
-                              <div
-                                key={point.uuid}
-                                className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
-                              >
-                                <span>{t.colores[point.runa]}</span>
-                                <button
-                                  onClick={() => removeSpawnPoint(point.uuid)}
-                                  className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                            {spawnPoints.map(point => {
+                              if (point.runa === "evento") {
+                                // Buscar en OTROS la imagen
+                                const evento = OTROS.find(o => o.id === "evento");
+                                return (
+                                  <div
+                                    key={point.uuid}
+                                    className="px-3 py-1 rounded bg-gray-800 text-white flex items-center gap-2"
+                                  >
+                                    {evento?.imagen && (
+                                      <img
+                                        src={evento.imagen}
+                                        alt="Evento"
+                                        className="w-6 h-6 object-contain"
+                                      />
+                                    )}
+                                    <span>{t.evento || "Evento"}</span>
+                                    <button
+                                      onClick={() => removeSpawnPoint(point.uuid)}
+                                      className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                    >
+                                      ✕
+                                    </button>
+                                  </div>
+                                );
+                              }
+                      
+                              // 🔹 Render normal para runas
+                              return (
+                                <div
+                                  key={point.uuid}
+                                  className={`px-3 py-1 rounded text-white ${colorMap[point.runa]} flex items-center gap-2`}
                                 >
-                                  ✕
-                                </button>
-                              </div>
-                            ))}
+                                  <span>{t.colores[point.runa]}</span>
+                                  <button
+                                    onClick={() => removeSpawnPoint(point.uuid)}
+                                    className="bg-red-600 hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                                  >
+                                    ✕
+                                  </button>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       )}
+
                       {runeKeys.length > 0 && (
                         <div className="mt-3 p-2 bg-gray-700 rounded-lg">
                           <div className="text-xs text-yellow-300 mb-2">{t.activeRuneKeys}</div>
