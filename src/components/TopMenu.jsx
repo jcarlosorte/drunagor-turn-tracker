@@ -886,23 +886,29 @@ const TopMenu = ({
                       </div>
                 
                       <div className="flex gap-2 flex-wrap justify-center">
+                        {/* Botón runas */}
                         <button
-                          onClick={() => {
-                            const choice = window.prompt(`${t.spawnQuestion || "¿Quieres añadir puntos de aparición por 'Runa' o se gestionará por ficha de 'Evento'?"}`, "runa");
-                            if (choice) {
-                              const respuesta = choice.toLowerCase().includes("evento") ? "evento" : "runa";
-                              initializeSpawnPoints(respuesta);
-                            }
-                          }}
+                          onClick={() => initializeSpawnPoints("runa")}
                           className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-3 py-1 rounded"
                         >
-                          ➕ {t.addSpawnPoints}
+                          ➕ {t.addSpawnPoints} {t.runes}
                         </button>
+                    
+                        {/* Botón evento */}
+                        <button
+                          onClick={() => initializeSpawnPoints("evento")}
+                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
+                        >
+                          ➕ {t.addSpawnPoints} {t.PAevento}
+                        </button>
+                    
+                        {/* Botón eliminar */}
                         <button
                           onClick={() => setSpawnPoints([])}
                           className="bg-red-700 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
                         >
                           ✕ {t.removeSP}
+                        </button>
                         </button>
                       </div>  
                     </div>
