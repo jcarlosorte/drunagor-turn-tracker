@@ -454,8 +454,22 @@ export const GameProvider = ({ children }) => {
     return tile;
   };
 
-  const initializeSpawnPoints = () => {
-    const colors = ['naranja', 'verde', 'azul', 'rojo', 'gris'];
+  const initializeSpawnPoints = (tipo = "runa") => {
+    if (tipo === "evento") {
+      // ✅ Solo un punto genérico de evento
+      const newPoints = [
+        {
+          uuid: uuidv4(),
+          runa: "evento",
+          tile: { id: "evento", nombre: "Evento" } // puedes ajustar los datos que quieras mostrar
+        }
+      ];
+      setSpawnPoints(newPoints);
+      return;
+    }
+  
+    // ✅ Versión clásica: por runas
+    const colors = ["naranja", "verde", "azul", "rojo", "gris"];
     const newPoints = [];
   
     colors.forEach(color => {
@@ -473,6 +487,7 @@ export const GameProvider = ({ children }) => {
   
     setSpawnPoints(newPoints);
   };
+
   
   const removeSpawnPoint = (uuid) => {
     setSpawnPoints(prev => {
