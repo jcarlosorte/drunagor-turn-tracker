@@ -11,6 +11,7 @@ import escudo from "@/assets/assets_logo/escudo.png";
 import sanar from "@/assets/assets_logo/sanar.png";
 import tiempo from "@/assets/assets_logo/tiempo.png";
 import grande from "@/assets/assets_logo/grande.png";
+import evento from "@/assets/assets_logo/evento.png";
 
 export const ESTADOS_ALTERADOS = [
   // condiciones redundantes
@@ -54,4 +55,8 @@ export const CAPACIDADES_ACTIVADAS = [
   { id: "HASTA", max: 0, imagen: sanar },
   { id: "SANAR", max: 0, imagen: sanar },
   { id: "ESCUDO", max: 4, imagen: escudo }
+];
+
+export const OTROS = [
+  { id: "evento", max: 0, imagen: evento }
 ];
