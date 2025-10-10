@@ -2310,7 +2310,8 @@ const InitTracker = () => {
                 const tile = manifestTile();
                 if (tile){
                   // ✅ Comprobar spawnPoints
-                  const spawnExists = spawnPoints.some(sp => sp.runa === tile.runa);
+                  const tieneEvento = spawnPoints.some(sp => sp.runa === "evento");
+                  const spawnExists = tieneEvento || spawnPoints.some(sp => sp.runa === tile.runa);
                   
                   // ✅ Buscar pilas activas con esa loseta
                   const pilasActivas = [
@@ -2340,7 +2341,11 @@ const InitTracker = () => {
                   
                   if (faltan > 0 && scenarioMonster) {
                     spawnBatchEnemies(faltan, scenarioMonster);
-                    showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
+                    if (tieneEvento) {
+                      showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.enFichaEvento}`);
+                    } else {
+                      showScenarioToast(`${ti.added} ${faltan} ${ti.Enemies} ${ti.invocaran}: ${ti.colores[tile.runa]}`);
+                    }
                   }
                   if (totalFinal > 4) {
                     const exceso = totalFinal - 4;
