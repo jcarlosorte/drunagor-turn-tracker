@@ -254,6 +254,7 @@
     "pH": "Health Points",
     "runes": "Runes",
     "PAevento": "Event",
+    "enFichaEvento": "In Event Token",
     "saltaTurnoPorTiempo": "Skip the turn by Time token",
     "inflige": "deals",
     "ignoraEscudos": "ignores shields",
