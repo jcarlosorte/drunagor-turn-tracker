@@ -729,10 +729,7 @@ const TopMenu = ({
                                 <div className="flex flex-col items-center gap-1">
                                   <button
                                     className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
-                                    onClick={() => {
-                                      const tile = addTileToPila(pila.id);
-                                      if (!tile) alert(t.aviso);
-                                    }}
+                                    onClick={() => {addTileToPila(pila.id);}}
                                   >
                                     {t.addRunaToPila}
                                   </button>
@@ -818,10 +815,7 @@ const TopMenu = ({
                                 <div className="flex flex-col items-center gap-1">
                                   <button
                                     className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
-                                    onClick={() => {
-                                      const tile = addTileToPilaConcentrada(pila.id);
-                                      if (!tile) alert(t.aviso);
-                                    }}
+                                    onClick={() => {addTileToPilaConcentrada(pila.id);}}
                                   >
                                     {t.addRunaToPila}
                                   </button>
