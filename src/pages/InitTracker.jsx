@@ -3312,7 +3312,7 @@ const InitTracker = () => {
                                 className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
                                 onClick={() => {addTileToPila(pila.id);}}
                               >
-                                {t.addRunaToPila}
+                                {ti.addRunaToPila}
                               </button>
                               <button
                                 className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
@@ -3385,7 +3385,7 @@ const InitTracker = () => {
                                   className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => {addTileToPilaConcentrada(pila.id);}}
                                 >
-                                  {t.addRunaToPila}
+                                  {ti.addRunaToPila}
                                 </button>
                                 <button
                                   className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
