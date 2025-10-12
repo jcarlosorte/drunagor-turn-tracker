@@ -757,7 +757,7 @@ const TopMenu = ({
                                       }
                                     }}
                                   >
-                                    {t.combateEstrecho || "Combate estrecho"}
+                                    {t.combateEstrecho_pila}
                                     {/* Helper */}
                                     <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
                                       {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
@@ -833,7 +833,7 @@ const TopMenu = ({
                                       else alert(t.emptyPila);
                                     }}
                                   >
-                                    {t.devolverNodo}
+                                    {t.devolver}
                                   </button>
                                   {/* Botón combate estrecho */}
                                   <button
@@ -846,7 +846,7 @@ const TopMenu = ({
                                       }
                                     }}
                                   >
-                                    {t.combateEstrecho || "Combate estrecho"}
+                                    {t.combateEstrecho}
                                     {/* Helper */}
                                     <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
                                       {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
