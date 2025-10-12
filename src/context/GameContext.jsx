@@ -303,6 +303,38 @@ export const GameProvider = ({ children }) => {
     ));
   };
   
+  const addTileToPila = (pilaId) => {
+    const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
+    let nuevaTile = null;
+  
+    // Buscar una runa disponible en la bolsa
+    for (const color of colores) {
+      const tile = deleteAvailableTileByColor(color);
+      if (tile) {
+        nuevaTile = tile;
+        break;
+      }
+    }
+  
+    if (!nuevaTile) {
+      alert(ti.noRunasBolsa || 'No hay runas disponibles en la bolsa');
+      return;
+    }
+  
+    // Añadir la nueva runa a la pila correspondiente
+    setPilas(prev =>
+      prev.map(p =>
+        p.id === pilaId
+          ? { ...p, tiles: [...p.tiles, nuevaTile] }
+          : p
+      )
+    );
+  
+    // Mostrar aviso o animación
+    showTileToast(nuevaTile, 'add');
+  };
+
+  
   const addNewPilaConcentrada = () => {
     const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
     const tilesSeleccionadas = [];
@@ -415,6 +447,36 @@ export const GameProvider = ({ children }) => {
     ));
   };
 
+  const addTileToPilaConcentrada = (pilaId) => {
+    const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
+    let nuevaTile = null;
+  
+    // Buscar aleatoriamente un color disponible en la bolsa
+    for (const color of colores) {
+      const tile = deleteAvailableTileByColor(color);
+      if (tile) {
+        nuevaTile = tile;
+        break;
+      }
+    }
+  
+    if (!nuevaTile) {
+      alert(ti.noRunasBolsa || 'No hay runas disponibles en la bolsa');
+      return;
+    }
+  
+    // Añadir la tile a la pila correspondiente
+    setPilasConcentrada(prev =>
+      prev.map(p =>
+        p.id === pilaId
+          ? { ...p, tiles: [...p.tiles, nuevaTile] }
+          : p
+      )
+    );
+  
+    // Mostrar mensaje o toast
+    showTileToast(nuevaTile, 'add');
+  };
 
   const deleteAvailableTileByColor = (color) => {
     const candidates = availableTiles.filter(t => t.runa === color);
@@ -672,7 +734,7 @@ export const GameProvider = ({ children }) => {
         discardTileRandom,
         restoreDiscardedTile,
         pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
-        removeTileFromPila, addRunesCascade, placeTilesFromPilaToTrack,
+        removeTileFromPila, addRunesCascade, placeTilesFromPilaToTrack, addTileToPila, addTileToPilaConcentrada,
         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack,
         resetTiles,
         tileWarning, 
