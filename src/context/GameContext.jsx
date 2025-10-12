@@ -305,23 +305,18 @@ export const GameProvider = ({ children }) => {
   
   const addTileToPila = (pilaId) => {
     const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
-    let nuevaTile = null;
-  
-    // Buscar una runa disponible en la bolsa
-    for (const color of colores) {
-      const tile = deleteAvailableTileByColor(color);
-      if (tile) {
-        nuevaTile = tile;
-        break;
-      }
-    }
+    
+    // Buscar la primera tile disponible
+    const nuevaTile = colores
+      .map(color => deleteAvailableTileByColor(color))
+      .find(tile => tile !== null && tile !== undefined);
   
     if (!nuevaTile) {
-      alert(ti.noRunasBolsa || 'No hay runas disponibles en la bolsa');
+      alert(ti.aviso);
       return;
     }
   
-    // Añadir la nueva runa a la pila correspondiente
+    // Añadir la nueva tile a la pila normal correspondiente
     setPilas(prev =>
       prev.map(p =>
         p.id === pilaId
@@ -330,9 +325,10 @@ export const GameProvider = ({ children }) => {
       )
     );
   
-    // Mostrar aviso o animación
+    // Mostrar feedback visual
     showTileToast(nuevaTile, 'add');
   };
+
 
   
   const addNewPilaConcentrada = () => {
@@ -449,23 +445,18 @@ export const GameProvider = ({ children }) => {
 
   const addTileToPilaConcentrada = (pilaId) => {
     const colores = shuffleArray(['naranja', 'verde', 'azul', 'rojo', 'gris']);
-    let nuevaTile = null;
-  
-    // Buscar aleatoriamente un color disponible en la bolsa
-    for (const color of colores) {
-      const tile = deleteAvailableTileByColor(color);
-      if (tile) {
-        nuevaTile = tile;
-        break;
-      }
-    }
+    
+    // Buscar la primera tile disponible
+    const nuevaTile = colores
+      .map(color => deleteAvailableTileByColor(color))
+      .find(tile => tile !== null && tile !== undefined);
   
     if (!nuevaTile) {
-      alert(ti.noRunasBolsa || 'No hay runas disponibles en la bolsa');
+      alert(ti.aviso);
       return;
     }
   
-    // Añadir la tile a la pila correspondiente
+    // Añadir la nueva tile a la pila concentrada correspondiente
     setPilasConcentrada(prev =>
       prev.map(p =>
         p.id === pilaId
@@ -474,9 +465,10 @@ export const GameProvider = ({ children }) => {
       )
     );
   
-    // Mostrar mensaje o toast
+    // Mostrar feedback visual
     showTileToast(nuevaTile, 'add');
   };
+
 
   const deleteAvailableTileByColor = (color) => {
     const candidates = availableTiles.filter(t => t.runa === color);
