@@ -3309,6 +3309,12 @@ const InitTracker = () => {
                             </div>
                             <div className="flex flex-col items-center gap-1">
                               <button
+                                className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                onClick={() => {addTileToPila(pila.id);}}
+                              >
+                                {t.addRunaToPila}
+                              </button>
+                              <button
                                 className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                 onClick={() => {
                                   const tile = removeTileFromPila(pila.id);
@@ -3375,6 +3381,12 @@ const InitTracker = () => {
                                 {ti.tamano}: {pila.tiles.length}
                               </div>
                               <div className="flex flex-col items-center gap-1">
+                                <button
+                                  className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                  onClick={() => {addTileToPilaConcentrada(pila.id);}}
+                                >
+                                  {t.addRunaToPila}
+                                </button>
                                 <button
                                   className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                   onClick={() => {
