@@ -42,7 +42,7 @@ const TopMenu = ({
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
-         pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade,
+         pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade, addTileToPilaConcentrada, addTileToPila,
          pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack, codigosPilas, setCodigosPilas, handleCodigoChange,
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, 
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
@@ -728,6 +728,15 @@ const TopMenu = ({
                                 </div>
                                 <div className="flex flex-col items-center gap-1">
                                   <button
+                                    className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                    onClick={() => {
+                                      const tile = addTileToPila(pila.id);
+                                      if (!tile) alert(t.aviso);
+                                    }}
+                                  >
+                                    {t.addRunaToPila}
+                                  </button>
+                                  <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
                                       const tile = removeTileFromPila(pila.id);
@@ -746,11 +755,9 @@ const TopMenu = ({
                                         alert(t.emptyPila);
                                         return;
                                       }
-                                      // opcional: feedback genérico
-                                      // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
                                     }}
                                   >
-                                    ⚔️ {t.combateEstrecho || "Combate estrecho"}
+                                    {t.combateEstrecho || "Combate estrecho"}
                                     {/* Helper */}
                                     <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
                                       {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
@@ -810,6 +817,15 @@ const TopMenu = ({
                                 </div>
                                 <div className="flex flex-col items-center gap-1">
                                   <button
+                                    className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                    onClick={() => {
+                                      const tile = addTileToPilaConcentrada(pila.id);
+                                      if (!tile) alert(t.aviso);
+                                    }}
+                                  >
+                                    {t.addRunaToPila}
+                                  </button>
+                                  <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
                                       const tile = removeTileFromPilaConcentrada(pila.id);
@@ -828,11 +844,9 @@ const TopMenu = ({
                                         alert(t.emptyPila);
                                         return;
                                       }
-                                      // opcional: feedback genérico
-                                      // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
                                     }}
                                   >
-                                    ⚔️ {t.combateEstrecho || "Combate estrecho"}
+                                    {t.combateEstrecho || "Combate estrecho"}
                                     {/* Helper */}
                                     <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-black text-white text-[0.65rem] rounded px-2 py-1 opacity-0 group-hover:opacity-100 whitespace-nowrap">
                                       {t.helperCombateEstrecho || "Los Token sobrantes irán al medidor de iniciativa"}
