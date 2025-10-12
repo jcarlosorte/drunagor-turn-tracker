@@ -2991,7 +2991,7 @@ const InitTracker = () => {
                     {hover && (
                       <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1
                                       bg-black text-white text-[0.65rem] rounded px-2 py-1 
-                                       w-max max-w-[200px] whitespace-normal break-words z-20">
+                                       w-max max-w-[200px] whitespace-normal break-words z-200">
                         <strong>{t_con[estado.id] || ""}</strong>
                         
                       </div>
