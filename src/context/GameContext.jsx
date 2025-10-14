@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { FICHAS } from '@/data/fichas';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTracker } from '@/context/TrackerContext';
 import { ALDEANO, ERRANTES } from '@/data/cartasEspeciales';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -42,6 +43,9 @@ export const GameProvider = ({ children }) => {
   const [aldeanoDeck, setAldeanoDeck] = useState([]);
   const [errantesDeck, setErrantesDeck] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
+  const { trackerData } = useTracker();
+  const selectedHeroes = trackerData.heroes;
+  const numHeroes = selectedHeroes.length;
 
   const handleCodigoChange = (pilaId, nuevoCodigo) => {
     setCodigosPilas(prev => ({
