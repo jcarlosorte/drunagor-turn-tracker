@@ -736,9 +736,12 @@ const TopMenu = ({
                                   <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
-                                      const tile = removeTileFromPila(pila.id);
-                                      if (tile) showTileToast(tile, 'retira');
-                                      else alert(t.emptyPila);
+                                      const tilesRemoved = removeTileFromPila(pila.id);
+                                      if (tilesRemoved && tilesRemoved.length > 0) {
+                                        tilesRemoved.forEach(tile => showTileToast(tile, 'retira'));
+                                      } else {
+                                        alert(t.emptyPila);
+                                      }
                                     }}
                                   >
                                     {t.devolver}
@@ -822,9 +825,12 @@ const TopMenu = ({
                                   <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
                                     onClick={() => {
-                                      const tile = removeTileFromPilaConcentrada(pila.id);
-                                      if (tile) showTileToast(tile, 'retira');
-                                      else alert(t.emptyPila);
+                                      const tilesRemoved = removeTileFromPilaConcentrada(pila.id);
+                                      if (tilesRemoved && tilesRemoved.length > 0) {
+                                        tilesRemoved.forEach(tile => showTileToast(tile, 'retira'));
+                                      } else {
+                                        alert(t.emptyPila);
+                                      }
                                     }}
                                   >
                                     {t.devolver}
