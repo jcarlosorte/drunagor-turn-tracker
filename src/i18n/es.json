@@ -158,7 +158,7 @@
     "night_stalker": "Acechador Nocturno",
     "fallen_sisters": "Hermanas Caídas",
     "dark_vampire_scenario": "Aparición Asesina",
-    "dark_vampire_scenario_com": "Aparición Asesina",
+    "dark_vampire_scenario_com": "Comandante Aparición Asesina",
     "executioner_scenario1": "Aparición Errante",
     "executioner_scenario2": "Verdugo Funesto",
     "shadow_cultist_scenario": "Aparición Plañidera",
@@ -185,7 +185,7 @@
     "escenario": {
       "dark_vampire": "Vástago de Vampiro Sombrío",
       "dark_vampire_scenario": "Aparición Asesina",
-      "dark_vampire_scenario_com": "Aparición Asesina",
+      "dark_vampire_scenario_com": "Comandante Aparición Asesina",
       "executioner_scenario1": "Aparición Errante",
       "executioner": "Verdugo Funesto",
       "shadow_cultist_scenario": "Aparición Plañidera",
