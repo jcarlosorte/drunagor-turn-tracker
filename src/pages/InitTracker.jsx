@@ -58,7 +58,7 @@ const allowedCategories = ['campeon', 'veterano', 'soldado', 'bisoño'];
 const behaviorOptions = ['estandar', 'alternativo', 'complejo'];
 const PROPIEDADES_ACTUALIZABLES = ['movimiento', 'ataque', 'capacidades', 'inmunidad', 'tipo_ataque'];
 const EnemiesNoShow = ['undead_king_boss_Acecho_1', 'undead_king_boss_Acecho_2', 'corrupted_worm_esbirro'];
-
+const commanderNoPc = ['dark_vampire_scenario_com'];
 
 const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
@@ -546,8 +546,10 @@ const InitTracker = () => {
     const colorId = forcedColorId === 'noColor' ? undefined : assignColorToEnemy(uuid, isBig, forcedColorId);
     const initialStates = ESTADOS_ALTERADOS.map(estado => ({ id: estado.id, count: 0 }));
     if (selected.categoria === 'comandante') {
-      const createAndPlaceCommander = (pcValue) => {
-        const totalVida = selected.vida * (pcValue + numHeroes);
+      const createAndPlaceCommander = (pcValue = null) => {
+        const totalVida = commanderNoPc.includes(selected.id)
+          ? selected.vida
+          : selected.vida * (pcValue + numHeroes);
         const runeIndex = runesColorMap[selected.rune];
         const runePosition = selected.runePosition;
         const adjustedCaps = adjustCapabilitiesByRunes(selected.capacidades, selected.rune, getRuneCount);
@@ -579,10 +581,16 @@ const InitTracker = () => {
         // 👉 Añadir cartas de ataque del comandante:
         placeCommanderCards(selected, uuid);
       };
-      // 👉 Si viene forzado, no abrimos modal
-      if (typeof forcedPcValue === 'number') {
+      // ⚙️ Si está en lista de exclusión → saltamos el modal
+      if (commanderNoPc.includes(selected.id)) {
+        createAndPlaceCommander(); // sin PC
+      }
+      // ⚙️ Si viene valor forzado → usarlo directamente
+      else if (typeof forcedPcValue === 'number') {
         createAndPlaceCommander(forcedPcValue);
-      } else {
+      }
+      // ⚙️ Si no, abrir modal como antes
+      else {
         openCommanderPCModal((pcValue) => createAndPlaceCommander(pcValue));
       }
       return;
