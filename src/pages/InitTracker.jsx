@@ -3341,11 +3341,9 @@ const InitTracker = () => {
                                       alert(t.emptyPila);
                                       return;
                                     }
-                                    // opcional: feedback genérico
-                                    // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
                                   }}
                                 >
-                                  ⚔️ {ti.combateEstrecho_pila || "Combate estrecho"}
+                                  {ti.combateEstrecho_pila || "Combate estrecho"}
                                 </button>
                             </div>
                           </>
@@ -3414,11 +3412,9 @@ const InitTracker = () => {
                                       alert(t.emptyPila);
                                       return;
                                     }
-                                    // opcional: feedback genérico
-                                    // showScenarioToast(`${tiles.length} ${t.tilesPlaced} ${t.enTracker}`) // si tienes esa función disponible
                                   }}
                                 >
-                                  ⚔️ {ti.combateEstrecho || "Combate estrecho"}
+                                  {ti.combateEstrecho || "Combate estrecho"}
                                 </button>
                               </div>
                             </>
