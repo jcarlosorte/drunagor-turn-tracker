@@ -243,16 +243,21 @@ export const GameProvider = ({ children }) => {
   };
 
   const removeTileFromPila = (pilaId) => {
-    // 1) Leer estado actual y decidir qué quitar (fuera de setPilas)
     const pilaActual = pilas.find(p => p.id === pilaId);
     if (!pilaActual || pilaActual.tiles.length === 0) return null;
   
-    const [firstTile, ...resto] = pilaActual.tiles;
+    // 🧮 Calcular cuántas eliminar
+    const numEliminar = Math.max(0, 6 - numHeroes);
+    if (numEliminar === 0) return null;
   
-    // 2) Devolver la ficha a la base
-    setAvailableTiles(prev => [...prev, firstTile]);
+    // ✂️ Tomamos las primeras N (o todas si hay menos)
+    const tilesAEliminar = pilaActual.tiles.slice(0, numEliminar);
+    const resto = pilaActual.tiles.slice(numEliminar);
   
-    // 3) Actualizar pilas (eliminar la pila si queda vacía)
+    // ♻️ Devolver las fichas a la base
+    setAvailableTiles(prev => [...prev, ...tilesAEliminar]);
+  
+    // 🔄 Actualizar las pilas (eliminar si queda vacía)
     setPilas(prev =>
       prev
         .map(p => {
@@ -262,8 +267,8 @@ export const GameProvider = ({ children }) => {
         .filter(Boolean)
     );
   
-    // 4) Devolver la ficha para el toast
-    return firstTile;
+    // 📤 Devolver las tiles eliminadas para mostrar toasts o logs
+    return tilesAEliminar;
   };
 
   const placeTilesFromPilaToTrack = (pilaId) => {
@@ -378,20 +383,25 @@ export const GameProvider = ({ children }) => {
     setPilasConcentrada(prev => [...prev, nuevaPila]);
     setContadorPilasConcentradas(prev => prev + 1);
     return nuevaPila;
-
   };
   
   const removeTileFromPilaConcentrada = (pilaId) => {
-    // 1) Buscar la pila actual y extraer ficha fuera del setState
+    // 1️⃣ Buscar la pila actual
     const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
     if (!pilaActual || pilaActual.tiles.length === 0) return null;
   
-    const [firstTile, ...resto] = pilaActual.tiles;
+    // 2️⃣ Calcular cuántas losetas eliminar
+    const numEliminar = Math.max(0, 6 - numHeroes);
+    if (numEliminar === 0) return null;
   
-    // 2) Devolver ficha a la bolsa
-    setAvailableTiles(prev => [...prev, firstTile]);
+    // 3️⃣ Tomar las primeras N (o todas si hay menos)
+    const tilesAEliminar = pilaActual.tiles.slice(0, numEliminar);
+    const resto = pilaActual.tiles.slice(numEliminar);
   
-    // 3) Actualizar pilas (eliminar pila si queda vacía)
+    // 4️⃣ Devolver las losetas eliminadas a la bolsa
+    setAvailableTiles(prev => [...prev, ...tilesAEliminar]);
+  
+    // 5️⃣ Actualizar las pilas concentradas (eliminar si queda vacía)
     setPilasConcentrada(prev =>
       prev
         .map(p => {
@@ -401,8 +411,8 @@ export const GameProvider = ({ children }) => {
         .filter(Boolean)
     );
   
-    // 4) Devolver ficha eliminada para el toast
-    return firstTile;
+    // 6️⃣ Devolver las fichas eliminadas para toasts o control
+    return tilesAEliminar;
   };
 
   const placeTilesFromPilaConcentradaToTrack = (pilaId) => {
