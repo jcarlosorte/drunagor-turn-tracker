@@ -158,7 +158,7 @@
     "night_stalker": "Night Stalker",
     "fallen_sisters": "Fallen Sisters",
     "dark_vampire_scenario": "Murderous Apparition",
-    "dark_vampire_scenario_com": "Murderous Apparition",
+    "dark_vampire_scenario_com": "Commander Murderous Apparition",
     "executioner_scenario1": "Drifter Apparition",
     "executioner_scenario2": "Grim Executioner",
     "shadow_cultist_scenario": "Mournful Apparition",
@@ -185,7 +185,7 @@
     "escenario": {
       "dark_vampire": "Shadow Vampire Spawn",
       "dark_vampire_scenario": "Murderous Apparition",
-      "dark_vampire_scenario_com": "Murderous Apparition",
+      "dark_vampire_scenario_com": "Commander Murderous Apparition",
       "executioner_scenario1": "Drifter Apparition",
       "executioner_scenario2": "Grim Executioner",
       "shadow_cultist_scenario": "Mournful Apparition",
