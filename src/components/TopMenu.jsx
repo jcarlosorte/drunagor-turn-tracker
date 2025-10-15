@@ -467,14 +467,20 @@ const TopMenu = ({
                     
                     {!invadidosActivo ? (
                       <button
-                        onClick={activaInvadidos}
+                        onClick={() => {
+                          activaInvadidos();
+                          setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo);
+                        }}
                         className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                       >
                         {t.activaInvadidos}
                       </button>
                     ) : (
                       <button
-                        onClick={desactivaInvadidos}
+                        onClick={() => {
+                          desactivaInvadidos();
+                          setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo);
+                        }}
                         className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                       >
                         {t.desactivaInvadidos}
