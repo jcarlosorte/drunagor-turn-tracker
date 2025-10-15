@@ -395,6 +395,8 @@
       "desactivaHuesped": "Desctiva Monstruo Huesped",
       "activaAcecho": "Activa El Rey Redivivo Acecha",
       "desactivaAcecho": "Desctiva El Rey Redivivo Acecha",
+      "activaInvadidos": "Activa Invadidos",
+      "desactivaInvadidos": "Desctiva Invadidos",
       "applyEffect": "Aplicar efecto",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
