@@ -520,7 +520,7 @@ const InitTracker = () => {
     const numFinal = Math.min(numAInvocar, faltan);
     for (let i = 0; i < numFinal; i++) {
       const candidatos = ENEMIES.filter(
-        e => enemies.includes(e.id) && e.id === enemyId && e.categoria === enemigoCat
+        e => enemies.includes(e.id) && e.id === enemigoId && e.categoria === enemigoCat
       );
       if (candidatos.length > 0) {
         const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
