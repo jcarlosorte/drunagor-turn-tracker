@@ -12,6 +12,7 @@ export const InitEnemiesProvider = ({ children }) => {
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [huespedActivo, setHuespedActivo] = useState(false);
   const [acechoActivo, setAcechoActivo] = useState(false);
+  const [invadidosActivo, setInvadidosActivo] = useState(false);
   const [usedColors, setUsedColors] = useState([]);
   const [usedColorsBig, setUsedColorsBig] = useState([]); 
   const [enemyColorMap, setEnemyColorMap] = useState({});
@@ -24,6 +25,9 @@ export const InitEnemiesProvider = ({ children }) => {
 
   const activaAcecho = () => setAcechoActivo(true);
   const desactivaAcecho = () => setAcechoActivo(false);
+
+  const activaInvadidos = () => setInvadidosActivo(true);
+  const desactivaInvadidos = () => setInvadidosActivo(false);
   
   // Función para mostrar aviso
   const mostrarAviso = (mensaje) => {
@@ -140,7 +144,9 @@ export const InitEnemiesProvider = ({ children }) => {
                                          removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-                                         huespedActivo, activaHuesped, desactivaHuesped, activaAcecho, desactivaAcecho, acechoActivo,
+                                         huespedActivo, activaHuesped, desactivaHuesped, 
+                                         activaAcecho, desactivaAcecho, acechoActivo,
+                                         activaInvadidos, desactivaInvadidos, invadidosActivo,
                                          avisos, mostrarAviso, removeAviso }}>
       {children}
     </InitEnemiesContext.Provider>
