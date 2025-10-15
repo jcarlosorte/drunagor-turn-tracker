@@ -469,7 +469,7 @@ const TopMenu = ({
                       <button
                         onClick={() => {
                           activaInvadidos();
-                          setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo);
+                          setScenarioMonster(prev => prev?.id === "dark_vampire" ? null : "dark_vampire");
                         }}
                         className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                       >
@@ -479,7 +479,7 @@ const TopMenu = ({
                       <button
                         onClick={() => {
                           desactivaInvadidos();
-                          setScenarioMonster(prev => prev?.id === monstruo.id ? null : monstruo);
+                          setScenarioMonster(prev => prev?.id === "dark_vampire" ? null : "dark_vampire");
                         }}
                         className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                       >
