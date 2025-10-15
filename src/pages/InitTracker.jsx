@@ -64,7 +64,7 @@ const InitTracker = () => {
   const { trackerData, setTrackerData } = useTracker();
   const { placedEnemies, setPlacedEnemies, placeEnemy, removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, assignColorToEnemy, 
          releaseColor, usedColors, setUsedColors, usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
-         avisos, removeAviso, huespedActivo, acechoActivo } = useInitEnemies();
+         avisos, removeAviso, huespedActivo, acechoActivo, invadidosActivo } = useInitEnemies();
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
@@ -486,6 +486,72 @@ const InitTracker = () => {
     });
     return { estados, logs };
   };
+
+  const handleInvadidosEffect = () => {
+    // 🧩 1. Definir enemigo base de la invasión
+    const enemigoId = "dark_vampire";
+    const enemigoCat = "bisoño";
+  
+    // 🧩 2. Calcular cuántos enemigos deben invocarse según el número de héroes
+    let numAInvocar = 0;
+    if (numHeroes <= 2) numAInvocar = 1;
+    else if (numHeroes <= 4) numAInvocar = 2;
+    else numAInvocar = 3;
+  
+    // 🧩 3. Contar cuántos vampiros oscuros ya están en el campo
+    const enemigosActuales = placedEnemies.filter(e => e.enemy.id === enemigoId);
+    const yaColocados = enemigosActuales.length;
+  
+    // 🧩 4. Calcular cuántos se pueden añadir sin pasar de 4
+    const maxPermitidos = 4;
+    const faltan = Math.max(0, maxPermitidos - yaColocados);
+  
+    if (faltan === 0) {
+      showScenarioToast(`${ti.noMasInvocar}`);
+      return;
+    }
+  
+    // 🧩 5. Invocar los que falten
+    let simulatedUsedSmall = [...usedColors];
+    let simulatedUsedBig = [...usedColorsBig];
+    const generatedColors = [];
+    let warnedNoColors = false;
+    
+    const numFinal = Math.min(numAInvocar, faltan);
+    for (let i = 0; i < numFinal; i++) {
+      const candidatos = ENEMIES.filter(
+        e => enemies.includes(e.id) && e.id === enemyId && e.categoria === enemigoCat
+      );
+      if (candidatos.length > 0) {
+        const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
+        const isBig = elegido.size === 'grande';
+        let nextColorId = getNextAvailableColorSimulated(isBig, simulatedUsedSmall, simulatedUsedBig);
+        if (!nextColorId) {
+          if (!warnedNoColors) {
+            alert(ti.noColorsAvailable || "No hay más colores disponibles para asignar");
+            warnedNoColors = true;
+          }
+          nextColorId = 'noColor';
+        } else {
+          if (isBig) simulatedUsedBig.push(nextColorId);
+          else simulatedUsedSmall.push(nextColorId);
+          generatedColors.push(nextColorId);
+        }
+        // ✅ Añadir enemigo manualmente
+        handleManualEnemyAdd(elegido.id, elegido.comportamiento, elegido.categoria, 'NoShow', nextColorId);
+        showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
+      }
+    }
+  
+    // 🧩 6. Si hay exceso (se deberían haber colocado más de 4)
+    const exceso = numAInvocar - faltan;
+    for (let i = 0; i < exceso; i++) {
+      showScenarioToast(`${ti.invasionDamage}`);
+    }
+  
+
+  };
+
   
   const handleCategorySelect = (categoryKey) => {
     const color = categorySelector.color;
@@ -2255,10 +2321,14 @@ const InitTracker = () => {
             if (currentRune.tipo === 'runa') {
               // 🔹 Lógica clásica de runa: roba fichas de runa
               if (currentRune.numRunas) {
+                const isCaraB = currentRune.cara === 'B';
                 const tiles = drawMultipleTiles(currentRune.numRunas);
                 tiles?.forEach(tile => handleTileDraw(tile));
                 if (!tiles) setTileWarning(ti.aviso);
                 handleAcechoEffect(tiles);
+                if (invadidosActivo && isCaraB){
+                  handleInvadidosEffect();
+                }
               }
       
             } else if (currentRune.tipo === 'asalto') {
@@ -3561,7 +3631,7 @@ const InitTracker = () => {
               </div>
             )}
 
-            {/* 🐉 Aviso de que la mecánica de Rey redivivo acecha */}
+            {/* 🐉 Aviso de la mecánica de Rey redivivo acecha */}
             {acechoActivo && (
               <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
                 <div className="text-xs text-indigo-300 font-bold">
@@ -3570,6 +3640,14 @@ const InitTracker = () => {
               </div>
             )}
 
+            {/* 🐉 Aviso de la mecánica INVADIDOS */}
+            {invadidosActivo && (
+              <div className="mt-3 p-2 bg-indigo-900 rounded-lg">
+                <div className="text-xs text-indigo-300 font-bold">
+                  {ti.invadidosActivo}
+                </div>
+              </div>
+            )}
             
             <div className="grid grid-cols-11 gap-0 auto-rows-auto bg-slate-700 p-2">
               {[...Array(11)].map((_, idx) => (
