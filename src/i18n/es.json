@@ -397,6 +397,7 @@
       "desactivaAcecho": "Desctiva El Rey Redivivo Acecha",
       "activaInvadidos": "Activa Invadidos",
       "desactivaInvadidos": "Desctiva Invadidos",
+      "invasionDamage": "INVADIDOS provoca 4 de daño a cada héroe porque se ha excedido el número de Vampiros Sombríos",
       "applyEffect": "Aplicar efecto",
       "resetRunes": "Resetear Runas",
       "RuneRepeat": "Ya existe una Carta de Runa.",
