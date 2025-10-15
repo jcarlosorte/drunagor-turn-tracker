@@ -394,6 +394,8 @@
     "desactivaHuesped": "Disable Host Monster",
     "activaAcecho": "Activate The Undead King Haunting",
     "desactivaAcecho": "Disable The Undead King Haunting",
+    "activaInvadidos": "Activate Invaded",
+    "desactivaInvadidos": "Disable Invaded",
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
