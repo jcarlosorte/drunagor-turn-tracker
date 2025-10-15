@@ -396,6 +396,7 @@
     "desactivaAcecho": "Disable The Undead King Haunting",
     "activaInvadidos": "Activate Invaded",
     "desactivaInvadidos": "Disable Invaded",
+    "invasionDamage": "INVADED deals 4 damage to each hero because the number of Shadow Vampires has been exceeded",
     "applyEffect": "Apply effect",
     "resetRunes": "Reset Runes",
     "RuneRepeat": "A Rune Card of this type already exists.",
