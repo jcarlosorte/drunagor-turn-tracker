@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { GiSwordClash, GiSpikedDragonHead, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm } from 'react-icons/gi';
+import { GiSwordClash, GiSpikedDragonHead, GiCrownedSkull, GiDiceTarget, GiShield, GiDaemonSkull, GiBullyMinion, GiRuneStone, GiMinions, GiBrickWall, GiCardPlay, GiVillage, GiUprising, GiStoneTower, GiCardDraw, GiCardPick, GiSwapBag, GiTrashCan, GiLeechingWorm, GiReaperScythe } from 'react-icons/gi';
 import { FaLanguage } from 'react-icons/fa';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { RUNAS, RUNAS_F, ASALTO } from '@/data/runas';
@@ -31,7 +31,7 @@ const TopMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
   const t = translations?.trackerInit || {};
-  const { resetPlacedEnemies, activaHuesped, desactivaHuesped, huespedActivo, activaAcecho, desactivaAcecho, acechoActivo } = useInitEnemies();
+  const { resetPlacedEnemies, activaHuesped, desactivaHuesped, huespedActivo, activaAcecho, desactivaAcecho, acechoActivo, activaInvadidos, desactivaInvadidos, invadidosActivo } = useInitEnemies();
   const [enemySelect, setEnemySelect] = useState('');
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
@@ -435,8 +435,7 @@ const TopMenu = ({
                     </div>
                   </div>
 
-        
-                  {/* --- Bloque 4: MONSTRUO HUESPED (solo si expansión activa) --- */}
+                 {/* --- Bloque 4: MONSTRUO HUESPED (solo si expansión activa) --- */}
                  {selectedExpansions.includes("undead_dragon") && (
                   <div className="mb-2"> 
                     <div className="flex flex-wrap gap-2 justify-center">
@@ -460,6 +459,30 @@ const TopMenu = ({
                     </div>
                   </div>
                 )}
+
+                {/* --- Bloque 5: INVADIDOS --- */}
+                <div className="mb-2"> 
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <GiReaperScythe className="text-indigo-300 text-xl" />
+                    
+                    {!invadidosActivo ? (
+                      <button
+                        onClick={activaInvadidos}
+                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.activaInvadidos}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={desactivaInvadidos}
+                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                      >
+                        {t.desactivaInvadidos}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
                   
                 </div>
 
