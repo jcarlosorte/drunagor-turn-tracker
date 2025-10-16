@@ -544,7 +544,7 @@ const InitTracker = () => {
     }
   
     // 🧩 6. Si hay exceso (se deberían haber colocado más de 4)
-    const exceso = numAInvocar - faltan;
+    const exceso = faltan - numAInvocar;
     console.log(exceso);
     for (let i = 0; i < exceso; i++) {
       console.log(i);
