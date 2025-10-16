@@ -505,14 +505,18 @@ const InitTracker = () => {
     // 🧩 4. Calcular cuántos se pueden añadir sin pasar de 4
     const maxPermitidos = 4;
     const faltan = Math.max(0, maxPermitidos - yaColocados);
-  
+
+    const exceso = numAInvocar - faltan;
+    
     if (faltan === 0) {
-      showScenarioToast(`${ti.noMasInvocar}`);
+      //showScenarioToast(`${ti.noMasInvocar}`);
       
-    } else if (faltan > 0){
-      const exceso = numAInvocar ;
-      console.log(faltan);
-      for (let i = 0; i < faltan; i++) {
+    } 
+      
+    if (exceso >= 0){
+      showScenarioToast(`${ti.noMasInvocar}`);
+      console.log(exceso);
+      for (let i = 0; i < exceso; i++) {
         console.log(i);
         showScenarioToast(`${ti.invasionDamage}`);
       }
