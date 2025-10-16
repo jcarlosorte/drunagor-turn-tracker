@@ -506,9 +506,14 @@ const InitTracker = () => {
     const maxPermitidos = 4;
     const faltan = Math.max(0, maxPermitidos - yaColocados);
   
-    if (faltan === 0) {
-      showScenarioToast(`${ti.noMasInvocar}`);
-      return;
+    if (faltan >= 0) {
+      //showScenarioToast(`${ti.noMasInvocar}`);
+      const exceso = numAInvocar;
+      console.log(exceso);
+      for (let i = 0; i < exceso; i++) {
+        console.log(i);
+        showScenarioToast(`${ti.invasionDamage}`);
+      }
     }
   
     // 🧩 5. Invocar los que falten
@@ -542,15 +547,6 @@ const InitTracker = () => {
         showScenarioToast(`${ti.invoca} ${tee[elegido.id]}`);
       }
     }
-  
-    // 🧩 6. Si hay exceso (se deberían haber colocado más de 4)
-    const exceso = faltan - numAInvocar;
-    console.log(exceso);
-    for (let i = 0; i < exceso; i++) {
-      console.log(i);
-      showScenarioToast(`${ti.invasionDamage}`);
-    }
-  
 
   };
 
