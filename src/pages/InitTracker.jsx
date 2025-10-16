@@ -506,11 +506,13 @@ const InitTracker = () => {
     const maxPermitidos = 4;
     const faltan = Math.max(0, maxPermitidos - yaColocados);
   
-    if (faltan >= 0) {
-      //showScenarioToast(`${ti.noMasInvocar}`);
-      const exceso = numAInvocar;
-      console.log(exceso);
-      for (let i = 0; i < exceso; i++) {
+    if (faltan === 0) {
+      showScenarioToast(`${ti.noMasInvocar}`);
+      
+    } else if (faltan > 0){
+      const exceso = numAInvocar ;
+      console.log(faltan);
+      for (let i = 0; i < faltan; i++) {
         console.log(i);
         showScenarioToast(`${ti.invasionDamage}`);
       }
