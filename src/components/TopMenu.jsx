@@ -31,7 +31,8 @@ const TopMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, translations } = useLanguage();
   const t = translations?.trackerInit || {};
-  const { resetPlacedEnemies, activaHuesped, desactivaHuesped, huespedActivo, activaAcecho, desactivaAcecho, acechoActivo, activaInvadidos, desactivaInvadidos, invadidosActivo } = useInitEnemies();
+  const { resetPlacedEnemies, activaHuesped, desactivaHuesped, huespedActivo, activaAcecho, desactivaAcecho, acechoActivo, activaInvadidos, desactivaInvadidos, invadidosActivo, oscuridadActivo, activaOscuridad, desactivaOscuridad,
+                                         asaltoActivo, activaAsalto, desactivaAsalto } = useInitEnemies();
   const [enemySelect, setEnemySelect] = useState('');
   const [manualSelect, setManualSelect] = useState('');
   const [showRuneFaceOptions, setShowRuneFaceOptions] = useState(false);
