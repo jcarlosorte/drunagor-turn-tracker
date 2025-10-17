@@ -192,7 +192,12 @@
       "shadow_knight_scenario": "Manifestación de la Ira",
       "abomination_scenario": "Tormento de Envidia",
       "shadow_knight_scenario2": "Tormento de Pena",
-      "shadow_knight_special": "El Guardián"
+      "shadow_knight_special": "El Guardián",
+      "abomination_com1": "Comandante Atroz (A)",
+      "abomination_com2": "Comandante Atroz (B)",
+      "shadow_cultist_com": "Comandante Arconte",
+      "archer_corrupted": "Jim Volin",
+      "lasse": "Hechicero Lasse"
       }
   },
   "roles": {
