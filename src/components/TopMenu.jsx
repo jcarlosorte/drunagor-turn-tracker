@@ -286,87 +286,112 @@ const TopMenu = ({
                     <span className="font-semibold">{t.cartas}</span>
                   </div>
 
+                  {/* --- Bloque 1: OSCURIDAD DE CAZA --- */}
                   <div className="mb-2">
-                    <div className="flex flex-wrap gap-2 justify-center">
+                    <div className="flex flex-wrap gap-2 justify-center items-center">
                       <GiRuneStone className="text-indigo-300 text-xl" />
-                      <button
-                        onClick={() => {
-                          const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                        }}
-                        className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunes}
-                      </button>
-            
-                      <button
-                        onClick={() => setShowRuneFaceOptions(prev => !prev)}
-                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunesCara}
-                      </button>
-                    </div>
-            
-                    {showRuneFaceOptions && (
-                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                        {RUNAS.map((card, index) => (
-                          <button
-                            key={`${card.id}-${card.cara}-${index}`}
-                            onClick={() => handleSelectUniqueCard(card)}
-                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.cara} ({card.cara})
-                          </button>
-                        ))}
-                        <button
-                        onClick={() => {
-                          const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
-                          defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                        }}
-                        className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                      >
-                        {t.addRunes2} (B)
-                      </button>
-                      </div>
-                    )}
-
-                    
-                  </div>
-
-                  {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
-                  {selectedExpansions.includes("infernal_desert") && (
-                    <div className="mb-2">
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <GiLeechingWorm className="text-indigo-300 text-xl" />
+                      
+                      {!oscuridadActivo ? (
                         <button
                           onClick={() => {
-                            const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                            activaOscuridad();
+                            const defaultRunes = RUNAS.filter(r => r.cara === 'A');
                             defaultRunes.forEach(r => handleSelectUniqueCard(r));
                           }}
                           className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                         >
-                          {t.addRunes_w}
+                          {t.activaOscuridad}
                         </button>
-              
+                      ) : (
                         <button
-                          onClick={() => setshowAssaultFaceOptions(prev => !prev)}
+                          onClick={() => {
+                            desactivaOscuridad();
+                            // Si quieres, puedes limpiar las runas de oscuridad aquí si es necesario
+                          }}
                           className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                         >
-                          {t.addRunesCara_w}
+                          {t.desactivaOscuridad}
+                        </button>
+                      )}
+                    </div>
+                  
+                    {/* Opcional: cara A / B */}
+                    {!oscuridadActivo && (
+                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                        <button
+                          onClick={() => {
+                            const defaultRunes = RUNAS.filter(r => r.cara === 'A');
+                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                          }}
+                          className="bg-green-800 hover:bg-green-700 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.addRunes}
+                        </button>
+                  
+                        <button
+                          onClick={() => {
+                            const defaultRunes = RUNAS.filter(r => r.cara === 'B');
+                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                          }}
+                          className="bg-indigo-800 hover:bg-indigo-700 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.addRunes2} (B)
                         </button>
                       </div>
-              
-                      {showAssaultFaceOptions && (
+                    )}
+                  </div>
+                  
+                  {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
+                  {selectedExpansions.includes("infernal_desert") && (
+                    <div className="mb-2">
+                      <div className="flex flex-wrap gap-2 justify-center items-center">
+                        <GiLeechingWorm className="text-indigo-300 text-xl" />
+                        
+                        {!asaltoActivo ? (
+                          <button
+                            onClick={() => {
+                              activaAsalto();
+                              const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                            }}
+                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.activaAsalto}
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              desactivaAsalto();
+                            }}
+                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.desactivaAsalto}
+                          </button>
+                        )}
+                      </div>
+                  
+                      {/* Opcional: elegir cara A/B si no activo */}
+                      {!asaltoActivo && (
                         <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                          {ASALTO.map((card, index) => (
-                            <button
-                              key={`${card.id}-${card.cara}-${index}`}
-                              onClick={() => handleSelectUniqueCard(card)}
-                              className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                            >
-                              {t.cara} ({card.cara})
-                            </button>
-                          ))}
+                          <button
+                            onClick={() => {
+                              const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                            }}
+                            className="bg-green-800 hover:bg-green-700 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.addRunes_w}
+                          </button>
+                  
+                          <button
+                            onClick={() => {
+                              const defaultRunes = ASALTO.filter(r => r.cara === 'B');
+                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                            }}
+                            className="bg-indigo-800 hover:bg-indigo-700 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.addRunesCara_w} (B)
+                          </button>
                         </div>
                       )}
                     </div>
