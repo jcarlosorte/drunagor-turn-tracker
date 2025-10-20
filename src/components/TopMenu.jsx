@@ -315,7 +315,10 @@ const TopMenu = ({
                               {RUNAS.map((card, index) => (
                                 <button
                                   key={`${card.id}-${card.cara}-${index}`}
-                                  onClick={() => handleSelectUniqueCard(card)}
+                                  onClick={() => { 
+                                    activaOscuridad();
+                                    handleSelectUniqueCard(card);
+                                  }}
                                   className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                                 >
                                   {t.cara} ({card.cara})
@@ -324,6 +327,7 @@ const TopMenu = ({
                       
                               <button
                                 onClick={() => {
+                                  activaOscuridad();
                                   const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
                                   defaultRunes.forEach(r => handleSelectUniqueCard(r));
                                 }}
@@ -339,7 +343,7 @@ const TopMenu = ({
                           onClick={() => {
                             desactivaOscuridad();
                             resetPlacedRunes();
-                            // Aquí puedes limpiar las runas si lo deseas
+                            setShowRuneFaceOptions(false);
                           }}
                           className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                         >
@@ -380,7 +384,10 @@ const TopMenu = ({
                                 {ASALTO.map((card, index) => (
                                   <button
                                     key={`${card.id}-${card.cara}-${index}`}
-                                    onClick={() => handleSelectUniqueCard(card)}
+                                    onClick={() => { 
+                                      activaAsalto();
+                                      handleSelectUniqueCard(card);
+                                    }}
                                     className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
                                   >
                                     {t.cara} ({card.cara})
@@ -394,6 +401,7 @@ const TopMenu = ({
                             onClick={() => {
                               desactivaAsalto();
                               resetPlacedRunes();
+                              setshowAssaultFaceOptions(false);
                               // Aquí podrías limpiar las runas si es necesario
                             }}
                             className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
