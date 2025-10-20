@@ -338,6 +338,7 @@ const TopMenu = ({
                         <button
                           onClick={() => {
                             desactivaOscuridad();
+                            resetPlacedRunes();
                             // Aquí puedes limpiar las runas si lo deseas
                           }}
                           className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
@@ -351,59 +352,58 @@ const TopMenu = ({
                   {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
                   {selectedExpansions.includes("infernal_desert") && (
                     <div className="mb-2">
-                      <div className="flex flex-wrap gap-2 justify-center items-center">
+                      <div className="flex flex-wrap gap-2 justify-center">
                         <GiLeechingWorm className="text-indigo-300 text-xl" />
-                        
+                  
                         {!asaltoActivo ? (
-                          <button
-                            onClick={() => {
-                              activaAsalto();
-                              const defaultRunes = ASALTO.filter(r => r.cara === 'A');
-                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                            }}
-                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.activaAsalto}
-                          </button>
+                          <>
+                            <button
+                              onClick={() => {
+                                activaAsalto();
+                                const defaultRunes = ASALTO.filter(r => r.cara === 'A');
+                                defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                              }}
+                              className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
+                            >
+                              {t.addRunes_w}
+                            </button>
+                  
+                            <button
+                              onClick={() => setshowAssaultFaceOptions(prev => !prev)}
+                              className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                            >
+                              {t.addRunesCara_w}
+                            </button>
+                  
+                            {showAssaultFaceOptions && (
+                              <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                                {ASALTO.map((card, index) => (
+                                  <button
+                                    key={`${card.id}-${card.cara}-${index}`}
+                                    onClick={() => handleSelectUniqueCard(card)}
+                                    className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                                  >
+                                    {t.cara} ({card.cara})
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </>
                         ) : (
                           <button
                             onClick={() => {
                               desactivaAsalto();
+                              resetPlacedRunes();
+                              // Aquí podrías limpiar las runas si es necesario
                             }}
                             className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                           >
-                            {t.desactivaAsalto}
+                            {t.delRunes_w}
                           </button>
                         )}
                       </div>
-                  
-                      {/* Opcional: elegir cara A/B si no activo */}
-                      {!asaltoActivo && (
-                        <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                          <button
-                            onClick={() => {
-                              const defaultRunes = ASALTO.filter(r => r.cara === 'A');
-                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                            }}
-                            className="bg-green-800 hover:bg-green-700 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.addRunes_w}
-                          </button>
-                  
-                          <button
-                            onClick={() => {
-                              const defaultRunes = ASALTO.filter(r => r.cara === 'B');
-                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                            }}
-                            className="bg-indigo-800 hover:bg-indigo-700 text-white text-xs px-2 py-1 rounded"
-                          >
-                            {t.addRunesCara_w} (B)
-                          </button>
-                        </div>
-                      )}
                     </div>
                   )}
-
 
                   {/* --- Bloque 3: ACECHO --- */}
                   <div className="mb-2"> 
@@ -1011,7 +1011,7 @@ const TopMenu = ({
                       </div>  
                     </div>
 
-                    {/* Sub-bloque: Recate de Aldeanos */}
+                    {/* Sub-bloque: Rescate de Aldeanos */}
                     <div className="bg-gray-700 rounded-lg p-3 shadow-md">
                       <div className="flex items-center gap-2 mb-2 justify-center">
                         <GiRuneStone className="text-cyan-400 text-xl" />
@@ -1167,6 +1167,8 @@ const TopMenu = ({
                     resetTiles();        // Borra las fichas de runa
                     desactivaAcecho();
                     desactivaHuesped();
+                    desactivaOscuridad();
+                    desactivaAsalto();
                   }}
                   className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-full text-sm"
                 >
