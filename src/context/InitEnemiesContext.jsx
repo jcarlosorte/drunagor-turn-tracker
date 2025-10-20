@@ -31,11 +31,11 @@ export const InitEnemiesProvider = ({ children }) => {
   const activaInvadidos = () => setInvadidosActivo(true);
   const desactivaInvadidos = () => setInvadidosActivo(false);
 
-  const activaOscuridad = () => setInvadidosActivo(true);
-  const desactivaOscuridad = () => setInvadidosActivo(false);
+  const activaOscuridad = () => setOscuridadActivo(true);
+  const desactivaOscuridad = () => setOscuridadActivo(false);
 
-  const activaAsalto = () => setInvadidosActivo(true);
-  const desactivaAsalto = () => setInvadidosActivo(false);
+  const activaAsalto = () => setAsaltoActivo(true);
+  const desactivaAsalto = () => setAsaltoActivo(false);
   
   // Función para mostrar aviso
   const mostrarAviso = (mensaje) => {
