@@ -290,51 +290,55 @@ const TopMenu = ({
                   <div className="mb-2">
                     <div className="flex flex-wrap gap-2 justify-center items-center">
                       <GiRuneStone className="text-indigo-300 text-xl" />
-                      
                       {!oscuridadActivo ? (
-                        <button
-                          onClick={() => {
-                            activaOscuridad();
-                            const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                          }}
-                          className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.addRunes}
-                        </button>
-                        <button    
-                          onClick={() => setShowRuneFaceOptions(prev => !prev)} 
-                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.addRunesCara}
-                        </button>
-                        {showRuneFaceOptions && (
-                          <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                            {RUNAS.map((card, index) => (
-                              <button
-                                key={`${card.id}-${card.cara}-${index}`}
-                                onClick={() => handleSelectUniqueCard(card)}
-                                className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
-                              >
-                                {t.cara} ({card.cara})
-                              </button>
-                            ))}
-                            <button
+                        <>
+                          <button
                             onClick={() => {
-                              const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
+                              activaOscuridad();
+                              const defaultRunes = RUNAS.filter(r => r.cara === 'A');
                               defaultRunes.forEach(r => handleSelectUniqueCard(r));
                             }}
-                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                            className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                           >
-                            {t.addRunes2} (B)
+                            {t.addRunes}
                           </button>
-                          </div>
-                        )}
+                      
+                          <button
+                            onClick={() => setShowRuneFaceOptions(prev => !prev)} 
+                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.addRunesCara}
+                          </button>
+                      
+                          {showRuneFaceOptions && (
+                            <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                              {RUNAS.map((card, index) => (
+                                <button
+                                  key={`${card.id}-${card.cara}-${index}`}
+                                  onClick={() => handleSelectUniqueCard(card)}
+                                  className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                                >
+                                  {t.cara} ({card.cara})
+                                </button>
+                              ))}
+                      
+                              <button
+                                onClick={() => {
+                                  const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
+                                  defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                                }}
+                                className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                              >
+                                {t.addRunes2} (B)
+                              </button>
+                            </div>
+                          )}
+                        </>
                       ) : (
                         <button
                           onClick={() => {
                             desactivaOscuridad();
-                            // Si quieres, puedes limpiar las runas de oscuridad aquí si es necesario
+                            // Aquí puedes limpiar las runas si lo deseas
                           }}
                           className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                         >
@@ -342,7 +346,6 @@ const TopMenu = ({
                         </button>
                       )}
                     </div>
-              
                   </div>
                   
                   {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
