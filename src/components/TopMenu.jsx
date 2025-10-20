@@ -300,8 +300,36 @@ const TopMenu = ({
                           }}
                           className="bg-green-700 hover:bg-green-600 text-white text-xs px-2 py-1 rounded"
                         >
-                          {t.activaOscuridad}
+                          {t.addRunes}
                         </button>
+                        <button    
+                          onClick={() => setShowRuneFaceOptions(prev => !prev)} 
+                          className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                        >
+                          {t.addRunesCara}
+                        </button>
+                        {showRuneFaceOptions && (
+                          <div className="flex gap-2 flex-wrap mt-2 justify-center">
+                            {RUNAS.map((card, index) => (
+                              <button
+                                key={`${card.id}-${card.cara}-${index}`}
+                                onClick={() => handleSelectUniqueCard(card)}
+                                className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                              >
+                                {t.cara} ({card.cara})
+                              </button>
+                            ))}
+                            <button
+                            onClick={() => {
+                              const defaultRunes = RUNAS_F.filter(r => r.cara === 'B');
+                              defaultRunes.forEach(r => handleSelectUniqueCard(r));
+                            }}
+                            className="bg-indigo-800 hover:bg-indigo-600 text-white text-xs px-2 py-1 rounded"
+                          >
+                            {t.addRunes2} (B)
+                          </button>
+                          </div>
+                        )}
                       ) : (
                         <button
                           onClick={() => {
@@ -310,35 +338,11 @@ const TopMenu = ({
                           }}
                           className="bg-blue-700 hover:bg-blue-600 text-white text-xs px-2 py-1 rounded"
                         >
-                          {t.desactivaOscuridad}
+                          {t.delRunes}
                         </button>
                       )}
                     </div>
-                  
-                    {/* Opcional: cara A / B */}
-                    {!oscuridadActivo && (
-                      <div className="flex gap-2 flex-wrap mt-2 justify-center">
-                        <button
-                          onClick={() => {
-                            const defaultRunes = RUNAS.filter(r => r.cara === 'A');
-                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                          }}
-                          className="bg-green-800 hover:bg-green-700 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.addRunes}
-                        </button>
-                  
-                        <button
-                          onClick={() => {
-                            const defaultRunes = RUNAS.filter(r => r.cara === 'B');
-                            defaultRunes.forEach(r => handleSelectUniqueCard(r));
-                          }}
-                          className="bg-indigo-800 hover:bg-indigo-700 text-white text-xs px-2 py-1 rounded"
-                        >
-                          {t.addRunes2} (B)
-                        </button>
-                      </div>
-                    )}
+              
                   </div>
                   
                   {/* --- Bloque 2: ASALTO (solo si expansión activa) --- */}
