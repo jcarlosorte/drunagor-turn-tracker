@@ -333,6 +333,7 @@
       "health": "Vida",
       "movement": "Movimiento",
       "attack": "Ataque",
+      "evoluciona": "Evoluciona",
       "runeBasedValue": "Basado en runas",
       "behavior": "Comportamiento",
       "category": "Categoría",
