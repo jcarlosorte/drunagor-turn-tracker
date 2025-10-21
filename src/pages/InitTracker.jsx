@@ -1389,8 +1389,21 @@ const InitTracker = () => {
         logs.push(
           `${ti.evoluciona}: +2 ${ti.attack}, +1 ${ti.movement}`
         );
-        
-
+        // 🔁 Actualizamos directamente el enemigo en placedEnemies
+        setPlacedEnemies(prev =>
+          prev.map(e =>
+            e.enemy.uuid === enemy.uuid
+              ? {
+                  ...e,
+                  enemy: {
+                    ...e.enemy,
+                    ataque,
+                    movimiento
+                  }
+                }
+              : e
+          )
+        );
         
       }
       
@@ -2569,7 +2582,7 @@ const InitTracker = () => {
     // 🔄 Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
-  
+      colsole.log(currentTurnEntity.ataque);
       if (currentTurnEntity.type === 'enemy') {
         const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
         if (nuevo) {
