@@ -1384,9 +1384,12 @@ const InitTracker = () => {
 
       // ✅ EVOLUCIÓN
       if (cap === "EVOLUCION") {
-        let ataq_Ori = enemy.ataque;
-        let mov_Ori = enemy.movimiento;
-        console.log(ataq_Ori);
+        let ataque = enemy.ataque + 2;
+        let movimiento = enemy.movimiento + 1;
+        logs.push(
+          `${ti.evoluciona}: +2 ${ti.attack}, +1 ${ti.movement}`
+        );
+        
 
         
       }
