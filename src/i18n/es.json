@@ -334,6 +334,7 @@
       "movement": "Movimiento",
       "attack": "Ataque",
       "evoluciona": "Evoluciona",
+      "fuerzaAumenta": "su poder crece este turno...",
       "runeBasedValue": "Basado en runas",
       "behavior": "Comportamiento",
       "category": "Categoría",
