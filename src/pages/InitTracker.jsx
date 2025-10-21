@@ -106,7 +106,7 @@ const InitTracker = () => {
   const [scenarioToasts, setScenarioToasts] = useState([]);
   const [showPCModal, setShowPCModal] = useState(false);
   const [onPCConfirm, setOnPCConfirm] = useState(null);
-  
+  const [enemyEvolutions, setEnemyEvolutions] = useState([]);
   const getHeroName = (id) => translations.heroes?.[id] || id;
   const getEnemyName = (id, color = null) => {
     if (color === 'escenario') {
@@ -1384,27 +1384,20 @@ const InitTracker = () => {
 
       // ✅ EVOLUCIÓN
       if (cap === "EVOLUCION") {
-        let ataque = enemy.ataque + 2;
-        let movimiento = enemy.movimiento + 1;
-        logs.push(
-          `${ti.evoluciona}: +2 ${ti.attack}, +1 ${ti.movement}`
-        );
-        // 🔁 Actualizamos directamente el enemigo en placedEnemies
-        setPlacedEnemies(prev =>
-          prev.map(e =>
-            e.enemy.uuid === enemy.uuid
-              ? {
-                  ...e,
-                  enemy: {
-                    ...e.enemy,
-                    ataque,
-                    movimiento
-                  }
-                }
-              : e
-          )
-        );
-        
+        setEnemyEvolutions(prev => {
+          const existing = prev.find(e => e.uuid === enemy.uuid);
+          if (existing) {
+            // Si ya existe → incrementamos el contador
+            return prev.map(e =>
+              e.uuid === enemy.uuid ? { ...e, count: e.count + 1 } : e
+            );
+          } else {
+            // Si no existe → lo añadimos con 1 evolución
+            return [...prev, { uuid: enemy.uuid, count: 1 }];
+          }
+        });
+      
+        logs.push(`${ti.evoluciona}: ${ti.fuerzaAumenta}`);
       }
       
       // ✅ MANIFESTAR
@@ -2582,7 +2575,6 @@ const InitTracker = () => {
     // 🔄 Si hay carta con cara, rotarla
     if (currentTurnEntity?.cara) {
       const nuevaCara = currentTurnEntity.cara === 'A' ? 'B' : 'A';
-      colsole.log(currentTurnEntity.ataque);
       if (currentTurnEntity.type === 'enemy') {
         const nuevo = ENEMIES.find(e => e.id === currentTurnEntity.id && e.cara === nuevaCara);
         if (nuevo) {
@@ -2592,16 +2584,29 @@ const InitTracker = () => {
               for (const key of PROPIEDADES_ACTUALIZABLES) {
                 if (nuevo[key] !== undefined) nuevasProps[key] = nuevo[key];
               }
-              return {
-                ...item,
-                enemy: {
-                  ...item.enemy,
-                  ...nuevasProps,
-                  cara: nuevaCara,
-                  capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
-                  capacidadesOriginales: nuevo.capacidades,
-                },
+              // 🔹 Clonamos el enemigo base con sus nuevas propiedades
+              let updatedEnemy = {
+                ...item.enemy,
+                ...nuevasProps,
+                cara: nuevaCara,
+                capacidades: adjustCapabilitiesByRunes(nuevo.capacidades, nuevo.rune, getRuneCount),
+                capacidadesOriginales: nuevo.capacidades,
               };
+              // ⚡️ Si pasa a cara A y tiene evolución activa, aplicar bonificación
+              if (nuevaCara === 'A') {
+                const evo = enemyEvolutions.find(e => e.uuid === item.enemy.uuid);
+                if (evo && evo.count > 0) {
+                  updatedEnemy = {
+                    ...updatedEnemy,
+                    ataque: (nuevo.ataque || updatedEnemy.ataque) + (2 * evo.count),
+                    movimiento: (nuevo.movimiento || updatedEnemy.movimiento) + (1 * evo.count),
+                  };
+                  console.log(`🧬 Evolución aplicada a ${updatedEnemy.nombre}: +${2 * evo.count} ATQ, +${1 * evo.count} MOV`);
+                }
+              }
+    
+              return { ...item, enemy: updatedEnemy };
+              
             }
             return item;
           }));
