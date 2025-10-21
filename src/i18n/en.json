@@ -332,6 +332,7 @@
     "health": "Health",
     "movement": "Movement",
     "attack": "Attack",
+    "evoluciona": "Evolves",
     "runeBasedValue": "Rune Based Value",
     "behavior": "Behavior",
     "category": "Category",
