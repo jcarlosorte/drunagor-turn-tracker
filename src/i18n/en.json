@@ -333,6 +333,7 @@
     "movement": "Movement",
     "attack": "Attack",
     "evoluciona": "Evolves",
+    "fuerzaAumenta": "your power grows this turn...",
     "runeBasedValue": "Rune Based Value",
     "behavior": "Behavior",
     "category": "Category",
