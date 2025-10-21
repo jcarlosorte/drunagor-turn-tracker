@@ -1381,7 +1381,16 @@ const InitTracker = () => {
           estados = nuevosEstados; // ✅ Actualizamos con la copia
         }
       }
-  
+
+      // ✅ EVOLUCIÓN
+      if (cap === "EVOLUCION") {
+        let ataq_Ori = enemy.ataque;
+        let mov_Ori = enemy.movimiento;
+        console.log(ataq_Ori);
+
+        
+      }
+      
       // ✅ MANIFESTAR
       if (cap === "MANIFESTAR") {
         const tile = manifestTile();
