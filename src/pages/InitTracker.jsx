@@ -2601,7 +2601,7 @@ const InitTracker = () => {
                     ataque: (nuevo.ataque || updatedEnemy.ataque) + (2 * evo.count),
                     movimiento: (nuevo.movimiento || updatedEnemy.movimiento) + (1 * evo.count),
                   };
-                  console.log(`🧬 Evolución aplicada a ${updatedEnemy.nombre}: +${2 * evo.count} ATQ, +${1 * evo.count} MOV`);
+                  //console.log(`🧬 Evolución aplicada a ${updatedEnemy.nombre}: +${2 * evo.count} ATQ, +${1 * evo.count} MOV`);
                 }
               }
     
