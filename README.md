@@ -8,7 +8,7 @@ WebApp gratuita para el control de turnos en el juego **Chronicles of Drunagor**
 
 - Selección de héroes y enemigos con datos personalizados.
 - Gestión de turnos automática según reglas del juego.
-- Configuración de idioma (actualmente solo español).
+- Configuración de idioma (actualmente solo español e inglés).
 - Soporte para expansiones que amplían enemigos y héroes.
 - Control de vida, efectos y estados alterados.
 - Interfaz clara y accesible para dispositivos móviles y escritorio.
