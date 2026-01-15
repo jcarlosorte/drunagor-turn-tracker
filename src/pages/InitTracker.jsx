@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { flushSync } from "react-dom";
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState, useRef } from 'react';
-import { GiAbstract065, GiWingedSword } from 'react-icons/gi';
+import { GiAbstract065, GiWingedSword, GiSwapBag } from 'react-icons/gi';
 import { RiArrowTurnBackLine, RiArrowTurnForwardLine } from "react-icons/ri";
 import { MdScreenRotation } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
@@ -93,7 +93,7 @@ const InitTracker = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
-  const { manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, discardTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
+  const { availableTiles, usedTiles, manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, discardTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange, addTileToPila, addTileToPilaConcentrada,
          initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack, placeTilesFromPilaToTrack } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
@@ -3684,6 +3684,43 @@ const InitTracker = () => {
               ))}
             </div>
 
+            {/* 📦 Estado de la bolsa debajo del track*/}
+            <div className="flex-1 bg-gray-700 rounded-lg p-3 shadow-md">
+              <div className="flex items-center gap-2 mb-2 justify-center">
+                <GiSwapBag className="text-yellow-300 text-xl" />
+                <span className="font-semibold text-white">
+                  {ti.estadoBolsa || 'Estado de la Bolsa de Runas'}
+                </span>
+              </div>
+              {/* Estado general */}
+              <div className="text-sm text-white justify-center">
+                {ti.extraidas}: <b>{usedTiles.length}</b><br />
+                {ti.total}: <b>{availableTiles.length + usedTiles.length}</b>
+              </div>
+              {/* Estado por colores en línea */}
+              <div className="flex items-center gap-2 text-xs justify-center">
+                {[
+                  { id: 'naranja', color: '#ff8c00' },
+                  { id: 'verde', color: '#00aa00' },
+                  { id: 'azul', color: '#0077cc' },
+                  { id: 'rojo', color: '#cc0000' },
+                  { id: 'gris', color: '#999999' }
+                ].map(({ id, color }) => {
+                  const usadasColor = usedTiles.filter(tile => tile.runa === id).length;
+                  const disponiblesColor = availableTiles.filter(tile => tile.runa === id).length;
+                  return (
+                    <div
+                      key={id}
+                      className="px-2 py-1 rounded font-semibold"
+                      style={{ backgroundColor: color, color: 'white' }}
+                    >
+                      {ti.colores[id] || id}: {usadasColor}/{usadasColor + disponiblesColor}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
             {categorySelector.open && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-gray-900 p-4 rounded-xl shadow-lg text-white text-center">
