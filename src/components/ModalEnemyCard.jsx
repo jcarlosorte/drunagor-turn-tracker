@@ -70,7 +70,9 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
         .replaceAll('{X}', numRunasColor)
         .replaceAll('{2*X}', numRunasColor * 2)
         .replaceAll('{3*X}', numRunasColor * 3)
-        .replaceAll('{4*X}', numRunasColor * 4);
+        .replaceAll('{4*X}', numRunasColor * 4)
+        .replaceAll('{X+1}', numRunasColor + 1)
+        .replaceAll('{X+2}', numRunasColor + 2);
   
       // Eliminamos las llaves y traducimos
       return capacidad.replace(/\{([^}]+)\}/g, (_, key) => ttr[key] || key);
