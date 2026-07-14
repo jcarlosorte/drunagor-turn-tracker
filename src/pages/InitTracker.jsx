@@ -1177,13 +1177,17 @@ const InitTracker = () => {
     if (!enemyData) return null;
   
     let ataqueModificado = 0;
-
+    const countAtaque = getRuneCount(enemyData.rune); // Obtenemos el valor base una vez
+    
     if (enemyData.ataque === "X") {
-      ataqueModificado = getRuneCount(enemyData.rune);
+      ataqueModificado = countAtaque;
+    } else if (typeof enemyData.ataque === "string" && enemyData.ataque.startsWith("X+")) {
+      const extra = parseInt(enemyData.ataque.slice(2), 10) || 0;
+      ataqueModificado = countAtaque + extra;
     } else {
       ataqueModificado = parseInt(enemyData.ataque, 10) || 0;
     }
-    
+
     let inmunidadesExtra = [];
     let cartaId = null;
     // Buscar cartas especiales asociadas a este enemigo
