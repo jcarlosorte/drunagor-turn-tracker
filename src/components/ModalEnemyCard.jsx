@@ -93,7 +93,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
       if (categoria === "esbirro"){
         if (tipeCap === "M"){
           if (count <= 1) return 3;  // 0 o 1 runa → 3
-          if (count === 2) return 4; // 2 runas → 4
+          if (count >= 2) return 4; // 2 runas → 4
         } else if (tipeCap === "A") {
           return Math.min(count, 3);
         }
