@@ -461,7 +461,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
                         {tipoAtaqueIconMap[tipo_ataque] || <GiSwordClash className="text-white text-lg" />}
                       </span>
                       {valorAtaque}
-                      {effectiveStats.ataqueModificado !== valorAtaque && (
+                      {effectiveStats.ataqueModificado !== valorAtaque && effectiveStats.enemyData.categoria !== "esbirro" && (
                         <span>
                           /
                           <span className="text-blue-500 font-bold cursor-help" title={traducirCapacidad(effectiveStats.idCartaEspecial, rune, getRuneCount)}>
