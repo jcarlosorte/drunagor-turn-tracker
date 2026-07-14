@@ -81,33 +81,33 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
     return '';
   };
   
-  const interpretarValorRuna = (valor, runeColor, getRuneCount, categoria) => {
+  const interpretarValorRuna = (valor, runeColor, getRuneCount, categoria, tipeCap) => {
     const count = getRuneCount(runeColor);
-  
+    
     if (valor === "X") {
       return count;
     }
 
     if (typeof valor === "string" && valor.startsWith("X+")) {
       const extra = parseInt(valor.slice(2), 10); // ej: "X+3" → 3
-      if (categoria != "esbirro"){
-        if (extra === 0) {
-          // X+0 → usar count con máximo de 4
-          return Math.min(count, 4);
+      if (categoria === "esbirro"){
+        if (tipeCap === "M"){
+          if (count <= 1) return 3;  // 0 o 1 runa → 3
+          if (count === 2) return 4; // 2 runas → 4
+        } else if (tipeCap === "A") {
+          return Math.min(count, 3);
         }
-        if (count <= 1) return extra;      // 0 o 1 runa → 3
-        if (count === 2) return extra + 1; // 2 runas → 4
-        return extra + 1;                  // 3 o más → 4
+
       } else {
-      return extra + count;
+        return extra + count;
       } 
     }
   
     return valor; // Si es un número directo o no aplicable
   };
 
-  const valorMovimiento = interpretarValorRuna(movimiento, rune, getRuneCount, categoria);
-  const valorAtaque = interpretarValorRuna(ataque, rune, getRuneCount, categoria);
+  const valorMovimiento = interpretarValorRuna(movimiento, rune, getRuneCount, categoria, "M");
+  const valorAtaque = interpretarValorRuna(ataque, rune, getRuneCount, categoria, "A");
   
 
   const borderColorMap = {
