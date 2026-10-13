@@ -18,15 +18,27 @@ WebApp gratuita para el control de turnos en el juego **Chronicles of Drunagor**
 ## 📦 Instalación y ejecución local
 
 ```bash
-# Clona el repositorio
-git clone https://github.com/tu_usuario/tu_repositorio.git
-
-# Entra en el directorio del proyecto
-cd tu_repositorio
-
-# Instala las dependencias
+git clone https://github.com/jcarlosorte/drunagor-turn-tracker.git
+cd drunagor-turn-tracker
 npm install
-
-# Inicia el servidor local
 npm run dev
+```
 
+## 💾 Guardado de partidas
+
+- **Este dispositivo** (IndexedDB): sin cuenta ni Firebase.
+- **Nube (Google)** (Firestore): opcional, login con cualquier Gmail.
+
+Guía paso a paso (local, Firebase, GitHub Pages, fallos comunes):
+
+→ **[docs/probar-guardado.md](docs/probar-guardado.md)**
+
+### Firebase
+
+No hay que “dar de alta” correos: con **Authentication → Google**, cada persona entra con **su** Gmail.
+
+Creación del proyecto **paso a paso** (app web, Auth, Firestore, reglas, `.env.local`):
+
+→ **[docs/probar-guardado.md § 3](docs/probar-guardado.md#3-crear-firebase-paso-a-paso-nube)**
+
+Si solo quieres probar el feature: empieza por la pestaña **Este dispositivo**; la nube puede esperar.

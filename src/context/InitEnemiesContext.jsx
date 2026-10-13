@@ -147,9 +147,24 @@ export const InitEnemiesProvider = ({ children }) => {
     setEnemyColorMap({});
   };
 
+  /** Restore board enemies / scenario flags from a save snapshot. */
+  const hydrateEnemies = (data = {}) => {
+    if (data.placedEnemies) setPlacedEnemies(data.placedEnemies);
+    if (data.usedColors) setUsedColors(data.usedColors);
+    if (data.usedColorsBig) setUsedColorsBig(data.usedColorsBig);
+    if (data.enemyColorMap) setEnemyColorMap(data.enemyColorMap);
+    if (typeof data.huespedActivo === 'boolean') setHuespedActivo(data.huespedActivo);
+    if (typeof data.acechoActivo === 'boolean') setAcechoActivo(data.acechoActivo);
+    if (typeof data.invadidosActivo === 'boolean') setInvadidosActivo(data.invadidosActivo);
+    if (typeof data.oscuridadActivo === 'boolean') setOscuridadActivo(data.oscuridadActivo);
+    if (typeof data.asaltoActivo === 'boolean') setAsaltoActivo(data.asaltoActivo);
+    setAvisos([]);
+  };
+
   return (
     <InitEnemiesContext.Provider value={{ placedEnemies, setPlacedEnemies, placeEnemy, 
-                                         removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies, 
+                                         removeEnemyAt, removeEnemyByUUID, resetPlacedEnemies,
+                                         hydrateEnemies,
                                          assignColorToEnemy, releaseColor, usedColors, setUsedColors, 
                                          usedColorsBig, setUsedColorsBig, enemyColorMap, setEnemyColorMap, 
                                          huespedActivo, activaHuesped, desactivaHuesped, 
