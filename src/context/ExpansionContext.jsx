@@ -25,8 +25,14 @@ export const ExpansionProvider = ({ children }) => {
 
   const clearExpansions = () => setSelectedExpansions([]);
 
+  const hydrateExpansions = (ids) => {
+    if (Array.isArray(ids)) setSelectedExpansions(ids);
+  };
+
   return (
-    <ExpansionContext.Provider value={{ selectedExpansions, toggleExpansion, clearExpansions }}>
+    <ExpansionContext.Provider
+      value={{ selectedExpansions, toggleExpansion, clearExpansions, hydrateExpansions, setSelectedExpansions }}
+    >
       {children}
     </ExpansionContext.Provider>
   );

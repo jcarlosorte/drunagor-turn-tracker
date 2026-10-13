@@ -765,6 +765,31 @@ export const GameProvider = ({ children }) => {
     if (!tile) return;
     showTileToast(tile, 'add');
   };
+
+  /** Restore game bag/track state from a save snapshot. Does not change handlers. */
+  const hydrateGame = (data = {}) => {
+    if (data.runes) setRunes(data.runes);
+    if (data.availableTiles) setAvailableTiles(data.availableTiles);
+    if (data.usedTiles) setUsedTiles(data.usedTiles);
+    if (data.discardedTiles) setDiscardedTiles(data.discardedTiles);
+    if (data.pilas) setPilas(data.pilas);
+    if (data.pilasConcentrada) setPilasConcentrada(data.pilasConcentrada);
+    if (data.codigosPilas) setCodigosPilas(data.codigosPilas);
+    if (typeof data.contadorPilas === 'number') setContadorPilas(data.contadorPilas);
+    if (typeof data.contadorPilasConcentradas === 'number') {
+      setContadorPilasConcentradas(data.contadorPilasConcentradas);
+    }
+    if (data.spawnPoints) setSpawnPoints(data.spawnPoints);
+    if (data.controlPoints) setControlPoints(data.controlPoints);
+    if (data.runeKeys) setRuneKeys(data.runeKeys);
+    if (data.rescue) setRescue(data.rescue);
+    if ('scenarioMonster' in data) setScenarioMonster(data.scenarioMonster);
+    if (data.aldeanoDeck) setAldeanoDeck(data.aldeanoDeck);
+    if (data.errantesDeck) setErrantesDeck(data.errantesDeck);
+    if (data.pilaDeRunas) setPilaDeRunas(data.pilaDeRunas);
+    setTileToasts([]);
+    setTileWarning(null);
+  };
   
   return (
     <GameContext.Provider
@@ -786,6 +811,12 @@ export const GameProvider = ({ children }) => {
         pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
         removeTileFromPila, addRunesCascade, placeTilesFromPilaToTrack, addTileToPila, addTileToPilaConcentrada,
         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, removeSingleTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack,
+        contadorPilas,
+        contadorPilasConcentradas,
+        aldeanoDeck,
+        errantesDeck,
+        pilaDeRunas,
+        hydrateGame,
         resetTiles,
         tileWarning, 
         setTileWarning,

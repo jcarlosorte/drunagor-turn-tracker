@@ -37,6 +37,11 @@ import TileWarningModal from '@/components/TileWarningModal';
 import TileToast from '@/components/TileToast';
 import CommanderCard from '@/components/CommanderCard';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  registerInitSnapshotHandlers,
+  consumeInitRestore,
+} from '@/save/initSnapshotBridge';
+import { OPEN_SAVES_EVENT } from '@/components/TopMenuLanguage';
 
 const rolesPositionMap = {
   defensor: 0,
@@ -2093,6 +2098,8 @@ const InitTracker = () => {
   const groupIndex = groupTurnTracker.index;
   const roundRef = useRef(0);
   const previousIndexRef = useRef(null);
+  /** After load/save hydrate: suppress auto-skip of empty turns for a short window. */
+  const hydrateGuardUntilRef = useRef(0);
   const processedStartEffectsRef = useRef(new Set());
   const processedEndEffectsRef = useRef(new Set());
   const processedCardsRef = useRef(new Set());
@@ -2100,6 +2107,81 @@ const InitTracker = () => {
   const [extraTurnsQueue, setExtraTurnsQueue] = useState([]);
   const [extraTurnIndex, setExtraTurnIndex] = useState(0); // índice actual
   const [extraTurnTotal, setExtraTurnTotal] = useState(0); // total actual
+
+  // Save/load bridge: expose turn-local state without changing game handlers.
+  useEffect(() => {
+    const get = () => ({
+      turnIndex,
+      currentTurnEntity,
+      groupTurnTracker,
+      lastRealTurnIndex,
+      extraTurnsQueue,
+      extraTurnIndex,
+      extraTurnTotal,
+      selectedRuneCards,
+      flippedCards,
+      enemyEvolutions,
+      overhealedEnemies: Array.from(overhealedEnemies || []),
+    });
+
+    const set = (data) => {
+      if (!data) return;
+      hydrateGuardUntilRef.current = Date.now() + 3000;
+      if (typeof data.turnIndex === 'number') {
+        previousIndexRef.current = data.turnIndex;
+        setTurnIndex(data.turnIndex);
+      }
+      if ('currentTurnEntity' in data) setCurrentTurnEntity(data.currentTurnEntity);
+      if (data.groupTurnTracker) setGroupTurnTracker(data.groupTurnTracker);
+      if ('lastRealTurnIndex' in data) setLastRealTurnIndex(data.lastRealTurnIndex);
+      if (Array.isArray(data.extraTurnsQueue)) setExtraTurnsQueue(data.extraTurnsQueue);
+      if (typeof data.extraTurnIndex === 'number') setExtraTurnIndex(data.extraTurnIndex);
+      if (typeof data.extraTurnTotal === 'number') setExtraTurnTotal(data.extraTurnTotal);
+      if (Array.isArray(data.selectedRuneCards)) setSelectedRuneCards(data.selectedRuneCards);
+      if (Array.isArray(data.flippedCards)) setFlippedCards(data.flippedCards);
+      if (Array.isArray(data.enemyEvolutions)) setEnemyEvolutions(data.enemyEvolutions);
+      if (Array.isArray(data.overhealedEnemies)) {
+        setOverhealedEnemies(new Set(data.overhealedEnemies));
+      }
+    };
+
+    return registerInitSnapshotHandlers({ get, set });
+  }, [
+    turnIndex,
+    currentTurnEntity,
+    groupTurnTracker,
+    lastRealTurnIndex,
+    extraTurnsQueue,
+    extraTurnIndex,
+    extraTurnTotal,
+    selectedRuneCards,
+    flippedCards,
+    enemyEvolutions,
+    overhealedEnemies,
+  ]);
+
+  // Apply a queued restore once when InitTracker mounts (e.g. after navigating from Load).
+  useEffect(() => {
+    const pending = consumeInitRestore();
+    if (!pending) return;
+    hydrateGuardUntilRef.current = Date.now() + 3000;
+    if (typeof pending.turnIndex === 'number') {
+      previousIndexRef.current = pending.turnIndex;
+      setTurnIndex(pending.turnIndex);
+    }
+    if ('currentTurnEntity' in pending) setCurrentTurnEntity(pending.currentTurnEntity);
+    if (pending.groupTurnTracker) setGroupTurnTracker(pending.groupTurnTracker);
+    if ('lastRealTurnIndex' in pending) setLastRealTurnIndex(pending.lastRealTurnIndex);
+    if (Array.isArray(pending.extraTurnsQueue)) setExtraTurnsQueue(pending.extraTurnsQueue);
+    if (typeof pending.extraTurnIndex === 'number') setExtraTurnIndex(pending.extraTurnIndex);
+    if (typeof pending.extraTurnTotal === 'number') setExtraTurnTotal(pending.extraTurnTotal);
+    if (Array.isArray(pending.selectedRuneCards)) setSelectedRuneCards(pending.selectedRuneCards);
+    if (Array.isArray(pending.flippedCards)) setFlippedCards(pending.flippedCards);
+    if (Array.isArray(pending.enemyEvolutions)) setEnemyEvolutions(pending.enemyEvolutions);
+    if (Array.isArray(pending.overhealedEnemies)) {
+      setOverhealedEnemies(new Set(pending.overhealedEnemies));
+    }
+  }, []);
   
   useEffect(() => {
 
@@ -2153,6 +2235,10 @@ const InitTracker = () => {
     }
     
     if (!hasEntities) {
+      // After save hydrate, keep the restored turnIndex (do not auto-skip).
+      if (Date.now() < hydrateGuardUntilRef.current) {
+        return;
+      }
       //console.log("⚠ No hay entidades en el paso actual, avanzamos...");
       setTimeout(() => {
         handleNextTurn();
@@ -3348,6 +3434,16 @@ const InitTracker = () => {
               onSelectRuneCard={handleAddRuneCard}
               onTileDraw={handleTileDraw}
             />
+
+            <div className="flex justify-end mb-2">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_SAVES_EVENT))}
+                className="bg-emerald-800 hover:bg-emerald-700 border border-emerald-500 text-white text-sm font-semibold px-3 py-1 rounded"
+              >
+                {translations?.saves?.openButton || 'Saves'}
+              </button>
+            </div>
 
             {/* Zona especial para Jefes */}
             {placedEnemies
