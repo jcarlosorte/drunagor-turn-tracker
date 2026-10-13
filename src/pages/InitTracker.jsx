@@ -3507,13 +3507,13 @@ const InitTracker = () => {
                                     )
                                   }
                                 >
-                                  {t.devolverNodo}
+                                  {ti.devolverNodo}
                                 </button>
                                 
                                 {pilaConcentradaEliminarAbierta === pila.id && (
                                   <div className="mt-1 p-2 rounded bg-gray-900 border border-red-700 flex flex-wrap justify-center gap-1">
                                     <div className="w-full text-[11px] text-gray-300 mb-1">
-                                      {t.eliminarPorColor || 'Eliminar una runa:'}
+                                      {ti.eliminarPorColor || 'Eliminar una runa:'}
                                     </div>
                                 
                                     {['naranja', 'verde', 'azul', 'rojo', 'gris']
@@ -3531,13 +3531,13 @@ const InitTracker = () => {
                                             if (removed) {
                                               showTileToast(removed, 'retira');
                                             } else {
-                                              alert(t.emptyPila);
+                                              alert(ti.emptyPila);
                                             }
                                 
                                             setPilaConcentradaEliminarAbierta(null);
                                           }}
                                         >
-                                          {t.colores?.[color] || color}
+                                          {ti.colores?.[color] || color}
                                         </button>
                                       ))}
                                 
@@ -3550,13 +3550,13 @@ const InitTracker = () => {
                                         if (removed) {
                                           showTileToast(removed, 'retira');
                                         } else {
-                                          alert(t.emptyPila);
+                                          alert(ti.emptyPila);
                                         }
                                 
                                         setPilaConcentradaEliminarAbierta(null);
                                       }}
                                     >
-                                      🎲 {t.removeRandom || 'Aleatoria'}
+                                      🎲 {ti.removeRandom || 'Aleatoria'}
                                     </button>
                                   </div>
                                 )}
@@ -3566,7 +3566,7 @@ const InitTracker = () => {
                                   onClick={() => {
                                     const tiles = placeTilesFromPilaConcentradaToTrack(pila.id);
                                     if (!tiles || tiles.length === 0) {
-                                      alert(t.emptyPila);
+                                      alert(ti.emptyPila);
                                       return;
                                     }
                                   }}
