@@ -92,10 +92,11 @@ const InitTracker = () => {
   const [manualSelector, setManualSelector] = useState({ open: false, color: null });
   const [toastMessage, setToastMessage] = useState('');
   const [selectedEnemyUuid, setSelectedEnemyUuid] = useState(null);
+  const [pilaConcentradaEliminarAbierta, setPilaConcentradaEliminarAbierta] = useState(null);
   const specialCategories = ['comandante', 'jefe', 'overlord', 'hero', 'esbirro', 'escenario'];
   const { availableTiles, usedTiles, manifestTile, tileToasts, setTileToasts, showTileToast, drawTilePreviewByColor, drawTileByColor, discardTileByColor, runes, addRune, removeRune, getRuneCount, clearRunes, drawMultipleTiles, tileWarning, setTileWarning, scenarioMonster, 
          spawnPoints, removeSpawnPoint, controlPoints, removeControlPoint, runeKeys, removeRuneKey, rescue, removeRescue, pilas, pilasConcentrada, activarPilaConcentrada, activarPila, codigosPilas, setCodigosPilas, handleCodigoChange, addTileToPila, addTileToPilaConcentrada,
-         initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack, placeTilesFromPilaToTrack } = useGame();
+         initializeDecks, drawCardFromDeck, removeTileFromPila, removeTileFromPilaConcentrada, removeSingleTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack, placeTilesFromPilaToTrack } = useGame();
   const [selectedRuneCards, setSelectedRuneCards] = useState([]);
   const { placedRunes, placeRune, removeRuneByUUID, resetPlacedRunes, setPlacedRunes } = useInitRunes();
   const { executedRunes, setExecutedRunes } = useInitRunes();
@@ -3499,17 +3500,28 @@ const InitTracker = () => {
                                 </button>
                                 <button
                                   className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                                  onClick={() => {
-                                    const tilesRemoved = removeTileFromPilaConcentrada(pila.id);
-                                    if (tilesRemoved && tilesRemoved.length > 0) {
-                                      tilesRemoved.forEach(tile => showTileToast(tile, 'retira'));
-                                    } else {
-                                      alert(ti.emptyPila);
-                                    }
-                                  }}
+                                  aria-expanded={pilaConcentradaEliminarAbierta === pila.id}
+                                  onClick={() =>
+                                    setPilaConcentradaEliminarAbierta(prev =>
+                                      prev === pila.id ? null : pila.id
+                                    )
+                                  }
                                 >
-                                  {ti.devolverNodo}
+                                  {t.devolverNodo}
                                 </button>
+                                
+                                {pilaConcentradaEliminarAbierta === pila.id && (
+                                  <div className="mt-1 p-2 rounded bg-gray-900 border border-red-700 flex flex-wrap justify-center gap-1">
+                                    <div className="w-full text-[11px] text-gray-300 mb-1">
+                                      {t.eliminarPorColor || 'Eliminar una runa:'}
+                                    </div>
+                                
+                                    {['naranja', 'verde', 'azul', 'rojo', 'gris']
+                                      .filter(color =>
+                                        pila.tiles.some(tile => tile.runa === color)
+                                      )
+                                      .map(color => (
+
                                {/* Botón combate estrecho */}
                                 <button
                                   className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
