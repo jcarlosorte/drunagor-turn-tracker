@@ -1,0 +1,4 @@
+Actualizar fetch origin en GitHub Desktop
+Luego en ProwerShell del GitHub:
+npm install
+npm run deploy
