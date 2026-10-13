@@ -447,6 +447,17 @@ const TopMenu = ({
                             }}
                             className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
                           >
+                            Embrujo 0
+                          </button>
+                          
+                          <button
+                            onClick={() => {
+                              activaAcecho();
+                              onSelectBoss("undead_king_boss_Acecho_1");
+                              setShowEmbrujoOptions(false);
+                            }}
+                            className="bg-purple-700 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded"
+                          >
                             Embrujo I
                           </button>
                   
