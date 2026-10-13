@@ -415,6 +415,50 @@ export const GameProvider = ({ children }) => {
     return tilesAEliminar;
   };
 
+  // Retira una sola ficha de la pila concentrada: por color o aleatoriamente.
+  const removeSingleTileFromPilaConcentrada = (pilaId, color = null) => {
+    const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
+  
+    if (
+      !pilaActual ||
+      !Array.isArray(pilaActual.tiles) ||
+      pilaActual.tiles.length === 0
+    ) {
+      return null;
+    }
+  
+    const candidates = pilaActual.tiles
+      .map((tile, index) => ({ tile, index }))
+      .filter(({ tile }) => !color || tile.runa === color);
+  
+    if (candidates.length === 0) return null;
+  
+    const selected =
+      candidates[Math.floor(Math.random() * candidates.length)];
+  
+    const tilesRestantes = pilaActual.tiles.filter(
+      (_, index) => index !== selected.index
+    );
+  
+    // Devolver la ficha a la bolsa.
+    setAvailableTiles(prev => [...prev, selected.tile]);
+  
+    // Actualizar la pila y eliminarla si se queda vacía.
+    setPilasConcentrada(prev =>
+      prev
+        .map(p =>
+          p.id !== pilaId
+            ? p
+            : tilesRestantes.length === 0
+              ? null
+              : { ...p, tiles: tilesRestantes }
+        )
+        .filter(Boolean)
+    );
+  
+    return selected.tile;
+  };
+    
   const placeTilesFromPilaConcentradaToTrack = (pilaId) => {
     const pilaActual = pilasConcentrada.find(p => p.id === pilaId);
     if (!pilaActual || !Array.isArray(pilaActual.tiles) || pilaActual.tiles.length === 0) return [];
@@ -741,7 +785,7 @@ export const GameProvider = ({ children }) => {
         restoreDiscardedTile,
         pilas, setPilas, addNewPila, activarPila, activarPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
         removeTileFromPila, addRunesCascade, placeTilesFromPilaToTrack, addTileToPila, addTileToPilaConcentrada,
-        pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack,
+        pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, removeTileFromPilaConcentrada, removeSingleTileFromPilaConcentrada, placeTilesFromPilaConcentradaToTrack,
         resetTiles,
         tileWarning, 
         setTileWarning,
