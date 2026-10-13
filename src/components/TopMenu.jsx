@@ -914,7 +914,7 @@ const TopMenu = ({
                                       }
                                     }}
                                   >
-                                    {t.devolver}
+                                    {t.devolverNodo}
                                   </button>
                                   {/* Botón combate estrecho */}
                                   <button
