@@ -41,10 +41,11 @@ const TopMenu = ({
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [showEmbrujoOptions, setShowEmbrujoOptions] = useState(false);
   const [showScenarioFaceOptions, setShowScenarioFaceOptions] = useState(false);
+  const [pilaConcentradaEliminarAbierta, setPilaConcentradaEliminarAbierta] = useState(null);
   const { runes, addRune, removeRune, getRuneCount, clearRunes, availableTiles, usedTiles, showTileToast, setTileToasts, tileToasts,
          drawTileByColor, drawTilePreviewByColor, drawMultipleTiles, discardedTiles, discardTileByColor, discardTileRandom, restoreDiscardedTile, 
          pilas, setPilas, addNewPila, activarPila, removeTileFromPila, addRunesCascade, addTileToPilaConcentrada, addTileToPila,
-         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
+         pilasConcentrada, setPilasConcentrada, addNewPilaConcentrada, activarPilaConcentrada, removeTileFromPilaConcentrada, removeSingleTileFromPilaConcentrada, codigosPilas, setCodigosPilas, handleCodigoChange,
          resetTiles, tileWarning, setTileWarning, deleteAvailableTileByColor, deleteAvailableTileRandom, scenarioMonster, placeTilesFromPilaConcentradaToTrack, placeTilesFromPilaToTrack,
          setScenarioMonster, setSpawnPoints, spawnPoints, initializeSpawnPoints, removeSpawnPoint, controlPoints, setControlPoints, initializeControlPoints, removeControlPoint, 
          setRuneKeys, runeKeys, initializeRuneKeys, removeRuneKey, setRescue, rescue, initializeRescue, removeRescue,
@@ -905,17 +906,66 @@ const TopMenu = ({
                                   </button>
                                   <button
                                     className="bg-red-700 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
-                                    onClick={() => {
-                                      const tilesRemoved = removeTileFromPilaConcentrada(pila.id);
-                                      if (tilesRemoved && tilesRemoved.length > 0) {
-                                        tilesRemoved.forEach(tile => showTileToast(tile, 'retira'));
-                                      } else {
-                                        alert(t.emptyPila);
-                                      }
-                                    }}
+                                    aria-expanded={pilaConcentradaEliminarAbierta === pila.id}
+                                    onClick={() =>
+                                      setPilaConcentradaEliminarAbierta(prev =>
+                                        prev === pila.id ? null : pila.id
+                                      )
+                                    }
                                   >
                                     {t.devolverNodo}
                                   </button>
+                                  
+                                  {pilaConcentradaEliminarAbierta === pila.id && (
+                                    <div className="mt-1 p-2 rounded bg-gray-900 border border-red-700 flex flex-wrap justify-center gap-1">
+                                      <div className="w-full text-[11px] text-gray-300 mb-1">
+                                        {t.eliminarPorColor || 'Eliminar una runa:'}
+                                      </div>
+                                  
+                                      {['naranja', 'verde', 'azul', 'rojo', 'gris']
+                                        .filter(color =>
+                                          pila.tiles.some(tile => tile.runa === color)
+                                        )
+                                        .map(color => (
+                                          <button
+                                            key={color}
+                                            className={`${colorMap[color]} text-white px-2 py-1 rounded text-xs`}
+                                            onClick={() => {
+                                              const removed =
+                                                removeSingleTileFromPilaConcentrada(pila.id, color);
+                                  
+                                              if (removed) {
+                                                showTileToast(removed, 'retira');
+                                              } else {
+                                                alert(t.emptyPila);
+                                              }
+                                  
+                                              setPilaConcentradaEliminarAbierta(null);
+                                            }}
+                                          >
+                                            {t.colores?.[color] || color}
+                                          </button>
+                                        ))}
+                                  
+                                      <button
+                                        className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white px-2 py-1 rounded text-xs"
+                                        onClick={() => {
+                                          const removed =
+                                            removeSingleTileFromPilaConcentrada(pila.id);
+                                  
+                                          if (removed) {
+                                            showTileToast(removed, 'retira');
+                                          } else {
+                                            alert(t.emptyPila);
+                                          }
+                                  
+                                          setPilaConcentradaEliminarAbierta(null);
+                                        }}
+                                      >
+                                        🎲 {t.removeRandom || 'Aleatoria'}
+                                      </button>
+                                    </div>
+                                  )}
                                   {/* Botón combate estrecho */}
                                   <button
                                     className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs relative group"
