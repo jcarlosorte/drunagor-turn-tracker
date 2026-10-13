@@ -3521,7 +3521,45 @@ const InitTracker = () => {
                                         pila.tiles.some(tile => tile.runa === color)
                                       )
                                       .map(color => (
-
+                                        <button
+                                          key={color}
+                                          className={`${colorMap[color]} text-white px-2 py-1 rounded text-xs`}
+                                          onClick={() => {
+                                            const removed =
+                                              removeSingleTileFromPilaConcentrada(pila.id, color);
+                                
+                                            if (removed) {
+                                              showTileToast(removed, 'retira');
+                                            } else {
+                                              alert(t.emptyPila);
+                                            }
+                                
+                                            setPilaConcentradaEliminarAbierta(null);
+                                          }}
+                                        >
+                                          {t.colores?.[color] || color}
+                                        </button>
+                                      ))}
+                                
+                                    <button
+                                      className="bg-gradient-to-r from-blue-500 via-yellow-400 to-red-500 text-white px-2 py-1 rounded text-xs"
+                                      onClick={() => {
+                                        const removed =
+                                          removeSingleTileFromPilaConcentrada(pila.id);
+                                
+                                        if (removed) {
+                                          showTileToast(removed, 'retira');
+                                        } else {
+                                          alert(t.emptyPila);
+                                        }
+                                
+                                        setPilaConcentradaEliminarAbierta(null);
+                                      }}
+                                    >
+                                      🎲 {t.removeRandom || 'Aleatoria'}
+                                    </button>
+                                  </div>
+                                )}
                                {/* Botón combate estrecho */}
                                 <button
                                   className="bg-red-900 hover:bg-red-800 text-white px-3 py-1 rounded text-xs"
