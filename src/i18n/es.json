@@ -385,6 +385,7 @@
       "devolverNodo": "Rompe Nodo",
       "combateEstrecho": "❌ Nodo",
       "combateEstrecho_pila": "❌ Pila",
+      "eliminarPorColor": "Eliminar una runa:",
       "helperCombateEstrecho": "Combate Cercano: Las Fichas de Runa sobrantes irán al Medidor de Iniciativa",
       "emptyPila": "Pila vacía.",
       "total": "Total",
