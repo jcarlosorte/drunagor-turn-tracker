@@ -8,7 +8,7 @@ const InitEnemiesContext = createContext();
 
 export const InitEnemiesProvider = ({ children }) => {
   const { language, translations } = useLanguage();
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
   const [placedEnemies, setPlacedEnemies] = useState([]);
   const [huespedActivo, setHuespedActivo] = useState(false);
   const [acechoActivo, setAcechoActivo] = useState(false);

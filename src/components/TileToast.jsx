@@ -16,7 +16,7 @@ const colorMap = {
 const TileToast = ({ tile, tipo = 'add', onClose = () => {} }) => {
   if (!tile?.runa) return null;
   const { translations } = useLanguage();
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
   const mensaje = tipo === 'remove'
     ? `−1 ${ti.rune}: ${ti.colores[tile.runa]}`
     : tipo === 'show'

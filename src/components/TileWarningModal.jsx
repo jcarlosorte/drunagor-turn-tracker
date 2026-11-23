@@ -6,7 +6,7 @@ import { useGame } from '@/context/GameContext';
 const TileWarningModal = () => {
   const { tileWarning, setTileWarning } = useGame();
   const { language, translations } = useLanguage();
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
 
   if (!tileWarning) return null;
 

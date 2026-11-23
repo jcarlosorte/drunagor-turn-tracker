@@ -68,7 +68,7 @@ const InitTracker = () => {
   const { language, translations } = useLanguage();
   const { selectedExpansions } = useExpansions();
   const navigate = useNavigate();
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
   const tr = translations.roles || {};
   const tc = translations.enemies?.categoria || {};
   const tee = translations.enemies || {};

@@ -16,7 +16,7 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const hasConfirmedOverheal = overhealedEnemies?.has(uuid) ?? false;
   const [avisos, setAvisos] = useState([]);
 
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
   const tr = translations.roles || {};
   const te = translations.enemies || {};
   const tc = translations.enemies?.categoria || {};

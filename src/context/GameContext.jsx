@@ -28,7 +28,7 @@ export const GameProvider = ({ children }) => {
   const [contadorPilas, setContadorPilas] = useState(1);
   const [contadorPilasConcentradas, setContadorPilasConcentradas] = useState(1);
   const { language, translations } = useLanguage();
-  const ti = translations.trackerInit || {};
+  const ti = translations?.trackerInit || {};
   const [availableTiles, setAvailableTiles] = useState(
     FICHAS.map(f => ({ ...f, uuid: uuidv4() }))
   );
@@ -44,7 +44,7 @@ export const GameProvider = ({ children }) => {
   const [errantesDeck, setErrantesDeck] = useState([]);
   const [codigosPilas, setCodigosPilas] = useState({});
   const { trackerData } = useTracker();
-  const selectedHeroes = trackerData.heroes;
+  const selectedHeroes = trackerData?.heroes || [];
   const numHeroes = selectedHeroes.length;
 
   const handleCodigoChange = (pilaId, nuevoCodigo) => {
