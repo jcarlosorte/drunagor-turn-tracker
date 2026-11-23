@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:win": "mkdir .buildtmp 2>nul && set TMP=.buildtmp && set TEMP=.buildtmp && set TMPDIR=.buildtmp && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
