@@ -1,0 +1,40 @@
+[33m1124de6eb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Remove GitHub Actions Pages workflow
+[33m6261533fe[m Improve workflow logging: verify dist contents before upload
+[33m440e12f1a[m Run vite directly with npx
+[33m03c1d1390[m Remove debug flag from build command
+[33me05ac2ec5[m Add debug steps to workflow
+[33m0f442f5a2[m Add .gitignore and remove .buildtmp from tracking
+[33m93744bf0c[m Simplify build script - use plain vite build on Linux
+[33m678013a57[m Fix build script for cross-platform compatibility
+[33mf76e4183b[m Add memory limit for build
+[33m3203c8565[m Fix build command for cross-platform compatibility
+[33m978fb545c[m Add GitHub Actions workflow for Pages deployment
+[33ma95ce716d[m update
+[33mad8ce6cca[m Fix build script: use local .buildtmp directory to avoid esbuild temp permission error
+[33m0e217d65a[m update
+[33m1f504a09a[m Fix logo path for GitHub Pages deployment
+[33m197b0f9c1[m Ni idea
+[33m50c6e8be9[m Update InitTracker.jsx
+[33mbd0295a91[m Add translation for 'Eliminar una runa'
+[33md96e9a95a[m Update en.json
+[33m1e9519a97[m Update InitTracker.jsx
+[33m7fa619d6a[m Update InitTracker.jsx
+[33m58d562306[m Update TopMenu.jsx
+[33m6a66c63ee[m Update GameContext.jsx
+[33ma29fe5369[m Update TopMenu.jsx
+[33m58aa5ee68[m up
+[33m4a4a9f039[m Update TopMenu.jsx
+[33m12d1c1c45[m Delete src/data/borrar
+[33mef52d968e[m Fix condition check for ataqueModificado in ModalEnemyCard
+[33m0c716ec47[m Update conditional rendering for ataqueModificado
+[33mf419aaeff[m Update InitTracker.jsx
+[33mca86b193b[m Refactor condition for count check in ModalEnemyCard
+[33m0c5664671[m Update ModalEnemyCard.jsx
+[33m9ab3e5cb1[m Update enemies.js
+[33m800a42efc[m Update ModalEnemyCard.jsx
+[33m5b7dc559b[m Update enemies.js
+[33m4bec3aa3f[m Fix translation key for solid elements in Spanish
+[33m0a3c8dcf2[m Update en.json
+[33mf75e3dbbf[m Update enemies.js
+[33m5a9360799[m Change background color class in InitTracker
+[33m9a536931d[m Add bag state display with GiSwapBag icon
