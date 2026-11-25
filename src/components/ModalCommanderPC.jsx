@@ -5,8 +5,8 @@ import { useLanguage } from '@/context/LanguageContext';
 const ModalCommanderPC = ({ onConfirm }) => {
   const [pcValue, setPcValue] = useState('');
   const { language, translations } = useLanguage();
-  const ti = translations.trackerInit || {}
-  const ts = translations.trackerSelect || {}
+  const ti = translations?.trackerInit || {}
+  const ts = translations?.trackerSelect || {}
 
   const handleSubmit = () => {
     const parsed = parseInt(pcValue, 10);

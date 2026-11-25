@@ -17,15 +17,15 @@ export const ModalEnemyCard = ({ uuid, enemy, onClose, onDelete, onVidaChange, o
   const [avisos, setAvisos] = useState([]);
 
   const ti = translations?.trackerInit || {};
-  const tr = translations.roles || {};
-  const te = translations.enemies || {};
-  const tc = translations.enemies?.categoria || {};
-  const tb = translations.trackerSelect?.comportamientos || {};
-  const tt = translations.condiciones_t || {};
-  const tte = translations.condiciones_d || {};
-  const tea = translations.estadosAlterados || {};
-  const tca = translations.cartas_ataque || {};
-  const ttr = translations.defensaCard.cartas_trad || {};
+  const tr = translations?.roles || {};
+  const te = translations?.enemies || {};
+  const tc = translations?.enemies?.categoria || {};
+  const tb = translations?.trackerSelect?.comportamientos || {};
+  const tt = translations?.condiciones_t || {};
+  const tte = translations?.condiciones_d || {};
+  const tea = translations?.estadosAlterados || {};
+  const tca = translations?.cartas_ataque || {};
+  const ttr = translations?.defensaCard?.cartas_trad || {};
   const { getRuneCount } = useGame();
 
   useEffect(() => {

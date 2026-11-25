@@ -19,7 +19,7 @@ export default function HomeMenu() {
                        hover:shadow-[0_0_12px_rgba(16,185,129,0.7)] 
                        transition-all duration-300"
           >
-            {translations.home.start_tracker}
+            {translations?.home?.start_tracker}
           </button>
 
           <button
@@ -30,7 +30,7 @@ export default function HomeMenu() {
                        hover:shadow-[0_0_12px_rgba(45,212,191,0.7)] 
                        transition-all duration-300"
           >
-            {translations.home.configure_environment}
+            {translations?.home?.configure_environment}
           </button>
         </div>
       </div>

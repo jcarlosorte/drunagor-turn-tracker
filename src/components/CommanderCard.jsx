@@ -8,8 +8,8 @@ const CommanderCard = ({ carta }) => {
   const { translations } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const [estadosLocal, setEstadosLocal] = useState(carta?.estadosAlterados || []);
-  const ta = translations.cartas_ataque || {};
-  const tea = translations.estadosAlterados || {};
+  const ta = translations?.cartas_ataque || {};
+  const tea = translations?.estadosAlterados || {};
   
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
   const nombreEnemy = carta.nombreEnemy;

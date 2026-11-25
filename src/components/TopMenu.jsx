@@ -1293,7 +1293,7 @@ const TopMenu = ({
                           className="object-cover w-full h-full rounded"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-xs text-white text-center px-1 py-0.5">
-                          {translations.enemies.escenario?.[monstruo.id] || monstruo.id}
+                          {translations?.enemies?.escenario?.[monstruo.id] || monstruo.id}
                         </div>
                       </div>
                     );
@@ -1302,7 +1302,7 @@ const TopMenu = ({
               
                 {scenarioMonster && (
                   <div className="mt-2 text-xs text-gray-300">
-                    ✅ {t.monstruoSeleccionado}: <strong>{translations.enemies.escenario?.[scenarioMonster.id] || scenarioMonster.id}</strong>
+                    ✅ {t.monstruoSeleccionado}: <strong>{translations?.enemies?.escenario?.[scenarioMonster.id] || scenarioMonster.id}</strong>
                   </div>
                 )}
               </div>

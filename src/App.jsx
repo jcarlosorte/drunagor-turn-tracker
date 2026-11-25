@@ -24,7 +24,7 @@ function Header() {
           className="mx-auto mb-4 w-1/2"
         />
         <h1 className="text-4xl font-bold mb-6 text-white drop-shadow-md">
-          {translations.home.title}
+          {translations?.home?.title}
         </h1>
       </div>
     </div>

@@ -9,9 +9,9 @@ const CommanderCardModal = ({ carta, onClose }) => {
   const { translations } = useLanguage();
   const { getRuneCount } = useGame();
   const { trackerData } = useTracker();
-  const ta = translations.cartas_ataque || {};
-  const ttr = translations.defensaCard.cartas_trad || {};
-  const selectedHeroes = trackerData.heroes;
+  const ta = translations?.cartas_ataque || {};
+  const ttr = translations?.defensaCard?.cartas_trad || {};
+  const selectedHeroes = trackerData?.heroes || [];
   const numHeroes = Math.min(selectedHeroes.length, 4);
   const numRunasColor = getRuneCount(carta.rune);
   const nombre = ta.nombre?.[carta.id] || carta.nombre;
